@@ -6,7 +6,7 @@ filters:
 
 website:
   title: "p-adic geometry notes"
-  site-url: "https://hechetory.github.io/p-adic_geometry_note/"
+  site-url: "https://losergh.github.io/p-adic_geometry_note/"
   description: "Intuition-first notes on p-adic and algebraic geometry."
   page-navigation: true
   reader-mode: true
