@@ -27,15 +27,6 @@ website:
     left:
       - text: "Home"
         href: index.qmd
-      - text: "Algebraic Geometry"
-        href: 16_ag/index.qmd
-      - text: "Positivity"
-        href: 22_positivity/index.qmd
-      - text: "Algebraic Groups"
-        href: 23_algebraic_groups/index.qmd
-      # Future topics can be directly added here, e.g.:
-      # - text: "Class Field Theory"
-      #   href: cft/index.qmd
     right:
       - icon: github
         href: "https://github.com/Losergh/note"
@@ -66,6 +57,9 @@ website:
       contents:
         - href: 23_algebraic_groups/index.qmd
           text: "Overview"
+        - section: "Lectures & Notes"
+          contents:
+            - "23_algebraic_groups/*.qmd"   # 👈 只要带 .qmd 的笔记会自动按字母顺序全部挂在下面
 
     # Future topic sidebars can be added here, e.g.:
     # - id: cft-sidebar
