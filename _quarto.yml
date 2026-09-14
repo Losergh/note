@@ -5,31 +5,78 @@ filters:
   - etale.lua
 
 website:
-  title: "p-adic geometry notes"
+  # General Site Info (Generalized for future math topics)
+  title: "Math Notes"
   site-url: "https://losergh.github.io/ag_note/"
-  description: "Intuition-first notes on p-adic and algebraic geometry."
+  description: "Personal study notes on mathematics, currently focusing on Algebraic Geometry, Positivity, and Algebraic Groups."
   page-navigation: true
   reader-mode: true
+
+  # Search Configuration
   search:
     location: sidebar
     type: overlay
-  repo-url: "https://github.com/Hechetory/p-adic_geometry_note"
+
+  # GitHub Repository Links
+  repo-url: "https://github.com/Losergh/ag_note"
   repo-actions: [edit, source, issue]
+
+  # Top Navigation Bar
   navbar:
     background: primary
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Algebraic Geometry"
+        href: ag/index.qmd
+      - text: "Positivity"
+        href: positivity/index.qmd
+      - text: "Algebraic Groups"
+        href: algebraic-groups/index.qmd
+      # Future topics can be directly added here, e.g.:
+      # - text: "Class Field Theory"
+      #   href: cft/index.qmd
     right:
       - icon: github
-        href: "https://github.com/Hechetory/p-adic_geometry_note"
+        href: "https://github.com/Losergh/ag_note"
         aria-label: GitHub
+
+  # Dedicated Sidebars for Each Topic
   sidebar:
-    style: docked
-    collapse-level: 2
-    contents:
-      - href: index.qmd
-        text: Home
-      - auto: true
+    - id: ag-sidebar
+      title: "Algebraic Geometry"
+      style: docked
+      collapse-level: 2
+      contents:
+        - href: ag/index.qmd
+          text: "Overview"
+
+    - id: positivity-sidebar
+      title: "Positivity"
+      style: docked
+      collapse-level: 2
+      contents:
+        - href: positivity/index.qmd
+          text: "Overview"
+
+    - id: alg-groups-sidebar
+      title: "Algebraic Groups"
+      style: docked
+      collapse-level: 2
+      contents:
+        - href: algebraic-groups/index.qmd
+          text: "Overview"
+
+    # Future topic sidebars can be added here, e.g.:
+    # - id: cft-sidebar
+    #   title: "Class Field Theory"
+    #   style: docked
+    #   contents:
+    #     - href: cft/index.qmd
+    #       text: "Overview"
+
   page-footer:
-    left: "An evolving notebook on p-adic geometry."
+    left: "An evolving notebook on mathematics."
     right: "Built with Quarto and GitHub Pages."
 
 format:
