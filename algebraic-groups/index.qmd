@@ -10,7 +10,6 @@ date: last-modified
 - **Course Title**: Selected Topics in Representation Theory (Linear Algebraic Groups)
 - **Institution**: Shanghai Center for Mathematical Sciences (SCMS), Fudan University
 - **Instructor**: Prof. Miaofen Chen (陈苗芬)
-- **Teaching Team**: Yiling Fei, Ronggang Shi, Miaofen Chen
 - **Credits**: 3.0 (54 Total Credit Hours)
 :::
 
@@ -69,9 +68,10 @@ The notes are organized according to the 7 main modules of the course:
 
 ## Primary References
 
-1. **Armand Borel**, *Linear Algebraic Groups*, Graduate Texts in Mathematics (GTM) 126, 2nd Edition, Springer, 1991.
-2. **Armand Borel**, *Introduction to Arithmetic Groups*, American Mathematical Society (AMS), 2019.
+- **J. S. Milne**, *Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field*, Cambridge University Press, 2017.
 
 ### Supplementary Literature
+
+- **Armand Borel**, *Linear Algebraic Groups*, Graduate Texts in Mathematics (GTM) 126, 2nd Edition, Springer, 1991.
+- **Armand Borel**, *Introduction to Arithmetic Groups*, American Mathematical Society (AMS), 2019.
 - **T. A. Springer**, *Linear Algebraic Groups*, 2nd Edition, Birkhäuser, 1998.
-- **J. S. Milne**, *Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field*, Cambridge University Press, 2017.
