@@ -1,0 +1,124 @@
+[
+  {
+    "objectID": "22_positivity/index.html",
+    "href": "22_positivity/index.html",
+    "title": "Positivity in AG",
+    "section": "",
+    "text": "Overview",
+    "crumbs": [
+      "Positivity",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "editing.html",
+    "href": "editing.html",
+    "title": "How to Edit These Notes",
+    "section": "",
+    "text": "你平时只需要编辑扩展名为 .qmd 的源文件。它和 Markdown 几乎一样，但对数学公式、目录和提示框支持得更好。侧边栏、首页卡片、主题目录和 HTML 都由 Quarto 根据这些源文件自动生成。"
+  },
+  {
+    "objectID": "editing.html#修改一篇笔记",
+    "href": "editing.html#修改一篇笔记",
+    "title": "How to Edit These Notes",
+    "section": "修改一篇笔记",
+    "text": "修改一篇笔记\n在 VS Code 左侧文件列表中打开对应的 .qmd 文件，直接修改文字并保存即可：\n## A new section\n\n普通文字写在这里，行内公式写成 $X \\to Y$。\n\n$$\n\\Omega_{X/Y}=0\n$$\n以 --- 包围的文件开头是页面信息。每篇正式笔记都需要填写：\n---\ntitle: \"A New Note\"\nsubtitle: \"\"\ndescription: \"A short description shown on the topic page.\"\norder: 80\n---\n\ntitle 是页面标题以及侧边栏中的名称。\ndescription 是主题目录中显示的一句话简介。\norder 是阅读顺序，必须写成数字。现有页面以 10 为间隔排列，因此可以把新页面插入中间，例如在 40 和 50 之间使用 45。\nsubtitle 可以留空。\n\n修改并保存后，本地预览会自动重新生成相应的 HTML。"
+  },
+  {
+    "objectID": "editing.html#删除一篇笔记",
+    "href": "editing.html#删除一篇笔记",
+    "title": "How to Edit These Notes",
+    "section": "删除一篇笔记",
+    "text": "删除一篇笔记\n删除对应的 .qmd 文件即可。下一次预览或构建时，Quarto 会自动把它从侧边栏和主题目录移除。\n如果其他笔记的正文中手动链接了被删除的页面，那些正文链接仍需自行修改。"
+  },
+  {
+    "objectID": "editing.html#新增一篇笔记",
+    "href": "editing.html#新增一篇笔记",
+    "title": "How to Edit These Notes",
+    "section": "新增一篇笔记",
+    "text": "新增一篇笔记\n在已有主题的文件夹中，新建一个 .qmd 文件并填写 title、description 和 order。例如：\n---\ntitle: \"Examples\"\ndescription: \"Examples illustrating the main definitions and geometric intuition.\"\norder: 45\n---\n文件保存后，不需要修改 _quarto.yml 或主题的 index.qmd：新页面会自动出现在侧边栏、主题目录和生成的网站中。"
+  },
+  {
+    "objectID": "editing.html#新增一个大主题",
+    "href": "editing.html#新增一个大主题",
+    "title": "How to Edit These Notes",
+    "section": "新增一个大主题",
+    "text": "新增一个大主题\n新建一个主题文件夹，并在其中创建 index.qmd。文件夹名称最好使用小写英文和连字符，例如 perfectoid-spaces。主题首页可以使用下面的模板：\n---\ntitle: \"Perfectoid Spaces\"\nsubtitle: \"\"\ndescription: \"Notes on perfectoid spaces and their applications.\"\norder: 30\nstart-page: \"perfectoid-spaces/first-note.qmd\"\ntoc: false\nlisting:\n  id: topic-pages\n  contents: \"*.qmd\"\n  template: \"../_templates/topic-pages.ejs.md\"\n  fields: [title, description, order]\n  sort: \"order asc\"\n  sort-ui: false\n  filter-ui: false\n---\n\nWrite the introduction to this topic here.\n\n## Contents\n\n::: {#topic-pages}\n:::\n其中 start-page 是首页卡片上 “Start reading” 指向的第一篇笔记。创建主题首页和第一篇笔记后，新主题会自动出现在网站首页与侧边栏中。\n\n\n\n\n\n\nTip最省事的工作方式\n\n\n\n你也可以复制同一主题中的现有 .qmd，只修改文件名、页面信息和正文。只要 title、description 和 order 完整，目录不需要手工维护。"
+  },
+  {
+    "objectID": "editing.html#本地预览",
+    "href": "editing.html#本地预览",
+    "title": "How to Edit These Notes",
+    "section": "本地预览",
+    "text": "本地预览\n在英文路径的工作目录 C:\\notes\\p-adic-geometry-note 中打开 VS Code，然后在终端运行：\n.\\preview-local.ps1\n终端会显示一个 http://localhost:... 地址。保持这个终端运行，保存 .qmd 文件后网页会自动刷新；结束预览时按 Ctrl+C。\n确认预览无误后，把修改 commit 并 push 到 main。GitHub Actions 会重新构建并发布网站。"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "\\(p\\)-adic Geometry Notes",
+    "section": "",
+    "text": "My purpose is to write some informal, intuition-first notes on topics related to \\(p\\)-adic geometry.\nEven so, there may be some proofs of results that interest me.\nThe aim is not to replace a textbook, but to record my study experiences in \\(p\\)-adic geometry."
+  },
+  {
+    "objectID": "index.html#notes",
+    "href": "index.html#notes",
+    "title": "\\(p\\)-adic Geometry Notes",
+    "section": "Notes",
+    "text": "Notes\n\n\n\nBasic Algebraic Geometry\n\nStart reading →\n\n\nPositivity in AG\n\nStart reading →\n\n\nLinear Algebraic Groups\n\nStart reading →\n\n\nMore notes will live here\nEach future topic can have its own folder, pages, and place in the sidebar.\n\n\nNo matching items\n\n\n\n\n\n\n\nNoteStatus\n\n\n\nThis is a living notebook. Explanations may be heuristic, abbreviated, or revised as the surrounding picture becomes clearer. Also, some parts may simply be forgotten by the author, who is a lazy man."
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html",
+    "href": "23_algebraic_groups/index.html",
+    "title": "Linear Algebraic Groups",
+    "section": "",
+    "text": "NoteCourse Information\n\n\n\n\nCourse Code: MATH70008.01\nCourse Title: Selected Topics in Representation Theory (Linear Algebraic Groups)\nInstitution: Shanghai Center for Mathematical Sciences (SCMS), Fudan University\nInstructor: Prof. Miaofen Chen (陈苗芬)\nCredits: 3.0 (54 Total Credit Hours)",
+    "crumbs": [
+      "Algebraic Groups",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html#course-overview",
+    "href": "23_algebraic_groups/index.html#course-overview",
+    "title": "Linear Algebraic Groups",
+    "section": "Course Overview",
+    "text": "Course Overview\nLinear algebraic groups are fundamental objects and tools in mathematics, with wide applications in number theory, representation theory, automorphic forms, and dynamical systems on homogeneous spaces.\nThe goal of this course is to systematically develop the theory of linear algebraic groups, focusing on their structural properties, representations, and root-theoretic classifications, laying a solid foundation for research in arithmetic geometry, the Langlands program, and related areas.",
+    "crumbs": [
+      "Algebraic Groups",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html#syllabus-lecture-schedule",
+    "href": "23_algebraic_groups/index.html#syllabus-lecture-schedule",
+    "title": "Linear Algebraic Groups",
+    "section": "Syllabus & Lecture Schedule",
+    "text": "Syllabus & Lecture Schedule\nThe notes are organized according to the 7 main modules of the course:\n\n[Weeks 1–2] Linear Algebraic Groups: Foundations & Jordan Decomposition\n\nAffine varieties and the definition of linear algebraic groups\nSubgroups, homomorphisms, and canonical examples (\\(\\mathrm{GL}_n\\), \\(\\mathrm{SL}_n\\), \\(\\mathrm{Sp}_{2n}\\), \\(\\mathrm{SO}_n\\))\nJordan-Chevalley decomposition (additive and multiplicative) in \\(\\mathrm{GL}(V)\\) and in abstract linear algebraic groups\n\n\n\n[Weeks 3–4] Tannakian Formalism and Lie Algebras\n\nGroup actions on affine coordinate algebras \\(\\mathcal{O}(G)\\) and locally finite representations\nTannakian perspective: reconstructing an algebraic group from its representation category\nThe Lie algebra \\(\\mathfrak{g} = \\operatorname{Lie}(G)\\) as invariant derivations\nThe adjoint representation \\(\\mathrm{Ad}: G \\to \\mathrm{GL}(\\mathfrak{g})\\)\n\n\n\n[Week 5] Tori in Algebraic Groups\n\nDiagonalizable groups and Cartier duality\nCharacter lattice \\(X^*(T)\\) and cocharacter lattice \\(X_*(T)\\)\nAlgebraic tori (split vs. non-split)\nRigidity of tori, centralizers, and normalizers\n\n\n\n[Week 6] Quotients of Algebraic Groups\n\nActions on algebraic varieties, orbits, and stabilizers\nChevalley’s Theorem on constructing subgroups as stabilizers of lines\nExistence and geometric construction of homogeneous spaces and quotient varieties \\(G/H\\)\n\n\n\n[Weeks 7–8] Reductive Groups\n\nThe radical \\(R(G)\\) and the unipotent radical \\(R_u(G)\\)\nDefinitions and characterizations of semisimple and reductive groups\nAction of maximal tori on \\(\\operatorname{Lie}(G)\\) and the root space decomposition\nBasic properties of roots and root systems\n\n\n\n[Weeks 10–11] Parabolic Subgroups of Reductive Groups\n\nThe Borel Fixed-Point Theorem for complete varieties\nMaximal connected solvable subgroups (Borel subgroups \\(B\\))\nThe flag variety \\(G/B\\) and its projectivity/completeness\nParabolic subgroups: standard parabolic subgroups and their classification\n\n\n\n[Weeks 12–13] Various Decompositions of Reductive Groups\n\nThe Bruhat decomposition: \\(G = \\bigsqcup_{w \\in W} B w B\\)\nRelative root systems and decompositions over non-algebraically closed fields\nConnections to the Iwasawa and Cartan decompositions in Lie groups and arithmetic groups",
+    "crumbs": [
+      "Algebraic Groups",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html#primary-references",
+    "href": "23_algebraic_groups/index.html#primary-references",
+    "title": "Linear Algebraic Groups",
+    "section": "Primary References",
+    "text": "Primary References\n\nJ. S. Milne, Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field, Cambridge University Press, 2017.\n\n\nSupplementary Literature\n\nArmand Borel, Linear Algebraic Groups, Graduate Texts in Mathematics (GTM) 126, 2nd Edition, Springer, 1991.\nArmand Borel, Introduction to Arithmetic Groups, American Mathematical Society (AMS), 2019.\nT. A. Springer, Linear Algebraic Groups, 2nd Edition, Birkhäuser, 1998.",
+    "crumbs": [
+      "Algebraic Groups",
+      "Overview"
+    ]
+  },
+  {
+    "objectID": "16_ag/index.html",
+    "href": "16_ag/index.html",
+    "title": "Basic Algebraic Geometry",
+    "section": "",
+    "text": "Overview",
+    "crumbs": [
+      "Algebraic Geometry",
+      "Overview"
+    ]
+  }
+]
