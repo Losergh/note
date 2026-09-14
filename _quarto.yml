@@ -7,7 +7,7 @@ filters:
 website:
   # General Site Info (Generalized for future math topics)
   title: "Math Notes"
-  site-url: "https://losergh.github.io/ag_note/"
+  site-url: "https://losergh.github.io/note/"
   description: "Personal study notes on mathematics, currently focusing on Algebraic Geometry, Positivity, and Algebraic Groups."
   page-navigation: true
   reader-mode: true
@@ -18,7 +18,7 @@ website:
     type: overlay
 
   # GitHub Repository Links
-  repo-url: "https://github.com/Losergh/ag_note"
+  repo-url: "https://github.com/Losergh/note"
   repo-actions: [edit, source, issue]
 
   # Top Navigation Bar
@@ -28,17 +28,17 @@ website:
       - text: "Home"
         href: index.qmd
       - text: "Algebraic Geometry"
-        href: ag/index.qmd
+        href: 16_ag/index.qmd
       - text: "Positivity"
-        href: positivity/index.qmd
+        href: 22_positivity/index.qmd
       - text: "Algebraic Groups"
-        href: algebraic-groups/index.qmd
+        href: 23_algebraic_groups/index.qmd
       # Future topics can be directly added here, e.g.:
       # - text: "Class Field Theory"
       #   href: cft/index.qmd
     right:
       - icon: github
-        href: "https://github.com/Losergh/ag_note"
+        href: "https://github.com/Losergh/note"
         aria-label: GitHub
 
   # Dedicated Sidebars for Each Topic
@@ -48,7 +48,7 @@ website:
       style: docked
       collapse-level: 2
       contents:
-        - href: ag/index.qmd
+        - href: 16_ag/index.qmd
           text: "Overview"
 
     - id: positivity-sidebar
@@ -56,7 +56,7 @@ website:
       style: docked
       collapse-level: 2
       contents:
-        - href: positivity/index.qmd
+        - href: 22_positivity/index.qmd
           text: "Overview"
 
     - id: alg-groups-sidebar
@@ -64,7 +64,7 @@ website:
       style: docked
       collapse-level: 2
       contents:
-        - href: algebraic-groups/index.qmd
+        - href: 23_algebraic_groups/index.qmd
           text: "Overview"
 
     # Future topic sidebars can be added here, e.g.:
