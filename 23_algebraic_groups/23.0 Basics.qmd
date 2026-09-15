@@ -104,7 +104,7 @@ Because base change preserves closed immersions, it suffices to prove that $e: \
 
 ::: {.callout-tip appearance="simple"}
 ## Lemma 23.0.5 (Open Subgroups are Closed)
-1. If $G$ is a group scheme over $k$ such that $G_{\mathrm{red}} \times_k G_{\mathrm{red}}$ is reduced, then $G_{\mathrm{red}} \hookrightarrow G$ is a closed subgroup scheme.
+1. If $G$ is a group scheme over $k$ such that $G_{\mathrm{red}} \times_k G_{\mathrm{red}}$ is reduced, then $G_{\mathrm{red}} \hookrightarrow G$ is a closed subgroup scheme. In particular, if $G_{\mathrm{red}}$ is geometrically reduced (e.g., if $k$ is perfect), then $G_{\mathrm{red}} \hookrightarrow G$ is a smooth closed subgroup scheme of $G$. 
 
 2. Let $\varphi: G' \to G$ be a homomorphism of group schemes over $k$. If the image $\varphi(G')$ is open in $G$, then $\varphi(G')$ is also closed in $G$.
 :::
@@ -175,14 +175,8 @@ Let $\varphi: G \to G'$ be a homomorphism of algebraic groups over $k$.
    where $p$ is fppf and $i$ is a closed immersion into $H$.
 :::
 
-*Proof.* Set $I := \varphi(G)$ with reduced subscheme structure. By generic flatness, there exists a dense open subscheme $U \subseteq I$ over which $\varphi^{-1}(U) \to U$ is flat. Since translations by rational points (over $\bar{k}$) act transitively on $I$, translates of $U$ cover $I$. Therefore, $\varphi$ is flat everywhere. Being surjective and of finite type, it is fppf. $\square$
+*Proof.* Set $I := \varphi(G)$ with reduced subscheme structure. By generic flatness, there exists a dense open subscheme $U \subseteq I$ over which $\varphi^{-1}(U) \to U$ is flat. Since translations by rational points (over $\bar{k}$) act transitively on $I$, translates of $U$ cover $I$. Therefore, $\varphi_{\bar{k}}$ is flat everywhere. Being surjective (image is closed) between noetherian schemes, it is fppf. $\square$
 
-::: {.callout-note appearance="simple"}
-## Definition 23.0.11 (The Identity Component $G^\circ$)
-1. The **identity component** $G^\circ$ of an algebraic group $G$ is the connected component containing the identity section $e$. Endowed with its open subscheme structure, $G^\circ$ is a smooth, geometrically connected, open and closed normal subgroup scheme of $G$.
-
-2. For any open subgroup $G' \subseteq G$ of finite index, $G^\circ \subseteq G' \subseteq G$, and $(G^\circ)^\circ = G^\circ$.
-:::
 
 ---
 
@@ -244,10 +238,6 @@ $$
    $$
 :::
 
-::: {.callout-tip appearance="simple"}
-## Proposition 23.0.14 (Reduction of Group Schemes)
-Let $G$ be an algebraic group over $k$. If $G_{\mathrm{red}}$ is geometrically reduced (e.g., if $k$ is perfect), then $G_{\mathrm{red}} \hookrightarrow G$ is a smooth closed subgroup scheme of $G$.
-:::
 
 ---
 
@@ -308,6 +298,14 @@ Let $X$ be a scheme of finite type over $k$. Then there exists a unique largest 
    \pi_0(X \times_k Y) \cong \pi_0(X) \times_k \pi_0(Y) \cong \operatorname{Spec} k \times_k \pi_0(Y) \cong \pi_0(Y).
    $$
    Since $Y$ is connected, $\pi_0(Y) = \operatorname{Spec} L$ for a field $L$. Thus $\pi_0(X \times_k Y) \cong \operatorname{Spec} L$, which shows $X \times_k Y$ is connected. $\square$
+
+::: {.callout-note appearance="simple"}
+## Definition 23.0.11 (The Identity Component $G^\circ$)
+1. The **identity component** $G^\circ$ of an algebraic group $G$ is the connected component containing the identity section $e$. Endowed with its open subscheme structure, $G^\circ$ is a smooth, geometrically connected, open and closed normal subgroup scheme of $G$.
+
+2. For any open subgroup $G' \subseteq G$ of finite index, $G^\circ \subseteq G' \subseteq G$, and $(G^\circ)^\circ = G^\circ$.
+:::
+
 
 ::: {.callout-important appearance="simple"}
 ## Proposition 23.0.18 ($\pi_0(G)$ and the Connected Component)
