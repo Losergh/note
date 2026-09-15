@@ -1,24 +1,111 @@
-/* 1. 引入学术界公认屏幕阅读体验第一的 Charter 字体（厚实、优雅、墨水感强） */
+/* 1. 引入学术界最饱满的 Charter 字体 */
 @import url('https://cdn.jsdelivr.net/npm/charter-webfont@1.0.2/charter.min.css');
 @import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
-/* 2. 正文字体：采用 Charter + Cambria 黄金学术字体栈，告别生硬的系统 Times */
+/* 2. 全局正文字体：放大词间距（word-spacing），告别单词粘连 */
 body {
   font-family: "Charter", "Bitstream Charter", "STIX Two Text", "Cambria", serif !important;
-  font-size: 1.06rem;           /* 舒适的阅读比例 */
-  line-height: 1.46;            /* 兼顾紧凑与呼吸感，行距致密但不拥挤 */
-  color: #1a1a1a !important;   /* 高级石墨黑，比纯黑更柔和护眼 */
+  font-size: 1.08rem;
+  line-height: 1.55;
+  word-spacing: 0.06em !important;      /* 👈 核心修复：适度放大单词与单词间的空隙，字形舒展清晰 */
+  letter-spacing: 0 !important;          /* 恢复自然字间距 */
+  color: #1a1a1a !important;
   background-color: #ffffff;
-  text-align: justify;
-  text-justify: inter-word;
 }
 
-/* 3. 标题字体：饱满沉稳的学术专著质感 */
-h1, h2, h3, h4, h5 {
-  font-family: "Charter", "STIX Two Text", "Cambria", serif !important;
+/* 仅正文段落两端对齐，避免影响边栏目录 */
+.content p, main p {
+  text-align: justify;
+  text-justify: inter-word;
+  margin-top: 0 !important;
+  margin-bottom: 0.4rem !important;
+}
+
+/* 3. 【彻底干掉灯泡】全方位隐藏 Callout 的所有图标、SVG 及预留空间 */
+.callout-icon-container,
+.callout-icon,
+.callout-header i,
+.callout-header svg,
+.callout-header::before {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  visibility: hidden !important;
+}
+
+/* 提示框标题：学术加粗、左侧无缝顶格 */
+.callout-header {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.callout-title-container {
   font-weight: 700 !important;
-  color: #111111 !important;
-  letter-spacing: -0.01em;
+  font-family: "Charter", "STIX Two Text", serif !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* 4. 【修复左右 Sidebar】彻底禁止对齐拉伸，恢复正常自然左对齐与排版 */
+.sidebar,
+.margin-sidebar,
+nav#TOC {
+  text-align: left !important;           /* 👈 核心修复：强制左对齐，禁止两端拉扯拉出大空格！ */
+  word-spacing: normal !important;       /* 目录恢复正常英文间距 */
+}
+
+/* 左右侧边栏链接样式：高级深灰，告别高亮蓝 */
+.sidebar a,
+.sidebar-item-text,
+.margin-sidebar a,
+nav#TOC a,
+.breadcrumb a,
+.nav-link {
+  color: #4a5568 !important;
+  text-decoration: none !important;
+  text-align: left !important;
+}
+
+.sidebar a:hover,
+nav#TOC a:hover,
+.breadcrumb a:hover {
+  color: #000000 !important;
+  text-decoration: underline !important;
+}
+
+/* 调整右侧目录间距，避免单词被挤换行 */
+nav#TOC {
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+}
+
+nav#TOC li {
+  margin-bottom: 0.4rem !important;
+}
+
+/* 调整左侧目录展开宽度，避免 "23.0 Basics of Algebraic Groups" 挤压成三行 */
+.sidebar nav {
+  font-size: 0.95rem !important;
+  line-height: 1.4 !important;
+}
+
+/* 5. 正文链接：雅致暗色带浅下划线，不刺眼 */
+.content a, main a {
+  color: #1a1a1a !important;
+  text-decoration: underline !important;
+  text-decoration-color: #cbd5e0 !important;
+  text-underline-offset: 2px;
+}
+
+.content a:hover, main a:hover {
+  color: #000000 !important;
+  text-decoration-color: #000000 !important;
+}
+
+/* 文献引用（如 [Borel91]）：深砖红 */
+.citation, a[role="doc-biblioref"] {
+  color: #8b0000 !important;
+  text-decoration: none !important;
 }
 
 h1 {
