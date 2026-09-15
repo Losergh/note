@@ -1,7 +1,7 @@
 ---
-title: "$p$-adic Geometry Notes"
+title: "Math Notes"
 subtitle: ""
-description: "Informal, intuition-first notes on topics related to $p$-adic and algebraic geometry."
+description: "Informal, intuition-first notes."
 order: 0
 page-layout: full
 toc: false
@@ -15,10 +15,11 @@ listing:
   filter-ui: false
 ---
 
+
 ::: {.hero-note}
-My purpose is to write some informal, intuition-first notes on topics related to $p$-adic geometry.  
-Even so, there may be some proofs of results that interest me.  
-The aim is not to replace a textbook, but to record my study experiences in $p$-adic geometry.
+This is a personal digital notebook where I record my studies, expositions, and thoughts on mathematics—centered primarily around algebraic geometry, groups, and positivity.
+
+Rather than a formal textbook, these pages emphasize conceptual clarity, geometric intuition, and self-contained proofs for results that caught my interest. It is a living record of my own mathematical journey.
 :::
 
 ## Notes
@@ -28,5 +29,4 @@ The aim is not to replace a textbook, but to record my study experiences in $p$-
 
 ::: {.callout-note title="Status"}
 This is a living notebook. Explanations may be heuristic, abbreviated, or revised as the surrounding picture becomes clearer. 
-Also, some parts may simply be forgotten by the author, who is a lazy man.
 :::
