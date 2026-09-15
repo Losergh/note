@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
 /* ==========================================================================
-   2. 主题变量与深色模式支持（浅蓝主题配色）
+   2. 主题变量与深色模式支持
    ========================================================================== */
 :root {
   --note-muted: #5d6975;
@@ -13,10 +13,10 @@
   --note-paper: #fbfaf7;
   --note-border: #d0dfec;          /* 泛浅蓝的温和边框 */
   
-  /* --- 顶部横条专属颜色（可随时在这里微调） --- */
+  /* 顶部横条专属颜色 */
   --navbar-bg: #eaf2f8;            /* 清爽护眼浅蓝色 */
-  --navbar-text: #1d3557;          /* 搭配浅蓝底色的深海蓝文字 */
-  --navbar-hover: #dbeaf5;         /* 鼠标悬停的高亮浅蓝 */
+  --navbar-text: #1d3557;          /* 搭配浅蓝底色的深海蓝文字与图标 */
+  --navbar-hover: #dbeaf5;         /* 鼠标悬停高亮 */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,27 +25,25 @@
     --note-paper: #20262d;
     --note-border: #334454;
     
-    /* 深色模式下的夜空蓝 */
-    --navbar-bg: #1c2836;
+    --navbar-bg: #1c2836;          /* 深色模式下的夜空蓝 */
     --navbar-text: #e2e8f0;
     --navbar-hover: #26384d;
   }
 }
 
 /* ==========================================================================
-   3. 全局正文与排版（适度词间距，告别粘连）
+   3. 全局正文与排版
    ========================================================================== */
 body {
   font-family: "Charter", "Bitstream Charter", "STIX Two Text", "Cambria", serif !important;
   font-size: 1.08rem;
   line-height: 1.55;
-  word-spacing: 0.05em !important;      /* 适度字词间距，舒适不挤压 */
+  word-spacing: 0.05em !important;
   letter-spacing: 0.005em !important;
   color: #1a1a1a !important;
   background-color: #ffffff;
 }
 
-/* 仅正文段落两端对齐 */
 .content p, main p {
   text-align: justify;
   text-justify: inter-word;
@@ -53,7 +51,6 @@ body {
   margin-bottom: 0.4rem !important;
 }
 
-/* 标题排版 */
 h1, h2, h3, h4, h5 {
   font-family: "Charter", "STIX Two Text", "Cambria", serif !important;
   font-weight: 700 !important;
@@ -77,7 +74,6 @@ h1.title {
   font-weight: 650;
 }
 
-/* 列表紧凑化 */
 ul, ol {
   margin-top: 0.2rem !important;
   margin-bottom: 0.35rem !important;
@@ -90,7 +86,7 @@ li {
 }
 
 /* ==========================================================================
-   4. 定理提示框（Callout）：彻底去灯泡 + 字号与正文 1:1 等大
+   4. 定理提示框（Callout）
    ========================================================================== */
 .callout {
   margin: 1.1rem 0 !important;
@@ -98,17 +94,15 @@ li {
   font-family: "Charter", "STIX Two Text", serif !important;
 }
 
-/* 彻底解决“框内字比正文小”的问题：强制继承正文字号与行高 */
 div.callout,
 div.callout-header,
 div.callout-title-container,
 div.callout-body,
 div.callout-body > p {
-  font-size: 1em !important;         /* 100% 继承正文字号 */
+  font-size: 1em !important;
   line-height: inherit !important;
 }
 
-/* 彻底隐藏所有图标（灯泡、(i) 等） */
 .callout-icon-container,
 .callout-icon,
 .callout-header i,
@@ -133,12 +127,12 @@ div.callout-body > p {
 }
 
 /* ==========================================================================
-   5. 左右侧边栏与目录：自然靠左（消灭大空格），低调深灰（消灭刺眼蓝）
+   5. 左右侧边栏与目录
    ========================================================================== */
 .sidebar,
 .margin-sidebar,
 nav#TOC {
-  text-align: left !important;         /* 强制左对齐，禁止两端拉伸撕裂空格 */
+  text-align: left !important;
   word-spacing: normal !important;
 }
 
@@ -147,7 +141,7 @@ nav#TOC {
 .margin-sidebar a,
 nav#TOC a,
 .breadcrumb a {
-  color: #4a5568 !important;         /* 雅致深石墨灰 */
+  color: #4a5568 !important;
   text-decoration: none !important;
   text-align: left !important;
 }
@@ -200,7 +194,7 @@ nav#TOC li {
 }
 
 /* ==========================================================================
-   7. 首页卡片样式（保留原项目特色）
+   7. 首页卡片样式
    ========================================================================== */
 .hero-note {
   max-width: 52rem;
@@ -269,71 +263,107 @@ nav#TOC li {
 }
 
 /* ==========================================================================
-   8. 顶部横条（浅蓝紧凑化导航栏 + 标题横幅）
+   8. 顶部横条彻底修复（解决高度撑大、右侧开关泛白、垂直对齐错位）
    ========================================================================== */
-/* 1. 顶部固定导航栏整体高度与浅蓝底色 */
-.navbar, 
-#quarto-header {
-  min-height: 38px !important;
+/* 1. 强制锁死顶栏整体与各级容器的高度为 40px */
+#quarto-header,
+.navbar,
+.navbar-container,
+.container-fluid,
+.navbar-brand-container,
+.navbar-collapse {
+  min-height: 40px !important;
+  max-height: 40px !important;
+  height: 40px !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  background-color: var(--navbar-bg) !important;           /* 浅蓝背景 */
-  border-bottom: 1px solid var(--note-border) !important;  /* 细致浅蓝分隔线 */
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  --bs-navbar-padding-y: 0 !important;
+  --bs-navbar-brand-padding-y: 0 !important;
 }
 
-.navbar .container-fluid {
-  min-height: 38px !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  background-color: transparent !important;
+.navbar {
+  background-color: var(--navbar-bg) !important;
+  border-bottom: 1px solid var(--note-border) !important;
+  box-sizing: border-box !important;
 }
 
-/* 2. 站点名称 / 品牌 Logo */
-.navbar-brand {
-  font-family: "Charter", "STIX Two Text", serif !important;
-  font-size: 1rem !important;
-  font-weight: 700 !important;
-  line-height: 38px !important;
-  color: var(--navbar-text) !important;                    /* 深海蓝文字，清晰护眼 */
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* 3. 顶部菜单链接项 */
-.navbar-nav {
+/* 2. 站点标题 / Logo：严格垂直居中 */
+.navbar-brand,
+.navbar-brand .navbar-title {
+  display: flex !important;
   align-items: center !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  font-family: "Charter", "STIX Two Text", serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: var(--navbar-text) !important;
+  margin: 0 1.2rem 0 0 !important;
+  padding: 0 !important;
 }
 
+/* 3. 导航链接（Home 等）垂直居中 */
+.navbar-nav,
+.navbar-nav .nav-item,
 .navbar-nav .nav-link {
-  font-size: 0.9rem !important;
-  line-height: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  font-size: 0.92rem !important;
   color: var(--navbar-text) !important;
-  padding: 0 0.65rem !important;
-  transition: background-color 0.2s ease;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .navbar-nav .nav-link:hover {
   color: var(--navbar-text) !important;
-  background-color: var(--navbar-hover) !important;        /* 鼠标划过微亮浅蓝 */
-  border-radius: 4px;
+  background-color: var(--navbar-hover) !important;
 }
 
-/* 4. 搜索框与右侧工具图标（GitHub 等） */
-.quarto-navbar-tools,
-.navbar-nav .nav-item {
+/* 4. 彻底修复右侧工具区（GitHub 图标、暗黑模式切换滑块、侧边栏按钮） */
+.quarto-navbar-tools {
   display: flex !important;
   align-items: center !important;
+  height: 40px !important;
+  margin: 0 !important;
+  gap: 0.6rem !important; /* 图标之间间距均匀 */
 }
 
+/* 彻底解决图标“泛白隐形”：强制换成深海蓝 */
+.quarto-navbar-tools a,
 .quarto-navigation-tool,
-.navbar-nav .nav-link i,
-.navbar-nav .nav-link svg {
-  line-height: 38px !important;
-  color: var(--navbar-text) !important;                    /* 图标同步为深蓝 */
+.navbar-nav i,
+.navbar-nav svg,
+.quarto-reader-toggle {
+  color: var(--navbar-text) !important;
   fill: var(--navbar-text) !important;
+  stroke: var(--navbar-text) !important;
+  opacity: 0.9 !important;
 }
 
-/* 5. 若开启了 title-block-banner（文章标题色块大横幅），同样应用浅蓝底色 */
+/* 彻底解决“深色模式切换滑块”在浅色底上看不清的问题 */
+.quarto-color-scheme-toggle {
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+}
+
+.quarto-color-scheme-toggle .form-check-input {
+  border: 1.5px solid var(--navbar-text) !important;   /* 药丸开关描深色边框 */
+  background-color: rgba(29, 53, 87, 0.12) !important; /* 开关底槽微透深蓝 */
+  height: 1.15rem !important;
+  width: 2rem !important;
+  cursor: pointer;
+}
+
+.quarto-color-scheme-toggle .form-check-input:checked {
+  background-color: var(--navbar-text) !important;     /* 选中后变纯深色 */
+}
+
+/* 5. 标题横幅压扁处理（若有开启） */
 .quarto-title-banner {
   background-color: var(--navbar-bg) !important;
   border-bottom: 1px solid var(--note-border) !important;
