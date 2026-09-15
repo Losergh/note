@@ -16,7 +16,6 @@
     "section": "",
     "text": "你平时只需要编辑扩展名为 .qmd 的源文件。它和 Markdown 几乎一样，但对数学公式、目录和提示框支持得更好。侧边栏、首页卡片、主题目录和 HTML 都由 Quarto 根据这些源文件自动生成。",
     "crumbs": [
-      "Home",
       "Typography"
     ]
   },
@@ -27,7 +26,6 @@
     "section": "修改一篇笔记",
     "text": "修改一篇笔记\n在 VS Code 左侧文件列表中打开对应的 .qmd 文件，直接修改文字并保存即可：\n## A new section\n\n普通文字写在这里，行内公式写成 $X \\to Y$。\n\n$$\n\\Omega_{X/Y}=0\n$$\n以 --- 包围的文件开头是页面信息。每篇正式笔记都需要填写：\n---\ntitle: \"A New Note\"\nsubtitle: \"\"\ndescription: \"A short description shown on the topic page.\"\norder: 80\n---\n\ntitle 是页面标题以及侧边栏中的名称。\ndescription 是主题目录中显示的一句话简介。\norder 是阅读顺序，必须写成数字。现有页面以 10 为间隔排列，因此可以把新页面插入中间，例如在 40 和 50 之间使用 45。\nsubtitle 可以留空。\n\n修改并保存后，本地预览会自动重新生成相应的 HTML。",
     "crumbs": [
-      "Home",
       "Typography"
     ]
   },
@@ -38,7 +36,6 @@
     "section": "删除一篇笔记",
     "text": "删除一篇笔记\n删除对应的 .qmd 文件即可。下一次预览或构建时，Quarto 会自动把它从侧边栏和主题目录移除。\n如果其他笔记的正文中手动链接了被删除的页面，那些正文链接仍需自行修改。",
     "crumbs": [
-      "Home",
       "Typography"
     ]
   },
@@ -49,7 +46,6 @@
     "section": "新增一篇笔记",
     "text": "新增一篇笔记\n在已有主题的文件夹中，新建一个 .qmd 文件并填写 title、description 和 order。例如：\n---\ntitle: \"Examples\"\ndescription: \"Examples illustrating the main definitions and geometric intuition.\"\norder: 45\n---\n文件保存后，不需要修改 _quarto.yml 或主题的 index.qmd：新页面会自动出现在侧边栏、主题目录和生成的网站中。",
     "crumbs": [
-      "Home",
       "Typography"
     ]
   },
@@ -60,7 +56,6 @@
     "section": "新增一个大主题",
     "text": "新增一个大主题\n新建一个主题文件夹，并在其中创建 index.qmd。文件夹名称最好使用小写英文和连字符，例如 perfectoid-spaces。主题首页可以使用下面的模板：\n---\ntitle: \"Perfectoid Spaces\"\nsubtitle: \"\"\ndescription: \"Notes on perfectoid spaces and their applications.\"\norder: 30\nstart-page: \"perfectoid-spaces/first-note.qmd\"\ntoc: false\nlisting:\n  id: topic-pages\n  contents: \"*.qmd\"\n  template: \"../_templates/topic-pages.ejs.md\"\n  fields: [title, description, order]\n  sort: \"order asc\"\n  sort-ui: false\n  filter-ui: false\n---\n\nWrite the introduction to this topic here.\n\n## Contents\n\n::: {#topic-pages}\n:::\n其中 start-page 是首页卡片上 “Start reading” 指向的第一篇笔记。创建主题首页和第一篇笔记后，新主题会自动出现在网站首页与侧边栏中。\n\n\n\n\n\n\nTip最省事的工作方式\n\n\n\n你也可以复制同一主题中的现有 .qmd，只修改文件名、页面信息和正文。只要 title、description 和 order 完整，目录不需要手工维护。",
     "crumbs": [
-      "Home",
       "Typography"
     ]
   },
@@ -71,7 +66,6 @@
     "section": "本地预览",
     "text": "本地预览\n在英文路径的工作目录 C:\\notes\\p-adic-geometry-note 中打开 VS Code，然后在终端运行：\n.\\preview-local.ps1\n终端会显示一个 http://localhost:... 地址。保持这个终端运行，保存 .qmd 文件后网页会自动刷新；结束预览时按 Ctrl+C。\n确认预览无误后，把修改 commit 并 push 到 main。GitHub Actions 会重新构建并发布网站。",
     "crumbs": [
-      "Home",
       "Typography"
     ]
   },
@@ -122,7 +116,6 @@
     "section": "",
     "text": "This is a personal digital notebook where I record my studies, expositions, and thoughts on mathematics—centered primarily around algebraic geometry, groups, and positivity.\nRather than a formal textbook, these pages emphasize conceptual clarity, geometric intuition, and self-contained proofs for results that caught my interest. It is a living record of my own mathematical journey.",
     "crumbs": [
-      "Home",
       "Welcome"
     ]
   },
@@ -133,7 +126,6 @@
     "section": "Notes",
     "text": "Notes\n\n\n\nBasic Algebraic Geometry\n\nStart reading →\n\n\nPositivity in AG\n\nStart reading →\n\n\nAlgebraic Groups\n\nStart reading →\n\n\nMore notes will live here\nEach future topic can have its own folder, pages, and place in the sidebar.\n\n\nNo matching items\n\n\n\n\n\n\n\nNoteStatus\n\n\n\nThis is a living notebook. Explanations may be heuristic, abbreviated, or revised as the surrounding picture becomes clearer.",
     "crumbs": [
-      "Home",
       "Welcome"
     ]
   },
