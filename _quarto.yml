@@ -55,10 +55,7 @@ website:
       style: docked
       collapse-level: 2
       contents:
-        - href: 23_algebraic_groups/index.qmd
-          text: "Overview"
-        - section: "Notes"
-          auto: 23_algebraic_groups
+        auto: 23_algebraic_groups
 
     # Future topic sidebars can be added here, e.g.:
     # - id: cft-sidebar
