@@ -259,3 +259,66 @@ nav#TOC li {
   margin-bottom: 0;
   color: var(--note-muted);
 }
+
+/* ==========================================================================
+   8. 顶部横条紧凑化（Navbar & Title Banner 极限压缩，消除臃肿感）
+   ========================================================================== */
+/* 1. 顶部导航条（Navbar）整体高度与内边距 */
+.navbar, 
+#quarto-header {
+  min-height: 38px !important;            /* 强行压制到 38px（原默认通常 >56px） */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.navbar .container-fluid {
+  min-height: 38px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 2. 站点标题/Logo（垂直居中 + 字号协调） */
+.navbar-brand {
+  font-family: "Charter", "STIX Two Text", serif !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  line-height: 38px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* 3. 顶部菜单链接项（减少占用空间，垂直居中） */
+.navbar-nav {
+  align-items: center !important;
+}
+
+.navbar-nav .nav-link {
+  font-size: 0.9rem !important;
+  line-height: 38px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 0.6rem !important;
+  padding-right: 0.6rem !important;
+}
+
+/* 4. 搜索框与右侧工具图标（GitHub 图标等）居中对齐 */
+.quarto-navbar-tools,
+.navbar-nav .nav-item {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.quarto-navigation-tool,
+.navbar-nav .nav-link i,
+.navbar-nav .nav-link svg {
+  line-height: 38px !important;
+}
+
+/* 5. 网页大标题横幅（若页面开了 title-block-banner 同样压缩高度） */
+.quarto-title-banner {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  margin-bottom: 1rem !important;
+}
