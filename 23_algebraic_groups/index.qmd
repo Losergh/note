@@ -1,5 +1,5 @@
 ---
-title: "Overview"
+title: "Algebraic Groups"
 subtitle: "Lecture Notes for MATH70008.01 26fall (Selected Topics in Representation Theory)"
 date: last-modified
 ---

@@ -65,6 +65,24 @@ website:
     #     - href: cft/index.qmd
     #       text: "Overview"
 
+    - id: home-sidebar
+      title: "Math Notes"
+      style: docked
+      contents:
+        - href: index.qmd
+          text: "Welcome"
+        - section: "Topics"
+          contents:
+            - href: 16_ag/index.qmd
+              text: "Algebraic Geometry"
+            - href: 22_positivity/index.qmd
+              text: "Positivity"
+            - href: 23_algebraic_groups/index.qmd
+              text: "Algebraic Groups"
+        # 顺便把根目录下原作者留下的编辑指南也挂上（方便自己查公式排版）
+        - href: editing.qmd
+          text: "Typography"
+  
   page-footer:
     left: "An evolving notebook on mathematics."
     right: "Built with Quarto and GitHub Pages."
