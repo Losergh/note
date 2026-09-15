@@ -1,22 +1,100 @@
-/* 1. 强制采用 Times 家族：天生字形收敛紧凑，无需网络加载，秒级显示 */
+/* 1. 引入学术界公认屏幕阅读体验第一的 Charter 字体（厚实、优雅、墨水感强） */
+@import url('https://cdn.jsdelivr.net/npm/charter-webfont@1.0.2/charter.min.css');
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+
+/* 2. 正文字体：采用 Charter + Cambria 黄金学术字体栈，告别生硬的系统 Times */
 body {
-  font-family: "Times New Roman", Times, "TeX Gyre Termes", "STIX Two Text", serif !important;
-  font-size: 1.05rem;           /* 恢复标准 10.5pt 论文视觉比例 */
-  line-height: 1.55 !important; /* 👈 核心修改：大幅压缩行距至 1.34（与图二完全一致） */
-  letter-spacing: -0.015em;     /* 👈 微微微调字间距，更加紧贴凝聚 */
-  color: #000000 !important;   /* 纯黑油墨印刷感 */
+  font-family: "Charter", "Bitstream Charter", "STIX Two Text", "Cambria", serif !important;
+  font-size: 1.06rem;           /* 舒适的阅读比例 */
+  line-height: 1.46;            /* 兼顾紧凑与呼吸感，行距致密但不拥挤 */
+  color: #1a1a1a !important;   /* 高级石墨黑，比纯黑更柔和护眼 */
   background-color: #ffffff;
-  text-align: justify;          /* 论文必备：两端对齐 */
+  text-align: justify;
   text-justify: inter-word;
 }
 
-/* 2. 段落间距紧凑化 */
-p {
-  margin-top: 0 !important;
-  margin-bottom: 0.25rem !important; /* 极小段落间隙 */
+/* 3. 标题字体：饱满沉稳的学术专著质感 */
+h1, h2, h3, h4, h5 {
+  font-family: "Charter", "STIX Two Text", "Cambria", serif !important;
+  font-weight: 700 !important;
+  color: #111111 !important;
+  letter-spacing: -0.01em;
 }
 
-/* 3. 【解决截图里列表过松的问题】全面压缩无序列表与圆点间距 */
+h1 {
+  font-size: 1.55rem !important;
+  margin-top: 1.2rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+h2 {
+  font-size: 1.3rem !important;
+  margin-top: 1.1rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+/* 4. 【核心干掉刺眼蓝】侧边栏、右侧大纲、顶部面包屑全部改为低调高级黑灰色 */
+.sidebar a,
+.sidebar-item-text,
+.margin-sidebar a,
+nav#TOC a,
+.breadcrumb a,
+.nav-link {
+  color: #4a5568 !important;   /* 雅致深石墨灰，彻底告别刺眼蓝！ */
+  text-decoration: none !important;
+}
+
+/* 鼠标悬停时加深为纯黑，带细线提示 */
+.sidebar a:hover,
+nav#TOC a:hover,
+.breadcrumb a:hover,
+.nav-link:hover {
+  color: #000000 !important;
+  text-decoration: underline !important;
+}
+
+/* 右侧大纲当前阅读位置的高亮（Active 项） */
+nav#TOC li.active > a,
+.sidebar-item.active > a {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* 右侧“On this page”目录排版优化，避免单词挤成一团 */
+nav#TOC {
+  font-size: 0.88rem !important;
+  line-height: 1.35 !important;
+}
+
+nav#TOC li {
+  margin-bottom: 0.35rem !important;
+}
+
+/* 5. 正文里的超链接：采用极细暗色下划线，融入正文不突兀 */
+.content a, main a {
+  color: #1a1a1a !important;   /* 与正文颜色融为一体 */
+  text-decoration: underline !important;
+  text-decoration-color: #a0aec0 !important; /* 低饱和度淡灰下划线 */
+  text-underline-offset: 2.5px;
+}
+
+.content a:hover, main a:hover {
+  color: #000000 !important;
+  text-decoration-color: #000000 !important;
+}
+
+/* 文献引用（如 [Borel91]）：学术暗红色（低饱和，不刺眼） */
+.citation, a[role="doc-biblioref"] {
+  color: #8b0000 !important;
+  text-decoration: none !important;
+}
+
+/* 6. 段落与列表紧凑化 */
+p {
+  margin-top: 0 !important;
+  margin-bottom: 0.35rem !important;
+}
+
 ul, ol {
   margin-top: 0.2rem !important;
   margin-bottom: 0.35rem !important;
@@ -24,17 +102,7 @@ ul, ol {
 }
 
 li {
-  margin-bottom: 0.15rem !important; /* 👈 关键：紧贴上一行，告别巨大垂直空隙 */
-  line-height: 1.32 !important;
-}
-
-/* 4. 标题紧凑化（告别网页大标题的空旷感） */
-h1, h2, h3, h4 {
-  font-family: "Times New Roman", Times, serif !important;
-  font-weight: bold !important;
-  color: #000000 !important;
-  letter-spacing: -0.01em;
-}
+  margin-bottom: 0
 
 h1 {
   font-size: 1.45rem !important;
