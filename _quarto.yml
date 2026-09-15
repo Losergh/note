@@ -94,6 +94,7 @@ format:
     toc-depth: 3
     code-copy: true
     link-external-newwindow: true
+    include-after-body: thm-toc.html
 
 execute:
   freeze: auto
