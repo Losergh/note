@@ -1,3 +1,25 @@
+/* 1. 引入 LaTeX 经典的 Computer Modern 字体库 */
+@import url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css');
+
+/* 2. 引入 AMS 官方出版物专用的 STIX Two Text 字体库 */
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&family=STIX+Two+Math&display=swap');
+
+/* 3. 全局应用为 AMS / LaTeX 论文衬线体 */
+body {
+  font-family: "Computer Modern Serif", "STIX Two Text", "Latin Modern Roman", "Times New Roman", serif !important;
+  font-size: 1.05rem; /* 衬线字体稍微放大一点点，数学阅读体验最佳 */
+  line-height: 1.68;  /* 增加学术论文标准的行间距 */
+}
+
+/* 4. 标题也同步采用衬线体，保持论文风格统一 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Computer Modern Serif", "STIX Two Text", serif !important;
+  font-weight: 600;
+}
+
+
+
+
 :root {
   --note-muted: #5d6975;
   --note-accent: #315b7d;
