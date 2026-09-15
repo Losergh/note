@@ -1,6 +1,6 @@
 ---
 title: "23.0 Basics of Algebraic Groups"
-subtitle: "Section 0"
+subtitle: ""
 date: last-modified
 ---
 
@@ -14,8 +14,6 @@ Throughout this section:
 - For an affine scheme $X = \operatorname{Spec} A$, $A$ is a finitely generated $k$-algebra.
 
 ---
-
-## 1. Group Objects and the Rigidity Lemma
 
 ::: {.callout-note appearance="simple"}
 ## Definition x.0.0 (Algebraic Group and Abelian Variety)
@@ -81,8 +79,6 @@ Hence $xyx^{-1}y^{-1} = e$ for all $x, y \in G$, meaning $xy = yx$. Thus $G$ is 
 
 ---
 
-## 2. Topological and Subgroup Properties
-
 ::: {.callout-important appearance="simple"}
 ## Proposition x.0.4 (Separatedness of Group Schemes)
 Every group scheme $G$ of finite type over a field $k$ is separated.
@@ -92,11 +88,11 @@ Every group scheme $G$ of finite type over a field $k$ is separated.
 
 Consider the difference morphism $\mu: G \times_k G \to G$ defined by $(g_1, g_2) \mapsto g_1 g_2^{-1}$. The diagonal $\Delta(G)$ is the scheme-theoretic pullback of the identity section $e: \operatorname{Spec} k \to G$ along $\mu$:
 $$
-\begin{matrix}
-G & \xrightarrow{\Delta} & G \times_k G \\
-\downarrow & \square & \downarrow \mu \\
-\operatorname{Spec} k & \xrightarrow{e} & G
-\end{matrix}
+\begin{CD}
+G @>{\Delta}>> G \times_k G \\
+@VVV @VV{\mu}V \\
+\operatorname{Spec} k @>{e}>> G
+\end{CD}
 $$
 Because base change preserves closed immersions, it suffices to prove that $e: \operatorname{Spec} k \to G$ is a closed immersion. The image of $e$ is a single point $e \in G$. Since $G$ is of finite type over $k$, the point $e$ has residue field $k(e) \cong k$ and is closed. Thus $e$ is a closed immersion, which implies $\Delta$ is a closed immersion. Therefore, $G$ is separated over $k$. $\square$
 
@@ -131,8 +127,6 @@ Let $G$ be a group scheme of finite type over $k$.
 *(Reference: The Stacks Project, Tag 047R, Tag 047S).*
 
 ---
-
-## 3. Kernels, Images, and Homomorphisms
 
 ::: {.callout-note appearance="simple"}
 ## Definition & Proposition x.0.8 (Subgroup Schemes and Kernels)
@@ -177,8 +171,6 @@ Let $\varphi: G \to G'$ be a homomorphism of algebraic groups over $k$.
 :::
 
 ---
-
-## 4. Affine Algebraic Groups and Hopf Algebras
 
 ::: {.callout-note appearance="simple"}
 ## Remark x.0.12 (Hopf Algebras and Functor of Points)
@@ -235,8 +227,6 @@ Let $G$ be an algebraic group over $k$. If $G_{\mathrm{red}}$ is geometrically r
 
 ---
 
-## 5. The Étale Quotient $\pi_0(X)$ and Component Groups
-
 ::: {.callout-important appearance="simple"}
 ## Proposition x.0.15 (Existence of the Largest Étale Subalgebra)
 Let $X$ be a scheme of finite type over $k$. Then there exists a unique largest étale $k$-subalgebra $\pi_0(X) \subseteq \mathcal{O}(X)$.
@@ -258,13 +248,13 @@ Let $X$ be a scheme of finite type over $k$. Then there exists a unique largest 
    \pi_0(X) := \operatorname{Spec} A.
    $$
    The inclusion $A \hookrightarrow \mathcal{O}(X)$ induces a canonical morphism $X \to \pi_0(X)$.
-2. **Universal Property:** For any étale $k$-scheme $Y$ and any $k$-morphism $f: X \to Y$, there exists a unique morphism $\bar{f}: \pi_0(X) \to Y$ making the diagram commute:
+2. **Universal Property:** For any étale $k$-scheme $Y$ and any $k$-morphism $f: X \to Y$, there exists a unique morphism $\bar{f}: \pi_0(X) \to Y$ such that the following diagram commutes:
    $$
-   \begin{matrix}
-   X & \xrightarrow{f} & Y \\
-   \downarrow & \nearrow_{\exists! \bar{f}} & \\
-   \pi_0(X) & &
-   \end{matrix}
+   \begin{CD}
+   X @>{f}>> Y \\
+   @VVV @| \\
+   \pi_0(X) @>{\exists! \bar{f}}>> Y
+   \end{CD}
    $$
 3. **Properties:**
    - The fibers of $X \to \pi_0(X)$ are the connected components of $X$.
@@ -298,11 +288,11 @@ Let $G$ be an algebraic group over $k$.
 - For (3), since $e \in G^\circ(k)$, $G^\circ$ has a $k$-rational point. Proposition x.0.17(1) implies that $G^\circ$ is geometrically connected.
 - For (5), since $H$ is connected, $\pi_0(H) \cong \operatorname{Spec} k$. Functoriality yields a commutative diagram:
   $$
-  \begin{matrix}
-  H & \xrightarrow{\psi} & G \\
-  \downarrow & & \downarrow \\
-  \pi_0(H) \cong \operatorname{Spec} k & \xrightarrow{e} & \pi_0(G)
-  \end{matrix}
+  \begin{CD}
+  H @>{\psi}>> G \\
+  @VVV @VVV \\
+  \pi_0(H) \cong \operatorname{Spec} k @>{e}>> \pi_0(G)
+  \end{CD}
   $$
   Thus the composition $H \to G \to \pi_0(G)$ is the trivial map, which implies that $\psi$ factors uniquely through $G^\circ = \ker(G \to \pi_0(G))$. $\square$
 
