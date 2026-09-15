@@ -314,8 +314,6 @@ nav#TOC li {
   fill: var(--navbar-text) !important;
   stroke: var(--navbar-text) !important;
   opacity: 0.88 !important;
-<<<<<<< HEAD
-=======
 }
 
 /* 5. 深色模式药丸开关显色 */
@@ -327,7 +325,6 @@ nav#TOC li {
 
 .navbar .quarto-color-scheme-toggle .form-check-input:checked {
   background-color: var(--navbar-text) !important;
->>>>>>> 016e004c265e40f9e78aa87212045024eb9cc7e0
 }
 
 /* 5. 深色模式药丸开关显色 */
