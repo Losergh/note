@@ -1,6 +1,6 @@
 ---
-title: "Basics of Algebraic Groups"
-subtitle: "Algebraic Groups Note x, Section 0"
+title: "23.0 Basics of Algebraic Groups"
+subtitle: "Section 0"
 date: last-modified
 ---
 
