@@ -118,9 +118,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "\\(p\\)-adic Geometry Notes",
+    "title": "Math Notes",
     "section": "",
-    "text": "My purpose is to write some informal, intuition-first notes on topics related to \\(p\\)-adic geometry.\nEven so, there may be some proofs of results that interest me.\nThe aim is not to replace a textbook, but to record my study experiences in \\(p\\)-adic geometry.",
+    "text": "This is a personal digital notebook where I record my studies, expositions, and thoughts on mathematics—centered primarily around algebraic geometry, groups, and positivity.\nRather than a formal textbook, these pages emphasize conceptual clarity, geometric intuition, and self-contained proofs for results that caught my interest. It is a living record of my own mathematical journey.",
     "crumbs": [
       "Home",
       "Welcome"
@@ -129,9 +129,9 @@
   {
     "objectID": "index.html#notes",
     "href": "index.html#notes",
-    "title": "\\(p\\)-adic Geometry Notes",
+    "title": "Math Notes",
     "section": "Notes",
-    "text": "Notes\n\n\n\nBasic Algebraic Geometry\n\nStart reading →\n\n\nPositivity in AG\n\nStart reading →\n\n\nAlgebraic Groups\n\nStart reading →\n\n\nMore notes will live here\nEach future topic can have its own folder, pages, and place in the sidebar.\n\n\nNo matching items\n\n\n\n\n\n\n\nNoteStatus\n\n\n\nThis is a living notebook. Explanations may be heuristic, abbreviated, or revised as the surrounding picture becomes clearer. Also, some parts may simply be forgotten by the author, who is a lazy man.",
+    "text": "Notes\n\n\n\nBasic Algebraic Geometry\n\nStart reading →\n\n\nPositivity in AG\n\nStart reading →\n\n\nAlgebraic Groups\n\nStart reading →\n\n\nMore notes will live here\nEach future topic can have its own folder, pages, and place in the sidebar.\n\n\nNo matching items\n\n\n\n\n\n\n\nNoteStatus\n\n\n\nThis is a living notebook. Explanations may be heuristic, abbreviated, or revised as the surrounding picture becomes clearer.",
     "crumbs": [
       "Home",
       "Welcome"
