@@ -9,7 +9,7 @@ date: last-modified
 Throughout this section:
 
 - Let $k$ be a fixed base field.
-- A **$k$-variety** is defined as a reduced, separated scheme of finite type over $k$.
+- A **$k$-variety** is defined as a geometrically reduced, separated scheme of finite type over $k$.
 - We denote by $\mathrm{Sch}/k$ the category of schemes of finite type over $k$, and by $\mathrm{Var}/k$ the full subcategory of $k$-varieties.
 - For an affine scheme $X = \operatorname{Spec} A$, $A$ is a finitely generated $k$-algebra.
 
