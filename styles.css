@@ -1,20 +1,57 @@
-/* 1. 引入 LaTeX 经典的 Computer Modern 字体库 */
-@import url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css');
+/* 1. 引入数学顶刊标准的 STIX Two 衬线字体（Times 进阶版，饱满深黑） */
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=STIX+Two+Math&display=swap');
 
-/* 2. 引入 AMS 官方出版物专用的 STIX Two Text 字体库 */
-@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&family=STIX+Two+Math&display=swap');
-
-/* 3. 全局应用为 AMS / LaTeX 论文衬线体 */
+/* 2. 全局正文：采用图二论文标准的字体、深黑色泽与行间距 */
 body {
-  font-family: "Computer Modern Serif", "STIX Two Text", "Latin Modern Roman", "Times New Roman", serif !important;
-  font-size: 1.05rem; /* 衬线字体稍微放大一点点，数学阅读体验最佳 */
-  line-height: 1.68;  /* 增加学术论文标准的行间距 */
+  font-family: "STIX Two Text", "Times New Roman", "TeX Gyre Termes", Times, serif !important;
+  font-size: 1.15rem;           /* 字体放大，饱满清晰 */
+  line-height: 1.55;            /* 舒适的数学学术行距 */
+  color: #0a0a0a;               /* 纯正深黑油墨感，告别发灰发虚 */
+  background-color: #ffffff;
 }
 
-/* 4. 标题也同步采用衬线体，保持论文风格统一 */
+/* 3. 标题字体：统一为学术衬线体 */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Computer Modern Serif", "STIX Two Text", serif !important;
+  font-family: "STIX Two Text", "Times New Roman", serif !important;
   font-weight: 600;
+}
+
+/* 4. 【保留提示框，去掉小灯泡】 */
+.callout {
+  margin: 1.2em 0 !important;
+  font-family: "STIX Two Text", "Times New Roman", serif !important;
+}
+
+/* 👈 核心修改：只隐藏小灯泡等各种图标，保留框框本身 */
+.callout-icon-container {
+  display: none !important;
+}
+
+/* 提示框标题（如 Lemma x.0.1）：学术加粗，居左对齐 */
+.callout-title-container {
+  font-weight: bold !important;
+  font-family: "STIX Two Text", "Times New Roman", serif !important;
+  margin-left: 0 !important;
+}
+
+/* 提示框正文：采用统一的 STIX 字体 */
+.callout-body {
+  font-family: "STIX Two Text", "Times New Roman", serif !important;
+}
+
+/* 5. 图二同款经典的 LaTeX Hyperref 链接配色 */
+/* 站内交叉引用与跳转：经典 LaTeX 蓝 */
+a {
+  color: #0022cc !important;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* 参考文献与文献编号引用：经典 LaTeX 砖红（如 [PS19]） */
+.citation, a[role="doc-biblioref"] {
+  color: #cc0000 !important;
 }
 
 
