@@ -24,9 +24,6 @@ website:
   # Top Navigation Bar
   navbar:
     background: primary
-    left:
-      - text: "Home"
-        href: index.qmd
     right:
       - icon: github
         href: "https://github.com/Losergh/note"
