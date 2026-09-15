@@ -263,115 +263,66 @@ nav#TOC li {
 }
 
 /* ==========================================================================
-   8. 顶部横条彻底修复（解决高度撑大、右侧开关泛白、垂直对齐错位）
+   8. 顶部横条安全优化（严格作用于 .navbar 内部，不干扰全站排版）
    ========================================================================== */
-/* 1. 强制锁死顶栏整体与各级容器的高度为 40px */
-#quarto-header,
-.navbar,
-.navbar-container,
-.container-fluid,
-.navbar-brand-container,
-.navbar-collapse {
-  min-height: 40px !important;
-  max-height: 40px !important;
-  height: 40px !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-  --bs-navbar-brand-padding-y: 0 !important;
-}
-
+/* 1. 压缩导航栏内边距，使其自然变窄 */
 .navbar {
+  padding-top: 0.15rem !important;
+  padding-bottom: 0.15rem !important;
   background-color: var(--navbar-bg) !important;
   border-bottom: 1px solid var(--note-border) !important;
-  box-sizing: border-box !important;
 }
 
-/* 2. 站点标题 / Logo：严格垂直居中 */
-.navbar-brand,
-.navbar-brand .navbar-title {
-  display: flex !important;
-  align-items: center !important;
-  height: 40px !important;
-  line-height: 40px !important;
+.navbar .navbar-container {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 2. 站点标题 / Logo */
+.navbar .navbar-brand {
   font-family: "Charter", "STIX Two Text", serif !important;
   font-size: 1.05rem !important;
   font-weight: 700 !important;
   color: var(--navbar-text) !important;
-  margin: 0 1.2rem 0 0 !important;
-  padding: 0 !important;
+  padding-top: 0.1rem !important;
+  padding-bottom: 0.1rem !important;
+  margin-right: 1.2rem !important;
 }
 
-/* 3. 导航链接（Home 等）垂直居中 */
-.navbar-nav,
-.navbar-nav .nav-item,
-.navbar-nav .nav-link {
-  display: flex !important;
-  align-items: center !important;
-  height: 40px !important;
-  line-height: 40px !important;
-  font-size: 0.92rem !important;
+/* 3. 导航链接（Home 等） */
+.navbar .navbar-nav .nav-link {
+  font-size: 0.95rem !important;
   color: var(--navbar-text) !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
+  padding-left: 0.6rem !important;
+  padding-right: 0.6rem !important;
 }
 
-.navbar-nav .nav-link:hover {
+.navbar .navbar-nav .nav-link:hover {
   color: var(--navbar-text) !important;
   background-color: var(--navbar-hover) !important;
+  border-radius: 4px;
 }
 
-/* 4. 彻底修复右侧工具区（GitHub 图标、暗黑模式切换滑块、侧边栏按钮） */
-.quarto-navbar-tools {
-  display: flex !important;
-  align-items: center !important;
-  height: 40px !important;
-  margin: 0 !important;
-  gap: 0.6rem !important; /* 图标之间间距均匀 */
-}
-
-/* 彻底解决图标“泛白隐形”：强制换成深海蓝 */
-.quarto-navbar-tools a,
-.quarto-navigation-tool,
-.navbar-nav i,
-.navbar-nav svg,
-.quarto-reader-toggle {
+/* 4. 右侧工具区与图标颜色强制恢复深色（告别隐形泛白） */
+.navbar .quarto-navbar-tools a,
+.navbar .quarto-navigation-tool,
+.navbar i,
+.navbar svg {
   color: var(--navbar-text) !important;
   fill: var(--navbar-text) !important;
   stroke: var(--navbar-text) !important;
-  opacity: 0.9 !important;
+  opacity: 0.88 !important;
 }
 
-/* 彻底解决“深色模式切换滑块”在浅色底上看不清的问题 */
-.quarto-color-scheme-toggle {
-  display: flex !important;
-  align-items: center !important;
-  margin: 0 !important;
-}
-
-.quarto-color-scheme-toggle .form-check-input {
-  border: 1.5px solid var(--navbar-text) !important;   /* 药丸开关描深色边框 */
-  background-color: rgba(29, 53, 87, 0.12) !important; /* 开关底槽微透深蓝 */
-  height: 1.15rem !important;
-  width: 2rem !important;
+/* 5. 深色模式药丸开关显色 */
+.navbar .quarto-color-scheme-toggle .form-check-input {
+  border: 1.5px solid var(--navbar-text) !important;
+  background-color: rgba(29, 53, 87, 0.15) !important;
   cursor: pointer;
 }
 
-.quarto-color-scheme-toggle .form-check-input:checked {
-  background-color: var(--navbar-text) !important;     /* 选中后变纯深色 */
-}
-
-/* 5. 标题横幅压扁处理（若有开启） */
-.quarto-title-banner {
-  background-color: var(--navbar-bg) !important;
-  border-bottom: 1px solid var(--note-border) !important;
-  padding-top: 0.75rem !important;
-  padding-bottom: 0.75rem !important;
-  margin-bottom: 1rem !important;
-}
-
-.quarto-title-banner h1,
-.quarto-title-banner .title {
-  color: var(--navbar-text) !important;
+.navbar .quarto-color-scheme-toggle .form-check-input:checked {
+  background-color: var(--navbar-text) !important;
 }
