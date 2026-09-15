@@ -57,9 +57,8 @@ website:
       contents:
         - href: 23_algebraic_groups/index.qmd
           text: "Overview"
-        - section: "Lectures & Notes"
-          contents:
-            - "23_algebraic_groups/*.qmd"   # 👈 只要带 .qmd 的笔记会自动按字母顺序全部挂在下面
+        - section: "Notes"
+          auto: 23_algebraic_groups
 
     # Future topic sidebars can be added here, e.g.:
     # - id: cft-sidebar
