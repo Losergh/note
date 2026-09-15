@@ -364,11 +364,6 @@ window.Quarto = {
    
   <ul>
   <li><a href="#conventions" id="toc-conventions" class="nav-link active" data-scroll-target="#conventions">Conventions</a></li>
-  <li><a href="#group-objects-and-the-rigidity-lemma" id="toc-group-objects-and-the-rigidity-lemma" class="nav-link" data-scroll-target="#group-objects-and-the-rigidity-lemma">1. Group Objects and the Rigidity Lemma</a></li>
-  <li><a href="#topological-and-subgroup-properties" id="toc-topological-and-subgroup-properties" class="nav-link" data-scroll-target="#topological-and-subgroup-properties">2. Topological and Subgroup Properties</a></li>
-  <li><a href="#kernels-images-and-homomorphisms" id="toc-kernels-images-and-homomorphisms" class="nav-link" data-scroll-target="#kernels-images-and-homomorphisms">3. Kernels, Images, and Homomorphisms</a></li>
-  <li><a href="#affine-algebraic-groups-and-hopf-algebras" id="toc-affine-algebraic-groups-and-hopf-algebras" class="nav-link" data-scroll-target="#affine-algebraic-groups-and-hopf-algebras">4. Affine Algebraic Groups and Hopf Algebras</a></li>
-  <li><a href="#the-étale-quotient-pi_0x-and-component-groups" id="toc-the-étale-quotient-pi_0x-and-component-groups" class="nav-link" data-scroll-target="#the-étale-quotient-pi_0x-and-component-groups">5. The Étale Quotient <span class="math inline">\(\pi_0(X)\)</span> and Component Groups</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Losergh/note/edit/main/23_algebraic_groups/23.0 Basics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Losergh/note/blob/main/23_algebraic_groups/23.0 Basics.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/Losergh/note/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -379,7 +374,6 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../23_algebraic_groups/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../23_algebraic_groups/23.0 Basics.html">23.0 Basics of Algebraic Groups</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">23.0 Basics of Algebraic Groups</h1>
-<p class="subtitle lead">Section 0</p>
 </div>
 
 
@@ -412,9 +406,6 @@ window.Quarto = {
 <li>For an affine scheme <span class="math inline">\(X = \operatorname{Spec} A\)</span>, <span class="math inline">\(A\)</span> is a finitely generated <span class="math inline">\(k\)</span>-algebra.</li>
 </ul>
 <hr>
-</section>
-<section id="group-objects-and-the-rigidity-lemma" class="level2">
-<h2 class="anchored" data-anchor-id="group-objects-and-the-rigidity-lemma">1. Group Objects and the Rigidity Lemma</h2>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -499,9 +490,6 @@ f: G \times_k G \to G, \quad (x, y) \mapsto x y x^{-1} y^{-1}.
 f(x, y) = f(e, y) = e y e^{-1} y^{-1} = e.
 \]</span> Hence <span class="math inline">\(xyx^{-1}y^{-1} = e\)</span> for all <span class="math inline">\(x, y \in G\)</span>, meaning <span class="math inline">\(xy = yx\)</span>. Thus <span class="math inline">\(G\)</span> is abelian. <span class="math inline">\(\square\)</span></p>
 <hr>
-</section>
-<section id="topological-and-subgroup-properties" class="level2">
-<h2 class="anchored" data-anchor-id="topological-and-subgroup-properties">2. Topological and Subgroup Properties</h2>
 <div class="callout callout-style-simple callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -517,11 +505,11 @@ f(x, y) = f(e, y) = e y e^{-1} y^{-1} = e.
 </div>
 <p><em>Proof.</em> A morphism <span class="math inline">\(G \to \operatorname{Spec} k\)</span> is separated if and only if the diagonal <span class="math inline">\(\Delta: G \to G \times_k G\)</span> is a closed immersion.</p>
 <p>Consider the difference morphism <span class="math inline">\(\mu: G \times_k G \to G\)</span> defined by <span class="math inline">\((g_1, g_2) \mapsto g_1 g_2^{-1}\)</span>. The diagonal <span class="math inline">\(\Delta(G)\)</span> is the scheme-theoretic pullback of the identity section <span class="math inline">\(e: \operatorname{Spec} k \to G\)</span> along <span class="math inline">\(\mu\)</span>: <span class="math display">\[
-\begin{matrix}
-G &amp; \xrightarrow{\Delta} &amp; G \times_k G \\
-\downarrow &amp; \square &amp; \downarrow \mu \\
-\operatorname{Spec} k &amp; \xrightarrow{e} &amp; G
-\end{matrix}
+\begin{CD}
+G @&gt;{\Delta}&gt;&gt; G \times_k G \\
+@VVV @VV{\mu}V \\
+\operatorname{Spec} k @&gt;{e}&gt;&gt; G
+\end{CD}
 \]</span> Because base change preserves closed immersions, it suffices to prove that <span class="math inline">\(e: \operatorname{Spec} k \to G\)</span> is a closed immersion. The image of <span class="math inline">\(e\)</span> is a single point <span class="math inline">\(e \in G\)</span>. Since <span class="math inline">\(G\)</span> is of finite type over <span class="math inline">\(k\)</span>, the point <span class="math inline">\(e\)</span> has residue field <span class="math inline">\(k(e) \cong k\)</span> and is closed. Thus <span class="math inline">\(e\)</span> is a closed immersion, which implies <span class="math inline">\(\Delta\)</span> is a closed immersion. Therefore, <span class="math inline">\(G\)</span> is separated over <span class="math inline">\(k\)</span>. <span class="math inline">\(\square\)</span></p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -572,9 +560,6 @@ G &amp; \xrightarrow{\Delta} &amp; G \times_k G \\
 </div>
 <p><em>(Reference: The Stacks Project, Tag 047R, Tag 047S).</em></p>
 <hr>
-</section>
-<section id="kernels-images-and-homomorphisms" class="level2">
-<h2 class="anchored" data-anchor-id="kernels-images-and-homomorphisms">3. Kernels, Images, and Homomorphisms</h2>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -646,9 +631,6 @@ G \xrightarrow{p} I \xrightarrow{i} H
 </div>
 </div>
 <hr>
-</section>
-<section id="affine-algebraic-groups-and-hopf-algebras" class="level2">
-<h2 class="anchored" data-anchor-id="affine-algebraic-groups-and-hopf-algebras">4. Affine Algebraic Groups and Hopf Algebras</h2>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -718,9 +700,6 @@ U_n \trianglelefteq B_n \subseteq \mathrm{GL}_n, \quad T_n \subseteq B_n, \quad 
 </div>
 </div>
 <hr>
-</section>
-<section id="the-étale-quotient-pi_0x-and-component-groups" class="level2">
-<h2 class="anchored" data-anchor-id="the-étale-quotient-pi_0x-and-component-groups">5. The Étale Quotient <span class="math inline">\(\pi_0(X)\)</span> and Component Groups</h2>
 <div class="callout callout-style-simple callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -751,12 +730,12 @@ U_n \trianglelefteq B_n \subseteq \mathrm{GL}_n, \quad T_n \subseteq B_n, \quad 
 <li>Let <span class="math inline">\(A \subseteq \mathcal{O}(X)\)</span> be the largest étale <span class="math inline">\(k\)</span>-subalgebra. We define: <span class="math display">\[
 \pi_0(X) := \operatorname{Spec} A.
 \]</span> The inclusion <span class="math inline">\(A \hookrightarrow \mathcal{O}(X)\)</span> induces a canonical morphism <span class="math inline">\(X \to \pi_0(X)\)</span>.</li>
-<li><strong>Universal Property:</strong> For any étale <span class="math inline">\(k\)</span>-scheme <span class="math inline">\(Y\)</span> and any <span class="math inline">\(k\)</span>-morphism <span class="math inline">\(f: X \to Y\)</span>, there exists a unique morphism <span class="math inline">\(\bar{f}: \pi_0(X) \to Y\)</span> making the diagram commute: <span class="math display">\[
-\begin{matrix}
-X &amp; \xrightarrow{f} &amp; Y \\
-\downarrow &amp; \nearrow_{\exists! \bar{f}} &amp; \\
-\pi_0(X) &amp; &amp;
-\end{matrix}
+<li><strong>Universal Property:</strong> For any étale <span class="math inline">\(k\)</span>-scheme <span class="math inline">\(Y\)</span> and any <span class="math inline">\(k\)</span>-morphism <span class="math inline">\(f: X \to Y\)</span>, there exists a unique morphism <span class="math inline">\(\bar{f}: \pi_0(X) \to Y\)</span> such that the following diagram commutes: <span class="math display">\[
+\begin{CD}
+X @&gt;{f}&gt;&gt; Y \\
+@VVV @| \\
+\pi_0(X) @&gt;{\exists! \bar{f}}&gt;&gt; Y
+\end{CD}
 \]</span></li>
 <li><strong>Properties:</strong>
 <ul>
@@ -799,11 +778,11 @@ X &amp; \xrightarrow{f} &amp; Y \\
 </div>
 </div>
 <p><em>Proof.</em> - Since <span class="math inline">\(\pi_0\)</span> commutes with finite products, the group morphisms <span class="math inline">\(m, i, e\)</span> on <span class="math inline">\(G\)</span> induce group structure morphisms on <span class="math inline">\(\pi_0(G)\)</span> by functoriality. - For (3), since <span class="math inline">\(e \in G^\circ(k)\)</span>, <span class="math inline">\(G^\circ\)</span> has a <span class="math inline">\(k\)</span>-rational point. Proposition x.0.17(1) implies that <span class="math inline">\(G^\circ\)</span> is geometrically connected. - For (5), since <span class="math inline">\(H\)</span> is connected, <span class="math inline">\(\pi_0(H) \cong \operatorname{Spec} k\)</span>. Functoriality yields a commutative diagram: <span class="math display">\[
-  \begin{matrix}
-  H &amp; \xrightarrow{\psi} &amp; G \\
-  \downarrow &amp; &amp; \downarrow \\
-  \pi_0(H) \cong \operatorname{Spec} k &amp; \xrightarrow{e} &amp; \pi_0(G)
-  \end{matrix}
+  \begin{CD}
+  H @&gt;{\psi}&gt;&gt; G \\
+  @VVV @VVV \\
+  \pi_0(H) \cong \operatorname{Spec} k @&gt;{e}&gt;&gt; \pi_0(G)
+  \end{CD}
   \]</span> Thus the composition <span class="math inline">\(H \to G \to \pi_0(G)\)</span> is the trivial map, which implies that <span class="math inline">\(\psi\)</span> factors uniquely through <span class="math inline">\(G^\circ = \ker(G \to \pi_0(G))\)</span>. <span class="math inline">\(\square\)</span></p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
