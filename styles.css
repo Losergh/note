@@ -1,92 +1,12 @@
-/* 1. 强制采用 Times 家族：天生字形收敛紧凑，无需网络加载，秒级显示 */
-body {
-  font-family: "Times New Roman", Times, "TeX Gyre Termes", "STIX Two Text", serif !important;
-  font-size: 1.05rem;           /* 恢复标准 10.5pt 论文视觉比例 */
-  line-height: 1.55 !important; /* 👈 核心修改：大幅压缩行距至 1.34（与图二完全一致） */
-  letter-spacing: -0.015em;     /* 👈 微微微调字间距，更加紧贴凝聚 */
-  color: #000000 !important;   /* 纯黑油墨印刷感 */
-  background-color: #ffffff;
-  text-align: justify;          /* 论文必备：两端对齐 */
-  text-justify: inter-word;
-}
+/* ==========================================================================
+   1. 字体库引入（Charter 学术衬线体 + STIX 数学字体）
+   ========================================================================== */
+@import url('https://cdn.jsdelivr.net/npm/charter-webfont@1.0.2/charter.min.css');
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
-/* 2. 段落间距紧凑化 */
-p {
-  margin-top: 0 !important;
-  margin-bottom: 0.25rem !important; /* 极小段落间隙 */
-}
-
-/* 3. 【解决截图里列表过松的问题】全面压缩无序列表与圆点间距 */
-ul, ol {
-  margin-top: 0.2rem !important;
-  margin-bottom: 0.35rem !important;
-  padding-left: 1.6rem !important;
-}
-
-li {
-  margin-bottom: 0.15rem !important; /* 👈 关键：紧贴上一行，告别巨大垂直空隙 */
-  line-height: 1.32 !important;
-}
-
-/* 4. 标题紧凑化（告别网页大标题的空旷感） */
-h1, h2, h3, h4 {
-  font-family: "Times New Roman", Times, serif !important;
-  font-weight: bold !important;
-  color: #000000 !important;
-  letter-spacing: -0.01em;
-}
-
-h1 {
-  font-size: 1.45rem !important;
-  margin-top: 1.2rem !important;
-  margin-bottom: 0.4rem !important;
-}
-
-h2 {
-  font-size: 1.25rem !important;
-  margin-top: 1.0rem !important;
-  margin-bottom: 0.3rem !important;
-}
-
-/* 5. 提示框（Callout）彻底去图标 + 内部紧凑化 */
-.callout {
-  margin: 0.8rem 0 !important;   /* 压缩提示框外边距 */
-  padding: 0.6rem 0.8rem !important;
-  font-family: "Times New Roman", Times, serif !important;
-}
-
-/* 隐藏包括 (i) 在内的所有图标 */
-.callout-icon-container {
-  display: none !important;
-}
-
-.callout-title-container {
-  font-weight: bold !important;
-  font-family: "Times New Roman", Times, serif !important;
-  margin-left: 0 !important;
-}
-
-.callout-body {
-  font-family: "Times New Roman", Times, serif !important;
-  line-height: 1.32 !important;
-}
-
-/* 6. 经典 LaTeX 超链接配色（图二同款） */
-a {
-  color: #0000cc !important;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-.citation, a[role="doc-biblioref"] {
-  color: #cc0000 !important;
-}
-
-
-
-
+/* ==========================================================================
+   2. 主题变量与深色模式支持
+   ========================================================================== */
 :root {
   --note-muted: #5d6975;
   --note-accent: #315b7d;
@@ -94,22 +14,186 @@ a:hover {
   --note-border: #dce2e7;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --note-muted: #b9c3cc;
+    --note-paper: #20262d;
+    --note-border: #3a4650;
+  }
+}
+
+/* ==========================================================================
+   3. 全局正文与排版（适度词间距，告别粘连）
+   ========================================================================== */
 body {
-  letter-spacing: 0.005em;
+  font-family: "Charter", "Bitstream Charter", "STIX Two Text", "Cambria", serif !important;
+  font-size: 1.08rem;
+  line-height: 1.55;
+  word-spacing: 0.05em !important;      /* 适度字词间距，舒适不挤压 */
+  letter-spacing: 0.005em !important;
+  color: #1a1a1a !important;
+  background-color: #ffffff;
 }
 
-.content {
-  line-height: 1.72;
+/* 仅正文段落两端对齐 */
+.content p, main p {
+  text-align: justify;
+  text-justify: inter-word;
+  margin-top: 0 !important;
+  margin-bottom: 0.4rem !important;
 }
 
-h1, h2, h3 {
-  letter-spacing: -0.018em;
+/* 标题排版 */
+h1, h2, h3, h4, h5 {
+  font-family: "Charter", "STIX Two Text", "Cambria", serif !important;
+  font-weight: 700 !important;
+  color: #111111 !important;
+  letter-spacing: -0.015em;
+}
+
+h1 {
+  font-size: 1.55rem !important;
+  margin-top: 1.2rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+h2 {
+  font-size: 1.3rem !important;
+  margin-top: 1.1rem !important;
+  margin-bottom: 0.4rem !important;
 }
 
 h1.title {
   font-weight: 650;
 }
 
+/* 列表紧凑化 */
+ul, ol {
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.35rem !important;
+  padding-left: 1.6rem !important;
+}
+
+li {
+  margin-bottom: 0.18rem !important;
+  line-height: 1.45 !important;
+}
+
+/* ==========================================================================
+   4. 定理提示框（Callout）：彻底去灯泡 + 字号与正文 1:1 等大
+   ========================================================================== */
+.callout {
+  margin: 1.1rem 0 !important;
+  border-radius: 0.45rem;
+  font-family: "Charter", "STIX Two Text", serif !important;
+}
+
+/* 彻底解决“框内字比正文小”的问题：强制继承正文字号与行高 */
+div.callout,
+div.callout-header,
+div.callout-title-container,
+div.callout-body,
+div.callout-body > p {
+  font-size: 1em !important;         /* 100% 继承正文字号 */
+  line-height: inherit !important;
+}
+
+/* 彻底隐藏所有图标（灯泡、(i) 等） */
+.callout-icon-container,
+.callout-icon,
+.callout-header i,
+.callout-header svg,
+.callout-header::before {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  visibility: hidden !important;
+}
+
+.callout-header {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.callout-title-container {
+  font-weight: 700 !important;
+  font-family: "Charter", "STIX Two Text", serif !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* ==========================================================================
+   5. 左右侧边栏与目录：自然靠左（消灭大空格），低调深灰（消灭刺眼蓝）
+   ========================================================================== */
+.sidebar,
+.margin-sidebar,
+nav#TOC {
+  text-align: left !important;         /* 强制左对齐，禁止两端拉伸撕裂空格 */
+  word-spacing: normal !important;
+}
+
+.sidebar a,
+.sidebar-item-text,
+.margin-sidebar a,
+nav#TOC a,
+.breadcrumb a,
+.nav-link {
+  color: #4a5568 !important;         /* 雅致深石墨灰 */
+  text-decoration: none !important;
+  text-align: left !important;
+}
+
+.sidebar a:hover,
+nav#TOC a:hover,
+.breadcrumb a:hover,
+.nav-link:hover {
+  color: #000000 !important;
+  text-decoration: underline !important;
+}
+
+nav#TOC li.active > a,
+.sidebar-item.active > a {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+nav#TOC {
+  font-size: 0.88rem !important;
+  line-height: 1.35 !important;
+}
+
+nav#TOC li {
+  margin-bottom: 0.35rem !important;
+}
+
+.sidebar nav {
+  font-size: 0.95rem !important;
+  line-height: 1.4 !important;
+}
+
+/* ==========================================================================
+   6. 超链接与文献引用配色
+   ========================================================================== */
+.content a, main a {
+  color: #1a1a1a !important;
+  text-decoration: underline !important;
+  text-decoration-color: #a0aec0 !important;
+  text-underline-offset: 2.5px;
+}
+
+.content a:hover, main a:hover {
+  color: #000000 !important;
+  text-decoration-color: #000000 !important;
+}
+
+.citation, a[role="doc-biblioref"] {
+  color: #8b0000 !important;
+  text-decoration: none !important;
+}
+
+/* ==========================================================================
+   7. 首页卡片样式（保留原项目特色）
+   ========================================================================== */
 .hero-note {
   max-width: 52rem;
   margin: 1.5rem 0 2.5rem;
@@ -174,16 +258,4 @@ h1.title {
 .topic-page-item p:last-child {
   margin-bottom: 0;
   color: var(--note-muted);
-}
-
-.callout {
-  border-radius: 0.45rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --note-muted: #b9c3cc;
-    --note-paper: #20262d;
-    --note-border: #3a4650;
-  }
 }
