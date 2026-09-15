@@ -350,6 +350,6 @@ $$
 is said to be **exact** if:
 
 1. $i: N \hookrightarrow G$ is a closed immersion identifying $N$ with a normal subgroup scheme of $G$;
-2. $p: G \to Q$ is an fppf quotient morphism;
-3. $i(N) = \ker(p)$ scheme-theoretically. 
+2. $p: G \to Q$ is an fppf morphism;
+3. $i(N) = \ker(p)$. 
 :::
