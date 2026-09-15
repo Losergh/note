@@ -493,6 +493,136 @@ Linear algebraic groups are fundamental objects and tools in mathematics, with w
 </section>
 
 </main> <!-- /main -->
+<script>
+(function() {
+  const ABBR = {
+    definition: 'Def', proposition: 'Prop', lemma: 'Lem', theorem: 'Thm',
+    remark: 'Rem', example: 'Ex', corollary: 'Cor', note: 'Note', tip: 'Tip',
+    important: 'Imp', warning: 'Warn', axiom: 'Ax', conjecture: 'Conj',
+    problem: 'Prob', solution: 'Sol', algorithm: 'Alg'
+  };
+
+  function decodeHtml(str) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = str;
+    return txt.value;
+  }
+
+  function getTocList() {
+    const selectors = [
+      '#TOC > ul',
+      'nav[role="doc-toc"] > ul',
+      '#quarto-toc-target > ul',
+      '.toc-ul',
+      '#toc ul',
+      '.sidebar-toc ul'
+    ];
+    for (const sel of selectors) {
+      const el = document.querySelector(sel);
+      if (el) return el;
+    }
+    return null;
+  }
+
+  function extractLabel(box) {
+    const titleEl = box.querySelector(
+      ":scope > .callout-header .callout-title-container, :scope > .callout-header"
+    );
+    if (!titleEl) return null;
+
+    const clone = titleEl.cloneNode(true);
+    clone.querySelectorAll('.callout-icon, .callout-type, [class*="style"]').forEach(el => el.remove());
+    
+    // 解码 HTML 实体（&amp; -> &）
+    let rawText = decodeHtml(clone.textContent).trim().replace(/\s+/g, ' ');
+
+    // 获取 callout 类型
+    const kindClass = [...box.classList].find(c => 
+      c.startsWith('callout-') && !c.includes('style') && !c.includes('appearance')
+    );
+    const kind = kindClass ? kindClass.replace('callout-', '').toLowerCase() : 'callout';
+
+    // 剥离前缀（如 "Note "）
+    let cleanText = rawText;
+    if (kind && cleanText.toLowerCase().startsWith(kind)) {
+      cleanText = cleanText.substring(kind.length).trim();
+    }
+    cleanText = cleanText.replace(/style-simple/gi, '').trim();
+
+    // 关键修复：先处理 & 符号，再提取环境名
+    // 将 "Definition & Proposition" 拆分为两个独立部分
+    const parts = cleanText.split('&').map(s => s.trim());
+    
+    const envs = [];
+    for (const part of parts) {
+      // 匹配环境名 + 编号（如 "Definition 23.0.8" 或 "Proposition 23.0.8"）
+      const m = part.match(new RegExp('\\b(' + Object.keys(ABBR).join('|') + ')\\b\\s*([\\d][\\d\\.]*)?', 'i'));
+      if (m) {
+        const env = ABBR[m[1].toLowerCase()] || m[1];
+        const num = m[2] ? m[2].replace(/\.$/, '') : '';
+        if (num) {
+          envs.push(`${env} ${num}`);
+        } else {
+          envs.push(env);
+        }
+      }
+    }
+
+    if (envs.length > 0) {
+      // 用 " & " 连接所有环境（如 "Def & Prop 23.0.8"）
+      return envs.join(' & ');
+    }
+
+    // 无数学环境，返回类型名
+    return kind.charAt(0).toUpperCase() + kind.slice(1);
+  }
+
+  function injectAllCalloutsToToc() {
+    const tocList = getTocList();
+    if (!tocList) return;
+
+    // 只移除之前脚本插入的条目
+    tocList.querySelectorAll('li[data-callout-toc]').forEach(li => li.remove());
+
+    const callouts = document.querySelectorAll(".callout");
+    if (!callouts.length) return;
+
+    callouts.forEach(box => {
+      const label = extractLabel(box);
+      if (!label) return;
+
+      let anchorId = box.id && box.id.trim() ? box.id.trim() : null;
+      if (!anchorId) {
+        anchorId = 'callout-' + Math.random().toString(36).slice(2, 8);
+        box.id = anchorId;
+      }
+
+      if (tocList.querySelector(`a[href="#${CSS.escape(anchorId)}"]`)) return;
+
+      const li = document.createElement("li");
+      li.setAttribute('data-callout-toc', 'true');
+      li.style.display = "block";
+
+      const a = document.createElement("a");
+      a.className = "nav-link";
+      a.href = `#${anchorId}`;
+      a.setAttribute("data-scroll-target", `#${anchorId}`);
+      a.textContent = label;
+      a.style.display = "block";
+      a.style.paddingLeft = "1.5rem";
+
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+  }
+
+  // 多次延迟执行
+  [200, 500, 1000, 1500].forEach(delay => {
+    setTimeout(injectAllCalloutsToToc, delay);
+  });
+  document.addEventListener('DOMContentLoaded', () => setTimeout(injectAllCalloutsToToc, 500));
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
