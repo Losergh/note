@@ -160,7 +160,6 @@ Let $\varphi: G \to G'$ be a homomorphism of algebraic groups over $k$.
    \dim G = \dim \ker \varphi + \dim \operatorname{Im} \varphi.
    $$
 
-3. $\varphi: G \to \operatorname{Im} \varphi$ is smooth if and only if $\ker \varphi$ is geometrically reduced, if and only if the differential $d\varphi_e: T_e(G) \to T_e(\operatorname{Im} \varphi)$ is surjective.
 :::
 
 *Idea of Proof.* By Chevalley's Theorem on constructible sets, $\varphi(G)$ contains a dense open subset of its closure. Group translations then show that $\varphi(G)$ is open in its closure $\overline{\varphi(G)}$. By Lemma 23.0.5, an open subgroup of $\overline{\varphi(G)}$ is closed, whence $\varphi(G) = \overline{\varphi(G)}$. $\square$
