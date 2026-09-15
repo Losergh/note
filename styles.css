@@ -1,19 +1,41 @@
-/* 1. 引入学术界最饱满的 Charter 字体 */
+/* ==========================================================================
+   1. 字体库引入（Charter 学术衬线体 + STIX 数学字体）
+   ========================================================================== */
 @import url('https://cdn.jsdelivr.net/npm/charter-webfont@1.0.2/charter.min.css');
 @import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
-/* 2. 全局正文字体：放大词间距（word-spacing），告别单词粘连 */
+/* ==========================================================================
+   2. 主题变量与深色模式支持
+   ========================================================================== */
+:root {
+  --note-muted: #5d6975;
+  --note-accent: #315b7d;
+  --note-paper: #fbfaf7;
+  --note-border: #dce2e7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --note-muted: #b9c3cc;
+    --note-paper: #20262d;
+    --note-border: #3a4650;
+  }
+}
+
+/* ==========================================================================
+   3. 全局正文与排版（适度词间距，告别粘连）
+   ========================================================================== */
 body {
   font-family: "Charter", "Bitstream Charter", "STIX Two Text", "Cambria", serif !important;
   font-size: 1.08rem;
   line-height: 1.55;
-  word-spacing: 0.06em !important;      /* 👈 核心修复：适度放大单词与单词间的空隙，字形舒展清晰 */
-  letter-spacing: 0 !important;          /* 恢复自然字间距 */
+  word-spacing: 0.05em !important;      /* 适度字词间距，舒适不挤压 */
+  letter-spacing: 0.005em !important;
   color: #1a1a1a !important;
   background-color: #ffffff;
 }
 
-/* 仅正文段落两端对齐，避免影响边栏目录 */
+/* 仅正文段落两端对齐 */
 .content p, main p {
   text-align: justify;
   text-justify: inter-word;
@@ -21,91 +43,12 @@ body {
   margin-bottom: 0.4rem !important;
 }
 
-/* 3. 【彻底干掉灯泡】全方位隐藏 Callout 的所有图标、SVG 及预留空间 */
-.callout-icon-container,
-.callout-icon,
-.callout-header i,
-.callout-header svg,
-.callout-header::before {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  visibility: hidden !important;
-}
-
-/* 提示框标题：学术加粗、左侧无缝顶格 */
-.callout-header {
-  border-bottom: none !important;
-  padding-bottom: 0 !important;
-}
-
-.callout-title-container {
+/* 标题排版 */
+h1, h2, h3, h4, h5 {
+  font-family: "Charter", "STIX Two Text", "Cambria", serif !important;
   font-weight: 700 !important;
-  font-family: "Charter", "STIX Two Text", serif !important;
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-}
-
-/* 4. 【修复左右 Sidebar】彻底禁止对齐拉伸，恢复正常自然左对齐与排版 */
-.sidebar,
-.margin-sidebar,
-nav#TOC {
-  text-align: left !important;           /* 👈 核心修复：强制左对齐，禁止两端拉扯拉出大空格！ */
-  word-spacing: normal !important;       /* 目录恢复正常英文间距 */
-}
-
-/* 左右侧边栏链接样式：高级深灰，告别高亮蓝 */
-.sidebar a,
-.sidebar-item-text,
-.margin-sidebar a,
-nav#TOC a,
-.breadcrumb a,
-.nav-link {
-  color: #4a5568 !important;
-  text-decoration: none !important;
-  text-align: left !important;
-}
-
-.sidebar a:hover,
-nav#TOC a:hover,
-.breadcrumb a:hover {
-  color: #000000 !important;
-  text-decoration: underline !important;
-}
-
-/* 调整右侧目录间距，避免单词被挤换行 */
-nav#TOC {
-  font-size: 0.9rem !important;
-  line-height: 1.4 !important;
-}
-
-nav#TOC li {
-  margin-bottom: 0.4rem !important;
-}
-
-/* 调整左侧目录展开宽度，避免 "23.0 Basics of Algebraic Groups" 挤压成三行 */
-.sidebar nav {
-  font-size: 0.95rem !important;
-  line-height: 1.4 !important;
-}
-
-/* 5. 正文链接：雅致暗色带浅下划线，不刺眼 */
-.content a, main a {
-  color: #1a1a1a !important;
-  text-decoration: underline !important;
-  text-decoration-color: #cbd5e0 !important;
-  text-underline-offset: 2px;
-}
-
-.content a:hover, main a:hover {
-  color: #000000 !important;
-  text-decoration-color: #000000 !important;
-}
-
-/* 文献引用（如 [Borel91]）：深砖红 */
-.citation, a[role="doc-biblioref"] {
-  color: #8b0000 !important;
-  text-decoration: none !important;
+  color: #111111 !important;
+  letter-spacing: -0.015em;
 }
 
 h1 {
@@ -120,18 +63,86 @@ h2 {
   margin-bottom: 0.4rem !important;
 }
 
-/* 4. 【核心干掉刺眼蓝】侧边栏、右侧大纲、顶部面包屑全部改为低调高级黑灰色 */
+h1.title {
+  font-weight: 650;
+}
+
+/* 列表紧凑化 */
+ul, ol {
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.35rem !important;
+  padding-left: 1.6rem !important;
+}
+
+li {
+  margin-bottom: 0.18rem !important;
+  line-height: 1.45 !important;
+}
+
+/* ==========================================================================
+   4. 定理提示框（Callout）：彻底去灯泡 + 字号与正文 1:1 等大
+   ========================================================================== */
+.callout {
+  margin: 1.1rem 0 !important;
+  border-radius: 0.45rem;
+  font-family: "Charter", "STIX Two Text", serif !important;
+}
+
+/* 彻底解决“框内字比正文小”的问题：强制继承正文字号与行高 */
+div.callout,
+div.callout-header,
+div.callout-title-container,
+div.callout-body,
+div.callout-body > p {
+  font-size: 1em !important;         /* 100% 继承正文字号 */
+  line-height: inherit !important;
+}
+
+/* 彻底隐藏所有图标（灯泡、(i) 等） */
+.callout-icon-container,
+.callout-icon,
+.callout-header i,
+.callout-header svg,
+.callout-header::before {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  visibility: hidden !important;
+}
+
+.callout-header {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.callout-title-container {
+  font-weight: 700 !important;
+  font-family: "Charter", "STIX Two Text", serif !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* ==========================================================================
+   5. 左右侧边栏与目录：自然靠左（消灭大空格），低调深灰（消灭刺眼蓝）
+   ========================================================================== */
+.sidebar,
+.margin-sidebar,
+nav#TOC {
+  text-align: left !important;         /* 强制左对齐，禁止两端拉伸撕裂空格 */
+  word-spacing: normal !important;
+}
+
 .sidebar a,
 .sidebar-item-text,
 .margin-sidebar a,
 nav#TOC a,
 .breadcrumb a,
 .nav-link {
-  color: #4a5568 !important;   /* 雅致深石墨灰，彻底告别刺眼蓝！ */
+  color: #4a5568 !important;         /* 雅致深石墨灰 */
   text-decoration: none !important;
+  text-align: left !important;
 }
 
-/* 鼠标悬停时加深为纯黑，带细线提示 */
 .sidebar a:hover,
 nav#TOC a:hover,
 .breadcrumb a:hover,
@@ -140,14 +151,12 @@ nav#TOC a:hover,
   text-decoration: underline !important;
 }
 
-/* 右侧大纲当前阅读位置的高亮（Active 项） */
 nav#TOC li.active > a,
 .sidebar-item.active > a {
   color: #000000 !important;
   font-weight: 700 !important;
 }
 
-/* 右侧“On this page”目录排版优化，避免单词挤成一团 */
 nav#TOC {
   font-size: 0.88rem !important;
   line-height: 1.35 !important;
@@ -157,11 +166,18 @@ nav#TOC li {
   margin-bottom: 0.35rem !important;
 }
 
-/* 5. 正文里的超链接：采用极细暗色下划线，融入正文不突兀 */
+.sidebar nav {
+  font-size: 0.95rem !important;
+  line-height: 1.4 !important;
+}
+
+/* ==========================================================================
+   6. 超链接与文献引用配色
+   ========================================================================== */
 .content a, main a {
-  color: #1a1a1a !important;   /* 与正文颜色融为一体 */
+  color: #1a1a1a !important;
   text-decoration: underline !important;
-  text-decoration-color: #a0aec0 !important; /* 低饱和度淡灰下划线 */
+  text-decoration-color: #a0aec0 !important;
   text-underline-offset: 2.5px;
 }
 
@@ -170,101 +186,14 @@ nav#TOC li {
   text-decoration-color: #000000 !important;
 }
 
-/* 文献引用（如 [Borel91]）：学术暗红色（低饱和，不刺眼） */
 .citation, a[role="doc-biblioref"] {
   color: #8b0000 !important;
   text-decoration: none !important;
 }
 
-/* 6. 段落与列表紧凑化 */
-p {
-  margin-top: 0 !important;
-  margin-bottom: 0.35rem !important;
-}
-
-ul, ol {
-  margin-top: 0.2rem !important;
-  margin-bottom: 0.35rem !important;
-  padding-left: 1.6rem !important;
-}
-
-li {
-  margin-bottom: 0
-
-h1 {
-  font-size: 1.45rem !important;
-  margin-top: 1.2rem !important;
-  margin-bottom: 0.4rem !important;
-}
-
-h2 {
-  font-size: 1.25rem !important;
-  margin-top: 1.0rem !important;
-  margin-bottom: 0.3rem !important;
-}
-
-/* 5. 提示框（Callout）彻底去图标 + 内部紧凑化 */
-.callout {
-  margin: 0.8rem 0 !important;   /* 压缩提示框外边距 */
-  padding: 0.6rem 0.8rem !important;
-  font-family: "Times New Roman", Times, serif !important;
-}
-
-/* 隐藏包括 (i) 在内的所有图标 */
-.callout-icon-container {
-  display: none !important;
-}
-
-.callout-title-container {
-  font-weight: bold !important;
-  font-family: "Times New Roman", Times, serif !important;
-  margin-left: 0 !important;
-}
-
-.callout-body {
-  font-family: "Times New Roman", Times, serif !important;
-  line-height: 1.32 !important;
-}
-
-/* 6. 经典 LaTeX 超链接配色（图二同款） */
-a {
-  color: #0000cc !important;
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-.citation, a[role="doc-biblioref"] {
-  color: #cc0000 !important;
-}
-
-
-
-
-:root {
-  --note-muted: #5d6975;
-  --note-accent: #315b7d;
-  --note-paper: #fbfaf7;
-  --note-border: #dce2e7;
-}
-
-body {
-  letter-spacing: 0.005em;
-}
-
-.content {
-  line-height: 1.72;
-}
-
-h1, h2, h3 {
-  letter-spacing: -0.018em;
-}
-
-h1.title {
-  font-weight: 650;
-}
-
+/* ==========================================================================
+   7. 首页卡片样式（保留原项目特色）
+   ========================================================================== */
 .hero-note {
   max-width: 52rem;
   margin: 1.5rem 0 2.5rem;
@@ -329,16 +258,4 @@ h1.title {
 .topic-page-item p:last-child {
   margin-bottom: 0;
   color: var(--note-muted);
-}
-
-.callout {
-  border-radius: 0.45rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --note-muted: #b9c3cc;
-    --note-paper: #20262d;
-    --note-border: #3a4650;
-  }
 }
