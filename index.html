@@ -493,134 +493,365 @@ Linear algebraic groups are fundamental objects and tools in mathematics, with w
 </section>
 
 </main> <!-- /main -->
+<!-- =========================================================================
+     Quarto 数学定理全功能套件 (math-support.html) - 无底色透明极简版
+     ========================================================================= -->
+<style>
+/* --------------------------------------------------------------------------
+   1. 定理环境基础外观：无底色透明设计
+   -------------------------------------------------------------------------- */
+.theorem {
+  margin: 1.2rem 0 !important;
+  padding: 0 0 0.4rem 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-left: 4px solid #4f46e5 !important; /* 默认主色 */
+  transition: all 0.2s ease;
+}
+
+/* 统一顶栏 */
+.theorem-header {
+  cursor: pointer !important;
+  user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.35rem 0.85rem !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.4 !important;
+  background: transparent !important;
+}
+.theorem-header:hover { opacity: 0.85; }
+
+/* 内容主体 */
+.theorem-body {
+  padding: 0.3rem 0.85rem 0.6rem !important;
+  background: transparent !important;
+}
+.theorem.is-folded .theorem-body {
+  display: none !important;
+}
+
+/* 折叠旋转箭头 */
+.fold-chevron {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.75rem;
+  opacity: 0.6;
+  transition: transform 0.25s ease;
+}
+.theorem-header:hover .fold-chevron, .proof-header:hover .fold-chevron {
+  opacity: 1;
+}
+.theorem.is-folded .fold-chevron, .proof.is-folded .fold-chevron {
+  transform: rotate(-90deg);
+}
+
+/* --------------------------------------------------------------------------
+   2. 准确的色彩映射（按类名精准匹配，避免颜色被 theorem 类覆盖）
+   -------------------------------------------------------------------------- */
+/* 定义 Definition - 经典学术蓝 */
+.theorem.definition { border-left-color: #0d6efd !important; }
+.theorem.definition > .theorem-header { color: #0d6efd !important; }
+
+/* 引理 Lemma - 浅绿 */
+.theorem.lemma { border-left-color: #198754 !important; }
+.theorem.lemma > .theorem-header { color: #198754 !important; }
+
+/* 命题 Proposition - 雅致紫 */
+.theorem.proposition { border-left-color: #6f42c1 !important; }
+.theorem.proposition > .theorem-header { color: #6f42c1 !important; }
+
+/* 注记 Remark - 琥珀橙 */
+.theorem.remark { border-left-color: #d97706 !important; }
+.theorem.remark > .theorem-header { color: #d97706 !important; }
+
+/* 例题 Example - 石板灰 */
+.theorem.example { border-left-color: #64748b !important; }
+.theorem.example > .theorem-header { color: #64748b !important; }
+
+/* --------------------------------------------------------------------------
+   3. 证明环境 (.proof)：无底色、浅灰竖线、默认折叠
+   -------------------------------------------------------------------------- */
+.proof {
+  margin: 0.8rem 0 1.25rem !important;
+  border-left: 3px solid #94a3b8 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.proof-header {
+  cursor: pointer !important;
+  user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.25rem 0.85rem !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+  font-size: 0.95rem !important;
+}
+.proof-header:hover { opacity: 0.85; }
+
+.proof-body {
+  padding: 0.3rem 0.85rem 0.5rem !important;
+}
+.proof.is-folded .proof-body {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. 右侧边栏（TOC）导航条目与滚动位置实时高亮
+   -------------------------------------------------------------------------- */
+.callout-toc-item a.nav-link {
+  padding-left: 1.8rem !important;
+  font-size: 0.85rem !important;
+  opacity: 0.82;
+  transition: all 0.15s ease;
+}
+.callout-toc-item a.nav-link:hover {
+  opacity: 1;
+  color: #0d6efd !important;
+}
+
+nav#TOC a.nav-link.active-math-target,
+nav#TOC li.active > a.nav-link {
+  color: #0d6efd !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+  border-left: 2.5px solid #0d6efd !important;
+}
+</style>
+
 <script>
 (function() {
-  const ABBR = {
-    definition: 'Def', proposition: 'Prop', lemma: 'Lem', theorem: 'Thm',
-    remark: 'Rem', example: 'Ex', corollary: 'Cor', note: 'Note', tip: 'Tip',
-    important: 'Imp', warning: 'Warn', axiom: 'Ax', conjecture: 'Conj',
-    problem: 'Prob', solution: 'Sol', algorithm: 'Alg'
+  const ENV_CONFIG = {
+    definition:  { full: 'Definition',  short: 'Def' },
+    lemma:       { full: 'Lemma',       short: 'Lem' },
+    proposition: { full: 'Proposition', short: 'Prop' },
+    theorem:     { full: 'Theorem',     short: 'Thm' },
+    corollary:   { full: 'Corollary',   short: 'Cor' },
+    remark:      { full: 'Remark',      short: 'Rem' },
+    example:     { full: 'Example',     short: 'Ex' }
   };
 
-  function decodeHtml(str) {
-    const txt = document.createElement("textarea");
-    txt.innerHTML = str;
-    return txt.value;
+  const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+
+  function getSecPrefix() {
+    const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
+    return sec ? sec.replace(/["']/g, '') : "23.0.";
   }
 
   function getTocList() {
-    const selectors = [
-      '#TOC > ul',
-      'nav[role="doc-toc"] > ul',
-      '#quarto-toc-target > ul',
-      '.toc-ul',
-      '#toc ul',
-      '.sidebar-toc ul'
-    ];
-    for (const sel of selectors) {
-      const el = document.querySelector(sel);
-      if (el) return el;
-    }
-    return null;
+    return document.querySelector('#TOC > ul') ||
+           document.querySelector('nav[role="doc-toc"] > ul') ||
+           document.querySelector('#quarto-toc-target > ul');
   }
 
-  function extractLabel(box) {
-    const titleEl = box.querySelector(
-      ":scope > .callout-header .callout-title-container, :scope > .callout-header"
-    );
-    if (!titleEl) return null;
+  // 1. 处理定理环境与右侧大纲
+  function processTheorems() {
+    const secPrefix = getSecPrefix();
+    let counter = 0;
 
-    const clone = titleEl.cloneNode(true);
-    clone.querySelectorAll('.callout-icon, .callout-type, [class*="style"]').forEach(el => el.remove());
-    
-    // 解码 HTML 实体（&amp; -> &）
-    let rawText = decodeHtml(clone.textContent).trim().replace(/\s+/g, ' ');
-
-    // 获取 callout 类型
-    const kindClass = [...box.classList].find(c => 
-      c.startsWith('callout-') && !c.includes('style') && !c.includes('appearance')
-    );
-    const kind = kindClass ? kindClass.replace('callout-', '').toLowerCase() : 'callout';
-
-    // 剥离前缀（如 "Note "）
-    let cleanText = rawText;
-    if (kind && cleanText.toLowerCase().startsWith(kind)) {
-      cleanText = cleanText.substring(kind.length).trim();
+    const tocList = getTocList();
+    if (tocList) {
+      tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
     }
-    cleanText = cleanText.replace(/style-simple/gi, '').trim();
 
-    // 关键修复：先处理 & 符号，再提取环境名
-    // 将 "Definition & Proposition" 拆分为两个独立部分
-    const parts = cleanText.split('&').map(s => s.trim());
-    
-    const envs = [];
-    for (const part of parts) {
-      // 匹配环境名 + 编号（如 "Definition 23.0.8" 或 "Proposition 23.0.8"）
-      const m = part.match(new RegExp('\\b(' + Object.keys(ABBR).join('|') + ')\\b\\s*([\\d][\\d\\.]*)?', 'i'));
-      if (m) {
-        const env = ABBR[m[1].toLowerCase()] || m[1];
-        const num = m[2] ? m[2].replace(/\.$/, '') : '';
-        if (num) {
-          envs.push(`${env} ${num}`);
+    const pageNodes = document.querySelectorAll(
+      'main h2, main h3, #quarto-document-content h2, #quarto-document-content h3, .theorem'
+    );
+
+    let lastTocAnchor = null;
+
+    pageNodes.forEach(node => {
+      // 记录普通小节位置
+      if (node.tagName === 'H2' || node.tagName === 'H3') {
+        if (tocList && node.id) {
+          const a = tocList.querySelector(`a[href="#${CSS.escape(node.id)}"]`);
+          if (a) lastTocAnchor = a.closest('li');
+        }
+        return;
+      }
+
+      // 处理 .theorem 环境
+      if (node.classList.contains('theorem')) {
+        // --- 关键防御锁：防止二次重复处理导致双重标题 ---
+        if (node.dataset.mathProcessed === "true") return;
+        node.dataset.mathProcessed = "true";
+
+        const titleSpan = node.querySelector('.theorem-title');
+        let subTitle = "";
+        if (titleSpan) {
+          const raw = titleSpan.textContent.trim();
+          const match = raw.match(/\((.*?)\)/);
+          if (match) subTitle = ` (${match[1]})`;
+          titleSpan.remove(); // 彻底移除原标题
+        }
+
+        // 清理由于移除 span 留下的首个空段落
+        const firstP = node.querySelector(':scope > p:first-child');
+        if (firstP && firstP.textContent.trim() === '') {
+          firstP.remove();
+        }
+
+        // 判断环境类别
+        let kind = 'theorem';
+        for (const k in ENV_CONFIG) {
+          if (node.classList.contains(k)) {
+            kind = k;
+            break;
+          }
+        }
+        const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
+        const numStr = secPrefix + counter;
+        counter++;
+
+        // 构造单一的 Header 顶栏
+        const header = document.createElement('div');
+        header.className = 'theorem-header';
+        header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${CHEVRON_SVG}`;
+
+        const body = document.createElement('div');
+        body.className = 'theorem-body';
+        while (node.firstChild) {
+          body.appendChild(node.firstChild);
+        }
+
+        node.appendChild(header);
+        node.appendChild(body);
+
+        // 绑定折叠 / 展开交互
+        header.addEventListener('click', () => {
+          node.classList.toggle('is-folded');
+        });
+
+        if (!node.id) {
+          node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
+        }
+
+        // 插入右侧大纲
+        if (tocList) {
+          const li = document.createElement('li');
+          li.setAttribute('data-callout-toc', 'true');
+          li.className = 'nav-item callout-toc-item';
+
+          const a = document.createElement('a');
+          a.className = 'nav-link';
+          a.href = `#${node.id}`;
+          a.setAttribute('data-scroll-target', `#${node.id}`);
+          a.textContent = `${conf.short} ${numStr}`;
+
+          li.appendChild(a);
+
+          if (lastTocAnchor && lastTocAnchor.parentNode) {
+            lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
+            lastTocAnchor = li;
+          } else {
+            tocList.appendChild(li);
+            lastTocAnchor = li;
+          }
+        }
+      }
+    });
+  }
+
+  // 2. 处理证明环境：默认折叠
+  function processProofs() {
+    const proofs = document.querySelectorAll('.proof');
+    proofs.forEach(proof => {
+      // 防御锁：防止重复处理
+      if (proof.dataset.mathProcessed === "true") return;
+      proof.dataset.mathProcessed = "true";
+
+      let proofLabel = "Proof.";
+      const firstP = proof.querySelector('p');
+      if (firstP) {
+        const titleSpan = firstP.querySelector('.proof-title');
+        if (titleSpan) {
+          proofLabel = titleSpan.textContent.trim();
+          titleSpan.remove();
         } else {
-          envs.push(env);
+          const em = firstP.querySelector('em');
+          if (em && /proof/i.test(em.textContent)) {
+            proofLabel = em.textContent.trim();
+            em.remove();
+          }
+        }
+      }
+
+      const header = document.createElement('div');
+      header.className = 'proof-header';
+      header.innerHTML = `<span><em>${proofLabel}</em></span>${CHEVRON_SVG}`;
+
+      const body = document.createElement('div');
+      body.className = 'proof-body';
+      while (proof.firstChild) {
+        body.appendChild(proof.firstChild);
+      }
+
+      proof.appendChild(header);
+      proof.appendChild(body);
+
+      // 默认折叠
+      proof.classList.add('is-folded');
+
+      header.addEventListener('click', () => {
+        proof.classList.toggle('is-folded');
+      });
+    });
+  }
+
+  // 3. 滚动监听：实时高亮右侧当前位置
+  function initScrollSpy() {
+    const tocLinks = document.querySelectorAll('#TOC a.nav-link');
+    if (!tocLinks.length) return;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 140;
+      const targets = Array.from(document.querySelectorAll('main h2[id], main h3[id], .theorem[id]'));
+
+      let current = null;
+      for (const el of targets) {
+        if (el.offsetTop <= scrollY) {
+          current = el;
+        } else {
+          break;
+        }
+      }
+
+      if (current) {
+        tocLinks.forEach(a => a.classList.remove('active-math-target'));
+        const activeA = document.querySelector(`#TOC a[href="#${CSS.escape(current.id)}"]`);
+        if (activeA) {
+          activeA.classList.add('active-math-target');
         }
       }
     }
 
-    if (envs.length > 0) {
-      // 用 " & " 连接所有环境（如 "Def & Prop 23.0.8"）
-      return envs.join(' & ');
-    }
-
-    // 无数学环境，返回类型名
-    return kind.charAt(0).toUpperCase() + kind.slice(1);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
-  function injectAllCalloutsToToc() {
-    const tocList = getTocList();
-    if (!tocList) return;
-
-    // 只移除之前脚本插入的条目
-    tocList.querySelectorAll('li[data-callout-toc]').forEach(li => li.remove());
-
-    const callouts = document.querySelectorAll(".callout");
-    if (!callouts.length) return;
-
-    callouts.forEach(box => {
-      const label = extractLabel(box);
-      if (!label) return;
-
-      let anchorId = box.id && box.id.trim() ? box.id.trim() : null;
-      if (!anchorId) {
-        anchorId = 'callout-' + Math.random().toString(36).slice(2, 8);
-        box.id = anchorId;
-      }
-
-      if (tocList.querySelector(`a[href="#${CSS.escape(anchorId)}"]`)) return;
-
-      const li = document.createElement("li");
-      li.setAttribute('data-callout-toc', 'true');
-      li.style.display = "block";
-
-      const a = document.createElement("a");
-      a.className = "nav-link";
-      a.href = `#${anchorId}`;
-      a.setAttribute("data-scroll-target", `#${anchorId}`);
-      a.textContent = label;
-      a.style.display = "block";
-      a.style.paddingLeft = "1.5rem";
-
-      li.appendChild(a);
-      tocList.appendChild(li);
-    });
+  // 全局唯一初始化入口
+  let hasInit = false;
+  function run() {
+    if (hasInit) return;
+    const thms = document.querySelectorAll('.theorem');
+    if (!thms.length && document.readyState === 'loading') return;
+    hasInit = true;
+    processTheorems();
+    processProofs();
+    initScrollSpy();
   }
 
-  // 多次延迟执行
-  [200, 500, 1000, 1500].forEach(delay => {
-    setTimeout(injectAllCalloutsToToc, delay);
-  });
-  document.addEventListener('DOMContentLoaded', () => setTimeout(injectAllCalloutsToToc, 500));
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+  window.addEventListener('load', run);
 })();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
