@@ -406,18 +406,19 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Definition x.0.0 (Algebraic Group and Abelian Variety)
+<span class="screen-reader-only">Note</span>Definition 23.0.0 (Algebraic Group and Abelian Variety)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>An <strong>algebraic group</strong> over <span class="math inline">\(k\)</span> is a group object in the category <span class="math inline">\(\mathrm{Sch}/k\)</span>. That is, it is a scheme <span class="math inline">\(G\)</span> of finite type over <span class="math inline">\(k\)</span> equipped with <span class="math inline">\(k\)</span>-morphisms:
+<li><p>An <strong>algebraic group</strong> over <span class="math inline">\(k\)</span> is a group object in the category <span class="math inline">\(\mathrm{Sch}/k\)</span>. That is, it is a scheme <span class="math inline">\(G\)</span> of finite type over <span class="math inline">\(k\)</span> equipped with <span class="math inline">\(k\)</span>-morphisms:</p>
 <ul>
 <li>Multiplication: <span class="math inline">\(m: G \times_k G \to G\)</span>,</li>
 <li>Inverse: <span class="math inline">\(i: G \to G\)</span>,</li>
-<li>Identity section: <span class="math inline">\(e: \operatorname{Spec} k \to G\)</span>, satisfying the usual group axioms.</li>
-</ul></li>
-<li>An <strong>abelian variety</strong> is an algebraic variety <span class="math inline">\(A \in \mathrm{Var}/k\)</span> which is a proper, geometrically connected group object in <span class="math inline">\(\mathrm{Sch}/k\)</span>.</li>
+<li>Identity section: <span class="math inline">\(e: \operatorname{Spec} k \to G\)</span>,</li>
+</ul>
+<p>satisfying the usual group axioms.</p></li>
+<li><p>An <strong>abelian variety</strong> is an algebraic variety <span class="math inline">\(A \in \mathrm{Var}/k\)</span> which is a proper, geometrically connected group object in <span class="math inline">\(\mathrm{Sch}/k\)</span>.</p></li>
 </ul>
 </div>
 </div>
@@ -427,7 +428,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Lemma x.0.1 (Smoothness of Geometrically Reduced Groups)
+<span class="screen-reader-only">Tip</span>Lemma 23.0.1 (Smoothness of Geometrically Reduced Groups)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -441,7 +442,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Lemma x.0.2 (Rigidity Lemma)
+<span class="screen-reader-only">Tip</span>Lemma 23.0.2 (Rigidity Lemma)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -455,15 +456,15 @@ f: X \times_k Y \to Z
 Y \xrightarrow{x_0 \times \mathrm{id}_Y} X \times_k Y \xrightarrow{f} Z.
 \]</span> We show that <span class="math inline">\(f(x, y) = g(y)\)</span> for all <span class="math inline">\(x \in X, y \in Y\)</span>.</p>
 <ol type="1">
-<li>Choose an affine open neighborhood <span class="math inline">\(U \subseteq Z\)</span> containing <span class="math inline">\(z_0\)</span>. The complement <span class="math inline">\(Z \setminus U\)</span> is closed in <span class="math inline">\(Z\)</span>, so <span class="math inline">\(f^{-1}(Z \setminus U)\)</span> is closed in <span class="math inline">\(X \times_k Y\)</span>.</li>
-<li>Since <span class="math inline">\(X\)</span> is proper over <span class="math inline">\(k\)</span>, the projection <span class="math inline">\(p_2: X \times_k Y \to Y\)</span> is universally closed. Thus: <span class="math display">\[
+<li><p>Choose an affine open neighborhood <span class="math inline">\(U \subseteq Z\)</span> containing <span class="math inline">\(z_0\)</span>. The complement <span class="math inline">\(Z \setminus U\)</span> is closed in <span class="math inline">\(Z\)</span>, so <span class="math inline">\(f^{-1}(Z \setminus U)\)</span> is closed in <span class="math inline">\(X \times_k Y\)</span>.</p></li>
+<li><p>Since <span class="math inline">\(X\)</span> is proper over <span class="math inline">\(k\)</span>, the projection <span class="math inline">\(p_2: X \times_k Y \to Y\)</span> is universally closed. Thus: <span class="math display">\[
 W := p_2\big(f^{-1}(Z \setminus U)\big) = \{ y \in Y \mid \exists x \in X \text{ with } f(x, y) \notin U \}
-\]</span> is a closed subset of <span class="math inline">\(Y\)</span>.</li>
-<li>By hypothesis, <span class="math inline">\(f(X \times \{y_0\}) = \{z_0\} \subseteq U\)</span>, so <span class="math inline">\(y_0 \notin W\)</span>. Hence <span class="math inline">\(Y \setminus W\)</span> is an open neighborhood of <span class="math inline">\(y_0\)</span>. Pick an affine open neighborhood <span class="math inline">\(V \subseteq Y \setminus W\)</span> containing <span class="math inline">\(y_0\)</span>.</li>
-<li>By construction, <span class="math inline">\(f(X \times V) \subseteq U\)</span>. Since <span class="math inline">\(U\)</span> is affine, we may choose a closed embedding <span class="math inline">\(U \hookrightarrow \mathbb{A}^n\)</span>. For every closed point <span class="math inline">\(y \in V\)</span>, the fiber <span class="math inline">\(X \times \{y\} \cong X\)</span> is proper and connected. Its image in the affine space <span class="math inline">\(\mathbb{A}^n\)</span> under <span class="math inline">\(f\)</span> must be both proper and affine, hence it must be a single point: <span class="math display">\[
+\]</span> is a closed subset of <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>By hypothesis, <span class="math inline">\(f(X \times \{y_0\}) = \{z_0\} \subseteq U\)</span>, so <span class="math inline">\(y_0 \notin W\)</span>. Hence <span class="math inline">\(Y \setminus W\)</span> is an open neighborhood of <span class="math inline">\(y_0\)</span>. Pick an affine open neighborhood <span class="math inline">\(V \subseteq Y \setminus W\)</span> containing <span class="math inline">\(y_0\)</span>.</p></li>
+<li><p>By construction, <span class="math inline">\(f(X \times V) \subseteq U\)</span>. Since <span class="math inline">\(U\)</span> is affine, we may choose a closed embedding <span class="math inline">\(U \hookrightarrow \mathbb{A}^n\)</span>. For every closed point <span class="math inline">\(y \in V\)</span>, the fiber <span class="math inline">\(X \times \{y\} \cong X\)</span> is proper and connected. Its image in the affine space <span class="math inline">\(\mathbb{A}^n\)</span> under <span class="math inline">\(f\)</span> must be both proper and affine, hence it must be a single point: <span class="math display">\[
 f(X \times \{y\}) = \{f(x_0, y)\} = \{g(y)\}.
-\]</span></li>
-<li>Therefore, <span class="math inline">\(f|_{X \times V} = (g \circ p_2)|_{X \times V}\)</span>. Because <span class="math inline">\(X \times_k Y\)</span> is reduced and <span class="math inline">\(Z\)</span> is separated, two morphisms agreeing on a non-empty open subscheme are identical everywhere (Reduced-to-Separated Theorem). Thus <span class="math inline">\(f = g \circ p_2\)</span>. <span class="math inline">\(\square\)</span></li>
+\]</span></p></li>
+<li><p>Therefore, <span class="math inline">\(f|_{X \times V} = (g \circ p_2)|_{X \times V}\)</span>. Because <span class="math inline">\(X \times_k Y\)</span> is reduced and <span class="math inline">\(Z\)</span> is separated, two morphisms agreeing on a non-empty open subscheme are identical everywhere (Reduced-to-Separated Theorem). Thus <span class="math inline">\(f = g \circ p_2\)</span>. <span class="math inline">\(\square\)</span></p></li>
 </ol>
 <div class="callout callout-style-simple callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -471,7 +472,7 @@ f(X \times \{y\}) = \{f(x_0, y)\} = \{g(y)\}.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Proposition x.0.3 (Proper Connected Groups are Abelian)
+<span class="screen-reader-only">Important</span>Proposition 23.0.3 (Proper Connected Groups are Abelian)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -480,7 +481,7 @@ f(X \times \{y\}) = \{f(x_0, y)\} = \{g(y)\}.
 </div>
 <p><em>Proof.</em> Consider the commutator morphism: <span class="math display">\[
 f: G \times_k G \to G, \quad (x, y) \mapsto x y x^{-1} y^{-1}.
-\]</span> Observe that <span class="math inline">\(f(G \times \{e\}) = \{e\}\)</span>. Since <span class="math inline">\(G\)</span> is proper and connected, Lemma x.0.2 (Rigidity) implies that <span class="math inline">\(f\)</span> factors through the projection to the second factor: <span class="math display">\[
+\]</span> Observe that <span class="math inline">\(f(G \times \{e\}) = \{e\}\)</span>. Since <span class="math inline">\(G\)</span> is proper and connected, Lemma 23.0.2 (Rigidity) implies that <span class="math inline">\(f\)</span> factors through the projection to the second factor: <span class="math display">\[
 f(x, y) = f(e, y) = e y e^{-1} y^{-1} = e.
 \]</span> Hence <span class="math inline">\(xyx^{-1}y^{-1} = e\)</span> for all <span class="math inline">\(x, y \in G\)</span>, meaning <span class="math inline">\(xy = yx\)</span>. Thus <span class="math inline">\(G\)</span> is abelian. <span class="math inline">\(\square\)</span></p>
 <hr>
@@ -490,7 +491,7 @@ f(x, y) = f(e, y) = e y e^{-1} y^{-1} = e.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Proposition x.0.4 (Separatedness of Group Schemes)
+<span class="screen-reader-only">Important</span>Proposition 23.0.4 (Separatedness of Group Schemes)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -511,13 +512,13 @@ G @&gt;{\Delta}&gt;&gt; G \times_k G \\
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Lemma x.0.5 (Open Subgroups are Closed)
+<span class="screen-reader-only">Tip</span>Lemma 23.0.5 (Open Subgroups are Closed)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>If <span class="math inline">\(G\)</span> is a group scheme over <span class="math inline">\(k\)</span> such that <span class="math inline">\(G_{\mathrm{red}} \times_k G_{\mathrm{red}}\)</span> is reduced, then <span class="math inline">\(G_{\mathrm{red}} \hookrightarrow G\)</span> is a closed subgroup scheme.</li>
-<li>Let <span class="math inline">\(\varphi: G' \to G\)</span> be a homomorphism of group schemes over <span class="math inline">\(k\)</span>. If the image <span class="math inline">\(\varphi(G')\)</span> is open in <span class="math inline">\(G\)</span>, then <span class="math inline">\(\varphi(G')\)</span> is also closed in <span class="math inline">\(G\)</span>.</li>
+<li><p>If <span class="math inline">\(G\)</span> is a group scheme over <span class="math inline">\(k\)</span> such that <span class="math inline">\(G_{\mathrm{red}} \times_k G_{\mathrm{red}}\)</span> is reduced, then <span class="math inline">\(G_{\mathrm{red}} \hookrightarrow G\)</span> is a closed subgroup scheme.</p></li>
+<li><p>Let <span class="math inline">\(\varphi: G' \to G\)</span> be a homomorphism of group schemes over <span class="math inline">\(k\)</span>. If the image <span class="math inline">\(\varphi(G')\)</span> is open in <span class="math inline">\(G\)</span>, then <span class="math inline">\(\varphi(G')\)</span> is also closed in <span class="math inline">\(G\)</span>.</p></li>
 </ol>
 </div>
 </div>
@@ -530,7 +531,7 @@ G @&gt;{\Delta}&gt;&gt; G \times_k G \\
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Lemma x.0.6 (Immersions of Group Schemes are Closed)
+<span class="screen-reader-only">Tip</span>Lemma 23.0.6 (Immersions of Group Schemes are Closed)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -538,18 +539,22 @@ G @&gt;{\Delta}&gt;&gt; G \times_k G \\
 </div>
 </div>
 <p><em>Proof.</em> Without loss of generality, assume <span class="math inline">\(G\)</span> and <span class="math inline">\(G'\)</span> are reduced. Let <span class="math inline">\(\overline{G'}\)</span> denote the scheme-theoretic closure of <span class="math inline">\(i(G')\)</span> in <span class="math inline">\(G\)</span> equipped with the reduced structure. Since multiplication <span class="math inline">\(m: G \times_k G \to G\)</span> is continuous and maps <span class="math inline">\(G' \times_k G'\)</span> into <span class="math inline">\(G'\)</span>, it maps the closure <span class="math inline">\(\overline{G'} \times_k \overline{G'}\)</span> into <span class="math inline">\(\overline{G'}\)</span>. Thus <span class="math inline">\(\overline{G'}\)</span> is a closed subgroup scheme of <span class="math inline">\(G\)</span>.</p>
-<p>Since <span class="math inline">\(i\)</span> is an immersion, <span class="math inline">\(i(G')\)</span> is an open subscheme of <span class="math inline">\(\overline{G'}\)</span>. By Lemma x.0.5, an open subgroup scheme of <span class="math inline">\(\overline{G'}\)</span> is closed in <span class="math inline">\(\overline{G'}\)</span>. Hence <span class="math inline">\(i(G') = \overline{G'}\)</span>, so <span class="math inline">\(i(G')\)</span> is closed in <span class="math inline">\(G\)</span>. <span class="math inline">\(\square\)</span></p>
+<p>Since <span class="math inline">\(i\)</span> is an immersion, <span class="math inline">\(i(G')\)</span> is an open subscheme of <span class="math inline">\(\overline{G'}\)</span>. By Lemma 23.0.5, an open subgroup scheme of <span class="math inline">\(\overline{G'}\)</span> is closed in <span class="math inline">\(\overline{G'}\)</span>. Hence <span class="math inline">\(i(G') = \overline{G'}\)</span>, so <span class="math inline">\(i(G')\)</span> is closed in <span class="math inline">\(G\)</span>. <span class="math inline">\(\square\)</span></p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Lemma x.0.7 (Connected Implies Irreducible)
+<span class="screen-reader-only">Tip</span>Lemma 23.0.7 (Connected Implies Irreducible)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(G\)</span> be a group scheme of finite type over <span class="math inline">\(k\)</span>. 1. If <span class="math inline">\(G\)</span> is irreducible, then <span class="math inline">\(G\)</span> is quasi-compact. 2. If <span class="math inline">\(G\)</span> is connected, then <span class="math inline">\(G\)</span> is irreducible.</p>
+<p>Let <span class="math inline">\(G\)</span> be a group scheme of finite type over <span class="math inline">\(k\)</span>.</p>
+<ol type="1">
+<li>If <span class="math inline">\(G\)</span> is irreducible, then <span class="math inline">\(G\)</span> is quasi-compact.</li>
+<li>If <span class="math inline">\(G\)</span> is connected, then <span class="math inline">\(G\)</span> is irreducible.</li>
+</ol>
 </div>
 </div>
 <p><em>(Reference: The Stacks Project, Tag 047R, Tag 047S).</em></p>
@@ -560,16 +565,16 @@ G @&gt;{\Delta}&gt;&gt; G \times_k G \\
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Definition &amp; Proposition x.0.8 (Subgroup Schemes and Kernels)
+<span class="screen-reader-only">Note</span>Definition &amp; Proposition 23.0.8 (Subgroup Schemes and Kernels)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>A closed subscheme <span class="math inline">\(H \subseteq G\)</span> is a <strong>normal subgroup scheme</strong> (denoted <span class="math inline">\(H \trianglelefteq G\)</span>) if for all <span class="math inline">\(T \in \mathrm{Sch}/k\)</span>, <span class="math inline">\(H(T)\)</span> is a normal subgroup of <span class="math inline">\(G(T)\)</span> (equivalently, <span class="math inline">\(H(R) \trianglelefteq G(R)\)</span> for all <span class="math inline">\(R \in \mathrm{Alg}_k\)</span>).</li>
-<li>Let <span class="math inline">\(\varphi: G \to G'\)</span> be a homomorphism of group schemes. The <strong>scheme-theoretic kernel</strong> is defined as the fiber product: <span class="math display">\[
+<li><p>A closed subscheme <span class="math inline">\(H \subseteq G\)</span> is a <strong>normal subgroup scheme</strong> (denoted <span class="math inline">\(H \trianglelefteq G\)</span>) if for all <span class="math inline">\(T \in \mathrm{Sch}/k\)</span>, <span class="math inline">\(H(T)\)</span> is a normal subgroup of <span class="math inline">\(G(T)\)</span> (equivalently, <span class="math inline">\(H(R) \trianglelefteq G(R)\)</span> for all <span class="math inline">\(R \in \mathrm{Alg}_k\)</span>).</p></li>
+<li><p>Let <span class="math inline">\(\varphi: G \to G'\)</span> be a homomorphism of group schemes. The <strong>scheme-theoretic kernel</strong> is defined as the fiber product: <span class="math display">\[
 \ker \varphi := \operatorname{Spec} k \times_{e, G', \varphi} G = \varphi^{-1}(e).
-\]</span> Then <span class="math inline">\(\ker \varphi\)</span> is a closed normal subgroup scheme of <span class="math inline">\(G\)</span>.</li>
-<li>On functor of points, <span class="math inline">\(\ker(\varphi)(R) = \ker(G(R) \to G'(R))\)</span> for all <span class="math inline">\(R \in \mathrm{Alg}_k\)</span>.</li>
+\]</span> Then <span class="math inline">\(\ker \varphi\)</span> is a closed normal subgroup scheme of <span class="math inline">\(G\)</span>.</p></li>
+<li><p>On functor of points, <span class="math inline">\(\ker(\varphi)(R) = \ker(G(R) \to G'(R))\)</span> for all <span class="math inline">\(R \in \mathrm{Alg}_k\)</span>.</p></li>
 </ol>
 </div>
 </div>
@@ -579,31 +584,36 @@ G @&gt;{\Delta}&gt;&gt; G \times_k G \\
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Proposition x.0.9 (Homomorphisms and Dimensions)
+<span class="screen-reader-only">Important</span>Proposition 23.0.9 (Homomorphisms and Dimensions)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(\varphi: G \to G'\)</span> be a homomorphism of algebraic groups over <span class="math inline">\(k\)</span>. 1. The scheme-theoretic image <span class="math inline">\(\varphi(G)\)</span> is closed in <span class="math inline">\(G'\)</span>. We denote <span class="math inline">\(\operatorname{Im} \varphi := \varphi(G)_{\mathrm{red}}\)</span>. 2. <strong>Dimension Formula:</strong> <span class="math display">\[
-   \dim G = \dim \ker \varphi + \dim \operatorname{Im} \varphi.
-   \]</span> 3. <span class="math inline">\(\varphi: G \to \operatorname{Im} \varphi\)</span> is smooth if and only if <span class="math inline">\(\ker \varphi\)</span> is geometrically reduced, if and only if the differential <span class="math inline">\(d\varphi_e: T_e(G) \to T_e(\operatorname{Im} \varphi)\)</span> is surjective.</p>
+<p>Let <span class="math inline">\(\varphi: G \to G'\)</span> be a homomorphism of algebraic groups over <span class="math inline">\(k\)</span>.</p>
+<ol type="1">
+<li><p>The scheme-theoretic image <span class="math inline">\(\varphi(G)\)</span> is closed in <span class="math inline">\(G'\)</span>. We denote <span class="math inline">\(\operatorname{Im} \varphi := \varphi(G)_{\mathrm{red}}\)</span>.</p></li>
+<li><p><strong>Dimension Formula:</strong> <span class="math display">\[
+\dim G = \dim \ker \varphi + \dim \operatorname{Im} \varphi.
+\]</span></p></li>
+<li><p><span class="math inline">\(\varphi: G \to \operatorname{Im} \varphi\)</span> is smooth if and only if <span class="math inline">\(\ker \varphi\)</span> is geometrically reduced, if and only if the differential <span class="math inline">\(d\varphi_e: T_e(G) \to T_e(\operatorname{Im} \varphi)\)</span> is surjective.</p></li>
+</ol>
 </div>
 </div>
-<p><em>Idea of Proof.</em> By Chevalley’s Theorem on constructible sets, <span class="math inline">\(\varphi(G)\)</span> contains a dense open subset of its closure. Group translations then show that <span class="math inline">\(\varphi(G)\)</span> is open in its closure <span class="math inline">\(\overline{\varphi(G)}\)</span>. By Lemma x.0.5, an open subgroup of <span class="math inline">\(\overline{\varphi(G)}\)</span> is closed, whence <span class="math inline">\(\varphi(G) = \overline{\varphi(G)}\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><em>Idea of Proof.</em> By Chevalley’s Theorem on constructible sets, <span class="math inline">\(\varphi(G)\)</span> contains a dense open subset of its closure. Group translations then show that <span class="math inline">\(\varphi(G)\)</span> is open in its closure <span class="math inline">\(\overline{\varphi(G)}\)</span>. By Lemma 23.0.5, an open subgroup of <span class="math inline">\(\overline{\varphi(G)}\)</span> is closed, whence <span class="math inline">\(\varphi(G) = \overline{\varphi(G)}\)</span>. <span class="math inline">\(\square\)</span></p>
 <div class="callout callout-style-simple callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Proposition x.0.10 (Image Factorization and Flatness)
+<span class="screen-reader-only">Important</span>Proposition 23.0.10 (Image Factorization and Flatness)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>If <span class="math inline">\(G'\)</span> is reduced and <span class="math inline">\(\varphi: G \to G'\)</span> is dominant, then <span class="math inline">\(\varphi\)</span> is an fppf morphism (faithfully flat of finite presentation).</li>
-<li>If <span class="math inline">\(G\)</span> is smooth, any homomorphism <span class="math inline">\(\varphi: G \to H\)</span> factors canonically as: <span class="math display">\[
+<li><p>If <span class="math inline">\(G'\)</span> is reduced and <span class="math inline">\(\varphi: G \to G'\)</span> is dominant, then <span class="math inline">\(\varphi\)</span> is an fppf morphism (faithfully flat of finite presentation).</p></li>
+<li><p>If <span class="math inline">\(G\)</span> is smooth, any homomorphism <span class="math inline">\(\varphi: G \to H\)</span> factors canonically as: <span class="math display">\[
 G \xrightarrow{p} I \xrightarrow{i} H
-\]</span> where <span class="math inline">\(p\)</span> is fppf and <span class="math inline">\(i\)</span> is a closed immersion into <span class="math inline">\(H\)</span>.</li>
+\]</span> where <span class="math inline">\(p\)</span> is fppf and <span class="math inline">\(i\)</span> is a closed immersion into <span class="math inline">\(H\)</span>.</p></li>
 </ol>
 </div>
 </div>
@@ -614,13 +624,13 @@ G \xrightarrow{p} I \xrightarrow{i} H
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Definition x.0.11 (The Identity Component <span class="math inline">\(G^\circ\)</span>)
+<span class="screen-reader-only">Note</span>Definition 23.0.11 (The Identity Component <span class="math inline">\(G^\circ\)</span>)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>The <strong>identity component</strong> <span class="math inline">\(G^\circ\)</span> of an algebraic group <span class="math inline">\(G\)</span> is the connected component containing the identity section <span class="math inline">\(e\)</span>. Endowed with its open subscheme structure, <span class="math inline">\(G^\circ\)</span> is a smooth, geometrically connected, open and closed normal subgroup scheme of <span class="math inline">\(G\)</span>.</li>
-<li>For any open subgroup <span class="math inline">\(G' \subseteq G\)</span> of finite index, <span class="math inline">\(G^\circ \subseteq G' \subseteq G\)</span>, and <span class="math inline">\((G^\circ)^\circ = G^\circ\)</span>.</li>
+<li><p>The <strong>identity component</strong> <span class="math inline">\(G^\circ\)</span> of an algebraic group <span class="math inline">\(G\)</span> is the connected component containing the identity section <span class="math inline">\(e\)</span>. Endowed with its open subscheme structure, <span class="math inline">\(G^\circ\)</span> is a smooth, geometrically connected, open and closed normal subgroup scheme of <span class="math inline">\(G\)</span>.</p></li>
+<li><p>For any open subgroup <span class="math inline">\(G' \subseteq G\)</span> of finite index, <span class="math inline">\(G^\circ \subseteq G' \subseteq G\)</span>, and <span class="math inline">\((G^\circ)^\circ = G^\circ\)</span>.</p></li>
 </ol>
 </div>
 </div>
@@ -631,14 +641,20 @@ G \xrightarrow{p} I \xrightarrow{i} H
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Remark x.0.12 (Hopf Algebras and Functor of Points)
+<span class="screen-reader-only">Note</span>Remark 23.0.12 (Hopf Algebras and Functor of Points)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>An affine scheme <span class="math inline">\(G = \operatorname{Spec} A\)</span> is a group scheme if and only if its coordinate ring <span class="math inline">\(A = \mathcal{O}(G)\)</span> is a <strong>commutative Hopf algebra</strong> over <span class="math inline">\(k\)</span>, equipped with: - Comultiplication <span class="math inline">\(\Delta: A \to A \otimes_k A\)</span>, - Counit <span class="math inline">\(\varepsilon: A \to k\)</span>, - Antipode <span class="math inline">\(S: A \to A\)</span>.</p>
+<p>An affine scheme <span class="math inline">\(G = \operatorname{Spec} A\)</span> is a group scheme if and only if its coordinate ring <span class="math inline">\(A = \mathcal{O}(G)\)</span> is a <strong>commutative Hopf algebra</strong> over <span class="math inline">\(k\)</span>, equipped with:</p>
+<ul>
+<li>Comultiplication <span class="math inline">\(\Delta: A \to A \otimes_k A\)</span>,</li>
+<li>Counit <span class="math inline">\(\varepsilon: A \to k\)</span>,</li>
+<li>Antipode <span class="math inline">\(S: A \to A\)</span>.</li>
+</ul>
 <p>We have an anti-equivalence of categories: <span class="math display">\[
 \{\text{Commutative f.g. Hopf } k\text{-algebras}\}^{\mathrm{op}} \xrightarrow{\sim} \{\text{Affine / Linear } k\text{-algebraic groups}\}.
-\]</span> Via the functor of points, the Yoneda embedding yields a fully faithful functor: <span class="math display">\[
+\]</span></p>
+<p>Via the functor of points, the Yoneda embedding yields a fully faithful functor: <span class="math display">\[
 \mathbf{GrpSch}/k \hookrightarrow \mathrm{Fun}(\mathrm{Alg}_k, \mathbf{Grp}), \quad G \mapsto (R \mapsto G(R) = \operatorname{Hom}_{k\text{-alg}}(A, R)).
 \]</span></p>
 </div>
@@ -649,34 +665,38 @@ G \xrightarrow{p} I \xrightarrow{i} H
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Example x.0.13 (Basic Examples)
+<span class="screen-reader-only">Note</span>Example 23.0.13 (Basic Examples)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><strong>Finite Constant Group:</strong> Let <span class="math inline">\(\Gamma\)</span> be a finite abstract group. The coordinate algebra is <span class="math inline">\(A = \prod_{g \in \Gamma} k \cdot e_g\)</span> with orthogonal idempotents <span class="math inline">\(e_g\)</span>.
+<li><p><strong>Finite Constant Group:</strong> Let <span class="math inline">\(\Gamma\)</span> be a finite abstract group. The coordinate algebra is <span class="math inline">\(A = \prod_{g \in \Gamma} k \cdot e_g\)</span> with orthogonal idempotents <span class="math inline">\(e_g\)</span>.</p>
 <ul>
 <li>Comultiplication: <span class="math inline">\(\Delta(e_x) = \sum_{yz = x} e_y \otimes e_z\)</span>,</li>
 <li>Antipode: <span class="math inline">\(S(e_x) = e_{x^{-1}}\)</span>,</li>
-<li>Counit: <span class="math inline">\(\varepsilon(e_x) = \delta_{x, e}\)</span>. On <span class="math inline">\(R\)</span>-points: <span class="math inline">\(G(R) = \{ (r_g)_{g \in \Gamma} \in R^\Gamma \mid \sum r_g = 1, \, r_g r_h = 0 \text{ for } g \neq h \}\)</span>.</li>
-</ul></li>
-<li><strong>Standard Matrix Groups (for <span class="math inline">\(n \in \mathbb{N}\)</span>):</strong>
+<li>Counit: <span class="math inline">\(\varepsilon(e_x) = \delta_{x, e}\)</span>.</li>
+</ul>
+<p>On <span class="math inline">\(R\)</span>-points: <span class="math display">\[
+G(R) = \left\{ (r_g)_{g \in \Gamma} \in R^\Gamma \;\middle|\; \sum_{g \in \Gamma} r_g = 1, \, r_g r_h = 0 \text{ for } g \neq h \right\}.
+\]</span></p></li>
+<li><p><strong>Standard Matrix Groups (for <span class="math inline">\(n \in \mathbb{N}\)</span>):</strong></p>
 <ul>
-<li><strong>General Linear Group <span class="math inline">\(\mathrm{GL}_n\)</span> (Reductive):</strong> <span class="math display">\[
+<li><p><strong>General Linear Group <span class="math inline">\(\mathrm{GL}_n\)</span> (Reductive):</strong> <span class="math display">\[
 \mathrm{GL}_n(R) = \{ M \in \mathrm{Mat}_{n \times n}(R) \mid \det(M) \in R^\times \}.
-\]</span></li>
-<li><strong>Standard Borel Subgroup <span class="math inline">\(B_n\)</span> (Solvable):</strong> <span class="math display">\[
+\]</span></p></li>
+<li><p><strong>Standard Borel Subgroup <span class="math inline">\(B_n\)</span> (Solvable):</strong> <span class="math display">\[
 B_n(R) = \{ (x_{ij}) \in \mathrm{GL}_n(R) \mid x_{ij} = 0 \text{ for all } i &gt; j \}.
-\]</span></li>
-<li><strong>Standard Unipotent Subgroup <span class="math inline">\(U_n\)</span> (Unipotent):</strong> <span class="math display">\[
+\]</span></p></li>
+<li><p><strong>Standard Unipotent Subgroup <span class="math inline">\(U_n\)</span> (Unipotent):</strong> <span class="math display">\[
 U_n(R) = \{ (x_{ij}) \in B_n(R) \mid x_{ii} = 1 \text{ for all } 1 \le i \le n \}.
-\]</span></li>
-<li><strong>Standard Maximal Torus <span class="math inline">\(T_n\)</span> (Split Torus):</strong> <span class="math display">\[
+\]</span></p></li>
+<li><p><strong>Standard Maximal Torus <span class="math inline">\(T_n\)</span> (Split Torus):</strong> <span class="math display">\[
 T_n(R) = \{ (x_{ij}) \in B_n(R) \mid x_{ij} = 0 \text{ for all } i \neq j \} \cong (\mathbb{G}_{m, R})^n.
-\]</span> These satisfy the inclusion hierarchy: <span class="math display">\[
+\]</span></p></li>
+</ul>
+<p>These satisfy the inclusion hierarchy: <span class="math display">\[
 U_n \trianglelefteq B_n \subseteq \mathrm{GL}_n, \quad T_n \subseteq B_n, \quad B_n = T_n \ltimes U_n.
-\]</span></li>
-</ul></li>
+\]</span></p></li>
 </ol>
 </div>
 </div>
@@ -686,7 +706,7 @@ U_n \trianglelefteq B_n \subseteq \mathrm{GL}_n, \quad T_n \subseteq B_n, \quad 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Proposition x.0.14 (Reduction of Group Schemes)
+<span class="screen-reader-only">Tip</span>Proposition 23.0.14 (Reduction of Group Schemes)
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -700,38 +720,43 @@ U_n \trianglelefteq B_n \subseteq \mathrm{GL}_n, \quad T_n \subseteq B_n, \quad 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Proposition x.0.15 (Existence of the Largest Étale Subalgebra)
+<span class="screen-reader-only">Important</span>Proposition 23.0.15 (Existence of the Largest Étale Subalgebra)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\(X\)</span> be a scheme of finite type over <span class="math inline">\(k\)</span>. Then there exists a unique largest étale <span class="math inline">\(k\)</span>-subalgebra <span class="math inline">\(\pi_0(X) \subseteq \mathcal{O}(X)\)</span>.</p>
 </div>
 </div>
-<p><em>Proof.</em> 1. If <span class="math inline">\(A_1, A_2 \subseteq \mathcal{O}(X)\)</span> are étale <span class="math inline">\(k\)</span>-subalgebras, the subring generated by them is the image of the canonical map <span class="math inline">\(A_1 \otimes_k A_2 \to \mathcal{O}(X)\)</span>. Since the tensor product of étale algebras is étale and any quotient of an étale algebra over a field is étale, the composite is étale. 2. For any étale subalgebra <span class="math inline">\(A \subseteq \mathcal{O}(X)\)</span>, base change to the separable closure satisfies: <span class="math display">\[
-   A \otimes_k k^{\mathrm{sep}} \subseteq \mathcal{O}(X) \otimes_k k^{\mathrm{sep}} = \mathcal{O}(X_{k^{\mathrm{sep}}}).
-   \]</span> Since <span class="math inline">\(A \otimes_k k^{\mathrm{sep}} \cong \prod_{i=1}^m k^{\mathrm{sep}}\)</span>, it admits a complete system of orthogonal idempotents <span class="math inline">\(e_1, \dots, e_m\)</span>. Each <span class="math inline">\(e_i\)</span> defines a non-empty open and closed subscheme <span class="math inline">\(V(1 - e_i)\)</span> of <span class="math inline">\(X_{k^{\mathrm{sep}}}\)</span>. Thus <span class="math inline">\(m \le \#\{\text{connected components of } X_{k^{\mathrm{sep}}}\}\)</span>. 3. Because <span class="math inline">\(X\)</span> is of finite type, it has finitely many connected components. The dimension <span class="math inline">\(\dim_k A\)</span> is uniformly bounded, guaranteeing the existence of a unique maximal étale subalgebra. <span class="math inline">\(\square\)</span></p>
+<p><em>Proof.</em></p>
+<ol type="1">
+<li><p>If <span class="math inline">\(A_1, A_2 \subseteq \mathcal{O}(X)\)</span> are étale <span class="math inline">\(k\)</span>-subalgebras, the subring generated by them is the image of the canonical map <span class="math inline">\(A_1 \otimes_k A_2 \to \mathcal{O}(X)\)</span>. Since the tensor product of étale algebras is étale and any quotient of an étale algebra over a field is étale, the composite is étale.</p></li>
+<li><p>For any étale subalgebra <span class="math inline">\(A \subseteq \mathcal{O}(X)\)</span>, base change to the separable closure satisfies: <span class="math display">\[
+A \otimes_k k^{\mathrm{sep}} \subseteq \mathcal{O}(X) \otimes_k k^{\mathrm{sep}} = \mathcal{O}(X_{k^{\mathrm{sep}}}).
+\]</span> Since <span class="math inline">\(A \otimes_k k^{\mathrm{sep}} \cong \prod_{i=1}^m k^{\mathrm{sep}}\)</span>, it admits a complete system of orthogonal idempotents <span class="math inline">\(e_1, \dots, e_m\)</span>. Each <span class="math inline">\(e_i\)</span> defines a non-empty open and closed subscheme <span class="math inline">\(V(1 - e_i)\)</span> of <span class="math inline">\(X_{k^{\mathrm{sep}}}\)</span>. Thus <span class="math inline">\(m \le \#\{\text{connected components of } X_{k^{\mathrm{sep}}}\}\)</span>.</p></li>
+<li><p>Because <span class="math inline">\(X\)</span> is of finite type, it has finitely many connected components. The dimension <span class="math inline">\(\dim_k A\)</span> is uniformly bounded, guaranteeing the existence of a unique maximal étale subalgebra. <span class="math inline">\(\square\)</span></p></li>
+</ol>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Definition x.0.16 (The Scheme <span class="math inline">\(\pi_0(X)\)</span>)
+<span class="screen-reader-only">Note</span>Definition 23.0.16 (The Scheme <span class="math inline">\(\pi_0(X)\)</span>)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Let <span class="math inline">\(A \subseteq \mathcal{O}(X)\)</span> be the largest étale <span class="math inline">\(k\)</span>-subalgebra. We define: <span class="math display">\[
+<li><p>Let <span class="math inline">\(A \subseteq \mathcal{O}(X)\)</span> be the largest étale <span class="math inline">\(k\)</span>-subalgebra. We define: <span class="math display">\[
 \pi_0(X) := \operatorname{Spec} A.
-\]</span> The inclusion <span class="math inline">\(A \hookrightarrow \mathcal{O}(X)\)</span> induces a canonical morphism <span class="math inline">\(X \to \pi_0(X)\)</span>.</li>
-<li><strong>Universal Property:</strong> For any étale <span class="math inline">\(k\)</span>-scheme <span class="math inline">\(Y\)</span> and any <span class="math inline">\(k\)</span>-morphism <span class="math inline">\(f: X \to Y\)</span>, there exists a unique morphism <span class="math inline">\(\bar{f}: \pi_0(X) \to Y\)</span> such that the following diagram commutes: <span class="math display">\[
+\]</span> The inclusion <span class="math inline">\(A \hookrightarrow \mathcal{O}(X)\)</span> induces a canonical morphism <span class="math inline">\(X \to \pi_0(X)\)</span>.</p></li>
+<li><p><strong>Universal Property:</strong> For any étale <span class="math inline">\(k\)</span>-scheme <span class="math inline">\(Y\)</span> and any <span class="math inline">\(k\)</span>-morphism <span class="math inline">\(f: X \to Y\)</span>, there exists a unique morphism <span class="math inline">\(\bar{f}: \pi_0(X) \to Y\)</span> such that the following diagram commutes: <span class="math display">\[
 \begin{CD}
 X @&gt;{f}&gt;&gt; Y \\
 @VVV @| \\
 \pi_0(X) @&gt;{\exists! \bar{f}}&gt;&gt; Y
 \end{CD}
-\]</span></li>
-<li><strong>Properties:</strong>
+\]</span></p></li>
+<li><p><strong>Properties:</strong></p>
 <ul>
 <li>The fibers of <span class="math inline">\(X \to \pi_0(X)\)</span> are the connected components of <span class="math inline">\(X\)</span>.</li>
 <li>For every <span class="math inline">\(y \in \pi_0(X)\)</span>, the fiber <span class="math inline">\(X_y\)</span> is geometrically connected over the residue field <span class="math inline">\(k(y)\)</span>.</li>
@@ -747,50 +772,73 @@ X @&gt;{f}&gt;&gt; Y \\
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Proposition x.0.17 (Geometric Connectedness Criteria)
+<span class="screen-reader-only">Tip</span>Proposition 23.0.17 (Geometric Connectedness Criteria)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>If <span class="math inline">\(X\)</span> is connected and <span class="math inline">\(X(k) \neq \emptyset\)</span>, then <span class="math inline">\(X\)</span> is geometrically connected.</li>
-<li>If <span class="math inline">\(X\)</span> is geometrically connected and <span class="math inline">\(Y\)</span> is connected, then <span class="math inline">\(X \times_k Y\)</span> is connected.</li>
+<li><p>If <span class="math inline">\(X\)</span> is connected and <span class="math inline">\(X(k) \neq \emptyset\)</span>, then <span class="math inline">\(X\)</span> is geometrically connected.</p></li>
+<li><p>If <span class="math inline">\(X\)</span> is geometrically connected and <span class="math inline">\(Y\)</span> is connected, then <span class="math inline">\(X \times_k Y\)</span> is connected.</p></li>
 </ol>
 </div>
 </div>
-<p><em>Proof.</em> 1. If <span class="math inline">\(X\)</span> is connected, <span class="math inline">\(\pi_0(X) = \operatorname{Spec} L\)</span>, where <span class="math inline">\(L/k\)</span> is a finite separable field extension. A rational point <span class="math inline">\(x \in X(k)\)</span> provides a section <span class="math inline">\(\operatorname{Spec} k \to X \to \operatorname{Spec} L\)</span>, forcing <span class="math inline">\(L \cong k\)</span>. Thus <span class="math inline">\(\pi_0(X) = \operatorname{Spec} k\)</span>, so <span class="math inline">\(X\)</span> is geometrically connected. 2. We have <span class="math inline">\(\pi_0(X) \cong \operatorname{Spec} k\)</span>. By product preservation, <span class="math inline">\(\pi_0(X \times_k Y) \cong \pi_0(X) \times_k \pi_0(Y) \cong \operatorname{Spec} k \times_k \pi_0(Y) \cong \pi_0(Y)\)</span>. Since <span class="math inline">\(Y\)</span> is connected, <span class="math inline">\(\pi_0(Y) = \operatorname{Spec} L\)</span> for a field <span class="math inline">\(L\)</span>. Thus <span class="math inline">\(\pi_0(X \times_k Y) \cong \operatorname{Spec} L\)</span>, which shows <span class="math inline">\(X \times_k Y\)</span> is connected. <span class="math inline">\(\square\)</span></p>
+<p><em>Proof.</em></p>
+<ol type="1">
+<li><p>If <span class="math inline">\(X\)</span> is connected, <span class="math inline">\(\pi_0(X) = \operatorname{Spec} L\)</span>, where <span class="math inline">\(L/k\)</span> is a finite separable field extension. A rational point <span class="math inline">\(x \in X(k)\)</span> provides a section <span class="math inline">\(\operatorname{Spec} k \to X \to \operatorname{Spec} L\)</span>, forcing <span class="math inline">\(L \cong k\)</span>. Thus <span class="math inline">\(\pi_0(X) = \operatorname{Spec} k\)</span>, so <span class="math inline">\(X\)</span> is geometrically connected.</p></li>
+<li><p>We have <span class="math inline">\(\pi_0(X) \cong \operatorname{Spec} k\)</span>. By product preservation, <span class="math display">\[
+\pi_0(X \times_k Y) \cong \pi_0(X) \times_k \pi_0(Y) \cong \operatorname{Spec} k \times_k \pi_0(Y) \cong \pi_0(Y).
+\]</span> Since <span class="math inline">\(Y\)</span> is connected, <span class="math inline">\(\pi_0(Y) = \operatorname{Spec} L\)</span> for a field <span class="math inline">\(L\)</span>. Thus <span class="math inline">\(\pi_0(X \times_k Y) \cong \operatorname{Spec} L\)</span>, which shows <span class="math inline">\(X \times_k Y\)</span> is connected. <span class="math inline">\(\square\)</span></p></li>
+</ol>
 <div class="callout callout-style-simple callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Proposition x.0.18 (<span class="math inline">\(\pi_0(G)\)</span> and the Connected Component)
+<span class="screen-reader-only">Important</span>Proposition 23.0.18 (<span class="math inline">\(\pi_0(G)\)</span> and the Connected Component)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(G\)</span> be an algebraic group over <span class="math inline">\(k\)</span>. 1. <span class="math inline">\(\pi_0(G)\)</span> is a finite étale group scheme over <span class="math inline">\(k\)</span>, and the canonical morphism <span class="math inline">\(G \to \pi_0(G)\)</span> is a homomorphism of algebraic groups. 2. The identity component <span class="math inline">\(G^\circ := \ker(G \to \pi_0(G))\)</span> is a geometrically connected, normal closed and open subgroup scheme of <span class="math inline">\(G\)</span>. For any field extension <span class="math inline">\(L/k\)</span>, we have <span class="math inline">\((G_L)^\circ = (G^\circ)_L\)</span>. 3. <span class="math inline">\(G\)</span> is connected <span class="math inline">\(\iff \pi_0(G) \cong \operatorname{Spec} k \iff G\)</span> is geometrically connected. 4. Formation of the identity component commutes with products: <span class="math inline">\((G \times_k H)^\circ \cong G^\circ \times_k H^\circ\)</span>. 5. If <span class="math inline">\(H\)</span> is a connected group scheme over <span class="math inline">\(k\)</span>, any homomorphism <span class="math inline">\(\psi: H \to G\)</span> factors uniquely through <span class="math inline">\(G^\circ \hookrightarrow G\)</span>.</p>
+<p>Let <span class="math inline">\(G\)</span> be an algebraic group over <span class="math inline">\(k\)</span>.</p>
+<ol type="1">
+<li><p><span class="math inline">\(\pi_0(G)\)</span> is a finite étale group scheme over <span class="math inline">\(k\)</span>, and the canonical morphism <span class="math inline">\(G \to \pi_0(G)\)</span> is a homomorphism of algebraic groups.</p></li>
+<li><p>The identity component <span class="math inline">\(G^\circ := \ker(G \to \pi_0(G))\)</span> is a geometrically connected, normal closed and open subgroup scheme of <span class="math inline">\(G\)</span>. For any field extension <span class="math inline">\(L/k\)</span>, we have <span class="math inline">\((G_L)^\circ = (G^\circ)_L\)</span>.</p></li>
+<li><p><span class="math inline">\(G\)</span> is connected <span class="math inline">\(\iff \pi_0(G) \cong \operatorname{Spec} k \iff G\)</span> is geometrically connected.</p></li>
+<li><p>Formation of the identity component commutes with products: <span class="math inline">\((G \times_k H)^\circ \cong G^\circ \times_k H^\circ\)</span>.</p></li>
+<li><p>If <span class="math inline">\(H\)</span> is a connected group scheme over <span class="math inline">\(k\)</span>, any homomorphism <span class="math inline">\(\psi: H \to G\)</span> factors uniquely through <span class="math inline">\(G^\circ \hookrightarrow G\)</span>.</p></li>
+</ol>
 </div>
 </div>
-<p><em>Proof.</em> - Since <span class="math inline">\(\pi_0\)</span> commutes with finite products, the group morphisms <span class="math inline">\(m, i, e\)</span> on <span class="math inline">\(G\)</span> induce group structure morphisms on <span class="math inline">\(\pi_0(G)\)</span> by functoriality. - For (3), since <span class="math inline">\(e \in G^\circ(k)\)</span>, <span class="math inline">\(G^\circ\)</span> has a <span class="math inline">\(k\)</span>-rational point. Proposition x.0.17(1) implies that <span class="math inline">\(G^\circ\)</span> is geometrically connected. - For (5), since <span class="math inline">\(H\)</span> is connected, <span class="math inline">\(\pi_0(H) \cong \operatorname{Spec} k\)</span>. Functoriality yields a commutative diagram: <span class="math display">\[
-  \begin{CD}
-  H @&gt;{\psi}&gt;&gt; G \\
-  @VVV @VVV \\
-  \pi_0(H) \cong \operatorname{Spec} k @&gt;{e}&gt;&gt; \pi_0(G)
-  \end{CD}
-  \]</span> Thus the composition <span class="math inline">\(H \to G \to \pi_0(G)\)</span> is the trivial map, which implies that <span class="math inline">\(\psi\)</span> factors uniquely through <span class="math inline">\(G^\circ = \ker(G \to \pi_0(G))\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><em>Proof.</em></p>
+<ul>
+<li><p>Since <span class="math inline">\(\pi_0\)</span> commutes with finite products, the group morphisms <span class="math inline">\(m, i, e\)</span> on <span class="math inline">\(G\)</span> induce group structure morphisms on <span class="math inline">\(\pi_0(G)\)</span> by functoriality.</p></li>
+<li><p>For (3), since <span class="math inline">\(e \in G^\circ(k)\)</span>, <span class="math inline">\(G^\circ\)</span> has a <span class="math inline">\(k\)</span>-rational point. Proposition 23.0.17(1) implies that <span class="math inline">\(G^\circ\)</span> is geometrically connected.</p></li>
+<li><p>For (5), since <span class="math inline">\(H\)</span> is connected, <span class="math inline">\(\pi_0(H) \cong \operatorname{Spec} k\)</span>. Functoriality yields a commutative diagram: <span class="math display">\[
+\begin{CD}
+H @&gt;{\psi}&gt;&gt; G \\
+@VVV @VVV \\
+\pi_0(H) \cong \operatorname{Spec} k @&gt;{e}&gt;&gt; \pi_0(G)
+\end{CD}
+\]</span> Thus the composition <span class="math inline">\(H \to G \to \pi_0(G)\)</span> is the trivial map, which implies that <span class="math inline">\(\psi\)</span> factors uniquely through <span class="math inline">\(G^\circ = \ker(G \to \pi_0(G))\)</span>. <span class="math inline">\(\square\)</span></p></li>
+</ul>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Definition x.0.19 (Exact Sequences of Group Schemes)
+<span class="screen-reader-only">Note</span>Definition 23.0.19 (Exact Sequences of Group Schemes)
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>A sequence of homomorphisms of group schemes over <span class="math inline">\(k\)</span>: <span class="math display">\[
 1 \longrightarrow N \xrightarrow{\quad i \quad} G \xrightarrow{\quad p \quad} Q \longrightarrow 1
-\]</span> is said to be <strong>exact</strong> if: 1. <span class="math inline">\(i: N \hookrightarrow G\)</span> is a closed immersion identifying <span class="math inline">\(N\)</span> with a normal subgroup scheme of <span class="math inline">\(G\)</span>; 2. <span class="math inline">\(p: G \to Q\)</span> is an fppf quotient morphism; 3. <span class="math inline">\(i(N) = \ker(p)\)</span> scheme-theoretically.</p>
+\]</span> is said to be <strong>exact</strong> if:</p>
+<ol type="1">
+<li><span class="math inline">\(i: N \hookrightarrow G\)</span> is a closed immersion identifying <span class="math inline">\(N\)</span> with a normal subgroup scheme of <span class="math inline">\(G\)</span>;</li>
+<li><span class="math inline">\(p: G \to Q\)</span> is an fppf quotient morphism;</li>
+<li><span class="math inline">\(i(N) = \ker(p)\)</span> scheme-theoretically.</li>
+</ol>
 </div>
 </div>
 
