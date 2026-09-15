@@ -95,6 +95,7 @@ format:
     code-copy: true
     link-external-newwindow: true
     include-after-body: thm-toc.html
-
 execute:
   freeze: auto
+
+
