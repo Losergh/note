@@ -166,7 +166,7 @@ Let $\varphi: G \to G'$ be a homomorphism of algebraic groups over $k$.
 
 ::: {.callout-important appearance="simple"}
 ## Proposition 23.0.10 (Image Factorization and Flatness)
-1. If $G'$ is reduced and $\varphi: G \to G'$ is dominant, then $\varphi$ is an fppf morphism (faithfully flat of finite presentation).
+1. If $G'$ is reduced and $\varphi: G \to G'$ is dominant, then $\varphi$ is an fppf morphism (faithfully flat locally of finite presentation).
 
 2. If $G$ is smooth, any homomorphism $\varphi: G \to H$ factors canonically as:
    $$
