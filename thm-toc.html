@@ -1,39 +1,52 @@
+<!-- thm-toc.html -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  // 匹配 Quarto 的目录容器
-  const tocList = document.querySelector("#TOC ul, #quarto-toc-target ul");
-  if (!tocList) return;
+(function() {
+  function injectThmToToc() {
+    const callouts = document.querySelectorAll(".callout");
+    if (callouts.length === 0) return;
 
-  // 抓取所有的 callout 提示框
-  document.querySelectorAll(".callout").forEach(box => {
-    // 找到卡片标题文本
-    const titleEl = box.querySelector(".callout-title, .callout-header h2, .callout-header h3");
-    if (!titleEl) return;
+    callouts.forEach(box => {
+      const titleEl = box.querySelector(".callout-title-container, .callout-header");
+      if (!titleEl) return;
 
-    const text = titleEl.textContent.trim();
-    // 匹配 Proposition 或 Theorem（包括其编号）
-    const m = text.match(/^(Proposition|Theorem|Prop|Thm)\s+([\d\.]+)/i);
-    
-    if (m) {
-      const type = m[1].toLowerCase().startsWith("p") ? "Prop" : "Thm";
-      const num = m[2];
-      const anchorId = `toc-thm-${num.replace(/\./g, "-")}`;
+      const text = titleEl.textContent;
+      const m = text.match(/(Proposition|Theorem)\s+([\d\.]+)/i);
+      
+      if (m) {
+        const type = m[1].toLowerCase().startsWith("p") ? "Prop" : "Thm";
+        const num = m[2];
+        const anchorId = "thm-" + num.replace(/\./g, "-");
 
-      // 1. 给正文里的卡片绑定跳转 ID
-      box.setAttribute("id", anchorId);
+        box.id = anchorId;
 
-      // 2. 动态创建 <li> 和 <a> 塞进右侧边栏
-      const li = document.createElement("li");
-      const a = document.createElement("a");
-      a.className = "nav-link";
-      a.href = `#${anchorId}`;
-      a.setAttribute("data-scroll-target", `#${anchorId}`);
-      a.textContent = `${type} ${num}`; // 侧边栏显示的字样，如 "Prop 23.0.3"
-      a.style.paddingLeft = "1.5rem";
+        // 获取所有匹配的 TOC 列表并插入
+        document.querySelectorAll("#TOC ul, nav[role='doc-toc'] ul").forEach(ul => {
+          if (ul.querySelector(`a[href="#${anchorId}"]`)) return;
 
-      li.appendChild(a);
-      tocList.appendChild(li);
-    }
-  });
-});
+          const li = document.createElement("li");
+          li.style.display = "block";
+
+          const a = document.createElement("a");
+          a.className = "nav-link";
+          a.href = `#${anchorId}`;
+          a.setAttribute("data-scroll-target", `#${anchorId}`);
+          a.textContent = `${type} ${num}`;
+          a.style.display = "block";
+          a.style.paddingLeft = "1.5rem";
+          a.style.opacity = "1";
+
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+      }
+    });
+  }
+
+  // 延时加载以避开 Bootstrap Scrollspy 的初始化覆盖
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => setTimeout(injectThmToToc, 300));
+  } else {
+    setTimeout(injectThmToToc, 300);
+  }
+})();
 </script>
