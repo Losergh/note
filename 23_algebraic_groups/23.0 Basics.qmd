@@ -1,5 +1,5 @@
 ---
-title: "23.0 Basics of Algebraic Groups"
+title: "23.0 Basics"
 subtitle: ""
 date: last-modified
 ---
