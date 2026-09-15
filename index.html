@@ -494,51 +494,86 @@ Linear algebraic groups are fundamental objects and tools in mathematics, with w
 
 </main> <!-- /main -->
 <!-- =========================================================================
-     Quarto 数学定理全功能套件 (math-support.html) - 无底色透明极简版
+     Quarto 数学定理全功能套件 (math-support.html) - 深色质感 + 圆角版
      ========================================================================= -->
 <style>
+
+
+
+
+/* 缩小并精致化右侧大纲标题 "On this page" */
+#toc-title,
+h2#toc-title,
+nav#TOC h2,
+.sidebar .toc-title {
+  font-size: 0.82rem !important;       /* 大幅缩小字号，与侧栏条目协调 */
+  font-weight: 600 !important;        /* 适度调细，不再大块黑粗 */
+  letter-spacing: 0.05em !important;  /* 微调字间距 */
+  color: #64748b !important;          /* 变成沉稳高级的次级灰色，不抢主体焦点 */
+  text-transform: uppercase !important; /* 采用学术期刊常用的紧凑小大写风格 */
+  margin-top: 0.3rem !important;
+  margin-bottom: 0.6rem !important;
+  padding-left: 0.2rem !important;
+}
+
+
+
 /* --------------------------------------------------------------------------
-   1. 定理环境基础外观：无底色透明设计
+   1. 定理环境基础外观：深色竖线 + 8px 精致圆角 + 无底色透明
    -------------------------------------------------------------------------- */
 .theorem {
-  margin: 1.2rem 0 !important;
-  padding: 0 0 0.4rem 0 !important;
+  margin: 1.25rem 0 !important;
+  padding: 0 !important;
   background: transparent !important;
   background-color: transparent !important;
-  border-left: 4px solid #4f46e5 !important; /* 默认主色 */
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important; /* 极细边框勾勒圆角轮廓 */
+  border-left: 5px solid #1e40af !important;         /* 默认深色加粗竖线 */
+  overflow: hidden !important;
   transition: all 0.2s ease;
 }
 
-/* 统一顶栏 */
+/* 深色模式下的外围细边框微调 */
+@media (prefers-color-scheme: dark) {
+  .theorem, .proof {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+}
+
+/* 顶栏排版 */
 .theorem-header {
-  cursor: pointer !important;
   user-select: none;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  padding: 0.35rem 0.85rem !important;
+  padding: 0.55rem 0.95rem !important;
   font-weight: 700 !important;
   font-size: 1.05rem !important;
   line-height: 1.4 !important;
   background: transparent !important;
 }
-.theorem-header:hover { opacity: 0.85; }
+.theorem-header.is-clickable {
+  cursor: pointer !important;
+}
+.theorem-header.is-clickable:hover {
+  opacity: 0.82;
+}
 
-/* 内容主体 */
+/* 内容正文 */
 .theorem-body {
-  padding: 0.3rem 0.85rem 0.6rem !important;
+  padding: 0.35rem 0.95rem 0.75rem !important;
   background: transparent !important;
 }
 .theorem.is-folded .theorem-body {
   display: none !important;
 }
 
-/* 折叠旋转箭头 */
+/* 折叠小箭头 */
 .fold-chevron {
   display: inline-flex;
   align-items: center;
   margin-left: 0.75rem;
-  opacity: 0.6;
+  opacity: 0.7;
   transition: transform 0.25s ease;
 }
 .theorem-header:hover .fold-chevron, .proof-header:hover .fold-chevron {
@@ -549,36 +584,44 @@ Linear algebraic groups are fundamental objects and tools in mathematics, with w
 }
 
 /* --------------------------------------------------------------------------
-   2. 准确的色彩映射（按类名精准匹配，避免颜色被 theorem 类覆盖）
+   2. 全面加深的专业学术色彩映射
    -------------------------------------------------------------------------- */
-/* 定义 Definition - 经典学术蓝 */
-.theorem.definition { border-left-color: #0d6efd !important; }
-.theorem.definition > .theorem-header { color: #0d6efd !important; }
+/* 定义 Definition - 深学术蓝 (Oxford Blue) */
+.theorem.kind-definition { border-left-color: #1e40af !important; }
+.theorem.kind-definition > .theorem-header { color: #1e40af !important; }
 
-/* 引理 Lemma - 浅绿 */
-.theorem.lemma { border-left-color: #198754 !important; }
-.theorem.lemma > .theorem-header { color: #198754 !important; }
+/* 引理 Lemma - 深森林绿 (Deep Forest Green) */
+.theorem.kind-lemma { border-left-color: #166534 !important; }
+.theorem.kind-lemma > .theorem-header { color: #166534 !important; }
 
-/* 命题 Proposition - 雅致紫 */
-.theorem.proposition { border-left-color: #6f42c1 !important; }
-.theorem.proposition > .theorem-header { color: #6f42c1 !important; }
+/* 命题 Proposition - 帝王深紫 (Royal Purple) */
+.theorem.kind-proposition { border-left-color: #6b21a8 !important; }
+.theorem.kind-proposition > .theorem-header { color: #6b21a8 !important; }
 
-/* 注记 Remark - 琥珀橙 */
-.theorem.remark { border-left-color: #d97706 !important; }
-.theorem.remark > .theorem-header { color: #d97706 !important; }
+/* 定理 Theorem - 深砖红 / 勃艮第红 (Crimson Red) */
+.theorem.kind-theorem { border-left-color: #991b1b !important; }
+.theorem.kind-theorem > .theorem-header { color: #991b1b !important; }
 
-/* 例题 Example - 石板灰 */
-.theorem.example { border-left-color: #64748b !important; }
-.theorem.example > .theorem-header { color: #64748b !important; }
+/* 注记 Remark - 深铜橙 (Deep Bronze Amber) */
+.theorem.kind-remark { border-left-color: #b45309 !important; }
+.theorem.kind-remark > .theorem-header { color: #b45309 !important; cursor: default !important; }
+
+/* 例题 Example - 深板岩炭灰 (Deep Slate) */
+.theorem.kind-example { border-left-color: #334155 !important; }
+.theorem.kind-example > .theorem-header { color: #334155 !important; }
 
 /* --------------------------------------------------------------------------
-   3. 证明环境 (.proof)：无底色、浅灰竖线、默认折叠
+   3. 证明环境 (.proof)：深烟灰、8px 圆角、默认折叠
    -------------------------------------------------------------------------- */
 .proof {
-  margin: 0.8rem 0 1.25rem !important;
-  border-left: 3px solid #94a3b8 !important;
+  margin: 0.9rem 0 1.35rem !important;
+  padding: 0 !important;
   background: transparent !important;
   background-color: transparent !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-left: 4px solid #64748b !important;
+  overflow: hidden !important;
 }
 
 .proof-header {
@@ -587,15 +630,15 @@ Linear algebraic groups are fundamental objects and tools in mathematics, with w
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  padding: 0.25rem 0.85rem !important;
+  padding: 0.4rem 0.9rem !important;
   font-weight: 600 !important;
-  color: #64748b !important;
-  font-size: 0.95rem !important;
+  color: #475569 !important;
+  font-size: 0.96rem !important;
 }
 .proof-header:hover { opacity: 0.85; }
 
 .proof-body {
-  padding: 0.3rem 0.85rem 0.5rem !important;
+  padding: 0.35rem 0.9rem 0.65rem !important;
 }
 .proof.is-folded .proof-body {
   display: none !important;
@@ -612,15 +655,15 @@ Linear algebraic groups are fundamental objects and tools in mathematics, with w
 }
 .callout-toc-item a.nav-link:hover {
   opacity: 1;
-  color: #0d6efd !important;
+  color: #1e40af !important;
 }
 
 nav#TOC a.nav-link.active-math-target,
 nav#TOC li.active > a.nav-link {
-  color: #0d6efd !important;
+  color: #1e40af !important;
   font-weight: 700 !important;
   opacity: 1 !important;
-  border-left: 2.5px solid #0d6efd !important;
+  border-left: 2.5px solid #1e40af !important;
 }
 </style>
 
@@ -643,18 +686,62 @@ nav#TOC li.active > a.nav-link {
     return sec ? sec.replace(/["']/g, '') : "23.0.";
   }
 
-  function getTocList() {
-    return document.querySelector('#TOC > ul') ||
-           document.querySelector('nav[role="doc-toc"] > ul') ||
-           document.querySelector('#quarto-toc-target > ul');
+  // 保证右侧大纲（TOC）永远不丢失
+  function ensureTocList() {
+    let list = document.querySelector('#TOC > ul') ||
+               document.querySelector('nav[role="doc-toc"] > ul') ||
+               document.querySelector('#quarto-toc-target > ul');
+    if (list) return list;
+
+    let marginSidebar = document.querySelector('#quarto-margin-sidebar, .margin-sidebar');
+    if (!marginSidebar) {
+      const content = document.querySelector('#quarto-content') || document.querySelector('.page-columns');
+      if (content) {
+        marginSidebar = document.createElement('div');
+        marginSidebar.id = 'quarto-margin-sidebar';
+        marginSidebar.className = 'sidebar margin-sidebar';
+        content.appendChild(marginSidebar);
+      }
+    }
+
+    if (marginSidebar) {
+      marginSidebar.style.display = 'block';
+      let nav = marginSidebar.querySelector('#TOC');
+      if (!nav) {
+        nav = document.createElement('nav');
+        nav.id = 'TOC';
+        nav.setAttribute('role', 'doc-toc');
+        nav.className = 'toc-active';
+        nav.innerHTML = '<h2 id="toc-title">On this page</h2><ul></ul>';
+        marginSidebar.appendChild(nav);
+      }
+      return nav.querySelector('ul');
+    }
+    return null;
   }
 
-  // 1. 处理定理环境与右侧大纲
+  // 多维智能类型捕获（精准识别 exm 和 rem）
+  function detectKind(node, titleText) {
+    const id = (node.id || "").toLowerCase();
+    const cls = (node.className || "").toLowerCase();
+    const title = (titleText || "").toLowerCase();
+
+    if (id.startsWith('exm-') || cls.includes('example') || /^example\b/.test(title)) return 'example';
+    if (id.startsWith('rem-') || cls.includes('remark') || /^remark\b/.test(title)) return 'remark';
+    if (id.startsWith('def-') || cls.includes('definition') || /^definition\b/.test(title)) return 'definition';
+    if (id.startsWith('lem-') || cls.includes('lemma') || /^lemma\b/.test(title)) return 'lemma';
+    if (id.startsWith('prp-') || cls.includes('proposition') || /^proposition\b/.test(title)) return 'proposition';
+    if (id.startsWith('cor-') || cls.includes('corollary') || /^corollary\b/.test(title)) return 'corollary';
+    if (id.startsWith('thm-') || cls.includes('theorem') || /^theorem\b/.test(title)) return 'theorem';
+    return 'theorem';
+  }
+
+  // 1. 处理定理环境
   function processTheorems() {
     const secPrefix = getSecPrefix();
     let counter = 0;
 
-    const tocList = getTocList();
+    const tocList = ensureTocList();
     if (tocList) {
       tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
     }
@@ -666,7 +753,6 @@ nav#TOC li.active > a.nav-link {
     let lastTocAnchor = null;
 
     pageNodes.forEach(node => {
-      // 记录普通小节位置
       if (node.tagName === 'H2' || node.tagName === 'H3') {
         if (tocList && node.id) {
           const a = tocList.querySelector(`a[href="#${CSS.escape(node.id)}"]`);
@@ -675,43 +761,32 @@ nav#TOC li.active > a.nav-link {
         return;
       }
 
-      // 处理 .theorem 环境
       if (node.classList.contains('theorem')) {
-        // --- 关键防御锁：防止二次重复处理导致双重标题 ---
         if (node.dataset.mathProcessed === "true") return;
         node.dataset.mathProcessed = "true";
 
         const titleSpan = node.querySelector('.theorem-title');
+        let rawTitle = titleSpan ? titleSpan.textContent.trim() : "";
         let subTitle = "";
-        if (titleSpan) {
-          const raw = titleSpan.textContent.trim();
-          const match = raw.match(/\((.*?)\)/);
-          if (match) subTitle = ` (${match[1]})`;
-          titleSpan.remove(); // 彻底移除原标题
-        }
 
-        // 清理由于移除 span 留下的首个空段落
+        const match = rawTitle.match(/\((.*?)\)/);
+        if (match) subTitle = ` (${match[1]})`;
+        if (titleSpan) titleSpan.remove();
+
         const firstP = node.querySelector(':scope > p:first-child');
-        if (firstP && firstP.textContent.trim() === '') {
-          firstP.remove();
-        }
+        if (firstP && firstP.textContent.trim() === '') firstP.remove();
 
-        // 判断环境类别
-        let kind = 'theorem';
-        for (const k in ENV_CONFIG) {
-          if (node.classList.contains(k)) {
-            kind = k;
-            break;
-          }
-        }
+        const kind = detectKind(node, rawTitle);
         const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
         const numStr = secPrefix + counter;
         counter++;
 
-        // 构造单一的 Header 顶栏
+        const canFold = (kind !== 'remark');
+        node.classList.add(`kind-${kind}`);
+
         const header = document.createElement('div');
-        header.className = 'theorem-header';
-        header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${CHEVRON_SVG}`;
+        header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
+        header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
 
         const body = document.createElement('div');
         body.className = 'theorem-body';
@@ -722,16 +797,16 @@ nav#TOC li.active > a.nav-link {
         node.appendChild(header);
         node.appendChild(body);
 
-        // 绑定折叠 / 展开交互
-        header.addEventListener('click', () => {
-          node.classList.toggle('is-folded');
-        });
+        if (canFold) {
+          header.addEventListener('click', () => {
+            node.classList.toggle('is-folded');
+          });
+        }
 
         if (!node.id) {
           node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
         }
 
-        // 插入右侧大纲
         if (tocList) {
           const li = document.createElement('li');
           li.setAttribute('data-callout-toc', 'true');
@@ -761,7 +836,6 @@ nav#TOC li.active > a.nav-link {
   function processProofs() {
     const proofs = document.querySelectorAll('.proof');
     proofs.forEach(proof => {
-      // 防御锁：防止重复处理
       if (proof.dataset.mathProcessed === "true") return;
       proof.dataset.mathProcessed = "true";
 
@@ -794,7 +868,6 @@ nav#TOC li.active > a.nav-link {
       proof.appendChild(header);
       proof.appendChild(body);
 
-      // 默认折叠
       proof.classList.add('is-folded');
 
       header.addEventListener('click', () => {
@@ -834,7 +907,6 @@ nav#TOC li.active > a.nav-link {
     onScroll();
   }
 
-  // 全局唯一初始化入口
   let hasInit = false;
   function run() {
     if (hasInit) return;
