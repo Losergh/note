@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-09-15">
+
+<title>Basics of Algebraic Groups – Math Notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../23_algebraic_groups/index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-4135fc327bf2835b2ef38f6e520f46b7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-072fe720cdfc8dbd8d45003ad61e038e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-4135fc327bf2835b2ef38f6e520f46b7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Math Notes</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Losergh/note"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../23_algebraic_groups/index.html">Overview</a></li><li class="breadcrumb-item"><a href="../23_algebraic_groups/23.0 Basics.html">Basics of Algebraic Groups</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="sidebar-tools-main">
+    <div id="quarto-search" class="quarto-navigation-tool px-1" title="Search"></div>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../23_algebraic_groups/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../23_algebraic_groups/23.0 Basics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Basics of Algebraic Groups</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#conventions" id="toc-conventions" class="nav-link active" data-scroll-target="#conventions">Conventions</a></li>
+  <li><a href="#group-objects-and-the-rigidity-lemma" id="toc-group-objects-and-the-rigidity-lemma" class="nav-link" data-scroll-target="#group-objects-and-the-rigidity-lemma">1. Group Objects and the Rigidity Lemma</a></li>
+  <li><a href="#topological-and-subgroup-properties" id="toc-topological-and-subgroup-properties" class="nav-link" data-scroll-target="#topological-and-subgroup-properties">2. Topological and Subgroup Properties</a></li>
+  <li><a href="#kernels-images-and-homomorphisms" id="toc-kernels-images-and-homomorphisms" class="nav-link" data-scroll-target="#kernels-images-and-homomorphisms">3. Kernels, Images, and Homomorphisms</a></li>
+  <li><a href="#affine-algebraic-groups-and-hopf-algebras" id="toc-affine-algebraic-groups-and-hopf-algebras" class="nav-link" data-scroll-target="#affine-algebraic-groups-and-hopf-algebras">4. Affine Algebraic Groups and Hopf Algebras</a></li>
+  <li><a href="#the-étale-quotient-pi_0x-and-component-groups" id="toc-the-étale-quotient-pi_0x-and-component-groups" class="nav-link" data-scroll-target="#the-étale-quotient-pi_0x-and-component-groups">5. The Étale Quotient <span class="math inline">\(\pi_0(X)\)</span> and Component Groups</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Losergh/note/edit/main/23_algebraic_groups/23.0 Basics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Losergh/note/blob/main/23_algebraic_groups/23.0 Basics.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/Losergh/note/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../23_algebraic_groups/index.html">Overview</a></li><li class="breadcrumb-item"><a href="../23_algebraic_groups/23.0 Basics.html">Basics of Algebraic Groups</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Basics of Algebraic Groups</h1>
+<p class="subtitle lead">Algebraic Groups Note x, Section 0</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 15, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="conventions" class="level2">
+<h2 class="anchored" data-anchor-id="conventions">Conventions</h2>
+<p>Throughout this section:</p>
+<ul>
+<li>Let <span class="math inline">\(k\)</span> be a fixed base field.</li>
+<li>A <strong><span class="math inline">\(k\)</span>-variety</strong> is defined as a reduced, separated scheme of finite type over <span class="math inline">\(k\)</span>.</li>
+<li>We denote by <span class="math inline">\(\mathrm{Sch}/k\)</span> the category of schemes of finite type over <span class="math inline">\(k\)</span>, and by <span class="math inline">\(\mathrm{Var}/k\)</span> the full subcategory of <span class="math inline">\(k\)</span>-varieties.</li>
+<li>For an affine scheme <span class="math inline">\(X = \operatorname{Spec} A\)</span>, <span class="math inline">\(A\)</span> is a finitely generated <span class="math inline">\(k\)</span>-algebra.</li>
+</ul>
+<hr>
+</section>
+<section id="group-objects-and-the-rigidity-lemma" class="level2">
+<h2 class="anchored" data-anchor-id="group-objects-and-the-rigidity-lemma">1. Group Objects and the Rigidity Lemma</h2>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition x.0.0 (Algebraic Group and Abelian Variety)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>An <strong>algebraic group</strong> over <span class="math inline">\(k\)</span> is a group object in the category <span class="math inline">\(\mathrm{Sch}/k\)</span>. That is, it is a scheme <span class="math inline">\(G\)</span> of finite type over <span class="math inline">\(k\)</span> equipped with <span class="math inline">\(k\)</span>-morphisms:
+<ul>
+<li>Multiplication: <span class="math inline">\(m: G \times_k G \to G\)</span>,</li>
+<li>Inverse: <span class="math inline">\(i: G \to G\)</span>,</li>
+<li>Identity section: <span class="math inline">\(e: \operatorname{Spec} k \to G\)</span>, satisfying the usual group axioms.</li>
+</ul></li>
+<li>An <strong>abelian variety</strong> is an algebraic variety <span class="math inline">\(A \in \mathrm{Var}/k\)</span> which is a proper, geometrically connected group object in <span class="math inline">\(\mathrm{Sch}/k\)</span>.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lemma x.0.1 (Smoothness of Geometrically Reduced Groups)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Any geometrically reduced algebraic group <span class="math inline">\(G\)</span> over <span class="math inline">\(k\)</span> is smooth. Consequently, its connected components coincide with its irreducible components.</p>
+</div>
+</div>
+<p><em>Proof sketch.</em> Since <span class="math inline">\(G_{\bar{k}}\)</span> is reduced and of finite type over an algebraically closed field, its smooth locus <span class="math inline">\(\operatorname{Sm}(G_{\bar{k}})\)</span> is open and non-empty. For any closed point <span class="math inline">\(g \in G(\bar{k})\)</span>, the group translation <span class="math inline">\(L_g: G_{\bar{k}} \to G_{\bar{k}}\)</span> is an automorphism mapping smooth points to smooth points. Transitivity of translations implies that every point of <span class="math inline">\(G_{\bar{k}}\)</span> is smooth. Thus <span class="math inline">\(G\)</span> is smooth over <span class="math inline">\(k\)</span>. Because smooth schemes are locally irreducible, the connected components must coincide with the irreducible components. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lemma x.0.2 (Rigidity Lemma)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X, Y, Z\)</span> be varieties over <span class="math inline">\(k\)</span> with <span class="math inline">\(X\)</span> proper and geometrically irreducible, and <span class="math inline">\(Y\)</span> geometrically irreducible. Let <span class="math display">\[
+f: X \times_k Y \to Z
+\]</span> be a <span class="math inline">\(k\)</span>-morphism. Suppose there exists a <span class="math inline">\(k\)</span>-rational point <span class="math inline">\(y_0 \in Y(k)\)</span> such that <span class="math inline">\(f(X \times \{y_0\}) = \{z_0\}\)</span> for some <span class="math inline">\(z_0 \in Z(k)\)</span>.</p>
+<p>Then <span class="math inline">\(f\)</span> factors through the canonical projection <span class="math inline">\(p_2: X \times_k Y \to Y\)</span>. That is, there exists a morphism <span class="math inline">\(g: Y \to Z\)</span> such that <span class="math inline">\(f = g \circ p_2\)</span>.</p>
+</div>
+</div>
+<p><em>Proof.</em> Fix a rational point <span class="math inline">\(x_0 \in X(k)\)</span> (extending scalars to <span class="math inline">\(\bar{k}\)</span> if necessary). Define <span class="math inline">\(g: Y \to Z\)</span> by the composition: <span class="math display">\[
+Y \xrightarrow{x_0 \times \mathrm{id}_Y} X \times_k Y \xrightarrow{f} Z.
+\]</span> We show that <span class="math inline">\(f(x, y) = g(y)\)</span> for all <span class="math inline">\(x \in X, y \in Y\)</span>.</p>
+<ol type="1">
+<li>Choose an affine open neighborhood <span class="math inline">\(U \subseteq Z\)</span> containing <span class="math inline">\(z_0\)</span>. The complement <span class="math inline">\(Z \setminus U\)</span> is closed in <span class="math inline">\(Z\)</span>, so <span class="math inline">\(f^{-1}(Z \setminus U)\)</span> is closed in <span class="math inline">\(X \times_k Y\)</span>.</li>
+<li>Since <span class="math inline">\(X\)</span> is proper over <span class="math inline">\(k\)</span>, the projection <span class="math inline">\(p_2: X \times_k Y \to Y\)</span> is universally closed. Thus: <span class="math display">\[
+W := p_2\big(f^{-1}(Z \setminus U)\big) = \{ y \in Y \mid \exists x \in X \text{ with } f(x, y) \notin U \}
+\]</span> is a closed subset of <span class="math inline">\(Y\)</span>.</li>
+<li>By hypothesis, <span class="math inline">\(f(X \times \{y_0\}) = \{z_0\} \subseteq U\)</span>, so <span class="math inline">\(y_0 \notin W\)</span>. Hence <span class="math inline">\(Y \setminus W\)</span> is an open neighborhood of <span class="math inline">\(y_0\)</span>. Pick an affine open neighborhood <span class="math inline">\(V \subseteq Y \setminus W\)</span> containing <span class="math inline">\(y_0\)</span>.</li>
+<li>By construction, <span class="math inline">\(f(X \times V) \subseteq U\)</span>. Since <span class="math inline">\(U\)</span> is affine, we may choose a closed embedding <span class="math inline">\(U \hookrightarrow \mathbb{A}^n\)</span>. For every closed point <span class="math inline">\(y \in V\)</span>, the fiber <span class="math inline">\(X \times \{y\} \cong X\)</span> is proper and connected. Its image in the affine space <span class="math inline">\(\mathbb{A}^n\)</span> under <span class="math inline">\(f\)</span> must be both proper and affine, hence it must be a single point: <span class="math display">\[
+f(X \times \{y\}) = \{f(x_0, y)\} = \{g(y)\}.
+\]</span></li>
+<li>Therefore, <span class="math inline">\(f|_{X \times V} = (g \circ p_2)|_{X \times V}\)</span>. Because <span class="math inline">\(X \times_k Y\)</span> is reduced and <span class="math inline">\(Z\)</span> is separated, two morphisms agreeing on a non-empty open subscheme are identical everywhere (Reduced-to-Separated Theorem). Thus <span class="math inline">\(f = g \circ p_2\)</span>. <span class="math inline">\(\square\)</span></li>
+</ol>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Proposition x.0.3 (Proper Connected Groups are Abelian)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Any proper connected smooth algebraic group <span class="math inline">\(G\)</span> over <span class="math inline">\(k\)</span> is abelian. In particular, abelian varieties are commutative.</p>
+</div>
+</div>
+<p><em>Proof.</em> Consider the commutator morphism: <span class="math display">\[
+f: G \times_k G \to G, \quad (x, y) \mapsto x y x^{-1} y^{-1}.
+\]</span> Observe that <span class="math inline">\(f(G \times \{e\}) = \{e\}\)</span>. Since <span class="math inline">\(G\)</span> is proper and connected, Lemma x.0.2 (Rigidity) implies that <span class="math inline">\(f\)</span> factors through the projection to the second factor: <span class="math display">\[
+f(x, y) = f(e, y) = e y e^{-1} y^{-1} = e.
+\]</span> Hence <span class="math inline">\(xyx^{-1}y^{-1} = e\)</span> for all <span class="math inline">\(x, y \in G\)</span>, meaning <span class="math inline">\(xy = yx\)</span>. Thus <span class="math inline">\(G\)</span> is abelian. <span class="math inline">\(\square\)</span></p>
+<hr>
+</section>
+<section id="topological-and-subgroup-properties" class="level2">
+<h2 class="anchored" data-anchor-id="topological-and-subgroup-properties">2. Topological and Subgroup Properties</h2>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Proposition x.0.4 (Separatedness of Group Schemes)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every group scheme <span class="math inline">\(G\)</span> of finite type over a field <span class="math inline">\(k\)</span> is separated.</p>
+</div>
+</div>
+<p><em>Proof.</em> A morphism <span class="math inline">\(G \to \operatorname{Spec} k\)</span> is separated if and only if the diagonal <span class="math inline">\(\Delta: G \to G \times_k G\)</span> is a closed immersion.</p>
+<p>Consider the difference morphism <span class="math inline">\(\mu: G \times_k G \to G\)</span> defined by <span class="math inline">\((g_1, g_2) \mapsto g_1 g_2^{-1}\)</span>. The diagonal <span class="math inline">\(\Delta(G)\)</span> is the scheme-theoretic pullback of the identity section <span class="math inline">\(e: \operatorname{Spec} k \to G\)</span> along <span class="math inline">\(\mu\)</span>: <span class="math display">\[
+\begin{matrix}
+G &amp; \xrightarrow{\Delta} &amp; G \times_k G \\
+\downarrow &amp; \square &amp; \downarrow \mu \\
+\operatorname{Spec} k &amp; \xrightarrow{e} &amp; G
+\end{matrix}
+\]</span> Because base change preserves closed immersions, it suffices to prove that <span class="math inline">\(e: \operatorname{Spec} k \to G\)</span> is a closed immersion. The image of <span class="math inline">\(e\)</span> is a single point <span class="math inline">\(e \in G\)</span>. Since <span class="math inline">\(G\)</span> is of finite type over <span class="math inline">\(k\)</span>, the point <span class="math inline">\(e\)</span> has residue field <span class="math inline">\(k(e) \cong k\)</span> and is closed. Thus <span class="math inline">\(e\)</span> is a closed immersion, which implies <span class="math inline">\(\Delta\)</span> is a closed immersion. Therefore, <span class="math inline">\(G\)</span> is separated over <span class="math inline">\(k\)</span>. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lemma x.0.5 (Open Subgroups are Closed)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>If <span class="math inline">\(G\)</span> is a group scheme over <span class="math inline">\(k\)</span> such that <span class="math inline">\(G_{\mathrm{red}} \times_k G_{\mathrm{red}}\)</span> is reduced, then <span class="math inline">\(G_{\mathrm{red}} \hookrightarrow G\)</span> is a closed subgroup scheme.</li>
+<li>Let <span class="math inline">\(\varphi: G' \to G\)</span> be a homomorphism of group schemes over <span class="math inline">\(k\)</span>. If the image <span class="math inline">\(\varphi(G')\)</span> is open in <span class="math inline">\(G\)</span>, then <span class="math inline">\(\varphi(G')\)</span> is also closed in <span class="math inline">\(G\)</span>.</li>
+</ol>
+</div>
+</div>
+<p><em>Proof of (2).</em> Let <span class="math inline">\(U = \varphi(G') \subseteq G\)</span> be open. Endow the complement <span class="math inline">\(Z := G \setminus U\)</span> with the reduced subscheme structure. It suffices to show that <span class="math inline">\(Z\)</span> is open.</p>
+<p>Consider the action map <span class="math inline">\(Z \times_k G' \to G\)</span> given by <span class="math inline">\((z, g') \mapsto z \cdot \varphi(g')\)</span>. For any <span class="math inline">\(g' \in G'\)</span>, the translation <span class="math inline">\(x \mapsto x \cdot \varphi(g')\)</span> is an automorphism of <span class="math inline">\(G\)</span>. Since <span class="math inline">\(U = \varphi(G')\)</span> is stable under right multiplication by <span class="math inline">\(\varphi(G')\)</span>, its complement <span class="math inline">\(Z\)</span> is also stable under multiplication by <span class="math inline">\(\varphi(G')\)</span>.</p>
+<p>Because translations are open morphisms, the image of <span class="math inline">\(Z \times_k G' \to G\)</span> is a union of translates of <span class="math inline">\(Z\)</span>, which is open. But this image is precisely <span class="math inline">\(Z\)</span> itself. Hence <span class="math inline">\(Z\)</span> is open, which proves <span class="math inline">\(U = G \setminus Z\)</span> is closed. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lemma x.0.6 (Immersions of Group Schemes are Closed)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(i: G' \hookrightarrow G\)</span> be an immersion of group schemes over <span class="math inline">\(k\)</span>. Then <span class="math inline">\(i\)</span> is a closed immersion.</p>
+</div>
+</div>
+<p><em>Proof.</em> Without loss of generality, assume <span class="math inline">\(G\)</span> and <span class="math inline">\(G'\)</span> are reduced. Let <span class="math inline">\(\overline{G'}\)</span> denote the scheme-theoretic closure of <span class="math inline">\(i(G')\)</span> in <span class="math inline">\(G\)</span> equipped with the reduced structure. Since multiplication <span class="math inline">\(m: G \times_k G \to G\)</span> is continuous and maps <span class="math inline">\(G' \times_k G'\)</span> into <span class="math inline">\(G'\)</span>, it maps the closure <span class="math inline">\(\overline{G'} \times_k \overline{G'}\)</span> into <span class="math inline">\(\overline{G'}\)</span>. Thus <span class="math inline">\(\overline{G'}\)</span> is a closed subgroup scheme of <span class="math inline">\(G\)</span>.</p>
+<p>Since <span class="math inline">\(i\)</span> is an immersion, <span class="math inline">\(i(G')\)</span> is an open subscheme of <span class="math inline">\(\overline{G'}\)</span>. By Lemma x.0.5, an open subgroup scheme of <span class="math inline">\(\overline{G'}\)</span> is closed in <span class="math inline">\(\overline{G'}\)</span>. Hence <span class="math inline">\(i(G') = \overline{G'}\)</span>, so <span class="math inline">\(i(G')\)</span> is closed in <span class="math inline">\(G\)</span>. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lemma x.0.7 (Connected Implies Irreducible)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(G\)</span> be a group scheme of finite type over <span class="math inline">\(k\)</span>. 1. If <span class="math inline">\(G\)</span> is irreducible, then <span class="math inline">\(G\)</span> is quasi-compact. 2. If <span class="math inline">\(G\)</span> is connected, then <span class="math inline">\(G\)</span> is irreducible.</p>
+</div>
+</div>
+<p><em>(Reference: The Stacks Project, Tag 047R, Tag 047S).</em></p>
+<hr>
+</section>
+<section id="kernels-images-and-homomorphisms" class="level2">
+<h2 class="anchored" data-anchor-id="kernels-images-and-homomorphisms">3. Kernels, Images, and Homomorphisms</h2>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition &amp; Proposition x.0.8 (Subgroup Schemes and Kernels)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>A closed subscheme <span class="math inline">\(H \subseteq G\)</span> is a <strong>normal subgroup scheme</strong> (denoted <span class="math inline">\(H \trianglelefteq G\)</span>) if for all <span class="math inline">\(T \in \mathrm{Sch}/k\)</span>, <span class="math inline">\(H(T)\)</span> is a normal subgroup of <span class="math inline">\(G(T)\)</span> (equivalently, <span class="math inline">\(H(R) \trianglelefteq G(R)\)</span> for all <span class="math inline">\(R \in \mathrm{Alg}_k\)</span>).</li>
+<li>Let <span class="math inline">\(\varphi: G \to G'\)</span> be a homomorphism of group schemes. The <strong>scheme-theoretic kernel</strong> is defined as the fiber product: <span class="math display">\[
+\ker \varphi := \operatorname{Spec} k \times_{e, G', \varphi} G = \varphi^{-1}(e).
+\]</span> Then <span class="math inline">\(\ker \varphi\)</span> is a closed normal subgroup scheme of <span class="math inline">\(G\)</span>.</li>
+<li>On functor of points, <span class="math inline">\(\ker(\varphi)(R) = \ker(G(R) \to G'(R))\)</span> for all <span class="math inline">\(R \in \mathrm{Alg}_k\)</span>.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Proposition x.0.9 (Homomorphisms and Dimensions)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\varphi: G \to G'\)</span> be a homomorphism of algebraic groups over <span class="math inline">\(k\)</span>. 1. The scheme-theoretic image <span class="math inline">\(\varphi(G)\)</span> is closed in <span class="math inline">\(G'\)</span>. We denote <span class="math inline">\(\operatorname{Im} \varphi := \varphi(G)_{\mathrm{red}}\)</span>. 2. <strong>Dimension Formula:</strong> <span class="math display">\[
+   \dim G = \dim \ker \varphi + \dim \operatorname{Im} \varphi.
+   \]</span> 3. <span class="math inline">\(\varphi: G \to \operatorname{Im} \varphi\)</span> is smooth if and only if <span class="math inline">\(\ker \varphi\)</span> is geometrically reduced, if and only if the differential <span class="math inline">\(d\varphi_e: T_e(G) \to T_e(\operatorname{Im} \varphi)\)</span> is surjective.</p>
+</div>
+</div>
+<p><em>Idea of Proof.</em> By Chevalley’s Theorem on constructible sets, <span class="math inline">\(\varphi(G)\)</span> contains a dense open subset of its closure. Group translations then show that <span class="math inline">\(\varphi(G)\)</span> is open in its closure <span class="math inline">\(\overline{\varphi(G)}\)</span>. By Lemma x.0.5, an open subgroup of <span class="math inline">\(\overline{\varphi(G)}\)</span> is closed, whence <span class="math inline">\(\varphi(G) = \overline{\varphi(G)}\)</span>. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Proposition x.0.10 (Image Factorization and Flatness)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>If <span class="math inline">\(G'\)</span> is reduced and <span class="math inline">\(\varphi: G \to G'\)</span> is dominant, then <span class="math inline">\(\varphi\)</span> is an fppf morphism (faithfully flat of finite presentation).</li>
+<li>If <span class="math inline">\(G\)</span> is smooth, any homomorphism <span class="math inline">\(\varphi: G \to H\)</span> factors canonically as: <span class="math display">\[
+G \xrightarrow{p} I \xrightarrow{i} H
+\]</span> where <span class="math inline">\(p\)</span> is fppf and <span class="math inline">\(i\)</span> is a closed immersion into <span class="math inline">\(H\)</span>.</li>
+</ol>
+</div>
+</div>
+<p><em>Proof.</em> Set <span class="math inline">\(I := \varphi(G)\)</span> with reduced subscheme structure. By generic flatness, there exists a dense open subscheme <span class="math inline">\(U \subseteq I\)</span> over which <span class="math inline">\(\varphi^{-1}(U) \to U\)</span> is flat. Since translations by rational points (over <span class="math inline">\(\bar{k}\)</span>) act transitively on <span class="math inline">\(I\)</span>, translates of <span class="math inline">\(U\)</span> cover <span class="math inline">\(I\)</span>. Therefore, <span class="math inline">\(\varphi\)</span> is flat everywhere. Being surjective and of finite type, it is fppf. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition x.0.11 (The Identity Component <span class="math inline">\(G^\circ\)</span>)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>The <strong>identity component</strong> <span class="math inline">\(G^\circ\)</span> of an algebraic group <span class="math inline">\(G\)</span> is the connected component containing the identity section <span class="math inline">\(e\)</span>. Endowed with its open subscheme structure, <span class="math inline">\(G^\circ\)</span> is a smooth, geometrically connected, open and closed normal subgroup scheme of <span class="math inline">\(G\)</span>.</li>
+<li>For any open subgroup <span class="math inline">\(G' \subseteq G\)</span> of finite index, <span class="math inline">\(G^\circ \subseteq G' \subseteq G\)</span>, and <span class="math inline">\((G^\circ)^\circ = G^\circ\)</span>.</li>
+</ol>
+</div>
+</div>
+<hr>
+</section>
+<section id="affine-algebraic-groups-and-hopf-algebras" class="level2">
+<h2 class="anchored" data-anchor-id="affine-algebraic-groups-and-hopf-algebras">4. Affine Algebraic Groups and Hopf Algebras</h2>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Remark x.0.12 (Hopf Algebras and Functor of Points)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An affine scheme <span class="math inline">\(G = \operatorname{Spec} A\)</span> is a group scheme if and only if its coordinate ring <span class="math inline">\(A = \mathcal{O}(G)\)</span> is a <strong>commutative Hopf algebra</strong> over <span class="math inline">\(k\)</span>, equipped with: - Comultiplication <span class="math inline">\(\Delta: A \to A \otimes_k A\)</span>, - Counit <span class="math inline">\(\varepsilon: A \to k\)</span>, - Antipode <span class="math inline">\(S: A \to A\)</span>.</p>
+<p>We have an anti-equivalence of categories: <span class="math display">\[
+\{\text{Commutative f.g. Hopf } k\text{-algebras}\}^{\mathrm{op}} \xrightarrow{\sim} \{\text{Affine / Linear } k\text{-algebraic groups}\}.
+\]</span> Via the functor of points, the Yoneda embedding yields a fully faithful functor: <span class="math display">\[
+\mathbf{GrpSch}/k \hookrightarrow \mathrm{Fun}(\mathrm{Alg}_k, \mathbf{Grp}), \quad G \mapsto (R \mapsto G(R) = \operatorname{Hom}_{k\text{-alg}}(A, R)).
+\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Example x.0.13 (Basic Examples)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>Finite Constant Group:</strong> Let <span class="math inline">\(\Gamma\)</span> be a finite abstract group. The coordinate algebra is <span class="math inline">\(A = \prod_{g \in \Gamma} k \cdot e_g\)</span> with orthogonal idempotents <span class="math inline">\(e_g\)</span>.
+<ul>
+<li>Comultiplication: <span class="math inline">\(\Delta(e_x) = \sum_{yz = x} e_y \otimes e_z\)</span>,</li>
+<li>Antipode: <span class="math inline">\(S(e_x) = e_{x^{-1}}\)</span>,</li>
+<li>Counit: <span class="math inline">\(\varepsilon(e_x) = \delta_{x, e}\)</span>. On <span class="math inline">\(R\)</span>-points: <span class="math inline">\(G(R) = \{ (r_g)_{g \in \Gamma} \in R^\Gamma \mid \sum r_g = 1, \, r_g r_h = 0 \text{ for } g \neq h \}\)</span>.</li>
+</ul></li>
+<li><strong>Standard Matrix Groups (for <span class="math inline">\(n \in \mathbb{N}\)</span>):</strong>
+<ul>
+<li><strong>General Linear Group <span class="math inline">\(\mathrm{GL}_n\)</span> (Reductive):</strong> <span class="math display">\[
+\mathrm{GL}_n(R) = \{ M \in \mathrm{Mat}_{n \times n}(R) \mid \det(M) \in R^\times \}.
+\]</span></li>
+<li><strong>Standard Borel Subgroup <span class="math inline">\(B_n\)</span> (Solvable):</strong> <span class="math display">\[
+B_n(R) = \{ (x_{ij}) \in \mathrm{GL}_n(R) \mid x_{ij} = 0 \text{ for all } i &gt; j \}.
+\]</span></li>
+<li><strong>Standard Unipotent Subgroup <span class="math inline">\(U_n\)</span> (Unipotent):</strong> <span class="math display">\[
+U_n(R) = \{ (x_{ij}) \in B_n(R) \mid x_{ii} = 1 \text{ for all } 1 \le i \le n \}.
+\]</span></li>
+<li><strong>Standard Maximal Torus <span class="math inline">\(T_n\)</span> (Split Torus):</strong> <span class="math display">\[
+T_n(R) = \{ (x_{ij}) \in B_n(R) \mid x_{ij} = 0 \text{ for all } i \neq j \} \cong (\mathbb{G}_{m, R})^n.
+\]</span> These satisfy the inclusion hierarchy: <span class="math display">\[
+U_n \trianglelefteq B_n \subseteq \mathrm{GL}_n, \quad T_n \subseteq B_n, \quad B_n = T_n \ltimes U_n.
+\]</span></li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Proposition x.0.14 (Reduction of Group Schemes)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(G\)</span> be an algebraic group over <span class="math inline">\(k\)</span>. If <span class="math inline">\(G_{\mathrm{red}}\)</span> is geometrically reduced (e.g., if <span class="math inline">\(k\)</span> is perfect), then <span class="math inline">\(G_{\mathrm{red}} \hookrightarrow G\)</span> is a smooth closed subgroup scheme of <span class="math inline">\(G\)</span>.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="the-étale-quotient-pi_0x-and-component-groups" class="level2">
+<h2 class="anchored" data-anchor-id="the-étale-quotient-pi_0x-and-component-groups">5. The Étale Quotient <span class="math inline">\(\pi_0(X)\)</span> and Component Groups</h2>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Proposition x.0.15 (Existence of the Largest Étale Subalgebra)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X\)</span> be a scheme of finite type over <span class="math inline">\(k\)</span>. Then there exists a unique largest étale <span class="math inline">\(k\)</span>-subalgebra <span class="math inline">\(\pi_0(X) \subseteq \mathcal{O}(X)\)</span>.</p>
+</div>
+</div>
+<p><em>Proof.</em> 1. If <span class="math inline">\(A_1, A_2 \subseteq \mathcal{O}(X)\)</span> are étale <span class="math inline">\(k\)</span>-subalgebras, the subring generated by them is the image of the canonical map <span class="math inline">\(A_1 \otimes_k A_2 \to \mathcal{O}(X)\)</span>. Since the tensor product of étale algebras is étale and any quotient of an étale algebra over a field is étale, the composite is étale. 2. For any étale subalgebra <span class="math inline">\(A \subseteq \mathcal{O}(X)\)</span>, base change to the separable closure satisfies: <span class="math display">\[
+   A \otimes_k k^{\mathrm{sep}} \subseteq \mathcal{O}(X) \otimes_k k^{\mathrm{sep}} = \mathcal{O}(X_{k^{\mathrm{sep}}}).
+   \]</span> Since <span class="math inline">\(A \otimes_k k^{\mathrm{sep}} \cong \prod_{i=1}^m k^{\mathrm{sep}}\)</span>, it admits a complete system of orthogonal idempotents <span class="math inline">\(e_1, \dots, e_m\)</span>. Each <span class="math inline">\(e_i\)</span> defines a non-empty open and closed subscheme <span class="math inline">\(V(1 - e_i)\)</span> of <span class="math inline">\(X_{k^{\mathrm{sep}}}\)</span>. Thus <span class="math inline">\(m \le \#\{\text{connected components of } X_{k^{\mathrm{sep}}}\}\)</span>. 3. Because <span class="math inline">\(X\)</span> is of finite type, it has finitely many connected components. The dimension <span class="math inline">\(\dim_k A\)</span> is uniformly bounded, guaranteeing the existence of a unique maximal étale subalgebra. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition x.0.16 (The Scheme <span class="math inline">\(\pi_0(X)\)</span>)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Let <span class="math inline">\(A \subseteq \mathcal{O}(X)\)</span> be the largest étale <span class="math inline">\(k\)</span>-subalgebra. We define: <span class="math display">\[
+\pi_0(X) := \operatorname{Spec} A.
+\]</span> The inclusion <span class="math inline">\(A \hookrightarrow \mathcal{O}(X)\)</span> induces a canonical morphism <span class="math inline">\(X \to \pi_0(X)\)</span>.</li>
+<li><strong>Universal Property:</strong> For any étale <span class="math inline">\(k\)</span>-scheme <span class="math inline">\(Y\)</span> and any <span class="math inline">\(k\)</span>-morphism <span class="math inline">\(f: X \to Y\)</span>, there exists a unique morphism <span class="math inline">\(\bar{f}: \pi_0(X) \to Y\)</span> making the diagram commute: <span class="math display">\[
+\begin{matrix}
+X &amp; \xrightarrow{f} &amp; Y \\
+\downarrow &amp; \nearrow_{\exists! \bar{f}} &amp; \\
+\pi_0(X) &amp; &amp;
+\end{matrix}
+\]</span></li>
+<li><strong>Properties:</strong>
+<ul>
+<li>The fibers of <span class="math inline">\(X \to \pi_0(X)\)</span> are the connected components of <span class="math inline">\(X\)</span>.</li>
+<li>For every <span class="math inline">\(y \in \pi_0(X)\)</span>, the fiber <span class="math inline">\(X_y\)</span> is geometrically connected over the residue field <span class="math inline">\(k(y)\)</span>.</li>
+<li><span class="math inline">\(\pi_0\)</span> preserves finite products: <span class="math inline">\(\pi_0(X \times_k Y) \cong \pi_0(X) \times_k \pi_0(Y)\)</span>.</li>
+<li>The canonical morphism <span class="math inline">\(X \to \pi_0(X)\)</span> is fppf.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Proposition x.0.17 (Geometric Connectedness Criteria)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>If <span class="math inline">\(X\)</span> is connected and <span class="math inline">\(X(k) \neq \emptyset\)</span>, then <span class="math inline">\(X\)</span> is geometrically connected.</li>
+<li>If <span class="math inline">\(X\)</span> is geometrically connected and <span class="math inline">\(Y\)</span> is connected, then <span class="math inline">\(X \times_k Y\)</span> is connected.</li>
+</ol>
+</div>
+</div>
+<p><em>Proof.</em> 1. If <span class="math inline">\(X\)</span> is connected, <span class="math inline">\(\pi_0(X) = \operatorname{Spec} L\)</span>, where <span class="math inline">\(L/k\)</span> is a finite separable field extension. A rational point <span class="math inline">\(x \in X(k)\)</span> provides a section <span class="math inline">\(\operatorname{Spec} k \to X \to \operatorname{Spec} L\)</span>, forcing <span class="math inline">\(L \cong k\)</span>. Thus <span class="math inline">\(\pi_0(X) = \operatorname{Spec} k\)</span>, so <span class="math inline">\(X\)</span> is geometrically connected. 2. We have <span class="math inline">\(\pi_0(X) \cong \operatorname{Spec} k\)</span>. By product preservation, <span class="math inline">\(\pi_0(X \times_k Y) \cong \pi_0(X) \times_k \pi_0(Y) \cong \operatorname{Spec} k \times_k \pi_0(Y) \cong \pi_0(Y)\)</span>. Since <span class="math inline">\(Y\)</span> is connected, <span class="math inline">\(\pi_0(Y) = \operatorname{Spec} L\)</span> for a field <span class="math inline">\(L\)</span>. Thus <span class="math inline">\(\pi_0(X \times_k Y) \cong \operatorname{Spec} L\)</span>, which shows <span class="math inline">\(X \times_k Y\)</span> is connected. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Proposition x.0.18 (<span class="math inline">\(\pi_0(G)\)</span> and the Connected Component)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(G\)</span> be an algebraic group over <span class="math inline">\(k\)</span>. 1. <span class="math inline">\(\pi_0(G)\)</span> is a finite étale group scheme over <span class="math inline">\(k\)</span>, and the canonical morphism <span class="math inline">\(G \to \pi_0(G)\)</span> is a homomorphism of algebraic groups. 2. The identity component <span class="math inline">\(G^\circ := \ker(G \to \pi_0(G))\)</span> is a geometrically connected, normal closed and open subgroup scheme of <span class="math inline">\(G\)</span>. For any field extension <span class="math inline">\(L/k\)</span>, we have <span class="math inline">\((G_L)^\circ = (G^\circ)_L\)</span>. 3. <span class="math inline">\(G\)</span> is connected <span class="math inline">\(\iff \pi_0(G) \cong \operatorname{Spec} k \iff G\)</span> is geometrically connected. 4. Formation of the identity component commutes with products: <span class="math inline">\((G \times_k H)^\circ \cong G^\circ \times_k H^\circ\)</span>. 5. If <span class="math inline">\(H\)</span> is a connected group scheme over <span class="math inline">\(k\)</span>, any homomorphism <span class="math inline">\(\psi: H \to G\)</span> factors uniquely through <span class="math inline">\(G^\circ \hookrightarrow G\)</span>.</p>
+</div>
+</div>
+<p><em>Proof.</em> - Since <span class="math inline">\(\pi_0\)</span> commutes with finite products, the group morphisms <span class="math inline">\(m, i, e\)</span> on <span class="math inline">\(G\)</span> induce group structure morphisms on <span class="math inline">\(\pi_0(G)\)</span> by functoriality. - For (3), since <span class="math inline">\(e \in G^\circ(k)\)</span>, <span class="math inline">\(G^\circ\)</span> has a <span class="math inline">\(k\)</span>-rational point. Proposition x.0.17(1) implies that <span class="math inline">\(G^\circ\)</span> is geometrically connected. - For (5), since <span class="math inline">\(H\)</span> is connected, <span class="math inline">\(\pi_0(H) \cong \operatorname{Spec} k\)</span>. Functoriality yields a commutative diagram: <span class="math display">\[
+  \begin{matrix}
+  H &amp; \xrightarrow{\psi} &amp; G \\
+  \downarrow &amp; &amp; \downarrow \\
+  \pi_0(H) \cong \operatorname{Spec} k &amp; \xrightarrow{e} &amp; \pi_0(G)
+  \end{matrix}
+  \]</span> Thus the composition <span class="math inline">\(H \to G \to \pi_0(G)\)</span> is the trivial map, which implies that <span class="math inline">\(\psi\)</span> factors uniquely through <span class="math inline">\(G^\circ = \ker(G \to \pi_0(G))\)</span>. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Definition x.0.19 (Exact Sequences of Group Schemes)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A sequence of homomorphisms of group schemes over <span class="math inline">\(k\)</span>: <span class="math display">\[
+1 \longrightarrow N \xrightarrow{\quad i \quad} G \xrightarrow{\quad p \quad} Q \longrightarrow 1
+\]</span> is said to be <strong>exact</strong> if: 1. <span class="math inline">\(i: N \hookrightarrow G\)</span> is a closed immersion identifying <span class="math inline">\(N\)</span> with a normal subgroup scheme of <span class="math inline">\(G\)</span>; 2. <span class="math inline">\(p: G \to Q\)</span> is an fppf quotient morphism; 3. <span class="math inline">\(i(N) = \ker(p)\)</span> scheme-theoretically.</p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/losergh\.github\.io\/note\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../23_algebraic_groups/index.html" class="pagination-link" aria-label="Overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Overview</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>An evolving notebook on mathematics.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Losergh/note/edit/main/23_algebraic_groups/23.0 Basics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Losergh/note/blob/main/23_algebraic_groups/23.0 Basics.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/Losergh/note/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Built with Quarto and GitHub Pages.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
