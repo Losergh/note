@@ -519,6 +519,35 @@ window.Quarto = {
      - 保留：缩小版 On this page、深色系、8px 圆角透明卡片
      ========================================================================= -->
 <style>
+
+
+
+/* --------------------------------------------------------------------------
+   紧凑型页脚：压低底部栏高度
+   -------------------------------------------------------------------------- */
+/* 1. 压缩页脚整体的上下内边距 */
+footer.footer,
+.nav-footer {
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
+  min-height: unset !important;
+}
+
+/* 2. 清除文字内嵌 <p> 标签自带的下外边距，并垂直居中 */
+.nav-footer p,
+.nav-footer-left,
+.nav-footer-right {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+.nav-footer {
+  display: flex !important;
+  align-items: center !important; /* 文字垂直居中 */
+}
+
+
 /* --------------------------------------------------------------------------
    1. 缩小右侧大纲标题 "On this page"
    -------------------------------------------------------------------------- */
