@@ -7,7 +7,7 @@ filters:
 website:
   # General Site Info (Generalized for future math topics)
   title: "Math Notes"
-  favicon: images/1.png
+  favicon: image/1.png
   site-url: "https://losergh.github.io/note/"
   description: "Personal study notes on mathematics, currently focusing on Algebraic Geometry, Positivity, and Algebraic Groups."
   page-navigation: true
