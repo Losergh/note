@@ -17,12 +17,10 @@ website:
     location: sidebar
     type: overlay
 
-  # GitHub Repository Links
-  repo-url: "https://github.com/Losergh/note"
-  repo-actions: [edit, source, issue]
 
   # Top Navigation Bar
   navbar:
+    pinned: true   
     background: primary
     right:
       - icon: github
