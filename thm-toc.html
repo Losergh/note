@@ -230,6 +230,17 @@ nav#TOC li.active > a.nav-link {
     return 'theorem';
   }
 
+  // 触发数学引擎排版
+  function triggerMathTypeset(elements) {
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      window.MathJax.typesetPromise(elements).catch(function(err) {
+        console.error("MathJax typeset failed: ", err);
+      });
+    } else if (window.MathJax && window.MathJax.Hub) {
+      window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, elements]);
+    }
+  }
+
   // 1. 处理定理、例题与注记
   function processTheorems() {
     const secPrefix = getSecPrefix();
@@ -240,12 +251,12 @@ nav#TOC li.active > a.nav-link {
       tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
     }
 
-    // 扫描范围：扩大包含 .theorem、.remark 以及以对应前缀开头的区块
     const pageNodes = document.querySelectorAll(
       'main h2, main h3, #quarto-document-content h2, #quarto-document-content h3, .theorem, .remark, [id^="def-"], [id^="lem-"], [id^="prp-"], [id^="thm-"], [id^="cor-"], [id^="rem-"], [id^="exm-"]'
     );
 
     let lastTocAnchor = null;
+    const headersToTypeset = [];
 
     pageNodes.forEach(node => {
       if (node.tagName === 'H2' || node.tagName === 'H3') {
@@ -256,27 +267,28 @@ nav#TOC li.active > a.nav-link {
         return;
       }
 
-      // 如果不是章节标题，那就是数学环境
       if (node.dataset.mathProcessed === "true") return;
       node.dataset.mathProcessed = "true";
 
       const titleSpan = node.querySelector('.theorem-title');
-      let rawTitle = titleSpan ? titleSpan.textContent.trim() : "";
+      let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
       let subTitle = "";
 
-      const match = rawTitle.match(/\((.*?)\)/);
-      if (match) subTitle = ` (${match[1]})`;
+      // 【关键修复 1】：使用贪婪匹配 /(.*)/ 匹配最外层括号，防止公式内包含的括号（如 \pi_0(G)）导致匹配被提前切断
+      const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
+      if (match) {
+        subTitle = ` (${match[1].trim()})`;
+      }
       if (titleSpan) titleSpan.remove();
 
       const firstP = node.querySelector(':scope > p:first-child');
       if (firstP && firstP.textContent.trim() === '') firstP.remove();
 
-      const kind = detectKind(node, rawTitle);
+      const kind = detectKind(node, rawTitleHtml);
       const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
       const numStr = secPrefix + counter;
       counter++;
 
-      // 确保 Remark 绝对不折叠
       const canFold = (kind !== 'remark');
       node.classList.add('theorem', `kind-${kind}`);
 
@@ -292,6 +304,7 @@ nav#TOC li.active > a.nav-link {
 
       node.appendChild(header);
       node.appendChild(body);
+      headersToTypeset.push(header);
 
       if (canFold) {
         header.addEventListener('click', () => {
@@ -303,7 +316,7 @@ nav#TOC li.active > a.nav-link {
         node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
       }
 
-      // 插入右侧大纲，并绑定丝滑平滑滚动
+      // 插入右侧大纲
       if (tocList) {
         const li = document.createElement('li');
         li.setAttribute('data-callout-toc', 'true');
@@ -315,7 +328,6 @@ nav#TOC li.active > a.nav-link {
         a.setAttribute('data-scroll-target', `#${node.id}`);
         a.textContent = `${conf.short} ${numStr}`;
 
-        // 核心修复：原生平滑滚动跳转事件，完美规避导航栏遮挡
         a.addEventListener('click', function(e) {
           e.preventDefault();
           e.stopPropagation();
@@ -348,11 +360,15 @@ nav#TOC li.active > a.nav-link {
         }
       }
     });
+
+    // 【关键修复 2】：在 DOM 组装完毕后通知 MathJax 对所有定理标题进行渲染
+    if (headersToTypeset.length > 0) {
+      triggerMathTypeset(headersToTypeset);
+    }
   }
 
-  // 2. 处理证明环境：硬性排除 Remark，仅针对真正的 Proof
+  // 2. 处理证明环境
   function processProofs() {
-    // 关键修复：排除 .remark 和 id 为 rem- 开头的区块，防止误伤
     const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
     proofs.forEach(proof => {
       if (proof.dataset.mathProcessed === "true") return;
@@ -387,7 +403,6 @@ nav#TOC li.active > a.nav-link {
       proof.appendChild(header);
       proof.appendChild(body);
 
-      // 真正证明环境才默认折叠
       proof.classList.add('is-folded');
 
       header.addEventListener('click', () => {
@@ -396,7 +411,7 @@ nav#TOC li.active > a.nav-link {
     });
   }
 
-  // 3. 滚动监听：实时高亮右侧当前位置
+  // 3. 滚动监听
   function initScrollSpy() {
     const tocLinks = document.querySelectorAll('#TOC a.nav-link');
     if (!tocLinks.length) return;
