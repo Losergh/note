@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2026-09-20">
 
-<title>22.3 Iitaka Fibration – Math Notes</title>
+<title>22.7 Zariski Decomposition – Math Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../22_positivity/22.4 Big Line Bundle.html" rel="next">
-<link href="../22_positivity/22.2 Cones.html" rel="prev">
+<link href="../22_positivity/22.6 Graded Linear Series.html" rel="prev">
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -313,7 +312,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.3 Itaka Fibration.html">22.3 Iitaka Fibration</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.7 Zariski Decomposition.html">22.7 Zariski Decomposition</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -360,7 +359,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../22_positivity/22.3 Itaka Fibration.html" class="sidebar-item-text sidebar-link active">
+  <a href="../22_positivity/22.3 Itaka Fibration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">22.3 Iitaka Fibration</span></a>
   </div>
 </li>
@@ -384,7 +383,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../22_positivity/22.7 Zariski Decomposition.html" class="sidebar-item-text sidebar-link">
+  <a href="../22_positivity/22.7 Zariski Decomposition.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">22.7 Zariski Decomposition</span></a>
   </div>
 </li>
@@ -402,10 +401,10 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.3 Itaka Fibration.html">22.3 Iitaka Fibration</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.7 Zariski Decomposition.html">22.7 Zariski Decomposition</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">22.3 Iitaka Fibration</h1>
-<p class="subtitle lead">Iitaka Dimension, Algebraic Fiber Spaces, and the Fundamental Theorem</p>
+<h1 class="title">22.7 Zariski Decomposition</h1>
+<p class="subtitle lead">Zariski Decomposition on Surfaces, Extremal Rays, and Mori’s Cone Theorem</p>
 </div>
 
 
@@ -428,200 +427,155 @@ window.Quarto = {
 </header>
 
 
-<div id="def-semigroup-line-bundle" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Semigroup of a Line Bundle and Exponent)</strong></span> Let <span class="math inline">\(X\)</span> be a variety and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span>.</p>
+<div id="thm-zariski-decomposition" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Zariski Decomposition on Surfaces)</strong></span> Let <span class="math inline">\(X\)</span> be a smooth projective surface and let <span class="math inline">\(D\)</span> be a pseudoeffective integral Cartier divisor on <span class="math inline">\(X\)</span>. Then there exists a unique decomposition into <span class="math inline">\(\mathbb{Q}\)</span>-divisors: <span class="math display">\[
+D = P + N
+\]</span> satisfying the following properties:</p>
 <ol type="1">
-<li>The set: <span class="math display">\[
-N(L) = N(X, L) := \big\{ m \ge 0 \;\big|\; H^0(X, L^{\otimes m}) \neq 0 \big\}
-\]</span> forms a sub-semigroup of <span class="math inline">\((\mathbb{N}, +)\)</span>.</li>
-<li>If <span class="math inline">\(N(L) \neq \{0\}\)</span>, there exists a unique integer <span class="math inline">\(e = e(L) \in \mathbb{Z}_{\ge 1}\)</span> such that: <span class="math display">\[
-N(L) \subseteq e \mathbb{N} \quad \text{and} \quad e\mathbb{N} \setminus N(L) \text{ is finite}.
-\]</span> The integer <span class="math inline">\(e(L)\)</span> is called the <strong>exponent</strong> of <span class="math inline">\(L\)</span>.</li>
+<li><span class="math inline">\(P\)</span> is nef;</li>
+<li><span class="math inline">\(N = \sum_{i=1}^r a_i E_i\)</span> is effective (<span class="math inline">\(a_i &gt; 0\)</span>), and if <span class="math inline">\(N \neq 0\)</span>, the intersection matrix <span class="math inline">\((E_i \cdot E_j)_{1 \le i, j \le r}\)</span> is negative definite;</li>
+<li><span class="math inline">\(P \cdot E_i = 0\)</span> for every irreducible component <span class="math inline">\(E_i\)</span> of <span class="math inline">\(N\)</span>. (In particular, if <span class="math inline">\(N \neq 0\)</span>, <span class="math inline">\(P \in \partial \operatorname{Nef}(X)\)</span>).</li>
 </ol>
-</div>
-<div id="prp-image-rational-map" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 (Scheme-Theoretic Image of a Rational Map)</strong></span> Let <span class="math inline">\(f: X \dashrightarrow Y\)</span> be a rational map between irreducible varieties. For any representative morphism <span class="math inline">\((U, f_U)\)</span> of <span class="math inline">\(f\)</span> defined on a dense open set <span class="math inline">\(U \subseteq X\)</span>, the closed subvariety: <span class="math display">\[
-\operatorname{Im}(f) := \overline{f_U(U)} \subseteq Y
-\]</span> is independent of the chosen representative and is called the <strong>image</strong> of <span class="math inline">\(f\)</span>.</p>
+<p>Moreover, the natural inclusion induces an isomorphism on global sections: <span class="math display">\[
+H^0\big(X, \mathcal{O}_X(mD - \lceil m N \rceil)\big) \xrightarrow{\;\sim\;} H^0\big(X, \mathcal{O}_X(mD)\big) \quad \text{for all } m \ge 1.
+\]</span> In particular, <span class="math inline">\(\operatorname{vol}(D) = \operatorname{vol}(P) = (P^2)\)</span>.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>If <span class="math inline">\((V, f_V)\)</span> is another representative, then <span class="math inline">\(f_U|_{U \cap V} = f_V|_{U \cap V}\)</span>. Setting <span class="math inline">\(W = U \cap V\)</span>, the pullback <span class="math inline">\(\mathcal{O}_Y \to (f_U)_* \mathcal{O}_U \to (f_W)_* \mathcal{O}_W\)</span> has the same kernel because <span class="math inline">\(W\)</span> is dense in <span class="math inline">\(U\)</span> and <span class="math inline">\(X\)</span> is reduced. The kernel defines the vanishing ideal of the scheme-theoretic closure, so <span class="math inline">\(\overline{f_U(U)} = \overline{f_W(W)} = \overline{f_V(V)}\)</span>.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>We prove the isomorphism on global sections. It suffices to show that for every effective divisor <span class="math inline">\(D' \sim m D\)</span>, we have <span class="math inline">\(D' \ge m N\)</span>. Clearing denominators, we may assume <span class="math inline">\(m = 1\)</span> and <span class="math inline">\(P, N\)</span> are integral.</p>
+<p>Let <span class="math inline">\(D' \sim D\)</span> be an effective divisor. Write <span class="math inline">\(D' = N_1 + M_1\)</span>, where <span class="math inline">\(N_1 = \sum c_i E_i \in \bigoplus \mathbb{Z} E_i\)</span> and <span class="math inline">\(M_1\)</span> shares no components with <span class="math inline">\(N\)</span>. Because <span class="math inline">\(P \cdot E_i = 0\)</span>, we have: <span class="math display">\[
+(D' - N) \cdot E_i = (D' - D) \cdot E_i + (D - N) \cdot E_i = 0 + P \cdot E_i = 0.
+\]</span> Since <span class="math inline">\(D' = N_1 + M_1\)</span> and <span class="math inline">\(M_1 \cdot E_i \ge 0\)</span>, this implies: <span class="math display">\[
+(N_1 - N) \cdot E_i = (D' - N) \cdot E_i - M_1 \cdot E_i \le 0 \quad \text{for all } i.
+\]</span> Write <span class="math inline">\(N_1 - N = N' - N''\)</span>, where <span class="math inline">\(N', N'' \in \bigoplus \mathbb{Z}_{\ge 0} E_i\)</span> have no common components. We must show <span class="math inline">\(N'' = 0\)</span>. If <span class="math inline">\(N'' \neq 0\)</span>, then <span class="math inline">\((N''^2) &lt; 0\)</span> by the negative definiteness of <span class="math inline">\((E_i \cdot E_j)\)</span>. Hence: <span class="math display">\[
+(N_1 - N) \cdot N'' = N' \cdot N'' - (N''^2) &gt; 0,
+\]</span> since <span class="math inline">\(N' \cdot N'' \ge 0\)</span>. On the other hand, <span class="math inline">\((N_1 - N) \cdot E_i \le 0\)</span> for all <span class="math inline">\(i\)</span> implies that <span class="math inline">\((N_1 - N) \cdot N'' \le 0\)</span>, a contradiction. Thus <span class="math inline">\(N'' = 0\)</span>, which proves <span class="math inline">\(N_1 \ge N\)</span>.</p>
 </div>
-<div id="def-iitaka-dimension" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (Iitaka Dimension)</strong></span> Let <span class="math inline">\(X\)</span> be a normal variety and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span>.</p>
-<ol type="1">
-<li>For each <span class="math inline">\(m \in N(X, L)\)</span>, the complete linear system <span class="math inline">\(|L^{\otimes m}|\)</span> determines a rational map: <span class="math display">\[
-\phi_m := \phi_{|L^{\otimes m}|}: X \dashrightarrow \mathbb{P} H^0(X, L^{\otimes m}).
-\]</span></li>
-<li>The <strong>Iitaka dimension</strong> (or <span class="math inline">\(L\)</span>-dimension) of <span class="math inline">\(L\)</span> is defined by: <span class="math display">\[
-\kappa(L) = \kappa(X, L) := \begin{cases} \max_{m \in N(X, L)} \big\{ \dim \operatorname{Im}(\phi_m) \big\}, &amp; N(X, L) \neq \{0\}, \\ -\infty, &amp; N(X, L) = \{0\}. \end{cases}
-\]</span></li>
-<li>For an arbitrary non-normal variety <span class="math inline">\(X\)</span>, let <span class="math inline">\(\nu: \widetilde{X} \to X\)</span> be the normalization. The Iitaka dimension is defined by: <span class="math display">\[
-\kappa(X, L) := \kappa(\widetilde{X}, \nu^* L).
-\]</span></li>
-</ol>
+<div id="cor-fg-zariski-decomposition" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 (Finite Generation via the Positive Part)</strong></span> Let <span class="math inline">\(D\)</span> be a big divisor on a smooth projective surface <span class="math inline">\(X\)</span>, with Zariski decomposition <span class="math inline">\(D = P + N\)</span>. Then the section ring <span class="math inline">\(R(X, D)\)</span> is finitely generated if and only if <span class="math inline">\(P\)</span> is semiample.</p>
 </div>
-<div id="def-algebraic-fiber-space" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (Algebraic Fiber Space)</strong></span> An <strong>algebraic fiber space</strong> (AFS) is a surjective projective morphism <span class="math inline">\(f: X \to Y\)</span> between irreducible varieties such that: <span class="math display">\[
-f_* \mathcal{O}_X = \mathcal{O}_Y.
-\]</span> By Zariski’s Connectedness Principle, every fiber of an algebraic fiber space is connected.</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By <a href="#thm-zariski-decomposition" class="quarto-xref">Theorem&nbsp;1</a>, <span class="math inline">\(R(X, D) \cong R(X, P)\)</span>. Since <span class="math inline">\(\operatorname{vol}(P) = \operatorname{vol}(D) &gt; 0\)</span> and <span class="math inline">\(P\)</span> is nef, <span class="math inline">\(P\)</span> is big and nef. The result follows immediately from <strong>?@thm-criterion-fg-nef-big</strong>.</p>
 </div>
 <hr>
-<blockquote class="blockquote">
-<p><strong>Convention:</strong> From now on, <span class="math inline">\(X\)</span> is assumed to be an irreducible normal projective variety over <span class="math inline">\(k\)</span>.</p>
-</blockquote>
+<div id="def-extremal-ray" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Extremal Ray)</strong></span> Let <span class="math inline">\(V\)</span> be a finite-dimensional real vector space and <span class="math inline">\(K \subseteq V\)</span> a closed convex cone. A 1-dimensional subcone <span class="math inline">\(R = \mathbb{R}_{\ge 0} \cdot v \subseteq K\)</span> is called an <strong>extremal ray</strong> of <span class="math inline">\(K\)</span> if whenever <span class="math inline">\(x, y \in K\)</span> satisfy: <span class="math display">\[
+x + y \in R,
+\]</span> then both <span class="math inline">\(x, y \in R\)</span>.</p>
+</div>
+<div id="exm-curves-on-surface" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (Curves on a Surface and Extremal Rays)</strong></span> Let <span class="math inline">\(X\)</span> be a smooth projective surface. Poincaré duality identifies 1-cycles with divisors, so <span class="math inline">\(N^1(X)_{\mathbb{R}} \cong N_1(X)_{\mathbb{R}}\)</span>.</p>
+<ol type="1">
+<li><span class="math inline">\(\operatorname{Nef}(X) \subseteq \overline{\operatorname{NE}}(X)\)</span>. If <span class="math inline">\((C^2) \ge 0\)</span> for every irreducible curve <span class="math inline">\(C \subseteq X\)</span>, then <span class="math inline">\(\operatorname{Nef}(X) = \overline{\operatorname{NE}}(X)\)</span>.</li>
+<li>If <span class="math inline">\(C \subseteq X\)</span> is an irreducible curve with <span class="math inline">\((C^2) &lt; 0\)</span>, then: <span class="math display">\[
+\overline{\operatorname{NE}}(X) = \mathbb{R}_{\ge 0} [C] + \overline{\operatorname{NE}}(X)_{C_{\ge 0}}, \quad \text{where } \overline{\operatorname{NE}}(X)_{C_{\ge 0}} := \{ \gamma \in \overline{\operatorname{NE}}(X) \mid \gamma \cdot C \ge 0 \}.
+\]</span></li>
+<li>If <span class="math inline">\(C\)</span> is an irreducible curve with <span class="math inline">\((C^2) &lt; 0\)</span>, then <span class="math inline">\([C]\)</span> spans an extremal ray in <span class="math inline">\(\overline{\operatorname{NE}}(X)\)</span>.</li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><em>Proof of (2) and (3):</em> For any irreducible curve <span class="math inline">\(C' \neq C\)</span>, <span class="math inline">\((C' \cdot C) \ge 0\)</span>, so <span class="math inline">\([C'] \in \overline{\operatorname{NE}}(X)_{C_{\ge 0}}\)</span>. Any effective 1-cycle decomposes as <span class="math inline">\(E = a C + E'\)</span> where <span class="math inline">\(C \not\subseteq \operatorname{Supp}(E')\)</span>, proving the sum formula.</p>
+<p>Since <span class="math inline">\((C^2) &lt; 0\)</span>, <span class="math inline">\([C] \notin \overline{\operatorname{NE}}(X)_{C_{\ge 0}}\)</span>. Suppose <span class="math inline">\(v, w \in \overline{\operatorname{NE}}(X)\)</span> satisfy <span class="math inline">\(v + w = \lambda [C] \in \mathbb{R}_{\ge 0} [C]\)</span>. Decomposing <span class="math inline">\(v = v_1 + v_2\)</span> and <span class="math inline">\(w = w_1 + w_2\)</span> with <span class="math inline">\(v_1, w_1 \in \mathbb{R}_{\ge 0} [C]\)</span> and <span class="math inline">\(v_2, w_2 \in \overline{\operatorname{NE}}(X)_{C_{\ge 0}}\)</span>, we obtain <span class="math inline">\(v_2 + w_2 = 0\)</span>. Because <span class="math inline">\(\overline{\operatorname{NE}}(X)\)</span> contains no straight lines (as <span class="math inline">\((H \cdot \gamma) &gt; 0\)</span> for ample <span class="math inline">\(H\)</span>), this forces <span class="math inline">\(v_2 = w_2 = 0\)</span>, so <span class="math inline">\(v, w \in \mathbb{R}_{\ge 0} [C]\)</span>.</p>
+</div>
+<div id="exm-kollar-non-bounded-very-ample" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2 (Kollár’s Example: Unboundedness of Very Ample Multiples)</strong></span> On a curve <span class="math inline">\(Y\)</span> of genus <span class="math inline">\(g\)</span>, every ample line bundle <span class="math inline">\(D\)</span> satisfies that <span class="math inline">\(m D\)</span> is very ample for <span class="math inline">\(m \ge 2g + 1\)</span>. Kollár showed that in dimension <span class="math inline">\(\ge 2\)</span>, <strong>there is no uniform bound</strong> <span class="math inline">\(m(Y)\)</span> such that <span class="math inline">\(m D\)</span> is very ample for all ample divisors <span class="math inline">\(D\)</span>.</p>
+<p><em>Construction:</em> Let <span class="math inline">\(X = E \times E\)</span> for an elliptic curve <span class="math inline">\(E\)</span>. For <span class="math inline">\(n \ge 2\)</span>, define the divisor: <span class="math display">\[
+A_n := n F_1 + (n^2 - n + 1) F_2 - (n-1)\Delta.
+\]</span> Computing intersection numbers yields <span class="math inline">\((A_n^2) = 2\)</span> and <span class="math inline">\(A_n \cdot (F_1 + F_2) = n^2 - 2n + 3 &gt; 0\)</span>, so <span class="math inline">\(A_n\)</span> is ample. Set <span class="math inline">\(R = F_1 + F_2\)</span>. Choose a smooth curve <span class="math inline">\(B \in |2 R|\)</span> and let <span class="math inline">\(\pi: Y \to X\)</span> be the double cover branched along <span class="math inline">\(B\)</span>.</p>
+<p>Pulling back gives an ample divisor <span class="math inline">\(D_n := \pi^* A_n\)</span> on <span class="math inline">\(Y\)</span>. We compute: <span class="math display">\[
+\pi_* \mathcal{O}_Y(n D_n) = \mathcal{O}_X(n A_n) \oplus \mathcal{O}_X(n A_n - R).
+\]</span> The self-intersection of <span class="math inline">\(n A_n - R\)</span> is: <span class="math display">\[
+(n A_n - R)^2 = 2n^2 - 2n(n^2 - 2n + 3) + 2 = -2(n-1)^3 &lt; 0.
+\]</span> If <span class="math inline">\(H^0(X, \mathcal{O}_X(n A_n - R)) \neq 0\)</span>, the effective divisor would lie in <span class="math inline">\(\overline{\operatorname{NE}}(X) = \operatorname{Nef}(X)\)</span>, forcing its self-intersection to be non-negative, a contradiction. Thus: <span class="math display">\[
+H^0(X, \mathcal{O}_X(n A_n)) \xrightarrow{\;\sim\;} H^0(Y, \mathcal{O}_Y(n D_n)).
+\]</span> Because the global sections of <span class="math inline">\(n D_n\)</span> all factor through <span class="math inline">\(X\)</span>, they cannot separate the two sheets of the double cover <span class="math inline">\(\pi: Y \to X\)</span>. Hence <span class="math inline">\(n D_n\)</span> is not very ample, which forces the very ample threshold <span class="math inline">\(m(D_n) &gt; n\)</span> to grow arbitrarily large.</p>
+</div>
 <hr>
-<div id="prp-powers-achieving-kappa" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2 (Powers Achieving the Iitaka Dimension)</strong></span> Let <span class="math inline">\(X\)</span> be a normal variety and <span class="math inline">\(\kappa = \kappa(X, L) \ge 0\)</span>. Then: <span class="math display">\[
-\dim \operatorname{Im}(\phi_m) = \kappa \quad \text{for all } m \gg 0 \text{ with } m \in N(X, L).
-\]</span></p>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Replacing <span class="math inline">\(L\)</span> by <span class="math inline">\(L^{\otimes e(L)}\)</span>, we may assume <span class="math inline">\(e(L) = 1\)</span>. Then there exists <span class="math inline">\(p_0\)</span> such that <span class="math inline">\(H^0(X, L^{\otimes p}) \neq 0\)</span> for all <span class="math inline">\(p \ge p_0\)</span>. Fix a non-zero section <span class="math inline">\(s \in H^0(X, L^{\otimes p})\)</span>.</p>
-<p>Choose <span class="math inline">\(m\)</span> such that <span class="math inline">\(\dim \operatorname{Im}(\phi_m) = \kappa\)</span>. Multiplication by <span class="math inline">\(s\)</span> induces an injection <span class="math inline">\(H^0(X, L^{\otimes m}) \hookrightarrow H^0(X, L^{\otimes(m+p)})\)</span>. This linear inclusion determines a rational projection of projective spaces: <span class="math display">\[
-\begin{CD}
-X @&gt;{\phi_{m+p}}&gt;&gt; Y_{m+p} \\
-@| @VV{\pi}V \\
-X @&gt;{\phi_m}&gt;&gt; Y_m
-\end{CD}
-\]</span> Because <span class="math inline">\(\pi\)</span> is a dominant rational projection, we have: <span class="math display">\[
-\kappa = \dim Y_m \le \dim Y_{m+p} \le \kappa \implies \dim Y_{m+p} = \kappa.
-\]</span> Thus <span class="math inline">\(\dim \operatorname{Im}(\phi_n) = \kappa\)</span> for all <span class="math inline">\(n \ge m + p_0\)</span>.</p>
-</div>
-<div id="prp-afs-function-fields" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 3 (Criterion for Algebraic Fiber Spaces)</strong></span> Let <span class="math inline">\(f: X \to Y\)</span> be a surjective projective morphism between normal varieties, inducing an inclusion of function fields <span class="math inline">\(K(Y) \subseteq K(X)\)</span>. Then <span class="math inline">\(f\)</span> is an algebraic fiber space if and only if <span class="math inline">\(K(Y)\)</span> is algebraically closed in <span class="math inline">\(K(X)\)</span>.</p>
-<p>In particular, every projective surjective birational morphism between normal varieties is an algebraic fiber space.</p>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><strong><span class="math inline">\((\implies)\)</span>:</strong> Let <span class="math inline">\(K(Y) \subseteq \mathbb{L} \subseteq K(X)\)</span> be the algebraic closure of <span class="math inline">\(K(Y)\)</span> in <span class="math inline">\(K(X)\)</span>. Normalizing <span class="math inline">\(Y\)</span> in <span class="math inline">\(\mathbb{L}\)</span> produces a factorization: <span class="math display">\[
-X \xrightarrow{\quad h \quad} Z \xrightarrow{\quad g \quad} Y,
-\]</span> where <span class="math inline">\(g: Z \to Y\)</span> is finite and <span class="math inline">\(h\)</span> is proper. Since <span class="math inline">\(f\)</span> is surjective and projective, <span class="math inline">\(h(X) = Z\)</span>, so <span class="math inline">\(\dim Z = \dim Y\)</span>. The condition <span class="math inline">\(f_* \mathcal{O}_X = \mathcal{O}_Y\)</span> implies: <span class="math display">\[
-\mathcal{O}_Y \subseteq g_* \mathcal{O}_Z \subseteq g_* h_* \mathcal{O}_X = f_* \mathcal{O}_X = \mathcal{O}_Y \implies g_* \mathcal{O}_Z = \mathcal{O}_Y.
-\]</span> Since <span class="math inline">\(Y\)</span> is normal, <span class="math inline">\(g\)</span> must be an isomorphism, so <span class="math inline">\(\mathbb{L} = K(Y)\)</span>.</p>
-<p><strong><span class="math inline">\((\impliedby)\)</span>:</strong> Consider the Stein factorization of <span class="math inline">\(f\)</span>: <span class="math display">\[
-X \xrightarrow{\quad \phi \quad} Z \xrightarrow{\quad g \quad} Y,
-\]</span> where <span class="math inline">\(\phi_* \mathcal{O}_X = \mathcal{O}_Z\)</span> and <span class="math inline">\(g\)</span> is finite. Since <span class="math inline">\(X\)</span> is normal and <span class="math inline">\(\phi_* \mathcal{O}_X = \mathcal{O}_Z\)</span>, the scheme <span class="math inline">\(Z\)</span> is normal. Furthermore, <span class="math inline">\(K(Z) \subseteq K(X)\)</span> is a finite algebraic extension of <span class="math inline">\(K(Y)\)</span>. Since <span class="math inline">\(K(Y)\)</span> is algebraically closed in <span class="math inline">\(K(X)\)</span>, we must have <span class="math inline">\(K(Z) = K(Y)\)</span>. Because <span class="math inline">\(Y\)</span> is normal and <span class="math inline">\(g\)</span> is birational and finite, Zariski’s Main Theorem implies that <span class="math inline">\(g: Z \xrightarrow{\sim} Y\)</span> is an isomorphism. Thus <span class="math inline">\(f_* \mathcal{O}_X = \mathcal{O}_Y\)</span>.</p>
-</div>
-<div id="lem-afs-cohomology-pic" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 1 (Invariance of Sections and Picard Group)</strong></span> Let <span class="math inline">\(\phi: X \to Y\)</span> be an algebraic fiber space.</p>
+<div id="def-null-cone" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (The Null Cone)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(V \subseteq X\)</span> be a subvariety of dimension <span class="math inline">\(d\)</span>.</p>
 <ol type="1">
-<li>For every line bundle <span class="math inline">\(L\)</span> on <span class="math inline">\(Y\)</span>, the natural map is an isomorphism: <span class="math display">\[
-H^0(Y, L) \xrightarrow{\;\sim\;} H^0(X, \phi^* L).
+<li>The polynomial map associated with <span class="math inline">\(V\)</span> is: <span class="math display">\[
+q_V: N^1(X)_{\mathbb{R}} \longrightarrow \mathbb{R}, \quad q_V(\xi) := (\xi^d \cdot V).
 \]</span></li>
-<li>The pullback homomorphism <span class="math inline">\(\phi^*: \operatorname{Pic}(Y) \hookrightarrow \operatorname{Pic}(X)\)</span> is injective.</li>
-</ol>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span></p>
-<ol type="1">
-<li>By the projection formula, <span class="math inline">\(\phi_* \phi^* L \cong L \otimes_{\mathcal{O}_Y} \phi_* \mathcal{O}_X \cong L\)</span>. Taking global sections yields <span class="math inline">\(H^0(X, \phi^* L) \cong H^0(Y, \phi_* \phi^* L) \cong H^0(Y, L)\)</span>.</li>
-<li>If <span class="math inline">\(\phi^* L \cong \mathcal{O}_X\)</span>, then by (1), <span class="math inline">\(H^0(Y, L) \cong H^0(X, \mathcal{O}_X) \cong k\)</span> and <span class="math inline">\(H^0(Y, L^\vee) \cong H^0(X, \mathcal{O}_X) \cong k\)</span>. Choose non-zero sections <span class="math inline">\(s \in H^0(Y, L)\)</span> and <span class="math inline">\(t \in H^0(Y, L^\vee)\)</span>. The product <span class="math inline">\(s \otimes t \in H^0(Y, \mathcal{O}_Y) \cong k\)</span> is non-zero, hence a non-zero constant <span class="math inline">\(c \in k^\times\)</span>. Thus <span class="math inline">\(s\)</span> vanishes nowhere, which implies <span class="math inline">\(L \cong \mathcal{O}_Y\)</span>.</li>
-</ol>
-</div>
-<div id="def-stable-base-locus" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4 (Stable Base Locus)</strong></span> Let <span class="math inline">\(D\)</span> be a Cartier divisor on <span class="math inline">\(X\)</span>.</p>
-<ol type="1">
-<li>The <strong>stable base locus</strong> of <span class="math inline">\(D\)</span> is the closed set: <span class="math display">\[
-\mathbf{B}(D) := \bigcap_{m \ge 1} \operatorname{Bs}(|mD|).
-\]</span></li>
-<li>Since the family of closed sets satisfies <span class="math inline">\(\operatorname{Bs}(|m_1 D|) \cap \operatorname{Bs}(|m_2 D|) \supseteq \operatorname{Bs}(|(m_1 + m_2)D|)\)</span>, by the descending chain condition on closed subsets of <span class="math inline">\(X\)</span>, there exists <span class="math inline">\(m_0 \ge 1\)</span> such that: <span class="math display">\[
-\mathbf{B}(D) = \operatorname{Bs}(|k m_0 D|) \quad \text{for all } k \gg 0.
+<li>The <strong>null cone</strong> of <span class="math inline">\(V\)</span> is the algebraic variety: <span class="math display">\[
+\mathcal{N}_V := \big\{ \xi \in N^1(X)_{\mathbb{R}} \;\big|\; q_V(\xi) = 0 \big\}.
 \]</span></li>
 </ol>
 </div>
-<div id="def-semiample" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5 (Semiample Line Bundles)</strong></span> &nbsp;</p>
-<ol type="1">
-<li>Define the semigroup of free multiples: <span class="math display">\[
-M(X, L) := \big\{ m \in \mathbb{N} \;\big|\; L^{\otimes m} \text{ is base-point-free} \big\}.
-\]</span> Let <span class="math inline">\(f = f(L)\)</span> be the exponent of the semigroup <span class="math inline">\(M(X, L)\)</span>.</li>
-<li>A line bundle <span class="math inline">\(L\)</span> on <span class="math inline">\(X\)</span> is <strong>semiample</strong> if <span class="math inline">\(M(X, L) \neq \{0\}\)</span>, that is, some positive power <span class="math inline">\(L^{\otimes m}\)</span> is generated by its global sections.</li>
-</ol>
+<div id="def-nef-boundary" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (The Nef Boundary)</strong></span> The <strong>nef boundary</strong> of <span class="math inline">\(X\)</span> is the boundary of the nef cone: <span class="math display">\[
+\mathcal{B}_X := \partial \operatorname{Nef}(X) \subseteq N^1(X)_{\mathbb{R}}.
+\]</span></p>
 </div>
-<div id="thm-semiample-fibration" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Semiample Fibration)</strong></span> Let <span class="math inline">\(X\)</span> be a normal projective variety and <span class="math inline">\(L\)</span> a semiample line bundle on <span class="math inline">\(X\)</span>. Then there exists an algebraic fiber space <span class="math inline">\(\phi: X \to Y\)</span> and an ample line bundle <span class="math inline">\(A\)</span> on <span class="math inline">\(Y\)</span> such that:</p>
-<ol type="1">
-<li>For all <span class="math inline">\(m \in M(X, L)\)</span> sufficiently large, the morphism <span class="math inline">\(\phi_m: X \to \mathbb{P} H^0(X, L^{\otimes m})\)</span> has image <span class="math inline">\(Y_m \cong Y\)</span>, and factors through <span class="math inline">\(\phi\)</span>.</li>
-<li><span class="math inline">\(\phi^* A \cong L^{\otimes f(L)}\)</span>, and for <span class="math inline">\(k \gg 0\)</span>, the very ample embeddings <span class="math inline">\(\iota_{A^{\otimes k}}: Y \hookrightarrow \mathbb{P} H^0(Y, A^{\otimes k})\)</span> make the following diagram commute: <span class="math display">\[
-\begin{CD}
-X @&gt;{\phi}&gt;&gt; Y \\
-@| @VV{\cong}V \\
-X @&gt;{\phi_{kf}}&gt;&gt; Y_{kf}
-\end{CD}
-\]</span> In particular, the target variety <span class="math inline">\(Y\)</span> is normal and projective.</li>
-</ol>
-</div>
-<div id="def-bigness" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 6 (Big Line Bundles and Divisors)</strong></span> A line bundle <span class="math inline">\(L\)</span> on an irreducible projective variety <span class="math inline">\(X\)</span> is <strong>big</strong> if: <span class="math display">\[
-\kappa(X, L) = \dim X.
-\]</span> A Cartier divisor <span class="math inline">\(D\)</span> is big if <span class="math inline">\(\mathcal{O}_X(D)\)</span> is big.</p>
-</div>
-<div id="thm-iitaka-fibration" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (The Iitaka Fibration Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be a normal projective variety and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span> with <span class="math inline">\(\kappa(X, L) &gt; 0\)</span>. Then there exists an algebraic fiber space between normal varieties: <span class="math display">\[
-\phi_\infty: X_\infty \longrightarrow Y_\infty,
-\]</span> unique up to birational equivalence, and a birational morphism <span class="math inline">\(u_\infty: X_\infty \to X\)</span>, such that for all <span class="math inline">\(k \in N(X, L)\)</span> sufficiently large, there exists a birational map <span class="math inline">\(v_k: Y_\infty \dashrightarrow Y_k\)</span> making the following diagram commute: <span class="math display">\[
-\begin{CD}
-X_\infty @&gt;{u_\infty}&gt;&gt; X \\
-@V{\phi_\infty}VV @VV{\phi_k}V \\
-Y_\infty @&gt;{v_k}&gt;{\approx}&gt; Y_k
-\end{CD}
-\]</span> where <span class="math inline">\(Y_k := \operatorname{Im}(\phi_k) \subseteq \mathbb{P} H^0(X, L^{\otimes k})\)</span>.</p>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Replacing <span class="math inline">\(L\)</span> by <span class="math inline">\(L^{\otimes e(L)}\)</span>, we may assume without loss of generality that <span class="math inline">\(e(L) = 1\)</span>.</p>
-<p><em>Step 1: The stable fibration for a sub-semigroup <span class="math inline">\(m\mathbb{N}\)</span>.</em> Fix <span class="math inline">\(m \in N(X, L)\)</span> such that <span class="math inline">\(\dim Y_m = \kappa(X, L)\)</span>. Let <span class="math inline">\(\mathfrak{b} = \mathfrak{b}(|L^{\otimes m}|) \subseteq \mathcal{O}_X\)</span> be the base ideal. Blow up <span class="math inline">\(\mathfrak{b}\)</span> and normalize to obtain a projective birational morphism: <span class="math display">\[
-u_m: X_{(m)} := \operatorname{Bl}_{\mathfrak{b}}(X)^\nu \longrightarrow X.
-\]</span> Let <span class="math inline">\(E_m\)</span> be the exceptional divisor on the blow-up, and <span class="math inline">\(F_m\)</span> its pullback to <span class="math inline">\(X_{(m)}\)</span>. Define: <span class="math display">\[
-M_m := u_m^* L^{\otimes m} \otimes_{\mathcal{O}_{X_{(m)}}} \mathcal{O}_{X_{(m)}}(-F_m).
-\]</span> Because <span class="math inline">\(u_m: X_{(m)} \to X\)</span> is a birational morphism between normal varieties, <a href="#prp-afs-function-fields" class="quarto-xref">Proposition&nbsp;3</a> implies that <span class="math inline">\(u_m\)</span> is an algebraic fiber space. By <a href="#lem-afs-cohomology-pic" class="quarto-xref">Lemma&nbsp;1</a>, <span class="math inline">\(H^0(X, L^{\otimes m}) \cong H^0(X_{(m)}, u_m^* L^{\otimes m})\)</span>. Since all sections vanish along <span class="math inline">\(F_m\)</span> by construction of the blow-up, restriction to <span class="math inline">\(F_m\)</span> is zero, yielding an isomorphism: <span class="math display">\[
-H^0(X_{(m)}, M_m) \cong H^0(X, L^{\otimes m}).
-\]</span> Consequently, <span class="math inline">\(M_m\)</span> is generated by its global sections and defines a morphism <span class="math inline">\(\phi_{M_m}: X_{(m)} \to \mathbb{P} H^0(X_{(m)}, M_m)\)</span>. By <a href="#thm-semiample-fibration" class="quarto-xref">Theorem&nbsp;1</a>, the Stein factorization of <span class="math inline">\(\phi_{M_m^{\otimes k}}\)</span> stabilizes for <span class="math inline">\(k \gg 0\)</span> to an algebraic fiber space: <span class="math display">\[
-\phi_{(m)}: X_{(m)} \longrightarrow Y_{(m)}.
-\]</span> For every <span class="math inline">\(k \ge 1\)</span>, we have <span class="math inline">\(H^0(X_{(m)}, M_m^{\otimes k}) \subseteq H^0(X_{(m)}, u_m^* L^{\otimes mk})\)</span>, inducing a dominant rational projection <span class="math inline">\(\mu_k: Y_{mk} \dashrightarrow Y_{(m)}\)</span>. Since <span class="math inline">\(X_{(m)} \to Y_{(m)}\)</span> is an AFS, <span class="math inline">\(K(Y_{(m)})\)</span> is algebraically closed in <span class="math inline">\(K(X_{(m)})\)</span>. The extension <span class="math inline">\(K(Y_{mk})/K(Y_{(m)})\)</span> is algebraic and contained in <span class="math inline">\(K(X_{(m)})\)</span>, forcing: <span class="math display">\[
-K(Y_{mk}) = K(Y_{(m)}).
-\]</span> Hence <span class="math inline">\(\mu_k: Y_{mk} \dashrightarrow Y_{(m)}\)</span> is birational for all <span class="math inline">\(k \gg 0\)</span>.</p>
-<p><em>Step 2: Construction of <span class="math inline">\(X_\infty\)</span> and <span class="math inline">\(Y_\infty\)</span>.</em> Choose two coprime integers <span class="math inline">\(p, q \in N(X, L)\)</span> such that <span class="math inline">\(\dim Y_p = \dim Y_q = \kappa(X, L)\)</span> (which is possible since <span class="math inline">\(H^0(X, L) \neq 0\)</span>). Apply Step 1 to <span class="math inline">\(M_p\)</span> and <span class="math inline">\(M_q\)</span>, obtaining: <span class="math display">\[
-\phi_{(p)}: X_{(p)} \longrightarrow Y_{(p)}, \qquad \phi_{(q)}: X_{(q)} \longrightarrow Y_{(q)}.
-\]</span> Let <span class="math inline">\(\widetilde{U}\)</span> be the closure of the diagonal embedding of a common dense open set <span class="math inline">\(U \subseteq X\)</span> into <span class="math inline">\(X_{(p)} \times_X X_{(q)}\)</span>. Let <span class="math inline">\(X_\infty\)</span> be the normalization of <span class="math inline">\(\widetilde{U}\)</span>. The projection maps <span class="math inline">\(v_p: X_\infty \to X_{(p)}\)</span> and <span class="math inline">\(v_q: X_\infty \to X_{(q)}\)</span> are projective, birational morphisms between normal varieties, hence algebraic fiber spaces.</p>
-<p>Define the semiample line bundle: <span class="math display">\[
-M_{pq} := v_p^* M_p^{\otimes m_1} \otimes v_q^* M_q^{\otimes m_2}.
-\]</span> The morphism induced by <span class="math inline">\(|M_{pq}|\)</span> factors as: <span class="math display">\[
-X_\infty \longrightarrow Y_\infty \xrightarrow{\quad w \quad} Y_{(p)} \times Y_{(q)},
-\]</span> where <span class="math inline">\(w\)</span> is a finite morphism onto its image. Thus <span class="math inline">\(K(Y_\infty) = K(Y_{(p)}) = K(Y_{(q)})\)</span>, and <span class="math inline">\(K(Y_\infty)\)</span> is algebraically closed in <span class="math inline">\(K(X_\infty)\)</span>. Hence <span class="math inline">\(\phi_\infty: X_\infty \to Y_\infty\)</span> is an algebraic fiber space with <span class="math inline">\(\dim Y_\infty = \kappa(X, L)\)</span>.</p>
-<p>For any <span class="math inline">\(k \gg 0\)</span>, the Frobenius coin problem ensures that <span class="math inline">\(k = c p^{m_1} + d q^{m_2}\)</span> for integers <span class="math inline">\(c, d \ge 1\)</span>. The sheaf <span class="math inline">\(u_p^* M_p^{\otimes(c-1)p^{m_1}} \otimes u_q^* M_q^{\otimes(d-1)q^{m_2}}\)</span> has a non-zero section, inducing an inclusion: <span class="math display">\[
-H^0(X_\infty, M_{pq}) \hookrightarrow H^0(X_\infty, u_\infty^* L^{\otimes k}).
-\]</span> This gives an induced dominant rational map <span class="math inline">\(v_k: Y_\infty \dashrightarrow Y_k\)</span>. Since <span class="math inline">\(\dim Y_k = \kappa(X, L) = \dim Y_\infty\)</span> and <span class="math inline">\(K(Y_\infty)\)</span> is algebraically closed in <span class="math inline">\(K(X_\infty)\)</span>, <span class="math inline">\(v_k\)</span> is birational. Uniqueness follows because any two such targets are birational to <span class="math inline">\(Y_k\)</span>.</p>
-</div>
-<div id="cor-iitaka-fibers" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Iitaka Dimension of the Fibers)</strong></span> Let <span class="math inline">\(\phi_\infty: X_\infty \to Y_\infty\)</span> be the Iitaka fibration associated with <span class="math inline">\(L\)</span>, and let <span class="math inline">\(L_\infty := u_\infty^* L\)</span>. For a very general closed point <span class="math inline">\(y \in Y_\infty\)</span> (that is, <span class="math inline">\(y \in Y_\infty \setminus \bigcup_{i=1}^\infty F_i\)</span> for countable proper closed subsets <span class="math inline">\(F_i \subsetneq Y_\infty\)</span>), the fiber <span class="math inline">\(F := X_{\infty, y} = \phi_\infty^{-1}(y)\)</span> satisfies: <span class="math display">\[
-\kappa(F, L_\infty|_F) = 0.
+<div id="prp-boundary-in-null-cones" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (Boundary Covered by Null Cones)</strong></span> For every <span class="math inline">\(\xi \in \mathcal{B}_X\)</span>, there exists an irreducible subvariety <span class="math inline">\(V \subseteq X\)</span> such that <span class="math inline">\(q_V(\xi) = 0\)</span>. That is: <span class="math display">\[
+\mathcal{B}_X \subseteq \bigcup_{V \subseteq X} \mathcal{N}_V.
 \]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By generic smoothness, a very general fiber <span class="math inline">\(F = X_{\infty, y}\)</span> is smooth and connected (by Zariski’s Main Theorem), hence integral.</p>
-<p>For all <span class="math inline">\(k \gg 0\)</span>, the rational map <span class="math inline">\(\phi_k \circ u_\infty\)</span> is defined along <span class="math inline">\(F\)</span> and contracts <span class="math inline">\(F\)</span> to a single point <span class="math inline">\(\phi_k(u_\infty(F)) = \{p_k\} \subseteq Y_k\)</span>. Thus the image of the restriction map: <span class="math display">\[
-\rho_k: H^0(X_\infty, L_\infty^{\otimes k}) \longrightarrow H^0(F, L_\infty^{\otimes k}|_F)
-\]</span> has dimension <span class="math inline">\(\le 1\)</span> for all <span class="math inline">\(k \ge 1\)</span>.</p>
-<p><em>Claim:</em> Fix a very ample line bundle <span class="math inline">\(B\)</span> on <span class="math inline">\(Y_\infty\)</span>. 1. There exists <span class="math inline">\(m_0 &gt; 0\)</span> such that <span class="math inline">\(H^0(X_\infty, L_\infty^{\otimes m_0} \otimes \phi_\infty^* B^\vee) \neq 0\)</span>. 2. For any fixed <span class="math inline">\(k\)</span> and all <span class="math inline">\(r \gg 0\)</span>, the restriction: <span class="math display">\[
-   \beta_{k, r}: H^0(X_\infty, L_\infty^{\otimes k} \otimes \phi_\infty^* B^{\otimes r}) \longrightarrow H^0(F, L_\infty^{\otimes k} \otimes \phi_\infty^* B^{\otimes r}|_F) \cong H^0(F, L_\infty^{\otimes k}|_F)
-   \]</span> is surjective.</p>
-<p><em>Proof of Claim:</em> For (1), by the proof of <a href="#thm-iitaka-fibration" class="quarto-xref">Theorem&nbsp;2</a>, there exists an ample line bundle <span class="math inline">\(A\)</span> on <span class="math inline">\(Y_\infty\)</span> such that <span class="math inline">\(\phi_\infty^* A \subseteq L_\infty^{\otimes m_0}\)</span>. Because <span class="math inline">\(A\)</span> is ample, <span class="math inline">\(A^{\otimes m_0} \otimes B^\vee\)</span> has a non-zero section for <span class="math inline">\(m_0 \gg 0\)</span>, yielding a non-zero section <span class="math inline">\(s \in H^0(X_\infty, L_\infty^{\otimes m_0} \otimes \phi_\infty^* B^\vee)\)</span>. For a very general fiber <span class="math inline">\(F\)</span>, <span class="math inline">\(s|_F \neq 0\)</span>.</p>
-<p>For (2), by generic flatness, <span class="math inline">\(X_\infty \to Y_\infty\)</span> is flat over a neighborhood of the generic point. By Grauert’s Semicontinuity Theorem, <span class="math inline">\((\phi_\infty)_* L_\infty^{\otimes k}\)</span> is locally free near <span class="math inline">\(y\)</span>, and the fiber cohomology satisfies: <span class="math display">\[
-H^0(F, L_\infty^{\otimes k}|_F) \cong (\phi_\infty)_* L_\infty^{\otimes k} \otimes k(y).
-\]</span> Since <span class="math inline">\(B\)</span> is very ample on <span class="math inline">\(Y_\infty\)</span>, the sheaf <span class="math inline">\((\phi_\infty)_* L_\infty^{\otimes k} \otimes B^{\otimes r}\)</span> is generated by its global sections for <span class="math inline">\(r \gg 0\)</span>. Hence the evaluation map <span class="math inline">\(\beta_{k, r}\)</span> is surjective.</p>
-<p>Now, for any <span class="math inline">\(r \ge 1\)</span>, multiplication by <span class="math inline">\(s^{\otimes r}\)</span> yields an injection: <span class="math display">\[
-H^0(X_\infty, L_\infty^{\otimes k} \otimes \phi_\infty^* B^{\otimes r}) \xrightarrow{\quad \times s^{\otimes r} \quad} H^0(X_\infty, L_\infty^{\otimes(k + r m_0)}).
-\]</span> Restricting to the fiber <span class="math inline">\(F\)</span>, we obtain a commutative diagram: <span class="math display">\[
-\begin{CD}
-H^0(X_\infty, L_\infty^{\otimes k} \otimes \phi_\infty^* B^{\otimes r}) @&gt;&gt;&gt; H^0(X_\infty, L_\infty^{\otimes(k + r m_0)}) \\
-@VV{\beta_{k, r}}V @VV{\rho_{k + r m_0}}V \\
-H^0(F, L_\infty^{\otimes k}|_F) @&gt;{\times (s|_F)^{\otimes r}}&gt;&gt; H^0(F, L_\infty^{\otimes(k + r m_0)}|_F)
-\end{CD}
-\]</span> Because <span class="math inline">\(F\)</span> is integral and <span class="math inline">\(s|_F \neq 0\)</span>, the bottom map is injective. Since <span class="math inline">\(\beta_{k, r}\)</span> is surjective, the image of the bottom map is contained in <span class="math inline">\(\operatorname{Im}(\rho_{k + r m_0})\)</span>. However, <span class="math inline">\(\operatorname{rank}(\rho_{k + r m_0}) \le 1\)</span>, which forces: <span class="math display">\[
-h^0(F, L_\infty^{\otimes k}|_F) \le 1 \quad \text{for all } k \ge 1.
-\]</span> Since <span class="math inline">\(h^0(F, L_\infty^{\otimes k}|_F) = 1\)</span> for all sufficiently large divisible <span class="math inline">\(k\)</span>, we conclude: <span class="math display">\[
-\kappa(F, L_\infty|_F) = 0.
+<p><span class="proof-title"><em>Proof</em>. </span>By definition of the nef cone, <span class="math inline">\(q_V(\xi) \ge 0\)</span> for all subvarieties <span class="math inline">\(V \subseteq X\)</span>. If <span class="math inline">\(q_V(\xi) &gt; 0\)</span> for all <span class="math inline">\(V\)</span>, the Nakai-Moishezon criterion (<strong>?@thm-nakai-r-divisors</strong>) implies that <span class="math inline">\(\xi\)</span> is ample, which means <span class="math inline">\(\xi \in \operatorname{int}(\operatorname{Nef}(X))\)</span>, contradicting <span class="math inline">\(\xi \in \mathcal{B}_X\)</span>.</p>
+</div>
+<div id="thm-campana-peternell" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Campana-Peternell Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety. There exists an open dense subset <span class="math inline">\(\mathcal{CP}(X) \subseteq \mathcal{B}_X\)</span> such that for every <span class="math inline">\(\xi \in \mathcal{CP}(X)\)</span>, there exists an open neighborhood <span class="math inline">\(U = U(\xi) \subseteq N^1(X)_{\mathbb{R}}\)</span> and an irreducible subvariety <span class="math inline">\(V \subseteq X\)</span> such that: <span class="math display">\[
+\mathcal{B}_X \cap U = \mathcal{N}_V \cap U.
+\]</span> In other words, the nef boundary is generically real-analytic, cut out locally by the polynomials <span class="math inline">\(q_V\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For each subvariety <span class="math inline">\(V \subseteq X\)</span>, define the open subset of the boundary: <span class="math display">\[
+\mathcal{O}_V := \big\{ \xi \in \mathcal{B}_X \;\big|\; \exists U(\xi) \text{ s.t. } U(\xi) \cap \mathcal{B}_X \subseteq \mathcal{N}_V \big\}, \qquad \mathcal{O} := \bigcup_{V \subseteq X} \mathcal{O}_V.
 \]</span></p>
+<p><em>Claim:</em> <span class="math inline">\(\mathcal{O}\)</span> is dense in <span class="math inline">\(\mathcal{B}_X\)</span>. Suppose it is not. Then there exists an open set <span class="math inline">\(U \subseteq N^1(X)_{\mathbb{R}}\)</span> intersecting <span class="math inline">\(\mathcal{B}_X\)</span> such that <span class="math inline">\(U \cap \mathcal{O} = \emptyset\)</span>, so <span class="math inline">\(U \cap \mathcal{O}_V = \emptyset\)</span> for all <span class="math inline">\(V\)</span>. Thus <span class="math inline">\(\overline{U} \setminus \mathcal{N}_V\)</span> is dense in <span class="math inline">\(\overline{U}\)</span> for each <span class="math inline">\(V\)</span>. Since the topological cycle class <span class="math inline">\([V] \in H_{2d}(X, \mathbb{Z})\)</span> belongs to a finitely generated abelian group, there are at most countably many distinct null cones <span class="math inline">\(\mathcal{N}_V\)</span>. By the Baire Category Theorem, the countable intersection: <span class="math display">\[
+\bigcap_V (\overline{U} \setminus \mathcal{N}_V) = \overline{U} \setminus \bigcup_V \mathcal{N}_V
+\]</span> is dense in <span class="math inline">\(\overline{U}\)</span>. But this contradicts <a href="#prp-boundary-in-null-cones" class="quarto-xref">Proposition&nbsp;1</a>, which states that <span class="math inline">\(\mathcal{B}_X \subseteq \bigcup_V \mathcal{N}_V\)</span>.</p>
+<p>Now, let <span class="math inline">\(\mathcal{P} \subseteq \mathcal{B}_X\)</span> be the set of points satisfying the local equality of the theorem. Fix <span class="math inline">\(\xi_1 \in \mathcal{O}_V\)</span> with <span class="math inline">\(\dim V\)</span> minimal. Choose a general very ample divisor <span class="math inline">\(H\)</span> such that <span class="math inline">\(H \cap V\)</span> is proper. By the minimality of <span class="math inline">\(\dim V\)</span>, <span class="math inline">\(\xi_1 \notin \mathcal{O}_{H \cap V}\)</span>. Hence there exists a sequence <span class="math inline">\(\eta_n \to \xi_1\)</span> with <span class="math inline">\(q_{H \cap V}(\eta_n) &gt; 0\)</span>. The directional derivative satisfies: <span class="math display">\[
+\lim_{t \to 0} \frac{q_V(\eta_n + t [H]) - q_V(\eta_n)}{t} = \dim V \cdot (\eta_n^{\dim V - 1} \cdot H \cdot V) = \dim V \cdot q_{H \cap V}(\eta_n) &gt; 0.
+\]</span> Thus the differential <span class="math inline">\(D q_V(\eta_n) \neq 0\)</span>, so <span class="math inline">\(\mathcal{N}_V\)</span> is a smooth manifold near <span class="math inline">\(\eta_n\)</span>. Projecting locally onto the tangent space <span class="math inline">\(T_{\eta_n} \mathcal{N}_V\)</span>, topological invariance of domain implies that <span class="math inline">\(\mathcal{B}_X\)</span> and <span class="math inline">\(\mathcal{N}_V\)</span> must coincide in a small neighborhood of <span class="math inline">\(\eta_n\)</span>.</p>
+</div>
+<div id="cor-cp-dual" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 2 (Dual Campana-Peternell Theorem)</strong></span> By cone duality between <span class="math inline">\(N^1(X)_{\mathbb{R}}\)</span> and <span class="math inline">\(N_1(X)_{\mathbb{R}}\)</span>, there exists an open dense subset <span class="math inline">\(\mathcal{CP}(X)^* \subseteq \partial \overline{\operatorname{NE}}(X)\)</span> that is locally cut out by linear hyperplanes associated with subvarieties of <span class="math inline">\(X\)</span>.</p>
+</div>
+<hr>
+<div id="thm-cone-theorem" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Mori’s Cone Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be a smooth projective variety of dimension <span class="math inline">\(n\)</span>.</p>
+<ol type="1">
+<li>There exists a countable family of rational curves <span class="math inline">\(\{C_i\}_{i \in I}\)</span> on <span class="math inline">\(X\)</span> satisfying <span class="math inline">\(0 &lt; -(K_X \cdot C_i) \le n + 1\)</span> such that: <span class="math display">\[
+\overline{\operatorname{NE}}(X) = \overline{\operatorname{NE}}(X)_{K_X \ge 0} + \sum_{i \in I} \mathbb{R}_{\ge 0} [C_i].
+\]</span></li>
+<li>For any ample divisor <span class="math inline">\(H\)</span> and any <span class="math inline">\(\varepsilon &gt; 0\)</span>, there are only finitely many curves <span class="math inline">\(C_1, \dots, C_t\)</span> spanning extremal rays in the half-space <span class="math inline">\((K_X + \varepsilon H)_{\le 0}\)</span>, so that: <span class="math display">\[
+\overline{\operatorname{NE}}(X) = \overline{\operatorname{NE}}(X)_{K_X + \varepsilon H \ge 0} + \sum_{i=1}^t \mathbb{R}_{\ge 0} [C_i].
+\]</span></li>
+</ol>
+</div>
+<div id="cor-fano-polyhedral" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 3 (Cone of Fano Varieties)</strong></span> If <span class="math inline">\(X\)</span> is a Fano variety (that is, <span class="math inline">\(-K_X\)</span> is ample), then the cone of curves <span class="math inline">\(\overline{\operatorname{NE}}(X) = \operatorname{NE}(X)\)</span> is a rational polyhedral cone generated by finitely many classes of rational curves.</p>
+</div>
+<div id="cor-effective-ampleness-threshold" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 4 (Numerical Ampleness Bounds)</strong></span> Let <span class="math inline">\(X\)</span> be a smooth projective variety of dimension <span class="math inline">\(n\)</span>.</p>
+<ol type="1">
+<li>If <span class="math inline">\(D\)</span> is an ample divisor such that <span class="math inline">\((D \cdot C) \ge n + 2\)</span> for all rational curves <span class="math inline">\(C \subseteq X\)</span>, then <span class="math inline">\(K_X + D\)</span> is ample.</li>
+<li>If <span class="math inline">\(D\)</span> is a nef divisor such that <span class="math inline">\((D \cdot C) \ge n + 1\)</span> for all rational curves <span class="math inline">\(C \subseteq X\)</span>, then <span class="math inline">\(K_X + D\)</span> is nef.</li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By the Cone Theorem (<a href="#thm-cone-theorem" class="quarto-xref">Theorem&nbsp;3</a>), any class <span class="math inline">\(\gamma \in \overline{\operatorname{NE}}(X)\)</span> decomposes as <span class="math inline">\(\gamma = \gamma_0 + \sum a_i [C_i]\)</span> with <span class="math inline">\(K_X \cdot \gamma_0 \ge 0\)</span> and <span class="math inline">\(-(K_X \cdot C_i) \le n+1\)</span>. For (1): <span class="math display">\[
+(K_X + D) \cdot C_i = (K_X \cdot C_i) + (D \cdot C_i) \ge -(n+1) + (n+2) = 1 &gt; 0,
+\]</span> and <span class="math inline">\((K_X + D) \cdot \gamma_0 \ge D \cdot \gamma_0 &gt; 0\)</span>. By Kleiman’s criterion (<strong>?@thm-kleiman-cone-criterion</strong>), <span class="math inline">\(K_X + D\)</span> is ample. Statement (2) follows similarly.</p>
+</div>
+<div id="exm-blowups-p2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3 (Extremal Rays on Blowups of <span class="math inline">\(\mathbb{P}^2\)</span>)</strong></span> Let <span class="math inline">\(X = \operatorname{Bl}_{P_1, \dots, P_n}(\mathbb{P}^2)\)</span> be the blow-up of <span class="math inline">\(\mathbb{P}^2\)</span> at <span class="math inline">\(n\)</span> points in general position. Let <span class="math inline">\(\ell\)</span> be the pullback of the line class and <span class="math inline">\(e_1, \dots, e_n\)</span> the exceptional divisors, so <span class="math inline">\(-K_X = 3\ell - \sum_{i=1}^n e_i\)</span>.</p>
+<ul>
+<li>For <span class="math inline">\(1 \le n \le 8\)</span>, <span class="math inline">\(-K_X\)</span> is ample (so <span class="math inline">\(X\)</span> is a del Pezzo surface). By the adjunction formula: <span class="math display">\[
+(C^2) + (C \cdot K_X) = 2 g - 2.
+\]</span> Every <span class="math inline">\(K_X\)</span>-negative extremal ray must have <span class="math inline">\(g = 0\)</span> and <span class="math inline">\((C^2) = -1\)</span>, meaning it is spanned by a <span class="math inline">\((-1)\)</span>-curve. Writing <span class="math inline">\(C = d \ell - \sum m_i e_i\)</span>, the conditions <span class="math inline">\(d^2 = \sum m_i^2 - 1\)</span> and <span class="math inline">\(3d - 1 = \sum m_i\)</span> combined with Cauchy-Schwarz give: <span class="math display">\[
+(9 - n) d^2 - 6d + (1 - n) \le 0.
+\]</span> Since <span class="math inline">\(9 - n &gt; 0\)</span>, this inequality yields only finitely many integer solutions for <span class="math inline">\(d\)</span>, reflecting the finiteness of the cone.</li>
+<li>For <span class="math inline">\(n \ge 10\)</span>, <span class="math inline">\(-K_X\)</span> is no longer nef. There exist infinitely many <span class="math inline">\((-1)\)</span>-curves with degrees <span class="math inline">\(d \to \infty\)</span>. Their normalized classes in the affine slice accumulate on the boundary of the cone of curves.</li>
+</ul>
+</div>
+<div id="exm-variational-pathologies" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4 (Variational Pathologies of the Iitaka Dimension)</strong></span> Let <span class="math inline">\(T\)</span> be a smooth curve. There exists a family of smooth projective surfaces <span class="math inline">\(X \to T\)</span> and a line bundle <span class="math inline">\(L\)</span> on <span class="math inline">\(X\)</span> such that: <span class="math display">\[
+\kappa(X_t, L_t) = -\infty \quad \text{for general } t \in T, \qquad \text{while} \qquad \kappa(X_0, L_0) = 2 \quad (\text{big})
+\]</span> at a special closed point <span class="math inline">\(0 \in T\)</span>.</p>
+<p><em>Construction:</em> Let <span class="math inline">\(S \subseteq \mathbb{P}^2\)</span> be a set of 9 distinct points, and consider <span class="math inline">\(X_S = \operatorname{Bl}_S(\mathbb{P}^2)\)</span> with divisor <span class="math inline">\(D_S = 2 H_S - E_S\)</span>. - If the 9 points lie on a smooth cubic <span class="math inline">\(B\)</span>, the strict transform <span class="math inline">\(C = 3H - E\)</span> satisfies <span class="math inline">\((D_S \cdot C) = -3 &lt; 0\)</span>. Slicing by multiples of <span class="math inline">\(C\)</span> reveals that <span class="math inline">\(H^0(X_S, \mathcal{O}_{X_S}(m D_S)) = 0\)</span> for all <span class="math inline">\(m \ge 1\)</span>. Hence <span class="math inline">\(\kappa(X_S, D_S) = -\infty\)</span> for general configurations <span class="math inline">\(S\)</span>. - If the 9 points become collinear, <span class="math inline">\(D_S - H_S\)</span> becomes effective, which implies <span class="math inline">\(D_S\)</span> is big, so <span class="math inline">\(\kappa = 2\)</span>.</p>
 </div>
 
 
@@ -1588,14 +1542,11 @@ nav#TOC li.active > a.nav-link {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../22_positivity/22.2 Cones.html" class="pagination-link" aria-label="22.2 Cones">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22.2 Cones</span>
+      <a href="../22_positivity/22.6 Graded Linear Series.html" class="pagination-link" aria-label="22.6 Graded Linear Series">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22.6 Graded Linear Series</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../22_positivity/22.4 Big Line Bundle.html" class="pagination-link" aria-label="22.4 Big Line Bundles">
-        <span class="nav-page-text">22.4 Big Line Bundles</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
