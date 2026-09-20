@@ -129,17 +129,77 @@
     "href": "23_algebraic_groups/index.html#course-overview",
     "title": "Algebraic Groups",
     "section": "Course Overview",
-    "text": "Course Overview\nLinear algebraic groups are fundamental objects and tools in mathematics, with wide applications in number theory, representation theory, automorphic forms, and dynamical systems on homogeneous spaces.\nThe goal of this course is to systematically develop the theory of linear algebraic groups, focusing on their structural properties, representations, and root-theoretic classifications, laying a solid foundation for research in arithmetic geometry, the Langlands program, and related areas.",
+    "text": "Course Overview\nLinear algebraic groups are fundamental objects and tools in mathematics, with wide applications in number theory, representation theory, automorphic forms, and dynamical systems on homogeneous spaces.\nThe goal of this course is to systematically develop the theory of linear algebraic groups, focusing on their structural properties, representations, and root-theoretic classifications, laying a solid foundation for research in arithmetic geometry, the Langlands program, and related areas.\n\n\nSyllabus & Lecture Schedule\nThe notes are organized according to the 7 main modules of the course:",
     "crumbs": [
       "Algebraic Groups"
     ]
   },
   {
-    "objectID": "23_algebraic_groups/index.html#syllabus-lecture-schedule",
-    "href": "23_algebraic_groups/index.html#syllabus-lecture-schedule",
+    "objectID": "23_algebraic_groups/index.html#weeks-12-linear-algebraic-groups-foundations-jordan-decomposition",
+    "href": "23_algebraic_groups/index.html#weeks-12-linear-algebraic-groups-foundations-jordan-decomposition",
     "title": "Algebraic Groups",
-    "section": "Syllabus & Lecture Schedule",
-    "text": "Syllabus & Lecture Schedule\nThe notes are organized according to the 7 main modules of the course:\n\n[Weeks 1–2] Linear Algebraic Groups: Foundations & Jordan Decomposition\n\nAffine varieties and the definition of linear algebraic groups\nSubgroups, homomorphisms, and canonical examples (\\(\\mathrm{GL}_n\\), \\(\\mathrm{SL}_n\\), \\(\\mathrm{Sp}_{2n}\\), \\(\\mathrm{SO}_n\\))\nJordan-Chevalley decomposition (additive and multiplicative) in \\(\\mathrm{GL}(V)\\) and in abstract linear algebraic groups\n\n\n\n[Weeks 3–4] Tannakian Formalism and Lie Algebras\n\nGroup actions on affine coordinate algebras \\(\\mathcal{O}(G)\\) and locally finite representations\nTannakian perspective: reconstructing an algebraic group from its representation category\nThe Lie algebra \\(\\mathfrak{g} = \\operatorname{Lie}(G)\\) as invariant derivations\nThe adjoint representation \\(\\mathrm{Ad}: G \\to \\mathrm{GL}(\\mathfrak{g})\\)\n\n\n\n[Week 5] Tori in Algebraic Groups\n\nDiagonalizable groups and Cartier duality\nCharacter lattice \\(X^*(T)\\) and cocharacter lattice \\(X_*(T)\\)\nAlgebraic tori (split vs. non-split)\nRigidity of tori, centralizers, and normalizers\n\n\n\n[Week 6] Quotients of Algebraic Groups\n\nActions on algebraic varieties, orbits, and stabilizers\nChevalley’s Theorem on constructing subgroups as stabilizers of lines\nExistence and geometric construction of homogeneous spaces and quotient varieties \\(G/H\\)\n\n\n\n[Weeks 7–8] Reductive Groups\n\nThe radical \\(R(G)\\) and the unipotent radical \\(R_u(G)\\)\nDefinitions and characterizations of semisimple and reductive groups\nAction of maximal tori on \\(\\operatorname{Lie}(G)\\) and the root space decomposition\nBasic properties of roots and root systems\n\n\n\n[Weeks 10–11] Parabolic Subgroups of Reductive Groups\n\nThe Borel Fixed-Point Theorem for complete varieties\nMaximal connected solvable subgroups (Borel subgroups \\(B\\))\nThe flag variety \\(G/B\\) and its projectivity/completeness\nParabolic subgroups: standard parabolic subgroups and their classification\n\n\n\n[Weeks 12–13] Various Decompositions of Reductive Groups\n\nThe Bruhat decomposition: \\(G = \\bigsqcup_{w \\in W} B w B\\)\nRelative root systems and decompositions over non-algebraically closed fields\nConnections to the Iwasawa and Cartan decompositions in Lie groups and arithmetic groups",
+    "section": "[Weeks 1–2] Linear Algebraic Groups: Foundations & Jordan Decomposition",
+    "text": "[Weeks 1–2] Linear Algebraic Groups: Foundations & Jordan Decomposition\n\nAffine varieties and the definition of linear algebraic groups\nSubgroups, homomorphisms, and canonical examples (\\(\\mathrm{GL}_n\\), \\(\\mathrm{SL}_n\\), \\(\\mathrm{Sp}_{2n}\\), \\(\\mathrm{SO}_n\\))\nJordan-Chevalley decomposition (additive and multiplicative) in \\(\\mathrm{GL}(V)\\) and in abstract linear algebraic groups",
+    "crumbs": [
+      "Algebraic Groups"
+    ]
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html#weeks-34-tannakian-formalism-and-lie-algebras",
+    "href": "23_algebraic_groups/index.html#weeks-34-tannakian-formalism-and-lie-algebras",
+    "title": "Algebraic Groups",
+    "section": "[Weeks 3–4] Tannakian Formalism and Lie Algebras",
+    "text": "[Weeks 3–4] Tannakian Formalism and Lie Algebras\n\nGroup actions on affine coordinate algebras \\(\\mathcal{O}(G)\\) and locally finite representations\nTannakian perspective: reconstructing an algebraic group from its representation category\nThe Lie algebra \\(\\mathfrak{g} = \\operatorname{Lie}(G)\\) as invariant derivations\nThe adjoint representation \\(\\mathrm{Ad}: G \\to \\mathrm{GL}(\\mathfrak{g})\\)",
+    "crumbs": [
+      "Algebraic Groups"
+    ]
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html#week-5-tori-in-algebraic-groups",
+    "href": "23_algebraic_groups/index.html#week-5-tori-in-algebraic-groups",
+    "title": "Algebraic Groups",
+    "section": "[Week 5] Tori in Algebraic Groups",
+    "text": "[Week 5] Tori in Algebraic Groups\n\nDiagonalizable groups and Cartier duality\nCharacter lattice \\(X^*(T)\\) and cocharacter lattice \\(X_*(T)\\)\nAlgebraic tori (split vs. non-split)\nRigidity of tori, centralizers, and normalizers",
+    "crumbs": [
+      "Algebraic Groups"
+    ]
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html#week-6-quotients-of-algebraic-groups",
+    "href": "23_algebraic_groups/index.html#week-6-quotients-of-algebraic-groups",
+    "title": "Algebraic Groups",
+    "section": "[Week 6] Quotients of Algebraic Groups",
+    "text": "[Week 6] Quotients of Algebraic Groups\n\nActions on algebraic varieties, orbits, and stabilizers\nChevalley’s Theorem on constructing subgroups as stabilizers of lines\nExistence and geometric construction of homogeneous spaces and quotient varieties \\(G/H\\)",
+    "crumbs": [
+      "Algebraic Groups"
+    ]
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html#weeks-78-reductive-groups",
+    "href": "23_algebraic_groups/index.html#weeks-78-reductive-groups",
+    "title": "Algebraic Groups",
+    "section": "[Weeks 7–8] Reductive Groups",
+    "text": "[Weeks 7–8] Reductive Groups\n\nThe radical \\(R(G)\\) and the unipotent radical \\(R_u(G)\\)\nDefinitions and characterizations of semisimple and reductive groups\nAction of maximal tori on \\(\\operatorname{Lie}(G)\\) and the root space decomposition\nBasic properties of roots and root systems",
+    "crumbs": [
+      "Algebraic Groups"
+    ]
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html#weeks-1011-parabolic-subgroups-of-reductive-groups",
+    "href": "23_algebraic_groups/index.html#weeks-1011-parabolic-subgroups-of-reductive-groups",
+    "title": "Algebraic Groups",
+    "section": "[Weeks 10–11] Parabolic Subgroups of Reductive Groups",
+    "text": "[Weeks 10–11] Parabolic Subgroups of Reductive Groups\n\nThe Borel Fixed-Point Theorem for complete varieties\nMaximal connected solvable subgroups (Borel subgroups \\(B\\))\nThe flag variety \\(G/B\\) and its projectivity/completeness\nParabolic subgroups: standard parabolic subgroups and their classification",
+    "crumbs": [
+      "Algebraic Groups"
+    ]
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html#weeks-1213-various-decompositions-of-reductive-groups",
+    "href": "23_algebraic_groups/index.html#weeks-1213-various-decompositions-of-reductive-groups",
+    "title": "Algebraic Groups",
+    "section": "[Weeks 12–13] Various Decompositions of Reductive Groups",
+    "text": "[Weeks 12–13] Various Decompositions of Reductive Groups\n\nThe Bruhat decomposition: \\(G = \\bigsqcup_{w \\in W} B w B\\)\nRelative root systems and decompositions over non-algebraically closed fields\nConnections to the Iwasawa and Cartan decompositions in Lie groups and arithmetic groups",
     "crumbs": [
       "Algebraic Groups"
     ]
@@ -149,7 +209,17 @@
     "href": "23_algebraic_groups/index.html#primary-references",
     "title": "Algebraic Groups",
     "section": "Primary References",
-    "text": "Primary References\n\nJ. S. Milne, Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field, Cambridge University Press, 2017.\n\n\nSupplementary Literature\n\nArmand Borel, Linear Algebraic Groups, Graduate Texts in Mathematics (GTM) 126, 2nd Edition, Springer, 1991.\nArmand Borel, Introduction to Arithmetic Groups, American Mathematical Society (AMS), 2019.\nT. A. Springer, Linear Algebraic Groups, 2nd Edition, Birkhäuser, 1998.",
+    "text": "Primary References\n\nJ. S. Milne, Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field, Cambridge University Press, 2017.",
+    "crumbs": [
+      "Algebraic Groups"
+    ]
+  },
+  {
+    "objectID": "23_algebraic_groups/index.html#supplementary-literature",
+    "href": "23_algebraic_groups/index.html#supplementary-literature",
+    "title": "Algebraic Groups",
+    "section": "Supplementary Literature",
+    "text": "Supplementary Literature\n\nArmand Borel, Linear Algebraic Groups, Graduate Texts in Mathematics (GTM) 126, 2nd Edition, Springer, 1991.\nArmand Borel, Introduction to Arithmetic Groups, American Mathematical Society (AMS), 2019.\nT. A. Springer, Linear Algebraic Groups, 2nd Edition, Birkhäuser, 1998.",
     "crumbs": [
       "Algebraic Groups"
     ]
