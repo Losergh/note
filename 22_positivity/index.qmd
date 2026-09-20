@@ -6,7 +6,7 @@ date: last-modified
 
 ## Introduction
 
-Positivity is a central organizing principle in modern algebraic geometry, bridging algebraic topology, complex differential geometry (metric curvature), and birational geometry (the Minimal Model Program, MMP). This notebook follows the foundational text *Positivity in Algebraic Geometry I* by Robert Lazarsfeld, systematically developing the theory of ample, nef, and big divisors, convex cones in the Néron-Severi space, and asymptotic invariants of section rings.
+Positivity is a central organizing principle in modern algebraic geometry, bridging algebraic topology, complex differential geometry (metric curvature), and birational geometry (the Minimal Model Program). This notebook follows the foundational text *Positivity in Algebraic Geometry I* by Robert Lazarsfeld, systematically developing the theory of ample, nef, and big divisors, convex cones in the Néron-Severi space, and asymptotic invariants of section rings.
 
 The development progresses logically from classical intersection theory and asymptotic Riemann-Roch to convex cone geometry, asymptotic invariants, and birational decomposition theorems:
 
