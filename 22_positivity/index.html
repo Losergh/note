@@ -549,6 +549,32 @@ window.Quarto = {
 </main> <!-- /main -->
 <style>
 
+/* 1. 标题放大（原为 1.05rem，调大至 1.2rem） */
+.theorem-header,
+.callout-header,
+.callout-title {
+  font-size: 1.05rem !important;       /* 标题字号加大（可根据喜好微调 1.18rem ~ 1.25rem） */
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* 2. 内部正文缩小（原为默认 1rem，缩减为 0.93rem） */
+.theorem-body,
+.callout-body,
+.callout-body-container {
+  font-size: 0.95rem !important;      /* 正文字号缩小（可根据喜好微调 0.91rem ~ 0.95rem） */
+  line-height: 1.68 !important;       /* 保持舒适行高，确保上下标与数学公式不拥挤 */
+}
+
+/* 3. 确保内部的列表项、段落同步缩小 */
+.theorem-body p,
+.theorem-body li,
+.callout-body p,
+.callout-body li {
+  font-size: 0.95rem !important;
+  line-height: 1.68 !important;
+}
+
 /* --------------------------------------------------------------------------
    7. 缩减左侧边栏最左侧留白与多级缩进（释放水平空间，防止标题折行）
    -------------------------------------------------------------------------- */
