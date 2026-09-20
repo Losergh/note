@@ -26,10 +26,39 @@
     "href": "22_positivity/index.html",
     "title": "Positivity in AG",
     "section": "",
-    "text": "Overview",
+    "text": "NoteCourse Information\n\n\n\n\nCourse Code: MATH70008.01\nCourse Title: Selected Topics in Representation Theory (Linear Algebraic Groups)\nInstitution: Shanghai Center for Mathematical Sciences (SCMS), Fudan University\nInstructor: Prof. Miaofen Chen (陈苗芬)\nCredits: 3.0 (54 Total Credit Hours)",
     "crumbs": [
-      "Topics",
-      "Positivity"
+      "Positivity in AG"
+    ]
+  },
+  {
+    "objectID": "22_positivity/index.html#course-overview",
+    "href": "22_positivity/index.html#course-overview",
+    "title": "Positivity in AG",
+    "section": "Course Overview",
+    "text": "Course Overview\nLinear algebraic groups are fundamental objects and tools in mathematics, with wide applications in number theory, representation theory, automorphic forms, and dynamical systems on homogeneous spaces.\nThe goal of this course is to systematically develop the theory of linear algebraic groups, focusing on their structural properties, representations, and root-theoretic classifications, laying a solid foundation for research in arithmetic geometry, the Langlands program, and related areas.",
+    "crumbs": [
+      "Positivity in AG"
+    ]
+  },
+  {
+    "objectID": "22_positivity/index.html#syllabus-lecture-schedule",
+    "href": "22_positivity/index.html#syllabus-lecture-schedule",
+    "title": "Positivity in AG",
+    "section": "Syllabus & Lecture Schedule",
+    "text": "Syllabus & Lecture Schedule\nThe notes are organized according to the 7 main modules of the course:\n\n[Weeks 1–2] Linear Algebraic Groups: Foundations & Jordan Decomposition\n\nAffine varieties and the definition of linear algebraic groups\nSubgroups, homomorphisms, and canonical examples (\\(\\mathrm{GL}_n\\), \\(\\mathrm{SL}_n\\), \\(\\mathrm{Sp}_{2n}\\), \\(\\mathrm{SO}_n\\))\nJordan-Chevalley decomposition (additive and multiplicative) in \\(\\mathrm{GL}(V)\\) and in abstract linear algebraic groups\n\n\n\n[Weeks 3–4] Tannakian Formalism and Lie Algebras\n\nGroup actions on affine coordinate algebras \\(\\mathcal{O}(G)\\) and locally finite representations\nTannakian perspective: reconstructing an algebraic group from its representation category\nThe Lie algebra \\(\\mathfrak{g} = \\operatorname{Lie}(G)\\) as invariant derivations\nThe adjoint representation \\(\\mathrm{Ad}: G \\to \\mathrm{GL}(\\mathfrak{g})\\)\n\n\n\n[Week 5] Tori in Algebraic Groups\n\nDiagonalizable groups and Cartier duality\nCharacter lattice \\(X^*(T)\\) and cocharacter lattice \\(X_*(T)\\)\nAlgebraic tori (split vs. non-split)\nRigidity of tori, centralizers, and normalizers\n\n\n\n[Week 6] Quotients of Algebraic Groups\n\nActions on algebraic varieties, orbits, and stabilizers\nChevalley’s Theorem on constructing subgroups as stabilizers of lines\nExistence and geometric construction of homogeneous spaces and quotient varieties \\(G/H\\)\n\n\n\n[Weeks 7–8] Reductive Groups\n\nThe radical \\(R(G)\\) and the unipotent radical \\(R_u(G)\\)\nDefinitions and characterizations of semisimple and reductive groups\nAction of maximal tori on \\(\\operatorname{Lie}(G)\\) and the root space decomposition\nBasic properties of roots and root systems\n\n\n\n[Weeks 10–11] Parabolic Subgroups of Reductive Groups\n\nThe Borel Fixed-Point Theorem for complete varieties\nMaximal connected solvable subgroups (Borel subgroups \\(B\\))\nThe flag variety \\(G/B\\) and its projectivity/completeness\nParabolic subgroups: standard parabolic subgroups and their classification\n\n\n\n[Weeks 12–13] Various Decompositions of Reductive Groups\n\nThe Bruhat decomposition: \\(G = \\bigsqcup_{w \\in W} B w B\\)\nRelative root systems and decompositions over non-algebraically closed fields\nConnections to the Iwasawa and Cartan decompositions in Lie groups and arithmetic groups",
+    "crumbs": [
+      "Positivity in AG"
+    ]
+  },
+  {
+    "objectID": "22_positivity/index.html#primary-references",
+    "href": "22_positivity/index.html#primary-references",
+    "title": "Positivity in AG",
+    "section": "Primary References",
+    "text": "Primary References\n\nJ. S. Milne, Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field, Cambridge University Press, 2017.\n\n\nSupplementary Literature\n\nArmand Borel, Linear Algebraic Groups, Graduate Texts in Mathematics (GTM) 126, 2nd Edition, Springer, 1991.\nArmand Borel, Introduction to Arithmetic Groups, American Mathematical Society (AMS), 2019.\nT. A. Springer, Linear Algebraic Groups, 2nd Edition, Birkhäuser, 1998.",
+    "crumbs": [
+      "Positivity in AG"
     ]
   },
   {

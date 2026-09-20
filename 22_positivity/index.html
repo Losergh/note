@@ -35,8 +35,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../23_algebraic_groups/index.html" rel="next">
-<link href="../16_ag/index.html" rel="prev">
+<link href="../22_positivity/22.0 Preliminaries.html" rel="next">
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -49,9 +48,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c1dd48fcfaabdb82845c1dde3dc5875f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-2d806c57ae2cf4be4604a8e2e5116337.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-c1dd48fcfaabdb82845c1dde3dc5875f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-90d1f85f1e03f3c78826791d548f8fc6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-a4ae0091060df79bfefc4800c412e12b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-90d1f85f1e03f3c78826791d548f8fc6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -79,6 +78,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -283,7 +311,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../16_ag/index.html">Topics</a></li><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -301,16 +329,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Topics</span></a>
+            <a href="../22_positivity/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Positivity in AG</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -318,30 +340,30 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../16_ag/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Algebraic Geometry</span></a>
+  <a href="../22_positivity/22.0 Preliminaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.0 Preliminaries</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../22_positivity/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Positivity</span></a>
+  <a href="../22_positivity/22.1 Nef Divisors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.1 Nef-Divisors</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../23_algebraic_groups/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Algebraic Groups</span></a>
+  <a href="../22_positivity/22.2 Cones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.2 Cones</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.3 Itaka Fibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.3 Iitaka Fibration</span></a>
   </div>
 </li>
       </ul>
   </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../editing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Typography</span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -352,7 +374,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#course-overview" id="toc-course-overview" class="nav-link active" data-scroll-target="#course-overview">Course Overview</a></li>
+  <li><a href="#syllabus-lecture-schedule" id="toc-syllabus-lecture-schedule" class="nav-link" data-scroll-target="#syllabus-lecture-schedule">Syllabus &amp; Lecture Schedule</a>
+  <ul class="collapse">
+  <li><a href="#weeks-12-linear-algebraic-groups-foundations-jordan-decomposition" id="toc-weeks-12-linear-algebraic-groups-foundations-jordan-decomposition" class="nav-link" data-scroll-target="#weeks-12-linear-algebraic-groups-foundations-jordan-decomposition">[Weeks 1–2] Linear Algebraic Groups: Foundations &amp; Jordan Decomposition</a></li>
+  <li><a href="#weeks-34-tannakian-formalism-and-lie-algebras" id="toc-weeks-34-tannakian-formalism-and-lie-algebras" class="nav-link" data-scroll-target="#weeks-34-tannakian-formalism-and-lie-algebras">[Weeks 3–4] Tannakian Formalism and Lie Algebras</a></li>
+  <li><a href="#week-5-tori-in-algebraic-groups" id="toc-week-5-tori-in-algebraic-groups" class="nav-link" data-scroll-target="#week-5-tori-in-algebraic-groups">[Week 5] Tori in Algebraic Groups</a></li>
+  <li><a href="#week-6-quotients-of-algebraic-groups" id="toc-week-6-quotients-of-algebraic-groups" class="nav-link" data-scroll-target="#week-6-quotients-of-algebraic-groups">[Week 6] Quotients of Algebraic Groups</a></li>
+  <li><a href="#weeks-78-reductive-groups" id="toc-weeks-78-reductive-groups" class="nav-link" data-scroll-target="#weeks-78-reductive-groups">[Weeks 7–8] Reductive Groups</a></li>
+  <li><a href="#weeks-1011-parabolic-subgroups-of-reductive-groups" id="toc-weeks-1011-parabolic-subgroups-of-reductive-groups" class="nav-link" data-scroll-target="#weeks-1011-parabolic-subgroups-of-reductive-groups">[Weeks 10–11] Parabolic Subgroups of Reductive Groups</a></li>
+  <li><a href="#weeks-1213-various-decompositions-of-reductive-groups" id="toc-weeks-1213-various-decompositions-of-reductive-groups" class="nav-link" data-scroll-target="#weeks-1213-various-decompositions-of-reductive-groups">[Weeks 12–13] Various Decompositions of Reductive Groups</a></li>
+  </ul></li>
+  <li><a href="#primary-references" id="toc-primary-references" class="nav-link" data-scroll-target="#primary-references">Primary References</a>
+  <ul class="collapse">
+  <li><a href="#supplementary-literature" id="toc-supplementary-literature" class="nav-link" data-scroll-target="#supplementary-literature">Supplementary Literature</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -360,7 +396,7 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../16_ag/index.html">Topics</a></li><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Positivity in AG</h1>
 </div>
@@ -379,10 +415,111 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level1">
-<h1>Overview</h1>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Course Information
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Course Code</strong>: MATH70008.01</li>
+<li><strong>Course Title</strong>: Selected Topics in Representation Theory (Linear Algebraic Groups)</li>
+<li><strong>Institution</strong>: Shanghai Center for Mathematical Sciences (SCMS), Fudan University</li>
+<li><strong>Instructor</strong>: Prof.&nbsp;Miaofen Chen (陈苗芬)</li>
+<li><strong>Credits</strong>: 3.0 (54 Total Credit Hours)</li>
+</ul>
+</div>
+</div>
+<section id="course-overview" class="level2">
+<h2 class="anchored" data-anchor-id="course-overview">Course Overview</h2>
+<p>Linear algebraic groups are fundamental objects and tools in mathematics, with wide applications in number theory, representation theory, automorphic forms, and dynamical systems on homogeneous spaces.</p>
+<p>The goal of this course is to systematically develop the theory of linear algebraic groups, focusing on their structural properties, representations, and root-theoretic classifications, laying a solid foundation for research in arithmetic geometry, the Langlands program, and related areas.</p>
+<hr>
+</section>
+<section id="syllabus-lecture-schedule" class="level2">
+<h2 class="anchored" data-anchor-id="syllabus-lecture-schedule">Syllabus &amp; Lecture Schedule</h2>
+<p>The notes are organized according to the 7 main modules of the course:</p>
+<section id="weeks-12-linear-algebraic-groups-foundations-jordan-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="weeks-12-linear-algebraic-groups-foundations-jordan-decomposition">[Weeks 1–2] Linear Algebraic Groups: Foundations &amp; Jordan Decomposition</h3>
+<ul>
+<li>Affine varieties and the definition of linear algebraic groups</li>
+<li>Subgroups, homomorphisms, and canonical examples (<span class="math inline">\(\mathrm{GL}_n\)</span>, <span class="math inline">\(\mathrm{SL}_n\)</span>, <span class="math inline">\(\mathrm{Sp}_{2n}\)</span>, <span class="math inline">\(\mathrm{SO}_n\)</span>)</li>
+<li>Jordan-Chevalley decomposition (additive and multiplicative) in <span class="math inline">\(\mathrm{GL}(V)\)</span> and in abstract linear algebraic groups</li>
+</ul>
+</section>
+<section id="weeks-34-tannakian-formalism-and-lie-algebras" class="level3">
+<h3 class="anchored" data-anchor-id="weeks-34-tannakian-formalism-and-lie-algebras">[Weeks 3–4] Tannakian Formalism and Lie Algebras</h3>
+<ul>
+<li>Group actions on affine coordinate algebras <span class="math inline">\(\mathcal{O}(G)\)</span> and locally finite representations</li>
+<li>Tannakian perspective: reconstructing an algebraic group from its representation category</li>
+<li>The Lie algebra <span class="math inline">\(\mathfrak{g} = \operatorname{Lie}(G)\)</span> as invariant derivations</li>
+<li>The adjoint representation <span class="math inline">\(\mathrm{Ad}: G \to \mathrm{GL}(\mathfrak{g})\)</span></li>
+</ul>
+</section>
+<section id="week-5-tori-in-algebraic-groups" class="level3">
+<h3 class="anchored" data-anchor-id="week-5-tori-in-algebraic-groups">[Week 5] Tori in Algebraic Groups</h3>
+<ul>
+<li>Diagonalizable groups and Cartier duality</li>
+<li>Character lattice <span class="math inline">\(X^*(T)\)</span> and cocharacter lattice <span class="math inline">\(X_*(T)\)</span></li>
+<li>Algebraic tori (split vs.&nbsp;non-split)</li>
+<li>Rigidity of tori, centralizers, and normalizers</li>
+</ul>
+</section>
+<section id="week-6-quotients-of-algebraic-groups" class="level3">
+<h3 class="anchored" data-anchor-id="week-6-quotients-of-algebraic-groups">[Week 6] Quotients of Algebraic Groups</h3>
+<ul>
+<li>Actions on algebraic varieties, orbits, and stabilizers</li>
+<li>Chevalley’s Theorem on constructing subgroups as stabilizers of lines</li>
+<li>Existence and geometric construction of homogeneous spaces and quotient varieties <span class="math inline">\(G/H\)</span></li>
+</ul>
+</section>
+<section id="weeks-78-reductive-groups" class="level3">
+<h3 class="anchored" data-anchor-id="weeks-78-reductive-groups">[Weeks 7–8] Reductive Groups</h3>
+<ul>
+<li>The radical <span class="math inline">\(R(G)\)</span> and the unipotent radical <span class="math inline">\(R_u(G)\)</span></li>
+<li>Definitions and characterizations of semisimple and reductive groups</li>
+<li>Action of maximal tori on <span class="math inline">\(\operatorname{Lie}(G)\)</span> and the root space decomposition</li>
+<li>Basic properties of roots and root systems</li>
+</ul>
+</section>
+<section id="weeks-1011-parabolic-subgroups-of-reductive-groups" class="level3">
+<h3 class="anchored" data-anchor-id="weeks-1011-parabolic-subgroups-of-reductive-groups">[Weeks 10–11] Parabolic Subgroups of Reductive Groups</h3>
+<ul>
+<li>The Borel Fixed-Point Theorem for complete varieties</li>
+<li>Maximal connected solvable subgroups (Borel subgroups <span class="math inline">\(B\)</span>)</li>
+<li>The flag variety <span class="math inline">\(G/B\)</span> and its projectivity/completeness</li>
+<li>Parabolic subgroups: standard parabolic subgroups and their classification</li>
+</ul>
+</section>
+<section id="weeks-1213-various-decompositions-of-reductive-groups" class="level3">
+<h3 class="anchored" data-anchor-id="weeks-1213-various-decompositions-of-reductive-groups">[Weeks 12–13] Various Decompositions of Reductive Groups</h3>
+<ul>
+<li>The Bruhat decomposition: <span class="math inline">\(G = \bigsqcup_{w \in W} B w B\)</span></li>
+<li>Relative root systems and decompositions over non-algebraically closed fields</li>
+<li>Connections to the Iwasawa and Cartan decompositions in Lie groups and arithmetic groups</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="primary-references" class="level2">
+<h2 class="anchored" data-anchor-id="primary-references">Primary References</h2>
+<ul>
+<li><strong>J. S. Milne</strong>, <em>Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field</em>, Cambridge University Press, 2017.</li>
+</ul>
+<section id="supplementary-literature" class="level3">
+<h3 class="anchored" data-anchor-id="supplementary-literature">Supplementary Literature</h3>
+<ul>
+<li><strong>Armand Borel</strong>, <em>Linear Algebraic Groups</em>, Graduate Texts in Mathematics (GTM) 126, 2nd Edition, Springer, 1991.</li>
+<li><strong>Armand Borel</strong>, <em>Introduction to Arithmetic Groups</em>, American Mathematical Society (AMS), 2019.</li>
+<li><strong>T. A. Springer</strong>, <em>Linear Algebraic Groups</em>, 2nd Edition, Birkhäuser, 1998.</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -624,9 +761,29 @@ nav#TOC li.active > a.nav-link {
 
   const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
 
+  // --------------------------------------------------------------------------
+  // 【自动提取章节前缀】：优先读 CSS 变量，其次自动提取页面大标题开头的编号
+  // --------------------------------------------------------------------------
   function getSecPrefix() {
+    // 1. 如果有通过 CSS 显式设置 --sec，直接使用
     const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
-    return sec ? sec.replace(/["']/g, '') : "23.0.";
+    if (sec) {
+      const clean = sec.replace(/["']/g, '');
+      return clean.endsWith('.') ? clean : clean + '.';
+    }
+
+    // 2. 自动从页面标题 (如 "22.0 Preliminaries") 或 document.title 提取开头的数字序号
+    const titleEl = document.querySelector('h1.title, .quarto-title h1, header#title-block-header h1, #title-block-header .title');
+    const titleText = titleEl ? titleEl.textContent.trim() : document.title.trim();
+    
+    // 匹配如 "22.0", "22.1", "23.0" 等开头的格式
+    const match = titleText.match(/^(\d+(?:\.\d+)*)\.?\s*/);
+    if (match) {
+      return match[1] + '.';
+    }
+
+    // 3. 最终保底默认值
+    return "22.0.";
   }
 
   function ensureTocList() {
@@ -722,7 +879,6 @@ nav#TOC li.active > a.nav-link {
       let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
       let subTitle = "";
 
-      // 【关键修复 1】：使用贪婪匹配 /(.*)/ 匹配最外层括号，防止公式内包含的括号（如 \pi_0(G)）导致匹配被提前切断
       const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
       if (match) {
         subTitle = ` (${match[1].trim()})`;
@@ -809,7 +965,6 @@ nav#TOC li.active > a.nav-link {
       }
     });
 
-    // 【关键修复 2】：在 DOM 组装完毕后通知 MathJax 对所有定理标题进行渲染
     if (headersToTypeset.length > 0) {
       triggerMathTypeset(headersToTypeset);
     }
@@ -1329,13 +1484,10 @@ nav#TOC li.active > a.nav-link {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../16_ag/index.html" class="pagination-link" aria-label="Algebraic Geometry">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Algebraic Geometry</span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../23_algebraic_groups/index.html" class="pagination-link" aria-label="Algebraic Groups">
-        <span class="nav-page-text">Algebraic Groups</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../22_positivity/22.0 Preliminaries.html" class="pagination-link" aria-label="22.0 Preliminaries">
+        <span class="nav-page-text">22.0 Preliminaries</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

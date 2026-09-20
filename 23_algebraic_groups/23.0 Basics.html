@@ -49,9 +49,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c1dd48fcfaabdb82845c1dde3dc5875f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-2d806c57ae2cf4be4604a8e2e5116337.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-c1dd48fcfaabdb82845c1dde3dc5875f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-90d1f85f1e03f3c78826791d548f8fc6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-a4ae0091060df79bfefc4800c412e12b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-90d1f85f1e03f3c78826791d548f8fc6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -901,9 +901,29 @@ nav#TOC li.active > a.nav-link {
 
   const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
 
+  // --------------------------------------------------------------------------
+  // 【自动提取章节前缀】：优先读 CSS 变量，其次自动提取页面大标题开头的编号
+  // --------------------------------------------------------------------------
   function getSecPrefix() {
+    // 1. 如果有通过 CSS 显式设置 --sec，直接使用
     const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
-    return sec ? sec.replace(/["']/g, '') : "23.0.";
+    if (sec) {
+      const clean = sec.replace(/["']/g, '');
+      return clean.endsWith('.') ? clean : clean + '.';
+    }
+
+    // 2. 自动从页面标题 (如 "22.0 Preliminaries") 或 document.title 提取开头的数字序号
+    const titleEl = document.querySelector('h1.title, .quarto-title h1, header#title-block-header h1, #title-block-header .title');
+    const titleText = titleEl ? titleEl.textContent.trim() : document.title.trim();
+    
+    // 匹配如 "22.0", "22.1", "23.0" 等开头的格式
+    const match = titleText.match(/^(\d+(?:\.\d+)*)\.?\s*/);
+    if (match) {
+      return match[1] + '.';
+    }
+
+    // 3. 最终保底默认值
+    return "22.0.";
   }
 
   function ensureTocList() {
@@ -999,7 +1019,6 @@ nav#TOC li.active > a.nav-link {
       let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
       let subTitle = "";
 
-      // 【关键修复 1】：使用贪婪匹配 /(.*)/ 匹配最外层括号，防止公式内包含的括号（如 \pi_0(G)）导致匹配被提前切断
       const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
       if (match) {
         subTitle = ` (${match[1].trim()})`;
@@ -1086,7 +1105,6 @@ nav#TOC li.active > a.nav-link {
       }
     });
 
-    // 【关键修复 2】：在 DOM 组装完毕后通知 MathJax 对所有定理标题进行渲染
     if (headersToTypeset.length > 0) {
       triggerMathTypeset(headersToTypeset);
     }
