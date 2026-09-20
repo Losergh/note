@@ -12,6 +12,7 @@ website:
   description: "Personal study notes on mathematics, currently focusing on Algebraic Geometry, Positivity, and Algebraic Groups."
   page-navigation: true
   reader-mode: true
+  
 
   # Search Configuration
   search:
