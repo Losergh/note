@@ -1,0 +1,286 @@
+---
+title: "22.6 Graded Linear Series"
+subtitle: "Graded Linear Series, Asymptotic Multiplicities, and Finite Generation of Section Rings"
+date: last-modified
+number-sections: true
+sec: "22.6." 
+---
+
+::: {#def-graded-linear-series}
+## Graded Linear Series
+Let $X$ be an irreducible variety over $\mathbb{C}$.
+
+1. A **graded linear series** $V_\bullet = \{V_m\}_{m \ge 0}$ on $X$ associated with a Cartier divisor $D \in \operatorname{Div}(X)$ (or line bundle $L = \mathcal{O}_X(D)$) consists of a collection of finite-dimensional vector subspaces:
+   $$
+   V_m \subseteq H^0(X, \mathcal{O}_X(mD)), \quad m \ge 0,
+   $$
+   such that $V_0 = \mathbb{C}$ and for all $k, \ell \ge 0$, the natural multiplication of sections satisfies:
+   $$
+   V_k \cdot V_\ell := \operatorname{Im}\big(V_k \otimes_{\mathbb{C}} V_\ell \longrightarrow H^0(X, \mathcal{O}_X((k+\ell)D))\big) \subseteq V_{k+\ell}.
+   $$
+2. The direct sum:
+   $$
+   R(V_\bullet) := \bigoplus_{m=0}^\infty V_m
+   $$
+   forms a graded $\mathbb{C}$-subalgebra of the complete section ring $R(X, D) = \bigoplus_{m=0}^\infty H^0(X, \mathcal{O}_X(mD))$, called the **section ring** associated with $V_\bullet$.
+:::
+
+::: {#def-finite-generation-gls}
+## Finite Generation
+A graded linear series $V_\bullet$ on a projective variety $X$ is said to be **finitely generated** if its associated section ring $R(V_\bullet)$ is finitely generated as a $\mathbb{C}$-algebra.
+:::
+
+::: {#def-graded-series-ideals}
+## Graded Linear Series Associated with an Ideal Sheaf
+Let $\mathfrak{b} \subseteq \mathcal{O}_X$ be a non-zero ideal sheaf, and let $c \in \mathbb{R}_{\ge 0}$. Setting:
+$$
+V_m := H^0\big(X, \mathcal{O}_X(mD) \otimes_{\mathcal{O}_X} \mathfrak{b}^{\lceil m c \rceil}\big),
+$$
+the collection $V_\bullet = \{V_m\}_{m \ge 0}$ forms a graded linear series because $\lceil k c \rceil + \lceil \ell c \rceil \ge \lceil (k+\ell)c \rceil$, which guarantees that $\mathfrak{b}^{\lceil k c \rceil} \cdot \mathfrak{b}^{\lceil \ell c \rceil} \subseteq \mathfrak{b}^{\lceil (k+\ell)c \rceil}$. This series is denoted by:
+$$
+V_\bullet = \Gamma\big(X, \mathcal{O}_X(D) \otimes \mathfrak{b}^c\big).
+$$
+:::
+
+::: {#def-restricted-linear-series}
+## Linear Series Restricted to a Subvariety
+Let $X \subseteq Y$ be an irreducible subvariety and $D' \in \operatorname{Div}(Y)$ a Cartier divisor on $Y$ such that $D = D'|_X$ is well-defined. The **trace linear series** on $X$ is defined by:
+$$
+V_m := \operatorname{Im}\big(H^0(Y, \mathcal{O}_Y(mD')) \longrightarrow H^0(X, \mathcal{O}_X(mD))\big),
+$$
+and is denoted by $V_\bullet = \operatorname{Tr}_X(D')$.
+:::
+
+::: {#def-operations-gls}
+## Operations on Graded Linear Series
+1. **Product:** If $V_\bullet$ and $W_\bullet$ are graded linear series associated with $D$ and $E$ respectively, their product $(V \cdot W)_\bullet$ is defined by:
+   $$
+   (V \cdot W)_m := \operatorname{Im}\big(V_m \otimes W_m \longrightarrow H^0(X, \mathcal{O}_X(m(D+E)))\big).
+   $$
+2. **Intersection and Span:** If $V_\bullet, W_\bullet$ are both associated with $D$, we define:
+   $$
+   (V \cap W)_m := V_m \cap W_m, \qquad \operatorname{Span}(V_\bullet, W_\bullet)_m := \sum_{k+\ell=m} V_k \cdot W_\ell.
+   $$
+3. **Veronese Subseries:** For an integer $p \ge 1$, the $p$-th Veronese subseries is:
+   $$
+   (V^{(p)})_m := V_{m p},
+   $$
+   which is associated with $p D$.
+:::
+
+::: {#lem-veronese-fg}
+## Finite Generation of Graded Algebras
+Let $R = \bigoplus_{i=0}^\infty R_i$ be a graded algebra over a Noetherian domain $R_0$.
+
+1. $R$ is a finitely generated $R_0$-algebra if and only if the Veronese subring $R^{(m)} = \bigoplus_{k=0}^\infty R_{k m}$ is a finitely generated $R_0$-algebra for any $m \ge 1$.
+2. If $R$ is a finitely generated $R_0$-algebra, then there exists an integer $p \ge 1$ such that $R^{(p)}$ is generated in degree 1 by $R_p$.
+:::
+
+::: {#thm-operations-preserves-fg}
+## Preservation of Finite Generation
+Let $X$ be an irreducible projective variety.
+
+1. If $V_\bullet$ and $W_\bullet$ are finitely generated, then $(V \cdot W)_\bullet$ is finitely generated.
+2. If $V_\bullet$ and $W_\bullet$ are finitely generated, then $\operatorname{Span}(V_\bullet, W_\bullet)$ is finitely generated.
+3. $V_\bullet$ is finitely generated if and only if $V^{(p)}$ is finitely generated for any $p \ge 1$.
+:::
+
+::: {.proof}
+Statements (2) and (3) follow directly from standard commutative algebra and @lem-veronese-fg. 
+
+For (1), by @lem-veronese-fg, it suffices to show that the Veronese subseries $((V \cdot W)^{(p)})_\bullet$ is finitely generated for some $p \ge 1$. Choose $m \gg 0$ such that both $R(V_\bullet)^{(m)}$ and $R(W_\bullet)^{(m)}$ are generated in degree 1. Suppose $V_m$ is spanned by $f_1, \dots, f_a$ and $W_m$ is spanned by $g_1, \dots, g_b$. Then the degree-$k$ piece $(V \cdot W)_{k m}$ is spanned by elements of the form:
+$$
+\left(\prod_{i=1}^a f_i^{\alpha_i}\right) \cdot \left(\prod_{j=1}^b g_j^{\beta_j}\right), \quad \sum_{i=1}^a \alpha_i = k, \; \sum_{j=1}^b \beta_j = k.
+$$
+Every such monomial can be regrouped into a product of $k$ terms of the form $f_i g_j \in V_m \cdot W_m$. Hence $R((V \cdot W)_\bullet)^{(m)}$ is generated in degree 1 by $V_m \cdot W_m$. Therefore, $(V \cdot W)_\bullet$ is finitely generated.
+:::
+
+::: {#def-invariants-gls}
+## Semigroups, Iitaka Dimension, and Stable Base Locus
+Let $V_\bullet$ be a graded linear series on $X$.
+
+1. The **semigroup of non-zero multiples** is $N(V_\bullet) := \{ m \ge 0 \mid V_m \neq 0 \}$ with exponent $e(V_\bullet) = e(N(V_\bullet))$. The **semigroup of free multiples** is $M(V_\bullet) := \{ m \ge 0 \mid |V_m| \text{ is base-point-free} \}$ with exponent $f(V_\bullet) = e(M(V_\bullet))$.
+2. The **Iitaka dimension** of $V_\bullet$ is defined by:
+   $$
+   \kappa(V_\bullet) := \begin{cases} \max_{m \in N(V_\bullet)} \big\{ \dim \overline{\phi_m(X)} \big\}, & N(V_\bullet) \neq \{0\}, \\ -\infty, & V_m = 0 \text{ for all } m > 0, \end{cases}
+   $$
+   where $\phi_m: X \dashrightarrow \mathbb{P} V_m$ is the rational map given by $|V_m|$.
+3. The **stable base locus** of $V_\bullet$ is the algebraic subset:
+   $$
+   \mathbf{B}(V_\bullet) := \bigcap_{m \ge 0} \operatorname{Bs}(|V_m|).
+   $$
+4. The **volume** of $V_\bullet$ is defined by:
+   $$
+   \operatorname{vol}(V_\bullet) := \limsup_{m \in N(V_\bullet), \, m \to \infty} \frac{\dim_{\mathbb{C}} V_m}{m^n / n!}, \quad \text{where } n = \dim X.
+   $$
+:::
+
+::: {#exm-irrational-volume-gls}
+## Graded Linear Series with Irrational Volume
+Let $x = [1:0:\dots:0] \in \mathbb{P}^n$, and let $\mathfrak{m} = \mathcal{I}_{x/\mathbb{P}^n}$ be its maximal ideal sheaf. For a fixed real number $0 < c < 1$, consider the graded linear series:
+$$
+V_\bullet = \Gamma\big(\mathbb{P}^n, \mathcal{O}_{\mathbb{P}^n}(1) \otimes \mathfrak{m}^c\big), \quad V_p = H^0\big(\mathbb{P}^n, \mathcal{O}(p) \otimes \mathfrak{m}^{\lceil p c \rceil}\big).
+$$
+In homogeneous coordinates, $V_p$ consists of homogeneous polynomials $\sum a_\alpha x^\alpha$ of degree $p$ satisfying $\alpha_1 + \dots + \alpha_n \ge \lceil p c \rceil$, which is equivalent to $\alpha_0 \le p - \lceil p c \rceil$. Thus:
+$$
+\dim_{\mathbb{C}} V_p = \binom{n+p}{n} - \binom{n + \lceil p c \rceil - 1}{n} = \frac{1}{n!} (p^n - c^n p^n) + O(p^{n-1}).
+$$
+Hence the volume is given by:
+$$
+\operatorname{vol}(V_\bullet) = 1 - c^n.
+$$
+Taking $n = 3$ and $c = 1/\sqrt{2}$, we obtain $\operatorname{vol}(V_\bullet) = 1 - \frac{1}{2\sqrt{2}} \notin \mathbb{Q}$, yielding an irrational volume.
+:::
+
+---
+
+::: {#def-graded-ideal-sheaves}
+## Graded Families of Ideals
+1. A **graded family of ideals** on an irreducible variety $X$ is a sequence $\mathfrak{a}_\bullet = \{\mathfrak{a}_m\}_{m \ge 0}$ of ideal sheaves $\mathfrak{a}_m \subseteq \mathcal{O}_X$ such that $\mathfrak{a}_0 = \mathcal{O}_X$ and:
+   $$
+   \mathfrak{a}_k \cdot \mathfrak{a}_\ell \subseteq \mathfrak{a}_{k+\ell} \quad \text{for all } k, \ell \ge 0.
+   $$
+2. The **Rees algebra** of $\mathfrak{a}_\bullet$ is the graded $\mathcal{O}_X$-algebra $\operatorname{Rees}(\mathfrak{a}_\bullet) := \bigoplus_{m \ge 0} \mathfrak{a}_m$. The family $\mathfrak{a}_\bullet$ is **finitely generated** if $\operatorname{Rees}(\mathfrak{a}_\bullet)$ is a finitely generated $\mathcal{O}_X$-algebra.
+3. For an ideal $\mathfrak{b} \subseteq \mathcal{O}_X$, the trivial family $\mathfrak{a}_m = \mathfrak{b}^m$ is denoted by $\operatorname{Pow}_\bullet(\mathfrak{b})$.
+4. For any graded linear series $V_\bullet$, the base ideals $\mathfrak{b}_m := \mathfrak{b}(|V_m|)$ form a graded family of ideals, denoted $\mathfrak{b}(V_\bullet)$.
+:::
+
+::: {#def-operations-graded-ideals}
+## Operations and Semigroups for Graded Ideals
+For graded families of ideals $\mathfrak{a}_\bullet$ and $\mathfrak{b}_\bullet$:
+$$
+(\mathfrak{a} \cap \mathfrak{b})_m := \mathfrak{a}_m \cap \mathfrak{b}_m, \qquad (\mathfrak{a} \cdot \mathfrak{b})_m := \mathfrak{a}_m \cdot \mathfrak{b}_m, \qquad (\mathfrak{a} + \mathfrak{b})_m := \sum_{k+\ell=m} \mathfrak{a}_k \cdot \mathfrak{b}_\ell, \qquad (\mathfrak{a}^{(p)})_m := \mathfrak{a}_{m p}.
+$$
+The non-zero semigroup is $N(\mathfrak{a}_\bullet) := \{ m \ge 0 \mid \mathfrak{a}_m \neq (0) \}$ with exponent $e(\mathfrak{a}_\bullet) = e(N(\mathfrak{a}_\bullet))$.
+:::
+
+::: {#prp-fg-graded-ideals-powers}
+## Powers of Finitely Generated Graded Ideals
+If $\mathfrak{a}_\bullet = \{\mathfrak{a}_m\}_{m \ge 0}$ is a finitely generated graded family of ideals, then there exists an integer $p \ge 1$ such that:
+$$
+\mathfrak{a}_\bullet^{(p)} = \operatorname{Pow}_\bullet(\mathfrak{a}_p), \quad \text{that is}, \quad \mathfrak{a}_{m p} = (\mathfrak{a}_p)^m \quad \text{for all } m \ge 1.
+$$
+:::
+
+::: {.proof}
+By @lem-veronese-fg, the Rees algebra $\operatorname{Rees}(\mathfrak{a}_\bullet)^{(p)}$ is generated in degree 1 for some $p \ge 1$. Hence its degree-$m$ piece is given by the $m$-th power of its degree-1 piece: $\mathfrak{a}_{m p} = (\mathfrak{a}_p)^m$.
+:::
+
+::: {#lem-mumford-regularity}
+## Castelnuovo-Mumford Regularity
+Let $X$ be a projective scheme and $B$ an ample line bundle on $X$. A coherent sheaf $\mathcal{F}$ is said to be **$m$-regular** with respect to $B$ if $H^i(X, \mathcal{F} \otimes B^{\otimes(m-i)}) = 0$ for all $i \ge 1$. If $\mathcal{F}$ is $m$-regular, then for every $k \ge 0$:
+
+1. $\mathcal{F} \otimes B^{\otimes(m+k)}$ is generated by its global sections;
+2. The multiplication map on global sections is surjective:
+   $$
+   H^0(X, \mathcal{F} \otimes B^{\otimes m}) \otimes H^0(X, B^{\otimes k}) \twoheadrightarrow H^0(X, \mathcal{F} \otimes B^{\otimes(m+k)});
+   $$
+3. $\mathcal{F}$ is $(m+k)$-regular with respect to $B$.
+:::
+
+::: {#prp-fg-semiample-bundles}
+## Finite Generation for Semiample Bundles and Base Ideals
+Let $X$ be a normal projective variety.
+
+1. If $L$ is a base-point-free line bundle on $X$, then there exists an integer $m_0 \ge 1$ such that for all $a, b \ge m_0$, the multiplication map:
+   $$
+   H^0(X, L^{\otimes a}) \otimes H^0(X, L^{\otimes b}) \longrightarrow H^0(X, L^{\otimes(a+b)})
+   $$
+   is surjective.
+2. If $L$ is semiample, then $R(X, L)$ is a finitely generated $\mathbb{C}$-algebra.
+3. Let $D \in \operatorname{Div}(X)$. If the graded family of base ideals $\mathfrak{b}_\bullet = \{\mathfrak{b}(|mD|)\}_{m \ge 0}$ is finitely generated, then the section ring $R(X, D)$ is finitely generated.
+:::
+
+::: {.proof}
+*Proof of (1):* Let $\phi: X \to Y$ be the semiample fibration associated with $L$ (@thm-semiample-fibration), so that $\phi_* \mathcal{O}_X = \mathcal{O}_Y$ and $L \cong \phi^* A$ for an ample line bundle $A$ on $Y$ (assuming $f(L) = 1$). By the projection formula, $H^0(X, L^{\otimes m}) \cong H^0(Y, A^{\otimes m})$. Since $A$ is ample, it is $m_0$-regular for some $m_0 \gg 0$. By Castelnuovo-Mumford regularity (@lem-mumford-regularity), multiplication of sections is surjective on $Y$, hence on $X$.
+
+*Proof of (2):* Choose $n \ge 1$ such that $L^{\otimes n}$ is base-point-free. By (1), the Veronese subring $R(X, L^{\otimes n})^{(m_0)} = R(X, L^{\otimes n m_0})$ is generated in degree 1. Hence $R(X, L^{\otimes n m_0})$ is finitely generated, and by @lem-veronese-fg, $R(X, L)$ is finitely generated.
+
+*Proof of (3):* By @prp-fg-graded-ideals-powers, replacing $D$ by a multiple $p D$, we may assume $\mathfrak{b}(|mD|) = \mathfrak{b}_1^m$ for all $m \ge 1$. Let $\nu: X^+ \to X$ be the normalization of the blow-up $\operatorname{Bl}_{\mathfrak{b}_1}(X)$, let $N^+$ be the exceptional divisor on $X^+$, and set $D^+ := \nu^* D - N^+$. As in the proof of @thm-iitaka-fibration, $D^+$ is base-point-free, so $R(X^+, D^+)$ is finitely generated by (2). Furthermore, because $\mathfrak{b}(|mD|) = \mathfrak{b}_1^m$, the pullback of the base locus is precisely $m N^+$, which implies that all global sections of $\nu^* (mD)$ vanish along $m N^+$. Thus:
+$$
+H^0(X^+, \mathcal{O}_{X^+}(m D^+)) \cong H^0(X^+, \mathcal{O}_{X^+}(m \nu^* D)) \cong H^0(X, \mathcal{O}_X(mD)).
+$$
+Consequently, $R(X^+, D^+) \cong R(X, D)$, proving that $R(X, D)$ is finitely generated.
+:::
+
+::: {#def-multiplicity-graded-system}
+## Multiplicity of a Graded System of Ideals
+Let $\mathfrak{a}_\bullet = \{\mathfrak{a}_m\}_{m \ge 0}$ be a graded system of $\mathfrak{m}_x$-primary ideals at a closed point $x \in X$. The **multiplicity** of $\mathfrak{a}_\bullet$ is defined by:
+$$
+\operatorname{mult}(\mathfrak{a}_\bullet) := \lim_{m \to \infty} \frac{\operatorname{length}_{\mathcal{O}_{X, x}}(\mathcal{O}_{X, x} / \mathfrak{a}_m)}{m^n / n!}.
+$$
+:::
+
+::: {#thm-wilsons-theorem}
+## Wilson's Theorem
+Let $X$ be an irreducible projective variety of dimension $n$, and let $D$ be a nef and big Cartier divisor on $X$. Then there exists an integer $m_0 \ge 1$ and an effective Cartier divisor $N$ such that the linear system:
+$$
+|m D - N|
+$$
+is base-point-free for all $m \ge m_0$.
+:::
+
+::: {.proof}
+By Fujita's Vanishing Theorem (@thm-fujita-vanishing), there exists a very ample divisor $B$ such that for all $i > 0$ and any nef divisor $P$, $H^i(X, \mathcal{O}_X(B + P)) = 0$. Since $D$ is big, @cor-characterization-bigness implies that there exists an integer $m_0 > 0$ and an effective divisor $N$ such that:
+$$
+N \sim m_0 D - (n+1)B.
+$$
+For any $m \ge m_0$, we rewrite:
+$$
+m D - N \sim (m - m_0)D + (n+1)B = B + n B + (m - m_0)D.
+$$
+For each $1 \le i \le n$, the divisor $(m D - N) - i B \sim B + (n-i)B + (m-m_0)D$ has the form $B + P$ with $P = (n-i)B + (m-m_0)D$ nef. Thus:
+$$
+H^i\big(X, \mathcal{O}_X(mD - N - i B)\big) = 0 \quad \text{for all } 1 \le i \le n.
+$$
+Therefore, $\mathcal{O}_X(m D - N)$ is 0-regular with respect to $B$. By Castelnuovo-Mumford regularity (@lem-mumford-regularity), $|m D - N|$ is base-point-free.
+:::
+
+::: {#def-multiplicity-linear-system}
+## Multiplicity of a Linear System at a Point
+Let $X$ be a projective variety and $x \in X$ a fixed point. For any linear system $|V| \subseteq |D|$, the **multiplicity** of $|V|$ at $x$ is:
+$$
+\operatorname{mult}_x |V| := \min_{D' \in |V|} \big\{ \operatorname{mult}_x(D') \big\}.
+$$
+:::
+
+::: {#prp-boundedness-mult}
+## Uniform Boundedness of Multiplicities
+Let $X$ be an irreducible projective variety of dimension $n$, and let $D$ be a nef and big Cartier divisor. Then for any point $x \in X$, there exists a constant $C > 0$ and an integer $m_0$ such that:
+$$
+\operatorname{mult}_x |m D| \le C \quad \text{for all } m \ge m_0.
+$$
+:::
+
+::: {.proof}
+By Wilson's Theorem (@thm-wilsons-theorem), there exist $m_0$ and an effective divisor $N$ such that $|m D - N|$ is free for all $m \ge m_0$. Choose an element $E \in |m D - N|$ not passing through $x$, so that $\operatorname{mult}_x(E) = 0$. Then $E + N \in |m D|$, which yields:
+$$
+\operatorname{mult}_x |m D| \le \operatorname{mult}_x(E + N) = \operatorname{mult}_x(N) =: C.
+$$
+:::
+
+::: {#thm-criterion-fg-nef-big}
+## Criterion for Finite Generation of Section Rings
+Let $X$ be a normal projective variety, and let $D$ be a nef and big Cartier divisor on $X$. Then:
+$$
+R(X, D) \text{ is finitely generated} \iff D \text{ is semiample}.
+$$
+:::
+
+::: {.proof}
+**$(\impliedby)$:** This is @prp-fg-semiample-bundles(2).
+
+**$(\implies)$:** Assume $R(X, D)$ is finitely generated. By @lem-veronese-fg, there exists an integer $\ell \ge 1$ such that $R(X, D)^{(\ell)}$ is generated in degree 1 by $H^0(X, \mathcal{O}_X(\ell D))$. Consequently, the natural symmetric algebra evaluation:
+$$
+\operatorname{Sym}^k H^0(X, \mathcal{O}_X(\ell D)) \twoheadrightarrow H^0(X, \mathcal{O}_X(k \ell D))
+$$
+is surjective for all $k \ge 1$. This implies that every element in $|k \ell D|$ is a sum of $k$ elements from $|\ell D|$, whence:
+$$
+\operatorname{mult}_x |k \ell D| \ge k \cdot \operatorname{mult}_x |\ell D|.
+$$
+However, by @prp-boundedness-mult, the left-hand side is bounded by a constant $C$ independent of $k$. Letting $k \to \infty$ forces:
+$$
+\operatorname{mult}_x |\ell D| = 0.
+$$
+Since this holds for every closed point $x \in X$, the linear system $|\ell D|$ has no base points. Hence $D$ is semiample.
+:::

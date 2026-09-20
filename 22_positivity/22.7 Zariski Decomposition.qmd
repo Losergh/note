@@ -1,0 +1,243 @@
+---
+title: "22.7 Zariski Decomposition"
+subtitle: "Zariski Decomposition on Surfaces, Extremal Rays, and Mori's Cone Theorem"
+date: last-modified
+number-sections: true
+sec: "22.7." 
+---
+
+::: {#thm-zariski-decomposition}
+## Zariski Decomposition on Surfaces
+Let $X$ be a smooth projective surface and let $D$ be a pseudoeffective integral Cartier divisor on $X$. Then there exists a unique decomposition into $\mathbb{Q}$-divisors:
+$$
+D = P + N
+$$
+satisfying the following properties:
+
+1. $P$ is nef;
+2. $N = \sum_{i=1}^r a_i E_i$ is effective ($a_i > 0$), and if $N \neq 0$, the intersection matrix $(E_i \cdot E_j)_{1 \le i, j \le r}$ is negative definite;
+3. $P \cdot E_i = 0$ for every irreducible component $E_i$ of $N$. (In particular, if $N \neq 0$, $P \in \partial \operatorname{Nef}(X)$).
+
+Moreover, the natural inclusion induces an isomorphism on global sections:
+$$
+H^0\big(X, \mathcal{O}_X(mD - \lceil m N \rceil)\big) \xrightarrow{\;\sim\;} H^0\big(X, \mathcal{O}_X(mD)\big) \quad \text{for all } m \ge 1.
+$$
+In particular, $\operatorname{vol}(D) = \operatorname{vol}(P) = (P^2)$.
+:::
+
+::: {.proof}
+We prove the isomorphism on global sections. It suffices to show that for every effective divisor $D' \sim m D$, we have $D' \ge m N$. Clearing denominators, we may assume $m = 1$ and $P, N$ are integral.
+
+Let $D' \sim D$ be an effective divisor. Write $D' = N_1 + M_1$, where $N_1 = \sum c_i E_i \in \bigoplus \mathbb{Z} E_i$ and $M_1$ shares no components with $N$. Because $P \cdot E_i = 0$, we have:
+$$
+(D' - N) \cdot E_i = (D' - D) \cdot E_i + (D - N) \cdot E_i = 0 + P \cdot E_i = 0.
+$$
+Since $D' = N_1 + M_1$ and $M_1 \cdot E_i \ge 0$, this implies:
+$$
+(N_1 - N) \cdot E_i = (D' - N) \cdot E_i - M_1 \cdot E_i \le 0 \quad \text{for all } i.
+$$
+Write $N_1 - N = N' - N''$, where $N', N'' \in \bigoplus \mathbb{Z}_{\ge 0} E_i$ have no common components. We must show $N'' = 0$. If $N'' \neq 0$, then $(N''^2) < 0$ by the negative definiteness of $(E_i \cdot E_j)$. Hence:
+$$
+(N_1 - N) \cdot N'' = N' \cdot N'' - (N''^2) > 0,
+$$
+since $N' \cdot N'' \ge 0$. On the other hand, $(N_1 - N) \cdot E_i \le 0$ for all $i$ implies that $(N_1 - N) \cdot N'' \le 0$, a contradiction. Thus $N'' = 0$, which proves $N_1 \ge N$.
+:::
+
+::: {#cor-fg-zariski-decomposition}
+## Finite Generation via the Positive Part
+Let $D$ be a big divisor on a smooth projective surface $X$, with Zariski decomposition $D = P + N$. Then the section ring $R(X, D)$ is finitely generated if and only if $P$ is semiample.
+:::
+
+::: {.proof}
+By @thm-zariski-decomposition, $R(X, D) \cong R(X, P)$. Since $\operatorname{vol}(P) = \operatorname{vol}(D) > 0$ and $P$ is nef, $P$ is big and nef. The result follows immediately from @thm-criterion-fg-nef-big.
+:::
+
+---
+
+::: {#def-extremal-ray}
+## Extremal Ray
+Let $V$ be a finite-dimensional real vector space and $K \subseteq V$ a closed convex cone. A 1-dimensional subcone $R = \mathbb{R}_{\ge 0} \cdot v \subseteq K$ is called an **extremal ray** of $K$ if whenever $x, y \in K$ satisfy:
+$$
+x + y \in R,
+$$
+then both $x, y \in R$.
+:::
+
+::: {#exm-curves-on-surface}
+## Curves on a Surface and Extremal Rays
+Let $X$ be a smooth projective surface. Poincaré duality identifies 1-cycles with divisors, so $N^1(X)_{\mathbb{R}} \cong N_1(X)_{\mathbb{R}}$.
+
+1. $\operatorname{Nef}(X) \subseteq \overline{\operatorname{NE}}(X)$. If $(C^2) \ge 0$ for every irreducible curve $C \subseteq X$, then $\operatorname{Nef}(X) = \overline{\operatorname{NE}}(X)$.
+2. If $C \subseteq X$ is an irreducible curve with $(C^2) < 0$, then:
+   $$
+   \overline{\operatorname{NE}}(X) = \mathbb{R}_{\ge 0} [C] + \overline{\operatorname{NE}}(X)_{C_{\ge 0}}, \quad \text{where } \overline{\operatorname{NE}}(X)_{C_{\ge 0}} := \{ \gamma \in \overline{\operatorname{NE}}(X) \mid \gamma \cdot C \ge 0 \}.
+   $$
+3. If $C$ is an irreducible curve with $(C^2) < 0$, then $[C]$ spans an extremal ray in $\overline{\operatorname{NE}}(X)$.
+:::
+
+::: {.proof}
+*Proof of (2) and (3):* For any irreducible curve $C' \neq C$, $(C' \cdot C) \ge 0$, so $[C'] \in \overline{\operatorname{NE}}(X)_{C_{\ge 0}}$. Any effective 1-cycle decomposes as $E = a C + E'$ where $C \not\subseteq \operatorname{Supp}(E')$, proving the sum formula.
+
+Since $(C^2) < 0$, $[C] \notin \overline{\operatorname{NE}}(X)_{C_{\ge 0}}$. Suppose $v, w \in \overline{\operatorname{NE}}(X)$ satisfy $v + w = \lambda [C] \in \mathbb{R}_{\ge 0} [C]$. Decomposing $v = v_1 + v_2$ and $w = w_1 + w_2$ with $v_1, w_1 \in \mathbb{R}_{\ge 0} [C]$ and $v_2, w_2 \in \overline{\operatorname{NE}}(X)_{C_{\ge 0}}$, we obtain $v_2 + w_2 = 0$. Because $\overline{\operatorname{NE}}(X)$ contains no straight lines (as $(H \cdot \gamma) > 0$ for ample $H$), this forces $v_2 = w_2 = 0$, so $v, w \in \mathbb{R}_{\ge 0} [C]$.
+:::
+
+::: {#exm-kollar-non-bounded-very-ample}
+## Kollár's Example: Unboundedness of Very Ample Multiples
+On a curve $Y$ of genus $g$, every ample line bundle $D$ satisfies that $m D$ is very ample for $m \ge 2g + 1$. Kollár showed that in dimension $\ge 2$, **there is no uniform bound** $m(Y)$ such that $m D$ is very ample for all ample divisors $D$.
+
+*Construction:* Let $X = E \times E$ for an elliptic curve $E$. For $n \ge 2$, define the divisor:
+$$
+A_n := n F_1 + (n^2 - n + 1) F_2 - (n-1)\Delta.
+$$
+Computing intersection numbers yields $(A_n^2) = 2$ and $A_n \cdot (F_1 + F_2) = n^2 - 2n + 3 > 0$, so $A_n$ is ample. Set $R = F_1 + F_2$. Choose a smooth curve $B \in |2 R|$ and let $\pi: Y \to X$ be the double cover branched along $B$. 
+
+Pulling back gives an ample divisor $D_n := \pi^* A_n$ on $Y$. We compute:
+$$
+\pi_* \mathcal{O}_Y(n D_n) = \mathcal{O}_X(n A_n) \oplus \mathcal{O}_X(n A_n - R).
+$$
+The self-intersection of $n A_n - R$ is:
+$$
+(n A_n - R)^2 = 2n^2 - 2n(n^2 - 2n + 3) + 2 = -2(n-1)^3 < 0.
+$$
+If $H^0(X, \mathcal{O}_X(n A_n - R)) \neq 0$, the effective divisor would lie in $\overline{\operatorname{NE}}(X) = \operatorname{Nef}(X)$, forcing its self-intersection to be non-negative, a contradiction. Thus:
+$$
+H^0(X, \mathcal{O}_X(n A_n)) \xrightarrow{\;\sim\;} H^0(Y, \mathcal{O}_Y(n D_n)).
+$$
+Because the global sections of $n D_n$ all factor through $X$, they cannot separate the two sheets of the double cover $\pi: Y \to X$. Hence $n D_n$ is not very ample, which forces the very ample threshold $m(D_n) > n$ to grow arbitrarily large.
+:::
+
+---
+
+::: {#def-null-cone}
+## The Null Cone
+Let $X$ be an irreducible projective variety of dimension $n$, and let $V \subseteq X$ be a subvariety of dimension $d$.
+
+1. The polynomial map associated with $V$ is:
+   $$
+   q_V: N^1(X)_{\mathbb{R}} \longrightarrow \mathbb{R}, \quad q_V(\xi) := (\xi^d \cdot V).
+   $$
+2. The **null cone** of $V$ is the algebraic variety:
+   $$
+   \mathcal{N}_V := \big\{ \xi \in N^1(X)_{\mathbb{R}} \;\big|\; q_V(\xi) = 0 \big\}.
+   $$
+:::
+
+::: {#def-nef-boundary}
+## The Nef Boundary
+The **nef boundary** of $X$ is the boundary of the nef cone:
+$$
+\mathcal{B}_X := \partial \operatorname{Nef}(X) \subseteq N^1(X)_{\mathbb{R}}.
+$$
+:::
+
+::: {#prp-boundary-in-null-cones}
+## Boundary Covered by Null Cones
+For every $\xi \in \mathcal{B}_X$, there exists an irreducible subvariety $V \subseteq X$ such that $q_V(\xi) = 0$. That is:
+$$
+\mathcal{B}_X \subseteq \bigcup_{V \subseteq X} \mathcal{N}_V.
+$$
+:::
+
+::: {.proof}
+By definition of the nef cone, $q_V(\xi) \ge 0$ for all subvarieties $V \subseteq X$. If $q_V(\xi) > 0$ for all $V$, the Nakai-Moishezon criterion (@thm-nakai-r-divisors) implies that $\xi$ is ample, which means $\xi \in \operatorname{int}(\operatorname{Nef}(X))$, contradicting $\xi \in \mathcal{B}_X$.
+:::
+
+::: {#thm-campana-peternell}
+## Campana-Peternell Theorem
+Let $X$ be an irreducible projective variety. There exists an open dense subset $\mathcal{CP}(X) \subseteq \mathcal{B}_X$ such that for every $\xi \in \mathcal{CP}(X)$, there exists an open neighborhood $U = U(\xi) \subseteq N^1(X)_{\mathbb{R}}$ and an irreducible subvariety $V \subseteq X$ such that:
+$$
+\mathcal{B}_X \cap U = \mathcal{N}_V \cap U.
+$$
+In other words, the nef boundary is generically real-analytic, cut out locally by the polynomials $q_V$.
+:::
+
+::: {.proof}
+For each subvariety $V \subseteq X$, define the open subset of the boundary:
+$$
+\mathcal{O}_V := \big\{ \xi \in \mathcal{B}_X \;\big|\; \exists U(\xi) \text{ s.t. } U(\xi) \cap \mathcal{B}_X \subseteq \mathcal{N}_V \big\}, \qquad \mathcal{O} := \bigcup_{V \subseteq X} \mathcal{O}_V.
+$$
+
+*Claim:* $\mathcal{O}$ is dense in $\mathcal{B}_X$.
+Suppose it is not. Then there exists an open set $U \subseteq N^1(X)_{\mathbb{R}}$ intersecting $\mathcal{B}_X$ such that $U \cap \mathcal{O} = \emptyset$, so $U \cap \mathcal{O}_V = \emptyset$ for all $V$. Thus $\overline{U} \setminus \mathcal{N}_V$ is dense in $\overline{U}$ for each $V$. Since the topological cycle class $[V] \in H_{2d}(X, \mathbb{Z})$ belongs to a finitely generated abelian group, there are at most countably many distinct null cones $\mathcal{N}_V$. By the Baire Category Theorem, the countable intersection:
+$$
+\bigcap_V (\overline{U} \setminus \mathcal{N}_V) = \overline{U} \setminus \bigcup_V \mathcal{N}_V
+$$
+is dense in $\overline{U}$. But this contradicts @prp-boundary-in-null-cones, which states that $\mathcal{B}_X \subseteq \bigcup_V \mathcal{N}_V$.
+
+Now, let $\mathcal{P} \subseteq \mathcal{B}_X$ be the set of points satisfying the local equality of the theorem. Fix $\xi_1 \in \mathcal{O}_V$ with $\dim V$ minimal. Choose a general very ample divisor $H$ such that $H \cap V$ is proper. By the minimality of $\dim V$, $\xi_1 \notin \mathcal{O}_{H \cap V}$. Hence there exists a sequence $\eta_n \to \xi_1$ with $q_{H \cap V}(\eta_n) > 0$. The directional derivative satisfies:
+$$
+\lim_{t \to 0} \frac{q_V(\eta_n + t [H]) - q_V(\eta_n)}{t} = \dim V \cdot (\eta_n^{\dim V - 1} \cdot H \cdot V) = \dim V \cdot q_{H \cap V}(\eta_n) > 0.
+$$
+Thus the differential $D q_V(\eta_n) \neq 0$, so $\mathcal{N}_V$ is a smooth manifold near $\eta_n$. Projecting locally onto the tangent space $T_{\eta_n} \mathcal{N}_V$, topological invariance of domain implies that $\mathcal{B}_X$ and $\mathcal{N}_V$ must coincide in a small neighborhood of $\eta_n$.
+:::
+
+::: {#cor-cp-dual}
+## Dual Campana-Peternell Theorem
+By cone duality between $N^1(X)_{\mathbb{R}}$ and $N_1(X)_{\mathbb{R}}$, there exists an open dense subset $\mathcal{CP}(X)^* \subseteq \partial \overline{\operatorname{NE}}(X)$ that is locally cut out by linear hyperplanes associated with subvarieties of $X$.
+:::
+
+---
+
+::: {#thm-cone-theorem}
+## Mori's Cone Theorem
+Let $X$ be a smooth projective variety of dimension $n$.
+
+1. There exists a countable family of rational curves $\{C_i\}_{i \in I}$ on $X$ satisfying $0 < -(K_X \cdot C_i) \le n + 1$ such that:
+   $$
+   \overline{\operatorname{NE}}(X) = \overline{\operatorname{NE}}(X)_{K_X \ge 0} + \sum_{i \in I} \mathbb{R}_{\ge 0} [C_i].
+   $$
+2. For any ample divisor $H$ and any $\varepsilon > 0$, there are only finitely many curves $C_1, \dots, C_t$ spanning extremal rays in the half-space $(K_X + \varepsilon H)_{\le 0}$, so that:
+   $$
+   \overline{\operatorname{NE}}(X) = \overline{\operatorname{NE}}(X)_{K_X + \varepsilon H \ge 0} + \sum_{i=1}^t \mathbb{R}_{\ge 0} [C_i].
+   $$
+:::
+
+::: {#cor-fano-polyhedral}
+## Cone of Fano Varieties
+If $X$ is a Fano variety (that is, $-K_X$ is ample), then the cone of curves $\overline{\operatorname{NE}}(X) = \operatorname{NE}(X)$ is a rational polyhedral cone generated by finitely many classes of rational curves.
+:::
+
+::: {#cor-effective-ampleness-threshold}
+## Numerical Ampleness Bounds
+Let $X$ be a smooth projective variety of dimension $n$.
+
+1. If $D$ is an ample divisor such that $(D \cdot C) \ge n + 2$ for all rational curves $C \subseteq X$, then $K_X + D$ is ample.
+2. If $D$ is a nef divisor such that $(D \cdot C) \ge n + 1$ for all rational curves $C \subseteq X$, then $K_X + D$ is nef.
+:::
+
+::: {.proof}
+By the Cone Theorem (@thm-cone-theorem), any class $\gamma \in \overline{\operatorname{NE}}(X)$ decomposes as $\gamma = \gamma_0 + \sum a_i [C_i]$ with $K_X \cdot \gamma_0 \ge 0$ and $-(K_X \cdot C_i) \le n+1$. For (1):
+$$
+(K_X + D) \cdot C_i = (K_X \cdot C_i) + (D \cdot C_i) \ge -(n+1) + (n+2) = 1 > 0,
+$$
+and $(K_X + D) \cdot \gamma_0 \ge D \cdot \gamma_0 > 0$. By Kleiman's criterion (@thm-kleiman-cone-criterion), $K_X + D$ is ample. Statement (2) follows similarly.
+:::
+
+::: {#exm-blowups-p2}
+## Extremal Rays on Blowups of $\mathbb{P}^2$
+Let $X = \operatorname{Bl}_{P_1, \dots, P_n}(\mathbb{P}^2)$ be the blow-up of $\mathbb{P}^2$ at $n$ points in general position. Let $\ell$ be the pullback of the line class and $e_1, \dots, e_n$ the exceptional divisors, so $-K_X = 3\ell - \sum_{i=1}^n e_i$.
+
+- For $1 \le n \le 8$, $-K_X$ is ample (so $X$ is a del Pezzo surface). By the adjunction formula:
+  $$
+  (C^2) + (C \cdot K_X) = 2 g - 2.
+  $$
+  Every $K_X$-negative extremal ray must have $g = 0$ and $(C^2) = -1$, meaning it is spanned by a $(-1)$-curve. Writing $C = d \ell - \sum m_i e_i$, the conditions $d^2 = \sum m_i^2 - 1$ and $3d - 1 = \sum m_i$ combined with Cauchy-Schwarz give:
+  $$
+  (9 - n) d^2 - 6d + (1 - n) \le 0.
+  $$
+  Since $9 - n > 0$, this inequality yields only finitely many integer solutions for $d$, reflecting the finiteness of the cone.
+- For $n \ge 10$, $-K_X$ is no longer nef. There exist infinitely many $(-1)$-curves with degrees $d \to \infty$. Their normalized classes in the affine slice accumulate on the boundary of the cone of curves.
+:::
+
+::: {#exm-variational-pathologies}
+## Variational Pathologies of the Iitaka Dimension
+Let $T$ be a smooth curve. There exists a family of smooth projective surfaces $X \to T$ and a line bundle $L$ on $X$ such that:
+$$
+\kappa(X_t, L_t) = -\infty \quad \text{for general } t \in T, \qquad \text{while} \qquad \kappa(X_0, L_0) = 2 \quad (\text{big})
+$$
+at a special closed point $0 \in T$.
+
+*Construction:* Let $S \subseteq \mathbb{P}^2$ be a set of 9 distinct points, and consider $X_S = \operatorname{Bl}_S(\mathbb{P}^2)$ with divisor $D_S = 2 H_S - E_S$.
+- If the 9 points lie on a smooth cubic $B$, the strict transform $C = 3H - E$ satisfies $(D_S \cdot C) = -3 < 0$. Slicing by multiples of $C$ reveals that $H^0(X_S, \mathcal{O}_{X_S}(m D_S)) = 0$ for all $m \ge 1$. Hence $\kappa(X_S, D_S) = -\infty$ for general configurations $S$.
+- If the 9 points become collinear, $D_S - H_S$ becomes effective, which implies $D_S$ is big, so $\kappa = 2$.
+:::
