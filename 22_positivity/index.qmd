@@ -1,75 +1,21 @@
 ---
 title: "Positivity in AG"
+subtitle: "Linear Series, Numerical Cones and asymptotic Invariants"
+date: last-modified
 ---
 
-::: {.callout-note appearance="simple"}
-## Course Information
-- **Course Code**: MATH70008.01
-- **Course Title**: Selected Topics in Representation Theory (Linear Algebraic Groups)
-- **Institution**: Shanghai Center for Mathematical Sciences (SCMS), Fudan University
-- **Instructor**: Prof. Miaofen Chen (陈苗芬)
-- **Credits**: 3.0 (54 Total Credit Hours)
-:::
+## Introduction
 
-## Course Overview
+**Positivity** is a central organizing principle in modern algebraic geometry, bridging algebraic topology, complex differential geometry (metric curvature), and birational geometry (the Minimal Model Program, MMP). This notebook follows the foundational text *Positivity in Algebraic Geometry I* by **Robert Lazarsfeld**, systematically developing the theory of ample, nef, and big divisors, convex cones in the Néron-Severi space, and asymptotic invariants of section rings.
 
-Linear algebraic groups are fundamental objects and tools in mathematics, with wide applications in number theory, representation theory, automorphic forms, and dynamical systems on homogeneous spaces. 
+The development progresses logically from classical intersection theory and asymptotic Riemann-Roch to convex cone geometry, asymptotic invariants, and birational decomposition theorems:
 
-The goal of this course is to systematically develop the theory of linear algebraic groups, focusing on their structural properties, representations, and root-theoretic classifications, laying a solid foundation for research in arithmetic geometry, the Langlands program, and related areas.
 
 ---
 
-## Syllabus & Lecture Schedule
+## References
 
-The notes are organized according to the 7 main modules of the course:
-
-### [Weeks 1–2] Linear Algebraic Groups: Foundations & Jordan Decomposition
-- Affine varieties and the definition of linear algebraic groups
-- Subgroups, homomorphisms, and canonical examples ($\mathrm{GL}_n$, $\mathrm{SL}_n$, $\mathrm{Sp}_{2n}$, $\mathrm{SO}_n$)
-- Jordan-Chevalley decomposition (additive and multiplicative) in $\mathrm{GL}(V)$ and in abstract linear algebraic groups
-
-### [Weeks 3–4] Tannakian Formalism and Lie Algebras
-- Group actions on affine coordinate algebras $\mathcal{O}(G)$ and locally finite representations
-- Tannakian perspective: reconstructing an algebraic group from its representation category
-- The Lie algebra $\mathfrak{g} = \operatorname{Lie}(G)$ as invariant derivations
-- The adjoint representation $\mathrm{Ad}: G \to \mathrm{GL}(\mathfrak{g})$
-
-### [Week 5] Tori in Algebraic Groups
-- Diagonalizable groups and Cartier duality
-- Character lattice $X^*(T)$ and cocharacter lattice $X_*(T)$
-- Algebraic tori (split vs. non-split)
-- Rigidity of tori, centralizers, and normalizers
-
-### [Week 6] Quotients of Algebraic Groups
-- Actions on algebraic varieties, orbits, and stabilizers
-- Chevalley's Theorem on constructing subgroups as stabilizers of lines
-- Existence and geometric construction of homogeneous spaces and quotient varieties $G/H$
-
-### [Weeks 7–8] Reductive Groups
-- The radical $R(G)$ and the unipotent radical $R_u(G)$
-- Definitions and characterizations of semisimple and reductive groups
-- Action of maximal tori on $\operatorname{Lie}(G)$ and the root space decomposition
-- Basic properties of roots and root systems
-
-### [Weeks 10–11] Parabolic Subgroups of Reductive Groups
-- The Borel Fixed-Point Theorem for complete varieties
-- Maximal connected solvable subgroups (Borel subgroups $B$)
-- The flag variety $G/B$ and its projectivity/completeness
-- Parabolic subgroups: standard parabolic subgroups and their classification
-
-### [Weeks 12–13] Various Decompositions of Reductive Groups
-- The Bruhat decomposition: $G = \bigsqcup_{w \in W} B w B$
-- Relative root systems and decompositions over non-algebraically closed fields
-- Connections to the Iwasawa and Cartan decompositions in Lie groups and arithmetic groups
-
----
-
-## Primary References
-
-- **J. S. Milne**, *Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field*, Cambridge University Press, 2017.
-
-### Supplementary Literature
-
-- **Armand Borel**, *Linear Algebraic Groups*, Graduate Texts in Mathematics (GTM) 126, 2nd Edition, Springer, 1991.
-- **Armand Borel**, *Introduction to Arithmetic Groups*, American Mathematical Society (AMS), 2019.
-- **T. A. Springer**, *Linear Algebraic Groups*, 2nd Edition, Birkhäuser, 1998.
+- **Lazarsfeld, R.** *Positivity in Algebraic Geometry I: Classical Setting: Line Bundles and Linear Series*. Ergebnisse der Mathematik und ihrer Grenzgebiete. 3. Folge, Vol. 48, Springer-Verlag, Berlin, 2004.
+- **Kollár, J., Mori, S.** *Birational Geometry of Algebraic Varieties*. Cambridge Tracts in Mathematics, Vol. 134, Cambridge University Press, 1998.
+- **Hartshorne, R.** *Algebraic Geometry*. Graduate Texts in Mathematics, Vol. 52, Springer-Verlag, 1977.
+- **Debarre, O.** *Higher-Dimensional Algebraic Geometry*. Universitext, Springer-Verlag, New York, 2001.
