@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2026-09-20">
 
-<title>22.0 Preliminaries – Math Notes</title>
+<title>22.4 Big Line Bundles – Math Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../22_positivity/22.1 Nef Divisors.html" rel="next">
-<link href="../22_positivity/index.html" rel="prev">
+<link href="../22_positivity/22.5 Volume.html" rel="next">
+<link href="../22_positivity/22.3 Itaka Fibration.html" rel="prev">
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -313,7 +313,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.0 Preliminaries.html">22.0 Preliminaries</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.4 Big Line Bundle.html">22.4 Big Line Bundles</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -342,7 +342,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../22_positivity/22.0 Preliminaries.html" class="sidebar-item-text sidebar-link active">
+  <a href="../22_positivity/22.0 Preliminaries.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">22.0 Preliminaries</span></a>
   </div>
 </li>
@@ -366,7 +366,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../22_positivity/22.4 Big Line Bundle.html" class="sidebar-item-text sidebar-link">
+  <a href="../22_positivity/22.4 Big Line Bundle.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">22.4 Big Line Bundles</span></a>
   </div>
 </li>
@@ -390,10 +390,10 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.0 Preliminaries.html">22.0 Preliminaries</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.4 Big Line Bundle.html">22.4 Big Line Bundles</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">22.0 Preliminaries</h1>
-<p class="subtitle lead">Divisors and Intersection Theory</p>
+<h1 class="title">22.4 Big Line Bundles</h1>
+<p class="subtitle lead">Asymptotic Growth, Kodaira’s Lemma, Numerical Criteria, and the Big Cone</p>
 </div>
 
 
@@ -416,246 +416,173 @@ window.Quarto = {
 </header>
 
 
-<div id="def-cartier-divisor" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Cartier Divisor)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible complex variety. Let <span class="math inline">\(\mathcal{M}_X := \mathcal{K}_X\)</span> be the constant sheaf of rational functions on <span class="math inline">\(X\)</span>, and <span class="math inline">\(\mathcal{O}_X \subseteq \mathcal{M}_X\)</span> the structure sheaf.</p>
-<ol type="1">
-<li><p>A <strong>Cartier divisor</strong> on <span class="math inline">\(X\)</span> is a global section of the quotient sheaf of units <span class="math inline">\(\mathcal{M}_X^* / \mathcal{O}_X^*\)</span>. The abelian group of Cartier divisors on <span class="math inline">\(X\)</span> is denoted by: <span class="math display">\[
-\operatorname{Div}(X) := \Gamma(X, \mathcal{M}_X^* / \mathcal{O}_X^*).
-\]</span></p></li>
-<li><p>In terms of local data, a Cartier divisor <span class="math inline">\(D \in \operatorname{Div}(X)\)</span> is represented by a collection of pairs <span class="math inline">\(\{(U_i, f_i)\}_{i \in I}\)</span>, where <span class="math inline">\(\{U_i\}\)</span> is an open covering of <span class="math inline">\(X\)</span>, <span class="math inline">\(f_i \in \Gamma(U_i, \mathcal{M}_X^*)\)</span>, and on overlaps <span class="math inline">\(U_{ij} = U_i \cap U_j\)</span>, <span class="math display">\[
-\frac{f_i}{f_j} = g_{ij} \in \Gamma(U_{ij}, \mathcal{O}_X^*).
-\]</span> Two such collections <span class="math inline">\(\{(U_i, f_i)\}\)</span> and <span class="math inline">\(\{(V_j, g_j)\}\)</span> determine the same Cartier divisor if they agree on a common refinement <span class="math inline">\(\{W_k\}\)</span>, that is, <span class="math inline">\(f_k / g_k \in \Gamma(W_k, \mathcal{O}_X^*)\)</span>.</p></li>
-<li><p>The <strong>support</strong> of <span class="math inline">\(D\)</span> is the closed subset: <span class="math display">\[
-\operatorname{Supp}(D) := \big\{ x \in X \;\big|\; (f_i)_x \notin \mathcal{O}_{X, x}^* \text{ for } x \in U_i \big\}.
-\]</span></p></li>
-<li><p>The group operation is written additively: for <span class="math inline">\(D = \{(U_i, f_i)\}\)</span> and <span class="math inline">\(D' = \{(U_i, f_i')\}\)</span>, <span class="math display">\[
-D + D' = \{(U_i, f_i f_i')\}.
-\]</span></p></li>
-<li><p>A Cartier divisor <span class="math inline">\(D\)</span> is <strong>effective</strong> (denoted <span class="math inline">\(D \ge 0\)</span>) if it can be represented by local equations <span class="math inline">\(f_i \in \Gamma(U_i, \mathcal{O}_X)\)</span> for all <span class="math inline">\(i\)</span>. We write <span class="math inline">\(D \ge D'\)</span> if and only if <span class="math inline">\(D - D' \ge 0\)</span>.</p></li>
-</ol>
-</div>
-<div id="rem-non-reduced-cartier" class="proof remark">
-<p><span class="proof-title"><em>Remark 1</em> (Sheaf of Meromorphic Functions on Non-Reduced Schemes). </span>If <span class="math inline">\(X\)</span> is not necessarily reduced, <span class="math inline">\(\mathcal{M}_X\)</span> is defined as the sheaf of total quotient rings: for an affine open <span class="math inline">\(U = \operatorname{Spec} A\)</span>, <span class="math display">\[
-\mathcal{M}_X(U) := A_{\mathrm{tot}},
-\]</span> where <span class="math inline">\(A_{\mathrm{tot}} = S^{-1}A\)</span> is the localization of <span class="math inline">\(A\)</span> at the multiplicatively closed set <span class="math inline">\(S \subseteq A\)</span> of all non-zero-divisors. Then <span class="math inline">\(\mathcal{O}_X^* \subseteq \mathcal{M}_X^*\)</span>, and Cartier divisors are defined identically.</p>
-</div>
-<div id="def-weil-divisor" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (Cycles and Weil Divisors)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>Let <span class="math inline">\(X\)</span> be a variety (or scheme) of pure dimension <span class="math inline">\(n\)</span>. A <strong><span class="math inline">\(k\)</span>-cycle</strong> on <span class="math inline">\(X\)</span> is a formal <span class="math inline">\(\mathbb{Z}\)</span>-linear combination of <span class="math inline">\(k\)</span>-dimensional irreducible subvarieties of <span class="math inline">\(X\)</span>. The abelian group of <span class="math inline">\(k\)</span>-cycles is denoted by <span class="math inline">\(Z_k(X)\)</span>.</p></li>
-<li><p>A <strong>Weil divisor</strong> on <span class="math inline">\(X\)</span> is an <span class="math inline">\((n-1)\)</span>-cycle, so the group of Weil divisors is <span class="math inline">\(\operatorname{WDiv}(X) := Z_{n-1}(X)\)</span>.</p></li>
-<li><p>If <span class="math inline">\(X\)</span> is irreducible, for any <span class="math inline">\(f \in \mathcal{K}(X)^*\)</span> and any prime divisor <span class="math inline">\(V \in Z_{n-1}(X)\)</span>, we define: <span class="math display">\[
-\operatorname{ord}_V(f) := \operatorname{ord}_{\widetilde{\mathcal{O}}_{X, V}}(f),
-\]</span> where <span class="math inline">\(\widetilde{\mathcal{O}}_{X, V}\)</span> is the normalization of the local ring <span class="math inline">\(\mathcal{O}_{X, V}\)</span> in <span class="math inline">\(\mathcal{K}(X)\)</span>. The rational function <span class="math inline">\(f\)</span> defines a principal Weil divisor: <span class="math display">\[
-\operatorname{div}(f) = \sum_{V \subseteq X} \operatorname{ord}_V(f) [V].
-\]</span></p></li>
-</ol>
-</div>
-<div id="prp-cycle-map" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 (Cycle Map)</strong></span> There is a canonical cycle homomorphism: <span class="math display">\[
-\operatorname{cyc}: \operatorname{Div}(X) \longrightarrow \operatorname{WDiv}(X), \quad D \longmapsto [D] := \sum_{V \subseteq X} \operatorname{ord}_V(D) \cdot [V],
-\]</span> where <span class="math inline">\(\operatorname{ord}_V(D) = \operatorname{ord}_V(f_i)\)</span> whenever the generic point <span class="math inline">\(\eta_V \in U_i\)</span>.</p>
-<ul>
-<li>The map <span class="math inline">\(\operatorname{cyc}\)</span> is injective if <span class="math inline">\(X\)</span> is normal.</li>
-<li>The map <span class="math inline">\(\operatorname{cyc}\)</span> is an isomorphism if <span class="math inline">\(X\)</span> is non-singular (regular).</li>
-</ul>
-</div>
-<div id="def-principal-divisor" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (Principal Divisors and Rational Sections)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>For any global section <span class="math inline">\(f \in \Gamma(X, \mathcal{M}_X^*)\)</span>, <span class="math inline">\(f\)</span> defines a principal Cartier divisor: <span class="math display">\[
-\operatorname{div}(f) \in \Gamma(X, \mathcal{M}_X^* / \mathcal{O}_X^*) = \operatorname{Div}(X).
-\]</span> The subgroup of principal divisors is denoted by <span class="math inline">\(\operatorname{PDiv}(X) \subseteq \operatorname{Div}(X)\)</span>.</p></li>
-<li><p>Two Cartier divisors <span class="math inline">\(D_1, D_2\)</span> are <strong>linearly equivalent</strong> (denoted <span class="math inline">\(D_1 \sim D_2\)</span> or <span class="math inline">\(D_1 \equiv_{\mathrm{lin}} D_2\)</span>) if: <span class="math display">\[
-D_1 - D_2 \in \operatorname{PDiv}(X).
-\]</span></p></li>
-<li><p>Let <span class="math inline">\(L\)</span> be a line bundle on <span class="math inline">\(X\)</span>. For any global section <span class="math inline">\(s \in \Gamma(X, L)\)</span>, choosing local trivializations <span class="math inline">\(\psi_i: L|_{U_i} \xrightarrow{\sim} \mathcal{O}_{U_i}\)</span> defines an effective Cartier divisor <span class="math inline">\(\{ (U_i, \psi_i(s)) \} \in \operatorname{Div}(X)\)</span>, denoted <span class="math inline">\(\operatorname{div}(s)_0\)</span>.</p></li>
-<li><p>More generally, any non-zero rational section <span class="math inline">\(s \in \Gamma(X, L \otimes_{\mathcal{O}_X} \mathcal{M}_X)\)</span> determines a Cartier divisor <span class="math inline">\(\operatorname{div}(s) \in \operatorname{Div}(X)\)</span>.</p></li>
-</ol>
-</div>
-<div id="def-line-bundle-divisor" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4 (The Sheaf <span class="math inline">\(\mathcal{O}_X(D)\)</span>)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>Every Cartier divisor <span class="math inline">\(D = \{(U_i, f_i)\} \in \operatorname{Div}(X)\)</span> determines an invertible sheaf <span class="math inline">\(\mathcal{O}_X(D)\)</span> (or <span class="math inline">\(\mathcal{L}(D)\)</span>) whose local sections are: <span class="math display">\[
-\mathcal{O}_X(D)(U) := \big\{ s \in \Gamma(U, \mathcal{M}_X) \;\big|\; \operatorname{div}(s)|_U + D|_U \ge 0 \big\}.
-\]</span> Locally on each open set <span class="math inline">\(U_i\)</span>, multiplication by <span class="math inline">\(f_i\)</span> yields an isomorphism: <span class="math display">\[
-\mathcal{O}_X(D)(U_i) \xrightarrow{\quad \times f_i \quad} \mathcal{O}_X(U_i), \quad s \longmapsto f_i \cdot s,
-\]</span> since <span class="math inline">\(\operatorname{div}(f_i s) = \operatorname{div}(f_i) + \operatorname{div}(s) \ge 0 \implies f_i s \in \mathcal{O}_X(U_i)\)</span>.</p></li>
-<li><p>From the short exact sequence of sheaves on <span class="math inline">\(X\)</span>: <span class="math display">\[
-0 \longrightarrow \mathcal{O}_X^* \longrightarrow \mathcal{M}_X^* \longrightarrow \mathcal{M}_X^* / \mathcal{O}_X^* \longrightarrow 0,
-\]</span> the connecting homomorphism gives: <span class="math display">\[
-\delta: \operatorname{Div}(X) = \Gamma(X, \mathcal{M}_X^* / \mathcal{O}_X^*) \longrightarrow H^1(X, \mathcal{O}_X^*) = \operatorname{Pic}(X).
-\]</span> Furthermore, <span class="math inline">\(\mathcal{O}_X(D_1) \cong \mathcal{O}_X(D_2) \iff D_1 \sim D_2\)</span>.</p></li>
-<li><p>This construction induces an isomorphism: <span class="math display">\[
-\operatorname{CaCl}(X) := \operatorname{Div}(X) / \operatorname{PDiv}(X) \xrightarrow{\;\sim\;} \operatorname{Pic}(X)
-\]</span> whenever <span class="math inline">\(X\)</span> is reduced or projective.</p></li>
-</ol>
-</div>
-<div id="def-linear-series" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5 (Linear Series and Base Locus)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>Let <span class="math inline">\(X\)</span> be a variety and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span>. Let <span class="math inline">\(V \subseteq H^0(X, L)\)</span> be a non-zero finite-dimensional subspace. The <strong>linear series</strong> associated with <span class="math inline">\(V\)</span> is: <span class="math display">\[
-|V| := \mathbb{P}(V^*) = \mathbb{P}_{\mathrm{sub}}(V),
-\]</span> the projective space of 1-dimensional subspaces in <span class="math inline">\(V\)</span>. If <span class="math inline">\(H^0(X, L)\)</span> is finite-dimensional, <span class="math inline">\(|H^0(X, L)|\)</span> is denoted by <span class="math inline">\(|L|\)</span> and called the <strong>complete linear series</strong>.</p></li>
-<li><p>The evaluation homomorphism is given by: <span class="math display">\[
-\mathrm{eval}_V: V \otimes_k \mathcal{O}_X \longrightarrow L, \quad s \otimes f \longmapsto f \cdot s|_U.
-\]</span></p></li>
-<li><p>The <strong>base ideal</strong> <span class="math inline">\(\mathfrak{b}(|V|) \subseteq \mathcal{O}_X\)</span> of <span class="math inline">\(|V|\)</span> is the image of the dualized evaluation: <span class="math display">\[
-V \otimes_k L^\vee \longrightarrow \mathcal{O}_X, \quad s \otimes \phi \longmapsto \phi(s).
-\]</span> The <strong>base scheme</strong> is the closed subscheme <span class="math inline">\(\operatorname{Bs}(|V|) \subseteq X\)</span> defined by <span class="math inline">\(\mathfrak{b}(|V|)\)</span>. For a divisor <span class="math inline">\(D\)</span>, we write <span class="math inline">\(\mathfrak{b}(|D|)\)</span> and <span class="math inline">\(\operatorname{Bs}(|D|)\)</span> for the base ideal and locus of <span class="math inline">\(|\mathcal{O}_X(D)|\)</span>.</p></li>
-</ol>
-</div>
-<div id="def-free-linear-series" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 6 (Base-Point-Free Linear Series)</strong></span> &nbsp;</p>
-<ul>
-<li>A linear series <span class="math inline">\(|V|\)</span> is <strong>free</strong> (or <strong>base-point-free</strong>) if its base ideal is trivial: <span class="math inline">\(\mathfrak{b}(|V|) = \mathcal{O}_X\)</span> (equivalently, <span class="math inline">\(\operatorname{Bs}(|V|) = \emptyset\)</span>).</li>
-<li>A divisor <span class="math inline">\(D\)</span> or a line bundle <span class="math inline">\(L\)</span> is free if its complete linear series is base-point-free.</li>
-<li>A line bundle <span class="math inline">\(L\)</span> is free if and only if <span class="math inline">\(L\)</span> is generated by its global sections.</li>
-</ul>
-</div>
-<div id="prp-morphism-linear-series" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2 (Maps to Projective Space)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>If <span class="math inline">\(\dim_k V \ge 1\)</span> and <span class="math inline">\(B = \operatorname{Bs}(|V|)\)</span>, then <span class="math inline">\(|V|\)</span> defines a morphism: <span class="math display">\[
-\phi_{|V|}: X \setminus B \longrightarrow \mathbb{P} V = \operatorname{Proj}(\operatorname{Sym} V).
-\]</span></p></li>
-<li><p>If <span class="math inline">\(W \subseteq V\)</span> is a linear subspace, we have a commutative naturality diagram: <span class="math display">\[
-\begin{CD}
-X \setminus \operatorname{Bs}(|V|) @&gt;{\phi_{|V|}}&gt;&gt; \mathbb{P} V \setminus \mathbb{P}(V/W) \\
-@VVV @VV{\pi}V \\
-X \setminus \operatorname{Bs}(|W|) @&gt;{\phi_{|W|}}&gt;&gt; \mathbb{P} W
-\end{CD}
-\]</span> where <span class="math inline">\(\pi\)</span> is the linear projection with center <span class="math inline">\(\mathbb{P}(V/W)\)</span>.</p></li>
-</ol>
-</div>
-<div id="def-intersection-number" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 7 (Intersection Number (Snapper’s Formulation))</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>Let <span class="math inline">\(X\)</span> be a proper variety over <span class="math inline">\(k\)</span>. Let <span class="math inline">\(Y \hookrightarrow X\)</span> be an irreducible subvariety of dimension <span class="math inline">\(m = \dim Y\)</span>. For any line bundles <span class="math inline">\(L_1, \dots, L_m \in \operatorname{Pic}(X)\)</span>, the <strong>intersection number</strong> is defined by: <span class="math display">\[
-(L_1 \cdots L_m \cdot Y) := \sum_{I \subseteq \{1, \dots, m\}} (-1)^{|I|} \chi\left(X, \bigotimes_{i \in I} L_i^\vee \otimes_{\mathcal{O}_X} i_* \mathcal{O}_Y\right) = \sum_{I \subseteq \{1, \dots, m\}} (-1)^{|I|} \chi\left(Y, \bigotimes_{i \in I} L_i^\vee|_Y\right).
-\]</span></p></li>
-<li><p>If <span class="math inline">\(Y = X\)</span> with <span class="math inline">\(\dim X = n\)</span>, we write <span class="math inline">\((L_1 \cdots L_n)\)</span> instead of <span class="math inline">\((L_1 \cdots L_n \cdot X)\)</span>. Then: <span class="math display">\[
-(L_1 \cdots L_m \cdot Y) = (L_1|_Y \cdots L_m|_Y).
-\]</span></p></li>
-<li><p>For a general subscheme <span class="math inline">\(Y \subseteq X\)</span> of pure dimension <span class="math inline">\(m\)</span>, associated with the cycle <span class="math inline">\([Y] = \sum_j \operatorname{length}_{\mathcal{O}_{Y, \eta_j}}(\mathcal{O}_{Y, \eta_j}) [Y_j]\)</span>, the intersection number is defined by linearity: <span class="math display">\[
-(L_1 \cdots L_m \cdot Y) := \sum_j \operatorname{length}(\mathcal{O}_{Y, \eta_j}) (L_1 \cdots L_m \cdot Y_j).
-\]</span></p></li>
-<li><p>If <span class="math inline">\(L_i \cong \mathcal{O}_X(D_i)\)</span>, we also write <span class="math inline">\((D_1 \cdots D_m \cdot Y)\)</span> for <span class="math inline">\((L_1 \cdots L_m \cdot Y)\)</span>.</p></li>
-</ol>
-</div>
-<hr>
-<blockquote class="blockquote">
-<p><strong>Convention:</strong> From now on, unless otherwise stated, every scheme is assumed to be separated, proper, and of finite type over an algebraically closed field <span class="math inline">\(k = \bar{k}\)</span> with <span class="math inline">\(\operatorname{char}(k) = 0\)</span>. A <em>variety</em> is defined as an irreducible and reduced scheme.</p>
-</blockquote>
-<hr>
-<div id="prp-properties-intersection" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 3 (Basic Properties of Intersection Numbers)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>Let <span class="math inline">\(X\)</span> be a proper curve and <span class="math inline">\(L \in \operatorname{Pic}(X)\)</span>. Then <span class="math inline">\((L \cdot X) = \deg L\)</span>. If <span class="math inline">\(X\)</span> is a proper variety and <span class="math inline">\(C \subseteq X\)</span> is a curve, <span class="math inline">\((L \cdot C) = \deg(L|_C)\)</span>.</p></li>
-<li><p>Let <span class="math inline">\(D \in \operatorname{Div}(X)\)</span> be an effective Cartier divisor. If <span class="math inline">\(Y \subseteq X\)</span> is an irreducible subvariety of dimension <span class="math inline">\(n = \dim Y\)</span> such that <span class="math inline">\(D\)</span> intersects <span class="math inline">\(Y\)</span> properly (<span class="math inline">\(Y \not\subseteq \operatorname{Supp} D\)</span>), then <span class="math inline">\(D|_Y\)</span> is of pure dimension <span class="math inline">\(n - 1\)</span> and: <span class="math display">\[
-(L_1 \cdots L_{n-1} \cdot \mathcal{O}_X(D) \cdot Y) = (L_1 \cdots L_{n-1} \cdot D|_Y).
-\]</span></p></li>
-<li><p>The intersection product is <span class="math inline">\(\mathbb{Z}\)</span>-multilinear and symmetric: <span class="math display">\[
-\operatorname{Pic}(X)^m \times A_m(X) \longrightarrow \mathbb{Z}, \quad (L_1, \dots, L_m, [Y]) \longmapsto (L_1 \cdots L_m \cdot [Y]).
-\]</span> In particular, if <span class="math inline">\(Y_1 \sim_{\mathrm{rat}} Y_2\)</span> are rationally equivalent cycles, then: <span class="math display">\[
-(L_1 \cdots L_m \cdot Y_1) = (L_1 \cdots L_m \cdot Y_2).
-\]</span></p></li>
-</ol>
-</div>
-<div id="def-numerical-equivalence" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8 (Numerical Equivalence)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>Two line bundles <span class="math inline">\(L_1, L_2 \in \operatorname{Pic}(X)\)</span> are <strong>numerically equivalent</strong> (denoted <span class="math inline">\(L_1 \equiv_{\mathrm{num}} L_2\)</span>) if for every irreducible curve <span class="math inline">\(C \subseteq X\)</span>, <span class="math display">\[
-(L_1 \cdot C) = (L_2 \cdot C).
-\]</span> Two Cartier divisors <span class="math inline">\(D_1, D_2\)</span> are numerically equivalent (denoted <span class="math inline">\(D_1 \equiv_{\mathrm{num}} D_2\)</span>) if <span class="math inline">\(\mathcal{O}_X(D_1) \equiv_{\mathrm{num}} \mathcal{O}_X(D_2)\)</span>.</p></li>
-<li><p>The quotient group: <span class="math display">\[
-N^1(X) := \operatorname{Pic}(X) / \equiv_{\mathrm{num}}
-\]</span> is called the <strong>Néron-Severi group</strong> of <span class="math inline">\(X\)</span> (modulo numerical equivalence).</p></li>
-</ol>
-</div>
-<div id="prp-picard-number" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4 (The Néron-Severi Group and Picard Number)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><span class="math inline">\(N^1(X)\)</span> is torsion-free.</li>
-<li><span class="math inline">\(N^1(X)\)</span> is a finitely generated free abelian group.</li>
-<li>The rank <span class="math inline">\(\rho(X) := \operatorname{rank}_{\mathbb{Z}} N^1(X)\)</span> is called the <strong>Picard number</strong> of <span class="math inline">\(X\)</span>.</li>
-</ol>
-</div>
-<div id="lem-numerical-intersection" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 1 (Numerical Invariance of Intersection)</strong></span> If <span class="math inline">\(L_1 \equiv_{\mathrm{num}} L_1', \dots, L_k \equiv_{\mathrm{num}} L_k'\)</span>, then for any subvariety <span class="math inline">\(V \subseteq X\)</span> of pure dimension <span class="math inline">\(k\)</span>, <span class="math display">\[
-(L_1 \cdots L_k \cdot [V]) = (L_1' \cdots L_k' \cdot [V]).
-\]</span></p>
-</div>
-<div id="thm-asymptotic-rr-1" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Asymptotic Riemann-Roch I)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>Let <span class="math inline">\(X\)</span> be an irreducible proper variety of dimension <span class="math inline">\(n = \dim X\)</span>, and <span class="math inline">\(D \in \operatorname{Div}(X)\)</span>. As <span class="math inline">\(m \to \infty\)</span>, <span class="math display">\[
-\chi(X, \mathcal{O}_X(mD)) = \frac{(D^n)}{n!} m^n + O(m^{n-1}).
-\]</span> More generally, for any coherent sheaf <span class="math inline">\(\mathcal{F} \in \operatorname{Coh}(X)\)</span>, <span class="math display">\[
-\chi(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{O}_X(mD)) = \operatorname{rank}(\mathcal{F}) \cdot \frac{(D^n)}{n!} m^n + O(m^{n-1}).
-\]</span></p></li>
-<li><p>If <span class="math inline">\(D\)</span> is ample, then by Serre vanishing <span class="math inline">\(H^i(X, \mathcal{O}_X(mD)) = 0\)</span> for all <span class="math inline">\(i &gt; 0\)</span> and <span class="math inline">\(m \gg 0\)</span>, hence: <span class="math display">\[
-h^0(X, \mathcal{O}_X(mD)) = \frac{(D^n)}{n!} m^n + O(m^{n-1}),
-\]</span> and for any <span class="math inline">\(\mathcal{F} \in \operatorname{Coh}(X)\)</span>, <span class="math display">\[
-h^0(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{O}_X(mD)) = \operatorname{rank}(\mathcal{F}) \cdot \frac{(D^n)}{n!} m^n + O(m^{n-1}).
-\]</span></p></li>
-</ol>
-</div>
-<div id="prp-amplitude-checked-curves" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 5 (Amplitude Checked on Curves and Reduction)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>Let <span class="math inline">\(f: Y \to X\)</span> be a finite morphism of proper schemes. If <span class="math inline">\(L \in \operatorname{Pic}(X)\)</span> is ample, then <span class="math inline">\(f^* L \in \operatorname{Pic}(Y)\)</span> is ample.</p></li>
-<li><p>A line bundle <span class="math inline">\(L \in \operatorname{Pic}(X)\)</span> is ample if and only if <span class="math inline">\(L|_{X_{\mathrm{red}}}\)</span> is ample, if and only if <span class="math inline">\(L|_{X_{i, \mathrm{red}}}\)</span> is ample for every irreducible component <span class="math inline">\(X_i\)</span> of <span class="math inline">\(X\)</span>.</p></li>
-<li><p>Let <span class="math inline">\(L\)</span> be a globally generated line bundle on a proper scheme <span class="math inline">\(X\)</span>. Then <span class="math inline">\(L\)</span> is ample if and only if <span class="math inline">\((L \cdot C) &gt; 0\)</span> for every irreducible curve <span class="math inline">\(C \subseteq X\)</span>.</p></li>
-</ol>
+<div id="prp-bounds-h0" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (Asymptotic Bounds for <span class="math inline">\(h^0(X, L^{\otimes m})\)</span>)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible normal projective variety over a field <span class="math inline">\(k\)</span> of characteristic zero, and let <span class="math inline">\(L\)</span> be a line bundle on <span class="math inline">\(X\)</span> with Iitaka dimension <span class="math inline">\(\kappa = \kappa(X, L) \ge 1\)</span>. Then there exist positive constants <span class="math inline">\(a, A &gt; 0\)</span> such that: <span class="math display">\[
+a \cdot m^\kappa \le h^0(X, L^{\otimes m}) \le A \cdot m^\kappa
+\]</span> for all <span class="math inline">\(m \in N(X, L)\)</span> sufficiently large.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><em>Proof of (3).</em> Consider the following three assertions: - (a) <span class="math inline">\(L\)</span> is ample; - (b) The morphism <span class="math inline">\(\phi = \phi_{|L|}: X \to \mathbb{P} H^0(X, L)\)</span> is finite; - (c) <span class="math inline">\((L \cdot C) &gt; 0\)</span> for all irreducible curves <span class="math inline">\(C \subseteq X\)</span>.</p>
-<p>We show <span class="math inline">\((b) \implies (a) \implies (c) \implies (b)\)</span>:</p>
-<ul>
-<li><p><span class="math inline">\((b) \implies (a)\)</span>: Since <span class="math inline">\(\phi\)</span> is finite and <span class="math inline">\(\mathcal{O}_{\mathbb{P}}(1)\)</span> is ample, <span class="math inline">\(L \cong \phi^* \mathcal{O}_{\mathbb{P}}(1)\)</span> is ample by (1).</p></li>
-<li><p><span class="math inline">\((a) \implies (c)\)</span>: If <span class="math inline">\(L\)</span> is ample, its restriction to any curve <span class="math inline">\(C \subseteq X\)</span> is ample, hence <span class="math inline">\((L \cdot C) = \deg(L|_C) &gt; 0\)</span>.</p></li>
-<li><p><span class="math inline">\((c) \implies (b)\)</span>: Suppose <span class="math inline">\(\phi\)</span> is not finite. Since <span class="math inline">\(\phi\)</span> is a proper morphism, it cannot be quasi-finite. Hence there exists a point <span class="math inline">\(p \in \phi(X)\)</span> such that <span class="math inline">\(\dim \phi^{-1}(p) \ge 1\)</span>. Choose an irreducible curve <span class="math inline">\(Z \subseteq \phi^{-1}(p) \subseteq X\)</span>. Endow <span class="math inline">\(Z\)</span> with the reduced structure.</p>
-<p>The restriction <span class="math inline">\(\phi|_Z: Z \to \mathbb{P}^N\)</span> has set-theoretic image <span class="math inline">\(\{p\}\)</span>. Because <span class="math inline">\(Z\)</span> is reduced, the scheme-theoretic image <span class="math inline">\(\operatorname{Im}(\phi|_Z)\)</span> is reduced, meaning <span class="math inline">\(\operatorname{Im}(\phi|_Z) = \operatorname{Spec} k(p) \hookrightarrow \mathbb{P}^N\)</span>. Thus the pullback bundle: <span class="math display">\[
-L|_Z = (\phi|_Z)^* \mathcal{O}_{\mathbb{P}^N}(1) \cong \mathcal{O}_Z
-\]</span> is trivial. Consequently, <span class="math inline">\((L \cdot Z) = \deg(\mathcal{O}_Z) = 0\)</span>, contradicting assumption (c). Thus <span class="math inline">\(\phi\)</span> is finite, completing the proof.</p></li>
-</ul>
-</div>
-<div id="prp-asymptotic-rr-2" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 6 (Asymptotic Riemann-Roch II)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(D \in \operatorname{Div}(X)\)</span> be an ample Cartier divisor. Then: <span class="math display">\[
-h^0(X, \mathcal{O}_X(mD)) = \frac{(D^n)}{n!} m^n + O(m^{n-1}).
-\]</span> For any coherent sheaf <span class="math inline">\(\mathcal{F} \in \operatorname{Coh}(X)\)</span>, <span class="math display">\[
-h^0(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{O}_X(mD)) = \operatorname{rank}(\mathcal{F}) \cdot \frac{(D^n)}{n!} m^n + O(m^{n-1}).
+<p><span class="proof-title"><em>Proof</em>. </span>Replacing <span class="math inline">\(L\)</span> by <span class="math inline">\(L^{\otimes e(L)}\)</span>, we may assume without loss of generality that the exponent <span class="math inline">\(e(L) = 1\)</span>. Passing to the Iitaka fibration model <span class="math inline">\(X_\infty \to Y\)</span>, we may assume <span class="math inline">\(X = X_\infty\)</span> and <span class="math inline">\(L = L_\infty\)</span>. By Hironaka’s resolution of singularities, there exists a projective birational morphism <span class="math inline">\(f: \widetilde{X} \to X\)</span> with <span class="math inline">\(\widetilde{X}\)</span> smooth. Because <span class="math inline">\(f\)</span> is projective, birational, and surjective between normal varieties, <span class="math inline">\(f\)</span> is an algebraic fiber space (<strong>?@prp-afs-function-fields</strong>). Hence <span class="math inline">\(h^0(X, L^{\otimes m}) = h^0(\widetilde{X}, f^* L^{\otimes m})\)</span>. Thus, we may assume <span class="math inline">\(X\)</span> is smooth.</p>
+<p><strong>Lower Bound:</strong> By the construction of the Iitaka fibration (<strong>?@cor-iitaka-fibers</strong>), there exists an ample line bundle <span class="math inline">\(B\)</span> on <span class="math inline">\(Y\)</span> and an integer <span class="math inline">\(m_0 \gg 0\)</span> such that <span class="math inline">\(L^{\otimes m_0} \otimes \phi^* B^\vee\)</span> has a non-zero global section. For any <span class="math inline">\(\ell \ge 1\)</span>, multiplication by this section yields: <span class="math display">\[
+H^0(Y, B^{\otimes \ell}) \cong H^0(X, \phi^* B^{\otimes \ell}) \hookrightarrow H^0(X, L^{\otimes \ell m_0}).
+\]</span> By Asymptotic Riemann-Roch I (<strong>?@thm-asymptotic-rr-1</strong>) on <span class="math inline">\(Y\)</span> (where <span class="math inline">\(\dim Y = \kappa\)</span>), <span class="math display">\[
+h^0(X, L^{\otimes \ell m_0}) \ge h^0(Y, B^{\otimes \ell}) = \frac{(B^\kappa)}{\kappa!} \ell^\kappa + O(\ell^{\kappa-1}) \ge a' \cdot \ell^\kappa
+\]</span> for some <span class="math inline">\(a' &gt; 0\)</span> and all <span class="math inline">\(\ell \gg 0\)</span>. Choose a system of representatives <span class="math inline">\(k_1, \dots, k_{m_0} \in N(X, L)\)</span> for the congruence classes modulo <span class="math inline">\(m_0\)</span>. For any <span class="math inline">\(m \in N(X, L)\)</span> with <span class="math inline">\(m \gg 0\)</span>, write <span class="math inline">\(m = \ell m_0 + k_i\)</span>. Then: <span class="math display">\[
+h^0(X, L^{\otimes m}) \ge h^0(X, L^{\otimes \ell m_0}) \ge a' \left(\frac{m - k_i}{m_0}\right)^\kappa \ge a \cdot m^\kappa.
 \]</span></p>
-</div>
-<div id="prp-intersection-hypersurfaces" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 7 (Intersection with Complete Intersections in <span class="math inline">\(\mathbb{P}^N\)</span>)</strong></span> Let <span class="math inline">\(X = \mathbb{P}^N\)</span>, and let <span class="math inline">\(Y \subseteq X\)</span> be an irreducible subvariety of dimension <span class="math inline">\(n\)</span>. If <span class="math inline">\(H_1, \dots, H_n\)</span> are effective hypersurfaces of degrees <span class="math inline">\(d_1, \dots, d_n\)</span> in <span class="math inline">\(\mathbb{P}^N\)</span>, then: <span class="math display">\[
-(\mathcal{O}_X(H_1) \cdots \mathcal{O}_X(H_n) \cdot Y) = d_1 \cdots d_n \deg(Y).
+<p><strong>Upper Bound:</strong> Fix <span class="math inline">\(u \in N(X, L)\)</span> and choose an effective divisor <span class="math inline">\(D \in |L^{\otimes u}|\)</span>. Since <span class="math inline">\(X\)</span> is smooth, <span class="math inline">\(\operatorname{CaCl}(X) = \operatorname{WDiv}(X)\)</span>. Write <span class="math inline">\(D = \sum a_i W_i\)</span> and decompose <span class="math inline">\(D = D_v + D_h\)</span> into vertical and horizontal components: <span class="math display">\[
+D_v := \sum_{\phi(W_i) \subsetneq Y} a_i W_i, \qquad D_h := \sum_{\phi(W_i) = Y} a_i W_i.
 \]</span></p>
+<p><em>Claim:</em> <span class="math inline">\(H^0(X, \mathcal{O}_X(m D_v)) = H^0(X, \mathcal{O}_X(m D))\)</span> for all <span class="math inline">\(m \ge 0\)</span>. Suppose toward a contradiction that there exists a sequence <span class="math inline">\(m_n \to \infty\)</span> with sections <span class="math inline">\(s_n \in H^0(X, \mathcal{O}_X(m_n D)) \setminus H^0(X, \mathcal{O}_X(m_n D_v))\)</span>. Then <span class="math inline">\(C_n := \operatorname{div}(s_n) + m_n D \ge 0\)</span>, but <span class="math inline">\(C_n - m_n D_h \not\ge 0\)</span>. For a very general point <span class="math inline">\(y \in Y\)</span>, the fiber <span class="math inline">\(F = X_y\)</span> is smooth, <span class="math inline">\(\dim F = \dim X - \kappa\)</span>, and <span class="math inline">\(F \cap \operatorname{Supp}(D_v) = \emptyset\)</span>. Thus <span class="math inline">\(L^{\otimes m u}|_F \cong \mathcal{O}_F(m D_h|_F)\)</span>. Restriction gives non-trivial sections <span class="math inline">\(s_n|_F \in H^0(F, \mathcal{O}_F(m_n D_h|_F))\)</span> that are not constant multiples of the canonical section. This implies <span class="math inline">\(h^0(F, L^{\otimes m_n u}|_F) \ge 2\)</span>, contradicting <strong>?@cor-iitaka-fibers</strong> (<span class="math inline">\(\kappa(F, L|_F) = 0\)</span>).</p>
+<p>Using the Claim, write <span class="math inline">\(D_v = \sum a_i E_i\)</span> with <span class="math inline">\(\phi(E_i) \subsetneq Y\)</span>. Choose an ample effective divisor <span class="math inline">\(H\)</span> on <span class="math inline">\(Y\)</span> and <span class="math inline">\(b \gg 0\)</span> such that <span class="math inline">\(B := b H\)</span> satisfies <span class="math inline">\(\operatorname{Supp}(B) \supseteq \bigcup \phi(E_i)\)</span>. Then <span class="math inline">\(\phi^* B \ge D_v\)</span> after scaling. Thus: <span class="math display">\[
+h^0(X, \mathcal{O}_X(m D)) = h^0(X, \mathcal{O}_X(m D_v)) \le h^0(X, \mathcal{O}_X(m r \phi^* B)) = h^0(Y, \mathcal{O}_Y(m r B)) \le A' \cdot m^\kappa.
+\]</span> For general <span class="math inline">\(m \gg 0\)</span>, write <span class="math inline">\(m = u r - q\)</span> with <span class="math inline">\(q \in N(X, L)\)</span>, which yields <span class="math inline">\(h^0(X, L^{\otimes m}) \le h^0(X, L^{\otimes u r}) \le A \cdot m^\kappa\)</span>.</p>
 </div>
-<div id="prp-projection-formula" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 8 (Projection Formula for Intersections)</strong></span> Let <span class="math inline">\(\pi: X_1 \to X_2\)</span> be a morphism of integral proper schemes of the same dimension <span class="math inline">\(n\)</span>. For any line bundles <span class="math inline">\(L_1, \dots, L_n \in \operatorname{Pic}(X_2)\)</span>, <span class="math display">\[
-(\pi^* L_1 \cdots \pi^* L_n) = \deg(X_1 / X_2) \cdot (L_1 \cdots L_n).
-\]</span></p>
-</div>
-<div id="thm-cacl-pic" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (Cartier Class Group and Picard Group)</strong></span> If <span class="math inline">\(X\)</span> is a reduced Noetherian scheme, then: <span class="math display">\[
-\operatorname{CaCl}(X) \xrightarrow{\;\sim\;} \operatorname{Pic}(X).
+<div id="lem-bigness-growth" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1 (Bigness by Growth of <span class="math inline">\(h^0\)</span>)</strong></span> Let <span class="math inline">\(X\)</span> be a projective variety of dimension <span class="math inline">\(n\)</span>. A Cartier divisor <span class="math inline">\(D\)</span> on <span class="math inline">\(X\)</span> is big if and only if there exists a constant <span class="math inline">\(C &gt; 0\)</span> such that: <span class="math display">\[
+h^0(X, \mathcal{O}_X(mD)) \ge C \cdot m^n \quad \text{for all } m \in N(X, D), \; m \gg 0.
 \]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><em>Proof idea.</em> We show that <span class="math inline">\(H^1(X, \mathcal{K}_X^*) = 0\)</span>. Let <span class="math inline">\(X = \bigcup_{j=1}^m \overline{\{\eta_j\}}\)</span> be the decomposition into irreducible components with generic points <span class="math inline">\(\eta_j\)</span>. Then: <span class="math display">\[
-\mathcal{K}_X^* = \bigoplus_{j=1}^m (i_{\eta_j})_* K_j^*,
-\]</span> which is a direct sum of pushforwards of constant sheaves from points, hence <span class="math inline">\(\mathcal{K}_X^*\)</span> is flasque. Therefore <span class="math inline">\(H^1(X, \mathcal{K}_X^*) = 0\)</span>. Taking cohomology of the short exact sequence <span class="math inline">\(0 \to \mathcal{O}_X^* \to \mathcal{K}_X^* \to \mathcal{K}_X^* / \mathcal{O}_X^* \to 0\)</span> yields: <span class="math display">\[
-H^0(X, \mathcal{K}_X^*) \xrightarrow{\;\operatorname{div}\;} H^0(X, \mathcal{K}_X^* / \mathcal{O}_X^*) \longrightarrow H^1(X, \mathcal{O}_X^*) \longrightarrow 0,
-\]</span> which implies: <span class="math display">\[
-\operatorname{coker}(\operatorname{div}) = \operatorname{Div}(X) / \operatorname{PDiv}(X) = \operatorname{CaCl}(X) \xrightarrow{\;\sim\;} \operatorname{Pic}(X).
+<p><span class="proof-title"><em>Proof</em>. </span>If <span class="math inline">\(X\)</span> is normal, this is immediate from <a href="#prp-bounds-h0" class="quarto-xref">Proposition&nbsp;1</a> by setting <span class="math inline">\(\kappa(X, D) = n\)</span>. In general, let <span class="math inline">\(\nu: X^\nu \to X\)</span> be the normalization and <span class="math inline">\(D^\nu = \nu^* D\)</span>. The exact sequence <span class="math inline">\(0 \to \mathcal{O}_X \to \nu_* \mathcal{O}_{X^\nu} \to \mathcal{C} \to 0\)</span> has <span class="math inline">\(\dim \operatorname{Supp}(\mathcal{C}) \le n - 1\)</span>. Tensoring with <span class="math inline">\(\mathcal{O}_X(mD)\)</span> yields: <span class="math display">\[
+h^0(X, \mathcal{O}_X(mD)) \le h^0(X^\nu, \mathcal{O}_{X^\nu}(m D^\nu)) \le h^0(X, \mathcal{O}_X(mD)) + O(m^{n-1}).
+\]</span> Hence the maximal growth rate <span class="math inline">\(m^n\)</span> on <span class="math inline">\(X^\nu\)</span> is equivalent to that on <span class="math inline">\(X\)</span>.</p>
+</div>
+<div id="prp-kodaira-lemma" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (Kodaira’s Lemma)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety of dimension <span class="math inline">\(n\)</span>. Let <span class="math inline">\(D\)</span> be a big Cartier divisor and <span class="math inline">\(F\)</span> an arbitrary effective Cartier divisor on <span class="math inline">\(X\)</span>. Then: <span class="math display">\[
+H^0(X, \mathcal{O}_X(mD - F)) \neq 0 \quad \text{for all } m \in N(X, D) \text{ with } m \gg 0.
 \]</span></p>
 </div>
-<div id="thm-wdiv-div" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3 (Cartier Divisors vs.&nbsp;Weil Divisors)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible variety that is regular in codimension 1. Then the cycle map induces injective homomorphisms: <span class="math display">\[
-\operatorname{Div}(X) \hookrightarrow \operatorname{WDiv}(X) \quad \text{and} \quad \operatorname{CaCl}(X) \hookrightarrow \operatorname{Cl}(X).
-\]</span> In particular, if <span class="math inline">\(X\)</span> is smooth (or regular), these maps are isomorphisms.</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Consider the standard restriction sequence: <span class="math display">\[
+0 \longrightarrow \mathcal{O}_X(mD - F) \longrightarrow \mathcal{O}_X(mD) \longrightarrow \mathcal{O}_F(mD) \longrightarrow 0.
+\]</span> By <a href="#lem-bigness-growth" class="quarto-xref">Lemma&nbsp;1</a>, <span class="math inline">\(h^0(X, \mathcal{O}_X(mD)) \ge C \cdot m^n\)</span> for some <span class="math inline">\(C &gt; 0\)</span>. Because <span class="math inline">\(\dim F = n - 1\)</span>, the growth of global sections on <span class="math inline">\(F\)</span> is bounded by: <span class="math display">\[
+h^0(F, \mathcal{O}_F(mD)) \le C' \cdot m^{n-1}.
+\]</span> For <span class="math inline">\(m \gg 0\)</span>, <span class="math inline">\(C m^n &gt; C' m^{n-1}\)</span>, forcing the restriction map to have a non-trivial kernel. Thus <span class="math inline">\(H^0(X, \mathcal{O}_X(mD - F)) \neq 0\)</span>.</p>
+</div>
+<div id="cor-characterization-bigness" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 (Characterization of Bigness)</strong></span> Let <span class="math inline">\(D\)</span> be a Cartier divisor on an irreducible projective variety <span class="math inline">\(X\)</span>. The following conditions are equivalent:</p>
+<ol type="1">
+<li><span class="math inline">\(D\)</span> is big;</li>
+<li>For every ample Cartier divisor <span class="math inline">\(A\)</span> on <span class="math inline">\(X\)</span>, there exists an integer <span class="math inline">\(m &gt; 0\)</span> and an effective divisor <span class="math inline">\(N\)</span> such that <span class="math inline">\(m D \sim A + N\)</span>;</li>
+<li>There exists an ample Cartier divisor <span class="math inline">\(A\)</span>, an integer <span class="math inline">\(m &gt; 0\)</span>, and an effective divisor <span class="math inline">\(N\)</span> such that <span class="math inline">\(m D \sim A + N\)</span>;</li>
+<li>There exists an ample <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(A\)</span>, an integer <span class="math inline">\(m &gt; 0\)</span>, and an effective <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(N\)</span> such that <span class="math inline">\(m D \equiv_{\mathrm{num}} A + N\)</span>.</li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span></p>
+<ul>
+<li><span class="math inline">\((1) \implies (2)\)</span>: Fix <span class="math inline">\(r \gg 0\)</span> such that <span class="math inline">\(r A \sim H_r\)</span> and <span class="math inline">\((r+1)A \sim H_{r+1}\)</span> are effective. By Kodaira’s Lemma (<a href="#prp-kodaira-lemma" class="quarto-xref">Proposition&nbsp;2</a>), <span class="math inline">\(H^0(X, \mathcal{O}_X(mD - H_{r+1})) \neq 0\)</span> for <span class="math inline">\(m \gg 0\)</span>. Hence <span class="math inline">\(m D \sim H_{r+1} + N' \sim A + (H_r + N')\)</span>. Setting <span class="math inline">\(N = H_r + N'\)</span> gives the result.</li>
+<li><span class="math inline">\((2) \implies (3) \implies (4)\)</span>: Trivial.</li>
+<li><span class="math inline">\((4) \implies (1)\)</span>: If <span class="math inline">\(m D \equiv_{\mathrm{num}} A + N\)</span>, then <span class="math inline">\(m D - N\)</span> is ample. For <span class="math inline">\(k \gg 0\)</span>, <span class="math inline">\(k(m D - N)\)</span> is very ample. Since <span class="math inline">\(k N \ge 0\)</span>, we have <span class="math inline">\(\kappa(X, D) = \kappa(X, k m D) \ge \kappa(X, k(m D - N)) = \dim X\)</span>, so <span class="math inline">\(D\)</span> is big.</li>
+</ul>
+</div>
+<div id="cor-numerical-exponent-bigness" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 2 (Numerical Nature and Exponent of Big Divisors)</strong></span> &nbsp;</p>
+<ol type="1">
+<li>Bigness is a numerical property: if <span class="math inline">\(D_1 \equiv_{\mathrm{num}} D_2\)</span>, then <span class="math inline">\(D_1\)</span> is big if and only if <span class="math inline">\(D_2\)</span> is big.</li>
+<li>If <span class="math inline">\(D\)</span> is big, its exponent is <span class="math inline">\(e(D) = 1\)</span>.</li>
+</ol>
+</div>
+<div id="prp-twisting-bigness" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3 (Twisting Theorem for Bigness)</strong></span> A Cartier divisor <span class="math inline">\(D\)</span> on an irreducible projective variety <span class="math inline">\(X\)</span> is big if and only if for every coherent sheaf <span class="math inline">\(\mathcal{F} \in \operatorname{Coh}(X)\)</span>, there exists an integer <span class="math inline">\(m_0 = m(\mathcal{F})\)</span> such that for all <span class="math inline">\(m \ge m_0\)</span>: <span class="math display">\[
+H^0(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{O}_X(mD)) \otimes_k \mathcal{O}_X \longrightarrow \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{O}_X(mD)
+\]</span> is generically surjective.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><strong><span class="math inline">\((\implies)\)</span>:</strong> Fix an ample divisor <span class="math inline">\(H\)</span>. By Serre generation, <span class="math inline">\(\mathcal{F}(m H)\)</span> is globally generated for all <span class="math inline">\(m \ge m_0\)</span>. By <a href="#cor-characterization-bigness" class="quarto-xref">Corollary&nbsp;1</a>, there exists <span class="math inline">\(n &gt; 0\)</span> such that <span class="math inline">\(n D \sim H + N\)</span> with <span class="math inline">\(N \ge 0\)</span>. The canonical injection <span class="math inline">\(\mathcal{F}(m H) \hookrightarrow \mathcal{F}(m n D)\)</span> induces a commutative evaluation diagram. Since <span class="math inline">\(\mathcal{O}_X(m n D) \to \mathcal{O}_X(m H)\)</span> is an isomorphism away from <span class="math inline">\(\operatorname{Supp}(N)\)</span>, generic surjectivity follows.</p>
+<p><strong><span class="math inline">\((\impliedby)\)</span>:</strong> Taking <span class="math inline">\(\mathcal{F} = \mathcal{O}_X(-H)\)</span> for an ample divisor <span class="math inline">\(H\)</span>, generic surjectivity implies <span class="math inline">\(H^0(X, \mathcal{O}_X(mD - H)) \neq 0\)</span> for <span class="math inline">\(m \gg 0\)</span>. Hence <span class="math inline">\(m D \sim H + N\)</span> for some <span class="math inline">\(N \ge 0\)</span>, which implies <span class="math inline">\(D\)</span> is big.</p>
+</div>
+<div id="prp-restriction-subvariety" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4 (Restriction of Big Divisors to Subvarieties)</strong></span> Let <span class="math inline">\(L\)</span> be a big line bundle on an irreducible projective variety <span class="math inline">\(X\)</span>. There exists a proper closed algebraic subset <span class="math inline">\(V \subsetneq X\)</span> such that for every irreducible subvariety <span class="math inline">\(Y \not\subseteq V\)</span>, the restriction <span class="math inline">\(L|_Y\)</span> is big on <span class="math inline">\(Y\)</span>. In particular, if <span class="math inline">\(H\)</span> is a general hyperplane section, <span class="math inline">\(L|_H\)</span> is big.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Write <span class="math inline">\(L \cong \mathcal{O}_X(D)\)</span>. By <a href="#cor-characterization-bigness" class="quarto-xref">Corollary&nbsp;1</a>, <span class="math inline">\(m D \sim H + N\)</span> with <span class="math inline">\(H\)</span> very ample and <span class="math inline">\(N \ge 0\)</span>. Set <span class="math inline">\(V = \operatorname{Supp}(N)\)</span>. If <span class="math inline">\(Y \not\subseteq V\)</span>, then by Bertini’s Theorem we may choose <span class="math inline">\(H' \sim H\)</span> such that <span class="math inline">\(Y \not\subseteq \operatorname{Supp}(H')\)</span>. The restriction gives <span class="math inline">\(m D|_Y \sim H|_Y + N|_Y\)</span>. Because <span class="math inline">\(H|_Y\)</span> is ample and <span class="math inline">\(N|_Y \ge 0\)</span>, <span class="math inline">\(L|_Y\)</span> is big by <a href="#cor-characterization-bigness" class="quarto-xref">Corollary&nbsp;1</a>(3).</p>
+</div>
+<hr>
+<div id="def-big-q-divisors" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Big <span class="math inline">\(\mathbb{Q}\)</span>-Divisors)</strong></span> &nbsp;</p>
+<ol type="1">
+<li>An integral divisor <span class="math inline">\(D\)</span> is big if and only if <span class="math inline">\(m D\)</span> is big for some <span class="math inline">\(m \in \mathbb{Z}_{\ge 1}\)</span>.</li>
+<li>A <span class="math inline">\(\mathbb{Q}\)</span>-divisor <span class="math inline">\(D \in \operatorname{Div}_{\mathbb{Q}}(X)\)</span> is <strong>big</strong> if <span class="math inline">\(m D\)</span> is an integral big Cartier divisor for some <span class="math inline">\(m \in \mathbb{Z}_{\ge 1}\)</span>.</li>
+<li>Bigness is an open numerical condition on <span class="math inline">\(N^1(X)_{\mathbb{Q}}\)</span>.</li>
+</ol>
+</div>
+<div id="thm-numerical-criterion-bigness" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Numerical Criterion for Bigness)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety of dimension <span class="math inline">\(n\)</span>. Let <span class="math inline">\(D, E\)</span> be nef <span class="math inline">\(\mathbb{Q}\)</span>-divisors on <span class="math inline">\(X\)</span>. If: <span class="math display">\[
+(D^n) &gt; n (D^{n-1} \cdot E),
+\]</span> then the difference <span class="math inline">\(D - E\)</span> is big.</p>
+</div>
+<div id="prp-bigness-nef-divisors" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 5 (Bigness of Nef Divisors)</strong></span> Let <span class="math inline">\(D\)</span> be a nef <span class="math inline">\(\mathbb{Q}\)</span>-divisor on an irreducible projective variety <span class="math inline">\(X\)</span> of dimension <span class="math inline">\(n\)</span>. Then: <span class="math display">\[
+D \text{ is big} \iff (D^n) &gt; 0.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>If <span class="math inline">\(D\)</span> is big, <span class="math inline">\(h^0(X, \mathcal{O}_X(mD)) \sim \Theta(m^n)\)</span>. By Asymptotic Riemann-Roch III (<strong>?@prp-asymptotic-rr-3</strong>), <span class="math inline">\((D^n) = n! \lim_{m \to \infty} \frac{h^0(X, \mathcal{O}_X(mD))}{m^n} &gt; 0\)</span>. The converse follows from <a href="#thm-numerical-criterion-bigness" class="quarto-xref">Theorem&nbsp;1</a> by setting <span class="math inline">\(E = 0\)</span>.</p>
+</div>
+<div id="def-q-effective-divisors" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (<span class="math inline">\(\mathbb{Q}\)</span>-Effective and Big <span class="math inline">\(\mathbb{R}\)</span>-Divisors)</strong></span> &nbsp;</p>
+<ol type="1">
+<li>A <span class="math inline">\(\mathbb{Q}\)</span>-divisor <span class="math inline">\(D\)</span> is <strong>effective</strong> if <span class="math inline">\(m D\)</span> is effective for some <span class="math inline">\(m \in \mathbb{Z}_{\ge 1}\)</span>.</li>
+<li>A <span class="math inline">\(\mathbb{Q}\)</span>-divisor <span class="math inline">\(D\)</span> is big if and only if <span class="math inline">\(D \equiv_{\mathrm{num}} A + N\)</span> for an ample <span class="math inline">\(\mathbb{Q}\)</span>-divisor <span class="math inline">\(A\)</span> and an effective <span class="math inline">\(\mathbb{Q}\)</span>-divisor <span class="math inline">\(N\)</span>.</li>
+<li>An <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(D\)</span> is <strong>effective</strong> if <span class="math inline">\(D = \sum a_i D_i\)</span> with <span class="math inline">\(a_i \ge 0\)</span> and <span class="math inline">\(D_i\)</span> effective Cartier divisors.</li>
+</ol>
+</div>
+<div id="def-big-r-divisors" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Big <span class="math inline">\(\mathbb{R}\)</span>-Divisors)</strong></span> An <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(D \in \operatorname{Div}_{\mathbb{R}}(X)\)</span> is <strong>big</strong> if <span class="math inline">\(D = \sum a_i D_i\)</span> where each <span class="math inline">\(D_i\)</span> is an integral big Cartier divisor and <span class="math inline">\(a_i \in \mathbb{R}_{&gt;0}\)</span>.</p>
+</div>
+<div id="prp-properties-big-r-divisors" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 6 (Properties of Big <span class="math inline">\(\mathbb{R}\)</span>-Divisors)</strong></span> Let <span class="math inline">\(D, D' \in \operatorname{Div}_{\mathbb{R}}(X)\)</span>.</p>
+<ol type="1">
+<li>Numerical invariance: <span class="math inline">\(D \equiv_{\mathrm{num}} D' \implies (D \text{ big} \iff D' \text{ big})\)</span>.</li>
+<li>Kodaira decomposition: <span class="math inline">\(D\)</span> is big if and only if <span class="math inline">\(D \equiv_{\mathrm{num}} A + N\)</span> for an ample <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(A\)</span> and an effective <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(N\)</span>.</li>
+<li>Openness: If <span class="math inline">\(D\)</span> is big and <span class="math inline">\(E_1, \dots, E_r \in \operatorname{Div}_{\mathbb{R}}(X)\)</span>, then <span class="math inline">\(D + \sum_{i=1}^r \varepsilon_i E_i\)</span> is big for all <span class="math inline">\(\sum |\varepsilon_i| \ll 1\)</span>.</li>
+</ol>
+</div>
+<div id="def-big-pseudoeffective-cones" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 (The Big Cone and Pseudoeffective Cone)</strong></span> &nbsp;</p>
+<ol type="1">
+<li>The <strong>big cone</strong> <span class="math inline">\(\operatorname{Big}(X) \subseteq N^1(X)_{\mathbb{R}}\)</span> is the convex cone of all big <span class="math inline">\(\mathbb{R}\)</span>-divisor classes.</li>
+<li>The <strong>effective cone</strong> <span class="math inline">\(\operatorname{Eff}(X) \subseteq N^1(X)_{\mathbb{R}}\)</span> is the convex cone spanned by effective classes. Its closure: <span class="math display">\[
+\overline{\operatorname{Eff}}(X) = \operatorname{Pseff}(X)
+\]</span> is called the <strong>pseudoeffective cone</strong>.</li>
+</ol>
+</div>
+<div id="thm-big-interior-pseudoeffective" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (The Interior of the Pseudoeffective Cone)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety. Then: <span class="math display">\[
+\operatorname{Big}(X) = \operatorname{int}\big(\operatorname{Eff}(X)\big) = \operatorname{int}\big(\overline{\operatorname{Eff}}(X)\big), \qquad \overline{\operatorname{Big}(X)} = \overline{\operatorname{Eff}}(X).
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By <a href="#prp-properties-big-r-divisors" class="quarto-xref">Proposition&nbsp;6</a>, every big class has the form <span class="math inline">\([D] = [A] + [E]\)</span> with <span class="math inline">\([A]\)</span> ample and <span class="math inline">\([E]\)</span> effective. Because the ample cone is open, <span class="math inline">\(\operatorname{Big}(X)\)</span> is open, so <span class="math inline">\(\operatorname{Big}(X) \subseteq \operatorname{int}(\operatorname{Eff}(X)) \subseteq \operatorname{int}(\overline{\operatorname{Eff}}(X))\)</span>.</p>
+<p>Conversely, let <span class="math inline">\(\eta \in \overline{\operatorname{Eff}}(X)\)</span>. There exists a sequence of effective classes <span class="math inline">\(\eta_k \in \operatorname{Eff}(X)\)</span> converging to <span class="math inline">\(\eta\)</span>. Fixing an ample class <span class="math inline">\(\alpha \in \operatorname{Amp}(X)\)</span>, the perturbed classes <span class="math inline">\(\eta_k + \frac{1}{k} \alpha\)</span> are big for all <span class="math inline">\(k \ge 1\)</span>. Since <span class="math inline">\(\lim_{k \to \infty} (\eta_k + \frac{1}{k} \alpha) = \eta\)</span>, we see that <span class="math inline">\(\eta \in \overline{\operatorname{Big}(X)}\)</span>. Hence <span class="math inline">\(\overline{\operatorname{Big}(X)} = \overline{\operatorname{Eff}}(X)\)</span>, and taking interiors yields <span class="math inline">\(\operatorname{Big}(X) = \operatorname{int}(\overline{\operatorname{Eff}}(X))\)</span>.</p>
+</div>
+<div id="cor-cone-inclusions" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 3 (Inclusions of Cones)</strong></span> &nbsp;</p>
+<ol type="1">
+<li>The following inclusions hold: <span class="math display">\[
+\operatorname{Amp}(X) \subseteq \operatorname{Big}(X) \subseteq \operatorname{Eff}(X) \subseteq \overline{\operatorname{Eff}}(X), \qquad \operatorname{Nef}(X) \subseteq \overline{\operatorname{Eff}}(X).
+\]</span></li>
+<li>Let <span class="math inline">\(\operatorname{SA}(X) := \{ \sum a_i [D_i] \mid D_i \text{ semiample}, a_i \ge 0 \}\)</span> be the semiample cone. Then: <span class="math display">\[
+\operatorname{Amp}(X) \subseteq \operatorname{SA}(X) \subseteq \operatorname{Nef}(X).
+\]</span></li>
+</ol>
+</div>
+<div id="thm-nakai-r-divisors" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Nakai-Moishezon Criterion for <span class="math inline">\(\mathbb{R}\)</span>-Divisors)</strong></span> Let <span class="math inline">\(X\)</span> be a projective scheme. An <span class="math inline">\(\mathbb{R}\)</span>-divisor class <span class="math inline">\(\delta \in N^1(X)_{\mathbb{R}}\)</span> is ample if and only if for every irreducible subvariety <span class="math inline">\(V \subseteq X\)</span> with <span class="math inline">\(\dim V \ge 1\)</span>: <span class="math display">\[
+(\delta^{\dim V} \cdot V) &gt; 0.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We reduce to the case where <span class="math inline">\(X\)</span> is an irreducible and reduced variety of dimension <span class="math inline">\(n\)</span>. If <span class="math inline">\(n = 1\)</span>, the condition <span class="math inline">\((\delta \cdot X) &gt; 0\)</span> implies amplitude immediately. We proceed by induction on <span class="math inline">\(n\)</span>:</p>
+<p>Assume the criterion holds in dimensions <span class="math inline">\(&lt; n\)</span>. For every proper subvariety <span class="math inline">\(Y \subsetneq X\)</span>, <span class="math inline">\(\delta|_Y\)</span> is ample, hence <span class="math inline">\(\delta\)</span> is nef. Choose small ample classes <span class="math inline">\(\alpha, \alpha' \in N^1(X)_{\mathbb{R}}\)</span> such that <span class="math inline">\(\delta + \alpha'\)</span> is ample and <span class="math inline">\(\delta - \alpha\)</span> is rational. For <span class="math inline">\(\alpha, \alpha'\)</span> sufficiently small, continuity of intersection products ensures: <span class="math display">\[
+((\delta + \alpha')^n) &gt; n \big((\delta + \alpha')^{n-1} \cdot (\alpha + \alpha')\big).
+\]</span> By <a href="#thm-numerical-criterion-bigness" class="quarto-xref">Theorem&nbsp;1</a>, the rational class <span class="math inline">\((\delta + \alpha') - (\alpha + \alpha') = \delta - \alpha\)</span> is big.</p>
+<p>Write <span class="math inline">\(\delta - \alpha \equiv_{\mathrm{num}} E\)</span> for an effective <span class="math inline">\(\mathbb{Q}\)</span>-divisor <span class="math inline">\(E = \sum q_i Y_i\)</span>. For <span class="math inline">\(0 &lt; \varepsilon \ll 1\)</span>, the restriction <span class="math inline">\((\delta - \varepsilon \alpha)|_{Y_i}\)</span> is nef by induction. For any curve <span class="math inline">\(C \subseteq X\)</span>: - If <span class="math inline">\(C \subseteq Y_i\)</span>, then <span class="math inline">\(((\delta - \varepsilon \alpha) \cdot C) \ge 0\)</span>; - If <span class="math inline">\(C \not\subseteq \operatorname{Supp}(E)\)</span>, then <span class="math inline">\((E \cdot C) \ge 0\)</span>, which implies <span class="math inline">\(((\delta - \varepsilon \alpha) \cdot C) \ge 0\)</span>.</p>
+<p>Thus <span class="math inline">\(\delta - \varepsilon \alpha\)</span> is nef. Finally, decomposing: <span class="math display">\[
+\delta = (\delta - \varepsilon \alpha) + \varepsilon \alpha
+\]</span> as the sum of a nef class and an ample class, Kleiman’s perturbation theorem (<strong>?@cor-kleiman-perturbation</strong>) guarantees that <span class="math inline">\(\delta\)</span> is ample.</p>
 </div>
 
 
@@ -1622,13 +1549,13 @@ nav#TOC li.active > a.nav-link {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../22_positivity/index.html" class="pagination-link" aria-label="Positivity in AG">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Positivity in AG</span>
+      <a href="../22_positivity/22.3 Itaka Fibration.html" class="pagination-link" aria-label="22.3 Iitaka Fibration">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22.3 Iitaka Fibration</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../22_positivity/22.1 Nef Divisors.html" class="pagination-link" aria-label="22.1 Nef-Divisors">
-        <span class="nav-page-text">22.1 Nef-Divisors</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../22_positivity/22.5 Volume.html" class="pagination-link" aria-label="22.5 Volume">
+        <span class="nav-page-text">22.5 Volume</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
