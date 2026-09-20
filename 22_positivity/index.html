@@ -79,6 +79,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -371,6 +400,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#cone-inclusions" id="toc-cone-inclusions" class="nav-link" data-scroll-target="#cone-inclusions">Cone Inclusions</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -409,6 +439,76 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Positivity is a central organizing principle in modern algebraic geometry, bridging algebraic topology, complex differential geometry (metric curvature), and birational geometry (the Minimal Model Program). This notebook follows the foundational text <em>Positivity in Algebraic Geometry I</em> by Robert Lazarsfeld, systematically developing the theory of ample, nef, and big divisors, convex cones in the Néron-Severi space, and asymptotic invariants of section rings.</p>
 <p>The development progresses logically from classical intersection theory and asymptotic Riemann-Roch to convex cone geometry, asymptotic invariants, and birational decomposition theorems:</p>
+<hr>
+<p>The following table summarizes the key properties, intersection-theoretic criteria, and asymptotic behaviors across the hierarchy of positivity:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Notion</th>
+<th style="text-align: left;">Geometric Characterization</th>
+<th style="text-align: left;">Numerical / Intersection Criterion</th>
+<th style="text-align: left;">Asymptotic Growth <span class="math inline">\(h^0(mD)\)</span></th>
+<th style="text-align: left;">Associated Cone</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Ample</strong></td>
+<td style="text-align: left;"><span class="math inline">\(mD\)</span> defines a closed immersion into <span class="math inline">\(\mathbb{P}^N\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\forall V, \; (D^{\dim V} \cdot V) &gt; 0\)</span> (Nakai-Moishezon)</td>
+<td style="text-align: left;"><span class="math inline">\(\frac{(D^n)}{n!} m^n + O(m^{n-1})\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{Amp}(X) = \operatorname{Nef}(X)^\circ\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Semiample</strong></td>
+<td style="text-align: left;"><span class="math inline">\(mD\)</span> is base-point-free for some <span class="math inline">\(m \ge 1\)</span></td>
+<td style="text-align: left;">Pullback of an ample divisor under a contraction</td>
+<td style="text-align: left;"><span class="math inline">\(m^{\kappa}\)</span> where <span class="math inline">\(\kappa = \kappa(X, D)\)</span>; <span class="math inline">\(R(X, D)\)</span> is f.g.</td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{SA}(X) \subseteq \operatorname{Nef}(X)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nef</strong></td>
+<td style="text-align: left;">Degree on every curve is non-negative</td>
+<td style="text-align: left;"><span class="math inline">\(\forall C, \; (D \cdot C) \ge 0 \iff (D^k \cdot V) \ge 0\)</span></td>
+<td style="text-align: left;">Controlled cohomology: <span class="math inline">\(h^i(mD) = O(m^{n-i})\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{Nef}(X) = \overline{\operatorname{Amp}(X)}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Big</strong></td>
+<td style="text-align: left;">Iitaka dimension is maximal: <span class="math inline">\(\kappa(X, D) = \dim X\)</span></td>
+<td style="text-align: left;">Kodaira decomposition: <span class="math inline">\(mD \sim A + N\)</span> (<span class="math inline">\(A\)</span> ample, <span class="math inline">\(N \ge 0\)</span>)</td>
+<td style="text-align: left;"><span class="math inline">\(\Theta(m^n)\)</span>; volume <span class="math inline">\(\operatorname{vol}(D) &gt; 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{Big}(X) = \operatorname{int}(\overline{\operatorname{Eff}}(X))\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Pseudoeffective</strong></td>
+<td style="text-align: left;">Lies in the closure of the effective cone</td>
+<td style="text-align: left;">Dually paired with the movable/nef cones</td>
+<td style="text-align: left;">Non-zero sections exist after arbitrary small ample twist</td>
+<td style="text-align: left;"><span class="math inline">\(\operatorname{Pseff}(X) = \overline{\operatorname{Eff}}(X)\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cone-inclusions" class="level2">
+<h2 class="anchored" data-anchor-id="cone-inclusions">Cone Inclusions</h2>
+<p><span class="math display">\[
+\begin{array}{ccccccc}
+\operatorname{Amp}(X) &amp; \subset &amp; \operatorname{SA}(X) &amp; \subset &amp; \operatorname{Nef}(X) &amp;   &amp;   \\
+\cap &amp; &amp; &amp; &amp; \cap &amp; &amp;  \\
+\operatorname{Big}(X) &amp; = &amp; \operatorname{int}\big(\overline{\operatorname{Eff}}(X)\big) &amp; \subset &amp; \operatorname{Eff}(X) &amp; \subset &amp; \overline{\operatorname{Eff}}(X)
+\end{array}
+\]</span></p>
+<p>Duality with 1-cycles: <span class="math display">\[
+\overline{\operatorname{NE}}(X) = \operatorname{Nef}(X)^\vee = \big\{ \gamma \in N_1(X)_{\mathbb{R}} \;\big|\; (\delta \cdot \gamma) \ge 0, \; \forall \delta \in \operatorname{Nef}(X) \big\}.
+\]</span></p>
 <hr>
 </section>
 <section id="references" class="level2">
