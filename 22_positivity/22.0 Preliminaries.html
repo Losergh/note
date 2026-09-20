@@ -650,6 +650,43 @@ H^0(X, \mathcal{K}_X^*) \xrightarrow{\;\operatorname{div}\;} H^0(X, \mathcal{K}_
 </main> <!-- /main -->
 <style>
 
+/* --------------------------------------------------------------------------
+   7. 缩减左侧边栏最左侧留白与多级缩进（释放水平空间，防止标题折行）
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  /* (1) 压缩侧边栏主容器的左内边距（原默认约 1.5rem~2rem） */
+  #quarto-sidebar,
+  .sidebar-navigation {
+    padding-left: 0.35rem !important; /* 大幅缩减最左侧空白 */
+    padding-right: 0.5rem !important;
+  }
+
+  /* (2) 清除菜单列表容器的额外左缩进 */
+  #quarto-sidebar .sidebar-menu-container,
+  #quarto-sidebar .sidebar-menu-container ul,
+  #quarto-sidebar .sidebar-item-container {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  /* (3) 压缩二级子章节（如 22.0 Preliminaries）的层级缩进 */
+  #quarto-sidebar .sidebar-section .sidebar-item {
+    padding-left: 0.6rem !important; /* 保持轻微层级感，但不浪费宽度 */
+  }
+
+  /* (4) 紧凑化目录项链接本身的内边距 */
+  #quarto-sidebar .sidebar-link {
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
+  }
+
+  /* (5) 保证如 "22.3 Iitaka Fibration" 这样的长标题整行显示不折行 */
+  #quarto-sidebar .sidebar-link,
+  #quarto-sidebar .menu-text {
+    white-space: nowrap !important; /* 强制单行显示 */
+  }
+}
+
 
 
 /* --------------------------------------------------------------------------
