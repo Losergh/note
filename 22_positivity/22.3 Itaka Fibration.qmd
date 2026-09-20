@@ -1,0 +1,308 @@
+---
+title: "22.3 Iitaka Fibration"
+subtitle: "Iitaka Dimension, Algebraic Fiber Spaces, and the Fundamental Theorem"
+date: last-modified
+number-sections: true
+sec: "22.3." 
+---
+
+::: {#def-semigroup-line-bundle}
+## Semigroup of a Line Bundle and Exponent
+Let $X$ be a variety and $L$ a line bundle on $X$.
+
+1. The set:
+   $$
+   N(L) = N(X, L) := \big\{ m \ge 0 \;\big|\; H^0(X, L^{\otimes m}) \neq 0 \big\}
+   $$
+   forms a sub-semigroup of $(\mathbb{N}, +)$.
+2. If $N(L) \neq \{0\}$, there exists a unique integer $e = e(L) \in \mathbb{Z}_{\ge 1}$ such that:
+   $$
+   N(L) \subseteq e \mathbb{N} \quad \text{and} \quad e\mathbb{N} \setminus N(L) \text{ is finite}.
+   $$
+   The integer $e(L)$ is called the **exponent** of $L$.
+:::
+
+::: {#prp-image-rational-map}
+## Scheme-Theoretic Image of a Rational Map
+Let $f: X \dashrightarrow Y$ be a rational map between irreducible varieties. For any representative morphism $(U, f_U)$ of $f$ defined on a dense open set $U \subseteq X$, the closed subvariety:
+$$
+\operatorname{Im}(f) := \overline{f_U(U)} \subseteq Y
+$$
+is independent of the chosen representative and is called the **image** of $f$.
+:::
+
+::: {.proof}
+If $(V, f_V)$ is another representative, then $f_U|_{U \cap V} = f_V|_{U \cap V}$. Setting $W = U \cap V$, the pullback $\mathcal{O}_Y \to (f_U)_* \mathcal{O}_U \to (f_W)_* \mathcal{O}_W$ has the same kernel because $W$ is dense in $U$ and $X$ is reduced. The kernel defines the vanishing ideal of the scheme-theoretic closure, so $\overline{f_U(U)} = \overline{f_W(W)} = \overline{f_V(V)}$.
+:::
+
+::: {#def-iitaka-dimension}
+## Iitaka Dimension
+Let $X$ be a normal variety and $L$ a line bundle on $X$.
+
+1. For each $m \in N(X, L)$, the complete linear system $|L^{\otimes m}|$ determines a rational map:
+   $$
+   \phi_m := \phi_{|L^{\otimes m}|}: X \dashrightarrow \mathbb{P} H^0(X, L^{\otimes m}).
+   $$
+2. The **Iitaka dimension** (or $L$-dimension) of $L$ is defined by:
+   $$
+   \kappa(L) = \kappa(X, L) := \begin{cases} \max_{m \in N(X, L)} \big\{ \dim \operatorname{Im}(\phi_m) \big\}, & N(X, L) \neq \{0\}, \\ -\infty, & N(X, L) = \{0\}. \end{cases}
+   $$
+3. For an arbitrary non-normal variety $X$, let $\nu: \widetilde{X} \to X$ be the normalization. The Iitaka dimension is defined by:
+   $$
+   \kappa(X, L) := \kappa(\widetilde{X}, \nu^* L).
+   $$
+:::
+
+::: {#def-algebraic-fiber-space}
+## Algebraic Fiber Space
+An **algebraic fiber space** (AFS) is a surjective projective morphism $f: X \to Y$ between irreducible varieties such that:
+$$
+f_* \mathcal{O}_X = \mathcal{O}_Y.
+$$
+By Zariski's Connectedness Principle, every fiber of an algebraic fiber space is connected.
+:::
+
+---
+
+> **Convention:** From now on, $X$ is assumed to be an irreducible normal projective variety over $k$.
+
+---
+
+::: {#prp-powers-achieving-kappa}
+## Powers Achieving the Iitaka Dimension
+Let $X$ be a normal variety and $\kappa = \kappa(X, L) \ge 0$. Then:
+$$
+\dim \operatorname{Im}(\phi_m) = \kappa \quad \text{for all } m \gg 0 \text{ with } m \in N(X, L).
+$$
+:::
+
+::: {.proof}
+Replacing $L$ by $L^{\otimes e(L)}$, we may assume $e(L) = 1$. Then there exists $p_0$ such that $H^0(X, L^{\otimes p}) \neq 0$ for all $p \ge p_0$. Fix a non-zero section $s \in H^0(X, L^{\otimes p})$.
+
+Choose $m$ such that $\dim \operatorname{Im}(\phi_m) = \kappa$. Multiplication by $s$ induces an injection $H^0(X, L^{\otimes m}) \hookrightarrow H^0(X, L^{\otimes(m+p)})$. This linear inclusion determines a rational projection of projective spaces:
+$$
+\begin{CD}
+X @>{\phi_{m+p}}>> Y_{m+p} \\
+@| @VV{\pi}V \\
+X @>{\phi_m}>> Y_m
+\end{CD}
+$$
+Because $\pi$ is a dominant rational projection, we have:
+$$
+\kappa = \dim Y_m \le \dim Y_{m+p} \le \kappa \implies \dim Y_{m+p} = \kappa.
+$$
+Thus $\dim \operatorname{Im}(\phi_n) = \kappa$ for all $n \ge m + p_0$.
+:::
+
+::: {#prp-afs-function-fields}
+## Criterion for Algebraic Fiber Spaces
+Let $f: X \to Y$ be a surjective projective morphism between normal varieties, inducing an inclusion of function fields $K(Y) \subseteq K(X)$. Then $f$ is an algebraic fiber space if and only if $K(Y)$ is algebraically closed in $K(X)$.
+
+In particular, every projective surjective birational morphism between normal varieties is an algebraic fiber space.
+:::
+
+::: {.proof}
+**$(\implies)$:** Let $K(Y) \subseteq \mathbb{L} \subseteq K(X)$ be the algebraic closure of $K(Y)$ in $K(X)$. Normalizing $Y$ in $\mathbb{L}$ produces a factorization:
+$$
+X \xrightarrow{\quad h \quad} Z \xrightarrow{\quad g \quad} Y,
+$$
+where $g: Z \to Y$ is finite and $h$ is proper. Since $f$ is surjective and projective, $h(X) = Z$, so $\dim Z = \dim Y$. The condition $f_* \mathcal{O}_X = \mathcal{O}_Y$ implies:
+$$
+\mathcal{O}_Y \subseteq g_* \mathcal{O}_Z \subseteq g_* h_* \mathcal{O}_X = f_* \mathcal{O}_X = \mathcal{O}_Y \implies g_* \mathcal{O}_Z = \mathcal{O}_Y.
+$$
+Since $Y$ is normal, $g$ must be an isomorphism, so $\mathbb{L} = K(Y)$.
+
+**$(\impliedby)$:** Consider the Stein factorization of $f$:
+$$
+X \xrightarrow{\quad \phi \quad} Z \xrightarrow{\quad g \quad} Y,
+$$
+where $\phi_* \mathcal{O}_X = \mathcal{O}_Z$ and $g$ is finite. Since $X$ is normal and $\phi_* \mathcal{O}_X = \mathcal{O}_Z$, the scheme $Z$ is normal. Furthermore, $K(Z) \subseteq K(X)$ is a finite algebraic extension of $K(Y)$. Since $K(Y)$ is algebraically closed in $K(X)$, we must have $K(Z) = K(Y)$. Because $Y$ is normal and $g$ is birational and finite, Zariski's Main Theorem implies that $g: Z \xrightarrow{\sim} Y$ is an isomorphism. Thus $f_* \mathcal{O}_X = \mathcal{O}_Y$.
+:::
+
+::: {#lem-afs-cohomology-pic}
+## Invariance of Sections and Picard Group
+Let $\phi: X \to Y$ be an algebraic fiber space.
+
+1. For every line bundle $L$ on $Y$, the natural map is an isomorphism:
+   $$
+   H^0(Y, L) \xrightarrow{\;\sim\;} H^0(X, \phi^* L).
+   $$
+2. The pullback homomorphism $\phi^*: \operatorname{Pic}(Y) \hookrightarrow \operatorname{Pic}(X)$ is injective.
+:::
+
+::: {.proof}
+1. By the projection formula, $\phi_* \phi^* L \cong L \otimes_{\mathcal{O}_Y} \phi_* \mathcal{O}_X \cong L$. Taking global sections yields $H^0(X, \phi^* L) \cong H^0(Y, \phi_* \phi^* L) \cong H^0(Y, L)$.
+2. If $\phi^* L \cong \mathcal{O}_X$, then by (1), $H^0(Y, L) \cong H^0(X, \mathcal{O}_X) \cong k$ and $H^0(Y, L^\vee) \cong H^0(X, \mathcal{O}_X) \cong k$. Choose non-zero sections $s \in H^0(Y, L)$ and $t \in H^0(Y, L^\vee)$. The product $s \otimes t \in H^0(Y, \mathcal{O}_Y) \cong k$ is non-zero, hence a non-zero constant $c \in k^\times$. Thus $s$ vanishes nowhere, which implies $L \cong \mathcal{O}_Y$.
+:::
+
+::: {#def-stable-base-locus}
+## Stable Base Locus
+Let $D$ be a Cartier divisor on $X$.
+
+1. The **stable base locus** of $D$ is the closed set:
+   $$
+   \mathbf{B}(D) := \bigcap_{m \ge 1} \operatorname{Bs}(|mD|).
+   $$
+2. Since the family of closed sets satisfies $\operatorname{Bs}(|m_1 D|) \cap \operatorname{Bs}(|m_2 D|) \supseteq \operatorname{Bs}(|(m_1 + m_2)D|)$, by the descending chain condition on closed subsets of $X$, there exists $m_0 \ge 1$ such that:
+   $$
+   \mathbf{B}(D) = \operatorname{Bs}(|k m_0 D|) \quad \text{for all } k \gg 0.
+   $$
+:::
+
+::: {#def-semiample}
+## Semiample Line Bundles
+1. Define the semigroup of free multiples:
+   $$
+   M(X, L) := \big\{ m \in \mathbb{N} \;\big|\; L^{\otimes m} \text{ is base-point-free} \big\}.
+   $$
+   Let $f = f(L)$ be the exponent of the semigroup $M(X, L)$.
+2. A line bundle $L$ on $X$ is **semiample** if $M(X, L) \neq \{0\}$, that is, some positive power $L^{\otimes m}$ is generated by its global sections.
+:::
+
+::: {#thm-semiample-fibration}
+## Semiample Fibration
+Let $X$ be a normal projective variety and $L$ a semiample line bundle on $X$. Then there exists an algebraic fiber space $\phi: X \to Y$ and an ample line bundle $A$ on $Y$ such that:
+
+1. For all $m \in M(X, L)$ sufficiently large, the morphism $\phi_m: X \to \mathbb{P} H^0(X, L^{\otimes m})$ has image $Y_m \cong Y$, and factors through $\phi$.
+2. $\phi^* A \cong L^{\otimes f(L)}$, and for $k \gg 0$, the very ample embeddings $\iota_{A^{\otimes k}}: Y \hookrightarrow \mathbb{P} H^0(Y, A^{\otimes k})$ make the following diagram commute:
+   $$
+   \begin{CD}
+   X @>{\phi}>> Y \\
+   @| @VV{\cong}V \\
+   X @>{\phi_{kf}}>> Y_{kf}
+   \end{CD}
+   $$
+In particular, the target variety $Y$ is normal and projective.
+:::
+
+::: {#def-bigness}
+## Big Line Bundles and Divisors
+A line bundle $L$ on an irreducible projective variety $X$ is **big** if:
+$$
+\kappa(X, L) = \dim X.
+$$
+A Cartier divisor $D$ is big if $\mathcal{O}_X(D)$ is big.
+:::
+
+::: {#thm-iitaka-fibration}
+## The Iitaka Fibration Theorem
+Let $X$ be a normal projective variety and $L$ a line bundle on $X$ with $\kappa(X, L) > 0$. Then there exists an algebraic fiber space between normal varieties:
+$$
+\phi_\infty: X_\infty \longrightarrow Y_\infty,
+$$
+unique up to birational equivalence, and a birational morphism $u_\infty: X_\infty \to X$, such that for all $k \in N(X, L)$ sufficiently large, there exists a birational map $v_k: Y_\infty \dashrightarrow Y_k$ making the following diagram commute:
+$$
+\begin{CD}
+X_\infty @>{u_\infty}>> X \\
+@V{\phi_\infty}VV @VV{\phi_k}V \\
+Y_\infty @>{v_k}>{\approx}> Y_k
+\end{CD}
+$$
+where $Y_k := \operatorname{Im}(\phi_k) \subseteq \mathbb{P} H^0(X, L^{\otimes k})$.
+:::
+
+::: {.proof}
+Replacing $L$ by $L^{\otimes e(L)}$, we may assume without loss of generality that $e(L) = 1$.
+
+*Step 1: The stable fibration for a sub-semigroup $m\mathbb{N}$.*
+Fix $m \in N(X, L)$ such that $\dim Y_m = \kappa(X, L)$. Let $\mathfrak{b} = \mathfrak{b}(|L^{\otimes m}|) \subseteq \mathcal{O}_X$ be the base ideal. Blow up $\mathfrak{b}$ and normalize to obtain a projective birational morphism:
+$$
+u_m: X_{(m)} := \operatorname{Bl}_{\mathfrak{b}}(X)^\nu \longrightarrow X.
+$$
+Let $E_m$ be the exceptional divisor on the blow-up, and $F_m$ its pullback to $X_{(m)}$. Define:
+$$
+M_m := u_m^* L^{\otimes m} \otimes_{\mathcal{O}_{X_{(m)}}} \mathcal{O}_{X_{(m)}}(-F_m).
+$$
+Because $u_m: X_{(m)} \to X$ is a birational morphism between normal varieties, @prp-afs-function-fields implies that $u_m$ is an algebraic fiber space. By @lem-afs-cohomology-pic, $H^0(X, L^{\otimes m}) \cong H^0(X_{(m)}, u_m^* L^{\otimes m})$. Since all sections vanish along $F_m$ by construction of the blow-up, restriction to $F_m$ is zero, yielding an isomorphism:
+$$
+H^0(X_{(m)}, M_m) \cong H^0(X, L^{\otimes m}).
+$$
+Consequently, $M_m$ is generated by its global sections and defines a morphism $\phi_{M_m}: X_{(m)} \to \mathbb{P} H^0(X_{(m)}, M_m)$. By @thm-semiample-fibration, the Stein factorization of $\phi_{M_m^{\otimes k}}$ stabilizes for $k \gg 0$ to an algebraic fiber space:
+$$
+\phi_{(m)}: X_{(m)} \longrightarrow Y_{(m)}.
+$$
+For every $k \ge 1$, we have $H^0(X_{(m)}, M_m^{\otimes k}) \subseteq H^0(X_{(m)}, u_m^* L^{\otimes mk})$, inducing a dominant rational projection $\mu_k: Y_{mk} \dashrightarrow Y_{(m)}$. Since $X_{(m)} \to Y_{(m)}$ is an AFS, $K(Y_{(m)})$ is algebraically closed in $K(X_{(m)})$. The extension $K(Y_{mk})/K(Y_{(m)})$ is algebraic and contained in $K(X_{(m)})$, forcing:
+$$
+K(Y_{mk}) = K(Y_{(m)}).
+$$
+Hence $\mu_k: Y_{mk} \dashrightarrow Y_{(m)}$ is birational for all $k \gg 0$.
+
+*Step 2: Construction of $X_\infty$ and $Y_\infty$.*
+Choose two coprime integers $p, q \in N(X, L)$ such that $\dim Y_p = \dim Y_q = \kappa(X, L)$ (which is possible since $H^0(X, L) \neq 0$). Apply Step 1 to $M_p$ and $M_q$, obtaining:
+$$
+\phi_{(p)}: X_{(p)} \longrightarrow Y_{(p)}, \qquad \phi_{(q)}: X_{(q)} \longrightarrow Y_{(q)}.
+$$
+Let $\widetilde{U}$ be the closure of the diagonal embedding of a common dense open set $U \subseteq X$ into $X_{(p)} \times_X X_{(q)}$. Let $X_\infty$ be the normalization of $\widetilde{U}$. The projection maps $v_p: X_\infty \to X_{(p)}$ and $v_q: X_\infty \to X_{(q)}$ are projective, birational morphisms between normal varieties, hence algebraic fiber spaces.
+
+Define the semiample line bundle:
+$$
+M_{pq} := v_p^* M_p^{\otimes m_1} \otimes v_q^* M_q^{\otimes m_2}.
+$$
+The morphism induced by $|M_{pq}|$ factors as:
+$$
+X_\infty \longrightarrow Y_\infty \xrightarrow{\quad w \quad} Y_{(p)} \times Y_{(q)},
+$$
+where $w$ is a finite morphism onto its image. Thus $K(Y_\infty) = K(Y_{(p)}) = K(Y_{(q)})$, and $K(Y_\infty)$ is algebraically closed in $K(X_\infty)$. Hence $\phi_\infty: X_\infty \to Y_\infty$ is an algebraic fiber space with $\dim Y_\infty = \kappa(X, L)$.
+
+For any $k \gg 0$, the Frobenius coin problem ensures that $k = c p^{m_1} + d q^{m_2}$ for integers $c, d \ge 1$. The sheaf $u_p^* M_p^{\otimes(c-1)p^{m_1}} \otimes u_q^* M_q^{\otimes(d-1)q^{m_2}}$ has a non-zero section, inducing an inclusion:
+$$
+H^0(X_\infty, M_{pq}) \hookrightarrow H^0(X_\infty, u_\infty^* L^{\otimes k}).
+$$
+This gives an induced dominant rational map $v_k: Y_\infty \dashrightarrow Y_k$. Since $\dim Y_k = \kappa(X, L) = \dim Y_\infty$ and $K(Y_\infty)$ is algebraically closed in $K(X_\infty)$, $v_k$ is birational. Uniqueness follows because any two such targets are birational to $Y_k$.
+:::
+
+::: {#cor-iitaka-fibers}
+## Iitaka Dimension of the Fibers
+Let $\phi_\infty: X_\infty \to Y_\infty$ be the Iitaka fibration associated with $L$, and let $L_\infty := u_\infty^* L$. For a very general closed point $y \in Y_\infty$ (that is, $y \in Y_\infty \setminus \bigcup_{i=1}^\infty F_i$ for countable proper closed subsets $F_i \subsetneq Y_\infty$), the fiber $F := X_{\infty, y} = \phi_\infty^{-1}(y)$ satisfies:
+$$
+\kappa(F, L_\infty|_F) = 0.
+$$
+:::
+
+::: {.proof}
+By generic smoothness, a very general fiber $F = X_{\infty, y}$ is smooth and connected (by Zariski's Main Theorem), hence integral. 
+
+For all $k \gg 0$, the rational map $\phi_k \circ u_\infty$ is defined along $F$ and contracts $F$ to a single point $\phi_k(u_\infty(F)) = \{p_k\} \subseteq Y_k$. Thus the image of the restriction map:
+$$
+\rho_k: H^0(X_\infty, L_\infty^{\otimes k}) \longrightarrow H^0(F, L_\infty^{\otimes k}|_F)
+$$
+has dimension $\le 1$ for all $k \ge 1$.
+
+*Claim:* Fix a very ample line bundle $B$ on $Y_\infty$. 
+1. There exists $m_0 > 0$ such that $H^0(X_\infty, L_\infty^{\otimes m_0} \otimes \phi_\infty^* B^\vee) \neq 0$.
+2. For any fixed $k$ and all $r \gg 0$, the restriction:
+   $$
+   \beta_{k, r}: H^0(X_\infty, L_\infty^{\otimes k} \otimes \phi_\infty^* B^{\otimes r}) \longrightarrow H^0(F, L_\infty^{\otimes k} \otimes \phi_\infty^* B^{\otimes r}|_F) \cong H^0(F, L_\infty^{\otimes k}|_F)
+   $$
+   is surjective.
+
+*Proof of Claim:*
+For (1), by the proof of @thm-iitaka-fibration, there exists an ample line bundle $A$ on $Y_\infty$ such that $\phi_\infty^* A \subseteq L_\infty^{\otimes m_0}$. Because $A$ is ample, $A^{\otimes m_0} \otimes B^\vee$ has a non-zero section for $m_0 \gg 0$, yielding a non-zero section $s \in H^0(X_\infty, L_\infty^{\otimes m_0} \otimes \phi_\infty^* B^\vee)$. For a very general fiber $F$, $s|_F \neq 0$.
+
+For (2), by generic flatness, $X_\infty \to Y_\infty$ is flat over a neighborhood of the generic point. By Grauert's Semicontinuity Theorem, $(\phi_\infty)_* L_\infty^{\otimes k}$ is locally free near $y$, and the fiber cohomology satisfies:
+$$
+H^0(F, L_\infty^{\otimes k}|_F) \cong (\phi_\infty)_* L_\infty^{\otimes k} \otimes k(y).
+$$
+Since $B$ is very ample on $Y_\infty$, the sheaf $(\phi_\infty)_* L_\infty^{\otimes k} \otimes B^{\otimes r}$ is generated by its global sections for $r \gg 0$. Hence the evaluation map $\beta_{k, r}$ is surjective.
+
+Now, for any $r \ge 1$, multiplication by $s^{\otimes r}$ yields an injection:
+$$
+H^0(X_\infty, L_\infty^{\otimes k} \otimes \phi_\infty^* B^{\otimes r}) \xrightarrow{\quad \times s^{\otimes r} \quad} H^0(X_\infty, L_\infty^{\otimes(k + r m_0)}).
+$$
+Restricting to the fiber $F$, we obtain a commutative diagram:
+$$
+\begin{CD}
+H^0(X_\infty, L_\infty^{\otimes k} \otimes \phi_\infty^* B^{\otimes r}) @>>> H^0(X_\infty, L_\infty^{\otimes(k + r m_0)}) \\
+@VV{\beta_{k, r}}V @VV{\rho_{k + r m_0}}V \\
+H^0(F, L_\infty^{\otimes k}|_F) @>{\times (s|_F)^{\otimes r}}>> H^0(F, L_\infty^{\otimes(k + r m_0)}|_F)
+\end{CD}
+$$
+Because $F$ is integral and $s|_F \neq 0$, the bottom map is injective. Since $\beta_{k, r}$ is surjective, the image of the bottom map is contained in $\operatorname{Im}(\rho_{k + r m_0})$. However, $\operatorname{rank}(\rho_{k + r m_0}) \le 1$, which forces:
+$$
+h^0(F, L_\infty^{\otimes k}|_F) \le 1 \quad \text{for all } k \ge 1.
+$$
+Since $h^0(F, L_\infty^{\otimes k}|_F) = 1$ for all sufficiently large divisible $k$, we conclude:
+$$
+\kappa(F, L_\infty|_F) = 0.
+$$
+:::
