@@ -1,0 +1,355 @@
+---
+title: "22.1 Nef-Divisors"
+subtitle: "Nakai-Moishezon Criterion, $\\mathbb{R}$-Divisors, and Kleiman's Theorem"
+date: last-modified
+number-sections: true
+sec: "22.1." 
+---
+
+::: {#thm-nakai-moishezon}
+## Nakai-Moishezon Criterion
+Let $X$ be a projective scheme and $L$ a line bundle on $X$. Then $L$ is ample if and only if for every irreducible subvariety $V \subseteq X$ with $\dim V \ge 1$,
+$$
+(L^{\dim V} \cdot V) > 0.
+$$
+:::
+
+::: {.proof}
+**$(\implies)$:** Suppose $L$ is ample. Then $L^{\otimes m}$ is very ample for some $m \ge 1$. For any irreducible subvariety $V \subseteq X$ of dimension $k = \dim V \ge 1$,
+$$
+((L^{\otimes m})^k \cdot V) = m^k (L^k \cdot V).
+$$
+The very ample line bundle $L^{\otimes m}$ defines an embedding $X \hookrightarrow \mathbb{P}^N$ such that $L^{\otimes m} \cong \mathcal{O}_X(1)$. Then:
+$$
+((L^{\otimes m})^k \cdot V) = (\mathcal{O}_{\mathbb{P}^N}(1)^k \cdot V) = \deg(V) > 0.
+$$
+Since $m^k > 0$, we conclude that $(L^k \cdot V) > 0$.
+
+**$(\impliedby)$:** By @prp-amplitude-checked-curves(2), we may assume without loss of generality that $X$ is integral. We proceed by induction on $n = \dim X$:
+
+- If $\dim X = 1$, $L$ is ample if and only if $\deg L = (L \cdot X) > 0$, which holds by hypothesis.
+- Assume the criterion holds for all schemes of dimension $\le n - 1$.
+- Let $L = \mathcal{O}_X(D)$ for some Cartier divisor $D \in \operatorname{Div}(X)$.
+
+*Step 1: $H^0(X, \mathcal{O}_X(mD)) \neq 0$ for $m \gg 0$.*
+By Asymptotic Riemann-Roch (@thm-asymptotic-rr-1),
+$$
+\chi(X, \mathcal{O}_X(mD)) = \frac{(D^n)}{n!} m^n + O(m^{n-1}).
+$$
+Since $(D^n) = (D^n \cdot X) > 0$, the leading coefficient is strictly positive. 
+
+Write $L = M \otimes_{\mathcal{O}_X} N^\vee$ with $M, N$ very ample line bundles on $X$. Choosing effective divisors $A, B$ such that $M \cong \mathcal{O}_X(A)$ and $N \cong \mathcal{O}_X(B)$, we have $D \sim A - B$. 
+
+Tensoring the short exact sequence $0 \to \mathcal{O}_X(-A) \to \mathcal{O}_X \to \mathcal{O}_A \to 0$ with $\mathcal{O}_X((m+1)D)$ yields:
+$$
+0 \longrightarrow \mathcal{O}_X(mD - B) \longrightarrow \mathcal{O}_X((m+1)D) \longrightarrow \mathcal{O}_A((m+1)D) \longrightarrow 0,
+$$
+since $(m+1)D - A = mD + (D - A) \sim mD - B$. Similarly, tensoring $0 \to \mathcal{O}_X(-B) \to \mathcal{O}_X \to \mathcal{O}_B \to 0$ with $\mathcal{O}_X(mD)$ yields:
+$$
+0 \longrightarrow \mathcal{O}_X(mD - B) \longrightarrow \mathcal{O}_X(mD) \longrightarrow \mathcal{O}_B(mD) \longrightarrow 0.
+$$
+Because $\dim A, \dim B \le n-1$, the induction hypothesis applies to the restricted bundles on $A$ and $B$, implying that for $m \gg 0$, their higher cohomology stabilizes. Consequently:
+$$
+H^1(X, \mathcal{O}_X(mD)) \cong H^1(X, \mathcal{O}_X(mD - B)) \cong H^1(X, \mathcal{O}_X((m+1)D))
+$$
+for $m \gg 0$, meaning $\dim H^1(X, \mathcal{O}_X(mD))$ is bounded. Therefore:
+$$
+\chi(X, \mathcal{O}_X(mD)) = h^0(X, \mathcal{O}_X(mD)) - h^1(X, \mathcal{O}_X(mD)) + O(1) \longrightarrow +\infty \quad \text{as } m \to \infty,
+$$
+which forces $h^0(X, \mathcal{O}_X(mD)) > 0$ for all $m \gg 0$. 
+
+*Step 2: $\mathcal{O}_X(mD)$ is globally generated for $m \gg 0$.*
+Replacing $D$ by a linearly equivalent effective divisor $D' \sim mD$ (noting that $D$ is ample if and only if $mD$ is ample), we may assume $D \ge 0$.
+
+To show $\mathcal{O}_X(mD)$ is globally generated, it suffices to show that the evaluation map:
+$$
+H^0(X, \mathcal{O}_X(mD)) \otimes_k \mathcal{O}_{X, P} \longrightarrow \mathcal{O}_X(mD)_P
+$$
+is surjective for every point $P \in X$.
+- If $P \notin \operatorname{Supp}(D)$, the canonical section $s_D^{\otimes m}$ does not vanish at $P$, so surjectivity holds trivially.
+- For $P \in \operatorname{Supp}(D)$, consider the exact sequence:
+  $$
+  0 \longrightarrow \mathcal{O}_X((m-1)D) \xrightarrow{\;\times D\;} \mathcal{O}_X(mD) \longrightarrow \mathcal{O}_D(mD) \longrightarrow 0.
+  $$
+  Since $\dim D = n - 1$, the induction hypothesis implies $\mathcal{O}_D(D)$ is ample on $D$. Hence $\mathcal{O}_D(mD)$ is globally generated and $H^1(D, \mathcal{O}_D(mD)) = 0$ for $m \gg 0$. The long exact sequence shows:
+  $$
+  H^1(X, \mathcal{O}_X((m-1)D)) \longrightarrow H^1(X, \mathcal{O}_X(mD))
+  $$
+  is surjective for all large $m$. Thus the dimension sequence $\dim_k H^1(X, \mathcal{O}_X(mD))$ is non-increasing, hence constant for $m \ge m_0$:
+  $$
+  H^1(X, \mathcal{O}_X((m-1)D)) \xrightarrow{\;\sim\;} H^1(X, \mathcal{O}_X(mD)).
+  $$
+  This yields a surjection on global sections:
+  $$
+  H^0(X, \mathcal{O}_X(mD)) \twoheadrightarrow H^0(D, \mathcal{O}_D(mD)).
+  $$
+  Considering the commutative diagram:
+  $$
+  \begin{CD}
+  H^0(X, \mathcal{O}_X(mD)) @>>> H^0(D, \mathcal{O}_D(mD)) \\
+  @VVV @VVV \\
+  \mathcal{O}_X(mD)_P @>>> \mathcal{O}_D(mD) \otimes k(P) \cong \mathcal{O}_X(mD) \otimes k(P)
+  \end{CD}
+  $$
+  Since $\mathcal{O}_D(mD)$ is globally generated, the right vertical arrow is surjective, which implies that $\mathcal{O}_X(mD)$ is generated by global sections at every $P \in \operatorname{Supp}(D)$.
+
+Finally, because $\mathcal{O}_X(mD)$ is globally generated and satisfies $(mD \cdot C) > 0$ for all irreducible curves $C \subseteq X$, @prp-amplitude-checked-curves(3) implies that $\mathcal{O}_X(mD)$ is ample. Hence $L$ is ample.
+:::
+
+---
+
+::: {#def-q-divisors}
+## $\mathbb{Q}$-Divisors
+1. Let $X$ be a scheme over $k$. The group of **$\mathbb{Q}$-Cartier divisors** is:
+   $$
+   \operatorname{Div}_{\mathbb{Q}}(X) := \operatorname{Div}(X) \otimes_{\mathbb{Z}} \mathbb{Q}.
+   $$
+   Every $D \in \operatorname{Div}_{\mathbb{Q}}(X)$ can be written as $D = \frac{1}{n} A$ for some $n \in \mathbb{Z}_{>0}$ and $A \in \operatorname{Div}(X)$.
+
+2. A $\mathbb{Q}$-divisor $D$ is **integral** if it lies in the image of the natural map $\operatorname{Div}(X) \to \operatorname{Div}_{\mathbb{Q}}(X)$.
+
+3. A $\mathbb{Q}$-divisor $D$ is **effective** ($D \ge 0$) if it can be written as $D = \sum c_i A_i$ with rational coefficients $c_i > 0$ and effective Cartier divisors $A_i$ (equivalently, $D = c A$ for some $c \in \mathbb{Q}_{>0}$ and effective $A \in \operatorname{Div}(X)$).
+:::
+
+::: {#def-support-q-divisors}
+## Support of $\mathbb{Q}$-Divisors
+Let $D \in \operatorname{Div}_{\mathbb{Q}}(X)$. A codimension 1 closed subscheme $E \subseteq X$ is said to **support** $D$ if there exists a representation $D = \sum c_i A_i$ such that $\bigcup_i \operatorname{Supp}(A_i) \subseteq E$.
+:::
+
+::: {#def-intersection-q-divisors}
+## Intersection and Equivalence of $\mathbb{Q}$-Divisors
+Let $X$ be a proper scheme.
+
+1. Let $V \subseteq X$ be a subscheme of pure dimension $k$. The $\mathbb{Q}$-valued intersection product is defined by multi-linear extension:
+   $$
+   \operatorname{Div}_{\mathbb{Q}}(X)^k \longrightarrow \mathbb{Q}, \quad (D_1, \dots, D_k) \longmapsto \prod_{i=1}^k c_i \cdot (A_1 \cdots A_k \cdot [V]),
+   $$
+   where $D_i = c_i A_i$ with $c_i \in \mathbb{Q}$ and $A_i \in \operatorname{Div}(X)$.
+
+2. Two $\mathbb{Q}$-divisors $D_1, D_2$ are **numerically equivalent** (denoted $D_1 \equiv_{\mathrm{num}} D_2$) if $(D_1 \cdot C) = (D_2 \cdot C)$ for every irreducible curve $C \subseteq X$. We set:
+   $$
+   N^1(X)_{\mathbb{Q}} := N^1(X) \otimes_{\mathbb{Z}} \mathbb{Q}.
+   $$
+
+3. Two $\mathbb{Q}$-divisors $D_1, D_2$ are **$\mathbb{Q}$-linearly equivalent** (denoted $D_1 \sim_{\mathbb{Q}} D_2$ or $D_1 \equiv_{\mathrm{lin}} D_2$) if there exists an integer $r > 0$ such that $r D_1, r D_2$ are integral and $r D_1 \sim r D_2$. We set:
+   $$
+   \operatorname{CaCl}_{\mathbb{Q}}(X) := \operatorname{CaCl}(X) \otimes_{\mathbb{Z}} \mathbb{Q}.
+   $$
+:::
+
+::: {#def-amplitude-q-divisors}
+## Ample $\mathbb{Q}$-Divisors
+A $\mathbb{Q}$-divisor $D \in \operatorname{Div}_{\mathbb{Q}}(X)$ is **ample** if it satisfies any of the following three equivalent conditions:
+
+1. $D = \sum c_i A_i$ with $c_i \in \mathbb{Q}_{>0}$ and each $A_i \in \operatorname{Div}(X)$ ample;
+2. There exists an integer $r > 0$ such that $r D$ is an integral ample Cartier divisor;
+3. $(D^{\dim V} \cdot V) > 0$ for all irreducible subvarieties $V \subseteq X$ with $\dim V \ge 1$.
+:::
+
+::: {#prp-openness-ample-cone-q}
+## Openness of Amplitude for $\mathbb{Q}$-Divisors
+Let $X$ be a projective variety, and let $H$ be an ample $\mathbb{Q}$-divisor on $X$. For any $\mathbb{Q}$-divisors $E_1, \dots, E_r$, the perturbed divisor:
+$$
+H + \varepsilon_1 E_1 + \dots + \varepsilon_r E_r
+$$
+is ample for all rational numbers $\varepsilon_i$ satisfying $0 \le |\varepsilon_i| \ll 1$.
+:::
+
+::: {.proof}
+Clearing denominators, we may assume without loss of generality that $H$ and each $E_i$ are integral Cartier divisors. Because $H$ is ample, there exists an integer $m \gg 0$ such that $m H \pm E_i$ is ample for each $i = 1, \dots, r$. Rewriting the perturbation as a convex linear combination:
+$$
+H + \sum_{i=1}^r \varepsilon_i E_i = \sum_{i=1}^r |\varepsilon_i| \cdot \frac{1}{m}\big(m H + \operatorname{sgn}(\varepsilon_i) E_i\big) + \left(1 - \frac{1}{m}\sum_{i=1}^r |\varepsilon_i|\right) H.
+$$
+For $\sum_{i=1}^r |\varepsilon_i| < m$, this is a positive rational linear combination of ample divisors, hence ample.
+:::
+
+---
+
+::: {#def-r-divisors}
+## $\mathbb{R}$-Divisors
+1. The real vector space of **$\mathbb{R}$-divisors** is:
+   $$
+   \operatorname{Div}_{\mathbb{R}}(X) := \operatorname{Div}(X) \otimes_{\mathbb{Z}} \mathbb{R}.
+   $$
+   The intersection product extends multi-linearly to $(D_1 \cdots D_k \cdot V) \in \mathbb{R}$. Two $\mathbb{R}$-divisors $D_1, D_2$ are numerically equivalent ($D_1 \equiv_{\mathrm{num}} D_2$) if $(D_1 \cdot C) = (D_2 \cdot C)$ for every curve $C$.
+
+2. The real Néron-Severi space is defined by:
+   $$
+   N^1(X)_{\mathbb{R}} := \operatorname{Div}_{\mathbb{R}}(X) / \equiv_{\mathrm{num}}.
+   $$
+
+3. An $\mathbb{R}$-divisor $D$ is **effective** if $D = \sum c_i A_i$ with $c_i \in \mathbb{R}_{\ge 0}$ and $A_i$ effective Cartier divisors.
+
+4. An $\mathbb{R}$-divisor $D$ is **ample** if $D = \sum c_i A_i$ with $c_i \in \mathbb{R}_{>0}$ and $A_i$ ample integral Cartier divisors.
+:::
+
+::: {#prp-neron-severi-r}
+## Flat Base Change for $N^1(X)$
+There is a canonical identification:
+$$
+N^1(X)_{\mathbb{R}} = N^1(X) \otimes_{\mathbb{Z}} \mathbb{R} = N^1(X)_{\mathbb{Q}} \otimes_{\mathbb{Q}} \mathbb{R}.
+$$
+:::
+
+::: {.proof}
+Since $\mathbb{R}$ is a flat $\mathbb{Z}$-module, it suffices to show that:
+$$
+\big\{ D \in \operatorname{Div}(X) \mid D \equiv_{\mathrm{num}} 0 \big\} \otimes_{\mathbb{Z}} \mathbb{R} = \big\{ D \in \operatorname{Div}_{\mathbb{R}}(X) \mid D \equiv_{\mathrm{num}} 0 \big\}.
+$$
+The inclusion $\subseteq$ is evident. Conversely, let $D = \sum_{i=1}^k c_i A_i$ with $c_i \in \mathbb{R}$ and $A_i \in \operatorname{Div}(X)$ satisfy $(D \cdot C) = 0$ for all curves $C \subseteq X$. The intersection pairing defines a linear map:
+$$
+\phi: \mathbb{Z}^k \longrightarrow \mathbb{Z}^{A_1(X)}, \quad (a_1, \dots, a_k) \longmapsto \left( C \mapsto \sum_{i=1}^k a_i (A_i \cdot C) \right).
+$$
+Since $(c_1, \dots, c_k) \in \ker(\phi \otimes_{\mathbb{Z}} \mathbb{R})$, we have $\ker(\phi \otimes \mathbb{Q}) \neq 0$, so $\ker(\phi) \neq 0$. Choose a non-zero vector $(a_1, \dots, a_k) \in \mathbb{Z}^k \cap \ker(\phi)$ with $a_1 \neq 0$. The divisor $A_1' := \sum a_i A_i$ satisfies $A_1' \equiv_{\mathrm{num}} 0$. We then decompose:
+$$
+D = \frac{c_1}{a_1} A_1' + \sum_{i=2}^k \left(c_i - \frac{c_1 a_i}{a_1}\right) A_i.
+$$
+The second term involves only $k - 1$ divisors and is numerically trivial. Induction on $k$ proves $D \in \{ D \equiv_{\mathrm{num}} 0 \} \otimes_{\mathbb{Z}} \mathbb{R}$.
+:::
+
+::: {#def-curve-classes}
+## 1-Cycles Modulo Numerical Equivalence
+1. Let $X$ be a proper scheme. Define the real vector space of 1-cycles by:
+   $$
+   Z_1(X)_{\mathbb{R}} := \bigoplus_{C \subseteq X \text{ curve}} \mathbb{R} \cdot C.
+   $$
+   Two 1-cycles $\gamma_1, \gamma_2$ are numerically equivalent ($\gamma_1 \equiv_{\mathrm{num}} \gamma_2$) if $(D \cdot \gamma_1) = (D \cdot \gamma_2)$ for all $D \in \operatorname{Div}_{\mathbb{R}}(X)$. We define:
+   $$
+   N_1(X)_{\mathbb{R}} := Z_1(X)_{\mathbb{R}} / \equiv_{\mathrm{num}}.
+   $$
+   Then the intersection pairing induces a perfect pairing of finite-dimensional real vector spaces:
+   $$
+   N^1(X)_{\mathbb{R}} \times N_1(X)_{\mathbb{R}} \longrightarrow \mathbb{R}, \quad (\delta, \gamma) \longmapsto (\delta \cdot \gamma).
+   $$
+
+2. Both $N_1(X)_{\mathbb{R}}$ and $N_1(X)_{\mathbb{Q}}$ are finite-dimensional, and $N_1(X)$ is a finitely generated free abelian group.
+:::
+
+::: {#prp-openness-amplitude-r}
+## Openness of Amplitude for $\mathbb{R}$-Divisors
+1. If $D_1 \equiv_{\mathrm{num}} D_2$, then $D_1$ is ample if and only if $D_2$ is ample.
+2. If $H \in \operatorname{Div}_{\mathbb{R}}(X)$ is ample, then $H + \varepsilon_1 E_1 + \dots + \varepsilon_r E_r$ is ample for all $0 \le |\varepsilon_i| \ll 1$. In particular, the ample cone $\operatorname{Amp}(X) \subseteq N^1(X)_{\mathbb{R}}$ is open.
+:::
+
+---
+
+::: {#def-nef-divisors}
+## Nef Divisors
+1. Let $X$ be a proper scheme. A line bundle $L \in \operatorname{Pic}(X)$ is **numerically effective (nef)** if for every irreducible curve $C \subseteq X$,
+   $$
+   (L \cdot C) \ge 0.
+   $$
+   An $\mathbb{R}$-divisor $D \in \operatorname{Div}_{\mathbb{R}}(X)$ is **nef** if $(D \cdot C) \ge 0$ for all irreducible curves $C \subseteq X$.
+
+2. Nefness depends only on the numerical class: if $D_1 \equiv_{\mathrm{num}} D_2$, then $D_1$ is nef if and only if $D_2$ is nef.
+:::
+
+::: {#prp-properties-nef}
+## Functorial Properties of Nef Bundles
+1. Let $f: X \to Y$ be a proper morphism. If $L \in \operatorname{Pic}(Y)$ is nef, then $f^* L$ is nef on $X$. If $f$ is additionally surjective, then $L$ is nef if and only if $f^* L$ is nef.
+
+2. If $L$ is globally generated, then $L$ is nef. In particular, the pullback of $\mathcal{O}_{\mathbb{P}}(1)$ under any morphism $\phi_{|L|}: X \to \mathbb{P}^N$ is nef.
+
+3. $L$ is nef if and only if $L|_{X_{\mathrm{red}}}$ is nef, if and only if $L|_{X_i}$ is nef for every irreducible component $X_i \subseteq X$.
+:::
+
+::: {#thm-kleiman}
+## Kleiman's Theorem
+Let $X$ be a proper scheme and $D \in \operatorname{Div}_{\mathbb{R}}(X)$ a nef $\mathbb{R}$-divisor. Then for every irreducible subvariety $V \subseteq X$ of dimension $k = \dim V$,
+$$
+(D^k \cdot V) \ge 0.
+$$
+:::
+
+::: {.proof}
+By @prp-properties-nef(3), we may assume $X$ is irreducible and reduced. 
+
+*Reduction to the projective case:* By Chow's Lemma, there exists a projective variety $\widetilde{X}$ and a birational surjective morphism $f: \widetilde{X} \to X$. For any curve $C \subseteq \widetilde{X}$, by the projection formula:
+$$
+(f^* D \cdot C) = (D \cdot f_* C) \ge 0,
+$$
+so $f^* D$ is nef on $\widetilde{X}$. If the theorem holds for projective varieties, then for any $V \subseteq X$ of dimension $k$, choosing $V' \subseteq \widetilde{X}$ such that $f_* V' = \deg(V'/V) V$, we have:
+$$
+(D^k \cdot V) = \frac{1}{\deg(V'/V)} ((f^* D)^k \cdot V') \ge 0.
+$$
+Thus we may assume $X$ is projective.
+
+We induct on $n = \dim X$:
+- If $n = 1$, $(D \cdot X) \ge 0$ by the definition of nefness.
+- Assume the result holds in dimensions $\le n - 1$. For any proper subvariety $V \subsetneq X$ of dimension $k \le n - 1$, $D|_V$ is nef, so $(D^k \cdot V) \ge 0$ by induction. It remains to show that $(D^n) = (D^n \cdot X) \ge 0$.
+
+*Case 1: $D$ is a $\mathbb{Q}$-divisor.*
+Fix an ample divisor $H$ on $X$, and consider the polynomial:
+$$
+P(t) := ((D + t H)^n) = \sum_{i=0}^n \binom{n}{i} (D^{n-i} \cdot H^i) t^i = a_n t^n + a_{n-1} t^{n-1} + \dots + a_0.
+$$
+By induction, for $1 \le i \le n$, the cycle $H^i$ is represented by a positive combination of $(n-i)$-dimensional subvarieties, so $a_i = \binom{n}{i} (D^{n-i} \cdot H^i) \ge 0$, and $a_n = (H^n) > 0$.
+
+Suppose toward a contradiction that $a_0 = (D^n) < 0$. By Descartes' rule of signs, $P(t)$ has a unique positive root $t_0 > 0$.
+
+*Claim:* For any rational $t > t_0$, the divisor $D + t H$ is ample.
+We verify the Nakai-Moishezon criterion (@thm-nakai-moishezon):
+- For $V = X$, $((D + t H)^n \cdot X) = P(t) > 0$ because $t > t_0$ and $a_n > 0$.
+- For any subvariety $V \subsetneq X$ of dimension $k < n$, the expansion:
+  $$
+  ((D + t H)^k \cdot V) = (D^k \cdot V) + \sum_{i=1}^{k-1} \binom{k}{i} (D^{k-i} \cdot H^i \cdot V) t^i + (H^k \cdot V) t^k
+  $$
+  has non-negative coefficients for $i < k$ by the induction hypothesis, and the leading coefficient satisfies $(H^k \cdot V) > 0$. Thus $((D + t H)^k \cdot V) > 0$ for all $t > 0$.
+
+This proves $D + t H$ is ample for all rational $t > t_0$. Now decompose $P(t)$ as:
+$$
+P(t) = Q(t) + R(t), \quad \text{where } Q(t) = (D \cdot (D + t H)^{n-1}), \quad R(t) = t(H \cdot (D + t H)^{n-1}).
+$$
+For $t > t_0$, $D + t H$ is ample, so $(D + t H)^{n-1}$ is represented by an effective 1-cycle. Since $D$ is nef, $Q(t) \ge 0$ for all $t > t_0$, and by continuity $Q(t_0) \ge 0$. Furthermore, every coefficient of $R(t)$ is non-negative and its leading term $(H^n) t^n$ is strictly positive, so $R(t_0) > 0$. Hence:
+$$
+P(t_0) = Q(t_0) + R(t_0) > 0,
+$$
+contradicting $P(t_0) = 0$. Thus $(D^n) \ge 0$.
+
+*Case 2: $D$ is an $\mathbb{R}$-divisor.*
+Choose ample divisors $H_1, \dots, H_r$ whose classes span $N^1(X)_{\mathbb{R}}$. For $\varepsilon = (\varepsilon_1, \dots, \varepsilon_r)$ with $\varepsilon_i > 0$, the perturbation:
+$$
+D(\varepsilon) := D + \sum_{i=1}^r \varepsilon_i H_i
+$$
+is nef, and the cone of such perturbations forms an open neighborhood. For any $\delta > 0$, we may choose $0 < \varepsilon_i < \delta$ such that $D(\varepsilon) \equiv_{\mathrm{num}} E$ for some $\mathbb{Q}$-divisor $E$. By Case 1, $(D(\varepsilon)^k \cdot V) = (E^k \cdot V) \ge 0$. Taking the limit as $\varepsilon_i \to 0$ yields:
+$$
+(D^k \cdot V) \ge 0.
+$$
+This completes the proof.
+:::
+
+::: {#cor-kleiman-perturbation}
+## Kleiman's Perturbation and Nefness Criterion
+Let $X$ be a projective scheme.
+
+1. If $D$ is a nef $\mathbb{R}$-divisor and $H$ is an ample $\mathbb{R}$-divisor, then $D + \varepsilon H$ is ample for every $\varepsilon > 0$.
+2. Conversely, if $D, H$ are $\mathbb{R}$-divisors such that $D + \varepsilon H$ is ample for all sufficiently small $\varepsilon > 0$, then $D$ is nef.
+:::
+
+::: {.proof}
+**Proof of (2):** If $D + \varepsilon H$ is ample for all $0 < \varepsilon \ll 1$, then for every irreducible curve $C \subseteq X$,
+$$
+((D + \varepsilon H) \cdot C) = (D \cdot C) + \varepsilon (H \cdot C) > 0.
+$$
+Taking the limit as $\varepsilon \to 0^+$ gives $(D \cdot C) \ge 0$, so $D$ is nef.
+
+**Proof of (1):** Replacing $\varepsilon H$ by $H$, it suffices to prove that $D + H$ is ample. Let $V \subseteq X$ be an irreducible subvariety of dimension $k \ge 1$. Expanding the intersection:
+$$
+((D + H)^k \cdot V) = \sum_{s=0}^k \binom{k}{s} (H^s \cdot D^{k-s} \cdot V).
+$$
+Because $H$ is ample, $H^s$ is represented by an effective cycle of dimension $k - s$. By Kleiman's Theorem (@thm-kleiman), $(H^s \cdot D^{k-s} \cdot V) \ge 0$ for all $s < k$. For $s = k$, $(H^k \cdot V) > 0$. Hence:
+$$
+((D + H)^k \cdot V) \ge (H^k \cdot V) > 0.
+$$
+If $D + H$ is a $\mathbb{Q}$-divisor, Nakai-Moishezon (@thm-nakai-moishezon) implies directly that $D + H$ is ample. 
+
+If $D + H$ is not rational, choose ample divisors $H_1, \dots, H_r$ spanning $N^1(X)_{\mathbb{R}}$. By openness of the ample cone, there exist small $\varepsilon_i > 0$ such that $H - \sum \varepsilon_i H_i$ remains ample, and:
+$$
+E := D + H - \sum_{i=1}^r \varepsilon_i H_i \equiv_{\mathrm{num}} E_{\mathbb{Q}}
+$$
+is a rational class. Then $E$ is ample by the rational case, and:
+$$
+D + H = E + \sum_{i=1}^r \varepsilon_i H_i
+$$
+is a sum of ample $\mathbb{R}$-divisors, hence ample.
+:::

@@ -43,9 +43,8 @@ website:
       style: docked
       collapse-level: 2
       contents:
-        - href: 22_positivity/index.qmd
-          text: "Overview"
-
+        auto: 22_positivity
+    
     - id: alg-groups-sidebar
       title: "Algebraic Groups"
       style: docked

@@ -1,0 +1,348 @@
+---
+title: "22.0 Preliminaries"
+subtitle: "Positivity in Algebraic Geometry: Divisors and Intersection Theory"
+date: last-modified
+number-sections: true
+sec: "22.0." 
+---
+
+::: {#def-cartier-divisor}
+## Cartier Divisor
+Let $X$ be an irreducible complex variety. Let $\mathcal{M}_X := \mathcal{K}_X$ be the constant sheaf of rational functions on $X$, and $\mathcal{O}_X \subseteq \mathcal{M}_X$ the structure sheaf.
+
+1. A **Cartier divisor** on $X$ is a global section of the quotient sheaf of units $\mathcal{M}_X^* / \mathcal{O}_X^*$. The abelian group of Cartier divisors on $X$ is denoted by:
+   $$
+   \operatorname{Div}(X) := \Gamma(X, \mathcal{M}_X^* / \mathcal{O}_X^*).
+   $$
+
+2. In terms of local data, a Cartier divisor $D \in \operatorname{Div}(X)$ is represented by a collection of pairs $\{(U_i, f_i)\}_{i \in I}$, where $\{U_i\}$ is an open covering of $X$, $f_i \in \Gamma(U_i, \mathcal{M}_X^*)$, and on overlaps $U_{ij} = U_i \cap U_j$,
+   $$
+   \frac{f_i}{f_j} = g_{ij} \in \Gamma(U_{ij}, \mathcal{O}_X^*).
+   $$
+   Two such collections $\{(U_i, f_i)\}$ and $\{(V_j, g_j)\}$ determine the same Cartier divisor if they agree on a common refinement $\{W_k\}$, that is, $f_k / g_k \in \Gamma(W_k, \mathcal{O}_X^*)$.
+
+3. The **support** of $D$ is the closed subset:
+   $$
+   \operatorname{Supp}(D) := \big\{ x \in X \;\big|\; (f_i)_x \notin \mathcal{O}_{X, x}^* \text{ for } x \in U_i \big\}.
+   $$
+
+4. The group operation is written additively: for $D = \{(U_i, f_i)\}$ and $D' = \{(U_i, f_i')\}$,
+   $$
+   D + D' = \{(U_i, f_i f_i')\}.
+   $$
+
+5. A Cartier divisor $D$ is **effective** (denoted $D \ge 0$) if it can be represented by local equations $f_i \in \Gamma(U_i, \mathcal{O}_X)$ for all $i$. We write $D \ge D'$ if and only if $D - D' \ge 0$.
+:::
+
+::: {#rem-non-reduced-cartier}
+## Sheaf of Meromorphic Functions on Non-Reduced Schemes
+If $X$ is not necessarily reduced, $\mathcal{M}_X$ is defined as the sheaf of total quotient rings: for an affine open $U = \operatorname{Spec} A$,
+$$
+\mathcal{M}_X(U) := A_{\mathrm{tot}},
+$$
+where $A_{\mathrm{tot}} = S^{-1}A$ is the localization of $A$ at the multiplicatively closed set $S \subseteq A$ of all non-zero-divisors. Then $\mathcal{O}_X^* \subseteq \mathcal{M}_X^*$, and Cartier divisors are defined identically.
+:::
+
+::: {#def-weil-divisor}
+## Cycles and Weil Divisors
+1. Let $X$ be a variety (or scheme) of pure dimension $n$. A **$k$-cycle** on $X$ is a formal $\mathbb{Z}$-linear combination of $k$-dimensional irreducible subvarieties of $X$. The abelian group of $k$-cycles is denoted by $Z_k(X)$.
+
+2. A **Weil divisor** on $X$ is an $(n-1)$-cycle, so the group of Weil divisors is $\operatorname{WDiv}(X) := Z_{n-1}(X)$.
+
+3. If $X$ is irreducible, for any $f \in \mathcal{K}(X)^*$ and any prime divisor $V \in Z_{n-1}(X)$, we define:
+   $$
+   \operatorname{ord}_V(f) := \operatorname{ord}_{\widetilde{\mathcal{O}}_{X, V}}(f),
+   $$
+   where $\widetilde{\mathcal{O}}_{X, V}$ is the normalization of the local ring $\mathcal{O}_{X, V}$ in $\mathcal{K}(X)$. The rational function $f$ defines a principal Weil divisor:
+   $$
+   \operatorname{div}(f) = \sum_{V \subseteq X} \operatorname{ord}_V(f) [V].
+   $$
+:::
+
+::: {#prp-cycle-map}
+## Cycle Map
+There is a canonical cycle homomorphism:
+$$
+\operatorname{cyc}: \operatorname{Div}(X) \longrightarrow \operatorname{WDiv}(X), \quad D \longmapsto [D] := \sum_{V \subseteq X} \operatorname{ord}_V(D) \cdot [V],
+$$
+where $\operatorname{ord}_V(D) = \operatorname{ord}_V(f_i)$ whenever the generic point $\eta_V \in U_i$.
+
+- The map $\operatorname{cyc}$ is injective if $X$ is normal.
+- The map $\operatorname{cyc}$ is an isomorphism if $X$ is non-singular (regular).
+:::
+
+::: {#def-principal-divisor}
+## Principal Divisors and Rational Sections
+1. For any global section $f \in \Gamma(X, \mathcal{M}_X^*)$, $f$ defines a principal Cartier divisor:
+   $$
+   \operatorname{div}(f) \in \Gamma(X, \mathcal{M}_X^* / \mathcal{O}_X^*) = \operatorname{Div}(X).
+   $$
+   The subgroup of principal divisors is denoted by $\operatorname{PDiv}(X) \subseteq \operatorname{Div}(X)$.
+
+2. Two Cartier divisors $D_1, D_2$ are **linearly equivalent** (denoted $D_1 \sim D_2$ or $D_1 \equiv_{\mathrm{lin}} D_2$) if:
+   $$
+   D_1 - D_2 \in \operatorname{PDiv}(X).
+   $$
+
+3. Let $L$ be a line bundle on $X$. For any global section $s \in \Gamma(X, L)$, choosing local trivializations $\psi_i: L|_{U_i} \xrightarrow{\sim} \mathcal{O}_{U_i}$ defines an effective Cartier divisor $\{ (U_i, \psi_i(s)) \} \in \operatorname{Div}(X)$, denoted $\operatorname{div}(s)_0$.
+
+4. More generally, any non-zero rational section $s \in \Gamma(X, L \otimes_{\mathcal{O}_X} \mathcal{M}_X)$ determines a Cartier divisor $\operatorname{div}(s) \in \operatorname{Div}(X)$.
+:::
+
+::: {#def-line-bundle-divisor}
+## The Sheaf $\mathcal{O}_X(D)$
+1. Every Cartier divisor $D = \{(U_i, f_i)\} \in \operatorname{Div}(X)$ determines an invertible sheaf $\mathcal{O}_X(D)$ (or $\mathcal{L}(D)$) whose local sections are:
+   $$
+   \mathcal{O}_X(D)(U) := \big\{ s \in \Gamma(U, \mathcal{M}_X) \;\big|\; \operatorname{div}(s)|_U + D|_U \ge 0 \big\}.
+   $$
+   Locally on each open set $U_i$, multiplication by $f_i$ yields an isomorphism:
+   $$
+   \mathcal{O}_X(D)(U_i) \xrightarrow{\quad \times f_i \quad} \mathcal{O}_X(U_i), \quad s \longmapsto f_i \cdot s,
+   $$
+   since $\operatorname{div}(f_i s) = \operatorname{div}(f_i) + \operatorname{div}(s) \ge 0 \implies f_i s \in \mathcal{O}_X(U_i)$.
+
+2. From the short exact sequence of sheaves on $X$:
+   $$
+   0 \longrightarrow \mathcal{O}_X^* \longrightarrow \mathcal{M}_X^* \longrightarrow \mathcal{M}_X^* / \mathcal{O}_X^* \longrightarrow 0,
+   $$
+   the connecting homomorphism gives:
+   $$
+   \delta: \operatorname{Div}(X) = \Gamma(X, \mathcal{M}_X^* / \mathcal{O}_X^*) \longrightarrow H^1(X, \mathcal{O}_X^*) = \operatorname{Pic}(X).
+   $$
+   Furthermore, $\mathcal{O}_X(D_1) \cong \mathcal{O}_X(D_2) \iff D_1 \sim D_2$.
+
+3. This construction induces an isomorphism:
+   $$
+   \operatorname{CaCl}(X) := \operatorname{Div}(X) / \operatorname{PDiv}(X) \xrightarrow{\;\sim\;} \operatorname{Pic}(X)
+   $$
+   whenever $X$ is reduced or projective.
+:::
+
+::: {#def-linear-series}
+## Linear Series and Base Locus
+1. Let $X$ be a variety and $L$ a line bundle on $X$. Let $V \subseteq H^0(X, L)$ be a non-zero finite-dimensional subspace. The **linear series** associated with $V$ is:
+   $$
+   |V| := \mathbb{P}(V^*) = \mathbb{P}_{\mathrm{sub}}(V),
+   $$
+   the projective space of 1-dimensional subspaces in $V$. If $H^0(X, L)$ is finite-dimensional, $|H^0(X, L)|$ is denoted by $|L|$ and called the **complete linear series**.
+
+2. The evaluation homomorphism is given by:
+   $$
+   \mathrm{eval}_V: V \otimes_k \mathcal{O}_X \longrightarrow L, \quad s \otimes f \longmapsto f \cdot s|_U.
+   $$
+
+3. The **base ideal** $\mathfrak{b}(|V|) \subseteq \mathcal{O}_X$ of $|V|$ is the image of the dualized evaluation:
+   $$
+   V \otimes_k L^\vee \longrightarrow \mathcal{O}_X, \quad s \otimes \phi \longmapsto \phi(s).
+   $$
+   The **base scheme** is the closed subscheme $\operatorname{Bs}(|V|) \subseteq X$ defined by $\mathfrak{b}(|V|)$. For a divisor $D$, we write $\mathfrak{b}(|D|)$ and $\operatorname{Bs}(|D|)$ for the base ideal and locus of $|\mathcal{O}_X(D)|$.
+:::
+
+::: {#def-free-linear-series}
+## Base-Point-Free Linear Series
+- A linear series $|V|$ is **free** (or **base-point-free**) if its base ideal is trivial: $\mathfrak{b}(|V|) = \mathcal{O}_X$ (equivalently, $\operatorname{Bs}(|V|) = \emptyset$).
+- A divisor $D$ or a line bundle $L$ is free if its complete linear series is base-point-free.
+- A line bundle $L$ is free if and only if $L$ is generated by its global sections.
+:::
+
+::: {#prp-morphism-linear-series}
+## Maps to Projective Space
+1. If $\dim_k V \ge 1$ and $B = \operatorname{Bs}(|V|)$, then $|V|$ defines a morphism:
+   $$
+   \phi_{|V|}: X \setminus B \longrightarrow \mathbb{P} V = \operatorname{Proj}(\operatorname{Sym} V).
+   $$
+
+2. If $W \subseteq V$ is a linear subspace, we have a commutative naturality diagram:
+   $$
+   \begin{CD}
+   X \setminus \operatorname{Bs}(|V|) @>{\phi_{|V|}}>> \mathbb{P} V \setminus \mathbb{P}(V/W) \\
+   @VVV @VV{\pi}V \\
+   X \setminus \operatorname{Bs}(|W|) @>{\phi_{|W|}}>> \mathbb{P} W
+   \end{CD}
+   $$
+   where $\pi$ is the linear projection with center $\mathbb{P}(V/W)$.
+:::
+
+::: {#def-intersection-number}
+## Intersection Number (Snapper's Formulation)
+1. Let $X$ be a proper variety over $k$. Let $Y \hookrightarrow X$ be an irreducible subvariety of dimension $m = \dim Y$. For any line bundles $L_1, \dots, L_m \in \operatorname{Pic}(X)$, the **intersection number** is defined by:
+   $$
+   (L_1 \cdots L_m \cdot Y) := \sum_{I \subseteq \{1, \dots, m\}} (-1)^{|I|} \chi\left(X, \bigotimes_{i \in I} L_i^\vee \otimes_{\mathcal{O}_X} i_* \mathcal{O}_Y\right) = \sum_{I \subseteq \{1, \dots, m\}} (-1)^{|I|} \chi\left(Y, \bigotimes_{i \in I} L_i^\vee|_Y\right).
+   $$
+
+2. If $Y = X$ with $\dim X = n$, we write $(L_1 \cdots L_n)$ instead of $(L_1 \cdots L_n \cdot X)$. Then:
+   $$
+   (L_1 \cdots L_m \cdot Y) = (L_1|_Y \cdots L_m|_Y).
+   $$
+
+3. For a general subscheme $Y \subseteq X$ of pure dimension $m$, associated with the cycle $[Y] = \sum_j \operatorname{length}_{\mathcal{O}_{Y, \eta_j}}(\mathcal{O}_{Y, \eta_j}) [Y_j]$, the intersection number is defined by linearity:
+   $$
+   (L_1 \cdots L_m \cdot Y) := \sum_j \operatorname{length}(\mathcal{O}_{Y, \eta_j}) (L_1 \cdots L_m \cdot Y_j).
+   $$
+
+4. If $L_i \cong \mathcal{O}_X(D_i)$, we also write $(D_1 \cdots D_m \cdot Y)$ for $(L_1 \cdots L_m \cdot Y)$.
+:::
+
+---
+
+> **Convention:** From now on, unless otherwise stated, every scheme is assumed to be separated, proper, and of finite type over an algebraically closed field $k = \bar{k}$ with $\operatorname{char}(k) = 0$. A *variety* is defined as an irreducible and reduced scheme.
+
+---
+
+::: {#prp-properties-intersection}
+## Basic Properties of Intersection Numbers
+1. Let $X$ be a proper curve and $L \in \operatorname{Pic}(X)$. Then $(L \cdot X) = \deg L$. If $X$ is a proper variety and $C \subseteq X$ is a curve, $(L \cdot C) = \deg(L|_C)$.
+
+2. Let $D \in \operatorname{Div}(X)$ be an effective Cartier divisor. If $Y \subseteq X$ is an irreducible subvariety of dimension $n = \dim Y$ such that $D$ intersects $Y$ properly ($Y \not\subseteq \operatorname{Supp} D$), then $D|_Y$ is of pure dimension $n - 1$ and:
+   $$
+   (L_1 \cdots L_{n-1} \cdot \mathcal{O}_X(D) \cdot Y) = (L_1 \cdots L_{n-1} \cdot D|_Y).
+   $$
+
+3. The intersection product is $\mathbb{Z}$-multilinear and symmetric:
+   $$
+   \operatorname{Pic}(X)^m \times A_m(X) \longrightarrow \mathbb{Z}, \quad (L_1, \dots, L_m, [Y]) \longmapsto (L_1 \cdots L_m \cdot [Y]).
+   $$
+   In particular, if $Y_1 \sim_{\mathrm{rat}} Y_2$ are rationally equivalent cycles, then:
+   $$
+   (L_1 \cdots L_m \cdot Y_1) = (L_1 \cdots L_m \cdot Y_2).
+   $$
+:::
+
+::: {#def-numerical-equivalence}
+## Numerical Equivalence
+1. Two line bundles $L_1, L_2 \in \operatorname{Pic}(X)$ are **numerically equivalent** (denoted $L_1 \equiv_{\mathrm{num}} L_2$) if for every irreducible curve $C \subseteq X$,
+   $$
+   (L_1 \cdot C) = (L_2 \cdot C).
+   $$
+   Two Cartier divisors $D_1, D_2$ are numerically equivalent (denoted $D_1 \equiv_{\mathrm{num}} D_2$) if $\mathcal{O}_X(D_1) \equiv_{\mathrm{num}} \mathcal{O}_X(D_2)$.
+
+2. The quotient group:
+   $$
+   N^1(X) := \operatorname{Pic}(X) / \equiv_{\mathrm{num}}
+   $$
+   is called the **Néron-Severi group** of $X$ (modulo numerical equivalence).
+:::
+
+::: {#prp-picard-number}
+## The Néron-Severi Group and Picard Number
+1. $N^1(X)$ is torsion-free.
+2. $N^1(X)$ is a finitely generated free abelian group.
+3. The rank $\rho(X) := \operatorname{rank}_{\mathbb{Z}} N^1(X)$ is called the **Picard number** of $X$.
+:::
+
+::: {#lem-numerical-intersection}
+## Numerical Invariance of Intersection
+If $L_1 \equiv_{\mathrm{num}} L_1', \dots, L_k \equiv_{\mathrm{num}} L_k'$, then for any subvariety $V \subseteq X$ of pure dimension $k$,
+$$
+(L_1 \cdots L_k \cdot [V]) = (L_1' \cdots L_k' \cdot [V]).
+$$
+:::
+
+::: {#thm-asymptotic-rr-1}
+## Asymptotic Riemann-Roch I
+1. Let $X$ be an irreducible proper variety of dimension $n = \dim X$, and $D \in \operatorname{Div}(X)$. As $m \to \infty$,
+   $$
+   \chi(X, \mathcal{O}_X(mD)) = \frac{(D^n)}{n!} m^n + O(m^{n-1}).
+   $$
+   More generally, for any coherent sheaf $\mathcal{F} \in \operatorname{Coh}(X)$,
+   $$
+   \chi(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{O}_X(mD)) = \operatorname{rank}(\mathcal{F}) \cdot \frac{(D^n)}{n!} m^n + O(m^{n-1}).
+   $$
+
+2. If $D$ is ample, then by Serre vanishing $H^i(X, \mathcal{O}_X(mD)) = 0$ for all $i > 0$ and $m \gg 0$, hence:
+   $$
+   h^0(X, \mathcal{O}_X(mD)) = \frac{(D^n)}{n!} m^n + O(m^{n-1}),
+   $$
+   and for any $\mathcal{F} \in \operatorname{Coh}(X)$,
+   $$
+   h^0(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{O}_X(mD)) = \operatorname{rank}(\mathcal{F}) \cdot \frac{(D^n)}{n!} m^n + O(m^{n-1}).
+   $$
+:::
+
+::: {#prp-amplitude-checked-curves}
+## Amplitude Checked on Curves and Reduction
+1. Let $f: Y \to X$ be a finite morphism of proper schemes. If $L \in \operatorname{Pic}(X)$ is ample, then $f^* L \in \operatorname{Pic}(Y)$ is ample.
+
+2. A line bundle $L \in \operatorname{Pic}(X)$ is ample if and only if $L|_{X_{\mathrm{red}}}$ is ample, if and only if $L|_{X_{i, \mathrm{red}}}$ is ample for every irreducible component $X_i$ of $X$.
+
+3. Let $L$ be a globally generated line bundle on a proper scheme $X$. Then $L$ is ample if and only if $(L \cdot C) > 0$ for every irreducible curve $C \subseteq X$.
+:::
+
+::: {.proof}
+*Proof of (3).* Consider the following three assertions:
+- (a) $L$ is ample;
+- (b) The morphism $\phi = \phi_{|L|}: X \to \mathbb{P} H^0(X, L)$ is finite;
+- (c) $(L \cdot C) > 0$ for all irreducible curves $C \subseteq X$.
+
+We show $(b) \implies (a) \implies (c) \implies (b)$:
+
+- $(b) \implies (a)$: Since $\phi$ is finite and $\mathcal{O}_{\mathbb{P}}(1)$ is ample, $L \cong \phi^* \mathcal{O}_{\mathbb{P}}(1)$ is ample by (1).
+- $(a) \implies (c)$: If $L$ is ample, its restriction to any curve $C \subseteq X$ is ample, hence $(L \cdot C) = \deg(L|_C) > 0$.
+- $(c) \implies (b)$: Suppose $\phi$ is not finite. Since $\phi$ is a proper morphism, it cannot be quasi-finite. Hence there exists a point $p \in \phi(X)$ such that $\dim \phi^{-1}(p) \ge 1$. Choose an irreducible curve $Z \subseteq \phi^{-1}(p) \subseteq X$. Endow $Z$ with the reduced structure. 
+  
+  The restriction $\phi|_Z: Z \to \mathbb{P}^N$ has set-theoretic image $\{p\}$. Because $Z$ is reduced, the scheme-theoretic image $\operatorname{Im}(\phi|_Z)$ is reduced, meaning $\operatorname{Im}(\phi|_Z) = \operatorname{Spec} k(p) \hookrightarrow \mathbb{P}^N$. Thus the pullback bundle:
+  $$
+  L|_Z = (\phi|_Z)^* \mathcal{O}_{\mathbb{P}^N}(1) \cong \mathcal{O}_Z
+  $$
+  is trivial. Consequently, $(L \cdot Z) = \deg(\mathcal{O}_Z) = 0$, contradicting assumption (c). Thus $\phi$ is finite, completing the proof.
+:::
+
+::: {#prp-asymptotic-rr-2}
+## Asymptotic Riemann-Roch II
+Let $X$ be an irreducible projective variety of dimension $n$, and let $D \in \operatorname{Div}(X)$ be an ample Cartier divisor. Then:
+$$
+h^0(X, \mathcal{O}_X(mD)) = \frac{(D^n)}{n!} m^n + O(m^{n-1}).
+$$
+For any coherent sheaf $\mathcal{F} \in \operatorname{Coh}(X)$,
+$$
+h^0(X, \mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{O}_X(mD)) = \operatorname{rank}(\mathcal{F}) \cdot \frac{(D^n)}{n!} m^n + O(m^{n-1}).
+$$
+:::
+
+::: {#prp-intersection-hypersurfaces}
+## Intersection with Complete Intersections in $\mathbb{P}^N$
+Let $X = \mathbb{P}^N$, and let $Y \subseteq X$ be an irreducible subvariety of dimension $n$. If $H_1, \dots, H_n$ are effective hypersurfaces of degrees $d_1, \dots, d_n$ in $\mathbb{P}^N$, then:
+$$
+(\mathcal{O}_X(H_1) \cdots \mathcal{O}_X(H_n) \cdot Y) = d_1 \cdots d_n \deg(Y).
+$$
+:::
+
+::: {#prp-projection-formula}
+## Projection Formula for Intersections
+Let $\pi: X_1 \to X_2$ be a morphism of integral proper schemes of the same dimension $n$. For any line bundles $L_1, \dots, L_n \in \operatorname{Pic}(X_2)$,
+$$
+(\pi^* L_1 \cdots \pi^* L_n) = \deg(X_1 / X_2) \cdot (L_1 \cdots L_n).
+$$
+:::
+
+::: {#thm-cacl-pic}
+## Cartier Class Group and Picard Group
+If $X$ is a reduced Noetherian scheme, then:
+$$
+\operatorname{CaCl}(X) \xrightarrow{\;\sim\;} \operatorname{Pic}(X).
+$$
+:::
+
+::: {.proof}
+*Proof idea.* We show that $H^1(X, \mathcal{K}_X^*) = 0$. Let $X = \bigcup_{j=1}^m \overline{\{\eta_j\}}$ be the decomposition into irreducible components with generic points $\eta_j$. Then:
+$$
+\mathcal{K}_X^* = \bigoplus_{j=1}^m (i_{\eta_j})_* K_j^*,
+$$
+which is a direct sum of pushforwards of constant sheaves from points, hence $\mathcal{K}_X^*$ is flasque. Therefore $H^1(X, \mathcal{K}_X^*) = 0$. Taking cohomology of the short exact sequence $0 \to \mathcal{O}_X^* \to \mathcal{K}_X^* \to \mathcal{K}_X^* / \mathcal{O}_X^* \to 0$ yields:
+$$
+H^0(X, \mathcal{K}_X^*) \xrightarrow{\;\operatorname{div}\;} H^0(X, \mathcal{K}_X^* / \mathcal{O}_X^*) \longrightarrow H^1(X, \mathcal{O}_X^*) \longrightarrow 0,
+$$
+which implies:
+$$
+\operatorname{coker}(\operatorname{div}) = \operatorname{Div}(X) / \operatorname{PDiv}(X) = \operatorname{CaCl}(X) \xrightarrow{\;\sim\;} \operatorname{Pic}(X).
+$$
+:::
+
+::: {#thm-wdiv-div}
+## Cartier Divisors vs. Weil Divisors
+Let $X$ be an irreducible variety that is regular in codimension 1. Then the cycle map induces injective homomorphisms:
+$$
+\operatorname{Div}(X) \hookrightarrow \operatorname{WDiv}(X) \quad \text{and} \quad \operatorname{CaCl}(X) \hookrightarrow \operatorname{Cl}(X).
+$$
+In particular, if $X$ is smooth (or regular), these maps are isomorphisms.
+:::
