@@ -13,9 +13,47 @@ The development progresses logically from classical intersection theory and asym
 
 ---
 
+
+
+
+The following table summarizes the key properties, intersection-theoretic criteria, and asymptotic behaviors across the hierarchy of positivity:
+
+| Notion | Geometric Characterization | Numerical / Intersection Criterion | Asymptotic Growth $h^0(mD)$ | Associated Cone |
+| :--- | :--- | :--- | :--- | :--- |
+| **Ample** | $mD$ defines a closed immersion into $\mathbb{P}^N$ | $\forall V, \; (D^{\dim V} \cdot V) > 0$ (Nakai-Moishezon) | $\frac{(D^n)}{n!} m^n + O(m^{n-1})$ | $\operatorname{Amp}(X) = \operatorname{Nef}(X)^\circ$ |
+| **Semiample** | $mD$ is base-point-free for some $m \ge 1$ | Pullback of an ample divisor under a contraction | $m^{\kappa}$ where $\kappa = \kappa(X, D)$; $R(X, D)$ is f.g. | $\operatorname{SA}(X) \subseteq \operatorname{Nef}(X)$ |
+| **Nef** | Degree on every curve is non-negative | $\forall C, \; (D \cdot C) \ge 0 \iff (D^k \cdot V) \ge 0$ | Controlled cohomology: $h^i(mD) = O(m^{n-i})$ | $\operatorname{Nef}(X) = \overline{\operatorname{Amp}(X)}$ |
+| **Big** | Iitaka dimension is maximal: $\kappa(X, D) = \dim X$ | Kodaira decomposition: $mD \sim A + N$ ($A$ ample, $N \ge 0$) | $\Theta(m^n)$; volume $\operatorname{vol}(D) > 0$ | $\operatorname{Big}(X) = \operatorname{int}(\overline{\operatorname{Eff}}(X))$ |
+| **Pseudoeffective** | Lies in the closure of the effective cone | Dually paired with the movable/nef cones | Non-zero sections exist after arbitrary small ample twist | $\operatorname{Pseff}(X) = \overline{\operatorname{Eff}}(X)$ |
+
+## Cone Inclusions
+
+$$
+\begin{array}{ccccccc}
+\operatorname{Amp}(X) & \subset & \operatorname{SA}(X) & \subset & \operatorname{Nef}(X) &   &   \\
+\cap & & & & \cap & &  \\
+\operatorname{Big}(X) & = & \operatorname{int}\big(\overline{\operatorname{Eff}}(X)\big) & \subset & \operatorname{Eff}(X) & \subset & \overline{\operatorname{Eff}}(X)
+\end{array}
+$$
+
+Duality with 1-cycles:
+$$
+\overline{\operatorname{NE}}(X) = \operatorname{Nef}(X)^\vee = \big\{ \gamma \in N_1(X)_{\mathbb{R}} \;\big|\; (\delta \cdot \gamma) \ge 0, \; \forall \delta \in \operatorname{Nef}(X) \big\}.
+$$
+
+
+
+---
+
+
 ## References
 
 - **Lazarsfeld, R.** *Positivity in Algebraic Geometry I: Classical Setting: Line Bundles and Linear Series*. Ergebnisse der Mathematik und ihrer Grenzgebiete. 3. Folge, Vol. 48, Springer-Verlag, Berlin, 2004.
 - **Kollár, J., Mori, S.** *Birational Geometry of Algebraic Varieties*. Cambridge Tracts in Mathematics, Vol. 134, Cambridge University Press, 1998.
 - **Hartshorne, R.** *Algebraic Geometry*. Graduate Texts in Mathematics, Vol. 52, Springer-Verlag, 1977.
 - **Debarre, O.** *Higher-Dimensional Algebraic Geometry*. Universitext, Springer-Verlag, New York, 2001.
+
+
+
+
+
