@@ -85,6 +85,11 @@ website:
 
 format:
   html:
+    grid:
+      sidebar-width: 240px    # 左侧边栏宽度（默认 250px）
+      margin-width: 200px     # 右侧边栏宽度（默认 250px~300px）
+      body-width: 950px       # 正文阅读区域宽度（默认 800px，可适度拉宽）
+      gutter-width: 1.2rem    # 侧边栏与正文的间隔（默认 1.5rem）
     theme:
       light: cosmo
       dark: darkly
