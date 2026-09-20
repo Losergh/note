@@ -1,5 +1,5 @@
 ---
-title: "Positivity in Algebraic Geometry"
+title: "Positivity in AG"
 subtitle: "Linear Series, Numerical Cones and asymptotic Invariants"
 date: last-modified
 ---
