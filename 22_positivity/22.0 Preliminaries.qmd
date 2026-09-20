@@ -1,6 +1,6 @@
 ---
 title: "22.0 Preliminaries"
-subtitle: "Positivity in Algebraic Geometry: Divisors and Intersection Theory"
+subtitle: "Divisors and Intersection Theory"
 date: last-modified
 number-sections: true
 sec: "22.0." 
