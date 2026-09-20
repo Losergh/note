@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-09-20">
 
-<title>Positivity in AG – Math Notes</title>
+<title>22.1 Nef-Divisors – Math Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -35,8 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../23_algebraic_groups/index.html" rel="next">
-<link href="../16_ag/index.html" rel="prev">
+<link href="../22_positivity/22.0 Preliminaries.html" rel="prev">
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -79,6 +79,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -283,7 +312,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../16_ag/index.html">Topics</a></li><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/22.0 Preliminaries.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.1 Nef Divisors.html">22.1 Nef-Divisors</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -301,16 +330,10 @@ ul.task-list li input[type="checkbox"] {
 </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Topics</span></a>
+ <span class="menu-text">Positivity in AG</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -318,51 +341,34 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../16_ag/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Algebraic Geometry</span></a>
+  <a href="../22_positivity/22.0 Preliminaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.0 Preliminaries</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../22_positivity/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Positivity</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../23_algebraic_groups/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Algebraic Groups</span></a>
+  <a href="../22_positivity/22.1 Nef Divisors.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">22.1 Nef-Divisors</span></a>
   </div>
 </li>
       </ul>
   </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../editing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Typography</span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../16_ag/index.html">Topics</a></li><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/22.0 Preliminaries.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.1 Nef Divisors.html">22.1 Nef-Divisors</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Positivity in AG</h1>
+<h1 class="title">22.1 Nef-Divisors</h1>
+<p class="subtitle lead">Nakai-Moishezon Criterion, <span class="math inline">\(\mathbb{R}\)</span>-Divisors, and Kleiman’s Theorem</p>
 </div>
 
 
@@ -370,6 +376,12 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 20, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -379,11 +391,223 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level1">
-<h1>Overview</h1>
+<div id="thm-nakai-moishezon" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Nakai-Moishezon Criterion)</strong></span> Let <span class="math inline">\(X\)</span> be a projective scheme and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span>. Then <span class="math inline">\(L\)</span> is ample if and only if for every irreducible subvariety <span class="math inline">\(V \subseteq X\)</span> with <span class="math inline">\(\dim V \ge 1\)</span>, <span class="math display">\[
+(L^{\dim V} \cdot V) &gt; 0.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><strong><span class="math inline">\((\implies)\)</span>:</strong> Suppose <span class="math inline">\(L\)</span> is ample. Then <span class="math inline">\(L^{\otimes m}\)</span> is very ample for some <span class="math inline">\(m \ge 1\)</span>. For any irreducible subvariety <span class="math inline">\(V \subseteq X\)</span> of dimension <span class="math inline">\(k = \dim V \ge 1\)</span>, <span class="math display">\[
+((L^{\otimes m})^k \cdot V) = m^k (L^k \cdot V).
+\]</span> The very ample line bundle <span class="math inline">\(L^{\otimes m}\)</span> defines an embedding <span class="math inline">\(X \hookrightarrow \mathbb{P}^N\)</span> such that <span class="math inline">\(L^{\otimes m} \cong \mathcal{O}_X(1)\)</span>. Then: <span class="math display">\[
+((L^{\otimes m})^k \cdot V) = (\mathcal{O}_{\mathbb{P}^N}(1)^k \cdot V) = \deg(V) &gt; 0.
+\]</span> Since <span class="math inline">\(m^k &gt; 0\)</span>, we conclude that <span class="math inline">\((L^k \cdot V) &gt; 0\)</span>.</p>
+<p><strong><span class="math inline">\((\impliedby)\)</span>:</strong> By <strong>?@prp-amplitude-checked-curves</strong>(2), we may assume without loss of generality that <span class="math inline">\(X\)</span> is integral. We proceed by induction on <span class="math inline">\(n = \dim X\)</span>:</p>
+<ul>
+<li>If <span class="math inline">\(\dim X = 1\)</span>, <span class="math inline">\(L\)</span> is ample if and only if <span class="math inline">\(\deg L = (L \cdot X) &gt; 0\)</span>, which holds by hypothesis.</li>
+<li>Assume the criterion holds for all schemes of dimension <span class="math inline">\(\le n - 1\)</span>.</li>
+<li>Let <span class="math inline">\(L = \mathcal{O}_X(D)\)</span> for some Cartier divisor <span class="math inline">\(D \in \operatorname{Div}(X)\)</span>.</li>
+</ul>
+<p><em>Step 1: <span class="math inline">\(H^0(X, \mathcal{O}_X(mD)) \neq 0\)</span> for <span class="math inline">\(m \gg 0\)</span>.</em> By Asymptotic Riemann-Roch (<strong>?@thm-asymptotic-rr-1</strong>), <span class="math display">\[
+\chi(X, \mathcal{O}_X(mD)) = \frac{(D^n)}{n!} m^n + O(m^{n-1}).
+\]</span> Since <span class="math inline">\((D^n) = (D^n \cdot X) &gt; 0\)</span>, the leading coefficient is strictly positive.</p>
+<p>Write <span class="math inline">\(L = M \otimes_{\mathcal{O}_X} N^\vee\)</span> with <span class="math inline">\(M, N\)</span> very ample line bundles on <span class="math inline">\(X\)</span>. Choosing effective divisors <span class="math inline">\(A, B\)</span> such that <span class="math inline">\(M \cong \mathcal{O}_X(A)\)</span> and <span class="math inline">\(N \cong \mathcal{O}_X(B)\)</span>, we have <span class="math inline">\(D \sim A - B\)</span>.</p>
+<p>Tensoring the short exact sequence <span class="math inline">\(0 \to \mathcal{O}_X(-A) \to \mathcal{O}_X \to \mathcal{O}_A \to 0\)</span> with <span class="math inline">\(\mathcal{O}_X((m+1)D)\)</span> yields: <span class="math display">\[
+0 \longrightarrow \mathcal{O}_X(mD - B) \longrightarrow \mathcal{O}_X((m+1)D) \longrightarrow \mathcal{O}_A((m+1)D) \longrightarrow 0,
+\]</span> since <span class="math inline">\((m+1)D - A = mD + (D - A) \sim mD - B\)</span>. Similarly, tensoring <span class="math inline">\(0 \to \mathcal{O}_X(-B) \to \mathcal{O}_X \to \mathcal{O}_B \to 0\)</span> with <span class="math inline">\(\mathcal{O}_X(mD)\)</span> yields: <span class="math display">\[
+0 \longrightarrow \mathcal{O}_X(mD - B) \longrightarrow \mathcal{O}_X(mD) \longrightarrow \mathcal{O}_B(mD) \longrightarrow 0.
+\]</span> Because <span class="math inline">\(\dim A, \dim B \le n-1\)</span>, the induction hypothesis applies to the restricted bundles on <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, implying that for <span class="math inline">\(m \gg 0\)</span>, their higher cohomology stabilizes. Consequently: <span class="math display">\[
+H^1(X, \mathcal{O}_X(mD)) \cong H^1(X, \mathcal{O}_X(mD - B)) \cong H^1(X, \mathcal{O}_X((m+1)D))
+\]</span> for <span class="math inline">\(m \gg 0\)</span>, meaning <span class="math inline">\(\dim H^1(X, \mathcal{O}_X(mD))\)</span> is bounded. Therefore: <span class="math display">\[
+\chi(X, \mathcal{O}_X(mD)) = h^0(X, \mathcal{O}_X(mD)) - h^1(X, \mathcal{O}_X(mD)) + O(1) \longrightarrow +\infty \quad \text{as } m \to \infty,
+\]</span> which forces <span class="math inline">\(h^0(X, \mathcal{O}_X(mD)) &gt; 0\)</span> for all <span class="math inline">\(m \gg 0\)</span>.</p>
+<p><em>Step 2: <span class="math inline">\(\mathcal{O}_X(mD)\)</span> is globally generated for <span class="math inline">\(m \gg 0\)</span>.</em> Replacing <span class="math inline">\(D\)</span> by a linearly equivalent effective divisor <span class="math inline">\(D' \sim mD\)</span> (noting that <span class="math inline">\(D\)</span> is ample if and only if <span class="math inline">\(mD\)</span> is ample), we may assume <span class="math inline">\(D \ge 0\)</span>.</p>
+<p>To show <span class="math inline">\(\mathcal{O}_X(mD)\)</span> is globally generated, it suffices to show that the evaluation map: <span class="math display">\[
+H^0(X, \mathcal{O}_X(mD)) \otimes_k \mathcal{O}_{X, P} \longrightarrow \mathcal{O}_X(mD)_P
+\]</span> is surjective for every point <span class="math inline">\(P \in X\)</span>. - If <span class="math inline">\(P \notin \operatorname{Supp}(D)\)</span>, the canonical section <span class="math inline">\(s_D^{\otimes m}\)</span> does not vanish at <span class="math inline">\(P\)</span>, so surjectivity holds trivially. - For <span class="math inline">\(P \in \operatorname{Supp}(D)\)</span>, consider the exact sequence: <span class="math display">\[
+  0 \longrightarrow \mathcal{O}_X((m-1)D) \xrightarrow{\;\times D\;} \mathcal{O}_X(mD) \longrightarrow \mathcal{O}_D(mD) \longrightarrow 0.
+  \]</span> Since <span class="math inline">\(\dim D = n - 1\)</span>, the induction hypothesis implies <span class="math inline">\(\mathcal{O}_D(D)\)</span> is ample on <span class="math inline">\(D\)</span>. Hence <span class="math inline">\(\mathcal{O}_D(mD)\)</span> is globally generated and <span class="math inline">\(H^1(D, \mathcal{O}_D(mD)) = 0\)</span> for <span class="math inline">\(m \gg 0\)</span>. The long exact sequence shows: <span class="math display">\[
+  H^1(X, \mathcal{O}_X((m-1)D)) \longrightarrow H^1(X, \mathcal{O}_X(mD))
+  \]</span> is surjective for all large <span class="math inline">\(m\)</span>. Thus the dimension sequence <span class="math inline">\(\dim_k H^1(X, \mathcal{O}_X(mD))\)</span> is non-increasing, hence constant for <span class="math inline">\(m \ge m_0\)</span>: <span class="math display">\[
+  H^1(X, \mathcal{O}_X((m-1)D)) \xrightarrow{\;\sim\;} H^1(X, \mathcal{O}_X(mD)).
+  \]</span> This yields a surjection on global sections: <span class="math display">\[
+  H^0(X, \mathcal{O}_X(mD)) \twoheadrightarrow H^0(D, \mathcal{O}_D(mD)).
+  \]</span> Considering the commutative diagram: <span class="math display">\[
+  \begin{CD}
+  H^0(X, \mathcal{O}_X(mD)) @&gt;&gt;&gt; H^0(D, \mathcal{O}_D(mD)) \\
+  @VVV @VVV \\
+  \mathcal{O}_X(mD)_P @&gt;&gt;&gt; \mathcal{O}_D(mD) \otimes k(P) \cong \mathcal{O}_X(mD) \otimes k(P)
+  \end{CD}
+  \]</span> Since <span class="math inline">\(\mathcal{O}_D(mD)\)</span> is globally generated, the right vertical arrow is surjective, which implies that <span class="math inline">\(\mathcal{O}_X(mD)\)</span> is generated by global sections at every <span class="math inline">\(P \in \operatorname{Supp}(D)\)</span>.</p>
+<p>Finally, because <span class="math inline">\(\mathcal{O}_X(mD)\)</span> is globally generated and satisfies <span class="math inline">\((mD \cdot C) &gt; 0\)</span> for all irreducible curves <span class="math inline">\(C \subseteq X\)</span>, <strong>?@prp-amplitude-checked-curves</strong>(3) implies that <span class="math inline">\(\mathcal{O}_X(mD)\)</span> is ample. Hence <span class="math inline">\(L\)</span> is ample.</p>
+</div>
+<hr>
+<div id="def-q-divisors" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (<span class="math inline">\(\mathbb{Q}\)</span>-Divisors)</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p>Let <span class="math inline">\(X\)</span> be a scheme over <span class="math inline">\(k\)</span>. The group of <strong><span class="math inline">\(\mathbb{Q}\)</span>-Cartier divisors</strong> is: <span class="math display">\[
+\operatorname{Div}_{\mathbb{Q}}(X) := \operatorname{Div}(X) \otimes_{\mathbb{Z}} \mathbb{Q}.
+\]</span> Every <span class="math inline">\(D \in \operatorname{Div}_{\mathbb{Q}}(X)\)</span> can be written as <span class="math inline">\(D = \frac{1}{n} A\)</span> for some <span class="math inline">\(n \in \mathbb{Z}_{&gt;0}\)</span> and <span class="math inline">\(A \in \operatorname{Div}(X)\)</span>.</p></li>
+<li><p>A <span class="math inline">\(\mathbb{Q}\)</span>-divisor <span class="math inline">\(D\)</span> is <strong>integral</strong> if it lies in the image of the natural map <span class="math inline">\(\operatorname{Div}(X) \to \operatorname{Div}_{\mathbb{Q}}(X)\)</span>.</p></li>
+<li><p>A <span class="math inline">\(\mathbb{Q}\)</span>-divisor <span class="math inline">\(D\)</span> is <strong>effective</strong> (<span class="math inline">\(D \ge 0\)</span>) if it can be written as <span class="math inline">\(D = \sum c_i A_i\)</span> with rational coefficients <span class="math inline">\(c_i &gt; 0\)</span> and effective Cartier divisors <span class="math inline">\(A_i\)</span> (equivalently, <span class="math inline">\(D = c A\)</span> for some <span class="math inline">\(c \in \mathbb{Q}_{&gt;0}\)</span> and effective <span class="math inline">\(A \in \operatorname{Div}(X)\)</span>).</p></li>
+</ol>
+</div>
+<div id="def-support-q-divisors" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Support of <span class="math inline">\(\mathbb{Q}\)</span>-Divisors)</strong></span> Let <span class="math inline">\(D \in \operatorname{Div}_{\mathbb{Q}}(X)\)</span>. A codimension 1 closed subscheme <span class="math inline">\(E \subseteq X\)</span> is said to <strong>support</strong> <span class="math inline">\(D\)</span> if there exists a representation <span class="math inline">\(D = \sum c_i A_i\)</span> such that <span class="math inline">\(\bigcup_i \operatorname{Supp}(A_i) \subseteq E\)</span>.</p>
+</div>
+<div id="def-intersection-q-divisors" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Intersection and Equivalence of <span class="math inline">\(\mathbb{Q}\)</span>-Divisors)</strong></span> Let <span class="math inline">\(X\)</span> be a proper scheme.</p>
+<ol type="1">
+<li><p>Let <span class="math inline">\(V \subseteq X\)</span> be a subscheme of pure dimension <span class="math inline">\(k\)</span>. The <span class="math inline">\(\mathbb{Q}\)</span>-valued intersection product is defined by multi-linear extension: <span class="math display">\[
+\operatorname{Div}_{\mathbb{Q}}(X)^k \longrightarrow \mathbb{Q}, \quad (D_1, \dots, D_k) \longmapsto \prod_{i=1}^k c_i \cdot (A_1 \cdots A_k \cdot [V]),
+\]</span> where <span class="math inline">\(D_i = c_i A_i\)</span> with <span class="math inline">\(c_i \in \mathbb{Q}\)</span> and <span class="math inline">\(A_i \in \operatorname{Div}(X)\)</span>.</p></li>
+<li><p>Two <span class="math inline">\(\mathbb{Q}\)</span>-divisors <span class="math inline">\(D_1, D_2\)</span> are <strong>numerically equivalent</strong> (denoted <span class="math inline">\(D_1 \equiv_{\mathrm{num}} D_2\)</span>) if <span class="math inline">\((D_1 \cdot C) = (D_2 \cdot C)\)</span> for every irreducible curve <span class="math inline">\(C \subseteq X\)</span>. We set: <span class="math display">\[
+N^1(X)_{\mathbb{Q}} := N^1(X) \otimes_{\mathbb{Z}} \mathbb{Q}.
+\]</span></p></li>
+<li><p>Two <span class="math inline">\(\mathbb{Q}\)</span>-divisors <span class="math inline">\(D_1, D_2\)</span> are <strong><span class="math inline">\(\mathbb{Q}\)</span>-linearly equivalent</strong> (denoted <span class="math inline">\(D_1 \sim_{\mathbb{Q}} D_2\)</span> or <span class="math inline">\(D_1 \equiv_{\mathrm{lin}} D_2\)</span>) if there exists an integer <span class="math inline">\(r &gt; 0\)</span> such that <span class="math inline">\(r D_1, r D_2\)</span> are integral and <span class="math inline">\(r D_1 \sim r D_2\)</span>. We set: <span class="math display">\[
+\operatorname{CaCl}_{\mathbb{Q}}(X) := \operatorname{CaCl}(X) \otimes_{\mathbb{Z}} \mathbb{Q}.
+\]</span></p></li>
+</ol>
+</div>
+<div id="def-amplitude-q-divisors" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 (Ample <span class="math inline">\(\mathbb{Q}\)</span>-Divisors)</strong></span> A <span class="math inline">\(\mathbb{Q}\)</span>-divisor <span class="math inline">\(D \in \operatorname{Div}_{\mathbb{Q}}(X)\)</span> is <strong>ample</strong> if it satisfies any of the following three equivalent conditions:</p>
+<ol type="1">
+<li><span class="math inline">\(D = \sum c_i A_i\)</span> with <span class="math inline">\(c_i \in \mathbb{Q}_{&gt;0}\)</span> and each <span class="math inline">\(A_i \in \operatorname{Div}(X)\)</span> ample;</li>
+<li>There exists an integer <span class="math inline">\(r &gt; 0\)</span> such that <span class="math inline">\(r D\)</span> is an integral ample Cartier divisor;</li>
+<li><span class="math inline">\((D^{\dim V} \cdot V) &gt; 0\)</span> for all irreducible subvarieties <span class="math inline">\(V \subseteq X\)</span> with <span class="math inline">\(\dim V \ge 1\)</span>.</li>
+</ol>
+</div>
+<div id="prp-openness-ample-cone-q" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (Openness of Amplitude for <span class="math inline">\(\mathbb{Q}\)</span>-Divisors)</strong></span> Let <span class="math inline">\(X\)</span> be a projective variety, and let <span class="math inline">\(H\)</span> be an ample <span class="math inline">\(\mathbb{Q}\)</span>-divisor on <span class="math inline">\(X\)</span>. For any <span class="math inline">\(\mathbb{Q}\)</span>-divisors <span class="math inline">\(E_1, \dots, E_r\)</span>, the perturbed divisor: <span class="math display">\[
+H + \varepsilon_1 E_1 + \dots + \varepsilon_r E_r
+\]</span> is ample for all rational numbers <span class="math inline">\(\varepsilon_i\)</span> satisfying <span class="math inline">\(0 \le |\varepsilon_i| \ll 1\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Clearing denominators, we may assume without loss of generality that <span class="math inline">\(H\)</span> and each <span class="math inline">\(E_i\)</span> are integral Cartier divisors. Because <span class="math inline">\(H\)</span> is ample, there exists an integer <span class="math inline">\(m \gg 0\)</span> such that <span class="math inline">\(m H \pm E_i\)</span> is ample for each <span class="math inline">\(i = 1, \dots, r\)</span>. Rewriting the perturbation as a convex linear combination: <span class="math display">\[
+H + \sum_{i=1}^r \varepsilon_i E_i = \sum_{i=1}^r |\varepsilon_i| \cdot \frac{1}{m}\big(m H + \operatorname{sgn}(\varepsilon_i) E_i\big) + \left(1 - \frac{1}{m}\sum_{i=1}^r |\varepsilon_i|\right) H.
+\]</span> For <span class="math inline">\(\sum_{i=1}^r |\varepsilon_i| &lt; m\)</span>, this is a positive rational linear combination of ample divisors, hence ample.</p>
+</div>
+<hr>
+<div id="def-r-divisors" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5 (<span class="math inline">\(\mathbb{R}\)</span>-Divisors)</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p>The real vector space of <strong><span class="math inline">\(\mathbb{R}\)</span>-divisors</strong> is: <span class="math display">\[
+\operatorname{Div}_{\mathbb{R}}(X) := \operatorname{Div}(X) \otimes_{\mathbb{Z}} \mathbb{R}.
+\]</span> The intersection product extends multi-linearly to <span class="math inline">\((D_1 \cdots D_k \cdot V) \in \mathbb{R}\)</span>. Two <span class="math inline">\(\mathbb{R}\)</span>-divisors <span class="math inline">\(D_1, D_2\)</span> are numerically equivalent (<span class="math inline">\(D_1 \equiv_{\mathrm{num}} D_2\)</span>) if <span class="math inline">\((D_1 \cdot C) = (D_2 \cdot C)\)</span> for every curve <span class="math inline">\(C\)</span>.</p></li>
+<li><p>The real Néron-Severi space is defined by: <span class="math display">\[
+N^1(X)_{\mathbb{R}} := \operatorname{Div}_{\mathbb{R}}(X) / \equiv_{\mathrm{num}}.
+\]</span></p></li>
+<li><p>An <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(D\)</span> is <strong>effective</strong> if <span class="math inline">\(D = \sum c_i A_i\)</span> with <span class="math inline">\(c_i \in \mathbb{R}_{\ge 0}\)</span> and <span class="math inline">\(A_i\)</span> effective Cartier divisors.</p></li>
+<li><p>An <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(D\)</span> is <strong>ample</strong> if <span class="math inline">\(D = \sum c_i A_i\)</span> with <span class="math inline">\(c_i \in \mathbb{R}_{&gt;0}\)</span> and <span class="math inline">\(A_i\)</span> ample integral Cartier divisors.</p></li>
+</ol>
+</div>
+<div id="prp-neron-severi-r" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (Flat Base Change for <span class="math inline">\(N^1(X)\)</span>)</strong></span> There is a canonical identification: <span class="math display">\[
+N^1(X)_{\mathbb{R}} = N^1(X) \otimes_{\mathbb{Z}} \mathbb{R} = N^1(X)_{\mathbb{Q}} \otimes_{\mathbb{Q}} \mathbb{R}.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Since <span class="math inline">\(\mathbb{R}\)</span> is a flat <span class="math inline">\(\mathbb{Z}\)</span>-module, it suffices to show that: <span class="math display">\[
+\big\{ D \in \operatorname{Div}(X) \mid D \equiv_{\mathrm{num}} 0 \big\} \otimes_{\mathbb{Z}} \mathbb{R} = \big\{ D \in \operatorname{Div}_{\mathbb{R}}(X) \mid D \equiv_{\mathrm{num}} 0 \big\}.
+\]</span> The inclusion <span class="math inline">\(\subseteq\)</span> is evident. Conversely, let <span class="math inline">\(D = \sum_{i=1}^k c_i A_i\)</span> with <span class="math inline">\(c_i \in \mathbb{R}\)</span> and <span class="math inline">\(A_i \in \operatorname{Div}(X)\)</span> satisfy <span class="math inline">\((D \cdot C) = 0\)</span> for all curves <span class="math inline">\(C \subseteq X\)</span>. The intersection pairing defines a linear map: <span class="math display">\[
+\phi: \mathbb{Z}^k \longrightarrow \mathbb{Z}^{A_1(X)}, \quad (a_1, \dots, a_k) \longmapsto \left( C \mapsto \sum_{i=1}^k a_i (A_i \cdot C) \right).
+\]</span> Since <span class="math inline">\((c_1, \dots, c_k) \in \ker(\phi \otimes_{\mathbb{Z}} \mathbb{R})\)</span>, we have <span class="math inline">\(\ker(\phi \otimes \mathbb{Q}) \neq 0\)</span>, so <span class="math inline">\(\ker(\phi) \neq 0\)</span>. Choose a non-zero vector <span class="math inline">\((a_1, \dots, a_k) \in \mathbb{Z}^k \cap \ker(\phi)\)</span> with <span class="math inline">\(a_1 \neq 0\)</span>. The divisor <span class="math inline">\(A_1' := \sum a_i A_i\)</span> satisfies <span class="math inline">\(A_1' \equiv_{\mathrm{num}} 0\)</span>. We then decompose: <span class="math display">\[
+D = \frac{c_1}{a_1} A_1' + \sum_{i=2}^k \left(c_i - \frac{c_1 a_i}{a_1}\right) A_i.
+\]</span> The second term involves only <span class="math inline">\(k - 1\)</span> divisors and is numerically trivial. Induction on <span class="math inline">\(k\)</span> proves <span class="math inline">\(D \in \{ D \equiv_{\mathrm{num}} 0 \} \otimes_{\mathbb{Z}} \mathbb{R}\)</span>.</p>
+</div>
+<div id="def-curve-classes" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 6 (1-Cycles Modulo Numerical Equivalence)</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p>Let <span class="math inline">\(X\)</span> be a proper scheme. Define the real vector space of 1-cycles by: <span class="math display">\[
+Z_1(X)_{\mathbb{R}} := \bigoplus_{C \subseteq X \text{ curve}} \mathbb{R} \cdot C.
+\]</span> Two 1-cycles <span class="math inline">\(\gamma_1, \gamma_2\)</span> are numerically equivalent (<span class="math inline">\(\gamma_1 \equiv_{\mathrm{num}} \gamma_2\)</span>) if <span class="math inline">\((D \cdot \gamma_1) = (D \cdot \gamma_2)\)</span> for all <span class="math inline">\(D \in \operatorname{Div}_{\mathbb{R}}(X)\)</span>. We define: <span class="math display">\[
+N_1(X)_{\mathbb{R}} := Z_1(X)_{\mathbb{R}} / \equiv_{\mathrm{num}}.
+\]</span> Then the intersection pairing induces a perfect pairing of finite-dimensional real vector spaces: <span class="math display">\[
+N^1(X)_{\mathbb{R}} \times N_1(X)_{\mathbb{R}} \longrightarrow \mathbb{R}, \quad (\delta, \gamma) \longmapsto (\delta \cdot \gamma).
+\]</span></p></li>
+<li><p>Both <span class="math inline">\(N_1(X)_{\mathbb{R}}\)</span> and <span class="math inline">\(N_1(X)_{\mathbb{Q}}\)</span> are finite-dimensional, and <span class="math inline">\(N_1(X)\)</span> is a finitely generated free abelian group.</p></li>
+</ol>
+</div>
+<div id="prp-openness-amplitude-r" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3 (Openness of Amplitude for <span class="math inline">\(\mathbb{R}\)</span>-Divisors)</strong></span> &nbsp;</p>
+<ol type="1">
+<li>If <span class="math inline">\(D_1 \equiv_{\mathrm{num}} D_2\)</span>, then <span class="math inline">\(D_1\)</span> is ample if and only if <span class="math inline">\(D_2\)</span> is ample.</li>
+<li>If <span class="math inline">\(H \in \operatorname{Div}_{\mathbb{R}}(X)\)</span> is ample, then <span class="math inline">\(H + \varepsilon_1 E_1 + \dots + \varepsilon_r E_r\)</span> is ample for all <span class="math inline">\(0 \le |\varepsilon_i| \ll 1\)</span>. In particular, the ample cone <span class="math inline">\(\operatorname{Amp}(X) \subseteq N^1(X)_{\mathbb{R}}\)</span> is open.</li>
+</ol>
+</div>
+<hr>
+<div id="def-nef-divisors" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 7 (Nef Divisors)</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p>Let <span class="math inline">\(X\)</span> be a proper scheme. A line bundle <span class="math inline">\(L \in \operatorname{Pic}(X)\)</span> is <strong>numerically effective (nef)</strong> if for every irreducible curve <span class="math inline">\(C \subseteq X\)</span>, <span class="math display">\[
+(L \cdot C) \ge 0.
+\]</span> An <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(D \in \operatorname{Div}_{\mathbb{R}}(X)\)</span> is <strong>nef</strong> if <span class="math inline">\((D \cdot C) \ge 0\)</span> for all irreducible curves <span class="math inline">\(C \subseteq X\)</span>.</p></li>
+<li><p>Nefness depends only on the numerical class: if <span class="math inline">\(D_1 \equiv_{\mathrm{num}} D_2\)</span>, then <span class="math inline">\(D_1\)</span> is nef if and only if <span class="math inline">\(D_2\)</span> is nef.</p></li>
+</ol>
+</div>
+<div id="prp-properties-nef" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4 (Functorial Properties of Nef Bundles)</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p>Let <span class="math inline">\(f: X \to Y\)</span> be a proper morphism. If <span class="math inline">\(L \in \operatorname{Pic}(Y)\)</span> is nef, then <span class="math inline">\(f^* L\)</span> is nef on <span class="math inline">\(X\)</span>. If <span class="math inline">\(f\)</span> is additionally surjective, then <span class="math inline">\(L\)</span> is nef if and only if <span class="math inline">\(f^* L\)</span> is nef.</p></li>
+<li><p>If <span class="math inline">\(L\)</span> is globally generated, then <span class="math inline">\(L\)</span> is nef. In particular, the pullback of <span class="math inline">\(\mathcal{O}_{\mathbb{P}}(1)\)</span> under any morphism <span class="math inline">\(\phi_{|L|}: X \to \mathbb{P}^N\)</span> is nef.</p></li>
+<li><p><span class="math inline">\(L\)</span> is nef if and only if <span class="math inline">\(L|_{X_{\mathrm{red}}}\)</span> is nef, if and only if <span class="math inline">\(L|_{X_i}\)</span> is nef for every irreducible component <span class="math inline">\(X_i \subseteq X\)</span>.</p></li>
+</ol>
+</div>
+<div id="thm-kleiman" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Kleiman’s Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be a proper scheme and <span class="math inline">\(D \in \operatorname{Div}_{\mathbb{R}}(X)\)</span> a nef <span class="math inline">\(\mathbb{R}\)</span>-divisor. Then for every irreducible subvariety <span class="math inline">\(V \subseteq X\)</span> of dimension <span class="math inline">\(k = \dim V\)</span>, <span class="math display">\[
+(D^k \cdot V) \ge 0.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By <a href="#prp-properties-nef" class="quarto-xref">Proposition&nbsp;4</a>(3), we may assume <span class="math inline">\(X\)</span> is irreducible and reduced.</p>
+<p><em>Reduction to the projective case:</em> By Chow’s Lemma, there exists a projective variety <span class="math inline">\(\widetilde{X}\)</span> and a birational surjective morphism <span class="math inline">\(f: \widetilde{X} \to X\)</span>. For any curve <span class="math inline">\(C \subseteq \widetilde{X}\)</span>, by the projection formula: <span class="math display">\[
+(f^* D \cdot C) = (D \cdot f_* C) \ge 0,
+\]</span> so <span class="math inline">\(f^* D\)</span> is nef on <span class="math inline">\(\widetilde{X}\)</span>. If the theorem holds for projective varieties, then for any <span class="math inline">\(V \subseteq X\)</span> of dimension <span class="math inline">\(k\)</span>, choosing <span class="math inline">\(V' \subseteq \widetilde{X}\)</span> such that <span class="math inline">\(f_* V' = \deg(V'/V) V\)</span>, we have: <span class="math display">\[
+(D^k \cdot V) = \frac{1}{\deg(V'/V)} ((f^* D)^k \cdot V') \ge 0.
+\]</span> Thus we may assume <span class="math inline">\(X\)</span> is projective.</p>
+<p>We induct on <span class="math inline">\(n = \dim X\)</span>: - If <span class="math inline">\(n = 1\)</span>, <span class="math inline">\((D \cdot X) \ge 0\)</span> by the definition of nefness. - Assume the result holds in dimensions <span class="math inline">\(\le n - 1\)</span>. For any proper subvariety <span class="math inline">\(V \subsetneq X\)</span> of dimension <span class="math inline">\(k \le n - 1\)</span>, <span class="math inline">\(D|_V\)</span> is nef, so <span class="math inline">\((D^k \cdot V) \ge 0\)</span> by induction. It remains to show that <span class="math inline">\((D^n) = (D^n \cdot X) \ge 0\)</span>.</p>
+<p><em>Case 1: <span class="math inline">\(D\)</span> is a <span class="math inline">\(\mathbb{Q}\)</span>-divisor.</em> Fix an ample divisor <span class="math inline">\(H\)</span> on <span class="math inline">\(X\)</span>, and consider the polynomial: <span class="math display">\[
+P(t) := ((D + t H)^n) = \sum_{i=0}^n \binom{n}{i} (D^{n-i} \cdot H^i) t^i = a_n t^n + a_{n-1} t^{n-1} + \dots + a_0.
+\]</span> By induction, for <span class="math inline">\(1 \le i \le n\)</span>, the cycle <span class="math inline">\(H^i\)</span> is represented by a positive combination of <span class="math inline">\((n-i)\)</span>-dimensional subvarieties, so <span class="math inline">\(a_i = \binom{n}{i} (D^{n-i} \cdot H^i) \ge 0\)</span>, and <span class="math inline">\(a_n = (H^n) &gt; 0\)</span>.</p>
+<p>Suppose toward a contradiction that <span class="math inline">\(a_0 = (D^n) &lt; 0\)</span>. By Descartes’ rule of signs, <span class="math inline">\(P(t)\)</span> has a unique positive root <span class="math inline">\(t_0 &gt; 0\)</span>.</p>
+<p><em>Claim:</em> For any rational <span class="math inline">\(t &gt; t_0\)</span>, the divisor <span class="math inline">\(D + t H\)</span> is ample. We verify the Nakai-Moishezon criterion (<a href="#thm-nakai-moishezon" class="quarto-xref">Theorem&nbsp;1</a>): - For <span class="math inline">\(V = X\)</span>, <span class="math inline">\(((D + t H)^n \cdot X) = P(t) &gt; 0\)</span> because <span class="math inline">\(t &gt; t_0\)</span> and <span class="math inline">\(a_n &gt; 0\)</span>. - For any subvariety <span class="math inline">\(V \subsetneq X\)</span> of dimension <span class="math inline">\(k &lt; n\)</span>, the expansion: <span class="math display">\[
+  ((D + t H)^k \cdot V) = (D^k \cdot V) + \sum_{i=1}^{k-1} \binom{k}{i} (D^{k-i} \cdot H^i \cdot V) t^i + (H^k \cdot V) t^k
+  \]</span> has non-negative coefficients for <span class="math inline">\(i &lt; k\)</span> by the induction hypothesis, and the leading coefficient satisfies <span class="math inline">\((H^k \cdot V) &gt; 0\)</span>. Thus <span class="math inline">\(((D + t H)^k \cdot V) &gt; 0\)</span> for all <span class="math inline">\(t &gt; 0\)</span>.</p>
+<p>This proves <span class="math inline">\(D + t H\)</span> is ample for all rational <span class="math inline">\(t &gt; t_0\)</span>. Now decompose <span class="math inline">\(P(t)\)</span> as: <span class="math display">\[
+P(t) = Q(t) + R(t), \quad \text{where } Q(t) = (D \cdot (D + t H)^{n-1}), \quad R(t) = t(H \cdot (D + t H)^{n-1}).
+\]</span> For <span class="math inline">\(t &gt; t_0\)</span>, <span class="math inline">\(D + t H\)</span> is ample, so <span class="math inline">\((D + t H)^{n-1}\)</span> is represented by an effective 1-cycle. Since <span class="math inline">\(D\)</span> is nef, <span class="math inline">\(Q(t) \ge 0\)</span> for all <span class="math inline">\(t &gt; t_0\)</span>, and by continuity <span class="math inline">\(Q(t_0) \ge 0\)</span>. Furthermore, every coefficient of <span class="math inline">\(R(t)\)</span> is non-negative and its leading term <span class="math inline">\((H^n) t^n\)</span> is strictly positive, so <span class="math inline">\(R(t_0) &gt; 0\)</span>. Hence: <span class="math display">\[
+P(t_0) = Q(t_0) + R(t_0) &gt; 0,
+\]</span> contradicting <span class="math inline">\(P(t_0) = 0\)</span>. Thus <span class="math inline">\((D^n) \ge 0\)</span>.</p>
+<p><em>Case 2: <span class="math inline">\(D\)</span> is an <span class="math inline">\(\mathbb{R}\)</span>-divisor.</em> Choose ample divisors <span class="math inline">\(H_1, \dots, H_r\)</span> whose classes span <span class="math inline">\(N^1(X)_{\mathbb{R}}\)</span>. For <span class="math inline">\(\varepsilon = (\varepsilon_1, \dots, \varepsilon_r)\)</span> with <span class="math inline">\(\varepsilon_i &gt; 0\)</span>, the perturbation: <span class="math display">\[
+D(\varepsilon) := D + \sum_{i=1}^r \varepsilon_i H_i
+\]</span> is nef, and the cone of such perturbations forms an open neighborhood. For any <span class="math inline">\(\delta &gt; 0\)</span>, we may choose <span class="math inline">\(0 &lt; \varepsilon_i &lt; \delta\)</span> such that <span class="math inline">\(D(\varepsilon) \equiv_{\mathrm{num}} E\)</span> for some <span class="math inline">\(\mathbb{Q}\)</span>-divisor <span class="math inline">\(E\)</span>. By Case 1, <span class="math inline">\((D(\varepsilon)^k \cdot V) = (E^k \cdot V) \ge 0\)</span>. Taking the limit as <span class="math inline">\(\varepsilon_i \to 0\)</span> yields: <span class="math display">\[
+(D^k \cdot V) \ge 0.
+\]</span> This completes the proof.</p>
+</div>
+<div id="cor-kleiman-perturbation" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 (Kleiman’s Perturbation and Nefness Criterion)</strong></span> Let <span class="math inline">\(X\)</span> be a projective scheme.</p>
+<ol type="1">
+<li>If <span class="math inline">\(D\)</span> is a nef <span class="math inline">\(\mathbb{R}\)</span>-divisor and <span class="math inline">\(H\)</span> is an ample <span class="math inline">\(\mathbb{R}\)</span>-divisor, then <span class="math inline">\(D + \varepsilon H\)</span> is ample for every <span class="math inline">\(\varepsilon &gt; 0\)</span>.</li>
+<li>Conversely, if <span class="math inline">\(D, H\)</span> are <span class="math inline">\(\mathbb{R}\)</span>-divisors such that <span class="math inline">\(D + \varepsilon H\)</span> is ample for all sufficiently small <span class="math inline">\(\varepsilon &gt; 0\)</span>, then <span class="math inline">\(D\)</span> is nef.</li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><strong>Proof of (2):</strong> If <span class="math inline">\(D + \varepsilon H\)</span> is ample for all <span class="math inline">\(0 &lt; \varepsilon \ll 1\)</span>, then for every irreducible curve <span class="math inline">\(C \subseteq X\)</span>, <span class="math display">\[
+((D + \varepsilon H) \cdot C) = (D \cdot C) + \varepsilon (H \cdot C) &gt; 0.
+\]</span> Taking the limit as <span class="math inline">\(\varepsilon \to 0^+\)</span> gives <span class="math inline">\((D \cdot C) \ge 0\)</span>, so <span class="math inline">\(D\)</span> is nef.</p>
+<p><strong>Proof of (1):</strong> Replacing <span class="math inline">\(\varepsilon H\)</span> by <span class="math inline">\(H\)</span>, it suffices to prove that <span class="math inline">\(D + H\)</span> is ample. Let <span class="math inline">\(V \subseteq X\)</span> be an irreducible subvariety of dimension <span class="math inline">\(k \ge 1\)</span>. Expanding the intersection: <span class="math display">\[
+((D + H)^k \cdot V) = \sum_{s=0}^k \binom{k}{s} (H^s \cdot D^{k-s} \cdot V).
+\]</span> Because <span class="math inline">\(H\)</span> is ample, <span class="math inline">\(H^s\)</span> is represented by an effective cycle of dimension <span class="math inline">\(k - s\)</span>. By Kleiman’s Theorem (<a href="#thm-kleiman" class="quarto-xref">Theorem&nbsp;2</a>), <span class="math inline">\((H^s \cdot D^{k-s} \cdot V) \ge 0\)</span> for all <span class="math inline">\(s &lt; k\)</span>. For <span class="math inline">\(s = k\)</span>, <span class="math inline">\((H^k \cdot V) &gt; 0\)</span>. Hence: <span class="math display">\[
+((D + H)^k \cdot V) \ge (H^k \cdot V) &gt; 0.
+\]</span> If <span class="math inline">\(D + H\)</span> is a <span class="math inline">\(\mathbb{Q}\)</span>-divisor, Nakai-Moishezon (<a href="#thm-nakai-moishezon" class="quarto-xref">Theorem&nbsp;1</a>) implies directly that <span class="math inline">\(D + H\)</span> is ample.</p>
+<p>If <span class="math inline">\(D + H\)</span> is not rational, choose ample divisors <span class="math inline">\(H_1, \dots, H_r\)</span> spanning <span class="math inline">\(N^1(X)_{\mathbb{R}}\)</span>. By openness of the ample cone, there exist small <span class="math inline">\(\varepsilon_i &gt; 0\)</span> such that <span class="math inline">\(H - \sum \varepsilon_i H_i\)</span> remains ample, and: <span class="math display">\[
+E := D + H - \sum_{i=1}^r \varepsilon_i H_i \equiv_{\mathrm{num}} E_{\mathbb{Q}}
+\]</span> is a rational class. Then <span class="math inline">\(E\)</span> is ample by the rational case, and: <span class="math display">\[
+D + H = E + \sum_{i=1}^r \varepsilon_i H_i
+\]</span> is a sum of ample <span class="math inline">\(\mathbb{R}\)</span>-divisors, hence ample.</p>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <style>
@@ -1292,14 +1516,11 @@ nav#TOC li.active > a.nav-link {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../16_ag/index.html" class="pagination-link" aria-label="Algebraic Geometry">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Algebraic Geometry</span>
+      <a href="../22_positivity/22.0 Preliminaries.html" class="pagination-link" aria-label="22.0 Preliminaries">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22.0 Preliminaries</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../23_algebraic_groups/index.html" class="pagination-link" aria-label="Algebraic Groups">
-        <span class="nav-page-text">Algebraic Groups</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
