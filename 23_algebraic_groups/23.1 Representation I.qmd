@@ -12,16 +12,16 @@ sec: "23.1."
    $$
    G \times X \longrightarrow X
    $$
-   or equivalently, a natural transformation of functors:
+   or equivalently, a natural transformation:
    $$
-   G(R) \circlearrowright X(R) \quad \text{for all } R \in k\text{-alg}.
+   \forall R \in k\text{-alg}, \quad G(R) \circlearrowright X(R) \quad \text{naturally}.
    $$
 
 2. A **linear representation** of $G$ is a homomorphism of algebraic groups:
    $$
    G \longrightarrow \mathrm{GL}_n
    $$
-   for some $n$, i.e., an action $G \circlearrowright \mathbb{A}^n$.
+   for some $n$, i.e., $G \circlearrowright \mathbb{A}^n$.
 :::
 
 ::: {#lem-action-properties}
@@ -32,29 +32,30 @@ Let $\varphi: G \times X \to X$ be an action. Then $\varphi$ is fppf. Moreover, 
 ::: {.proof}
 Consider the commutative diagram:
 $$
-\begin{tikzcd}
-G \times X \ar[r, "\sim", "{(g, x) \mapsto (g, gx)}"'] \ar[rd, "\varphi"'] & G \times X \ar[r] \ar[d, "\mathrm{pr}_2"'] \ar[rd, phantom, "\square"] & G \ar[d] \\
-& X \ar[r] & \operatorname{Spec} k
-\end{tikzcd}
+\begin{CD}
+G \times X @>{\sim}>{(g, x) \mapsto (g, gx)}> G \times X @>>> G \\
+@V{\varphi}VV @VV{\mathrm{pr}_2}V @VVV \\
+X @= X @>>> \operatorname{Spec} k
+\end{CD}
 $$
-The right square is Cartesian, so $\mathrm{pr}_2$ inherits properties (fppf, smooth, finite) from the structural morphism $G \to \operatorname{Spec} k$ by base change. Since $(g, x) \mapsto (g, gx)$ is an isomorphism, $\varphi$ satisfies these properties.
+The right square is Cartesian, so $\mathrm{pr}_2$ inherits the respective property (fppf, smooth, finite) from $G \to \operatorname{Spec} k$ by base change. Since the first horizontal map is an isomorphism, $\varphi = \mathrm{pr}_2 \circ \sim$ satisfies these properties.
 :::
 
 ::: {#prp-orbit}
 ## Orbit
-1. Let $\varphi: G \times X \to X$ be an action and $x \in X(k)$. Define the **orbit map**:
+1. Let $\varphi: G \times X \to X$ be an action, and $x \in X(k)$. Define the **orbit map**:
    $$
    \varphi_x: G = G \times \operatorname{Spec} k \xrightarrow{\;\mathrm{id} \times x\;} G \times X \xrightarrow{\;\varphi\;} X.
    $$
-   The **orbit** of $x$, denoted $G \cdot x$, is defined set-theoretically as $\operatorname{Im} \varphi_x$.
+   The **orbit** of $x$ is defined set-theoretically as $\operatorname{Im} \varphi_x$.
 
-2. $\operatorname{Im} \varphi_x$ is always locally closed in $X$, and $G \cdot x$ is open dense in its closure $\overline{G \cdot x}$.
+2. $\operatorname{Im} \varphi_x$ is always locally closed. $G \cdot x$ is open dense in $\overline{G \cdot x}$.
 :::
 
 ::: {.proof}
 Since $X_{\bar{k}} \to X$ is a quotient open map of topological spaces, without loss of generality we may assume $k = \bar{k}$.
 
-Apply Chevalley's Theorem to $\varphi_x$: the orbit $G \cdot x$ is constructible. Hence there exists an open dense subset $U \subseteq \overline{G \cdot x}$ such that $U \subseteq G \cdot x$. Then:
+Apply Chevalley's Theorem to $\varphi_x$: $G \cdot x$ is constructible. Thus there exists an open dense subset $U \subseteq \overline{G \cdot x}$ such that $U \subseteq G \cdot x$. Then:
 $$
 G \cdot x = G \cdot U = \bigcup_{g \in G} g \cdot U \subseteq \overline{G \cdot x}.
 $$
@@ -76,7 +77,7 @@ If $k = \bar{k}$ and $G \circlearrowright X$, every orbit of minimal dimension i
    $$
    0 \longrightarrow G^\circ \longrightarrow G \longrightarrow \pi_0(G) \longrightarrow e
    $$
-   where $G^\circ$ is geometrically connected and $\pi_0(G)$ is a finite étale group scheme.
+   with $G^\circ$ geometrically connected.
 
 2. **(Barsotti–Chevalley)** For every connected algebraic group $G$ over $k$, there exists an exact sequence:
    $$
@@ -98,10 +99,11 @@ since $\mathcal{O}(G)$ is a commutative Hopf $k$-algebra.
 1. $\mathcal{O}(G)$ is a finitely generated $k$-algebra, and $G_{\mathrm{aff}} := \operatorname{Spec}\mathcal{O}(G)$ is a linear algebraic group (LAG).
 2. $G \to G_{\mathrm{aff}}$ is universal: for every linear algebraic group $H$ and every homomorphism $G \to H$, there exists a unique factorization:
    $$
-   \begin{tikzcd}
-   G \ar[r] \ar[rd] & G_{\mathrm{aff}} \ar[d, "\exists!", dashed] \\
-   & H
-   \end{tikzcd}
+   \begin{CD}
+   G @>{\phi}>> G_{\mathrm{aff}} \\
+   @VVV @VV{\exists!}V \\
+   H @= H
+   \end{CD}
    $$
 3. $\phi$ is fppf.
 4. $\mathcal{O}(\ker \phi) = k$. If $\mathcal{O}(G) = k$, $G$ is called **anti-affine** ($G$ is commutative anti-affine).
@@ -128,10 +130,11 @@ Then $m_A^* = m_B^*|_A$, $i_A^* = i_B^*|_A$, and $e_A^* = e_B^*|_A$.
 3. If $f: A \to B$ is a morphism of Hopf algebras, then $\ker f$ is a Hopf ideal of $A$.
 4. If $\mathfrak{a} \subseteq A$ is a Hopf ideal, then $A/\mathfrak{a}$ has a natural Hopf algebra structure and $A \to A/\mathfrak{a}$ is a morphism in the category of Hopf $k$-algebras. For every $f: A \to B$ such that $\ker f \supseteq \mathfrak{a}$, there exists a unique $\bar{f}$:
    $$
-   \begin{tikzcd}
-   A \ar[r, "f"] \ar[d] & B \\
-   A/\mathfrak{a} \ar[ur, "\exists! \bar{f}"']
-   \end{tikzcd}
+   \begin{CD}
+   A @>{f}>> B \\
+   @VVV @AA{\exists! \bar{f}}A \\
+   A/\mathfrak{a} @= A/\mathfrak{a}
+   \end{CD}
    $$
 5. For every morphism of Hopf algebras $f: A \to B$, there is a canonical isomorphism:
    $$
@@ -143,15 +146,17 @@ Then $m_A^* = m_B^*|_A$, $i_A^* = i_B^*|_A$, and $e_A^* = e_B^*|_A$.
 ## Factorization of Morphisms of LAG
 A homomorphism $\varphi: G \to H$ of linear algebraic groups factors as:
 $$
-\begin{tikzcd}
-G \ar[r, "\varphi"] \ar[d, "q"'] & H \\
-I \ar[ur, "i"']
-\end{tikzcd}
+\begin{CD}
+G @>{\varphi}>> H \\
+@V{q}VV @AA{i}A \\
+I @= I
+\end{CD}
 \qquad
-\begin{tikzcd}
-\operatorname{Spec} B \ar[r, "\varphi"] \ar[d, "q"'] & \operatorname{Spec} A \\
-\operatorname{Spec}(A/\mathfrak{a}) \ar[ur, "i"']
-\end{tikzcd}
+\begin{CD}
+\operatorname{Spec} B @>{\varphi}>> \operatorname{Spec} A \\
+@V{q}VV @AA{i}A \\
+\operatorname{Spec}(A/\mathfrak{a}) @= \operatorname{Spec}(A/\mathfrak{a})
+\end{CD}
 $$
 where $q$ is fppf and $i$ is a closed immersion.
 
@@ -170,14 +175,15 @@ Since $\ker q = \ker \varphi = \operatorname{Spec} k$, for every $R \in k\text{-
 
 **Claim:** $\varphi(R)$ is surjective for all $R$.
 
-For any $y \in I(R)$, there exists an fppf extension $R' \in k\text{-alg}$ over $R$ and $x \in G(R')$ such that $\varphi(R')(x) = y|_{R'}$. (Take $R' = R \otimes_{\mathcal{O}(I)} \mathcal{O}(G)$ via the pullback diagram):
+For any $y \in I(R)$, there exists an fppf extension $R' \in k\text{-alg}$ over $R$ and $x \in G(R')$ such that $\varphi(R')(x) = y|_{R'}$. (Take $R' = R \otimes_{\mathcal{O}(I)} \mathcal{O}(G)$ via the pullback):
 $$
-\begin{tikzcd}
-R' & G \ar[d, "\mathrm{fppf}"] \\
-R \ar[u, "\mathrm{fppf}"] \ar[r] & I
-\end{tikzcd}
+\begin{CD}
+R' @<<< G \\
+@AAA @VV{\mathrm{fppf}}V \\
+R @>>> I
+\end{CD}
 $$
-Now the sequence $0 \to R \to R' \rightrightarrows R' \otimes_R R'$ is exact, which gives the exact sequence:
+Now the sequence $0 \to R \to R' \rightrightarrows R' \otimes_R R'$ is exact, giving the exact sequence:
 $$
 0 \longrightarrow G(R) \longrightarrow G(R') \rightrightarrows G(R' \otimes_R R')
 $$
@@ -186,10 +192,11 @@ $$
 $$
 Consider the commutative diagram:
 $$
-\begin{tikzcd}
-\operatorname{Hom}(\mathcal{O}(G), R) \ar[r] \ar[d, "\varphi(R)"] & \operatorname{Hom}(\mathcal{O}(G), R') \ar[r, shift left] \ar[r, shift right] \ar[d, "\varphi(R')"] & \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R') \ar[d] \\
-I(R) \ar[r] & I(R') \ar[r, shift left] \ar[r, shift right] & I(R' \otimes_R R')
-\end{tikzcd}
+\begin{CD}
+\operatorname{Hom}(\mathcal{O}(G), R) @>>> \operatorname{Hom}(\mathcal{O}(G), R') @>>> \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R') \\
+@V{\varphi(R)}VV @V{\varphi(R')}VV @VVV \\
+I(R) @>>> I(R') @>>> I(R' \otimes_R R')
+\end{CD}
 $$
 $$
 y \longmapsto y|_{R'} \longmapsto 0
@@ -221,18 +228,20 @@ A **right comodule** is a $k$-vector space $V$ equipped with a $k$-linear map $\
 
 1. $(\mathrm{id}_V \otimes e^*) \circ \rho = \mathrm{id}_V$:
    $$
-   \begin{tikzcd}
-   V \ar[r, "\rho"] \ar[rd, "\mathrm{id}_V"'] & V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id}_V \otimes e^*"] \\
-   & V
-   \end{tikzcd}
+   \begin{CD}
+   V @>{\rho}>> V \otimes \mathcal{O}(G) \\
+   @| @VV{\mathrm{id}_V \otimes e^*}V \\
+   V @= V
+   \end{CD}
    $$
 
 2. $(\mathrm{id}_V \otimes m^*) \circ \rho = (\rho \otimes \mathrm{id}_{\mathcal{O}(G)}) \circ \rho$:
    $$
-   \begin{tikzcd}
-   V \ar[r, "\rho"] \ar[d, "\rho"'] & V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id}_V \otimes m^*"] \\
-   V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] & V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-   \end{tikzcd}
+   \begin{CD}
+   V @>{\rho}>> V \otimes \mathcal{O}(G) \\
+   @V{\rho}VV @VV{\mathrm{id}_V \otimes m^*}V \\
+   V \otimes \mathcal{O}(G) @>{\rho \otimes \mathrm{id}}>> V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+   \end{CD}
    $$
 :::
 
@@ -242,10 +251,11 @@ Let $(V, \rho)$ be an $\mathcal{O}(G)$-comodule.
 
 1. A **morphism** of $\mathcal{O}(G)$-comodules is a $k$-linear map $f: V \to W$ such that:
    $$
-   \begin{tikzcd}
-   V \ar[r, "f"] \ar[d, "\rho_V"'] & W \ar[d, "\rho_W"] \\
-   V \otimes \mathcal{O}(G) \ar[r, "f \otimes \mathrm{id}"'] & W \otimes \mathcal{O}(G)
-   \end{tikzcd}
+   \begin{CD}
+   V @>{f}>> W \\
+   @V{\rho_V}VV @VV{\rho_W}V \\
+   V \otimes \mathcal{O}(G) @>{f \otimes \mathrm{id}}>> W \otimes \mathcal{O}(G)
+   \end{CD}
    $$
 
 2. A **submodule** (subcomodule) is a subspace $W \subseteq V$ such that $\rho(W) \subseteq W \otimes \mathcal{O}(G)$.
@@ -269,10 +279,11 @@ $$
 ::: {.proof}
 By Yoneda's Lemma on $G$ and $\mathrm{GL}_V(-)$, for every $R \in k\text{-alg}$ and $f: A \to R$ ($f \in G(R)$), we have:
 $$
-\begin{tikzcd}
-G(A) \ar[r, "r(A)"] \ar[d, "f_*"'] & \mathrm{GL}_V(A) \ar[d, "f_*"] \\
-G(R) \ar[r, "r(R)"'] & \mathrm{GL}_V(R)
-\end{tikzcd}
+\begin{CD}
+G(A) @>{r(A)}>> \mathrm{GL}_V(A) \\
+@V{f_*}VV @VV{f_*}V \\
+G(R) @>{r(R)}>> \mathrm{GL}_V(R)
+\end{CD}
 \qquad
 \begin{array}{rcl}
 \mathrm{id} & \longmapsto & u \\
@@ -306,10 +317,11 @@ Set $W := \operatorname{span}_k\{v_i\}$.
 
 First, $v = \sum_{i \in I} v_i f_i(e) \in W$. It remains to show that $\rho(v_i) \in W \otimes \mathcal{O}(G)$ for all $v_i$. From the coassociativity diagram:
 $$
-\begin{tikzcd}
-V \ar[r, "\rho"] \ar[d, "\rho"'] & V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes m^*"] \\
-V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] & V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{tikzcd}
+\begin{CD}
+V @>{\rho}>> V \otimes \mathcal{O}(G) \\
+@V{\rho}VV @VV{\mathrm{id} \otimes m^*}V \\
+V \otimes \mathcal{O}(G) @>{\rho \otimes \mathrm{id}}>> V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
 $$
 we have:
 $$
@@ -325,15 +337,17 @@ Then $\rho(v_l) = \sum a_{ijl} \, v_i \otimes f_j \in W \otimes \mathcal{O}(G)$.
 ## Algebraic Action
 If $V = \mathcal{O}(X)$ with $X$ affine over $k$, then $V$ is an $\mathcal{O}(G)$-comodule. Given $\rho: V \to V \otimes \mathcal{O}(G)$, suppose $\rho$ is a morphism of $k$-algebras. Then $X \times G \xrightarrow{a} X$:
 $$
-\begin{tikzcd}
-\mathcal{O}(X) \ar[r, "\rho"] \ar[rd] & \mathcal{O}(X) \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes e^*"] \\
-& \mathcal{O}(X)
-\end{tikzcd}
+\begin{CD}
+\mathcal{O}(X) @>{\rho}>> \mathcal{O}(X) \otimes \mathcal{O}(G) \\
+@| @VV{\mathrm{id} \otimes e^*}V \\
+\mathcal{O}(X) @= \mathcal{O}(X)
+\end{CD}
 \qquad
-\begin{tikzcd}
-\mathcal{O}(X) \ar[r, "\rho"] \ar[d, "\rho"'] & \mathcal{O}(X) \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes m^*"] \\
-\mathcal{O}(X) \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] & \mathcal{O}(X) \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{tikzcd}
+\begin{CD}
+\mathcal{O}(X) @>{\rho}>> \mathcal{O}(X) \otimes \mathcal{O}(G) \\
+@V{\rho}VV @VV{\mathrm{id} \otimes m^*}V \\
+\mathcal{O}(X) \otimes \mathcal{O}(G) @>{\rho \otimes \mathrm{id}}>> \mathcal{O}(X) \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
 $$
 $\implies a$ is a right algebraic action, which is in fact:
 $$
@@ -374,10 +388,11 @@ The regular representation of $G$ has a faithful finite-dimensional subrepresent
 ::: {.proof}
 For any finite-dimensional submodule $V \subseteq \mathcal{O}(G)$, if $f_1, \dots, f_n$ is a basis of $V$, then $\mathrm{GL}_V \cong \mathrm{GL}_n$:
 $$
-\begin{tikzcd}
-V \ar[r] \ar[d, hook] & V \otimes \mathcal{O}(G) \ar[d, hook] \\
-\mathcal{O}(G) \ar[r, "m^*"'] & \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{tikzcd}
+\begin{CD}
+V @>>> V \otimes \mathcal{O}(G) \\
+@VVV @VVV \\
+\mathcal{O}(G) @>{m^*}>> \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
 $$
 Suppose $m^*(f_i) = \sum_j f_j \otimes b_{ij}$. Then:
 $$
@@ -414,10 +429,11 @@ Every finite-dimensional $\mathcal{O}(G)$-comodule $V$ is a submodule of $(\math
 ::: {.proof}
 $\rho: V \to V \otimes \mathcal{O}(G)$ is injective (since $(\mathrm{id} \otimes e^*) \circ \rho = \mathrm{id}_V$), and:
 $$
-\begin{tikzcd}
-V \ar[r, "\rho"] \ar[d, "\rho"'] & V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes m^*"] \\
-V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] & V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{tikzcd}
+\begin{CD}
+V @>{\rho}>> V \otimes \mathcal{O}(G) \\
+@V{\rho}VV @VV{\mathrm{id} \otimes m^*}V \\
+V \otimes \mathcal{O}(G) @>{\rho \otimes \mathrm{id}}>> V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
 $$
 is a morphism of comodules.
 :::
