@@ -49,9 +49,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-61861d1f9c65a7ce1aaef4dbf8c8159e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-1679720b21ee0d6527b51eaeaff8602f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-61861d1f9c65a7ce1aaef4dbf8c8159e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-4aca2a2117ed63b0569097be74b0cc2c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-5d42f241ef4cd2dd0db2b2ab03ec0d33.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-4aca2a2117ed63b0569097be74b0cc2c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -395,12 +395,12 @@ window.Quarto = {
 <ol type="1">
 <li><p>An <strong>action</strong> of an algebraic group <span class="math inline">\(G\)</span> on a scheme <span class="math inline">\(X\)</span> over <span class="math inline">\(k\)</span> is a morphism: <span class="math display">\[
 G \times X \longrightarrow X
-\]</span> or equivalently, a natural transformation of functors: <span class="math display">\[
-G(R) \circlearrowright X(R) \quad \text{for all } R \in k\text{-alg}.
+\]</span> or equivalently, a natural transformation: <span class="math display">\[
+\forall R \in k\text{-alg}, \quad G(R) \circlearrowright X(R) \quad \text{naturally}.
 \]</span></p></li>
 <li><p>A <strong>linear representation</strong> of <span class="math inline">\(G\)</span> is a homomorphism of algebraic groups: <span class="math display">\[
 G \longrightarrow \mathrm{GL}_n
-\]</span> for some <span class="math inline">\(n\)</span>, i.e., an action <span class="math inline">\(G \circlearrowright \mathbb{A}^n\)</span>.</p></li>
+\]</span> for some <span class="math inline">\(n\)</span>, i.e., <span class="math inline">\(G \circlearrowright \mathbb{A}^n\)</span>.</p></li>
 </ol>
 </div>
 <div id="lem-action-properties" class="theorem lemma">
@@ -408,24 +408,25 @@ G \longrightarrow \mathrm{GL}_n
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Consider the commutative diagram: <span class="math display">\[
-\begin{tikzcd}
-G \times X \ar[r, "\sim", "{(g, x) \mapsto (g, gx)}"'] \ar[rd, "\varphi"'] &amp; G \times X \ar[r] \ar[d, "\mathrm{pr}_2"'] \ar[rd, phantom, "\square"] &amp; G \ar[d] \\
-&amp; X \ar[r] &amp; \operatorname{Spec} k
-\end{tikzcd}
-\]</span> The right square is Cartesian, so <span class="math inline">\(\mathrm{pr}_2\)</span> inherits properties (fppf, smooth, finite) from the structural morphism <span class="math inline">\(G \to \operatorname{Spec} k\)</span> by base change. Since <span class="math inline">\((g, x) \mapsto (g, gx)\)</span> is an isomorphism, <span class="math inline">\(\varphi\)</span> satisfies these properties.</p>
+\begin{CD}
+G \times X @&gt;{\sim}&gt;{(g, x) \mapsto (g, gx)}&gt; G \times X @&gt;&gt;&gt; G \\
+@V{\varphi}VV @VV{\mathrm{pr}_2}V @VVV \\
+X @= X @&gt;&gt;&gt; \operatorname{Spec} k
+\end{CD}
+\]</span> The right square is Cartesian, so <span class="math inline">\(\mathrm{pr}_2\)</span> inherits the respective property (fppf, smooth, finite) from <span class="math inline">\(G \to \operatorname{Spec} k\)</span> by base change. Since the first horizontal map is an isomorphism, <span class="math inline">\(\varphi = \mathrm{pr}_2 \circ \sim\)</span> satisfies these properties.</p>
 </div>
 <div id="prp-orbit" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 1 (Orbit)</strong></span> &nbsp;</p>
 <ol type="1">
-<li><p>Let <span class="math inline">\(\varphi: G \times X \to X\)</span> be an action and <span class="math inline">\(x \in X(k)\)</span>. Define the <strong>orbit map</strong>: <span class="math display">\[
+<li><p>Let <span class="math inline">\(\varphi: G \times X \to X\)</span> be an action, and <span class="math inline">\(x \in X(k)\)</span>. Define the <strong>orbit map</strong>: <span class="math display">\[
 \varphi_x: G = G \times \operatorname{Spec} k \xrightarrow{\;\mathrm{id} \times x\;} G \times X \xrightarrow{\;\varphi\;} X.
-\]</span> The <strong>orbit</strong> of <span class="math inline">\(x\)</span>, denoted <span class="math inline">\(G \cdot x\)</span>, is defined set-theoretically as <span class="math inline">\(\operatorname{Im} \varphi_x\)</span>.</p></li>
-<li><p><span class="math inline">\(\operatorname{Im} \varphi_x\)</span> is always locally closed in <span class="math inline">\(X\)</span>, and <span class="math inline">\(G \cdot x\)</span> is open dense in its closure <span class="math inline">\(\overline{G \cdot x}\)</span>.</p></li>
+\]</span> The <strong>orbit</strong> of <span class="math inline">\(x\)</span> is defined set-theoretically as <span class="math inline">\(\operatorname{Im} \varphi_x\)</span>.</p></li>
+<li><p><span class="math inline">\(\operatorname{Im} \varphi_x\)</span> is always locally closed. <span class="math inline">\(G \cdot x\)</span> is open dense in <span class="math inline">\(\overline{G \cdot x}\)</span>.</p></li>
 </ol>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Since <span class="math inline">\(X_{\bar{k}} \to X\)</span> is a quotient open map of topological spaces, without loss of generality we may assume <span class="math inline">\(k = \bar{k}\)</span>.</p>
-<p>Apply Chevalley’s Theorem to <span class="math inline">\(\varphi_x\)</span>: the orbit <span class="math inline">\(G \cdot x\)</span> is constructible. Hence there exists an open dense subset <span class="math inline">\(U \subseteq \overline{G \cdot x}\)</span> such that <span class="math inline">\(U \subseteq G \cdot x\)</span>. Then: <span class="math display">\[
+<p>Apply Chevalley’s Theorem to <span class="math inline">\(\varphi_x\)</span>: <span class="math inline">\(G \cdot x\)</span> is constructible. Thus there exists an open dense subset <span class="math inline">\(U \subseteq \overline{G \cdot x}\)</span> such that <span class="math inline">\(U \subseteq G \cdot x\)</span>. Then: <span class="math display">\[
 G \cdot x = G \cdot U = \bigcup_{g \in G} g \cdot U \subseteq \overline{G \cdot x}.
 \]</span> Since each <span class="math inline">\(g \cdot U\)</span> is open in <span class="math inline">\(\overline{G \cdot x}\)</span>, the union <span class="math inline">\(G \cdot x\)</span> is open in <span class="math inline">\(\overline{G \cdot x}\)</span>. Therefore, <span class="math inline">\(G \cdot x\)</span> is an open subset of a closed subset, hence locally closed.</p>
 </div>
@@ -438,7 +439,7 @@ G \cdot x = G \cdot U = \bigcup_{g \in G} g \cdot U \subseteq \overline{G \cdot 
 <ol type="1">
 <li><p>There exists an exact sequence: <span class="math display">\[
 0 \longrightarrow G^\circ \longrightarrow G \longrightarrow \pi_0(G) \longrightarrow e
-\]</span> where <span class="math inline">\(G^\circ\)</span> is geometrically connected and <span class="math inline">\(\pi_0(G)\)</span> is a finite étale group scheme.</p></li>
+\]</span> with <span class="math inline">\(G^\circ\)</span> geometrically connected.</p></li>
 <li><p><strong>(Barsotti–Chevalley)</strong> For every connected algebraic group <span class="math inline">\(G\)</span> over <span class="math inline">\(k\)</span>, there exists an exact sequence: <span class="math display">\[
 0 \longrightarrow N \longrightarrow G \longrightarrow Q \longrightarrow 0
 \]</span> where <span class="math inline">\(N\)</span> is connected linear and <span class="math inline">\(Q\)</span> is an abelian variety. If <span class="math inline">\(k\)</span> is perfect, then <span class="math inline">\(N\)</span> is unique.</p></li>
@@ -452,10 +453,11 @@ G \xrightarrow{\;\phi\;} \operatorname{Spec}\mathcal{O}(G)
 <ol type="1">
 <li><span class="math inline">\(\mathcal{O}(G)\)</span> is a finitely generated <span class="math inline">\(k\)</span>-algebra, and <span class="math inline">\(G_{\mathrm{aff}} := \operatorname{Spec}\mathcal{O}(G)\)</span> is a linear algebraic group (LAG).</li>
 <li><span class="math inline">\(G \to G_{\mathrm{aff}}\)</span> is universal: for every linear algebraic group <span class="math inline">\(H\)</span> and every homomorphism <span class="math inline">\(G \to H\)</span>, there exists a unique factorization: <span class="math display">\[
-\begin{tikzcd}
-G \ar[r] \ar[rd] &amp; G_{\mathrm{aff}} \ar[d, "\exists!", dashed] \\
-&amp; H
-\end{tikzcd}
+\begin{CD}
+G @&gt;{\phi}&gt;&gt; G_{\mathrm{aff}} \\
+@VVV @VV{\exists!}V \\
+H @= H
+\end{CD}
 \]</span></li>
 <li><span class="math inline">\(\phi\)</span> is fppf.</li>
 <li><span class="math inline">\(\mathcal{O}(\ker \phi) = k\)</span>. If <span class="math inline">\(\mathcal{O}(G) = k\)</span>, <span class="math inline">\(G\)</span> is called <strong>anti-affine</strong> (<span class="math inline">\(G\)</span> is commutative anti-affine).</li>
@@ -476,10 +478,11 @@ m^*(\mathfrak{a}) \subseteq \mathfrak{a} \otimes A + A \otimes \mathfrak{a}, \qu
 \]</span></li>
 <li>If <span class="math inline">\(f: A \to B\)</span> is a morphism of Hopf algebras, then <span class="math inline">\(\ker f\)</span> is a Hopf ideal of <span class="math inline">\(A\)</span>.</li>
 <li>If <span class="math inline">\(\mathfrak{a} \subseteq A\)</span> is a Hopf ideal, then <span class="math inline">\(A/\mathfrak{a}\)</span> has a natural Hopf algebra structure and <span class="math inline">\(A \to A/\mathfrak{a}\)</span> is a morphism in the category of Hopf <span class="math inline">\(k\)</span>-algebras. For every <span class="math inline">\(f: A \to B\)</span> such that <span class="math inline">\(\ker f \supseteq \mathfrak{a}\)</span>, there exists a unique <span class="math inline">\(\bar{f}\)</span>: <span class="math display">\[
-\begin{tikzcd}
-A \ar[r, "f"] \ar[d] &amp; B \\
-A/\mathfrak{a} \ar[ur, "\exists! \bar{f}"']
-\end{tikzcd}
+\begin{CD}
+A @&gt;{f}&gt;&gt; B \\
+@VVV @AA{\exists! \bar{f}}A \\
+A/\mathfrak{a} @= A/\mathfrak{a}
+\end{CD}
 \]</span></li>
 <li>For every morphism of Hopf algebras <span class="math inline">\(f: A \to B\)</span>, there is a canonical isomorphism: <span class="math display">\[
 A/\ker f \xrightarrow{\;\sim\;} f(A) \subseteq B.
@@ -488,15 +491,17 @@ A/\ker f \xrightarrow{\;\sim\;} f(A) \subseteq B.
 </div>
 <div id="cor-factorization-lag" class="theorem corollary">
 <p><span class="theorem-title"><strong>Corollary 1 (Factorization of Morphisms of LAG)</strong></span> A homomorphism <span class="math inline">\(\varphi: G \to H\)</span> of linear algebraic groups factors as: <span class="math display">\[
-\begin{tikzcd}
-G \ar[r, "\varphi"] \ar[d, "q"'] &amp; H \\
-I \ar[ur, "i"']
-\end{tikzcd}
+\begin{CD}
+G @&gt;{\varphi}&gt;&gt; H \\
+@V{q}VV @AA{i}A \\
+I @= I
+\end{CD}
 \qquad
-\begin{tikzcd}
-\operatorname{Spec} B \ar[r, "\varphi"] \ar[d, "q"'] &amp; \operatorname{Spec} A \\
-\operatorname{Spec}(A/\mathfrak{a}) \ar[ur, "i"']
-\end{tikzcd}
+\begin{CD}
+\operatorname{Spec} B @&gt;{\varphi}&gt;&gt; \operatorname{Spec} A \\
+@V{q}VV @AA{i}A \\
+\operatorname{Spec}(A/\mathfrak{a}) @= \operatorname{Spec}(A/\mathfrak{a})
+\end{CD}
 \]</span> where <span class="math inline">\(q\)</span> is fppf and <span class="math inline">\(i\)</span> is a closed immersion.</p>
 <p><strong>Fact:</strong> If <span class="math inline">\(A \subseteq B\)</span> is a Hopf subalgebra, then <span class="math inline">\(B\)</span> is fppf over <span class="math inline">\(A\)</span> (i.e., <span class="math inline">\(\operatorname{Spec} B \to \operatorname{Spec} A\)</span> is fppf).</p>
 </div>
@@ -507,20 +512,22 @@ I \ar[ur, "i"']
 <p><span class="proof-title"><em>Proof</em>. </span>It suffices to prove that <span class="math inline">\(q: G \to I\)</span> is an isomorphism.</p>
 <p>Since <span class="math inline">\(\ker q = \ker \varphi = \operatorname{Spec} k\)</span>, for every <span class="math inline">\(R \in k\text{-alg}\)</span>, the map <span class="math inline">\(\varphi(R): G(R) \hookrightarrow I(R)\)</span> is injective.</p>
 <p><strong>Claim:</strong> <span class="math inline">\(\varphi(R)\)</span> is surjective for all <span class="math inline">\(R\)</span>.</p>
-<p>For any <span class="math inline">\(y \in I(R)\)</span>, there exists an fppf extension <span class="math inline">\(R' \in k\text{-alg}\)</span> over <span class="math inline">\(R\)</span> and <span class="math inline">\(x \in G(R')\)</span> such that <span class="math inline">\(\varphi(R')(x) = y|_{R'}\)</span>. (Take <span class="math inline">\(R' = R \otimes_{\mathcal{O}(I)} \mathcal{O}(G)\)</span> via the pullback diagram): <span class="math display">\[
-\begin{tikzcd}
-R' &amp; G \ar[d, "\mathrm{fppf}"] \\
-R \ar[u, "\mathrm{fppf}"] \ar[r] &amp; I
-\end{tikzcd}
-\]</span> Now the sequence <span class="math inline">\(0 \to R \to R' \rightrightarrows R' \otimes_R R'\)</span> is exact, which gives the exact sequence: <span class="math display">\[
+<p>For any <span class="math inline">\(y \in I(R)\)</span>, there exists an fppf extension <span class="math inline">\(R' \in k\text{-alg}\)</span> over <span class="math inline">\(R\)</span> and <span class="math inline">\(x \in G(R')\)</span> such that <span class="math inline">\(\varphi(R')(x) = y|_{R'}\)</span>. (Take <span class="math inline">\(R' = R \otimes_{\mathcal{O}(I)} \mathcal{O}(G)\)</span> via the pullback): <span class="math display">\[
+\begin{CD}
+R' @&lt;&lt;&lt; G \\
+@AAA @VV{\mathrm{fppf}}V \\
+R @&gt;&gt;&gt; I
+\end{CD}
+\]</span> Now the sequence <span class="math inline">\(0 \to R \to R' \rightrightarrows R' \otimes_R R'\)</span> is exact, giving the exact sequence: <span class="math display">\[
 0 \longrightarrow G(R) \longrightarrow G(R') \rightrightarrows G(R' \otimes_R R')
 \]</span> <span class="math display">\[
 \operatorname{Hom}(\mathcal{O}(G), R) \longhookrightarrow \operatorname{Hom}(\mathcal{O}(G), R') \rightrightarrows \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R')
 \]</span> Consider the commutative diagram: <span class="math display">\[
-\begin{tikzcd}
-\operatorname{Hom}(\mathcal{O}(G), R) \ar[r] \ar[d, "\varphi(R)"] &amp; \operatorname{Hom}(\mathcal{O}(G), R') \ar[r, shift left] \ar[r, shift right] \ar[d, "\varphi(R')"] &amp; \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R') \ar[d] \\
-I(R) \ar[r] &amp; I(R') \ar[r, shift left] \ar[r, shift right] &amp; I(R' \otimes_R R')
-\end{tikzcd}
+\begin{CD}
+\operatorname{Hom}(\mathcal{O}(G), R) @&gt;&gt;&gt; \operatorname{Hom}(\mathcal{O}(G), R') @&gt;&gt;&gt; \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R') \\
+@V{\varphi(R)}VV @V{\varphi(R')}VV @VVV \\
+I(R) @&gt;&gt;&gt; I(R') @&gt;&gt;&gt; I(R' \otimes_R R')
+\end{CD}
 \]</span> <span class="math display">\[
 y \longmapsto y|_{R'} \longmapsto 0
 \]</span> Then <span class="math inline">\(x \in G(R')\)</span> maps to <span class="math inline">\(y|_{R'}\)</span>, and its difference in <span class="math inline">\(G(R' \otimes_R R')\)</span> maps to <span class="math inline">\(0\)</span> in <span class="math inline">\(I(R' \otimes_R R')\)</span>. By injectivity, the difference is <span class="math inline">\(0\)</span>. By descent, <span class="math inline">\(x\)</span> descends to <span class="math inline">\(x_0 \in G(R)\)</span> with <span class="math inline">\(x_0 \mapsto y\)</span>. Thus <span class="math inline">\(\varphi(R)\)</span> is surjective.</p>
@@ -545,16 +552,18 @@ r: G \longrightarrow \mathrm{GL}_V.
 <p><span class="theorem-title"><strong>Definition 4 (Comodule)</strong></span> A <strong>right comodule</strong> is a <span class="math inline">\(k\)</span>-vector space <span class="math inline">\(V\)</span> equipped with a <span class="math inline">\(k\)</span>-linear map <span class="math inline">\(\rho: V \to V \otimes \mathcal{O}(G)\)</span> such that:</p>
 <ol type="1">
 <li><p><span class="math inline">\((\mathrm{id}_V \otimes e^*) \circ \rho = \mathrm{id}_V\)</span>: <span class="math display">\[
-\begin{tikzcd}
-V \ar[r, "\rho"] \ar[rd, "\mathrm{id}_V"'] &amp; V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id}_V \otimes e^*"] \\
-&amp; V
-\end{tikzcd}
+\begin{CD}
+V @&gt;{\rho}&gt;&gt; V \otimes \mathcal{O}(G) \\
+@| @VV{\mathrm{id}_V \otimes e^*}V \\
+V @= V
+\end{CD}
 \]</span></p></li>
 <li><p><span class="math inline">\((\mathrm{id}_V \otimes m^*) \circ \rho = (\rho \otimes \mathrm{id}_{\mathcal{O}(G)}) \circ \rho\)</span>: <span class="math display">\[
-\begin{tikzcd}
-V \ar[r, "\rho"] \ar[d, "\rho"'] &amp; V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id}_V \otimes m^*"] \\
-V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] &amp; V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{tikzcd}
+\begin{CD}
+V @&gt;{\rho}&gt;&gt; V \otimes \mathcal{O}(G) \\
+@V{\rho}VV @VV{\mathrm{id}_V \otimes m^*}V \\
+V \otimes \mathcal{O}(G) @&gt;{\rho \otimes \mathrm{id}}&gt;&gt; V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
 \]</span></p></li>
 </ol>
 </div>
@@ -562,10 +571,11 @@ V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] &amp; V \otimes \ma
 <p><span class="theorem-title"><strong>Definition 5 (Comodule Morphism and Submodule)</strong></span> Let <span class="math inline">\((V, \rho)\)</span> be an <span class="math inline">\(\mathcal{O}(G)\)</span>-comodule.</p>
 <ol type="1">
 <li><p>A <strong>morphism</strong> of <span class="math inline">\(\mathcal{O}(G)\)</span>-comodules is a <span class="math inline">\(k\)</span>-linear map <span class="math inline">\(f: V \to W\)</span> such that: <span class="math display">\[
-\begin{tikzcd}
-V \ar[r, "f"] \ar[d, "\rho_V"'] &amp; W \ar[d, "\rho_W"] \\
-V \otimes \mathcal{O}(G) \ar[r, "f \otimes \mathrm{id}"'] &amp; W \otimes \mathcal{O}(G)
-\end{tikzcd}
+\begin{CD}
+V @&gt;{f}&gt;&gt; W \\
+@V{\rho_V}VV @VV{\rho_W}V \\
+V \otimes \mathcal{O}(G) @&gt;{f \otimes \mathrm{id}}&gt;&gt; W \otimes \mathcal{O}(G)
+\end{CD}
 \]</span></p></li>
 <li><p>A <strong>submodule</strong> (subcomodule) is a subspace <span class="math inline">\(W \subseteq V\)</span> such that <span class="math inline">\(\rho(W) \subseteq W \otimes \mathcal{O}(G)\)</span>.</p></li>
 </ol>
@@ -581,10 +591,11 @@ r(A): G(A) = \operatorname{Hom}(\mathcal{O}(G), A) \longrightarrow \mathrm{GL}_V
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>By Yoneda’s Lemma on <span class="math inline">\(G\)</span> and <span class="math inline">\(\mathrm{GL}_V(-)\)</span>, for every <span class="math inline">\(R \in k\text{-alg}\)</span> and <span class="math inline">\(f: A \to R\)</span> (<span class="math inline">\(f \in G(R)\)</span>), we have: <span class="math display">\[
-\begin{tikzcd}
-G(A) \ar[r, "r(A)"] \ar[d, "f_*"'] &amp; \mathrm{GL}_V(A) \ar[d, "f_*"] \\
-G(R) \ar[r, "r(R)"'] &amp; \mathrm{GL}_V(R)
-\end{tikzcd}
+\begin{CD}
+G(A) @&gt;{r(A)}&gt;&gt; \mathrm{GL}_V(A) \\
+@V{f_*}VV @VV{f_*}V \\
+G(R) @&gt;{r(R)}&gt;&gt; \mathrm{GL}_V(R)
+\end{CD}
 \qquad
 \begin{array}{rcl}
 \mathrm{id} &amp; \longmapsto &amp; u \\
@@ -605,10 +616,11 @@ f &amp; \longmapsto &amp; f_* u
 \]</span> Set <span class="math inline">\(W := \operatorname{span}_k\{v_i\}\)</span>.</p>
 <p><strong>Claim:</strong> <span class="math inline">\(W\)</span> is a subcomodule of <span class="math inline">\(V\)</span> containing <span class="math inline">\(v\)</span>.</p>
 <p>First, <span class="math inline">\(v = \sum_{i \in I} v_i f_i(e) \in W\)</span>. It remains to show that <span class="math inline">\(\rho(v_i) \in W \otimes \mathcal{O}(G)\)</span> for all <span class="math inline">\(v_i\)</span>. From the coassociativity diagram: <span class="math display">\[
-\begin{tikzcd}
-V \ar[r, "\rho"] \ar[d, "\rho"'] &amp; V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes m^*"] \\
-V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] &amp; V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{tikzcd}
+\begin{CD}
+V @&gt;{\rho}&gt;&gt; V \otimes \mathcal{O}(G) \\
+@V{\rho}VV @VV{\mathrm{id} \otimes m^*}V \\
+V \otimes \mathcal{O}(G) @&gt;{\rho \otimes \mathrm{id}}&gt;&gt; V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
 \]</span> we have: <span class="math display">\[
 \sum v_i \otimes m^*(f_i) = \sum a_{ijl} \, v_i \otimes f_j \otimes f_l
 \]</span> <span class="math display">\[
@@ -617,15 +629,17 @@ V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] &amp; V \otimes \ma
 </div>
 <div id="rem-algebraic-action" class="proof remark">
 <p><span class="proof-title"><em>Remark 1</em> (Algebraic Action). </span>If <span class="math inline">\(V = \mathcal{O}(X)\)</span> with <span class="math inline">\(X\)</span> affine over <span class="math inline">\(k\)</span>, then <span class="math inline">\(V\)</span> is an <span class="math inline">\(\mathcal{O}(G)\)</span>-comodule. Given <span class="math inline">\(\rho: V \to V \otimes \mathcal{O}(G)\)</span>, suppose <span class="math inline">\(\rho\)</span> is a morphism of <span class="math inline">\(k\)</span>-algebras. Then <span class="math inline">\(X \times G \xrightarrow{a} X\)</span>: <span class="math display">\[
-\begin{tikzcd}
-\mathcal{O}(X) \ar[r, "\rho"] \ar[rd] &amp; \mathcal{O}(X) \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes e^*"] \\
-&amp; \mathcal{O}(X)
-\end{tikzcd}
+\begin{CD}
+\mathcal{O}(X) @&gt;{\rho}&gt;&gt; \mathcal{O}(X) \otimes \mathcal{O}(G) \\
+@| @VV{\mathrm{id} \otimes e^*}V \\
+\mathcal{O}(X) @= \mathcal{O}(X)
+\end{CD}
 \qquad
-\begin{tikzcd}
-\mathcal{O}(X) \ar[r, "\rho"] \ar[d, "\rho"'] &amp; \mathcal{O}(X) \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes m^*"] \\
-\mathcal{O}(X) \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] &amp; \mathcal{O}(X) \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{tikzcd}
+\begin{CD}
+\mathcal{O}(X) @&gt;{\rho}&gt;&gt; \mathcal{O}(X) \otimes \mathcal{O}(G) \\
+@V{\rho}VV @VV{\mathrm{id} \otimes m^*}V \\
+\mathcal{O}(X) \otimes \mathcal{O}(G) @&gt;{\rho \otimes \mathrm{id}}&gt;&gt; \mathcal{O}(X) \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
 \]</span> <span class="math inline">\(\implies a\)</span> is a right algebraic action, which is in fact: <span class="math display">\[
 G \longrightarrow \operatorname{Aut}_X \longrightarrow \mathrm{GL}_{\mathcal{O}(X)}
 \]</span> <span class="math display">\[
@@ -651,10 +665,11 @@ G \longrightarrow \mathrm{GL}_A
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>For any finite-dimensional submodule <span class="math inline">\(V \subseteq \mathcal{O}(G)\)</span>, if <span class="math inline">\(f_1, \dots, f_n\)</span> is a basis of <span class="math inline">\(V\)</span>, then <span class="math inline">\(\mathrm{GL}_V \cong \mathrm{GL}_n\)</span>: <span class="math display">\[
-\begin{tikzcd}
-V \ar[r] \ar[d, hook] &amp; V \otimes \mathcal{O}(G) \ar[d, hook] \\
-\mathcal{O}(G) \ar[r, "m^*"'] &amp; \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{tikzcd}
+\begin{CD}
+V @&gt;&gt;&gt; V \otimes \mathcal{O}(G) \\
+@VVV @VVV \\
+\mathcal{O}(G) @&gt;{m^*}&gt;&gt; \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
 \]</span> Suppose <span class="math inline">\(m^*(f_i) = \sum_j f_j \otimes b_{ij}\)</span>. Then: <span class="math display">\[
 G \longrightarrow \mathrm{GL}_V \xrightarrow{\;\sim\;} \mathrm{GL}_n, \quad g \longmapsto (b_{ij}(g)).
 \]</span> Then we want: <span class="math display">\[
@@ -673,10 +688,11 @@ V \otimes \mathcal{O}(G) \xrightarrow{\;\mathrm{id} \otimes m^* \;} V \otimes \m
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span><span class="math inline">\(\rho: V \to V \otimes \mathcal{O}(G)\)</span> is injective (since <span class="math inline">\((\mathrm{id} \otimes e^*) \circ \rho = \mathrm{id}_V\)</span>), and: <span class="math display">\[
-\begin{tikzcd}
-V \ar[r, "\rho"] \ar[d, "\rho"'] &amp; V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes m^*"] \\
-V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] &amp; V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{tikzcd}
+\begin{CD}
+V @&gt;{\rho}&gt;&gt; V \otimes \mathcal{O}(G) \\
+@V{\rho}VV @VV{\mathrm{id} \otimes m^*}V \\
+V \otimes \mathcal{O}(G) @&gt;{\rho \otimes \mathrm{id}}&gt;&gt; V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
 \]</span> is a morphism of comodules.</p>
 </div>
 <div id="thm-generating-rep" class="theorem">
