@@ -1,0 +1,432 @@
+---
+title: "23.1 Representation"
+subtitle: ""
+date: last-modified
+number-sections: true
+sec: "23.1." 
+---
+
+::: {#def-action}
+## Action
+1. An **action** of an algebraic group $G$ on a scheme $X$ over $k$ is a morphism:
+   $$
+   G \times X \longrightarrow X
+   $$
+   or equivalently, a natural transformation of functors:
+   $$
+   G(R) \circlearrowright X(R) \quad \text{for all } R \in k\text{-alg}.
+   $$
+
+2. A **linear representation** of $G$ is a homomorphism of algebraic groups:
+   $$
+   G \longrightarrow \mathrm{GL}_n
+   $$
+   for some $n$, i.e., an action $G \circlearrowright \mathbb{A}^n$.
+:::
+
+::: {#lem-action-properties}
+## Properties of Action Morphisms
+Let $\varphi: G \times X \to X$ be an action. Then $\varphi$ is fppf. Moreover, $\varphi$ is smooth (resp. finite) if $G$ is smooth (resp. finite).
+:::
+
+::: {.proof}
+Consider the commutative diagram:
+$$
+\begin{tikzcd}
+G \times X \ar[r, "\sim", "{(g, x) \mapsto (g, gx)}"'] \ar[rd, "\varphi"'] & G \times X \ar[r] \ar[d, "\mathrm{pr}_2"'] \ar[rd, phantom, "\square"] & G \ar[d] \\
+& X \ar[r] & \operatorname{Spec} k
+\end{tikzcd}
+$$
+The right square is Cartesian, so $\mathrm{pr}_2$ inherits properties (fppf, smooth, finite) from the structural morphism $G \to \operatorname{Spec} k$ by base change. Since $(g, x) \mapsto (g, gx)$ is an isomorphism, $\varphi$ satisfies these properties.
+:::
+
+::: {#prp-orbit}
+## Orbit
+1. Let $\varphi: G \times X \to X$ be an action and $x \in X(k)$. Define the **orbit map**:
+   $$
+   \varphi_x: G = G \times \operatorname{Spec} k \xrightarrow{\;\mathrm{id} \times x\;} G \times X \xrightarrow{\;\varphi\;} X.
+   $$
+   The **orbit** of $x$, denoted $G \cdot x$, is defined set-theoretically as $\operatorname{Im} \varphi_x$.
+
+2. $\operatorname{Im} \varphi_x$ is always locally closed in $X$, and $G \cdot x$ is open dense in its closure $\overline{G \cdot x}$.
+:::
+
+::: {.proof}
+Since $X_{\bar{k}} \to X$ is a quotient open map of topological spaces, without loss of generality we may assume $k = \bar{k}$.
+
+Apply Chevalley's Theorem to $\varphi_x$: the orbit $G \cdot x$ is constructible. Hence there exists an open dense subset $U \subseteq \overline{G \cdot x}$ such that $U \subseteq G \cdot x$. Then:
+$$
+G \cdot x = G \cdot U = \bigcup_{g \in G} g \cdot U \subseteq \overline{G \cdot x}.
+$$
+Since each $g \cdot U$ is open in $\overline{G \cdot x}$, the union $G \cdot x$ is open in $\overline{G \cdot x}$. Therefore, $G \cdot x$ is an open subset of a closed subset, hence locally closed.
+:::
+
+::: {#prp-minimal-orbit-closed}
+## Closed Orbits
+If $k = \bar{k}$ and $G \circlearrowright X$, every orbit of minimal dimension is closed. In particular, closed orbits always exist.
+:::
+
+---
+
+::: {#thm-structure-general-alg-group}
+## Structure of General Algebraic Groups
+*(Reference: [Milne, Chapter 8])*
+
+1. There exists an exact sequence:
+   $$
+   0 \longrightarrow G^\circ \longrightarrow G \longrightarrow \pi_0(G) \longrightarrow e
+   $$
+   where $G^\circ$ is geometrically connected and $\pi_0(G)$ is a finite étale group scheme.
+
+2. **(Barsotti–Chevalley)** For every connected algebraic group $G$ over $k$, there exists an exact sequence:
+   $$
+   0 \longrightarrow N \longrightarrow G \longrightarrow Q \longrightarrow 0
+   $$
+   where $N$ is connected linear and $Q$ is an abelian variety. If $k$ is perfect, then $N$ is unique.
+:::
+
+::: {#thm-maximal-affine-quotient}
+## Maximal Affine Quotient
+Every algebraic group $G$ has a maximal affine quotient, defined by:
+$$
+G \xrightarrow{\;\phi\;} \operatorname{Spec}\mathcal{O}(G)
+$$
+since $\mathcal{O}(G)$ is a commutative Hopf $k$-algebra.
+
+**Facts:**
+
+1. $\mathcal{O}(G)$ is a finitely generated $k$-algebra, and $G_{\mathrm{aff}} := \operatorname{Spec}\mathcal{O}(G)$ is a linear algebraic group (LAG).
+2. $G \to G_{\mathrm{aff}}$ is universal: for every linear algebraic group $H$ and every homomorphism $G \to H$, there exists a unique factorization:
+   $$
+   \begin{tikzcd}
+   G \ar[r] \ar[rd] & G_{\mathrm{aff}} \ar[d, "\exists!", dashed] \\
+   & H
+   \end{tikzcd}
+   $$
+3. $\phi$ is fppf.
+4. $\mathcal{O}(\ker \phi) = k$. If $\mathcal{O}(G) = k$, $G$ is called **anti-affine** ($G$ is commutative anti-affine).
+:::
+
+---
+
+::: {#def-hopf-subalgebra}
+## Hopf Subalgebra
+Let $B$ be a Hopf algebra over $k$. A $k$-subalgebra $A \subseteq B$ is called a **Hopf subalgebra** if:
+$$
+m^*(A) \subseteq A \otimes A \quad \text{and} \quad i^*(A) \subseteq A.
+$$
+Then $m_A^* = m_B^*|_A$, $i_A^* = i_B^*|_A$, and $e_A^* = e_B^*|_A$.
+:::
+
+::: {#prp-image-kernel-hopf-ideal}
+## Image, Kernel, and Hopf Ideals
+1. If $f: A \to B$ is a morphism of Hopf algebras, then $\operatorname{Im} f = f(A)$ is a Hopf subalgebra of $B$.
+2. A **Hopf ideal** in a Hopf $k$-algebra $A$ is an ideal $\mathfrak{a} \subseteq A$ such that:
+   $$
+   m^*(\mathfrak{a}) \subseteq \mathfrak{a} \otimes A + A \otimes \mathfrak{a}, \quad i^*(\mathfrak{a}) \subseteq \mathfrak{a}, \quad \text{and} \quad e^*(\mathfrak{a}) = 0.
+   $$
+3. If $f: A \to B$ is a morphism of Hopf algebras, then $\ker f$ is a Hopf ideal of $A$.
+4. If $\mathfrak{a} \subseteq A$ is a Hopf ideal, then $A/\mathfrak{a}$ has a natural Hopf algebra structure and $A \to A/\mathfrak{a}$ is a morphism in the category of Hopf $k$-algebras. For every $f: A \to B$ such that $\ker f \supseteq \mathfrak{a}$, there exists a unique $\bar{f}$:
+   $$
+   \begin{tikzcd}
+   A \ar[r, "f"] \ar[d] & B \\
+   A/\mathfrak{a} \ar[ur, "\exists! \bar{f}"']
+   \end{tikzcd}
+   $$
+5. For every morphism of Hopf algebras $f: A \to B$, there is a canonical isomorphism:
+   $$
+   A/\ker f \xrightarrow{\;\sim\;} f(A) \subseteq B.
+   $$
+:::
+
+::: {#cor-factorization-lag}
+## Factorization of Morphisms of LAG
+A homomorphism $\varphi: G \to H$ of linear algebraic groups factors as:
+$$
+\begin{tikzcd}
+G \ar[r, "\varphi"] \ar[d, "q"'] & H \\
+I \ar[ur, "i"']
+\end{tikzcd}
+\qquad
+\begin{tikzcd}
+\operatorname{Spec} B \ar[r, "\varphi"] \ar[d, "q"'] & \operatorname{Spec} A \\
+\operatorname{Spec}(A/\mathfrak{a}) \ar[ur, "i"']
+\end{tikzcd}
+$$
+where $q$ is fppf and $i$ is a closed immersion.
+
+**Fact:** If $A \subseteq B$ is a Hopf subalgebra, then $B$ is fppf over $A$ (i.e., $\operatorname{Spec} B \to \operatorname{Spec} A$ is fppf).
+:::
+
+::: {#prp-closed-immersion-kernel}
+## Closed Immersion Criterion
+Let $\varphi: G \to H$ be a morphism of linear algebraic groups. If $\ker \varphi = \operatorname{Spec} k$, then $\varphi$ is a closed immersion.
+:::
+
+::: {.proof}
+It suffices to prove that $q: G \to I$ is an isomorphism.
+
+Since $\ker q = \ker \varphi = \operatorname{Spec} k$, for every $R \in k\text{-alg}$, the map $\varphi(R): G(R) \hookrightarrow I(R)$ is injective.
+
+**Claim:** $\varphi(R)$ is surjective for all $R$.
+
+For any $y \in I(R)$, there exists an fppf extension $R' \in k\text{-alg}$ over $R$ and $x \in G(R')$ such that $\varphi(R')(x) = y|_{R'}$. (Take $R' = R \otimes_{\mathcal{O}(I)} \mathcal{O}(G)$ via the pullback diagram):
+$$
+\begin{tikzcd}
+R' & G \ar[d, "\mathrm{fppf}"] \\
+R \ar[u, "\mathrm{fppf}"] \ar[r] & I
+\end{tikzcd}
+$$
+Now the sequence $0 \to R \to R' \rightrightarrows R' \otimes_R R'$ is exact, which gives the exact sequence:
+$$
+0 \longrightarrow G(R) \longrightarrow G(R') \rightrightarrows G(R' \otimes_R R')
+$$
+$$
+\operatorname{Hom}(\mathcal{O}(G), R) \longhookrightarrow \operatorname{Hom}(\mathcal{O}(G), R') \rightrightarrows \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R')
+$$
+Consider the commutative diagram:
+$$
+\begin{tikzcd}
+\operatorname{Hom}(\mathcal{O}(G), R) \ar[r] \ar[d, "\varphi(R)"] & \operatorname{Hom}(\mathcal{O}(G), R') \ar[r, shift left] \ar[r, shift right] \ar[d, "\varphi(R')"] & \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R') \ar[d] \\
+I(R) \ar[r] & I(R') \ar[r, shift left] \ar[r, shift right] & I(R' \otimes_R R')
+\end{tikzcd}
+$$
+$$
+y \longmapsto y|_{R'} \longmapsto 0
+$$
+Then $x \in G(R')$ maps to $y|_{R'}$, and its difference in $G(R' \otimes_R R')$ maps to $0$ in $I(R' \otimes_R R')$. By injectivity, the difference is $0$. By descent, $x$ descends to $x_0 \in G(R)$ with $x_0 \mapsto y$. Thus $\varphi(R)$ is surjective.
+:::
+
+---
+
+::: {#def-representations}
+## Representations
+1. Let $V$ be a $k$-vector space. Define the affine algebraic group functor:
+   $$
+   \mathrm{GL}_V: k\text{-alg} \longrightarrow \mathbf{Grp}, \quad R \longmapsto \mathrm{GL}_V(R) = \operatorname{Aut}_R(V \otimes R).
+   $$
+   If $V$ is finite-dimensional, then after fixing a basis, $\mathrm{GL}_V \cong \mathrm{GL}_n$.
+
+2. A **linear representation** of $G$ is a morphism of algebraic groups:
+   $$
+   r: G \longrightarrow \mathrm{GL}_V.
+   $$
+   - $r$ is **faithful** if $\ker r = \operatorname{Spec} k \iff r$ is a closed immersion.
+   - $r$ is **trivial** if $r(G) = e$.
+:::
+
+::: {#def-comodule}
+## Comodule
+A **right comodule** is a $k$-vector space $V$ equipped with a $k$-linear map $\rho: V \to V \otimes \mathcal{O}(G)$ such that:
+
+1. $(\mathrm{id}_V \otimes e^*) \circ \rho = \mathrm{id}_V$:
+   $$
+   \begin{tikzcd}
+   V \ar[r, "\rho"] \ar[rd, "\mathrm{id}_V"'] & V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id}_V \otimes e^*"] \\
+   & V
+   \end{tikzcd}
+   $$
+
+2. $(\mathrm{id}_V \otimes m^*) \circ \rho = (\rho \otimes \mathrm{id}_{\mathcal{O}(G)}) \circ \rho$:
+   $$
+   \begin{tikzcd}
+   V \ar[r, "\rho"] \ar[d, "\rho"'] & V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id}_V \otimes m^*"] \\
+   V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] & V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+   \end{tikzcd}
+   $$
+:::
+
+::: {#def-comodule-morphism}
+## Comodule Morphism and Submodule
+Let $(V, \rho)$ be an $\mathcal{O}(G)$-comodule.
+
+1. A **morphism** of $\mathcal{O}(G)$-comodules is a $k$-linear map $f: V \to W$ such that:
+   $$
+   \begin{tikzcd}
+   V \ar[r, "f"] \ar[d, "\rho_V"'] & W \ar[d, "\rho_W"] \\
+   V \otimes \mathcal{O}(G) \ar[r, "f \otimes \mathrm{id}"'] & W \otimes \mathcal{O}(G)
+   \end{tikzcd}
+   $$
+
+2. A **submodule** (subcomodule) is a subspace $W \subseteq V$ such that $\rho(W) \subseteq W \otimes \mathcal{O}(G)$.
+:::
+
+::: {#thm-rep-comodule-bijection}
+## Bijection between Representations and Comodules
+Let $r: G \to \mathrm{GL}_V$ be a representation and $A := \mathcal{O}(G)$.
+$$
+r(A): G(A) = \operatorname{Hom}(\mathcal{O}(G), A) \longrightarrow \mathrm{GL}_V(A) = \operatorname{Aut}_A(V \otimes A)
+$$
+$$
+\mathrm{id} \longmapsto (u: V \otimes A \xrightarrow{\sim} V \otimes A) \in \operatorname{Aut}_A(V \otimes A).
+$$
+Consider $\rho: V \xrightarrow{v \mapsto v \otimes 1} V \otimes A \xrightarrow{u} V \otimes A$. There is a bijection:
+$$
+\big\{ \text{Representations } r: G \to \mathrm{GL}_V \big\} \xleftrightarrow{\quad 1:1 \quad} \big\{ \mathcal{O}(G)\text{-comodule structures on } V \big\}, \quad r \longleftrightarrow \rho_r.
+$$
+:::
+
+::: {.proof}
+By Yoneda's Lemma on $G$ and $\mathrm{GL}_V(-)$, for every $R \in k\text{-alg}$ and $f: A \to R$ ($f \in G(R)$), we have:
+$$
+\begin{tikzcd}
+G(A) \ar[r, "r(A)"] \ar[d, "f_*"'] & \mathrm{GL}_V(A) \ar[d, "f_*"] \\
+G(R) \ar[r, "r(R)"'] & \mathrm{GL}_V(R)
+\end{tikzcd}
+\qquad
+\begin{array}{rcl}
+\mathrm{id} & \longmapsto & u \\
+f & \longmapsto & f_* u
+\end{array}
+$$
+Then $\operatorname{Hom}_{\mathbf{Grp}}(G, \mathrm{GL}_V) \cong \dots$
+
+Given a $k$-morphism $V \xrightarrow{\rho} V \otimes A$, one has $V \otimes A \to V \otimes A$, $(v, a) \mapsto a\rho(v)$. Then:
+$$
+\operatorname{Hom}_k(V, V \otimes A) = \operatorname{Hom}_k(V, \operatorname{Hom}_A(A, V \otimes A)) = \operatorname{Hom}_A(V \otimes A, V \otimes A).
+$$
+We narrow down to $\operatorname{Hom}_{\mathbf{Grp}}(G, \mathrm{GL}_V) = \operatorname{Hom}_{\mathrm{comod}}(V, V \otimes A)$.
+:::
+
+::: {#prp-filtered-union-comodules}
+## Filtered Union of Finite-Dimensional Submodules
+Every $\mathcal{O}(G)$-comodule $(V, \rho)$ is a filtered union of finite-dimensional submodules.
+:::
+
+::: {.proof}
+If $W_1, W_2 \subseteq V$ are submodules, then $W_1 + W_2$ is a submodule. It suffices to show that every $v \in V$ is contained in a finite-dimensional submodule of $V$.
+
+Let $(f_i)_{i \in I}$ be a $k$-basis of $\mathcal{O}(G)$, then:
+$$
+\rho(v) = \sum_{i \in I} v_i \otimes f_i \in V \otimes \mathcal{O}(G) \quad (\text{finite sum}).
+$$
+Set $W := \operatorname{span}_k\{v_i\}$.
+
+**Claim:** $W$ is a subcomodule of $V$ containing $v$.
+
+First, $v = \sum_{i \in I} v_i f_i(e) \in W$. It remains to show that $\rho(v_i) \in W \otimes \mathcal{O}(G)$ for all $v_i$. From the coassociativity diagram:
+$$
+\begin{tikzcd}
+V \ar[r, "\rho"] \ar[d, "\rho"'] & V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes m^*"] \\
+V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] & V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{tikzcd}
+$$
+we have:
+$$
+\sum v_i \otimes m^*(f_i) = \sum a_{ijl} \, v_i \otimes f_j \otimes f_l
+$$
+$$
+\sum \rho(v_i) \otimes f_i = \sum \rho(v_l) \otimes f_l.
+$$
+Then $\rho(v_l) = \sum a_{ijl} \, v_i \otimes f_j \in W \otimes \mathcal{O}(G)$.
+:::
+
+::: {#rem-algebraic-action}
+## Algebraic Action
+If $V = \mathcal{O}(X)$ with $X$ affine over $k$, then $V$ is an $\mathcal{O}(G)$-comodule. Given $\rho: V \to V \otimes \mathcal{O}(G)$, suppose $\rho$ is a morphism of $k$-algebras. Then $X \times G \xrightarrow{a} X$:
+$$
+\begin{tikzcd}
+\mathcal{O}(X) \ar[r, "\rho"] \ar[rd] & \mathcal{O}(X) \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes e^*"] \\
+& \mathcal{O}(X)
+\end{tikzcd}
+\qquad
+\begin{tikzcd}
+\mathcal{O}(X) \ar[r, "\rho"] \ar[d, "\rho"'] & \mathcal{O}(X) \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes m^*"] \\
+\mathcal{O}(X) \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] & \mathcal{O}(X) \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{tikzcd}
+$$
+$\implies a$ is a right algebraic action, which is in fact:
+$$
+G \longrightarrow \operatorname{Aut}_X \longrightarrow \mathrm{GL}_{\mathcal{O}(X)}
+$$
+$$
+\begin{array}{rcl}
+\operatorname{Aut}_X(R) & \longrightarrow & \mathrm{GL}_{\mathcal{O}(X)}(R) \\
+\operatorname{Aut}(X \times R) & \longrightarrow & \mathrm{GL}(\mathcal{O}(X) \otimes R) \\
+f & \longmapsto & f^*: \mathcal{O}(X \times R) \xrightarrow{\sim} \mathcal{O}(X \times R).
+\end{array}
+$$
+:::
+
+---
+
+::: {#def-simple-rep}
+## Simple Representation
+A representation $V$ of $G$ is **simple** if $V \neq 0$ and has no non-trivial subrepresentations.
+
+Then every simple representation of a linear algebraic group is finite-dimensional.
+:::
+
+::: {#def-regular-rep}
+## Regular Representation
+Let $X = G$, with $m: X \times G \to X$ the right action. Then $\mathcal{O}(X) = \mathcal{O}(G)$ is an $\mathcal{O}(G)$-comodule. The morphism:
+$$
+G \longrightarrow \mathrm{GL}_A
+$$
+is called the **regular representation**, where $A = \mathcal{O}(G)$.
+:::
+
+::: {#thm-faithful-subrep}
+## Finite-Dimensional Faithful Action
+The regular representation of $G$ has a faithful finite-dimensional subrepresentation. In particular, the regular representation is faithful and $G \hookrightarrow \mathrm{GL}_n$.
+:::
+
+::: {.proof}
+For any finite-dimensional submodule $V \subseteq \mathcal{O}(G)$, if $f_1, \dots, f_n$ is a basis of $V$, then $\mathrm{GL}_V \cong \mathrm{GL}_n$:
+$$
+\begin{tikzcd}
+V \ar[r] \ar[d, hook] & V \otimes \mathcal{O}(G) \ar[d, hook] \\
+\mathcal{O}(G) \ar[r, "m^*"'] & \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{tikzcd}
+$$
+Suppose $m^*(f_i) = \sum_j f_j \otimes b_{ij}$. Then:
+$$
+G \longrightarrow \mathrm{GL}_V \xrightarrow{\;\sim\;} \mathrm{GL}_n, \quad g \longmapsto (b_{ij}(g)).
+$$
+Then we want:
+$$
+\mathcal{O}(\mathrm{GL}_n) = k[T_{ij}, \det{}^{-1}] \longrightarrow \mathcal{O}(G), \quad T_{ij} \longmapsto b_{ij}
+$$
+to be surjective. It suffices to find $b_{ij}$ generating $\mathcal{O}(G)$.
+
+Since $\mathrm{id}: G \xrightarrow{e \times \mathrm{id}} G \times G \xrightarrow{m} G \implies f_i = \sum_j f_j(e) b_{ij}$, it suffices to choose $V \subseteq \mathcal{O}(G)$ such that:
+- $V$ generates $\mathcal{O}(G)$,
+- $V$ is a submodule of $\mathcal{O}(G)$,
+- $\dim_k V < +\infty$.
+:::
+
+---
+
+::: {#def-free-comodule}
+## Free Comodule
+For a vector space $V/k$, $V \otimes \mathcal{O}(G)$ equipped with:
+$$
+V \otimes \mathcal{O}(G) \xrightarrow{\;\mathrm{id} \otimes m^* \;} V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+$$
+is an $\mathcal{O}(G)$-comodule, called the **free comodule**.
+:::
+
+::: {#prp-submodule-free-comodule}
+## Finite-Dimensional Comodules Embed into Free Comodules
+Every finite-dimensional $\mathcal{O}(G)$-comodule $V$ is a submodule of $(\mathcal{O}(G)^n, m^*)$.
+:::
+
+::: {.proof}
+$\rho: V \to V \otimes \mathcal{O}(G)$ is injective (since $(\mathrm{id} \otimes e^*) \circ \rho = \mathrm{id}_V$), and:
+$$
+\begin{tikzcd}
+V \ar[r, "\rho"] \ar[d, "\rho"'] & V \otimes \mathcal{O}(G) \ar[d, "\mathrm{id} \otimes m^*"] \\
+V \otimes \mathcal{O}(G) \ar[r, "\rho \otimes \mathrm{id}"'] & V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{tikzcd}
+$$
+is a morphism of comodules.
+:::
+
+::: {#thm-generating-rep}
+## Generating Representation
+Let $G \hookrightarrow \mathrm{GL}_V$ be a faithful finite-dimensional representation of $G$. Every finite-dimensional representation $W$ of $G$ can be constructed from $V$ by tensor, direct sum, dual, and subquotient.
+:::
+
+::: {.proof}
+See [Milne].
+:::
