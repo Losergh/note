@@ -1,0 +1,455 @@
+---
+title: "22.8 Analytic Topology"
+subtitle: "Morse Theory, Andreotti-Frankel Theorem, Lefschetz Hyperplane Theorem, and Barth's Theorem"
+date: last-modified
+number-sections: true
+sec: "22.8." 
+---
+
+::: {#exm-stein-homotopy-type}
+## Homotopy Type of Stein Manifolds
+Consider the closed complex submanifold of $\mathbb{C}^2$ defined by:
+$$
+V = V\big(w \sin(\pi z) - 1\big) = \left\{ (z, w) \in \mathbb{C}^2 \;\middle|\; w \sin(\pi z) = 1 \right\} \subseteq \mathbb{C}^2.
+$$
+Then $V$ is biholomorphic to the punctured complex plane $\mathbb{C} \setminus \mathbb{Z}$ via the biholomorphism:
+$$
+V \xrightarrow{\;\sim\;} \mathbb{C} \setminus \mathbb{Z}, \quad (z, w) \longmapsto z, \qquad z \longmapsto \left(z, \frac{1}{\sin(\pi z)}\right).
+$$
+Topologically, $\mathbb{C} \setminus \mathbb{Z}$ deformation retracts onto a countable wedge of circles:
+$$
+V \simeq \mathbb{C} \setminus \mathbb{Z} \simeq \bigvee_{n \in \mathbb{Z}} S^1.
+$$
+In particular, $V$ has the homotopy type of a $1$-dimensional CW complex (real dimension $1$, while $\dim_{\mathbb{C}} V = 1$). Its singular homology and cohomology satisfy:
+$$
+H^1_{\mathrm{sing}}(V, \mathbb{Z}) \cong \bigoplus_{n \in \mathbb{Z}} \mathbb{Z}, \qquad H^i_{\mathrm{sing}}(V, \mathbb{Z}) = 0 \quad \text{for all } i \ge 2.
+$$
+
+**Question:** Is every Stein manifold (in particular, any closed complex submanifold of $\mathbb{C}^N$) of complex dimension $n$ homotopy equivalent to a CW complex of real dimension at most $n$?
+
+**Answer:** Yes! This is the celebrated **Andreotti-Frankel Theorem** (@thm-andreotti-frankel).
+:::
+
+---
+
+::: {#def-morse-exhaustion}
+## Morse Functions and Exhaustion Functions
+Let $M \subseteq \mathbb{R}^N$ be a smooth real manifold of dimension $m \ge 2$, and let $f \in C^\infty(M, \mathbb{R})$.
+
+1. $f$ is called an **exhaustion function** if for every $a \in \mathbb{R}$, the sublevel set $f^{-1}((-\infty, a])$ is compact in $M$.
+2. A point $p \in M$ is a **critical point** of $f$ if $df_p = 0$. The set of critical points is denoted by $\operatorname{Crit}(f)$.
+3. A critical point $p \in \operatorname{Crit}(f)$ is called **nondegenerate** if the Hessian matrix:
+   $$
+   \operatorname{Hess}_p(f) = \left( \frac{\partial^2 f}{\partial x_i \partial x_j}(p) \right)
+   $$
+   is nonsingular (nondegenerate) in local coordinates.
+4. $f$ is called a **Morse function** if every critical point $p \in \operatorname{Crit}(f)$ is nondegenerate.
+5. For a nondegenerate critical point $p \in \operatorname{Crit}(f)$, the **index** of $f$ at $p$ is defined as:
+   $$
+   \operatorname{Index}_p(f) := \# \big\{ \lambda < 0 \;\big|\; \lambda \text{ is an eigenvalue of } \operatorname{Hess}_p(f) \big\},
+   $$
+   counted with multiplicity.
+:::
+
+::: {#thm-existence-morse}
+## Existence of Distance Morse Functions
+Let $M \subseteq \mathbb{R}^N$ be a smooth closed submanifold of dimension $m \ge 2$. For any $c \in \mathbb{R}^N$, consider the squared Euclidean distance function:
+$$
+\phi_c: M \longrightarrow \mathbb{R}, \quad x \longmapsto \|x - c\|^2.
+$$
+Then $\phi_c$ is an exhaustion function, and for almost all $c \in \mathbb{R}^N$ (outside a subset of Lebesgue measure zero), $\phi_c$ is a Morse function.
+:::
+
+::: {#thm-morse-cw-complex}
+## CW Complex from an Exhaustion Morse Function
+Let $M$ be a smooth manifold and let $f: M \to \mathbb{R}$ be an exhaustion Morse function. Then $M$ has the homotopy type of a CW complex $K$:
+$$
+M \simeq K,
+$$
+where the cells of $K$ are in one-to-one correspondence with the critical points of $f$:
+$$
+\{\text{cells of } K\} \stackrel{1:1}{\longleftrightarrow} \operatorname{Crit}(f), \quad e_p^m \longleftrightarrow p \in \operatorname{Crit}(f) \text{ with } m = \operatorname{Index}_p(f).
+$$
+:::
+
+---
+
+::: {#thm-andreotti-frankel}
+## Andreotti-Frankel Theorem
+Let $V \subseteq \mathbb{C}^r$ be a connected complex submanifold of complex dimension $n$. Then $V$ has the homotopy type of a CW complex $K$ of real dimension at most $n$:
+$$
+V \simeq K \quad \text{with} \quad \dim_{\mathbb{R}} K \le n.
+$$
+In particular, the singular cohomology of $V$ vanishes above degree $n$:
+$$
+H^i_{\mathrm{sing}}(V, \mathbb{Z}) = 0 \quad \text{for all } i > n.
+$$
+:::
+
+::: {.proof}
+By @thm-existence-morse, we can choose a point $c \in \mathbb{R}^{2r} \cong \mathbb{C}^r$ such that $\phi_c: V \to \mathbb{R}$, $x \mapsto \|x - c\|^2$, is an exhaustion Morse function on $V$.
+
+By @thm-morse-cw-complex, to show that $\dim_{\mathbb{R}} K \le n$, it suffices to show that:
+$$
+\operatorname{Index}_p(\phi_c) \le n \quad \text{for every critical point } p \in \operatorname{Crit}(\phi_c).
+$$
+
+Fix $p \in \operatorname{Crit}(\phi_c)$. Because the question is purely local around $p$, after a unitary transformation and translation on $\mathbb{C}^r$, we may assume without loss of generality that:
+$$
+p = 0 \in \mathbb{C}^r \quad \text{and} \quad T_0 V = \operatorname{Span}_{\mathbb{C}}\left( \frac{\partial}{\partial z_1}, \dots, \frac{\partial}{\partial z_n} \right) \subseteq \mathbb{C}^r.
+$$
+
+**Step 1: Local chart parametrization.**
+Near $0$, $V$ is represented as the graph of a holomorphic mapping over an open neighborhood $U_1 \subseteq \mathbb{C}^n$ of the origin:
+$$
+g: U_1 \longrightarrow V \subseteq \mathbb{C}^r, \quad z = (z_1, \dots, z_n) \longmapsto \big(z_1, \dots, z_n, f_1(z), \dots, f_k(z)\big),
+$$
+where $k = r - n$, $f_l(0) = 0$, and $df_l(0) = 0$ for each $1 \le l \le k$. Thus:
+$$
+dg_0 = \begin{pmatrix} I_n \\ 0 \end{pmatrix} \quad \text{and} \quad \operatorname{Im}(dg_0) = T_0 V.
+$$
+
+**Step 2: Characterization of the critical point $c$.**
+The differential $(d\phi_c)_0: T_0 V \to \mathbb{R}$ vanishes on any $v \in T_0 V$. Let $w = dg_0^{-1}(v) \in \mathbb{C}^n$. Differentiating along the real line $t \mapsto t w$ gives:
+$$
+\begin{aligned}
+0 = \left. \frac{d}{dt} \right|_{t=0} \|g(tw) - c\|^2 &= \left. \frac{d}{dt} \right|_{t=0} (g(tw) - c)^T \overline{(g(tw) - c)} \\
+&= (dg_0(w))^T \overline{(-c)} + (-c)^T \overline{dg_0(w)} \\
+&= (w_1, \dots, w_n, 0, \dots, 0)^T (-\bar{c}) + (-c)^T \overline{(w_1, \dots, w_n, 0, \dots, 0)} \\
+&= -2 \operatorname{Re} \langle v, c \rangle.
+\end{aligned}
+$$
+Replacing $v$ with $i v \in T_0 V$ yields $\operatorname{Im} \langle v, c \rangle = 0$, hence $\langle v, c \rangle = 0$ for all $v \in T_0 V$. Thus $c \in (T_0 V)^\perp$.
+
+Applying an invertible unitary change of coordinates on the normal space $\mathbb{C}^k$ (leaving $T_0 V$ invariant), we may arrange that:
+$$
+c = (0, \dots, 0, 1, 0, \dots, 0) \in \mathbb{C}^n \times \mathbb{C}^k,
+$$
+where $1$ is placed in the $(n+1)$-th coordinate (the first coordinate of $\mathbb{C}^k$).
+
+**Step 3: Pullback and Hessian calculation.**
+Pulling back $\phi_c$ via the chart $g$ yields:
+$$
+\begin{aligned}
+\phi_c(z) &= |z_1|^2 + \dots + |z_n|^2 + |f_1(z) - 1|^2 + |f_2(z)|^2 + \dots + |f_k(z)|^2 \\
+&= \sum_{j=1}^n |z_j|^2 + \sum_{l=1}^k |f_l(z)|^2 - 2 \operatorname{Re}\big(f_1(z)\big) + 1.
+\end{aligned}
+$$
+Since $f_l(0) = 0$ and $df_l(0) = 0$, the Hessian of each $|f_l|^2$ at $0$ vanishes:
+$$
+\operatorname{Hess}_0\big(|f_l|^2\big) = 2 \operatorname{Re}(f_l) \operatorname{Hess}_0\big(\operatorname{Re} f_l\big) + 2 \operatorname{Im}(f_l) \operatorname{Hess}_0\big(\operatorname{Im} f_l\big) = 0.
+$$
+Therefore, the Hessian of $\phi_c$ at the origin simplifies to:
+$$
+\operatorname{Hess}_0(\phi_c) = I_{2n} - 2 \operatorname{Hess}_0\big(\operatorname{Re} f_1\big).
+$$
+
+**Step 4: Eigenvalue pairing of the holomorphic Hessian.**
+Since $f_1$ is holomorphic with $f_1(0) = 0$ and $df_1(0) = 0$, its Taylor expansion at $0$ is:
+$$
+f_1(z) = Q(z) + O(|z|^3),
+$$
+where $Q(z) = z^T C z$ is a complex symmetric quadratic form with $C = A + iB$, where $A, B \in \operatorname{Sym}_n(\mathbb{R})$.
+Writing $z = x + iy$ with $x, y \in \mathbb{R}^n$:
+$$
+\operatorname{Re} Q(x + iy) = x^T A x - y^T A y - 2 x^T B y = \begin{pmatrix} x^T & y^T \end{pmatrix} \begin{pmatrix} A & -B \\ -B & -A \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}.
+$$
+Let $H = \begin{pmatrix} A & -B \\ -B & -A \end{pmatrix}$ and let $J = \begin{pmatrix} 0 & -I_n \\ I_n & 0 \end{pmatrix}$ be the standard complex structure. A direct matrix computation shows:
+$$
+J H = \begin{pmatrix} 0 & -I_n \\ I_n & 0 \end{pmatrix} \begin{pmatrix} A & -B \\ -B & -A \end{pmatrix} = \begin{pmatrix} B & A \\ A & -B \end{pmatrix} = - H J.
+$$
+Therefore, if $\begin{pmatrix} u \\ v \end{pmatrix}$ is an eigenvector of $H$ with eigenvalue $\lambda$, then:
+$$
+H \left( \begin{pmatrix} -v \\ u \end{pmatrix} \right) = H J \begin{pmatrix} u \\ v \end{pmatrix} = - J H \begin{pmatrix} u \\ v \end{pmatrix} = -\lambda J \begin{pmatrix} u \\ v \end{pmatrix} = -\lambda \begin{pmatrix} -v \\ u \end{pmatrix}.
+$$
+Hence the eigenvalues of $H = \operatorname{Hess}_0(\operatorname{Re} Q)$ occur in opposite pairs $\{\lambda, -\lambda\}$.
+In particular, $H$ can have at most $n$ strictly positive eigenvalues:
+$$
+\# \big\{ \text{positive eigenvalues of } \operatorname{Hess}_0(\operatorname{Re} Q) \big\} \le n.
+$$
+
+**Step 5: Bounding the Morse index.**
+The eigenvalues of $\operatorname{Hess}_0(\phi_c) = I_{2n} - 2 H$ are of the form $1 - 2\lambda$, where $\lambda$ is an eigenvalue of $H$. An eigenvalue $1 - 2\lambda$ is strictly negative if and only if:
+$$
+1 - 2\lambda < 0 \iff \lambda > \frac{1}{2} > 0.
+$$
+Because at most $n$ eigenvalues of $H$ are positive, at most $n$ eigenvalues satisfy $\lambda > 1/2$. Consequently:
+$$
+\operatorname{Index}_0(\phi_c) = \#\{ 1 - 2\lambda < 0 \} \le n.
+$$
+This completes the proof.
+:::
+
+---
+
+::: {#cor-smooth-affine-cw}
+## Smooth Affine Varieties Have Finite Homotopy Type
+Let $V \subseteq \mathbb{C}^r$ be a smooth affine algebraic variety of dimension $n$. Then in the analytic topology, $V^{\mathrm{an}}$ has the homotopy type of a **finite** CW complex of dimension at most $n$.
+:::
+
+::: {.proof}
+Let $V = V(f_1, \dots, f_k) \subseteq \mathbb{C}^r$. By separating each polynomial and coordinate into real and imaginary parts, $V$ can be viewed as a real algebraic subvariety:
+$$
+V = V(g_1, \dots, g_p) \subseteq \mathbb{R}^{2r}.
+$$
+For any $x \in V$, the normal space is $N_x V = \operatorname{Span}_{\mathbb{R}}\{\nabla g_1(x), \dots, \nabla g_p(x)\}$.
+
+Let $\phi_c(x) = \|x - c\|^2$ be a Morse exhaustion function on $V$. A point $q \in V$ is a critical point of $\phi_c|_V$ if and only if $c - q \in N_q V$, which is equivalent to:
+$$
+\operatorname{rank}\big(\nabla g_1(q), \dots, \nabla g_p(q) \;\big|\; q - c\big) \le 2r - 2n.
+$$
+This condition is algebraic: it is cut out by the vanishing of all $(2r - 2n + 1) \times (2r - 2n + 1)$ minors of the augmented matrix. Hence $\operatorname{Crit}(\phi_c)$ is a real algebraic subvariety of $V$.
+
+On the other hand, since $\phi_c$ is a Morse function, all its critical points are nondegenerate, meaning the differential $D(\nabla \phi_c|_V) = \operatorname{Hess}(\phi_c)$ is invertible at each critical point. By the inverse function theorem, $\operatorname{Crit}(\phi_c)$ consists of isolated points, so $\dim_{\mathbb{R}} \operatorname{Crit}(\phi_c) = 0$.
+
+A $0$-dimensional real algebraic variety in $\mathbb{R}^{2r}$ must be a **finite set**. Therefore, $\operatorname{Crit}(\phi_c)$ is finite, and by @thm-morse-cw-complex, $V^{\mathrm{an}}$ is homotopy equivalent to a finite CW complex of dimension $\le n$.
+:::
+
+::: {#thm-artin-grothendieck}
+## Artin-Grothendieck Vanishing Theorem
+Let $V$ be an affine variety over $\mathbb{C}$ of dimension $n$, and let $\mathcal{F}$ be an algebraically constructible sheaf on $V$ (that is, $\mathcal{F}$ is analytically locally constant on each stratum of some Zariski stratification $V = \bigsqcup X_i$). Then:
+$$
+H^i(V, \mathcal{F}) = 0 \quad \text{for all } i > n.
+$$
+:::
+
+---
+
+::: {#thm-lefschetz-hyperplane}
+## Lefschetz Hyperplane Theorem
+Let $X$ be an $n$-dimensional nonsingular irreducible complex projective variety, and let $D \subseteq X$ be an effective ample divisor. Then:
+$$
+H^i(X, D; \mathbb{Z}) = 0 \quad \text{for all } i \le n - 1.
+$$
+Consequently, the restriction homomorphism $H^i(X, \mathbb{Z}) \to H^i(D, \mathbb{Z})$ is:
+
+1. an **isomorphism** for all $i \le n - 2$;
+2. **injective** for $i = n - 1$.
+:::
+
+::: {.proof}
+Because $\operatorname{Supp}(D) = \operatorname{Supp}(mD)$, we may replace $D$ by a large multiple $m D$ and assume without loss of generality that $D$ is very ample, cut out by a hyperplane section $H$. The complement:
+$$
+X \setminus D = X \setminus (X \cap H)
+$$
+is an affine variety of complex dimension $n$. By the Andreotti-Frankel Theorem (@thm-andreotti-frankel) or Artin-Grothendieck vanishing (@thm-artin-grothendieck):
+$$
+H_i(X \setminus D, \mathbb{Z}) = 0 \quad \text{for all } i > n.
+$$
+
+::: {#lem-lefschetz-duality}
+### Lefschetz Duality
+Consider the long exact sequence of compactly supported cohomology and relative cohomology:
+$$
+\begin{CD}
+H_c^k(X \setminus D) @>>> H^k(X) @>>> H^k(D) @>>> H_c^{k+1}(X \setminus D) \\
+@V{\cong}VV @| @| \\
+H^k(X, D) @>>> H^k(X) @>>> H^k(D)
+\end{CD}
+$$
+By Poincaré-Lefschetz duality on the $2n$-dimensional real manifold $X$:
+$$
+H_i(X \setminus D, \mathbb{Z}) = 0 \iff H_c^{2n - i}(X \setminus D, \mathbb{Z}) = 0 \iff H^{2n - i}(X, D; \mathbb{Z}) = 0.
+$$
+Setting $k = 2n - i$, the condition $i > n$ is equivalent to $0 \le k \le n - 1$. Hence:
+$$
+H^k(X, D; \mathbb{Z}) = 0 \quad \text{for all } 0 \le k \le n - 1.
+$$
+:::
+
+Now examine the long exact sequence of the pair $(X, D)$:
+$$
+H^{i-1}(D, \mathbb{Z}) \longrightarrow H^i(X, D; \mathbb{Z}) \longrightarrow H^i(X, \mathbb{Z}) \longrightarrow H^i(D, \mathbb{Z}) \longrightarrow H^{i+1}(X, D; \mathbb{Z}).
+$$
+- For $i \le n - 2$, both $H^i(X, D; \mathbb{Z}) = 0$ and $H^{i+1}(X, D; \mathbb{Z}) = 0$, so $H^i(X, \mathbb{Z}) \xrightarrow{\sim} H^i(D, \mathbb{Z})$ is an isomorphism.
+- For $i = n - 1$, $H^{n-1}(X, D; \mathbb{Z}) = 0$, so $H^{n-1}(X, \mathbb{Z}) \hookrightarrow H^{n-1}(D, \mathbb{Z})$ is injective.
+:::
+
+---
+
+::: {#cor-connectedness-picard-ample}
+## Connectedness and Picard Group of Ample Divisors
+Let $X$ be a smooth projective variety over $\mathbb{C}$.
+
+1. If $\dim X \ge 2$ and $D \subseteq X$ is an effective ample divisor, then $D$ is connected in both the classical (analytic) and Zariski topologies.
+2. If $\dim X \ge 3$ and $D \subseteq X$ is a reduced effective ample divisor, then the restriction map induces an isomorphism on Picard groups:
+   $$
+   \operatorname{Pic}(X) \xrightarrow{\;\sim\;} \operatorname{Pic}(D).
+   $$
+:::
+
+::: {.proof}
+*Proof of (1):* Since $n = \dim X \ge 2$, we have $n - 2 \ge 0$. By @thm-lefschetz-hyperplane:
+$$
+H^0(X, \mathbb{Z}) \xrightarrow{\;\sim\;} H^0(D, \mathbb{Z}) \cong \mathbb{Z}.
+$$
+Therefore, $D$ is connected in the classical analytic topology. By Serre's GAGA, $H^0(D, \mathcal{O}_D) \cong H^0(D^{\mathrm{an}}, \mathcal{O}_{D^{\mathrm{an}}})$ has no nontrivial idempotents, which proves $D$ is also connected in the Zariski topology.
+
+*Proof of (2):* Since $D$ is reduced, we have the exponential sheaf sequence $0 \to \mathbb{Z} \to \mathcal{O}_D \to \mathcal{O}_D^* \to 0$ on $D$, and similarly on $X$. Consider the commutative diagram of long exact sequences:
+$$
+\begin{CD}
+H^1(X, \mathbb{Z}) @>>> H^1(X, \mathcal{O}_X) @>>> H^1(X, \mathcal{O}_X^*) @>>> H^2(X, \mathbb{Z}) @>>> H^2(X, \mathcal{O}_X) \\
+@VV{\sim}V @VV{\operatorname{res}}V @VV{\operatorname{res}}V @VV{\sim}V @VV{\operatorname{res}}V \\
+H^1(D, \mathbb{Z}) @>>> H^1(D, \mathcal{O}_D) @>>> H^1(D, \mathcal{O}_D^*) @>>> H^2(D, \mathbb{Z}) @>>> H^2(D, \mathcal{O}_D)
+\end{CD}
+$$
+From the short exact sequence of ideal sheaves $0 \to \mathcal{O}_X(-D) \to \mathcal{O}_X \to \mathcal{O}_D \to 0$, we have:
+$$
+H^i(X, \mathcal{O}_X(-D)) \longrightarrow H^i(X, \mathcal{O}_X) \longrightarrow H^i(D, \mathcal{O}_D) \longrightarrow H^{i+1}(X, \mathcal{O}_X(-D)).
+$$
+By Kodaira vanishing and Serre duality, $H^j(X, \mathcal{O}_X(-D)) \cong H^{n-j}(X, K_X + D)^\vee = 0$ for all $j < n$. Since $n \ge 3$, this vanishing holds for $j = 1, 2$, which implies:
+$$
+H^i(X, \mathcal{O}_X) \xrightarrow{\;\sim\;} H^i(D, \mathcal{O}_D) \quad \text{for } i \le n - 2.
+$$
+Since $n \ge 3$, this is an isomorphism for $i = 1$ (and for $i = 2$ when $n \ge 4$; when $n = 3$, it is injective). Furthermore, by @thm-lefschetz-hyperplane:
+- $H^1(X, \mathbb{Z}) \xrightarrow{\sim} H^1(D, \mathbb{Z})$ is an isomorphism (as $1 \le n - 2$);
+- $H^2(X, \mathbb{Z}) \to H^2(D, \mathbb{Z})$ is an isomorphism for $n \ge 4$, and injective for $n = 3$.
+
+By the Five Lemma, the restriction map on Picard groups:
+$$
+\operatorname{Pic}(X) \cong H^1(X, \mathcal{O}_X^*) \xrightarrow{\;\sim\;} H^1(D, \mathcal{O}_D^*) \cong \operatorname{Pic}(D)
+$$
+is an isomorphism.
+:::
+
+---
+
+::: {#cor-hodge-restriction-ufd}
+## 
+1. Let $X$ be a smooth projective variety of dimension $n$, and let $D \subseteq X$ be a nonsingular ample effective divisor. The restriction map on Hodge cohomology:
+   $$
+   \operatorname{res}: H^p(X, \Omega_X^q) \longrightarrow H^p(D, \Omega_D^q)
+   $$
+   is an **isomorphism** for $p + q \le n - 2$, and **injective** for $p + q = n - 1$.
+2. Let $F \in \mathbb{C}[x_0, \dots, x_n]$ be an irreducible homogeneous polynomial with $n \ge 4$. If the projective hypersurface $D = V(F) \subseteq \mathbb{P}^n$ is nonsingular, then the coordinate ring:
+   $$
+   R = \mathbb{C}[x_0, \dots, x_n] / (F)
+   $$
+   is a Unique Factorization Domain (UFD).
+:::
+
+::: {.proof}
+*Proof of (2):* An integral domain $R$ is a UFD if and only if $R$ is normal and its divisor class group vanishes: $\operatorname{Cl}(R) = 0$.
+
+- **Normality:** Because $D = V(F)$ is smooth in $\mathbb{P}^n$, normal ci is projectively normal. Then the affine cone i.e. $R$ is normal.
+- **Divisor Class Group:** For the punctured affine cone $\operatorname{Spec} R \setminus \{0\}$, the divisor class group satisfies:
+  $$
+  \operatorname{Cl}(R) \cong \operatorname{Pic}(\operatorname{Spec} R \setminus \{0\}).
+  $$
+  The punctured cone $\operatorname{Spec} R \setminus \{0\}$ is the total space of the $\mathbb{C}^*$-bundle associated with $\mathcal{O}_D(-1)$ without its zero section, fitting into the fibration:
+  $$
+  \begin{CD}
+  \operatorname{Spec} R \setminus \{0\} = \mathcal{O}_{\mathbb{P}^n}(-1)|_D \setminus \{0\} @>>> \mathcal{O}_{\mathbb{P}^n}(-1)|_D @>>> D \\
+  @VVV @VVV @VVV \\
+  \mathbb{A}^{n+1} \setminus \{0\} = \mathcal{O}_{\mathbb{P}^n}(-1) \setminus \{0\} @>>> \mathcal{O}_{\mathbb{P}^n}(-1) @>>> \mathbb{P}^n
+  \end{CD}
+  $$
+  From the vector bundle homotopy invariance, $\operatorname{Pic}(\mathcal{O}_D(-1)) \cong \operatorname{Pic}(D)$, and removing the zero section yields the exact sequence:
+  $$
+  0 \longrightarrow \mathbb{Z} \cdot [\mathcal{O}_D(-1)] \longrightarrow \operatorname{Pic}(D) \longrightarrow \operatorname{Pic}(\operatorname{Spec} R \setminus \{0\}) \longrightarrow 0.
+  $$
+  Since $n \ge 4 \ge 3$, by @cor-connectedness-picard-ample:
+  $$
+  \operatorname{Pic}(D) \cong \operatorname{Pic}(\mathbb{P}^n) \cong \mathbb{Z} \cdot [\mathcal{O}_D(1)].
+  $$
+  Because $[\mathcal{O}_D(-1)]$ generates $\operatorname{Pic}(D)$, the quotient is trivial:
+  $$
+  \operatorname{Cl}(R) \cong \operatorname{Pic}(\operatorname{Spec} R \setminus \{0\}) = 0.
+  $$
+Hence $R$ is a UFD.
+:::
+
+---
+
+
+::: {#thm-barth}
+## Barth's Theorem
+Let $X \subseteq \mathbb{P}^r$ be a nonsingular complex subvariety of dimension $n$ and codimension $e = r - n$. Then the restriction homomorphism:
+$$
+j^*: H^i(\mathbb{P}^r, \mathbb{C}) \longrightarrow H^i(X, \mathbb{C})
+$$
+is an **isomorphism** for all $i \le n - e = 2n - r$.
+:::
+
+::: {.proof}
+Let $j: X \hookrightarrow \mathbb{P}^r$ denote the inclusion. Let $\zeta = c_1(\mathcal{O}_{\mathbb{P}^r}(1)) \in H^2(\mathbb{P}^r, \mathbb{C})$ be the hyperplane class, so that:
+$$
+H^*(\mathbb{P}^r, \mathbb{C}) \cong \mathbb{C}[\zeta] / (\zeta^{r+1}), \quad \deg \zeta = 2.
+$$
+Let $d = (X \cdot H^e)$ be the degree of $X$.
+
+**Step 1: Fundamental class and degree.**
+The fundamental class $\eta_X \in H^{2e}(\mathbb{P}^r, \mathbb{C})$ is Poincaré dual to the cycle $[X] \in H_{2n}(\mathbb{P}^r, \mathbb{C})$. Since $H^{2e}(\mathbb{P}^r, \mathbb{C}) = \mathbb{C} \cdot \zeta^e$, we can write $\eta_X = a \zeta^e$. Evaluating on $\zeta^n$ gives:
+$$
+a = \int_{\mathbb{P}^r} \eta_X \cup \zeta^n = \eta_X(\zeta^n) = \int_X j^* \zeta^n = (X \cdot H^n) = d.
+$$
+Thus $\eta_X = d \cdot \zeta^e$.
+
+**Step 2: The Gysin homomorphism.**
+The Gysin pushforward map $j_*: H^i(X, \mathbb{C}) \to H^{i+2e}(\mathbb{P}^r, \mathbb{C})$ is defined via Poincaré duality:
+$$
+j_*: H^i(X) \xrightarrow{\;\mathrm{PD}\;} H_{2n-i}(X) \xrightarrow{\;j_*\;} H_{2n-i}(\mathbb{P}^r) \xrightarrow{\;\mathrm{PD}\;} H^{i+2e}(\mathbb{P}^r).
+$$
+The pushforward and pullback satisfy the following two relations:
+1. For any $x \in H^i(\mathbb{P}^r, \mathbb{C})$, the projection formula gives:
+   $$
+   j_*(j^*(x)) = x \cup \eta_X = d \cdot (x \cup \zeta^e).
+   $$
+   Hence the composition:
+   $$
+   H^i(\mathbb{P}^r, \mathbb{C}) \xrightarrow{\;j^* \;} H^i(X, \mathbb{C}) \xrightarrow{\;j_*\;} H^{i+2e}(\mathbb{P}^r, \mathbb{C})
+   $$
+   is multiplication by $d \zeta^e$. Because $H^*(\mathbb{P}^r, \mathbb{C})$ is generated by $\zeta$, multiplication by $\zeta^e$ is an isomorphism $H^i(\mathbb{P}^r, \mathbb{C}) \xrightarrow{\sim} H^{i+2e}(\mathbb{P}^r, \mathbb{C})$ for all $i \le 2(r - e) = 2n$.
+   In particular, for $i \le n - e$, the composition $j_* \circ j^*$ is an isomorphism. This implies:
+   - $j_*$ is **surjective**;
+   - $j^*$ is **injective**.
+
+2. For any $y \in H^i(X, \mathbb{C})$, the pullback of the pushforward satisfies:
+   $$
+   j^*(j_*(y)) = y \cup j^*(\eta_X) = d \cdot \big(y \cup (j^* \zeta)^e\big).
+   $$
+   Consider the commutative diagram:
+   $$
+   \begin{CD}
+   H^i(\mathbb{P}^r) @>{j^*}>> H^i(X) \\
+   @V{\cdot d \zeta^e}VV @VV{\cdot d (j^*\zeta)^e}V \\
+   H^{i+2e}(\mathbb{P}^r) @>>{j^*}> H^{i+2e}(X)
+   \end{CD}
+   $$
+   By the **Hard Lefschetz Theorem** on the smooth projective variety $X$ of dimension $n$, the Lefschetz operator $L = \cup (j^* \zeta)$ induces an isomorphism:
+   $$
+   L^k: H^{n-k}(X, \mathbb{C}) \xrightarrow{\;\sim\;} H^{n+k}(X, \mathbb{C}).
+   $$
+   For $i \le n - e$, writing $k = n - i \ge e$, the map $L^k = L^{k-e} \circ L^e$ is an isomorphism, which forces the factor:
+   $$
+   L^e: H^i(X, \mathbb{C}) \longrightarrow H^{i+2e}(X, \mathbb{C})
+   $$
+   to be **injective**. Therefore, $j^* \circ j_* = d \cdot L^e$ is injective, which implies that $j_*$ is **injective**.
+
+**Step 3: Conclusion.**
+From (1), $j_*$ is surjective; from (2), $j_*$ is injective. Hence $j_*$ is an isomorphism. Because $j_* \circ j^*$ is an isomorphism, the restriction map:
+$$
+j^*: H^i(\mathbb{P}^r, \mathbb{C}) \xrightarrow{\;\sim\;} H^i(X, \mathbb{C})
+$$
+is an isomorphism for all $i \le n - e$.
+:::
+
+::: {#cor-barth-picard}
+## Picard Group of Subvarieties of Small Codimension
+Let $X \subseteq \mathbb{P}^r$ be a smooth subvariety of dimension $n$. If $2n - r \ge 2$, then the restriction map induces an isomorphism:
+$$
+\operatorname{Pic}(\mathbb{P}^r) \xrightarrow{\;\sim\;} \operatorname{Pic}(X) \cong \mathbb{Z}.
+$$
+:::
+
+::: {.proof}
+By Barth's Theorem on $\mathbb{Z}$ (Deep Fact), $2n - r = n - e \ge 2$ implies that:
+$$
+H^i(\mathbb{P}^r, \mathbb{Z}) \xrightarrow{\;\sim\;} H^i(X, \mathbb{Z}) \quad \text{for } i = 1, 2.
+$$
+In particular, $H^1(X, \mathbb{Z}) = 0$ and $H^2(X, \mathbb{Z}) \cong \mathbb{Z} \cdot c_1(\mathcal{O}_X(1))$. By Hodge decomposition, $H^1(X, \mathcal{O}_X) = 0$. From the exponential sheaf sequence:
+$$
+0 = H^1(X, \mathcal{O}_X) \longrightarrow \operatorname{Pic}(X) \xrightarrow{\;c_1\;} H^2(X, \mathbb{Z}) \cong \mathbb{Z},
+$$
+the first Chern class $c_1$ gives an isomorphism $\operatorname{Pic}(X) \cong \mathbb{Z} \cdot \mathcal{O}_X(1) \cong \operatorname{Pic}(\mathbb{P}^r)$.
+:::
