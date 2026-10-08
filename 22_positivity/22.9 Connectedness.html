@@ -406,15 +406,8 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#grothendiecks-connectedness-theorem" id="toc-grothendiecks-connectedness-theorem" class="nav-link active" data-scroll-target="#grothendiecks-connectedness-theorem"><span class="header-section-number">1</span> Grothendieck’s Connectedness Theorem</a></li>
-  <li><a href="#applications-to-ramification-and-singularities" id="toc-applications-to-ramification-and-singularities" class="nav-link" data-scroll-target="#applications-to-ramification-and-singularities"><span class="header-section-number">2</span> Applications to Ramification and Singularities</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -561,8 +554,6 @@ X \cap Y
 \]</span> then <span class="math inline">\(f^{-1}(\Delta)\)</span> is connected, where <span class="math inline">\(\Delta \cong \mathbb{P}^r\)</span> is the small diagonal in <span class="math inline">\((\mathbb{P}^r)^k\)</span> (viewed via embedding into <span class="math inline">\(\mathbb{P}^{kr + k - 1}\)</span>).</p>
 </div>
 <hr>
-<section id="grothendiecks-connectedness-theorem" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="grothendiecks-connectedness-theorem"><span class="header-section-number">1</span> Grothendieck’s Connectedness Theorem</h2>
 <div id="def-connectedness-dim-k" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1 (Connectedness in Dimension <span class="math inline">\(k\)</span>)</strong></span> A Noetherian scheme <span class="math inline">\(X\)</span> is said to be <strong>connected in dimension <span class="math inline">\(k\)</span></strong> (or <strong><span class="math inline">\(k\)</span>-connected</strong>) if <span class="math inline">\(\dim X &gt; k\)</span> and for every closed subset <span class="math inline">\(T \subseteq X\)</span> with <span class="math inline">\(\dim T &lt; k\)</span>, the complement: <span class="math display">\[
 X \setminus T
@@ -624,9 +615,6 @@ f_1 f_2 = x_1 x_4 + (x_1 x_5 + x_2 x_4) T + (x_1 x_6 + x_2 x_5 + x_3 x_4) T^2 + 
 \]</span> The vanishing of the <span class="math inline">\(5\)</span> coefficients cuts out <span class="math inline">\(X\)</span> set-theoretically in <span class="math inline">\(\mathbb{A}^6\)</span>.</p>
 </div>
 <hr>
-</section>
-<section id="applications-to-ramification-and-singularities" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="applications-to-ramification-and-singularities"><span class="header-section-number">2</span> Applications to Ramification and Singularities</h2>
 <div id="thm-ramification-closed-embedding" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 5 (Unramified Morphisms into Projective Space)</strong></span> Let <span class="math inline">\(X\)</span> be a complete irreducible variety of dimension <span class="math inline">\(n\)</span> over <span class="math inline">\(\mathbb{C}\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r\)</span> be an unramified morphism. If: <span class="math display">\[
 2n &gt; r,
@@ -684,7 +672,6 @@ Y' \longhookrightarrow Y \xrightarrow{\;p\;} X \longhookrightarrow \mathbb{P}^r
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <style>
