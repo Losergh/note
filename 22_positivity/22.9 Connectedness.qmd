@@ -209,7 +209,6 @@ then $f^{-1}(\Delta)$ is connected, where $\Delta \cong \mathbb{P}^r$ is the sma
 
 ---
 
-## Grothendieck's Connectedness Theorem
 
 ::: {#def-connectedness-dim-k}
 ## Connectedness in Dimension $k$
@@ -317,8 +316,6 @@ The vanishing of the $5$ coefficients cuts out $X$ set-theoretically in $\mathbb
 :::
 
 ---
-
-## Applications to Ramification and Singularities
 
 ::: {#thm-ramification-closed-embedding}
 ## Unramified Morphisms into Projective Space
