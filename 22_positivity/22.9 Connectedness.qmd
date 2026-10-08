@@ -1,0 +1,420 @@
+---
+title: "22.9 Connectedness"
+subtitle: "Bertini Theorems, Fulton–Hansen Theorem, Grothendieck's Connectedness Theorem, and Applications"
+date: last-modified
+number-sections: true
+sec: "22.9." 
+---
+
+::: {#thm-bertini-irreducibility}
+## Bertini's Theorem on Irreducibility
+Let $X$ be an irreducible variety over $\mathbb{C}$, and let $f: X \to \mathbb{P}^r$ be a morphism. Fix an integer $d < \dim \overline{f(X)}$. If $L \subseteq \mathbb{P}^r$ is a general $(r - d)$-plane (i.e., belonging to a dense open subset of the Grassmannian $\mathbb{G}(r - d, r)$), then the preimage:
+$$
+f^{-1}(L)
+$$
+is irreducible.
+:::
+
+::: {#lem-irreducibility-fibers-section}
+### Irreducibility of Fibers Admitting a Section
+Let $p: V \to T$ be a dominant morphism of irreducible complex varieties. If $p$ admits a section $s: T \to V$ such that $s(T) \nsubseteq \operatorname{Sing}(V)$, then the fiber $V_t = p^{-1}(t)$ is irreducible for general $t \in T$.
+:::
+
+::: {.proof}
+Since $s(T) \nsubseteq \operatorname{Sing}(V)$, the generic point $\eta_T$ does not lie in $s^{-1}(\operatorname{Sing} V)$. Setting $U := T \setminus s^{-1}(\operatorname{Sing} V)$ and shrinking $T$ to $U$ and $V$ to $p^{-1}(U)$, we may assume without loss of generality that $T$ is smooth, $s(T) \cap \operatorname{Sing}(V) = \varnothing$, and $p$ is flat (hence every fiber has pure dimension).
+
+For general $t \in T$, since $s(t) \notin \operatorname{Sing}(V)$, we have $V_t \nsubseteq \operatorname{Sing}(V)$, so $V_t \setminus \operatorname{Sing}(V)$ is dense in $V_t$. Replacing $V$ by $V \setminus \operatorname{Sing}(V)$, we may assume that $V$ is smooth. By generic smoothness, shrinking $T$ further, we may assume that $p$ is smooth.
+
+To show that the general fiber of $p$ is irreducible, it suffices to show that its fibers are connected:
+1. By [Stacks Project, Tag 055J], for a smooth morphism, the fibers are geometrically irreducible if and only if they are geometrically connected. Hence it suffices to show that the geometric generic fiber $V_{\bar{\eta}}$ is irreducible.
+2. By [Stacks Project, Tag 054Q], this is equivalent to showing that the function field $k(T)$ is separably closed in $k(V)$.
+
+Consider the Stein factorization of $p$: let $\widetilde{k(T)}$ be the separable closure of $k(T)$ in $k(V)$, and let $\tilde{T}$ be the normalization of $T$ in $\widetilde{k(T)}$. This yields a factorization:
+$$
+\begin{CD}
+V @>{\tilde{p}}>> \tilde{T} \\
+@V{p}VV @VV{f}V \\
+T @= T
+\end{CD}
+$$
+where $f: \tilde{T} \to T$ is finite and $\tilde{p}: V \to \tilde{T}$ has geometrically connected fibers. Because $p$ admits a section $s: T \to V$ with $p \circ s = \operatorname{id}_T$, the composition:
+$$
+f \circ (\tilde{p} \circ s) = \operatorname{id}_T
+$$
+shows that $\tilde{p} \circ s$ is a section of the finite morphism $f$. Since $T$ is normal and $f$ is a finite morphism admitting a section, $f$ must be birational, and hence $f: \tilde{T} \xrightarrow{\sim} T$ is an isomorphism. Therefore, $\widetilde{k(T)} = k(T)$, which proves that the fibers of $p$ are irreducible for general $t \in T$.
+:::
+
+::: {.proof}
+*(Proof of @thm-bertini-irreducibility)*
+Let $n := \dim \overline{f(X)}$. It suffices to prove the theorem for $d = n - 1$. 
+
+Indeed, suppose the result holds for $d = n - 1$. For any $d < n - 1$, let $L \subseteq \mathbb{P}^r$ be an $(r - d)$-plane. If $f^{-1}(L)$ were reducible for general $L$, we could choose a general $(r - n + 1)$-plane $L' \subseteq L$ such that $f^{-1}(L')$ is irreducible. Writing $f^{-1}(L) = Y_1 \cup Y_2$ with $Y_1, Y_2$ irreducible, each component has dimension $\dim Y_i \ge n - d$. Setting $k := n - 1 - d \ge 1$, we have $\dim Y_i \ge k + 1$. Then:
+$$
+f^{-1}(L') = \big(f^{-1}(L') \cap Y_1\big) \cup \big(f^{-1}(L') \cap Y_2\big).
+$$
+Adjusting $L'$ so that $\dim\big(f^{-1}(L') \cap Y_1 \cap Y_2\big) = \dim(Y_1 \cap Y_2) - k$, if $f^{-1}(L') \cap Y_1 \subseteq f^{-1}(L') \cap Y_2$, we would have:
+$$
+\dim\big(f^{-1}(L') \cap Y_1\big) \ge \dim Y_1 - 1, \quad \text{while} \quad \dim\big(f^{-1}(L') \cap Y_1 \cap Y_2\big) \le \dim Y_1 - 1 - k,
+$$
+a contradiction. The same holds for $Y_2$, which would imply that $f^{-1}(L')$ is reducible, contradicting the choice of $L'$. Thus, the general case reduces to $d = n - 1$.
+
+Now assume $d = n - 1$. Fix a general $(r - n)$-plane $\Lambda \subseteq \mathbb{P}^r$. The pencil of $(r - n + 1)$-planes $L_t \subseteq \mathbb{P}^r$ containing $\Lambda$ is parametrized by $T = \mathbb{P}^{n-1}$. Consider the incidence variety:
+$$
+V := \big\{ (x, t) \in X \times T \;\big|\; f(x) \in L_t \big\} \subseteq X \times T,
+$$
+equipped with the natural projection $p: V \to T$. It suffices to show that the general fiber of $p$ is irreducible.
+
+For $x \in X \setminus f^{-1}(\Lambda)$, the point $f(x)$ and $\Lambda$ span a unique $(r - n + 1)$-plane $L_t$, which defines a unique $t \in T$. Thus:
+$$
+V \setminus \big(f^{-1}(\Lambda) \times T\big) \xrightarrow{\;\sim\;} X \setminus f^{-1}(\Lambda).
+$$
+Since $X$ is irreducible and $f^{-1}(\Lambda)$ is a proper closed subset, $V \setminus (f^{-1}(\Lambda) \times T)$ is irreducible and dense in $V$, so $V$ is irreducible. 
+
+Notice that the blow-up $\mathrm{Bl}_\Lambda \mathbb{P}^r$ embeds into $\mathbb{P}^r \times T$ as the incidence variety $\{ (x, L_t) \mid x \in L_t \}$. We obtain a commutative diagram with Cartesian squares:
+$$
+\begin{CD}
+\mathrm{Bl}_{f^{-1}(\Lambda)} X @>>> X \times T @>>> X \\
+@VV{\text{strict transform}}V @VVV @VVV \\
+\mathrm{Bl}_\Lambda \mathbb{P}^r @>>> \mathbb{P}^r \times T @>>> \mathbb{P}^r
+\end{CD}
+$$
+Choosing $\Lambda$ such that $f^{-1}(\Lambda)$ is cut out by a regular sequence, we have $V = \mathrm{Bl}_{f^{-1}(\Lambda)} X$. In particular, for any $x \in f^{-1}(\Lambda) \cap X^{\mathrm{reg}}$, the variety $V$ is smooth near $x$.
+
+Since $X \to \overline{f(X)}$ is generically smooth on the source, there exist open dense subsets $U \subseteq X^{\mathrm{reg}}$ and $W \subseteq \overline{f(X)}$ such that $U \to W$ is smooth. Choosing $\Lambda$ such that $\Lambda \cap W \neq \varnothing$, there exists a point $x_0 \in f^{-1}(\Lambda) \cap X^{\mathrm{reg}} \cap f^{-1}(W)^{\mathrm{reg}}$. Then the map:
+$$
+s: T \longrightarrow V, \quad t \longmapsto (x_0, t)
+$$
+defines a section of $p: V \to T$ whose image lies in $V^{\mathrm{reg}}$. By @lem-irreducibility-fibers-section, the general fiber of $p$ is irreducible, which completes the proof.
+:::
+
+---
+
+::: {#thm-bertini-connectedness-proper}
+## Bertini's Theorem for Connectedness (Proper Version)
+Let $X$ be an irreducible proper variety over $\mathbb{C}$, and let $f: X \to \mathbb{P}^r$ be a morphism. Let $L \subseteq \mathbb{P}^r$ be a linear subspace of codimension $d < \dim \overline{f(X)}$. Then the preimage:
+$$
+f^{-1}(L)
+$$
+is connected for **all** linear subspaces $L$.
+:::
+
+::: {.proof}
+Let $G = \mathbb{G}(r - d, r)$ be the Grassmannian parameterizing all linear subspaces of codimension $d$ in $\mathbb{P}^r$. Consider the closed incidence variety:
+$$
+Z := \big\{ (x, L) \in X \times G \;\big|\; x \in f^{-1}(L) \big\} \subseteq X \times G.
+$$
+The projection $Z \to X$ realizes $Z$ as a Grassmannian bundle over $X$ with smooth, irreducible fibers. Since $X$ is irreducible, $Z$ is irreducible. 
+
+Let $p: Z \to G$ be the projection onto the second factor. Because $X$ is proper, $p$ is a proper morphism. Consider the Stein factorization of $p$:
+$$
+Z \xrightarrow{\;\tilde{p}\;} W \xrightarrow{\;r\;} G,
+$$
+where $\tilde{p}$ has connected fibers and $r$ is finite. By @thm-bertini-irreducibility, the general fiber of $p$ is irreducible, so $r: W \to G$ is generically bijective. Since $G$ is smooth, it is normal. By Zariski's Main Theorem, a finite birational morphism onto a normal variety is an isomorphism, so $[K(W) : K(G)] = 1$ and $W \cong G$. 
+
+Therefore, every fiber of $p$ is connected, which implies that $f^{-1}(L)$ is connected for every $L \in G$.
+:::
+
+::: {#cor-curve-connecting-points}
+## Curves Connecting Two Points
+Let $X$ be an irreducible quasi-projective variety over $\mathbb{C}$. For any two distinct points $x_1, x_2 \in X$, there exists an irreducible curve $C \subseteq X$ containing both $x_1$ and $x_2$ (which may not be smooth).
+:::
+
+::: {.proof}
+Let $X' := \mathrm{Bl}_{\{x_1, x_2\}} X$, and let $E_1, E_2 \subseteq X'$ be the exceptional divisors. Choose a quasi-finite morphism $f: X' \to \mathbb{P}^r$. Let $L \subseteq \mathbb{P}^r$ be a general linear subspace of codimension $\dim X - 1$ meeting both $f(E_1)$ and $f(E_2)$. 
+
+Since $L$ is general, $f|_{E_i}$ is finite, and by @thm-bertini-irreducibility, $f^{-1}(L)$ is an irreducible curve in $X'$. Setting $\widetilde{C} := f^{-1}(L)$ and taking its image $C := \pi(\widetilde{C}) \subseteq X$ under the blow-down morphism $\pi: X' \to X$, we obtain an irreducible curve $C$ connecting $x_1$ and $x_2$.
+:::
+
+---
+
+::: {#thm-fulton-hansen}
+## Fulton–Hansen Connectedness Theorem
+Let $X$ be an irreducible proper variety over $\mathbb{C}$, and let $f: X \to \mathbb{P}^r \times \mathbb{P}^r$ be a morphism such that $\dim \overline{f(X)} > r$. Then:
+$$
+f^{-1}(\Delta) \subseteq X
+$$
+is connected, where $\Delta \subseteq \mathbb{P}^r \times \mathbb{P}^r$ denotes the diagonal.
+:::
+
+::: {.proof}
+**Step 1: The geometric construction.**
+Consider two disjoint linear subspaces of $\mathbb{P}^{2r+1}$:
+$$
+L_1 = \big\{ [0, \dots, 0, y_0, \dots, y_r] \big\} \cong \mathbb{P}^r, \qquad L_2 = \big\{ [x_0, \dots, x_r, 0, \dots, 0] \big\} \cong \mathbb{P}^r.
+$$
+Let $U := \mathbb{P}^{2r+1} \setminus (L_1 \cup L_2)$. There is a natural projection:
+$$
+p: U \longrightarrow \mathbb{P}^r \times \mathbb{P}^r, \quad [x_0, \dots, x_r, y_0, \dots, y_r] \longmapsto \big([x_0, \dots, x_r], [y_0, \dots, y_r]\big).
+$$
+Locally over the standard open set $\mathbb{P}^r \times D(y_i)$, the fiber is isomorphic to $(\mathbb{A}^{r+1} \setminus \{0\}) \times \mathbb{A}^r$. Hence $p: U \to \mathbb{P}^r \times \mathbb{P}^r$ is a principal $\mathbb{G}_m$-bundle.
+
+Define the linear subspace:
+$$
+\mathcal{L} := \big\{ [x_0, \dots, x_r, y_0, \dots, y_r] \in \mathbb{P}^{2r+1} \;\big|\; x_i = y_i \text{ for all } 0 \le i \le r \big\} \subseteq U.
+$$
+Then $\mathcal{L} \cong \mathbb{P}^r$, and $p$ restricts to an isomorphism $\mathcal{L} \xrightarrow{\sim} \Delta$:
+$$
+\begin{CD}
+\mathcal{L} @>{\sim}>> \Delta \\
+@VV{\cap}V @VV{\cap}V \\
+U @>>> \mathbb{P}^r \times \mathbb{P}^r
+\end{CD}
+$$
+
+**Step 2: Base change.**
+Pull back the bundle $U \to \mathbb{P}^r \times \mathbb{P}^r$ along $f: X \to \mathbb{P}^r \times \mathbb{P}^r$:
+$$
+\begin{CD}
+V_X @>{f_U}>> U \\
+@V{p}VV @VV{p}V \\
+X @>{f}>> \mathbb{P}^r \times \mathbb{P}^r
+\end{CD}
+$$
+Because $X$ is irreducible and $V_X \to X$ is smooth with irreducible fibers (isomorphic to $\mathbb{G}_m$), the total space $V_X$ is irreducible. Furthermore, since $f$ is proper, $f_U: V_X \to U$ is proper.
+
+The image $U_{f(X)} := f_U(V_X)$ is a $\mathbb{G}_m$-bundle over $f(X)$, which gives:
+$$
+\dim \overline{f_U(V_X)} = \dim \overline{f(X)} + 1 > r + 1 = \operatorname{codim}_{\mathbb{P}^{2r+1}}(\mathcal{L}).
+$$
+
+**Step 3: Applying Bertini for connectedness.**
+By @thm-bertini-connectedness-proper, the preimage $f_U^{-1}(\mathcal{L}) \subseteq V_X$ is connected.
+
+Set-theoretically, we claim that $p\big(f_U^{-1}(\mathcal{L})\big) = f^{-1}(\Delta)$:
+- If $(x, y) \in f_U^{-1}(\mathcal{L})$, then $f_U(x, y) \in \mathcal{L}$, so $f(x) = p(f_U(x, y)) \in p(\mathcal{L}) = \Delta$, hence $x \in f^{-1}(\Delta)$.
+- Conversely, for any $x \in f^{-1}(\Delta)$, the point $f(x) \in \Delta$ lifts to a unique point $y \in \mathcal{L}$. Then $(x, y) \in V_X$ satisfies $f_U(x, y) = y \in \mathcal{L}$, so $(x, y) \in f_U^{-1}(\mathcal{L})$ and $p(x, y) = x$.
+
+Since $p$ is continuous and $f_U^{-1}(\mathcal{L})$ is connected, its image $f^{-1}(\Delta) = p\big(f_U^{-1}(\mathcal{L})\big)$ is connected.
+:::
+
+::: {#exm-intersection-projective-space}
+## Intersection of Subvarieties in Projective Space
+Let $X, Y \subseteq \mathbb{P}^r$ be irreducible subvarieties over $\mathbb{C}$. If $\dim X + \dim Y > r$, then:
+$$
+X \cap Y
+$$
+is connected.
+
+*Proof:* Realize $X \cap Y$ as the preimage of the diagonal $\Delta \subseteq \mathbb{P}^r \times \mathbb{P}^r$ under the inclusion $X \times Y \hookrightarrow \mathbb{P}^r \times \mathbb{P}^r$. Since $\dim(X \times Y) = \dim X + \dim Y > r$, the connectedness follows directly from @thm-fulton-hansen.
+:::
+
+::: {#exm-multiprojective-connectedness}
+## Generalization to Multi-Projective Spaces
+Let $f: X \to \prod_{i=1}^k \mathbb{P}^r$ be a morphism from an irreducible proper variety $X$. If:
+$$
+\dim \overline{f(X)} > (k - 1)r,
+$$
+then $f^{-1}(\Delta)$ is connected, where $\Delta \cong \mathbb{P}^r$ is the small diagonal in $(\mathbb{P}^r)^k$ (viewed via embedding into $\mathbb{P}^{kr + k - 1}$).
+:::
+
+---
+
+## Grothendieck's Connectedness Theorem
+
+::: {#def-connectedness-dim-k}
+## Connectedness in Dimension $k$
+A Noetherian scheme $X$ is said to be **connected in dimension $k$** (or **$k$-connected**) if $\dim X > k$ and for every closed subset $T \subseteq X$ with $\dim T < k$, the complement:
+$$
+X \setminus T
+$$
+is connected.
+:::
+
+::: {#rem-why-codim-two}
+### Why Require $\dim T < k \le \dim X$?
+Let $X = X_1 \cup \dots \cup X_m$ be the decomposition into irreducible components, with $\dim X_1 \ge \dots \ge \dim X_m$. 
+The intersection of $X_1$ with the other components satisfies:
+$$
+\dim(X_1 \cap X_i) \le \dim X_1 - 1 = \dim X - 1.
+$$
+Removing the closed subset $T = \bigcup_{i \ge 2} (X_1 \cap X_i)$ of codimension $\ge 1$ disconnects $X$, because:
+$$
+\left(X_1 \setminus \bigcup_{i \ge 2} X_i\right) \cap \left(\bigcup_{i \ge 2} X_i \setminus X_1\right) = \varnothing.
+$$
+Thus, to prevent a space from being trivially disconnected by removing components, one must test against closed subsets of dimension at most $\dim X - 2$.
+:::
+
+::: {#exm-properties-k-connectedness}
+## Basic Properties of $k$-Connectedness
+1. $X$ is connected if and only if $X$ is $0$-connected (since $\dim \varnothing = -1 < 0$).
+2. If $X$ is $d$-connected and $d' \le d$, then $X$ is $d'$-connected.
+3. If $X$ is an irreducible variety of dimension $n$, then $X$ is $(n - 1)$-connected. In fact, $X$ is irreducible if and only if $X$ is "$\dim X$-connected".
+:::
+
+::: {#exm-chain-characterization}
+## Characterization via Chains of Irreducible Components
+For $k < \dim X$, a Noetherian scheme $X$ is $k$-connected if and only if for any two irreducible components $X$ and $X'$, there exists a sequence of irreducible components:
+$$
+X_0 = X, \; X_1, \; \dots, \; X_p = X'
+$$
+such that for each $1 \le i \le p$, the intersection satisfies:
+$$
+\dim(X_{i-1} \cap X_i) \ge k.
+$$
+:::
+
+::: {#thm-grothendieck-connectedness}
+## Grothendieck's Connectedness Theorem
+Let $(A, \mathfrak{m})$ be a complete local Noetherian ring, and let $k \ge 1$. If $\operatorname{Spec} A$ is $k$-connected, then for any element $f \in \mathfrak{m}$, the scheme:
+$$
+\operatorname{Spec}(A / fA)
+$$
+is $(k - 1)$-connected.
+:::
+
+::: {#cor-complete-local-domain}
+## Complete Local Noetherian Domains
+Let $(A, \mathfrak{m})$ be a complete local Noetherian domain of dimension $n$. Fix $d \le n - 1$. For any elements $f_1, \dots, f_d \in \mathfrak{m}$, the scheme:
+$$
+\operatorname{Spec}\big(A / (f_1, \dots, f_d)\big)
+$$
+is $(n - d - 1)$-connected.
+:::
+
+::: {#cor-stronger-bertini}
+## Stronger Bertini for Connectedness
+Let $X \subseteq \mathbb{P}^r$ be a closed algebraic set that is $k$-connected, and let $L \subseteq \mathbb{P}^r$ be a linear subspace of codimension $d$. Then:
+$$
+X \cap L
+$$
+is connected in dimension $k - d$. 
+
+In particular, if $X$ is irreducible of dimension $n$, it is $(n - 1)$-connected. If $d < n$, then $k - d = n - 1 - d \ge 0$, so $X \cap L$ is $0$-connected (i.e., connected).
+:::
+
+::: {#exm-set-theoretic-lci}
+## Verification of Set-Theoretic Complete Intersections
+Consider the union of two $3$-planes in $\mathbb{A}^6_{\mathbb{C}}$ meeting only at the origin:
+$$
+X = V(x_1, x_2, x_3) \cup V(x_4, x_5, x_6) \subseteq \mathbb{A}^6, \quad \dim X = 3.
+$$
+The defining ideal is generated by the $9$ pairwise products:
+$$
+I(X) = (x_1 x_4, \, x_1 x_5, \, x_1 x_6, \, x_2 x_4, \, x_2 x_5, \, x_2 x_6, \, x_3 x_4, \, x_3 x_5, \, x_3 x_6).
+$$
+
+**Question:** Is $X$ a set-theoretic local complete intersection (LCI) defined by $3$ functions at the origin?
+
+**Analysis:**
+Because $V(x_1, x_2, x_3) \cap V(x_4, x_5, x_6) = \{0\}$, the space $X$ is $0$-connected, but **not** $1$-connected. 
+
+Suppose $U \subseteq \mathbb{A}^6$ is an affine open neighborhood of $0$ such that $U \cap X = \operatorname{Spec}(A / (f_1, f_2, f_3))$ with $A = \mathcal{O}(U)$ regular of dimension $6$. By @cor-complete-local-domain:
+$$
+U \cap X \quad \text{would be } (6 - 1 - 3 = 2)\text{-connected},
+$$
+a contradiction! Similarly, $X$ cannot be cut out set-theoretically by $4$ functions, because that would force it to be $(6 - 1 - 4 = 1)$-connected.
+
+**Answer:** However, $X$ **is** a set-theoretic complete intersection of $5$ functions!
+Consider the auxiliary polynomials in the variable $T$:
+$$
+f_1(T) = x_1 + x_2 T + x_3 T^2, \qquad f_2(T) = x_4 + x_5 T + x_6 T^2.
+$$
+Then $f_1(T) f_2(T) = 0$ for all $T$ if and only if $f_1 \equiv 0$ or $f_2 \equiv 0$, which is equivalent to $x \in X$. Expanding the product gives:
+$$
+f_1 f_2 = x_1 x_4 + (x_1 x_5 + x_2 x_4) T + (x_1 x_6 + x_2 x_5 + x_3 x_4) T^2 + (x_2 x_6 + x_3 x_5) T^3 + x_3 x_6 T^4.
+$$
+The vanishing of the $5$ coefficients cuts out $X$ set-theoretically in $\mathbb{A}^6$.
+:::
+
+---
+
+## Applications to Ramification and Singularities
+
+::: {#thm-ramification-closed-embedding}
+## Unramified Morphisms into Projective Space
+Let $X$ be a complete irreducible variety of dimension $n$ over $\mathbb{C}$, and let $f: X \to \mathbb{P}^r$ be an unramified morphism. If:
+$$
+2n > r,
+$$
+then $f$ is a closed embedding.
+:::
+
+::: {.proof}
+**Fact:** A morphism from a complete variety that is injective on closed points and unramified is a closed immersion.
+
+Consider the product morphism $F = f \times f: X \times X \to \mathbb{P}^r \times \mathbb{P}^r$. The preimage of the diagonal is:
+$$
+F^{-1}(\Delta_{\mathbb{P}^r}) = X \times_{\mathbb{P}^r} X = \big\{ (x, y) \in X \times X \;\big|\; f(x) = f(y) \big\}.
+$$
+The morphism $f$ is injective if and only if $F^{-1}(\Delta_{\mathbb{P}^r}) = \Delta_X$.
+
+Since $\dim \overline{\operatorname{Im} F} = \dim(X \times X) = 2n > r$, the Fulton–Hansen Connectedness Theorem (@thm-fulton-hansen) implies that:
+$$
+X \times_{\mathbb{P}^r} X
+$$
+is connected.
+
+On the other hand, because $X \to \mathbb{P}^r$ is separated and unramified, the diagonal morphism:
+$$
+\Delta_{X / \mathbb{P}^r}: X \longrightarrow X \times_{\mathbb{P}^r} X
+$$
+is both a closed immersion and an open immersion (i.e., a clopen immersion). Since $X \times_{\mathbb{P}^r} X$ is connected, the open and closed subset $\Delta_X$ must be the entire space:
+$$
+\Delta_X = X \times_{\mathbb{P}^r} X.
+$$
+Therefore, $f$ is injective on points, hence a closed embedding.
+:::
+
+::: {#rem-sharpness-ramification}
+### Sharpness
+The inequality $2n > r$ is sharp: for $n = 1$ and $r = 2$, let $C \subseteq \mathbb{P}^2$ be a nodal cubic curve and $X = \widetilde{C} \cong \mathbb{P}^1$ its normalization. The normalization map $X \to C \hookrightarrow \mathbb{P}^2$ is unramified, but not an embedding.
+:::
+
+::: {#exm-no-normal-crossing-hypersurface}
+## Nonexistence of Hypersurfaces with Normal Crossing Singularities
+If $r \ge 3$, there are **no** irreducible singular hypersurfaces $X \subseteq \mathbb{P}^r$ having only normal crossing singularities.
+:::
+
+::: {.proof}
+Recall that $X$ has a **normal crossing singularity** at $p$ if and only if:
+$$
+\widehat{\mathcal{O}}_{X, p} \cong k[[x_1, \dots, x_r]] / (x_1 \cdots x_k) \quad \text{for some } k \ge 2,
+$$
+which is equivalent to admitting an étale neighborhood isomorphic to $\operatorname{Spec}\big(k[x_1, \dots, x_r]/(x_1 \cdots x_k)\big)$.
+
+At such a singular point $x$, the normalization $\widetilde{\mathcal{O}}_{X, x}$ is:
+$$
+\widetilde{\widehat{\mathcal{O}}_{X, x}} \cong \prod_{i=1}^k k[[x_1, \dots, x_r]] / (x_i).
+$$
+The cotangent space of $X$ at $x$ has dimension:
+$$
+T_x X^\vee \cong (x_1, \dots, x_r) / \big((x_1 \cdots x_k) + (x_i x_j)_{i, j}\big) \cong (x_1, \dots, x_r) / (x_i x_j) \cong \bigoplus_{i=1}^r k \cdot x_i.
+$$
+For each point $y_i \in \widetilde{X}$ lying above $x$, the local ring $\mathcal{O}_{\widetilde{X}, y_i}$ is regular with cotangent space $k^{r-1}$, and the cotangent map:
+$$
+T_x X^\vee \twoheadrightarrow T_{y_i} \widetilde{X}^\vee, \quad \sum a_j x_j \longmapsto (a_1, \dots, \hat{a}_i, \dots, a_r)
+$$
+is surjective. Therefore, the normalization morphism $\nu: \widetilde{X} \to X$ is unramified, and $\widetilde{X}$ is a smooth variety of dimension $r - 1$.
+
+Now consider the composition:
+$$
+g: \widetilde{X} \xrightarrow{\;\nu\;} X \longhookrightarrow \mathbb{P}^r.
+$$
+Since $\nu$ and the inclusion are unramified, $g$ is an unramified morphism. Because $\dim \widetilde{X} = r - 1$ and $r \ge 3$, we have:
+$$
+2 \dim \widetilde{X} = 2(r - 1) = 2r - 2 > r \iff r > 2.
+$$
+By @thm-ramification-closed-embedding, $g: \widetilde{X} \hookrightarrow \mathbb{P}^r$ is a closed embedding. But then $X = g(\widetilde{X})$ must be smooth, contradicting the assumption that $X$ is singular.
+:::
+
+::: {#exm-etale-fundamental-group}
+## Simple Connectedness of Large Subvarieties
+Let $X \subseteq \mathbb{P}^r$ be an irreducible smooth subvariety of dimension $n$. If:
+$$
+2n > r,
+$$
+then the étale fundamental group of $X$ is trivial:
+$$
+\pi_1^{\text{ét}}(X) = \{e\}.
+$$
+:::
+
+::: {.proof}
+Let $p: Y \to X$ be a connected finite étale cover of $X$. Let $Y' \subseteq Y$ be an irreducible component of $Y$. The composite map:
+$$
+Y' \longhookrightarrow Y \xrightarrow{\;p\;} X \longhookrightarrow \mathbb{P}^r
+$$
+is an unramified morphism from a complete variety of dimension $n$ into $\mathbb{P}^r$. Since $2n > r$, @thm-ramification-closed-embedding implies that $Y' \hookrightarrow \mathbb{P}^r$ is a closed embedding. 
+
+Consequently, $p|_{Y'}: Y' \to X$ is an isomorphism. Because $Y$ is connected and étale over $X$, it follows that $Y = Y'$, so $p: Y \xrightarrow{\sim} X$ is an isomorphism. Thus, $X$ has no nontrivial connected finite étale covers, which implies $\pi_1^{\text{ét}}(X) = \{e\}$.
+:::
