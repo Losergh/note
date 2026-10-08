@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2026-10-08">
 
-<title>23.1 Representation I – Math Notes</title>
+<title>23.2 Representation II – Math Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../23_algebraic_groups/23.2 Representation II.html" rel="next">
-<link href="../23_algebraic_groups/23.0 Basics.html" rel="prev">
+<link href="../23_algebraic_groups/23.1 Representation I.html" rel="prev">
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -313,7 +312,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../23_algebraic_groups/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../23_algebraic_groups/23.1 Representation I.html">23.1 Representation I</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../23_algebraic_groups/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../23_algebraic_groups/23.2 Representation II.html">23.2 Representation II</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -348,13 +347,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../23_algebraic_groups/23.1 Representation I.html" class="sidebar-item-text sidebar-link active">
+  <a href="../23_algebraic_groups/23.1 Representation I.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">23.1 Representation I</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../23_algebraic_groups/23.2 Representation II.html" class="sidebar-item-text sidebar-link">
+  <a href="../23_algebraic_groups/23.2 Representation II.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">23.2 Representation II</span></a>
   </div>
 </li>
@@ -372,9 +371,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../23_algebraic_groups/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../23_algebraic_groups/23.1 Representation I.html">23.1 Representation I</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../23_algebraic_groups/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../23_algebraic_groups/23.2 Representation II.html">23.2 Representation II</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">23.1 Representation I</h1>
+<h1 class="title">23.2 Representation II</h1>
 </div>
 
 
@@ -397,316 +396,191 @@ window.Quarto = {
 </header>
 
 
-<div id="def-action" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Action)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>An <strong>action</strong> of an algebraic group <span class="math inline">\(G\)</span> on a scheme <span class="math inline">\(X\)</span> over <span class="math inline">\(k\)</span> is a morphism: <span class="math display">\[
-G \times X \longrightarrow X
-\]</span> or equivalently, a natural transformation: <span class="math display">\[
-\forall R \in k\text{-alg}, \quad G(R) \circlearrowright X(R) \quad \text{naturally}.
-\]</span></p></li>
-<li><p>A <strong>linear representation</strong> of <span class="math inline">\(G\)</span> is a homomorphism of algebraic groups: <span class="math display">\[
-G \longrightarrow \mathrm{GL}_n
-\]</span> for some <span class="math inline">\(n\)</span>, i.e., <span class="math inline">\(G \circlearrowright \mathbb{A}^n\)</span>.</p></li>
-</ol>
-</div>
-<div id="lem-action-properties" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 1 (Properties of Action Morphisms)</strong></span> Let <span class="math inline">\(\varphi: G \times X \to X\)</span> be an action. Then <span class="math inline">\(\varphi\)</span> is fppf. Moreover, <span class="math inline">\(\varphi\)</span> is smooth (resp. finite) if <span class="math inline">\(G\)</span> is smooth (resp. finite).</p>
+<div id="prp-stabilizer-subspace" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (Stabilizer of a Subspace)</strong></span> Let <span class="math inline">\(r: G \to \mathrm{GL}_V\)</span> be a finite-dimensional representation of <span class="math inline">\(G\)</span>, and let <span class="math inline">\(W \subseteq V\)</span> be a <span class="math inline">\(k\)</span>-subspace. Then the functor: <span class="math display">\[
+\operatorname{Stab}_G(W): k\text{-}\mathbf{Alg} \longrightarrow \mathbf{Grp}, \quad R \longmapsto \{ g \in G(R) \mid r(g)(W_R) = W_R \}
+\]</span> (also denoted by <span class="math inline">\(G_W\)</span>) is represented by an algebraic subgroup of <span class="math inline">\(G\)</span>.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Consider the commutative diagram: <span class="math display">\[
-\begin{CD}
-G \times X @&gt;{\sim}&gt;{(g, x) \mapsto (g, gx)}&gt; G \times X @&gt;&gt;&gt; G \\
-@V{\varphi}VV @VV{\mathrm{pr}_2}V @VVV \\
-X @= X @&gt;&gt;&gt; \operatorname{Spec} k
-\end{CD}
-\]</span> The right square is Cartesian, so <span class="math inline">\(\mathrm{pr}_2\)</span> inherits the respective property (fppf, smooth, finite) from <span class="math inline">\(G \to \operatorname{Spec} k\)</span> by base change. Since the first horizontal map is an isomorphism, <span class="math inline">\(\varphi = \mathrm{pr}_2 \circ \sim\)</span> satisfies these properties.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\((e_j)_{j \in J}\)</span> be a <span class="math inline">\(k\)</span>-basis of <span class="math inline">\(W\)</span>, and extend it to a basis <span class="math inline">\((e_i)_{i \in I}\)</span> of <span class="math inline">\(V\)</span> (with <span class="math inline">\(J \subseteq I\)</span>). Write the comodule map on the basis elements as: <span class="math display">\[
+\rho(e_j) = \sum_{i \in I} e_i \otimes f_{ij}, \quad f_{ij} \in \mathcal{O}(G).
+\]</span> For any <span class="math inline">\(R \in k\text{-}\mathbf{Alg}\)</span> and <span class="math inline">\(g \in G(R)\)</span>, we have: <span class="math display">\[
+\begin{aligned}
+g \in \operatorname{Stab}_G(W)(R) &amp;\iff r(g)(W_R) = W_R \\
+&amp;\iff r(g)(e_j) \in W_R \quad (\forall j \in J) \\
+&amp;\iff f_{ij}(g) = 0 \quad (\forall i \in I \setminus J, \, j \in J).
+\end{aligned}
+\]</span> Therefore, <span class="math inline">\(\operatorname{Stab}_G(W)\)</span> is represented by the closed subscheme: <span class="math display">\[
+\operatorname{Stab}_G(W) = \operatorname{Spec}\big(\mathcal{O}(G) / (f_{ij} \mid i \in I \setminus J, \, j \in J)\big),
+\]</span> which is an algebraic subgroup of <span class="math inline">\(G\)</span>.</p>
 </div>
-<div id="prp-orbit" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 (Orbit)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>Let <span class="math inline">\(\varphi: G \times X \to X\)</span> be an action, and <span class="math inline">\(x \in X(k)\)</span>. Define the <strong>orbit map</strong>: <span class="math display">\[
-\varphi_x: G = G \times \operatorname{Spec} k \xrightarrow{\;\mathrm{id} \times x\;} G \times X \xrightarrow{\;\varphi\;} X.
-\]</span> The <strong>orbit</strong> of <span class="math inline">\(x\)</span> is defined set-theoretically as <span class="math inline">\(\operatorname{Im} \varphi_x\)</span>.</p></li>
-<li><p><span class="math inline">\(\operatorname{Im} \varphi_x\)</span> is always locally closed. <span class="math inline">\(G \cdot x\)</span> is open dense in <span class="math inline">\(\overline{G \cdot x}\)</span>.</p></li>
-</ol>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Since <span class="math inline">\(X_{\bar{k}} \to X\)</span> is a quotient open map of topological spaces, without loss of generality we may assume <span class="math inline">\(k = \bar{k}\)</span>.</p>
-<p>Apply Chevalley’s Theorem to <span class="math inline">\(\varphi_x\)</span>: <span class="math inline">\(G \cdot x\)</span> is constructible. Thus there exists an open dense subset <span class="math inline">\(U \subseteq \overline{G \cdot x}\)</span> such that <span class="math inline">\(U \subseteq G \cdot x\)</span>. Then: <span class="math display">\[
-G \cdot x = G \cdot U = \bigcup_{g \in G} g \cdot U \subseteq \overline{G \cdot x}.
-\]</span> Since each <span class="math inline">\(g \cdot U\)</span> is open in <span class="math inline">\(\overline{G \cdot x}\)</span>, the union <span class="math inline">\(G \cdot x\)</span> is open in <span class="math inline">\(\overline{G \cdot x}\)</span>. Therefore, <span class="math inline">\(G \cdot x\)</span> is an open subset of a closed subset, hence locally closed.</p>
-</div>
-<div id="prp-minimal-orbit-closed" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2 (Closed Orbits)</strong></span> If <span class="math inline">\(k = \bar{k}\)</span> and <span class="math inline">\(G \circlearrowright X\)</span>, every orbit of minimal dimension is closed. In particular, closed orbits always exist.</p>
-</div>
-<hr>
-<div id="thm-structure-general-alg-group" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Structure of General Algebraic Groups)</strong></span> <em>(Reference: [Milne, Chapter 8])</em></p>
-<ol type="1">
-<li><p>There exists an exact sequence: <span class="math display">\[
-0 \longrightarrow G^\circ \longrightarrow G \longrightarrow \pi_0(G) \longrightarrow e
-\]</span> with <span class="math inline">\(G^\circ\)</span> geometrically connected.</p></li>
-<li><p><strong>(Barsotti–Chevalley)</strong> For every connected algebraic group <span class="math inline">\(G\)</span> over <span class="math inline">\(k\)</span>, there exists an exact sequence: <span class="math display">\[
-0 \longrightarrow N \longrightarrow G \longrightarrow Q \longrightarrow 0
-\]</span> where <span class="math inline">\(N\)</span> is connected linear and <span class="math inline">\(Q\)</span> is an abelian variety. If <span class="math inline">\(k\)</span> is perfect, then <span class="math inline">\(N\)</span> is unique.</p></li>
-</ol>
-</div>
-<div id="thm-maximal-affine-quotient" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (Maximal Affine Quotient)</strong></span> Every algebraic group <span class="math inline">\(G\)</span> has a maximal affine quotient, defined by: <span class="math display">\[
-G \xrightarrow{\;\phi\;} \operatorname{Spec}\mathcal{O}(G)
-\]</span> since <span class="math inline">\(\mathcal{O}(G)\)</span> is a commutative Hopf <span class="math inline">\(k\)</span>-algebra.</p>
-<p><strong>Facts:</strong></p>
-<ol type="1">
-<li><span class="math inline">\(\mathcal{O}(G)\)</span> is a finitely generated <span class="math inline">\(k\)</span>-algebra, and <span class="math inline">\(G_{\mathrm{aff}} := \operatorname{Spec}\mathcal{O}(G)\)</span> is a linear algebraic group (LAG).</li>
-<li><span class="math inline">\(G \to G_{\mathrm{aff}}\)</span> is universal: for every linear algebraic group <span class="math inline">\(H\)</span> and every homomorphism <span class="math inline">\(G \to H\)</span>, there exists a unique factorization: <span class="math display">\[
-\begin{CD}
-G @&gt;{\phi}&gt;&gt; G_{\mathrm{aff}} \\
-@VVV @VV{\exists!}V \\
-H @= H
-\end{CD}
-\]</span></li>
-<li><span class="math inline">\(\phi\)</span> is fppf.</li>
-<li><span class="math inline">\(\mathcal{O}(\ker \phi) = k\)</span>. If <span class="math inline">\(\mathcal{O}(G) = k\)</span>, <span class="math inline">\(G\)</span> is called <strong>anti-affine</strong> (<span class="math inline">\(G\)</span> is commutative anti-affine).</li>
-</ol>
-</div>
-<hr>
-<div id="def-hopf-subalgebra" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (Hopf Subalgebra)</strong></span> Let <span class="math inline">\(B\)</span> be a Hopf algebra over <span class="math inline">\(k\)</span>. A <span class="math inline">\(k\)</span>-subalgebra <span class="math inline">\(A \subseteq B\)</span> is called a <strong>Hopf subalgebra</strong> if: <span class="math display">\[
-m^*(A) \subseteq A \otimes A \quad \text{and} \quad i^*(A) \subseteq A.
-\]</span> Then <span class="math inline">\(m_A^* = m_B^*|_A\)</span>, <span class="math inline">\(i_A^* = i_B^*|_A\)</span>, and <span class="math inline">\(e_A^* = e_B^*|_A\)</span>.</p>
-</div>
-<div id="prp-image-kernel-hopf-ideal" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 3 (Image, Kernel, and Hopf Ideals)</strong></span> &nbsp;</p>
-<ol type="1">
-<li>If <span class="math inline">\(f: A \to B\)</span> is a morphism of Hopf algebras, then <span class="math inline">\(\operatorname{Im} f = f(A)\)</span> is a Hopf subalgebra of <span class="math inline">\(B\)</span>.</li>
-<li>A <strong>Hopf ideal</strong> in a Hopf <span class="math inline">\(k\)</span>-algebra <span class="math inline">\(A\)</span> is an ideal <span class="math inline">\(\mathfrak{a} \subseteq A\)</span> such that: <span class="math display">\[
-m^*(\mathfrak{a}) \subseteq \mathfrak{a} \otimes A + A \otimes \mathfrak{a}, \quad i^*(\mathfrak{a}) \subseteq \mathfrak{a}, \quad \text{and} \quad e^*(\mathfrak{a}) = 0.
-\]</span></li>
-<li>If <span class="math inline">\(f: A \to B\)</span> is a morphism of Hopf algebras, then <span class="math inline">\(\ker f\)</span> is a Hopf ideal of <span class="math inline">\(A\)</span>.</li>
-<li>If <span class="math inline">\(\mathfrak{a} \subseteq A\)</span> is a Hopf ideal, then <span class="math inline">\(A/\mathfrak{a}\)</span> has a natural Hopf algebra structure and <span class="math inline">\(A \to A/\mathfrak{a}\)</span> is a morphism in the category of Hopf <span class="math inline">\(k\)</span>-algebras. For every <span class="math inline">\(f: A \to B\)</span> such that <span class="math inline">\(\ker f \supseteq \mathfrak{a}\)</span>, there exists a unique <span class="math inline">\(\bar{f}\)</span>: <span class="math display">\[
-\begin{CD}
-A @&gt;{f}&gt;&gt; B \\
-@VVV @AA{\exists! \bar{f}}A \\
-A/\mathfrak{a} @= A/\mathfrak{a}
-\end{CD}
-\]</span></li>
-<li>For every morphism of Hopf algebras <span class="math inline">\(f: A \to B\)</span>, there is a canonical isomorphism: <span class="math display">\[
-A/\ker f \xrightarrow{\;\sim\;} f(A) \subseteq B.
-\]</span></li>
-</ol>
-</div>
-<div id="cor-factorization-lag" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Factorization of Morphisms of LAG)</strong></span> A homomorphism <span class="math inline">\(\varphi: G \to H\)</span> of linear algebraic groups factors as: <span class="math display">\[
-\begin{CD}
-G @&gt;{\varphi}&gt;&gt; H \\
-@V{q}VV @AA{i}A \\
-I @= I
-\end{CD}
-\qquad
-\begin{CD}
-\operatorname{Spec} B @&gt;{\varphi}&gt;&gt; \operatorname{Spec} A \\
-@V{q}VV @AA{i}A \\
-\operatorname{Spec}(A/\mathfrak{a}) @= \operatorname{Spec}(A/\mathfrak{a})
-\end{CD}
-\]</span> where <span class="math inline">\(q\)</span> is fppf and <span class="math inline">\(i\)</span> is a closed immersion.</p>
-<p><strong>Fact:</strong> If <span class="math inline">\(A \subseteq B\)</span> is a Hopf subalgebra, then <span class="math inline">\(B\)</span> is fppf over <span class="math inline">\(A\)</span> (i.e., <span class="math inline">\(\operatorname{Spec} B \to \operatorname{Spec} A\)</span> is fppf).</p>
-</div>
-<div id="prp-closed-immersion-kernel" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4 (Closed Immersion Criterion)</strong></span> Let <span class="math inline">\(\varphi: G \to H\)</span> be a morphism of linear algebraic groups. If <span class="math inline">\(\ker \varphi = \operatorname{Spec} k\)</span>, then <span class="math inline">\(\varphi\)</span> is a closed immersion.</p>
+<div id="thm-chevalley" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Chevalley’s Theorem)</strong></span> Every algebraic subgroup <span class="math inline">\(H \leqslant G\)</span> arises as the stabilizer of a <span class="math inline">\(1\)</span>-dimensional subspace <span class="math inline">\(L\)</span> in a finite-dimensional representation <span class="math inline">\(V\)</span> of <span class="math inline">\(G\)</span>.</p>
+<p><em>(This is one of the main ingredients for the existence of the quotient variety <span class="math inline">\(G/H\)</span>.)</em></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>It suffices to prove that <span class="math inline">\(q: G \to I\)</span> is an isomorphism.</p>
-<p>Since <span class="math inline">\(\ker q = \ker \varphi = \operatorname{Spec} k\)</span>, for every <span class="math inline">\(R \in k\text{-alg}\)</span>, the map <span class="math inline">\(\varphi(R): G(R) \hookrightarrow I(R)\)</span> is injective.</p>
-<p><strong>Claim:</strong> <span class="math inline">\(\varphi(R)\)</span> is surjective for all <span class="math inline">\(R\)</span>.</p>
-<p>For any <span class="math inline">\(y \in I(R)\)</span>, there exists an fppf extension <span class="math inline">\(R' \in k\text{-alg}\)</span> over <span class="math inline">\(R\)</span> and <span class="math inline">\(x \in G(R')\)</span> such that <span class="math inline">\(\varphi(R')(x) = y|_{R'}\)</span>. (Take <span class="math inline">\(R' = R \otimes_{\mathcal{O}(I)} \mathcal{O}(G)\)</span> via the pullback): <span class="math display">\[
-\begin{CD}
-R' @&lt;&lt;&lt; G \\
-@AAA @VV{\mathrm{fppf}}V \\
-R @&gt;&gt;&gt; I
-\end{CD}
-\]</span> Now the sequence <span class="math inline">\(0 \to R \to R' \rightrightarrows R' \otimes_R R'\)</span> is exact, giving the exact sequence: <span class="math display">\[
-0 \longrightarrow G(R) \longrightarrow G(R') \rightrightarrows G(R' \otimes_R R')
-\]</span> <span class="math display">\[
-\operatorname{Hom}(\mathcal{O}(G), R) \longhookrightarrow \operatorname{Hom}(\mathcal{O}(G), R') \rightrightarrows \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R')
-\]</span> Consider the commutative diagram: <span class="math display">\[
-\begin{CD}
-\operatorname{Hom}(\mathcal{O}(G), R) @&gt;&gt;&gt; \operatorname{Hom}(\mathcal{O}(G), R') @&gt;&gt;&gt; \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R') \\
-@V{\varphi(R)}VV @V{\varphi(R')}VV @VVV \\
-I(R) @&gt;&gt;&gt; I(R') @&gt;&gt;&gt; I(R' \otimes_R R')
-\end{CD}
-\]</span> <span class="math display">\[
-y \longmapsto y|_{R'} \longmapsto 0
-\]</span> Then <span class="math inline">\(x \in G(R')\)</span> maps to <span class="math inline">\(y|_{R'}\)</span>, and its difference in <span class="math inline">\(G(R' \otimes_R R')\)</span> maps to <span class="math inline">\(0\)</span> in <span class="math inline">\(I(R' \otimes_R R')\)</span>. By injectivity, the difference is <span class="math inline">\(0\)</span>. By descent, <span class="math inline">\(x\)</span> descends to <span class="math inline">\(x_0 \in G(R)\)</span> with <span class="math inline">\(x_0 \mapsto y\)</span>. Thus <span class="math inline">\(\varphi(R)\)</span> is surjective.</p>
-</div>
+<p><span class="proof-title"><em>Proof</em>. </span><strong>Step 1.</strong> There exists a finite-dimensional representation <span class="math inline">\(V\)</span> of <span class="math inline">\(G\)</span> and a subspace <span class="math inline">\(W \subseteq V\)</span> such that <span class="math inline">\(H = \operatorname{Stab}_G(W)\)</span>.</p>
+<p><strong>Step 2.</strong> Let <span class="math inline">\(d := \dim_k W\)</span>, <span class="math inline">\(\tilde{V} := \bigwedge^d V\)</span>, and <span class="math inline">\(L := \bigwedge^d W \subseteq \tilde{V}\)</span>. Show that <span class="math inline">\(\operatorname{Stab}_G(L) = H\)</span>, then the theorem is proved.</p>
 <hr>
-<div id="def-representations" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (Representations)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><p>Let <span class="math inline">\(V\)</span> be a <span class="math inline">\(k\)</span>-vector space. Define the affine algebraic group functor: <span class="math display">\[
-\mathrm{GL}_V: k\text{-alg} \longrightarrow \mathbf{Grp}, \quad R \longmapsto \mathrm{GL}_V(R) = \operatorname{Aut}_R(V \otimes R).
-\]</span> If <span class="math inline">\(V\)</span> is finite-dimensional, then after fixing a basis, <span class="math inline">\(\mathrm{GL}_V \cong \mathrm{GL}_n\)</span>.</p></li>
-<li><p>A <strong>linear representation</strong> of <span class="math inline">\(G\)</span> is a morphism of algebraic groups: <span class="math display">\[
-r: G \longrightarrow \mathrm{GL}_V.
+<p><strong>Proof of Step 2:</strong> Let <span class="math inline">\((e_j)_{1 \le j \le d}\)</span> be a <span class="math inline">\(k\)</span>-basis of <span class="math inline">\(W\)</span>, and extend it to a <span class="math inline">\(k\)</span>-basis <span class="math inline">\((e_i)_{1 \le i \le n}\)</span> of <span class="math inline">\(V\)</span>. Let: <span class="math display">\[
+\omega := e_1 \wedge \dots \wedge e_d \in L = \bigwedge^d W, \quad \text{so that } L = k\omega.
+\]</span> It suffices to prove that for all <span class="math inline">\(\alpha \in \mathrm{GL}_V(R)\)</span>: <span class="math display">\[
+\alpha(W_R) = W_R \iff \left(\bigwedge^d \alpha\right)(L_R) = L_R.
 \]</span></p>
 <ul>
-<li><span class="math inline">\(r\)</span> is <strong>faithful</strong> if <span class="math inline">\(\ker r = \operatorname{Spec} k \iff r\)</span> is a closed immersion.</li>
-<li><span class="math inline">\(r\)</span> is <strong>trivial</strong> if <span class="math inline">\(r(G) = e\)</span>.</li>
-</ul></li>
-</ol>
-</div>
-<div id="def-comodule" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4 (Comodule)</strong></span> A <strong>right comodule</strong> is a <span class="math inline">\(k\)</span>-vector space <span class="math inline">\(V\)</span> equipped with a <span class="math inline">\(k\)</span>-linear map <span class="math inline">\(\rho: V \to V \otimes \mathcal{O}(G)\)</span> such that:</p>
+<li><span class="math inline">\((\Longrightarrow)\)</span> Obvious.</li>
+<li><span class="math inline">\((\Longleftarrow)\)</span> Notice that <span class="math inline">\(W_R = \{ v \in V_R \mid \omega \wedge v = 0 \in \bigwedge^{d+1} V_R \}\)</span>. If <span class="math inline">\(\left(\bigwedge^d \alpha\right)(L_R) = L_R\)</span>, then: <span class="math display">\[
+\left(\bigwedge^d \alpha\right)(\omega) = c \cdot \omega \quad \text{for some } c \in R^\times.
+\]</span> For any <span class="math inline">\(v \in W_R\)</span>, <span class="math inline">\(\omega \wedge v = 0\)</span>, so: <span class="math display">\[
+0 = \left(\bigwedge^{d+1} \alpha\right)(\omega \wedge v) = \left(\bigwedge^d \alpha\right)(\omega) \wedge \alpha(v) = c \cdot (\omega \wedge \alpha(v)).
+\]</span> Since <span class="math inline">\(c \in R^\times\)</span>, this implies <span class="math inline">\(\omega \wedge \alpha(v) = 0\)</span>, hence <span class="math inline">\(\alpha(v) \in W_R\)</span> for all <span class="math inline">\(v \in W_R\)</span>. Therefore <span class="math inline">\(\alpha(W_R) = W_R\)</span>.</li>
+</ul>
+<hr>
+<p><strong>Proof of Step 1:</strong> <strong>Goal:</strong> Construct a finite-dimensional representation <span class="math inline">\(r: G \to \mathrm{GL}_V\)</span> and a subspace <span class="math inline">\(W \subseteq V\)</span> such that <span class="math inline">\(H = \operatorname{Stab}_G(W)\)</span>.</p>
+<p>Let <span class="math inline">\(\mathfrak{a} := \ker(\mathcal{O}(G) \to \mathcal{O}(H))\)</span> be the defining ideal of <span class="math inline">\(H\)</span>. Since <span class="math inline">\(\mathcal{O}(G)\)</span> is noetherian, <span class="math inline">\(\mathfrak{a}\)</span> is finitely generated as an ideal, say by <span class="math inline">\(f_1, \dots, f_r\)</span>. Set <span class="math inline">\(W_0 := \operatorname{span}_k\{f_1, \dots, f_r\} \subseteq \mathfrak{a}\)</span>.</p>
+<p>Since <span class="math inline">\(\mathcal{O}(G)\)</span> is a filtered union of finite-dimensional subcomodules, there exists a finite-dimensional subcomodule <span class="math inline">\(V \subseteq \mathcal{O}(G)\)</span> containing <span class="math inline">\(W_0\)</span>. Set <span class="math inline">\(W := V \cap \mathfrak{a}\)</span>. Then <span class="math inline">\(W\)</span> generates <span class="math inline">\(\mathfrak{a}\)</span> as an ideal.</p>
+<p>Let <span class="math inline">\((f_j)_{j \in J}\)</span> be a basis of <span class="math inline">\(W\)</span>, and extend it to a basis <span class="math inline">\((f_i)_{i \in I \cup J}\)</span> of <span class="math inline">\(V\)</span>. Since <span class="math inline">\(V\)</span> is a subcomodule: <span class="math display">\[
+m^*(f_j) = \sum_{i \in I \cup J} f_i \otimes a_{ij}, \quad a_{ij} \in \mathcal{O}(G).
+\]</span> Then <span class="math inline">\(\operatorname{Stab}_G(W) = \operatorname{Spec}\big(\mathcal{O}(G)/\mathfrak{a}'\big)\)</span>, where <span class="math inline">\(\mathfrak{a}' := (a_{ij} \mid i \in I, \, j \in J)\)</span>. We claim that <span class="math inline">\(\mathfrak{a} = \mathfrak{a}'\)</span>:</p>
 <ol type="1">
-<li><p><span class="math inline">\((\mathrm{id}_V \otimes e^*) \circ \rho = \mathrm{id}_V\)</span>: <span class="math display">\[
-\begin{CD}
-V @&gt;{\rho}&gt;&gt; V \otimes \mathcal{O}(G) \\
-@| @VV{\mathrm{id}_V \otimes e^*}V \\
-V @= V
-\end{CD}
-\]</span></p></li>
-<li><p><span class="math inline">\((\mathrm{id}_V \otimes m^*) \circ \rho = (\rho \otimes \mathrm{id}_{\mathcal{O}(G)}) \circ \rho\)</span>: <span class="math display">\[
-\begin{CD}
-V @&gt;{\rho}&gt;&gt; V \otimes \mathcal{O}(G) \\
-@V{\rho}VV @VV{\mathrm{id}_V \otimes m^*}V \\
-V \otimes \mathcal{O}(G) @&gt;{\rho \otimes \mathrm{id}}&gt;&gt; V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{CD}
-\]</span></p></li>
+<li><p>Since <span class="math inline">\(\mathfrak{a}\)</span> is a Hopf ideal, <span class="math inline">\(m^*(\mathfrak{a}) \subseteq \mathfrak{a} \otimes \mathcal{O}(G) + \mathcal{O}(G) \otimes \mathfrak{a}\)</span>. For each <span class="math inline">\(j \in J\)</span>, <span class="math inline">\(f_j \in W \subseteq \mathfrak{a}\)</span>, so: <span class="math display">\[
+m^*(f_j) = \sum_{i \in I \cup J} f_i \otimes a_{ij} \equiv 0 \pmod{\mathfrak{a} \otimes \mathcal{O}(G) + \mathcal{O}(G) \otimes \mathfrak{a}} \implies \sum_{i \in I} f_i \otimes a_{ij} \equiv 0 \pmod{\mathfrak{a} \otimes \mathcal{O}(G)}.
+\]</span> Since the images of <span class="math inline">\((f_i)_{i \in I}\)</span> in <span class="math inline">\(V/W \subseteq \mathcal{O}(G)/\mathfrak{a}\)</span> are linearly independent, we obtain <span class="math inline">\(a_{ij} \in \mathfrak{a}\)</span> for all <span class="math inline">\(i \in I, j \in J\)</span>. Thus <span class="math inline">\(\mathfrak{a}' \subseteq \mathfrak{a}\)</span>.</p></li>
+<li><p>Conversely, applying <span class="math inline">\((\mathrm{id} \otimes e^*) \circ m^* = \mathrm{id}\)</span> to <span class="math inline">\(f_j\)</span>, we have: <span class="math display">\[
+f_j = \sum_{i \in I \cup J} f_i(e) a_{ij} \equiv \sum_{j' \in J} f_{j'}(e) a_{j' j} \pmod{\mathfrak{a}'}.
+\]</span> Since <span class="math inline">\(f_{j'} \in \mathfrak{a}\)</span>, we have <span class="math inline">\(f_{j'}(e) = 0\)</span> for all <span class="math inline">\(j' \in J\)</span>. Thus <span class="math inline">\(f_j \equiv 0 \pmod{\mathfrak{a}'}\)</span>, meaning <span class="math inline">\(f_j \in \mathfrak{a}'\)</span> for all <span class="math inline">\(j \in J\)</span>. Because <span class="math inline">\(W = \operatorname{span}_k\{f_j\}\)</span> generates <span class="math inline">\(\mathfrak{a}\)</span> as an ideal, this shows <span class="math inline">\(\mathfrak{a} \subseteq \mathfrak{a}'\)</span>.</p></li>
 </ol>
-</div>
-<div id="def-comodule-morphism" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5 (Comodule Morphism and Submodule)</strong></span> Let <span class="math inline">\((V, \rho)\)</span> be an <span class="math inline">\(\mathcal{O}(G)\)</span>-comodule.</p>
-<ol type="1">
-<li><p>A <strong>morphism</strong> of <span class="math inline">\(\mathcal{O}(G)\)</span>-comodules is a <span class="math inline">\(k\)</span>-linear map <span class="math inline">\(f: V \to W\)</span> such that: <span class="math display">\[
-\begin{CD}
-V @&gt;{f}&gt;&gt; W \\
-@V{\rho_V}VV @VV{\rho_W}V \\
-V \otimes \mathcal{O}(G) @&gt;{f \otimes \mathrm{id}}&gt;&gt; W \otimes \mathcal{O}(G)
-\end{CD}
-\]</span></p></li>
-<li><p>A <strong>submodule</strong> (subcomodule) is a subspace <span class="math inline">\(W \subseteq V\)</span> such that <span class="math inline">\(\rho(W) \subseteq W \otimes \mathcal{O}(G)\)</span>.</p></li>
-</ol>
-</div>
-<div id="thm-rep-comodule-bijection" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3 (Bijection between Representations and Comodules)</strong></span> Let <span class="math inline">\(r: G \to \mathrm{GL}_V\)</span> be a representation and <span class="math inline">\(A := \mathcal{O}(G)\)</span>. <span class="math display">\[
-r(A): G(A) = \operatorname{Hom}(\mathcal{O}(G), A) \longrightarrow \mathrm{GL}_V(A) = \operatorname{Aut}_A(V \otimes A)
-\]</span> <span class="math display">\[
-\mathrm{id} \longmapsto (u: V \otimes A \xrightarrow{\sim} V \otimes A) \in \operatorname{Aut}_A(V \otimes A).
-\]</span> Consider <span class="math inline">\(\rho: V \xrightarrow{v \mapsto v \otimes 1} V \otimes A \xrightarrow{u} V \otimes A\)</span>. There is a bijection: <span class="math display">\[
-\big\{ \text{Representations } r: G \to \mathrm{GL}_V \big\} \xleftrightarrow{\quad 1:1 \quad} \big\{ \mathcal{O}(G)\text{-comodule structures on } V \big\}, \quad r \longleftrightarrow \rho_r.
-\]</span></p>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By Yoneda’s Lemma on <span class="math inline">\(G\)</span> and <span class="math inline">\(\mathrm{GL}_V(-)\)</span>, for every <span class="math inline">\(R \in k\text{-alg}\)</span> and <span class="math inline">\(f: A \to R\)</span> (<span class="math inline">\(f \in G(R)\)</span>), we have: <span class="math display">\[
-\begin{CD}
-G(A) @&gt;{r(A)}&gt;&gt; \mathrm{GL}_V(A) \\
-@V{f_*}VV @VV{f_*}V \\
-G(R) @&gt;{r(R)}&gt;&gt; \mathrm{GL}_V(R)
-\end{CD}
-\qquad
-\begin{array}{rcl}
-\mathrm{id} &amp; \longmapsto &amp; u \\
-f &amp; \longmapsto &amp; f_* u
-\end{array}
-\]</span> Then <span class="math inline">\(\operatorname{Hom}_{\mathbf{Grp}}(G, \mathrm{GL}_V) \cong \dots\)</span></p>
-<p>Given a <span class="math inline">\(k\)</span>-morphism <span class="math inline">\(V \xrightarrow{\rho} V \otimes A\)</span>, one has <span class="math inline">\(V \otimes A \to V \otimes A\)</span>, <span class="math inline">\((v, a) \mapsto a\rho(v)\)</span>. Then: <span class="math display">\[
-\operatorname{Hom}_k(V, V \otimes A) = \operatorname{Hom}_k(V, \operatorname{Hom}_A(A, V \otimes A)) = \operatorname{Hom}_A(V \otimes A, V \otimes A).
-\]</span> We narrow down to <span class="math inline">\(\operatorname{Hom}_{\mathbf{Grp}}(G, \mathrm{GL}_V) = \operatorname{Hom}_{\mathrm{comod}}(V, V \otimes A)\)</span>.</p>
-</div>
-<div id="prp-filtered-union-comodules" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 5 (Filtered Union of Finite-Dimensional Submodules)</strong></span> Every <span class="math inline">\(\mathcal{O}(G)\)</span>-comodule <span class="math inline">\((V, \rho)\)</span> is a filtered union of finite-dimensional submodules.</p>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>If <span class="math inline">\(W_1, W_2 \subseteq V\)</span> are submodules, then <span class="math inline">\(W_1 + W_2\)</span> is a submodule. It suffices to show that every <span class="math inline">\(v \in V\)</span> is contained in a finite-dimensional submodule of <span class="math inline">\(V\)</span>.</p>
-<p>Let <span class="math inline">\((f_i)_{i \in I}\)</span> be a <span class="math inline">\(k\)</span>-basis of <span class="math inline">\(\mathcal{O}(G)\)</span>, then: <span class="math display">\[
-\rho(v) = \sum_{i \in I} v_i \otimes f_i \in V \otimes \mathcal{O}(G) \quad (\text{finite sum}).
-\]</span> Set <span class="math inline">\(W := \operatorname{span}_k\{v_i\}\)</span>.</p>
-<p><strong>Claim:</strong> <span class="math inline">\(W\)</span> is a subcomodule of <span class="math inline">\(V\)</span> containing <span class="math inline">\(v\)</span>.</p>
-<p>First, <span class="math inline">\(v = \sum_{i \in I} v_i f_i(e) \in W\)</span>. It remains to show that <span class="math inline">\(\rho(v_i) \in W \otimes \mathcal{O}(G)\)</span> for all <span class="math inline">\(v_i\)</span>. From the coassociativity diagram: <span class="math display">\[
-\begin{CD}
-V @&gt;{\rho}&gt;&gt; V \otimes \mathcal{O}(G) \\
-@V{\rho}VV @VV{\mathrm{id} \otimes m^*}V \\
-V \otimes \mathcal{O}(G) @&gt;{\rho \otimes \mathrm{id}}&gt;&gt; V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{CD}
-\]</span> we have: <span class="math display">\[
-\sum v_i \otimes m^*(f_i) = \sum a_{ijl} \, v_i \otimes f_j \otimes f_l
-\]</span> <span class="math display">\[
-\sum \rho(v_i) \otimes f_i = \sum \rho(v_l) \otimes f_l.
-\]</span> Then <span class="math inline">\(\rho(v_l) = \sum a_{ijl} \, v_i \otimes f_j \in W \otimes \mathcal{O}(G)\)</span>.</p>
-</div>
-<div id="rem-algebraic-action" class="proof remark">
-<p><span class="proof-title"><em>Remark 1</em> (Algebraic Action). </span>If <span class="math inline">\(V = \mathcal{O}(X)\)</span> with <span class="math inline">\(X\)</span> affine over <span class="math inline">\(k\)</span>, then <span class="math inline">\(V\)</span> is an <span class="math inline">\(\mathcal{O}(G)\)</span>-comodule. Given <span class="math inline">\(\rho: V \to V \otimes \mathcal{O}(G)\)</span>, suppose <span class="math inline">\(\rho\)</span> is a morphism of <span class="math inline">\(k\)</span>-algebras. Then <span class="math inline">\(X \times G \xrightarrow{a} X\)</span>: <span class="math display">\[
-\begin{CD}
-\mathcal{O}(X) @&gt;{\rho}&gt;&gt; \mathcal{O}(X) \otimes \mathcal{O}(G) \\
-@| @VV{\mathrm{id} \otimes e^*}V \\
-\mathcal{O}(X) @= \mathcal{O}(X)
-\end{CD}
-\qquad
-\begin{CD}
-\mathcal{O}(X) @&gt;{\rho}&gt;&gt; \mathcal{O}(X) \otimes \mathcal{O}(G) \\
-@V{\rho}VV @VV{\mathrm{id} \otimes m^*}V \\
-\mathcal{O}(X) \otimes \mathcal{O}(G) @&gt;{\rho \otimes \mathrm{id}}&gt;&gt; \mathcal{O}(X) \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{CD}
-\]</span> <span class="math inline">\(\implies a\)</span> is a right algebraic action, which is in fact: <span class="math display">\[
-G \longrightarrow \operatorname{Aut}_X \longrightarrow \mathrm{GL}_{\mathcal{O}(X)}
-\]</span> <span class="math display">\[
-\begin{array}{rcl}
-\operatorname{Aut}_X(R) &amp; \longrightarrow &amp; \mathrm{GL}_{\mathcal{O}(X)}(R) \\
-\operatorname{Aut}(X \times R) &amp; \longrightarrow &amp; \mathrm{GL}(\mathcal{O}(X) \otimes R) \\
-f &amp; \longmapsto &amp; f^*: \mathcal{O}(X \times R) \xrightarrow{\sim} \mathcal{O}(X \times R).
-\end{array}
-\]</span></p>
+<p>Hence <span class="math inline">\(\mathfrak{a} = \mathfrak{a}'\)</span>, which implies <span class="math inline">\(H = \operatorname{Stab}_G(W)\)</span>.</p>
 </div>
 <hr>
-<div id="def-simple-rep" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 6 (Simple Representation)</strong></span> A representation <span class="math inline">\(V\)</span> of <span class="math inline">\(G\)</span> is <strong>simple</strong> if <span class="math inline">\(V \neq 0\)</span> and has no non-trivial subrepresentations.</p>
-<p>Then every simple representation of a linear algebraic group is finite-dimensional.</p>
+<div id="def-character" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Character)</strong></span> A <strong>character</strong> of a linear algebraic group <span class="math inline">\(G\)</span> over <span class="math inline">\(k\)</span> is a homomorphism: <span class="math display">\[
+\chi: G \longrightarrow \mathbb{G}_m.
+\]</span> Then <span class="math inline">\(\chi\)</span> is determined by the comorphism: <span class="math display">\[
+\chi^*: k[T, T^{-1}] \longrightarrow \mathcal{O}(G), \quad T \longmapsto a := \chi^*(T) \in \mathcal{O}(G)^\times.
+\]</span> The compatibility of <span class="math inline">\(\chi\)</span> with group multiplication implies <span class="math inline">\(m^*(a) = a \otimes a\)</span>, corresponding to the commutative diagram: <span class="math display">\[
+\begin{CD}
+k[T, T^{-1}] @&gt;{\chi^*}&gt;&gt; \mathcal{O}(G) \\
+@VV{T \mapsto T \otimes T}V @VV{m^*}V \\
+k[T, T^{-1}] \otimes k[T, T^{-1}] @&gt;{\chi^* \otimes \chi^*}&gt;&gt; \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
+\]</span></p>
 </div>
-<div id="def-regular-rep" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 7 (Regular Representation)</strong></span> Let <span class="math inline">\(X = G\)</span>, with <span class="math inline">\(m: X \times G \to X\)</span> the right action. Then <span class="math inline">\(\mathcal{O}(X) = \mathcal{O}(G)\)</span> is an <span class="math inline">\(\mathcal{O}(G)\)</span>-comodule. The morphism: <span class="math display">\[
-G \longrightarrow \mathrm{GL}_A
-\]</span> is called the <strong>regular representation</strong>, where <span class="math inline">\(A = \mathcal{O}(G)\)</span>.</p>
-</div>
-<div id="thm-faithful-subrep" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4 (Finite-Dimensional Faithful Action)</strong></span> The regular representation of <span class="math inline">\(G\)</span> has a faithful finite-dimensional subrepresentation. In particular, the regular representation is faithful and <span class="math inline">\(G \hookrightarrow \mathrm{GL}_n\)</span>.</p>
+<div id="prp-characters-properties" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (Group-like Elements and Characters)</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p>There are natural bijections: <span class="math display">\[
+\operatorname{Hom}_{\mathbf{Grp}}(G, \mathbb{G}_m) \xleftrightarrow{\quad 1:1 \quad} \{ a \in \mathcal{O}(G)^\times \mid m^*(a) = a \otimes a \} \xleftrightarrow{\quad 1:1 \quad} \{ \text{$1$-dimensional representations of } G \}.
+\]</span> An element <span class="math inline">\(a \in \mathcal{O}(G)\)</span> satisfying <span class="math inline">\(m^*(a) = a \otimes a\)</span> is called a <strong>group-like element</strong>.</p></li>
+<li><p>Group-like elements in <span class="math inline">\(\mathcal{O}(G)\)</span> are linearly independent over <span class="math inline">\(k\)</span>.</p></li>
+</ol>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>For any finite-dimensional submodule <span class="math inline">\(V \subseteq \mathcal{O}(G)\)</span>, if <span class="math inline">\(f_1, \dots, f_n\)</span> is a basis of <span class="math inline">\(V\)</span>, then <span class="math inline">\(\mathrm{GL}_V \cong \mathrm{GL}_n\)</span>: <span class="math display">\[
+<p><span class="proof-title"><em>Proof</em>. </span><em>(Proof of 2)</em> Suppose distinct group-like elements <span class="math inline">\(a_1, \dots, a_n\)</span> are linearly dependent. Without loss of generality, assume any <span class="math inline">\(n-1\)</span> of them are linearly independent. We may assume <span class="math inline">\(k = \bar{k}\)</span>. Suppose there exists a non-trivial relation: <span class="math display">\[
+\sum_{i=1}^n c_i a_i = 0 \quad \text{with } c_i \in k^\times.
+\]</span> Applying <span class="math inline">\(m^*\)</span> to this equation gives: <span class="math display">\[
+0 = m^*\left(\sum_{i=1}^n c_i a_i\right) = \sum_{i=1}^n c_i \, a_i \otimes a_i.
+\]</span> Since <span class="math inline">\(a_1 \neq a_2\)</span>, there exists <span class="math inline">\(x \in G(k)\)</span> such that <span class="math inline">\(a_1(x) \neq a_2(x)\)</span>. Applying <span class="math inline">\((\mathrm{id} \otimes x)\)</span> to the equation above gives: <span class="math display">\[
+\sum_{i=1}^n c_i a_i(x) a_i = 0.
+\]</span> Multiplying the original relation <span class="math inline">\(\sum c_i a_i = 0\)</span> by <span class="math inline">\(a_1(x)\)</span> and subtracting yields: <span class="math display">\[
+\sum_{i=2}^n c_i \big(a_i(x) - a_1(x)\big) a_i = 0.
+\]</span> Since <span class="math inline">\(c_2 \neq 0\)</span> and <span class="math inline">\(a_2(x) - a_1(x) \neq 0\)</span>, the coefficient of <span class="math inline">\(a_2\)</span> is non-zero. This provides a non-trivial linear relation among <span class="math inline">\(a_2, \dots, a_n\)</span>, contradicting the minimality of <span class="math inline">\(n\)</span>.</p>
+</div>
+<div id="def-eigenspace" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Eigenspaces)</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p>Let <span class="math inline">\(r: G \to \mathrm{GL}_V\)</span> be a representation of <span class="math inline">\(G\)</span>, and <span class="math inline">\(\chi: G \to \mathbb{G}_m\)</span> a character. We say that <span class="math inline">\(G\)</span> <strong>acts on <span class="math inline">\(V\)</span> through <span class="math inline">\(\chi\)</span></strong> (<span class="math inline">\(G \circlearrowright V\)</span> through <span class="math inline">\(\chi\)</span>) if <span class="math inline">\(r\)</span> factors as: <span class="math display">\[
 \begin{CD}
-V @&gt;&gt;&gt; V \otimes \mathcal{O}(G) \\
+G @&gt;{r}&gt;&gt; \mathrm{GL}(V) \\
+@V{\chi}VV @AA{a \mapsto a \cdot \mathrm{id}_V}A \\
+\mathbb{G}_m @= \mathbb{G}_m
+\end{CD}
+\]</span> i.e., <span class="math inline">\(\rho(v) = v \otimes a(\chi)\)</span>, where <span class="math inline">\(a(\chi) := \chi^*(T) \in \mathcal{O}(G)\)</span>.</p></li>
+<li><p>If <span class="math inline">\(W \subseteq V\)</span> is a <span class="math inline">\(G\)</span>-stable subspace, we say <span class="math inline">\(G \circlearrowright W\)</span> through <span class="math inline">\(\chi\)</span> if the restricted representation acts through <span class="math inline">\(\chi\)</span>. The largest subspace of <span class="math inline">\(V\)</span> on which <span class="math inline">\(G\)</span> acts through <span class="math inline">\(\chi\)</span> is called the <strong><span class="math inline">\(\chi\)</span>-eigenspace</strong> (or <strong><span class="math inline">\(\chi\)</span>-weight space</strong>), denoted by <span class="math inline">\(V_\chi\)</span>.</p></li>
+</ol>
+</div>
+<div id="prp-eigenspace-direct-sum" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3 (Sum of Eigenspaces is Direct)</strong></span> Let <span class="math inline">\(r: G \to \mathrm{GL}_V\)</span> be a representation of <span class="math inline">\(G\)</span>. If <span class="math inline">\(V = \sum_\chi V_\chi\)</span>, then the sum is direct: <span class="math display">\[
+V = \bigoplus_\chi V_\chi.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Suppose <span class="math inline">\(v_1 + \dots + v_s = 0\)</span> with <span class="math inline">\(v_i \in V_{\chi_i}\)</span> (<span class="math inline">\(1 \le i \le s\)</span>), where <span class="math inline">\(\chi_1, \dots, \chi_s\)</span> are pairwise distinct characters. We want to show that <span class="math inline">\(v_i = 0\)</span> for all <span class="math inline">\(1 \le i \le s\)</span>. Applying the comodule map <span class="math inline">\(\rho\)</span> to the relation: <span class="math display">\[
+0 = \rho(v_1 + \dots + v_s) = v_1 \otimes a(\chi_1) + \dots + v_s \otimes a(\chi_s).
+\]</span> For any linear functional <span class="math inline">\(f \in V^\vee\)</span>, applying <span class="math inline">\(f \otimes \mathrm{id}\)</span> yields: <span class="math display">\[
+f(v_1) a(\chi_1) + \dots + f(v_s) a(\chi_s) = 0 \quad \text{in } \mathcal{O}(G).
+\]</span> By <a href="#prp-characters-properties" class="quarto-xref">Proposition&nbsp;2</a>(2), the distinct group-like elements <span class="math inline">\(a(\chi_i)\)</span> are linearly independent over <span class="math inline">\(k\)</span>. Hence <span class="math inline">\(f(v_i) = 0\)</span> for all <span class="math inline">\(f \in V^\vee\)</span> and all <span class="math inline">\(1 \le i \le s\)</span>. Thus <span class="math inline">\(v_i = 0\)</span> for each <span class="math inline">\(i\)</span>, showing that the sum is direct.</p>
+</div>
+<hr>
+<div id="def-rep-category" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Category of Representations)</strong></span> Let <span class="math inline">\(\mathbf{Rep}_k G\)</span> denote the category of linear representations of <span class="math inline">\(G\)</span> on finite-dimensional <span class="math inline">\(k\)</span>-vector spaces. - It is a <strong>tensor category</strong> equipped with: <span class="math display">\[
+  \otimes: \mathbf{Rep}_k G \times \mathbf{Rep}_k G \longrightarrow \mathbf{Rep}_k G, \quad (V, W) \longmapsto V \otimes W,
+  \]</span> and identity object <span class="math inline">\(\mathbf{1} := (G \to \mathrm{GL}_1(k))\)</span> (the trivial <span class="math inline">\(1\)</span>-dimensional representation). - <span class="math inline">\(\mathbf{Rep}_k G\)</span> is a <strong>neutral Tannakian category</strong> equipped with the natural forgetful functor: <span class="math display">\[
+  \omega: \mathbf{Rep}_k G \longrightarrow \mathbf{Vect}_k, \quad (G \to \mathrm{GL}_V) \longmapsto V.
+  \]</span> - A <strong>tensor functor</strong> between tensor categories is a functor <span class="math inline">\(F\)</span> satisfying: <span class="math display">\[
+  F(V \otimes W) = F(V) \otimes F(W), \quad F(f \otimes g) = F(f) \otimes F(g), \quad F(\mathbf{1}) = \mathbf{1}.
+  \]</span> - A <strong>natural transformation of tensor functors</strong> is a natural transformation <span class="math inline">\(\eta: F \to F'\)</span> such that: <span class="math display">\[
+  \eta_{\mathbf{1}} = \mathrm{id}_{\mathbf{1}}, \quad \eta_{X \otimes Y} = \eta_X \otimes \eta_Y \quad \text{with respect to } F(X \otimes Y) \xrightarrow{\sim} F(X) \otimes F(Y).
+  \]</span></p>
+</div>
+<div id="def-aut-functor" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 (Automorphism Functor of the Fibre Functor)</strong></span> Define the functor of tensor automorphisms of <span class="math inline">\(\omega\)</span>: <span class="math display">\[
+\underline{\operatorname{Aut}}^\otimes(\omega): k\text{-}\mathbf{Alg} \longrightarrow \mathbf{Grp}
+\]</span> <span class="math display">\[
+R \longmapsto \underline{\operatorname{Aut}}^\otimes(\omega)(R) := \operatorname{Aut}^\otimes(\omega_R) = \operatorname{Aut}^\otimes(\mathbf{Rep}_k G \otimes R \xrightarrow{\;\omega_R\;} \mathbf{Vect}_k \otimes R),
+\]</span> where: - <span class="math inline">\(\mathbf{Rep}_k G \otimes R\)</span> is <span class="math inline">\(\mathbf{Rep}_k G / R\)</span>, whose objects are <span class="math inline">\(V \otimes R\)</span> and morphisms are <span class="math inline">\(f \otimes \mathrm{id}_R\)</span> for <span class="math inline">\(V \in \operatorname{Ob}(\mathbf{Rep}_k G)\)</span> and <span class="math inline">\(f \in \operatorname{Mor}(\mathbf{Rep}_k G)\)</span>; - <span class="math inline">\(\mathbf{Vect}_k \otimes R\)</span> consists of <span class="math inline">\(\{ V \otimes R, \, f \otimes \mathrm{id}_R \}_{V \in \mathbf{Vect}_k, f \in \operatorname{Mor}}\)</span>.</p>
+<p>Explicitly, an element <span class="math inline">\(\lambda \in \underline{\operatorname{Aut}}^\otimes(\omega)(R)\)</span> is a family of <span class="math inline">\(R\)</span>-linear isomorphisms: <span class="math display">\[
+\lambda = (\lambda_X)_{X \in \operatorname{Ob}(\mathbf{Rep}_k G)}, \quad \lambda_X: X \otimes R \xrightarrow{\;\sim\;} X \otimes R
+\]</span> such that: 1. <span class="math inline">\(\lambda_{\mathbf{1}} = \mathrm{id}_R\)</span>; 2. <span class="math inline">\(\lambda_{X_1 \otimes X_2} = \lambda_{X_1} \otimes_R \lambda_{X_2}\)</span>; 3. For every morphism <span class="math inline">\(f: X \to Y\)</span> in <span class="math inline">\(\mathbf{Rep}_k G\)</span>, the diagram commutes: <span class="math display">\[
+   \begin{CD}
+   X \otimes R @&gt;{\lambda_X}&gt;&gt; X \otimes R \\
+   @V{f \otimes \mathrm{id}}VV @VV{f \otimes \mathrm{id}}V \\
+   Y \otimes R @&gt;{\lambda_Y}&gt;&gt; Y \otimes R
+   \end{CD}
+   \]</span></p>
+<p>For any <span class="math inline">\(k\)</span>-algebra homomorphism <span class="math inline">\(R \to R'\)</span>, the induced map: <span class="math display">\[
+\underline{\operatorname{Aut}}^\otimes(\omega)(R) \longrightarrow \underline{\operatorname{Aut}}^\otimes(\omega)(R'), \quad (\lambda_X) \longmapsto (\lambda_X \otimes_R R')
+\]</span> makes <span class="math inline">\(\underline{\operatorname{Aut}}^\otimes(\omega)\)</span> into a group functor.</p>
+</div>
+<div id="thm-tannakian-recover-g" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Tannakian Reconstruction of <span class="math inline">\(G\)</span>)</strong></span> The natural morphism: <span class="math display">\[
+G \longrightarrow \underline{\operatorname{Aut}}^\otimes(\omega), \quad G(R) \longrightarrow \underline{\operatorname{Aut}}^\otimes(\omega)(R), \quad g \longmapsto (\rho_g \otimes R)
+\]</span> is an isomorphism of group functors.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>It suffices to prove that for all <span class="math inline">\(R \in k\text{-}\mathbf{Alg}\)</span>, <span class="math inline">\(G(R) \xrightarrow{\sim} \underline{\operatorname{Aut}}^\otimes(\omega)(R)\)</span> is a bijection.</p>
+<p><strong>Step 1. Extension to infinite-dimensional representations:</strong> Let <span class="math inline">\(r: G \to \mathrm{GL}_V\)</span> be a representation with <span class="math inline">\(\dim V = \infty\)</span>. Write <span class="math inline">\(V = \bigcup_i V_i\)</span> as the union of its finite-dimensional subcomodules. For any two finite-dimensional subcomodules <span class="math inline">\(V_i, V_j \subseteq V\)</span>, the intersection <span class="math inline">\(V_i \cap V_j\)</span> is a finite-dimensional subcomodule, and by functoriality: <span class="math display">\[
+\begin{CD}
+(V_i \cap V_j) \otimes R @&gt;{\lambda_{V_i \cap V_j}}&gt;&gt; (V_i \cap V_j) \otimes R \\
 @VVV @VVV \\
-\mathcal{O}(G) @&gt;{m^*}&gt;&gt; \mathcal{O}(G) \otimes \mathcal{O}(G)
+V_i \otimes R @&gt;{\lambda_{V_i}}&gt;&gt; V_i \otimes R
 \end{CD}
-\]</span> Suppose <span class="math inline">\(m^*(f_i) = \sum_j f_j \otimes b_{ij}\)</span>. Then: <span class="math display">\[
-G \longrightarrow \mathrm{GL}_V \xrightarrow{\;\sim\;} \mathrm{GL}_n, \quad g \longmapsto (b_{ij}(g)).
-\]</span> Then we want: <span class="math display">\[
-\mathcal{O}(\mathrm{GL}_n) = k[T_{ij}, \det{}^{-1}] \longrightarrow \mathcal{O}(G), \quad T_{ij} \longmapsto b_{ij}
-\]</span> to be surjective. It suffices to find <span class="math inline">\(b_{ij}\)</span> generating <span class="math inline">\(\mathcal{O}(G)\)</span>.</p>
-<p>Since <span class="math inline">\(\mathrm{id}: G \xrightarrow{e \times \mathrm{id}} G \times G \xrightarrow{m} G \implies f_i = \sum_j f_j(e) b_{ij}\)</span>, it suffices to choose <span class="math inline">\(V \subseteq \mathcal{O}(G)\)</span> such that: - <span class="math inline">\(V\)</span> generates <span class="math inline">\(\mathcal{O}(G)\)</span>, - <span class="math inline">\(V\)</span> is a submodule of <span class="math inline">\(\mathcal{O}(G)\)</span>, - <span class="math inline">\(\dim_k V &lt; +\infty\)</span>.</p>
+\]</span> Passing to the colimit yields a unique <span class="math inline">\(R\)</span>-linear isomorphism <span class="math inline">\(\lambda_V: V \otimes R \xrightarrow{\sim} V \otimes R\)</span> such that <span class="math inline">\(\lambda_V|_{V_i \otimes R} = \lambda_{V_i}\)</span>.</p>
+<p><strong>Step 2. The regular representation:</strong> For <span class="math inline">\(R \in k\text{-}\mathbf{Alg}\)</span>, let <span class="math inline">\(X_0 := \mathcal{O}(G)\)</span> be the regular representation of <span class="math inline">\(G\)</span>.</p>
+<p><strong>Claim:</strong> <span class="math inline">\(\lambda_{X_0}: \mathcal{O}(G) \otimes R \to \mathcal{O}(G) \otimes R\)</span> equals <span class="math inline">\(r_0(g)\)</span> for some unique <span class="math inline">\(g \in G(R) = \operatorname{Hom}_{k\text{-alg}}(\mathcal{O}(G), R)\)</span>.</p>
+<p><em>(Proof of Claim: Since <span class="math inline">\(\lambda\)</span> commutes with all comodule endomorphisms and preserves the algebra structure via tensor compatibility, <span class="math inline">\(\lambda_{X_0}\)</span> is an algebra automorphism commuting with the right <span class="math inline">\(G\)</span>-action, hence is given by left translation by some element <span class="math inline">\(g \in G(R)\)</span>).</em></p>
+<p><strong>Step 3. Surjectivity:</strong> The regular representation settles the case <span class="math inline">\(R = \mathcal{O}(G)\)</span>. For any <span class="math inline">\((V, r) \in \operatorname{Ob}(\mathbf{Rep}_k G)\)</span>, <span class="math inline">\(V \hookrightarrow \mathcal{O}(G)^n\)</span> for some <span class="math inline">\(n\)</span> as a <span class="math inline">\(G\)</span>-representation. Then: <span class="math display">\[
+\begin{CD}
+V \otimes R @&gt;&gt;&gt; \mathcal{O}(G)^n \otimes R \\
+@V{\lambda_V}VV @VV{\lambda_{X_0^n} = (r_0(g), \dots, r_0(g))}V \\
+V \otimes R @&gt;&gt;&gt; \mathcal{O}(G)^n \otimes R
+\end{CD}
+\]</span> By functoriality with respect to the embedding <span class="math inline">\(V \hookrightarrow \mathcal{O}(G)^n\)</span>, we deduce <span class="math inline">\(\lambda_V = r(g)\)</span> for all <span class="math inline">\(V\)</span>. Thus the map is surjective.</p>
+<p><strong>Step 4. Injectivity:</strong> The element <span class="math inline">\(g \in G(R)\)</span> is uniquely determined by any faithful representation: if <span class="math inline">\(V\)</span> is faithful, i.e., <span class="math inline">\(G \hookrightarrow \mathrm{GL}_V\)</span>, then <span class="math inline">\(G(R) \hookrightarrow \mathrm{GL}_V(R)\)</span> for all <span class="math inline">\(R\)</span>, via <span class="math inline">\(g \mapsto \lambda_V\)</span>. (Since every representation <span class="math inline">\(W\)</span> is obtained from <span class="math inline">\(V\)</span> via tensor products, duals, direct sums, and subquotients, functoriality forces <span class="math inline">\(\lambda_W = r(g)\)</span>).</p>
 </div>
 <hr>
-<div id="def-free-comodule" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8 (Free Comodule)</strong></span> For a vector space <span class="math inline">\(V/k\)</span>, <span class="math inline">\(V \otimes \mathcal{O}(G)\)</span> equipped with: <span class="math display">\[
-V \otimes \mathcal{O}(G) \xrightarrow{\;\mathrm{id} \otimes m^* \;} V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\]</span> is an <span class="math inline">\(\mathcal{O}(G)\)</span>-comodule, called the <strong>free comodule</strong>.</p>
+<div id="rem-determine-g-via-category" class="proof remark">
+<p><span class="proof-title"><em>Remark 1</em> (Equivalence of Categories via Tannakian Duality). </span><em>(Reference: [Milne, §4.7])</em></p>
+<p>Let <span class="math inline">\((\mathcal{C}, \otimes)\)</span> be a neutral Tannakian category over <span class="math inline">\(k\)</span> with a <span class="math inline">\(k\)</span>-valued fibre functor <span class="math inline">\(\omega: \mathcal{C} \to \mathbf{Vect}_k\)</span>. Then: 1. <span class="math inline">\(\underline{\operatorname{Aut}}^\otimes(\omega): k\text{-}\mathbf{Alg} \to \mathbf{Grp}\)</span> is representable by an affine group scheme <span class="math inline">\(G\)</span> over <span class="math inline">\(k\)</span>. 2. The functor <span class="math inline">\(\mathcal{C} \to \mathbf{Rep}_k(G)\)</span> defined by <span class="math inline">\(\omega\)</span> is an equivalence of tensor categories.</p>
 </div>
-<div id="prp-submodule-free-comodule" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 6 (Finite-Dimensional Comodules Embed into Free Comodules)</strong></span> Every finite-dimensional <span class="math inline">\(\mathcal{O}(G)\)</span>-comodule <span class="math inline">\(V\)</span> is a submodule of <span class="math inline">\((\mathcal{O}(G)^n, m^*)\)</span>.</p>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><span class="math inline">\(\rho: V \to V \otimes \mathcal{O}(G)\)</span> is injective (since <span class="math inline">\((\mathrm{id} \otimes e^*) \circ \rho = \mathrm{id}_V\)</span>), and: <span class="math display">\[
-\begin{CD}
-V @&gt;{\rho}&gt;&gt; V \otimes \mathcal{O}(G) \\
-@V{\rho}VV @VV{\mathrm{id} \otimes m^*}V \\
-V \otimes \mathcal{O}(G) @&gt;{\rho \otimes \mathrm{id}}&gt;&gt; V \otimes \mathcal{O}(G) \otimes \mathcal{O}(G)
-\end{CD}
-\]</span> is a morphism of comodules.</p>
-</div>
-<div id="thm-generating-rep" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 5 (Generating Representation)</strong></span> Let <span class="math inline">\(G \hookrightarrow \mathrm{GL}_V\)</span> be a faithful finite-dimensional representation of <span class="math inline">\(G\)</span>. Every finite-dimensional representation <span class="math inline">\(W\)</span> of <span class="math inline">\(G\)</span> can be constructed from <span class="math inline">\(V\)</span> by tensor, direct sum, dual, and subquotient.</p>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>See [Milne].</p>
+<div id="rem-neutral-tannakian-category" class="proof remark">
+<p><span class="proof-title"><em>Remark 2</em> (Neutral Tannakian Categories). </span>A tuple <span class="math inline">\((\mathcal{C}, \otimes, \Phi, \Psi)\)</span> is a <strong>neutral Tannakian category</strong> over <span class="math inline">\(k\)</span> if: 1. <span class="math inline">\(\mathcal{C}\)</span> is a <span class="math inline">\(k\)</span>-linear abelian category (a subabelian category of <span class="math inline">\(\mathbf{Vect}_k\)</span>). 2. <span class="math inline">\(\otimes: \mathcal{C} \times \mathcal{C} \to \mathcal{C}\)</span> is a <span class="math inline">\(k\)</span>-bilinear functor. 3. Associativity and symmetry constraints: <span class="math display">\[
+   \Phi_{X,Y,Z}: X \otimes (Y \otimes Z) \xrightarrow{\;\sim\;} (X \otimes Y) \otimes Z, \quad \Psi_{X,Y}: X \otimes Y \xrightarrow{\;\sim\;} Y \otimes X,
+   \]</span> which imply the existence of an identity object <span class="math inline">\(\mathbf{1}\)</span> such that <span class="math inline">\(\mathcal{C} \xrightarrow{\sim} \mathcal{C}\)</span>, <span class="math inline">\(X \mapsto \mathbf{1} \otimes X\)</span>. 4. Existence of duals: for every <span class="math inline">\(X \in \operatorname{Ob}(\mathcal{C})\)</span>, there exists <span class="math inline">\(X^\vee \in \operatorname{Ob}(\mathcal{C})\)</span> and an evaluation morphism: <span class="math display">\[
+   \operatorname{ev}: X^\vee \otimes X \longrightarrow \mathbf{1}
+   \]</span> inducing an isomorphism: <span class="math display">\[
+   \operatorname{Hom}_\mathcal{C}(T, X^\vee) \xrightarrow{\;\sim\;} \operatorname{Hom}_\mathcal{C}(T \otimes X, \mathbf{1}), \quad \alpha \longmapsto \operatorname{ev} \circ (\alpha \otimes \mathrm{id}_X).
+   \]</span> 5. There exists a <strong><span class="math inline">\(k\)</span>-valued fibre functor</strong> <span class="math inline">\(\omega: (\mathcal{C}, \otimes) \to \mathbf{Vect}_k\)</span>, which is an exact, faithful <span class="math inline">\(k\)</span>-linear functor preserving tensor products.</p>
 </div>
 
 
@@ -1699,14 +1573,11 @@ nav#TOC li.active > a.nav-link {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../23_algebraic_groups/23.0 Basics.html" class="pagination-link" aria-label="23.0 Basics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">23.0 Basics</span>
+      <a href="../23_algebraic_groups/23.1 Representation I.html" class="pagination-link" aria-label="23.1 Representation I">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">23.1 Representation I</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../23_algebraic_groups/23.2 Representation II.html" class="pagination-link" aria-label="23.2 Representation II">
-        <span class="nav-page-text">23.2 Representation II</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
