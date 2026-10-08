@@ -1,0 +1,332 @@
+---
+title: "23.2 Representation II"
+subtitle: ""
+date: last-modified
+number-sections: true
+sec: "23.2." 
+---
+
+::: {#prp-stabilizer-subspace}
+## Stabilizer of a Subspace
+Let $r: G \to \mathrm{GL}_V$ be a finite-dimensional representation of $G$, and let $W \subseteq V$ be a $k$-subspace. Then the functor:
+$$
+\operatorname{Stab}_G(W): k\text{-}\mathbf{Alg} \longrightarrow \mathbf{Grp}, \quad R \longmapsto \{ g \in G(R) \mid r(g)(W_R) = W_R \}
+$$
+(also denoted by $G_W$) is represented by an algebraic subgroup of $G$.
+:::
+
+::: {.proof}
+Let $(e_j)_{j \in J}$ be a $k$-basis of $W$, and extend it to a basis $(e_i)_{i \in I}$ of $V$ (with $J \subseteq I$).
+Write the comodule map on the basis elements as:
+$$
+\rho(e_j) = \sum_{i \in I} e_i \otimes f_{ij}, \quad f_{ij} \in \mathcal{O}(G).
+$$
+For any $R \in k\text{-}\mathbf{Alg}$ and $g \in G(R)$, we have:
+$$
+\begin{aligned}
+g \in \operatorname{Stab}_G(W)(R) &\iff r(g)(W_R) = W_R \\
+&\iff r(g)(e_j) \in W_R \quad (\forall j \in J) \\
+&\iff f_{ij}(g) = 0 \quad (\forall i \in I \setminus J, \, j \in J).
+\end{aligned}
+$$
+Therefore, $\operatorname{Stab}_G(W)$ is represented by the closed subscheme:
+$$
+\operatorname{Stab}_G(W) = \operatorname{Spec}\big(\mathcal{O}(G) / (f_{ij} \mid i \in I \setminus J, \, j \in J)\big),
+$$
+which is an algebraic subgroup of $G$.
+:::
+
+::: {#thm-chevalley}
+## Chevalley's Theorem
+Every algebraic subgroup $H \leqslant G$ arises as the stabilizer of a $1$-dimensional subspace $L$ in a finite-dimensional representation $V$ of $G$.
+
+*(This is one of the main ingredients for the existence of the quotient variety $G/H$.)*
+:::
+
+::: {.proof}
+**Step 1.** There exists a finite-dimensional representation $V$ of $G$ and a subspace $W \subseteq V$ such that $H = \operatorname{Stab}_G(W)$.
+
+**Step 2.** Let $d := \dim_k W$, $\tilde{V} := \bigwedge^d V$, and $L := \bigwedge^d W \subseteq \tilde{V}$. Show that $\operatorname{Stab}_G(L) = H$, then the theorem is proved.
+
+---
+
+**Proof of Step 2:**
+Let $(e_j)_{1 \le j \le d}$ be a $k$-basis of $W$, and extend it to a $k$-basis $(e_i)_{1 \le i \le n}$ of $V$. Let:
+$$
+\omega := e_1 \wedge \dots \wedge e_d \in L = \bigwedge^d W, \quad \text{so that } L = k\omega.
+$$
+It suffices to prove that for all $\alpha \in \mathrm{GL}_V(R)$:
+$$
+\alpha(W_R) = W_R \iff \left(\bigwedge^d \alpha\right)(L_R) = L_R.
+$$
+
+- $(\Longrightarrow)$ Obvious.
+- $(\Longleftarrow)$ Notice that $W_R = \{ v \in V_R \mid \omega \wedge v = 0 \in \bigwedge^{d+1} V_R \}$. If $\left(\bigwedge^d \alpha\right)(L_R) = L_R$, then:
+  $$
+  \left(\bigwedge^d \alpha\right)(\omega) = c \cdot \omega \quad \text{for some } c \in R^\times.
+  $$
+  For any $v \in W_R$, $\omega \wedge v = 0$, so:
+  $$
+  0 = \left(\bigwedge^{d+1} \alpha\right)(\omega \wedge v) = \left(\bigwedge^d \alpha\right)(\omega) \wedge \alpha(v) = c \cdot (\omega \wedge \alpha(v)).
+  $$
+  Since $c \in R^\times$, this implies $\omega \wedge \alpha(v) = 0$, hence $\alpha(v) \in W_R$ for all $v \in W_R$. Therefore $\alpha(W_R) = W_R$.
+
+---
+
+**Proof of Step 1:**
+**Goal:** Construct a finite-dimensional representation $r: G \to \mathrm{GL}_V$ and a subspace $W \subseteq V$ such that $H = \operatorname{Stab}_G(W)$.
+
+Let $\mathfrak{a} := \ker(\mathcal{O}(G) \to \mathcal{O}(H))$ be the defining ideal of $H$. Since $\mathcal{O}(G)$ is noetherian, $\mathfrak{a}$ is finitely generated as an ideal, say by $f_1, \dots, f_r$. Set $W_0 := \operatorname{span}_k\{f_1, \dots, f_r\} \subseteq \mathfrak{a}$.
+
+Since $\mathcal{O}(G)$ is a filtered union of finite-dimensional subcomodules, there exists a finite-dimensional subcomodule $V \subseteq \mathcal{O}(G)$ containing $W_0$. Set $W := V \cap \mathfrak{a}$. Then $W$ generates $\mathfrak{a}$ as an ideal.
+
+Let $(f_j)_{j \in J}$ be a basis of $W$, and extend it to a basis $(f_i)_{i \in I \cup J}$ of $V$. Since $V$ is a subcomodule:
+$$
+m^*(f_j) = \sum_{i \in I \cup J} f_i \otimes a_{ij}, \quad a_{ij} \in \mathcal{O}(G).
+$$
+Then $\operatorname{Stab}_G(W) = \operatorname{Spec}\big(\mathcal{O}(G)/\mathfrak{a}'\big)$, where $\mathfrak{a}' := (a_{ij} \mid i \in I, \, j \in J)$. We claim that $\mathfrak{a} = \mathfrak{a}'$:
+
+1. Since $\mathfrak{a}$ is a Hopf ideal, $m^*(\mathfrak{a}) \subseteq \mathfrak{a} \otimes \mathcal{O}(G) + \mathcal{O}(G) \otimes \mathfrak{a}$. For each $j \in J$, $f_j \in W \subseteq \mathfrak{a}$, so:
+   $$
+   m^*(f_j) = \sum_{i \in I \cup J} f_i \otimes a_{ij} \equiv 0 \pmod{\mathfrak{a} \otimes \mathcal{O}(G) + \mathcal{O}(G) \otimes \mathfrak{a}} \implies \sum_{i \in I} f_i \otimes a_{ij} \equiv 0 \pmod{\mathfrak{a} \otimes \mathcal{O}(G)}.
+   $$
+   Since the images of $(f_i)_{i \in I}$ in $V/W \subseteq \mathcal{O}(G)/\mathfrak{a}$ are linearly independent, we obtain $a_{ij} \in \mathfrak{a}$ for all $i \in I, j \in J$. Thus $\mathfrak{a}' \subseteq \mathfrak{a}$.
+
+2. Conversely, applying $(\mathrm{id} \otimes e^*) \circ m^* = \mathrm{id}$ to $f_j$, we have:
+   $$
+   f_j = \sum_{i \in I \cup J} f_i(e) a_{ij} \equiv \sum_{j' \in J} f_{j'}(e) a_{j' j} \pmod{\mathfrak{a}'}.
+   $$
+   Since $f_{j'} \in \mathfrak{a}$, we have $f_{j'}(e) = 0$ for all $j' \in J$. Thus $f_j \equiv 0 \pmod{\mathfrak{a}'}$, meaning $f_j \in \mathfrak{a}'$ for all $j \in J$. Because $W = \operatorname{span}_k\{f_j\}$ generates $\mathfrak{a}$ as an ideal, this shows $\mathfrak{a} \subseteq \mathfrak{a}'$.
+
+Hence $\mathfrak{a} = \mathfrak{a}'$, which implies $H = \operatorname{Stab}_G(W)$.
+:::
+
+---
+
+::: {#def-character}
+## Character
+A **character** of a linear algebraic group $G$ over $k$ is a homomorphism:
+$$
+\chi: G \longrightarrow \mathbb{G}_m.
+$$
+Then $\chi$ is determined by the comorphism:
+$$
+\chi^*: k[T, T^{-1}] \longrightarrow \mathcal{O}(G), \quad T \longmapsto a := \chi^*(T) \in \mathcal{O}(G)^\times.
+$$
+The compatibility of $\chi$ with group multiplication implies $m^*(a) = a \otimes a$, corresponding to the commutative diagram:
+$$
+\begin{CD}
+k[T, T^{-1}] @>{\chi^*}>> \mathcal{O}(G) \\
+@VV{T \mapsto T \otimes T}V @VV{m^*}V \\
+k[T, T^{-1}] \otimes k[T, T^{-1}] @>{\chi^* \otimes \chi^*}>> \mathcal{O}(G) \otimes \mathcal{O}(G)
+\end{CD}
+$$
+:::
+
+::: {#prp-characters-properties}
+## Group-like Elements and Characters
+1. There are natural bijections:
+   $$
+   \operatorname{Hom}_{\mathbf{Grp}}(G, \mathbb{G}_m) \xleftrightarrow{\quad 1:1 \quad} \{ a \in \mathcal{O}(G)^\times \mid m^*(a) = a \otimes a \} \xleftrightarrow{\quad 1:1 \quad} \{ \text{$1$-dimensional representations of } G \}.
+   $$
+   An element $a \in \mathcal{O}(G)$ satisfying $m^*(a) = a \otimes a$ is called a **group-like element**.
+
+2. Group-like elements in $\mathcal{O}(G)$ are linearly independent over $k$.
+:::
+
+::: {.proof}
+*(Proof of 2)* Suppose distinct group-like elements $a_1, \dots, a_n$ are linearly dependent. Without loss of generality, assume any $n-1$ of them are linearly independent. We may assume $k = \bar{k}$. Suppose there exists a non-trivial relation:
+$$
+\sum_{i=1}^n c_i a_i = 0 \quad \text{with } c_i \in k^\times.
+$$
+Applying $m^*$ to this equation gives:
+$$
+0 = m^*\left(\sum_{i=1}^n c_i a_i\right) = \sum_{i=1}^n c_i \, a_i \otimes a_i.
+$$
+Since $a_1 \neq a_2$, there exists $x \in G(k)$ such that $a_1(x) \neq a_2(x)$. Applying $(\mathrm{id} \otimes x)$ to the equation above gives:
+$$
+\sum_{i=1}^n c_i a_i(x) a_i = 0.
+$$
+Multiplying the original relation $\sum c_i a_i = 0$ by $a_1(x)$ and subtracting yields:
+$$
+\sum_{i=2}^n c_i \big(a_i(x) - a_1(x)\big) a_i = 0.
+$$
+Since $c_2 \neq 0$ and $a_2(x) - a_1(x) \neq 0$, the coefficient of $a_2$ is non-zero. This provides a non-trivial linear relation among $a_2, \dots, a_n$, contradicting the minimality of $n$.
+:::
+
+::: {#def-eigenspace}
+## Eigenspaces
+1. Let $r: G \to \mathrm{GL}_V$ be a representation of $G$, and $\chi: G \to \mathbb{G}_m$ a character. We say that $G$ **acts on $V$ through $\chi$** ($G \circlearrowright V$ through $\chi$) if $r$ factors as:
+   $$
+   \begin{CD}
+   G @>{r}>> \mathrm{GL}(V) \\
+   @V{\chi}VV @AA{a \mapsto a \cdot \mathrm{id}_V}A \\
+   \mathbb{G}_m @= \mathbb{G}_m
+   \end{CD}
+   $$
+   i.e., $\rho(v) = v \otimes a(\chi)$, where $a(\chi) := \chi^*(T) \in \mathcal{O}(G)$.
+
+2. If $W \subseteq V$ is a $G$-stable subspace, we say $G \circlearrowright W$ through $\chi$ if the restricted representation acts through $\chi$.
+   The largest subspace of $V$ on which $G$ acts through $\chi$ is called the **$\chi$-eigenspace** (or **$\chi$-weight space**), denoted by $V_\chi$.
+:::
+
+::: {#prp-eigenspace-direct-sum}
+## Sum of Eigenspaces is Direct
+Let $r: G \to \mathrm{GL}_V$ be a representation of $G$. If $V = \sum_\chi V_\chi$, then the sum is direct:
+$$
+V = \bigoplus_\chi V_\chi.
+$$
+:::
+
+::: {.proof}
+Suppose $v_1 + \dots + v_s = 0$ with $v_i \in V_{\chi_i}$ ($1 \le i \le s$), where $\chi_1, \dots, \chi_s$ are pairwise distinct characters. We want to show that $v_i = 0$ for all $1 \le i \le s$.
+Applying the comodule map $\rho$ to the relation:
+$$
+0 = \rho(v_1 + \dots + v_s) = v_1 \otimes a(\chi_1) + \dots + v_s \otimes a(\chi_s).
+$$
+For any linear functional $f \in V^\vee$, applying $f \otimes \mathrm{id}$ yields:
+$$
+f(v_1) a(\chi_1) + \dots + f(v_s) a(\chi_s) = 0 \quad \text{in } \mathcal{O}(G).
+$$
+By @prp-characters-properties(2), the distinct group-like elements $a(\chi_i)$ are linearly independent over $k$. Hence $f(v_i) = 0$ for all $f \in V^\vee$ and all $1 \le i \le s$. Thus $v_i = 0$ for each $i$, showing that the sum is direct.
+:::
+
+---
+
+::: {#def-rep-category}
+## Category of Representations
+Let $\mathbf{Rep}_k G$ denote the category of linear representations of $G$ on finite-dimensional $k$-vector spaces.
+- It is a **tensor category** equipped with:
+  $$
+  \otimes: \mathbf{Rep}_k G \times \mathbf{Rep}_k G \longrightarrow \mathbf{Rep}_k G, \quad (V, W) \longmapsto V \otimes W,
+  $$
+  and identity object $\mathbf{1} := (G \to \mathrm{GL}_1(k))$ (the trivial $1$-dimensional representation).
+- $\mathbf{Rep}_k G$ is a **neutral Tannakian category** equipped with the natural forgetful functor:
+  $$
+  \omega: \mathbf{Rep}_k G \longrightarrow \mathbf{Vect}_k, \quad (G \to \mathrm{GL}_V) \longmapsto V.
+  $$
+- A **tensor functor** between tensor categories is a functor $F$ satisfying:
+  $$
+  F(V \otimes W) = F(V) \otimes F(W), \quad F(f \otimes g) = F(f) \otimes F(g), \quad F(\mathbf{1}) = \mathbf{1}.
+  $$
+- A **natural transformation of tensor functors** is a natural transformation $\eta: F \to F'$ such that:
+  $$
+  \eta_{\mathbf{1}} = \mathrm{id}_{\mathbf{1}}, \quad \eta_{X \otimes Y} = \eta_X \otimes \eta_Y \quad \text{with respect to } F(X \otimes Y) \xrightarrow{\sim} F(X) \otimes F(Y).
+  $$
+:::
+
+::: {#def-aut-functor}
+## Automorphism Functor of the Fibre Functor
+Define the functor of tensor automorphisms of $\omega$:
+$$
+\underline{\operatorname{Aut}}^\otimes(\omega): k\text{-}\mathbf{Alg} \longrightarrow \mathbf{Grp}
+$$
+$$
+R \longmapsto \underline{\operatorname{Aut}}^\otimes(\omega)(R) := \operatorname{Aut}^\otimes(\omega_R) = \operatorname{Aut}^\otimes(\mathbf{Rep}_k G \otimes R \xrightarrow{\;\omega_R\;} \mathbf{Vect}_k \otimes R),
+$$
+where:
+- $\mathbf{Rep}_k G \otimes R$ is $\mathbf{Rep}_k G / R$, whose objects are $V \otimes R$ and morphisms are $f \otimes \mathrm{id}_R$ for $V \in \operatorname{Ob}(\mathbf{Rep}_k G)$ and $f \in \operatorname{Mor}(\mathbf{Rep}_k G)$;
+- $\mathbf{Vect}_k \otimes R$ consists of $\{ V \otimes R, \, f \otimes \mathrm{id}_R \}_{V \in \mathbf{Vect}_k, f \in \operatorname{Mor}}$.
+
+Explicitly, an element $\lambda \in \underline{\operatorname{Aut}}^\otimes(\omega)(R)$ is a family of $R$-linear isomorphisms:
+$$
+\lambda = (\lambda_X)_{X \in \operatorname{Ob}(\mathbf{Rep}_k G)}, \quad \lambda_X: X \otimes R \xrightarrow{\;\sim\;} X \otimes R
+$$
+such that:
+1. $\lambda_{\mathbf{1}} = \mathrm{id}_R$;
+2. $\lambda_{X_1 \otimes X_2} = \lambda_{X_1} \otimes_R \lambda_{X_2}$;
+3. For every morphism $f: X \to Y$ in $\mathbf{Rep}_k G$, the diagram commutes:
+   $$
+   \begin{CD}
+   X \otimes R @>{\lambda_X}>> X \otimes R \\
+   @V{f \otimes \mathrm{id}}VV @VV{f \otimes \mathrm{id}}V \\
+   Y \otimes R @>{\lambda_Y}>> Y \otimes R
+   \end{CD}
+   $$
+
+For any $k$-algebra homomorphism $R \to R'$, the induced map:
+$$
+\underline{\operatorname{Aut}}^\otimes(\omega)(R) \longrightarrow \underline{\operatorname{Aut}}^\otimes(\omega)(R'), \quad (\lambda_X) \longmapsto (\lambda_X \otimes_R R')
+$$
+makes $\underline{\operatorname{Aut}}^\otimes(\omega)$ into a group functor.
+:::
+
+::: {#thm-tannakian-recover-g}
+## Tannakian Reconstruction of $G$
+The natural morphism:
+$$
+G \longrightarrow \underline{\operatorname{Aut}}^\otimes(\omega), \quad G(R) \longrightarrow \underline{\operatorname{Aut}}^\otimes(\omega)(R), \quad g \longmapsto (\rho_g \otimes R)
+$$
+is an isomorphism of group functors.
+:::
+
+::: {.proof}
+It suffices to prove that for all $R \in k\text{-}\mathbf{Alg}$, $G(R) \xrightarrow{\sim} \underline{\operatorname{Aut}}^\otimes(\omega)(R)$ is a bijection.
+
+**Step 1. Extension to infinite-dimensional representations:**
+Let $r: G \to \mathrm{GL}_V$ be a representation with $\dim V = \infty$. Write $V = \bigcup_i V_i$ as the union of its finite-dimensional subcomodules.
+For any two finite-dimensional subcomodules $V_i, V_j \subseteq V$, the intersection $V_i \cap V_j$ is a finite-dimensional subcomodule, and by functoriality:
+$$
+\begin{CD}
+(V_i \cap V_j) \otimes R @>{\lambda_{V_i \cap V_j}}>> (V_i \cap V_j) \otimes R \\
+@VVV @VVV \\
+V_i \otimes R @>{\lambda_{V_i}}>> V_i \otimes R
+\end{CD}
+$$
+Passing to the colimit yields a unique $R$-linear isomorphism $\lambda_V: V \otimes R \xrightarrow{\sim} V \otimes R$ such that $\lambda_V|_{V_i \otimes R} = \lambda_{V_i}$.
+
+**Step 2. The regular representation:**
+For $R \in k\text{-}\mathbf{Alg}$, let $X_0 := \mathcal{O}(G)$ be the regular representation of $G$.
+
+**Claim:** $\lambda_{X_0}: \mathcal{O}(G) \otimes R \to \mathcal{O}(G) \otimes R$ equals $r_0(g)$ for some unique $g \in G(R) = \operatorname{Hom}_{k\text{-alg}}(\mathcal{O}(G), R)$.
+
+*(Proof of Claim: Since $\lambda$ commutes with all comodule endomorphisms and preserves the algebra structure via tensor compatibility, $\lambda_{X_0}$ is an algebra automorphism commuting with the right $G$-action, hence is given by left translation by some element $g \in G(R)$).*
+
+**Step 3. Surjectivity:**
+The regular representation settles the case $R = \mathcal{O}(G)$.
+For any $(V, r) \in \operatorname{Ob}(\mathbf{Rep}_k G)$, $V \hookrightarrow \mathcal{O}(G)^n$ for some $n$ as a $G$-representation. Then:
+$$
+\begin{CD}
+V \otimes R @>>> \mathcal{O}(G)^n \otimes R \\
+@V{\lambda_V}VV @VV{\lambda_{X_0^n} = (r_0(g), \dots, r_0(g))}V \\
+V \otimes R @>>> \mathcal{O}(G)^n \otimes R
+\end{CD}
+$$
+By functoriality with respect to the embedding $V \hookrightarrow \mathcal{O}(G)^n$, we deduce $\lambda_V = r(g)$ for all $V$. Thus the map is surjective.
+
+**Step 4. Injectivity:**
+The element $g \in G(R)$ is uniquely determined by any faithful representation: if $V$ is faithful, i.e., $G \hookrightarrow \mathrm{GL}_V$, then $G(R) \hookrightarrow \mathrm{GL}_V(R)$ for all $R$, via $g \mapsto \lambda_V$.
+(Since every representation $W$ is obtained from $V$ via tensor products, duals, direct sums, and subquotients, functoriality forces $\lambda_W = r(g)$).
+:::
+
+---
+
+::: {#rem-determine-g-via-category}
+## Equivalence of Categories via Tannakian Duality
+*(Reference: [Milne, §4.7])*
+
+Let $(\mathcal{C}, \otimes)$ be a neutral Tannakian category over $k$ with a $k$-valued fibre functor $\omega: \mathcal{C} \to \mathbf{Vect}_k$. Then:
+1. $\underline{\operatorname{Aut}}^\otimes(\omega): k\text{-}\mathbf{Alg} \to \mathbf{Grp}$ is representable by an affine group scheme $G$ over $k$.
+2. The functor $\mathcal{C} \to \mathbf{Rep}_k(G)$ defined by $\omega$ is an equivalence of tensor categories.
+:::
+
+::: {#rem-neutral-tannakian-category}
+## Neutral Tannakian Categories
+A tuple $(\mathcal{C}, \otimes, \Phi, \Psi)$ is a **neutral Tannakian category** over $k$ if:
+1. $\mathcal{C}$ is a $k$-linear abelian category (a subabelian category of $\mathbf{Vect}_k$).
+2. $\otimes: \mathcal{C} \times \mathcal{C} \to \mathcal{C}$ is a $k$-bilinear functor.
+3. Associativity and symmetry constraints:
+   $$
+   \Phi_{X,Y,Z}: X \otimes (Y \otimes Z) \xrightarrow{\;\sim\;} (X \otimes Y) \otimes Z, \quad \Psi_{X,Y}: X \otimes Y \xrightarrow{\;\sim\;} Y \otimes X,
+   $$
+   which imply the existence of an identity object $\mathbf{1}$ such that $\mathcal{C} \xrightarrow{\sim} \mathcal{C}$, $X \mapsto \mathbf{1} \otimes X$.
+4. Existence of duals: for every $X \in \operatorname{Ob}(\mathcal{C})$, there exists $X^\vee \in \operatorname{Ob}(\mathcal{C})$ and an evaluation morphism:
+   $$
+   \operatorname{ev}: X^\vee \otimes X \longrightarrow \mathbf{1}
+   $$
+   inducing an isomorphism:
+   $$
+   \operatorname{Hom}_\mathcal{C}(T, X^\vee) \xrightarrow{\;\sim\;} \operatorname{Hom}_\mathcal{C}(T \otimes X, \mathbf{1}), \quad \alpha \longmapsto \operatorname{ev} \circ (\alpha \otimes \mathrm{id}_X).
+   $$
+5. There exists a **$k$-valued fibre functor** $\omega: (\mathcal{C}, \otimes) \to \mathbf{Vect}_k$, which is an exact, faithful $k$-linear functor preserving tensor products.
+:::
