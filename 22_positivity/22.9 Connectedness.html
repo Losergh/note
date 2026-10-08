@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2026-10-08">
 
-<title>22.6 Graded Linear Series – Math Notes</title>
+<title>22.9 Connectedness – Math Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -36,8 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../22_positivity/22.7 Zariski Decomposition.html" rel="next">
-<link href="../22_positivity/22.5 Volume.html" rel="prev">
+<link href="../22_positivity/22.8 Analytic Topology.html" rel="prev">
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -313,7 +312,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.6 Graded Linear Series.html">22.6 Graded Linear Series</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.9 Connectedness.html">22.9 Connectedness</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -378,7 +377,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../22_positivity/22.6 Graded Linear Series.html" class="sidebar-item-text sidebar-link active">
+  <a href="../22_positivity/22.6 Graded Linear Series.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">22.6 Graded Linear Series</span></a>
   </div>
 </li>
@@ -396,7 +395,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../22_positivity/22.9 Connectedness.html" class="sidebar-item-text sidebar-link">
+  <a href="../22_positivity/22.9 Connectedness.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">22.9 Connectedness</span></a>
   </div>
 </li>
@@ -407,17 +406,24 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#grothendiecks-connectedness-theorem" id="toc-grothendiecks-connectedness-theorem" class="nav-link active" data-scroll-target="#grothendiecks-connectedness-theorem"><span class="header-section-number">1</span> Grothendieck’s Connectedness Theorem</a></li>
+  <li><a href="#applications-to-ramification-and-singularities" id="toc-applications-to-ramification-and-singularities" class="nav-link" data-scroll-target="#applications-to-ramification-and-singularities"><span class="header-section-number">2</span> Applications to Ramification and Singularities</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.6 Graded Linear Series.html">22.6 Graded Linear Series</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.9 Connectedness.html">22.9 Connectedness</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">22.6 Graded Linear Series</h1>
-<p class="subtitle lead">Graded Linear Series, Asymptotic Multiplicities, and Finite Generation of Section Rings</p>
+<h1 class="title">22.9 Connectedness</h1>
+<p class="subtitle lead">Bertini Theorems, Fulton–Hansen Theorem, Grothendieck’s Connectedness Theorem, and Applications</p>
 </div>
 
 
@@ -440,196 +446,245 @@ window.Quarto = {
 </header>
 
 
-<div id="def-graded-linear-series" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Graded Linear Series)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible variety over <span class="math inline">\(\mathbb{C}\)</span>.</p>
-<ol type="1">
-<li>A <strong>graded linear series</strong> <span class="math inline">\(V_\bullet = \{V_m\}_{m \ge 0}\)</span> on <span class="math inline">\(X\)</span> associated with a Cartier divisor <span class="math inline">\(D \in \operatorname{Div}(X)\)</span> (or line bundle <span class="math inline">\(L = \mathcal{O}_X(D)\)</span>) consists of a collection of finite-dimensional vector subspaces: <span class="math display">\[
-V_m \subseteq H^0(X, \mathcal{O}_X(mD)), \quad m \ge 0,
-\]</span> such that <span class="math inline">\(V_0 = \mathbb{C}\)</span> and for all <span class="math inline">\(k, \ell \ge 0\)</span>, the natural multiplication of sections satisfies: <span class="math display">\[
-V_k \cdot V_\ell := \operatorname{Im}\big(V_k \otimes_{\mathbb{C}} V_\ell \longrightarrow H^0(X, \mathcal{O}_X((k+\ell)D))\big) \subseteq V_{k+\ell}.
-\]</span></li>
-<li>The direct sum: <span class="math display">\[
-R(V_\bullet) := \bigoplus_{m=0}^\infty V_m
-\]</span> forms a graded <span class="math inline">\(\mathbb{C}\)</span>-subalgebra of the complete section ring <span class="math inline">\(R(X, D) = \bigoplus_{m=0}^\infty H^0(X, \mathcal{O}_X(mD))\)</span>, called the <strong>section ring</strong> associated with <span class="math inline">\(V_\bullet\)</span>.</li>
-</ol>
+<div id="thm-bertini-irreducibility" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Bertini’s Theorem on Irreducibility)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible variety over <span class="math inline">\(\mathbb{C}\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r\)</span> be a morphism. Fix an integer <span class="math inline">\(d &lt; \dim \overline{f(X)}\)</span>. If <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> is a general <span class="math inline">\((r - d)\)</span>-plane (i.e., belonging to a dense open subset of the Grassmannian <span class="math inline">\(\mathbb{G}(r - d, r)\)</span>), then the preimage: <span class="math display">\[
+f^{-1}(L)
+\]</span> is irreducible.</p>
 </div>
-<div id="def-finite-generation-gls" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (Finite Generation)</strong></span> A graded linear series <span class="math inline">\(V_\bullet\)</span> on a projective variety <span class="math inline">\(X\)</span> is said to be <strong>finitely generated</strong> if its associated section ring <span class="math inline">\(R(V_\bullet)\)</span> is finitely generated as a <span class="math inline">\(\mathbb{C}\)</span>-algebra.</p>
-</div>
-<div id="def-graded-series-ideals" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (Graded Linear Series Associated with an Ideal Sheaf)</strong></span> Let <span class="math inline">\(\mathfrak{b} \subseteq \mathcal{O}_X\)</span> be a non-zero ideal sheaf, and let <span class="math inline">\(c \in \mathbb{R}_{\ge 0}\)</span>. Setting: <span class="math display">\[
-V_m := H^0\big(X, \mathcal{O}_X(mD) \otimes_{\mathcal{O}_X} \mathfrak{b}^{\lceil m c \rceil}\big),
-\]</span> the collection <span class="math inline">\(V_\bullet = \{V_m\}_{m \ge 0}\)</span> forms a graded linear series because <span class="math inline">\(\lceil k c \rceil + \lceil \ell c \rceil \ge \lceil (k+\ell)c \rceil\)</span>, which guarantees that <span class="math inline">\(\mathfrak{b}^{\lceil k c \rceil} \cdot \mathfrak{b}^{\lceil \ell c \rceil} \subseteq \mathfrak{b}^{\lceil (k+\ell)c \rceil}\)</span>. This series is denoted by: <span class="math display">\[
-V_\bullet = \Gamma\big(X, \mathcal{O}_X(D) \otimes \mathfrak{b}^c\big).
-\]</span></p>
-</div>
-<div id="def-restricted-linear-series" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4 (Linear Series Restricted to a Subvariety)</strong></span> Let <span class="math inline">\(X \subseteq Y\)</span> be an irreducible subvariety and <span class="math inline">\(D' \in \operatorname{Div}(Y)\)</span> a Cartier divisor on <span class="math inline">\(Y\)</span> such that <span class="math inline">\(D = D'|_X\)</span> is well-defined. The <strong>trace linear series</strong> on <span class="math inline">\(X\)</span> is defined by: <span class="math display">\[
-V_m := \operatorname{Im}\big(H^0(Y, \mathcal{O}_Y(mD')) \longrightarrow H^0(X, \mathcal{O}_X(mD))\big),
-\]</span> and is denoted by <span class="math inline">\(V_\bullet = \operatorname{Tr}_X(D')\)</span>.</p>
-</div>
-<div id="def-operations-gls" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5 (Operations on Graded Linear Series)</strong></span> &nbsp;</p>
-<ol type="1">
-<li><strong>Product:</strong> If <span class="math inline">\(V_\bullet\)</span> and <span class="math inline">\(W_\bullet\)</span> are graded linear series associated with <span class="math inline">\(D\)</span> and <span class="math inline">\(E\)</span> respectively, their product <span class="math inline">\((V \cdot W)_\bullet\)</span> is defined by: <span class="math display">\[
-(V \cdot W)_m := \operatorname{Im}\big(V_m \otimes W_m \longrightarrow H^0(X, \mathcal{O}_X(m(D+E)))\big).
-\]</span></li>
-<li><strong>Intersection and Span:</strong> If <span class="math inline">\(V_\bullet, W_\bullet\)</span> are both associated with <span class="math inline">\(D\)</span>, we define: <span class="math display">\[
-(V \cap W)_m := V_m \cap W_m, \qquad \operatorname{Span}(V_\bullet, W_\bullet)_m := \sum_{k+\ell=m} V_k \cdot W_\ell.
-\]</span></li>
-<li><strong>Veronese Subseries:</strong> For an integer <span class="math inline">\(p \ge 1\)</span>, the <span class="math inline">\(p\)</span>-th Veronese subseries is: <span class="math display">\[
-(V^{(p)})_m := V_{m p},
-\]</span> which is associated with <span class="math inline">\(p D\)</span>.</li>
-</ol>
-</div>
-<div id="lem-veronese-fg" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 1 (Finite Generation of Graded Algebras)</strong></span> Let <span class="math inline">\(R = \bigoplus_{i=0}^\infty R_i\)</span> be a graded algebra over a Noetherian domain <span class="math inline">\(R_0\)</span>.</p>
-<ol type="1">
-<li><span class="math inline">\(R\)</span> is a finitely generated <span class="math inline">\(R_0\)</span>-algebra if and only if the Veronese subring <span class="math inline">\(R^{(m)} = \bigoplus_{k=0}^\infty R_{k m}\)</span> is a finitely generated <span class="math inline">\(R_0\)</span>-algebra for any <span class="math inline">\(m \ge 1\)</span>.</li>
-<li>If <span class="math inline">\(R\)</span> is a finitely generated <span class="math inline">\(R_0\)</span>-algebra, then there exists an integer <span class="math inline">\(p \ge 1\)</span> such that <span class="math inline">\(R^{(p)}\)</span> is generated in degree 1 by <span class="math inline">\(R_p\)</span>.</li>
-</ol>
-</div>
-<div id="thm-operations-preserves-fg" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Preservation of Finite Generation)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety.</p>
-<ol type="1">
-<li>If <span class="math inline">\(V_\bullet\)</span> and <span class="math inline">\(W_\bullet\)</span> are finitely generated, then <span class="math inline">\((V \cdot W)_\bullet\)</span> is finitely generated.</li>
-<li>If <span class="math inline">\(V_\bullet\)</span> and <span class="math inline">\(W_\bullet\)</span> are finitely generated, then <span class="math inline">\(\operatorname{Span}(V_\bullet, W_\bullet)\)</span> is finitely generated.</li>
-<li><span class="math inline">\(V_\bullet\)</span> is finitely generated if and only if <span class="math inline">\(V^{(p)}\)</span> is finitely generated for any <span class="math inline">\(p \ge 1\)</span>.</li>
-</ol>
+<div id="lem-irreducibility-fibers-section" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1 (Irreducibility of Fibers Admitting a Section)</strong></span> Let <span class="math inline">\(p: V \to T\)</span> be a dominant morphism of irreducible complex varieties. If <span class="math inline">\(p\)</span> admits a section <span class="math inline">\(s: T \to V\)</span> such that <span class="math inline">\(s(T) \nsubseteq \operatorname{Sing}(V)\)</span>, then the fiber <span class="math inline">\(V_t = p^{-1}(t)\)</span> is irreducible for general <span class="math inline">\(t \in T\)</span>.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Statements (2) and (3) follow directly from standard commutative algebra and <a href="#lem-veronese-fg" class="quarto-xref">Lemma&nbsp;1</a>.</p>
-<p>For (1), by <a href="#lem-veronese-fg" class="quarto-xref">Lemma&nbsp;1</a>, it suffices to show that the Veronese subseries <span class="math inline">\(((V \cdot W)^{(p)})_\bullet\)</span> is finitely generated for some <span class="math inline">\(p \ge 1\)</span>. Choose <span class="math inline">\(m \gg 0\)</span> such that both <span class="math inline">\(R(V_\bullet)^{(m)}\)</span> and <span class="math inline">\(R(W_\bullet)^{(m)}\)</span> are generated in degree 1. Suppose <span class="math inline">\(V_m\)</span> is spanned by <span class="math inline">\(f_1, \dots, f_a\)</span> and <span class="math inline">\(W_m\)</span> is spanned by <span class="math inline">\(g_1, \dots, g_b\)</span>. Then the degree-<span class="math inline">\(k\)</span> piece <span class="math inline">\((V \cdot W)_{k m}\)</span> is spanned by elements of the form: <span class="math display">\[
-\left(\prod_{i=1}^a f_i^{\alpha_i}\right) \cdot \left(\prod_{j=1}^b g_j^{\beta_j}\right), \quad \sum_{i=1}^a \alpha_i = k, \; \sum_{j=1}^b \beta_j = k.
-\]</span> Every such monomial can be regrouped into a product of <span class="math inline">\(k\)</span> terms of the form <span class="math inline">\(f_i g_j \in V_m \cdot W_m\)</span>. Hence <span class="math inline">\(R((V \cdot W)_\bullet)^{(m)}\)</span> is generated in degree 1 by <span class="math inline">\(V_m \cdot W_m\)</span>. Therefore, <span class="math inline">\((V \cdot W)_\bullet\)</span> is finitely generated.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Since <span class="math inline">\(s(T) \nsubseteq \operatorname{Sing}(V)\)</span>, the generic point <span class="math inline">\(\eta_T\)</span> does not lie in <span class="math inline">\(s^{-1}(\operatorname{Sing} V)\)</span>. Setting <span class="math inline">\(U := T \setminus s^{-1}(\operatorname{Sing} V)\)</span> and shrinking <span class="math inline">\(T\)</span> to <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> to <span class="math inline">\(p^{-1}(U)\)</span>, we may assume without loss of generality that <span class="math inline">\(T\)</span> is smooth, <span class="math inline">\(s(T) \cap \operatorname{Sing}(V) = \varnothing\)</span>, and <span class="math inline">\(p\)</span> is flat (hence every fiber has pure dimension).</p>
+<p>For general <span class="math inline">\(t \in T\)</span>, since <span class="math inline">\(s(t) \notin \operatorname{Sing}(V)\)</span>, we have <span class="math inline">\(V_t \nsubseteq \operatorname{Sing}(V)\)</span>, so <span class="math inline">\(V_t \setminus \operatorname{Sing}(V)\)</span> is dense in <span class="math inline">\(V_t\)</span>. Replacing <span class="math inline">\(V\)</span> by <span class="math inline">\(V \setminus \operatorname{Sing}(V)\)</span>, we may assume that <span class="math inline">\(V\)</span> is smooth. By generic smoothness, shrinking <span class="math inline">\(T\)</span> further, we may assume that <span class="math inline">\(p\)</span> is smooth.</p>
+<p>To show that the general fiber of <span class="math inline">\(p\)</span> is irreducible, it suffices to show that its fibers are connected: 1. By [Stacks Project, Tag 055J], for a smooth morphism, the fibers are geometrically irreducible if and only if they are geometrically connected. Hence it suffices to show that the geometric generic fiber <span class="math inline">\(V_{\bar{\eta}}\)</span> is irreducible. 2. By [Stacks Project, Tag 054Q], this is equivalent to showing that the function field <span class="math inline">\(k(T)\)</span> is separably closed in <span class="math inline">\(k(V)\)</span>.</p>
+<p>Consider the Stein factorization of <span class="math inline">\(p\)</span>: let <span class="math inline">\(\widetilde{k(T)}\)</span> be the separable closure of <span class="math inline">\(k(T)\)</span> in <span class="math inline">\(k(V)\)</span>, and let <span class="math inline">\(\tilde{T}\)</span> be the normalization of <span class="math inline">\(T\)</span> in <span class="math inline">\(\widetilde{k(T)}\)</span>. This yields a factorization: <span class="math display">\[
+\begin{CD}
+V @&gt;{\tilde{p}}&gt;&gt; \tilde{T} \\
+@V{p}VV @VV{f}V \\
+T @= T
+\end{CD}
+\]</span> where <span class="math inline">\(f: \tilde{T} \to T\)</span> is finite and <span class="math inline">\(\tilde{p}: V \to \tilde{T}\)</span> has geometrically connected fibers. Because <span class="math inline">\(p\)</span> admits a section <span class="math inline">\(s: T \to V\)</span> with <span class="math inline">\(p \circ s = \operatorname{id}_T\)</span>, the composition: <span class="math display">\[
+f \circ (\tilde{p} \circ s) = \operatorname{id}_T
+\]</span> shows that <span class="math inline">\(\tilde{p} \circ s\)</span> is a section of the finite morphism <span class="math inline">\(f\)</span>. Since <span class="math inline">\(T\)</span> is normal and <span class="math inline">\(f\)</span> is a finite morphism admitting a section, <span class="math inline">\(f\)</span> must be birational, and hence <span class="math inline">\(f: \tilde{T} \xrightarrow{\sim} T\)</span> is an isomorphism. Therefore, <span class="math inline">\(\widetilde{k(T)} = k(T)\)</span>, which proves that the fibers of <span class="math inline">\(p\)</span> are irreducible for general <span class="math inline">\(t \in T\)</span>.</p>
 </div>
-<div id="def-invariants-gls" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 6 (Semigroups, Iitaka Dimension, and Stable Base Locus)</strong></span> Let <span class="math inline">\(V_\bullet\)</span> be a graded linear series on <span class="math inline">\(X\)</span>.</p>
-<ol type="1">
-<li>The <strong>semigroup of non-zero multiples</strong> is <span class="math inline">\(N(V_\bullet) := \{ m \ge 0 \mid V_m \neq 0 \}\)</span> with exponent <span class="math inline">\(e(V_\bullet) = e(N(V_\bullet))\)</span>. The <strong>semigroup of free multiples</strong> is <span class="math inline">\(M(V_\bullet) := \{ m \ge 0 \mid |V_m| \text{ is base-point-free} \}\)</span> with exponent <span class="math inline">\(f(V_\bullet) = e(M(V_\bullet))\)</span>.</li>
-<li>The <strong>Iitaka dimension</strong> of <span class="math inline">\(V_\bullet\)</span> is defined by: <span class="math display">\[
-\kappa(V_\bullet) := \begin{cases} \max_{m \in N(V_\bullet)} \big\{ \dim \overline{\phi_m(X)} \big\}, &amp; N(V_\bullet) \neq \{0\}, \\ -\infty, &amp; V_m = 0 \text{ for all } m &gt; 0, \end{cases}
-\]</span> where <span class="math inline">\(\phi_m: X \dashrightarrow \mathbb{P} V_m\)</span> is the rational map given by <span class="math inline">\(|V_m|\)</span>.</li>
-<li>The <strong>stable base locus</strong> of <span class="math inline">\(V_\bullet\)</span> is the algebraic subset: <span class="math display">\[
-\mathbf{B}(V_\bullet) := \bigcap_{m \ge 0} \operatorname{Bs}(|V_m|).
-\]</span></li>
-<li>The <strong>volume</strong> of <span class="math inline">\(V_\bullet\)</span> is defined by: <span class="math display">\[
-\operatorname{vol}(V_\bullet) := \limsup_{m \in N(V_\bullet), \, m \to \infty} \frac{\dim_{\mathbb{C}} V_m}{m^n / n!}, \quad \text{where } n = \dim X.
-\]</span></li>
-</ol>
-</div>
-<div id="exm-irrational-volume-gls" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1 (Graded Linear Series with Irrational Volume)</strong></span> Let <span class="math inline">\(x = [1:0:\dots:0] \in \mathbb{P}^n\)</span>, and let <span class="math inline">\(\mathfrak{m} = \mathcal{I}_{x/\mathbb{P}^n}\)</span> be its maximal ideal sheaf. For a fixed real number <span class="math inline">\(0 &lt; c &lt; 1\)</span>, consider the graded linear series: <span class="math display">\[
-V_\bullet = \Gamma\big(\mathbb{P}^n, \mathcal{O}_{\mathbb{P}^n}(1) \otimes \mathfrak{m}^c\big), \quad V_p = H^0\big(\mathbb{P}^n, \mathcal{O}(p) \otimes \mathfrak{m}^{\lceil p c \rceil}\big).
-\]</span> In homogeneous coordinates, <span class="math inline">\(V_p\)</span> consists of homogeneous polynomials <span class="math inline">\(\sum a_\alpha x^\alpha\)</span> of degree <span class="math inline">\(p\)</span> satisfying <span class="math inline">\(\alpha_1 + \dots + \alpha_n \ge \lceil p c \rceil\)</span>, which is equivalent to <span class="math inline">\(\alpha_0 \le p - \lceil p c \rceil\)</span>. Thus: <span class="math display">\[
-\dim_{\mathbb{C}} V_p = \binom{n+p}{n} - \binom{n + \lceil p c \rceil - 1}{n} = \frac{1}{n!} (p^n - c^n p^n) + O(p^{n-1}).
-\]</span> Hence the volume is given by: <span class="math display">\[
-\operatorname{vol}(V_\bullet) = 1 - c^n.
-\]</span> Taking <span class="math inline">\(n = 3\)</span> and <span class="math inline">\(c = 1/\sqrt{2}\)</span>, we obtain <span class="math inline">\(\operatorname{vol}(V_\bullet) = 1 - \frac{1}{2\sqrt{2}} \notin \mathbb{Q}\)</span>, yielding an irrational volume.</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><em>(Proof of <a href="#thm-bertini-irreducibility" class="quarto-xref">Theorem&nbsp;1</a>)</em> Let <span class="math inline">\(n := \dim \overline{f(X)}\)</span>. It suffices to prove the theorem for <span class="math inline">\(d = n - 1\)</span>.</p>
+<p>Indeed, suppose the result holds for <span class="math inline">\(d = n - 1\)</span>. For any <span class="math inline">\(d &lt; n - 1\)</span>, let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be an <span class="math inline">\((r - d)\)</span>-plane. If <span class="math inline">\(f^{-1}(L)\)</span> were reducible for general <span class="math inline">\(L\)</span>, we could choose a general <span class="math inline">\((r - n + 1)\)</span>-plane <span class="math inline">\(L' \subseteq L\)</span> such that <span class="math inline">\(f^{-1}(L')\)</span> is irreducible. Writing <span class="math inline">\(f^{-1}(L) = Y_1 \cup Y_2\)</span> with <span class="math inline">\(Y_1, Y_2\)</span> irreducible, each component has dimension <span class="math inline">\(\dim Y_i \ge n - d\)</span>. Setting <span class="math inline">\(k := n - 1 - d \ge 1\)</span>, we have <span class="math inline">\(\dim Y_i \ge k + 1\)</span>. Then: <span class="math display">\[
+f^{-1}(L') = \big(f^{-1}(L') \cap Y_1\big) \cup \big(f^{-1}(L') \cap Y_2\big).
+\]</span> Adjusting <span class="math inline">\(L'\)</span> so that <span class="math inline">\(\dim\big(f^{-1}(L') \cap Y_1 \cap Y_2\big) = \dim(Y_1 \cap Y_2) - k\)</span>, if <span class="math inline">\(f^{-1}(L') \cap Y_1 \subseteq f^{-1}(L') \cap Y_2\)</span>, we would have: <span class="math display">\[
+\dim\big(f^{-1}(L') \cap Y_1\big) \ge \dim Y_1 - 1, \quad \text{while} \quad \dim\big(f^{-1}(L') \cap Y_1 \cap Y_2\big) \le \dim Y_1 - 1 - k,
+\]</span> a contradiction. The same holds for <span class="math inline">\(Y_2\)</span>, which would imply that <span class="math inline">\(f^{-1}(L')\)</span> is reducible, contradicting the choice of <span class="math inline">\(L'\)</span>. Thus, the general case reduces to <span class="math inline">\(d = n - 1\)</span>.</p>
+<p>Now assume <span class="math inline">\(d = n - 1\)</span>. Fix a general <span class="math inline">\((r - n)\)</span>-plane <span class="math inline">\(\Lambda \subseteq \mathbb{P}^r\)</span>. The pencil of <span class="math inline">\((r - n + 1)\)</span>-planes <span class="math inline">\(L_t \subseteq \mathbb{P}^r\)</span> containing <span class="math inline">\(\Lambda\)</span> is parametrized by <span class="math inline">\(T = \mathbb{P}^{n-1}\)</span>. Consider the incidence variety: <span class="math display">\[
+V := \big\{ (x, t) \in X \times T \;\big|\; f(x) \in L_t \big\} \subseteq X \times T,
+\]</span> equipped with the natural projection <span class="math inline">\(p: V \to T\)</span>. It suffices to show that the general fiber of <span class="math inline">\(p\)</span> is irreducible.</p>
+<p>For <span class="math inline">\(x \in X \setminus f^{-1}(\Lambda)\)</span>, the point <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(\Lambda\)</span> span a unique <span class="math inline">\((r - n + 1)\)</span>-plane <span class="math inline">\(L_t\)</span>, which defines a unique <span class="math inline">\(t \in T\)</span>. Thus: <span class="math display">\[
+V \setminus \big(f^{-1}(\Lambda) \times T\big) \xrightarrow{\;\sim\;} X \setminus f^{-1}(\Lambda).
+\]</span> Since <span class="math inline">\(X\)</span> is irreducible and <span class="math inline">\(f^{-1}(\Lambda)\)</span> is a proper closed subset, <span class="math inline">\(V \setminus (f^{-1}(\Lambda) \times T)\)</span> is irreducible and dense in <span class="math inline">\(V\)</span>, so <span class="math inline">\(V\)</span> is irreducible.</p>
+<p>Notice that the blow-up <span class="math inline">\(\mathrm{Bl}_\Lambda \mathbb{P}^r\)</span> embeds into <span class="math inline">\(\mathbb{P}^r \times T\)</span> as the incidence variety <span class="math inline">\(\{ (x, L_t) \mid x \in L_t \}\)</span>. We obtain a commutative diagram with Cartesian squares: <span class="math display">\[
+\begin{CD}
+\mathrm{Bl}_{f^{-1}(\Lambda)} X @&gt;&gt;&gt; X \times T @&gt;&gt;&gt; X \\
+@VV{\text{strict transform}}V @VVV @VVV \\
+\mathrm{Bl}_\Lambda \mathbb{P}^r @&gt;&gt;&gt; \mathbb{P}^r \times T @&gt;&gt;&gt; \mathbb{P}^r
+\end{CD}
+\]</span> Choosing <span class="math inline">\(\Lambda\)</span> such that <span class="math inline">\(f^{-1}(\Lambda)\)</span> is cut out by a regular sequence, we have <span class="math inline">\(V = \mathrm{Bl}_{f^{-1}(\Lambda)} X\)</span>. In particular, for any <span class="math inline">\(x \in f^{-1}(\Lambda) \cap X^{\mathrm{reg}}\)</span>, the variety <span class="math inline">\(V\)</span> is smooth near <span class="math inline">\(x\)</span>.</p>
+<p>Since <span class="math inline">\(X \to \overline{f(X)}\)</span> is generically smooth on the source, there exist open dense subsets <span class="math inline">\(U \subseteq X^{\mathrm{reg}}\)</span> and <span class="math inline">\(W \subseteq \overline{f(X)}\)</span> such that <span class="math inline">\(U \to W\)</span> is smooth. Choosing <span class="math inline">\(\Lambda\)</span> such that <span class="math inline">\(\Lambda \cap W \neq \varnothing\)</span>, there exists a point <span class="math inline">\(x_0 \in f^{-1}(\Lambda) \cap X^{\mathrm{reg}} \cap f^{-1}(W)^{\mathrm{reg}}\)</span>. Then the map: <span class="math display">\[
+s: T \longrightarrow V, \quad t \longmapsto (x_0, t)
+\]</span> defines a section of <span class="math inline">\(p: V \to T\)</span> whose image lies in <span class="math inline">\(V^{\mathrm{reg}}\)</span>. By <a href="#lem-irreducibility-fibers-section" class="quarto-xref">Lemma&nbsp;1</a>, the general fiber of <span class="math inline">\(p\)</span> is irreducible, which completes the proof.</p>
 </div>
 <hr>
-<div id="def-graded-ideal-sheaves" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 7 (Graded Families of Ideals)</strong></span> &nbsp;</p>
+<div id="thm-bertini-connectedness-proper" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Bertini’s Theorem for Connectedness (Proper Version))</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible proper variety over <span class="math inline">\(\mathbb{C}\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r\)</span> be a morphism. Let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be a linear subspace of codimension <span class="math inline">\(d &lt; \dim \overline{f(X)}\)</span>. Then the preimage: <span class="math display">\[
+f^{-1}(L)
+\]</span> is connected for <strong>all</strong> linear subspaces <span class="math inline">\(L\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(G = \mathbb{G}(r - d, r)\)</span> be the Grassmannian parameterizing all linear subspaces of codimension <span class="math inline">\(d\)</span> in <span class="math inline">\(\mathbb{P}^r\)</span>. Consider the closed incidence variety: <span class="math display">\[
+Z := \big\{ (x, L) \in X \times G \;\big|\; x \in f^{-1}(L) \big\} \subseteq X \times G.
+\]</span> The projection <span class="math inline">\(Z \to X\)</span> realizes <span class="math inline">\(Z\)</span> as a Grassmannian bundle over <span class="math inline">\(X\)</span> with smooth, irreducible fibers. Since <span class="math inline">\(X\)</span> is irreducible, <span class="math inline">\(Z\)</span> is irreducible.</p>
+<p>Let <span class="math inline">\(p: Z \to G\)</span> be the projection onto the second factor. Because <span class="math inline">\(X\)</span> is proper, <span class="math inline">\(p\)</span> is a proper morphism. Consider the Stein factorization of <span class="math inline">\(p\)</span>: <span class="math display">\[
+Z \xrightarrow{\;\tilde{p}\;} W \xrightarrow{\;r\;} G,
+\]</span> where <span class="math inline">\(\tilde{p}\)</span> has connected fibers and <span class="math inline">\(r\)</span> is finite. By <a href="#thm-bertini-irreducibility" class="quarto-xref">Theorem&nbsp;1</a>, the general fiber of <span class="math inline">\(p\)</span> is irreducible, so <span class="math inline">\(r: W \to G\)</span> is generically bijective. Since <span class="math inline">\(G\)</span> is smooth, it is normal. By Zariski’s Main Theorem, a finite birational morphism onto a normal variety is an isomorphism, so <span class="math inline">\([K(W) : K(G)] = 1\)</span> and <span class="math inline">\(W \cong G\)</span>.</p>
+<p>Therefore, every fiber of <span class="math inline">\(p\)</span> is connected, which implies that <span class="math inline">\(f^{-1}(L)\)</span> is connected for every <span class="math inline">\(L \in G\)</span>.</p>
+</div>
+<div id="cor-curve-connecting-points" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 (Curves Connecting Two Points)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible quasi-projective variety over <span class="math inline">\(\mathbb{C}\)</span>. For any two distinct points <span class="math inline">\(x_1, x_2 \in X\)</span>, there exists an irreducible curve <span class="math inline">\(C \subseteq X\)</span> containing both <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> (which may not be smooth).</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(X' := \mathrm{Bl}_{\{x_1, x_2\}} X\)</span>, and let <span class="math inline">\(E_1, E_2 \subseteq X'\)</span> be the exceptional divisors. Choose a quasi-finite morphism <span class="math inline">\(f: X' \to \mathbb{P}^r\)</span>. Let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be a general linear subspace of codimension <span class="math inline">\(\dim X - 1\)</span> meeting both <span class="math inline">\(f(E_1)\)</span> and <span class="math inline">\(f(E_2)\)</span>.</p>
+<p>Since <span class="math inline">\(L\)</span> is general, <span class="math inline">\(f|_{E_i}\)</span> is finite, and by <a href="#thm-bertini-irreducibility" class="quarto-xref">Theorem&nbsp;1</a>, <span class="math inline">\(f^{-1}(L)\)</span> is an irreducible curve in <span class="math inline">\(X'\)</span>. Setting <span class="math inline">\(\widetilde{C} := f^{-1}(L)\)</span> and taking its image <span class="math inline">\(C := \pi(\widetilde{C}) \subseteq X\)</span> under the blow-down morphism <span class="math inline">\(\pi: X' \to X\)</span>, we obtain an irreducible curve <span class="math inline">\(C\)</span> connecting <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>.</p>
+</div>
+<hr>
+<div id="thm-fulton-hansen" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Fulton–Hansen Connectedness Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible proper variety over <span class="math inline">\(\mathbb{C}\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r \times \mathbb{P}^r\)</span> be a morphism such that <span class="math inline">\(\dim \overline{f(X)} &gt; r\)</span>. Then: <span class="math display">\[
+f^{-1}(\Delta) \subseteq X
+\]</span> is connected, where <span class="math inline">\(\Delta \subseteq \mathbb{P}^r \times \mathbb{P}^r\)</span> denotes the diagonal.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><strong>Step 1: The geometric construction.</strong> Consider two disjoint linear subspaces of <span class="math inline">\(\mathbb{P}^{2r+1}\)</span>: <span class="math display">\[
+L_1 = \big\{ [0, \dots, 0, y_0, \dots, y_r] \big\} \cong \mathbb{P}^r, \qquad L_2 = \big\{ [x_0, \dots, x_r, 0, \dots, 0] \big\} \cong \mathbb{P}^r.
+\]</span> Let <span class="math inline">\(U := \mathbb{P}^{2r+1} \setminus (L_1 \cup L_2)\)</span>. There is a natural projection: <span class="math display">\[
+p: U \longrightarrow \mathbb{P}^r \times \mathbb{P}^r, \quad [x_0, \dots, x_r, y_0, \dots, y_r] \longmapsto \big([x_0, \dots, x_r], [y_0, \dots, y_r]\big).
+\]</span> Locally over the standard open set <span class="math inline">\(\mathbb{P}^r \times D(y_i)\)</span>, the fiber is isomorphic to <span class="math inline">\((\mathbb{A}^{r+1} \setminus \{0\}) \times \mathbb{A}^r\)</span>. Hence <span class="math inline">\(p: U \to \mathbb{P}^r \times \mathbb{P}^r\)</span> is a principal <span class="math inline">\(\mathbb{G}_m\)</span>-bundle.</p>
+<p>Define the linear subspace: <span class="math display">\[
+\mathcal{L} := \big\{ [x_0, \dots, x_r, y_0, \dots, y_r] \in \mathbb{P}^{2r+1} \;\big|\; x_i = y_i \text{ for all } 0 \le i \le r \big\} \subseteq U.
+\]</span> Then <span class="math inline">\(\mathcal{L} \cong \mathbb{P}^r\)</span>, and <span class="math inline">\(p\)</span> restricts to an isomorphism <span class="math inline">\(\mathcal{L} \xrightarrow{\sim} \Delta\)</span>: <span class="math display">\[
+\begin{CD}
+\mathcal{L} @&gt;{\sim}&gt;&gt; \Delta \\
+@VV{\cap}V @VV{\cap}V \\
+U @&gt;&gt;&gt; \mathbb{P}^r \times \mathbb{P}^r
+\end{CD}
+\]</span></p>
+<p><strong>Step 2: Base change.</strong> Pull back the bundle <span class="math inline">\(U \to \mathbb{P}^r \times \mathbb{P}^r\)</span> along <span class="math inline">\(f: X \to \mathbb{P}^r \times \mathbb{P}^r\)</span>: <span class="math display">\[
+\begin{CD}
+V_X @&gt;{f_U}&gt;&gt; U \\
+@V{p}VV @VV{p}V \\
+X @&gt;{f}&gt;&gt; \mathbb{P}^r \times \mathbb{P}^r
+\end{CD}
+\]</span> Because <span class="math inline">\(X\)</span> is irreducible and <span class="math inline">\(V_X \to X\)</span> is smooth with irreducible fibers (isomorphic to <span class="math inline">\(\mathbb{G}_m\)</span>), the total space <span class="math inline">\(V_X\)</span> is irreducible. Furthermore, since <span class="math inline">\(f\)</span> is proper, <span class="math inline">\(f_U: V_X \to U\)</span> is proper.</p>
+<p>The image <span class="math inline">\(U_{f(X)} := f_U(V_X)\)</span> is a <span class="math inline">\(\mathbb{G}_m\)</span>-bundle over <span class="math inline">\(f(X)\)</span>, which gives: <span class="math display">\[
+\dim \overline{f_U(V_X)} = \dim \overline{f(X)} + 1 &gt; r + 1 = \operatorname{codim}_{\mathbb{P}^{2r+1}}(\mathcal{L}).
+\]</span></p>
+<p><strong>Step 3: Applying Bertini for connectedness.</strong> By <a href="#thm-bertini-connectedness-proper" class="quarto-xref">Theorem&nbsp;2</a>, the preimage <span class="math inline">\(f_U^{-1}(\mathcal{L}) \subseteq V_X\)</span> is connected.</p>
+<p>Set-theoretically, we claim that <span class="math inline">\(p\big(f_U^{-1}(\mathcal{L})\big) = f^{-1}(\Delta)\)</span>: - If <span class="math inline">\((x, y) \in f_U^{-1}(\mathcal{L})\)</span>, then <span class="math inline">\(f_U(x, y) \in \mathcal{L}\)</span>, so <span class="math inline">\(f(x) = p(f_U(x, y)) \in p(\mathcal{L}) = \Delta\)</span>, hence <span class="math inline">\(x \in f^{-1}(\Delta)\)</span>. - Conversely, for any <span class="math inline">\(x \in f^{-1}(\Delta)\)</span>, the point <span class="math inline">\(f(x) \in \Delta\)</span> lifts to a unique point <span class="math inline">\(y \in \mathcal{L}\)</span>. Then <span class="math inline">\((x, y) \in V_X\)</span> satisfies <span class="math inline">\(f_U(x, y) = y \in \mathcal{L}\)</span>, so <span class="math inline">\((x, y) \in f_U^{-1}(\mathcal{L})\)</span> and <span class="math inline">\(p(x, y) = x\)</span>.</p>
+<p>Since <span class="math inline">\(p\)</span> is continuous and <span class="math inline">\(f_U^{-1}(\mathcal{L})\)</span> is connected, its image <span class="math inline">\(f^{-1}(\Delta) = p\big(f_U^{-1}(\mathcal{L})\big)\)</span> is connected.</p>
+</div>
+<div id="exm-intersection-projective-space" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (Intersection of Subvarieties in Projective Space)</strong></span> Let <span class="math inline">\(X, Y \subseteq \mathbb{P}^r\)</span> be irreducible subvarieties over <span class="math inline">\(\mathbb{C}\)</span>. If <span class="math inline">\(\dim X + \dim Y &gt; r\)</span>, then: <span class="math display">\[
+X \cap Y
+\]</span> is connected.</p>
+<p><em>Proof:</em> Realize <span class="math inline">\(X \cap Y\)</span> as the preimage of the diagonal <span class="math inline">\(\Delta \subseteq \mathbb{P}^r \times \mathbb{P}^r\)</span> under the inclusion <span class="math inline">\(X \times Y \hookrightarrow \mathbb{P}^r \times \mathbb{P}^r\)</span>. Since <span class="math inline">\(\dim(X \times Y) = \dim X + \dim Y &gt; r\)</span>, the connectedness follows directly from <a href="#thm-fulton-hansen" class="quarto-xref">Theorem&nbsp;3</a>.</p>
+</div>
+<div id="exm-multiprojective-connectedness" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2 (Generalization to Multi-Projective Spaces)</strong></span> Let <span class="math inline">\(f: X \to \prod_{i=1}^k \mathbb{P}^r\)</span> be a morphism from an irreducible proper variety <span class="math inline">\(X\)</span>. If: <span class="math display">\[
+\dim \overline{f(X)} &gt; (k - 1)r,
+\]</span> then <span class="math inline">\(f^{-1}(\Delta)\)</span> is connected, where <span class="math inline">\(\Delta \cong \mathbb{P}^r\)</span> is the small diagonal in <span class="math inline">\((\mathbb{P}^r)^k\)</span> (viewed via embedding into <span class="math inline">\(\mathbb{P}^{kr + k - 1}\)</span>).</p>
+</div>
+<hr>
+<section id="grothendiecks-connectedness-theorem" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="grothendiecks-connectedness-theorem"><span class="header-section-number">1</span> Grothendieck’s Connectedness Theorem</h2>
+<div id="def-connectedness-dim-k" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Connectedness in Dimension <span class="math inline">\(k\)</span>)</strong></span> A Noetherian scheme <span class="math inline">\(X\)</span> is said to be <strong>connected in dimension <span class="math inline">\(k\)</span></strong> (or <strong><span class="math inline">\(k\)</span>-connected</strong>) if <span class="math inline">\(\dim X &gt; k\)</span> and for every closed subset <span class="math inline">\(T \subseteq X\)</span> with <span class="math inline">\(\dim T &lt; k\)</span>, the complement: <span class="math display">\[
+X \setminus T
+\]</span> is connected.</p>
+</div>
+<div id="rem-why-codim-two" class="proof remark">
+<p><span class="proof-title"><em>Remark 1</em> (Why Require <span class="math inline">\(\dim T &lt; k \le \dim X\)</span>?). </span>Let <span class="math inline">\(X = X_1 \cup \dots \cup X_m\)</span> be the decomposition into irreducible components, with <span class="math inline">\(\dim X_1 \ge \dots \ge \dim X_m\)</span>. The intersection of <span class="math inline">\(X_1\)</span> with the other components satisfies: <span class="math display">\[
+\dim(X_1 \cap X_i) \le \dim X_1 - 1 = \dim X - 1.
+\]</span> Removing the closed subset <span class="math inline">\(T = \bigcup_{i \ge 2} (X_1 \cap X_i)\)</span> of codimension <span class="math inline">\(\ge 1\)</span> disconnects <span class="math inline">\(X\)</span>, because: <span class="math display">\[
+\left(X_1 \setminus \bigcup_{i \ge 2} X_i\right) \cap \left(\bigcup_{i \ge 2} X_i \setminus X_1\right) = \varnothing.
+\]</span> Thus, to prevent a space from being trivially disconnected by removing components, one must test against closed subsets of dimension at most <span class="math inline">\(\dim X - 2\)</span>.</p>
+</div>
+<div id="exm-properties-k-connectedness" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3 (Basic Properties of <span class="math inline">\(k\)</span>-Connectedness)</strong></span> &nbsp;</p>
 <ol type="1">
-<li>A <strong>graded family of ideals</strong> on an irreducible variety <span class="math inline">\(X\)</span> is a sequence <span class="math inline">\(\mathfrak{a}_\bullet = \{\mathfrak{a}_m\}_{m \ge 0}\)</span> of ideal sheaves <span class="math inline">\(\mathfrak{a}_m \subseteq \mathcal{O}_X\)</span> such that <span class="math inline">\(\mathfrak{a}_0 = \mathcal{O}_X\)</span> and: <span class="math display">\[
-\mathfrak{a}_k \cdot \mathfrak{a}_\ell \subseteq \mathfrak{a}_{k+\ell} \quad \text{for all } k, \ell \ge 0.
-\]</span></li>
-<li>The <strong>Rees algebra</strong> of <span class="math inline">\(\mathfrak{a}_\bullet\)</span> is the graded <span class="math inline">\(\mathcal{O}_X\)</span>-algebra <span class="math inline">\(\operatorname{Rees}(\mathfrak{a}_\bullet) := \bigoplus_{m \ge 0} \mathfrak{a}_m\)</span>. The family <span class="math inline">\(\mathfrak{a}_\bullet\)</span> is <strong>finitely generated</strong> if <span class="math inline">\(\operatorname{Rees}(\mathfrak{a}_\bullet)\)</span> is a finitely generated <span class="math inline">\(\mathcal{O}_X\)</span>-algebra.</li>
-<li>For an ideal <span class="math inline">\(\mathfrak{b} \subseteq \mathcal{O}_X\)</span>, the trivial family <span class="math inline">\(\mathfrak{a}_m = \mathfrak{b}^m\)</span> is denoted by <span class="math inline">\(\operatorname{Pow}_\bullet(\mathfrak{b})\)</span>.</li>
-<li>For any graded linear series <span class="math inline">\(V_\bullet\)</span>, the base ideals <span class="math inline">\(\mathfrak{b}_m := \mathfrak{b}(|V_m|)\)</span> form a graded family of ideals, denoted <span class="math inline">\(\mathfrak{b}(V_\bullet)\)</span>.</li>
+<li><span class="math inline">\(X\)</span> is connected if and only if <span class="math inline">\(X\)</span> is <span class="math inline">\(0\)</span>-connected (since <span class="math inline">\(\dim \varnothing = -1 &lt; 0\)</span>).</li>
+<li>If <span class="math inline">\(X\)</span> is <span class="math inline">\(d\)</span>-connected and <span class="math inline">\(d' \le d\)</span>, then <span class="math inline">\(X\)</span> is <span class="math inline">\(d'\)</span>-connected.</li>
+<li>If <span class="math inline">\(X\)</span> is an irreducible variety of dimension <span class="math inline">\(n\)</span>, then <span class="math inline">\(X\)</span> is <span class="math inline">\((n - 1)\)</span>-connected. In fact, <span class="math inline">\(X\)</span> is irreducible if and only if <span class="math inline">\(X\)</span> is “<span class="math inline">\(\dim X\)</span>-connected”.</li>
 </ol>
 </div>
-<div id="def-operations-graded-ideals" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 8 (Operations and Semigroups for Graded Ideals)</strong></span> For graded families of ideals <span class="math inline">\(\mathfrak{a}_\bullet\)</span> and <span class="math inline">\(\mathfrak{b}_\bullet\)</span>: <span class="math display">\[
-(\mathfrak{a} \cap \mathfrak{b})_m := \mathfrak{a}_m \cap \mathfrak{b}_m, \qquad (\mathfrak{a} \cdot \mathfrak{b})_m := \mathfrak{a}_m \cdot \mathfrak{b}_m, \qquad (\mathfrak{a} + \mathfrak{b})_m := \sum_{k+\ell=m} \mathfrak{a}_k \cdot \mathfrak{b}_\ell, \qquad (\mathfrak{a}^{(p)})_m := \mathfrak{a}_{m p}.
-\]</span> The non-zero semigroup is <span class="math inline">\(N(\mathfrak{a}_\bullet) := \{ m \ge 0 \mid \mathfrak{a}_m \neq (0) \}\)</span> with exponent <span class="math inline">\(e(\mathfrak{a}_\bullet) = e(N(\mathfrak{a}_\bullet))\)</span>.</p>
+<div id="exm-chain-characterization" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4 (Characterization via Chains of Irreducible Components)</strong></span> For <span class="math inline">\(k &lt; \dim X\)</span>, a Noetherian scheme <span class="math inline">\(X\)</span> is <span class="math inline">\(k\)</span>-connected if and only if for any two irreducible components <span class="math inline">\(X\)</span> and <span class="math inline">\(X'\)</span>, there exists a sequence of irreducible components: <span class="math display">\[
+X_0 = X, \; X_1, \; \dots, \; X_p = X'
+\]</span> such that for each <span class="math inline">\(1 \le i \le p\)</span>, the intersection satisfies: <span class="math display">\[
+\dim(X_{i-1} \cap X_i) \ge k.
+\]</span></p>
 </div>
-<div id="prp-fg-graded-ideals-powers" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 (Powers of Finitely Generated Graded Ideals)</strong></span> If <span class="math inline">\(\mathfrak{a}_\bullet = \{\mathfrak{a}_m\}_{m \ge 0}\)</span> is a finitely generated graded family of ideals, then there exists an integer <span class="math inline">\(p \ge 1\)</span> such that: <span class="math display">\[
-\mathfrak{a}_\bullet^{(p)} = \operatorname{Pow}_\bullet(\mathfrak{a}_p), \quad \text{that is}, \quad \mathfrak{a}_{m p} = (\mathfrak{a}_p)^m \quad \text{for all } m \ge 1.
+<div id="thm-grothendieck-connectedness" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4 (Grothendieck’s Connectedness Theorem)</strong></span> Let <span class="math inline">\((A, \mathfrak{m})\)</span> be a complete local Noetherian ring, and let <span class="math inline">\(k \ge 1\)</span>. If <span class="math inline">\(\operatorname{Spec} A\)</span> is <span class="math inline">\(k\)</span>-connected, then for any element <span class="math inline">\(f \in \mathfrak{m}\)</span>, the scheme: <span class="math display">\[
+\operatorname{Spec}(A / fA)
+\]</span> is <span class="math inline">\((k - 1)\)</span>-connected.</p>
+</div>
+<div id="cor-complete-local-domain" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 2 (Complete Local Noetherian Domains)</strong></span> Let <span class="math inline">\((A, \mathfrak{m})\)</span> be a complete local Noetherian domain of dimension <span class="math inline">\(n\)</span>. Fix <span class="math inline">\(d \le n - 1\)</span>. For any elements <span class="math inline">\(f_1, \dots, f_d \in \mathfrak{m}\)</span>, the scheme: <span class="math display">\[
+\operatorname{Spec}\big(A / (f_1, \dots, f_d)\big)
+\]</span> is <span class="math inline">\((n - d - 1)\)</span>-connected.</p>
+</div>
+<div id="cor-stronger-bertini" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 3 (Stronger Bertini for Connectedness)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a closed algebraic set that is <span class="math inline">\(k\)</span>-connected, and let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be a linear subspace of codimension <span class="math inline">\(d\)</span>. Then: <span class="math display">\[
+X \cap L
+\]</span> is connected in dimension <span class="math inline">\(k - d\)</span>.</p>
+<p>In particular, if <span class="math inline">\(X\)</span> is irreducible of dimension <span class="math inline">\(n\)</span>, it is <span class="math inline">\((n - 1)\)</span>-connected. If <span class="math inline">\(d &lt; n\)</span>, then <span class="math inline">\(k - d = n - 1 - d \ge 0\)</span>, so <span class="math inline">\(X \cap L\)</span> is <span class="math inline">\(0\)</span>-connected (i.e., connected).</p>
+</div>
+<div id="exm-set-theoretic-lci" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5 (Verification of Set-Theoretic Complete Intersections)</strong></span> Consider the union of two <span class="math inline">\(3\)</span>-planes in <span class="math inline">\(\mathbb{A}^6_{\mathbb{C}}\)</span> meeting only at the origin: <span class="math display">\[
+X = V(x_1, x_2, x_3) \cup V(x_4, x_5, x_6) \subseteq \mathbb{A}^6, \quad \dim X = 3.
+\]</span> The defining ideal is generated by the <span class="math inline">\(9\)</span> pairwise products: <span class="math display">\[
+I(X) = (x_1 x_4, \, x_1 x_5, \, x_1 x_6, \, x_2 x_4, \, x_2 x_5, \, x_2 x_6, \, x_3 x_4, \, x_3 x_5, \, x_3 x_6).
+\]</span></p>
+<p><strong>Question:</strong> Is <span class="math inline">\(X\)</span> a set-theoretic local complete intersection (LCI) defined by <span class="math inline">\(3\)</span> functions at the origin?</p>
+<p><strong>Analysis:</strong> Because <span class="math inline">\(V(x_1, x_2, x_3) \cap V(x_4, x_5, x_6) = \{0\}\)</span>, the space <span class="math inline">\(X\)</span> is <span class="math inline">\(0\)</span>-connected, but <strong>not</strong> <span class="math inline">\(1\)</span>-connected.</p>
+<p>Suppose <span class="math inline">\(U \subseteq \mathbb{A}^6\)</span> is an affine open neighborhood of <span class="math inline">\(0\)</span> such that <span class="math inline">\(U \cap X = \operatorname{Spec}(A / (f_1, f_2, f_3))\)</span> with <span class="math inline">\(A = \mathcal{O}(U)\)</span> regular of dimension <span class="math inline">\(6\)</span>. By <a href="#cor-complete-local-domain" class="quarto-xref">Corollary&nbsp;2</a>: <span class="math display">\[
+U \cap X \quad \text{would be } (6 - 1 - 3 = 2)\text{-connected},
+\]</span> a contradiction! Similarly, <span class="math inline">\(X\)</span> cannot be cut out set-theoretically by <span class="math inline">\(4\)</span> functions, because that would force it to be <span class="math inline">\((6 - 1 - 4 = 1)\)</span>-connected.</p>
+<p><strong>Answer:</strong> However, <span class="math inline">\(X\)</span> <strong>is</strong> a set-theoretic complete intersection of <span class="math inline">\(5\)</span> functions! Consider the auxiliary polynomials in the variable <span class="math inline">\(T\)</span>: <span class="math display">\[
+f_1(T) = x_1 + x_2 T + x_3 T^2, \qquad f_2(T) = x_4 + x_5 T + x_6 T^2.
+\]</span> Then <span class="math inline">\(f_1(T) f_2(T) = 0\)</span> for all <span class="math inline">\(T\)</span> if and only if <span class="math inline">\(f_1 \equiv 0\)</span> or <span class="math inline">\(f_2 \equiv 0\)</span>, which is equivalent to <span class="math inline">\(x \in X\)</span>. Expanding the product gives: <span class="math display">\[
+f_1 f_2 = x_1 x_4 + (x_1 x_5 + x_2 x_4) T + (x_1 x_6 + x_2 x_5 + x_3 x_4) T^2 + (x_2 x_6 + x_3 x_5) T^3 + x_3 x_6 T^4.
+\]</span> The vanishing of the <span class="math inline">\(5\)</span> coefficients cuts out <span class="math inline">\(X\)</span> set-theoretically in <span class="math inline">\(\mathbb{A}^6\)</span>.</p>
+</div>
+<hr>
+</section>
+<section id="applications-to-ramification-and-singularities" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="applications-to-ramification-and-singularities"><span class="header-section-number">2</span> Applications to Ramification and Singularities</h2>
+<div id="thm-ramification-closed-embedding" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5 (Unramified Morphisms into Projective Space)</strong></span> Let <span class="math inline">\(X\)</span> be a complete irreducible variety of dimension <span class="math inline">\(n\)</span> over <span class="math inline">\(\mathbb{C}\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r\)</span> be an unramified morphism. If: <span class="math display">\[
+2n &gt; r,
+\]</span> then <span class="math inline">\(f\)</span> is a closed embedding.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><strong>Fact:</strong> A morphism from a complete variety that is injective on closed points and unramified is a closed immersion.</p>
+<p>Consider the product morphism <span class="math inline">\(F = f \times f: X \times X \to \mathbb{P}^r \times \mathbb{P}^r\)</span>. The preimage of the diagonal is: <span class="math display">\[
+F^{-1}(\Delta_{\mathbb{P}^r}) = X \times_{\mathbb{P}^r} X = \big\{ (x, y) \in X \times X \;\big|\; f(x) = f(y) \big\}.
+\]</span> The morphism <span class="math inline">\(f\)</span> is injective if and only if <span class="math inline">\(F^{-1}(\Delta_{\mathbb{P}^r}) = \Delta_X\)</span>.</p>
+<p>Since <span class="math inline">\(\dim \overline{\operatorname{Im} F} = \dim(X \times X) = 2n &gt; r\)</span>, the Fulton–Hansen Connectedness Theorem (<a href="#thm-fulton-hansen" class="quarto-xref">Theorem&nbsp;3</a>) implies that: <span class="math display">\[
+X \times_{\mathbb{P}^r} X
+\]</span> is connected.</p>
+<p>On the other hand, because <span class="math inline">\(X \to \mathbb{P}^r\)</span> is separated and unramified, the diagonal morphism: <span class="math display">\[
+\Delta_{X / \mathbb{P}^r}: X \longrightarrow X \times_{\mathbb{P}^r} X
+\]</span> is both a closed immersion and an open immersion (i.e., a clopen immersion). Since <span class="math inline">\(X \times_{\mathbb{P}^r} X\)</span> is connected, the open and closed subset <span class="math inline">\(\Delta_X\)</span> must be the entire space: <span class="math display">\[
+\Delta_X = X \times_{\mathbb{P}^r} X.
+\]</span> Therefore, <span class="math inline">\(f\)</span> is injective on points, hence a closed embedding.</p>
+</div>
+<div id="rem-sharpness-ramification" class="proof remark">
+<p><span class="proof-title"><em>Remark 2</em> (Sharpness). </span>The inequality <span class="math inline">\(2n &gt; r\)</span> is sharp: for <span class="math inline">\(n = 1\)</span> and <span class="math inline">\(r = 2\)</span>, let <span class="math inline">\(C \subseteq \mathbb{P}^2\)</span> be a nodal cubic curve and <span class="math inline">\(X = \widetilde{C} \cong \mathbb{P}^1\)</span> its normalization. The normalization map <span class="math inline">\(X \to C \hookrightarrow \mathbb{P}^2\)</span> is unramified, but not an embedding.</p>
+</div>
+<div id="exm-no-normal-crossing-hypersurface" class="theorem example">
+<p><span class="theorem-title"><strong>Example 6 (Nonexistence of Hypersurfaces with Normal Crossing Singularities)</strong></span> If <span class="math inline">\(r \ge 3\)</span>, there are <strong>no</strong> irreducible singular hypersurfaces <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> having only normal crossing singularities.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Recall that <span class="math inline">\(X\)</span> has a <strong>normal crossing singularity</strong> at <span class="math inline">\(p\)</span> if and only if: <span class="math display">\[
+\widehat{\mathcal{O}}_{X, p} \cong k[[x_1, \dots, x_r]] / (x_1 \cdots x_k) \quad \text{for some } k \ge 2,
+\]</span> which is equivalent to admitting an étale neighborhood isomorphic to <span class="math inline">\(\operatorname{Spec}\big(k[x_1, \dots, x_r]/(x_1 \cdots x_k)\big)\)</span>.</p>
+<p>At such a singular point <span class="math inline">\(x\)</span>, the normalization <span class="math inline">\(\widetilde{\mathcal{O}}_{X, x}\)</span> is: <span class="math display">\[
+\widetilde{\widehat{\mathcal{O}}_{X, x}} \cong \prod_{i=1}^k k[[x_1, \dots, x_r]] / (x_i).
+\]</span> The cotangent space of <span class="math inline">\(X\)</span> at <span class="math inline">\(x\)</span> has dimension: <span class="math display">\[
+T_x X^\vee \cong (x_1, \dots, x_r) / \big((x_1 \cdots x_k) + (x_i x_j)_{i, j}\big) \cong (x_1, \dots, x_r) / (x_i x_j) \cong \bigoplus_{i=1}^r k \cdot x_i.
+\]</span> For each point <span class="math inline">\(y_i \in \widetilde{X}\)</span> lying above <span class="math inline">\(x\)</span>, the local ring <span class="math inline">\(\mathcal{O}_{\widetilde{X}, y_i}\)</span> is regular with cotangent space <span class="math inline">\(k^{r-1}\)</span>, and the cotangent map: <span class="math display">\[
+T_x X^\vee \twoheadrightarrow T_{y_i} \widetilde{X}^\vee, \quad \sum a_j x_j \longmapsto (a_1, \dots, \hat{a}_i, \dots, a_r)
+\]</span> is surjective. Therefore, the normalization morphism <span class="math inline">\(\nu: \widetilde{X} \to X\)</span> is unramified, and <span class="math inline">\(\widetilde{X}\)</span> is a smooth variety of dimension <span class="math inline">\(r - 1\)</span>.</p>
+<p>Now consider the composition: <span class="math display">\[
+g: \widetilde{X} \xrightarrow{\;\nu\;} X \longhookrightarrow \mathbb{P}^r.
+\]</span> Since <span class="math inline">\(\nu\)</span> and the inclusion are unramified, <span class="math inline">\(g\)</span> is an unramified morphism. Because <span class="math inline">\(\dim \widetilde{X} = r - 1\)</span> and <span class="math inline">\(r \ge 3\)</span>, we have: <span class="math display">\[
+2 \dim \widetilde{X} = 2(r - 1) = 2r - 2 &gt; r \iff r &gt; 2.
+\]</span> By <a href="#thm-ramification-closed-embedding" class="quarto-xref">Theorem&nbsp;5</a>, <span class="math inline">\(g: \widetilde{X} \hookrightarrow \mathbb{P}^r\)</span> is a closed embedding. But then <span class="math inline">\(X = g(\widetilde{X})\)</span> must be smooth, contradicting the assumption that <span class="math inline">\(X\)</span> is singular.</p>
+</div>
+<div id="exm-etale-fundamental-group" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7 (Simple Connectedness of Large Subvarieties)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be an irreducible smooth subvariety of dimension <span class="math inline">\(n\)</span>. If: <span class="math display">\[
+2n &gt; r,
+\]</span> then the étale fundamental group of <span class="math inline">\(X\)</span> is trivial: <span class="math display">\[
+\pi_1^{\text{ét}}(X) = \{e\}.
 \]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By <a href="#lem-veronese-fg" class="quarto-xref">Lemma&nbsp;1</a>, the Rees algebra <span class="math inline">\(\operatorname{Rees}(\mathfrak{a}_\bullet)^{(p)}\)</span> is generated in degree 1 for some <span class="math inline">\(p \ge 1\)</span>. Hence its degree-<span class="math inline">\(m\)</span> piece is given by the <span class="math inline">\(m\)</span>-th power of its degree-1 piece: <span class="math inline">\(\mathfrak{a}_{m p} = (\mathfrak{a}_p)^m\)</span>.</p>
-</div>
-<div id="lem-mumford-regularity" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 2 (Castelnuovo-Mumford Regularity)</strong></span> Let <span class="math inline">\(X\)</span> be a projective scheme and <span class="math inline">\(B\)</span> an ample line bundle on <span class="math inline">\(X\)</span>. A coherent sheaf <span class="math inline">\(\mathcal{F}\)</span> is said to be <strong><span class="math inline">\(m\)</span>-regular</strong> with respect to <span class="math inline">\(B\)</span> if <span class="math inline">\(H^i(X, \mathcal{F} \otimes B^{\otimes(m-i)}) = 0\)</span> for all <span class="math inline">\(i \ge 1\)</span>. If <span class="math inline">\(\mathcal{F}\)</span> is <span class="math inline">\(m\)</span>-regular, then for every <span class="math inline">\(k \ge 0\)</span>:</p>
-<ol type="1">
-<li><span class="math inline">\(\mathcal{F} \otimes B^{\otimes(m+k)}\)</span> is generated by its global sections;</li>
-<li>The multiplication map on global sections is surjective: <span class="math display">\[
-H^0(X, \mathcal{F} \otimes B^{\otimes m}) \otimes H^0(X, B^{\otimes k}) \twoheadrightarrow H^0(X, \mathcal{F} \otimes B^{\otimes(m+k)});
-\]</span></li>
-<li><span class="math inline">\(\mathcal{F}\)</span> is <span class="math inline">\((m+k)\)</span>-regular with respect to <span class="math inline">\(B\)</span>.</li>
-</ol>
-</div>
-<div id="prp-fg-semiample-bundles" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2 (Finite Generation for Semiample Bundles and Base Ideals)</strong></span> Let <span class="math inline">\(X\)</span> be a normal projective variety.</p>
-<ol type="1">
-<li>If <span class="math inline">\(L\)</span> is a base-point-free line bundle on <span class="math inline">\(X\)</span>, then there exists an integer <span class="math inline">\(m_0 \ge 1\)</span> such that for all <span class="math inline">\(a, b \ge m_0\)</span>, the multiplication map: <span class="math display">\[
-H^0(X, L^{\otimes a}) \otimes H^0(X, L^{\otimes b}) \longrightarrow H^0(X, L^{\otimes(a+b)})
-\]</span> is surjective.</li>
-<li>If <span class="math inline">\(L\)</span> is semiample, then <span class="math inline">\(R(X, L)\)</span> is a finitely generated <span class="math inline">\(\mathbb{C}\)</span>-algebra.</li>
-<li>Let <span class="math inline">\(D \in \operatorname{Div}(X)\)</span>. If the graded family of base ideals <span class="math inline">\(\mathfrak{b}_\bullet = \{\mathfrak{b}(|mD|)\}_{m \ge 0}\)</span> is finitely generated, then the section ring <span class="math inline">\(R(X, D)\)</span> is finitely generated.</li>
-</ol>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><em>Proof of (1):</em> Let <span class="math inline">\(\phi: X \to Y\)</span> be the semiample fibration associated with <span class="math inline">\(L\)</span> (<strong>?@thm-semiample-fibration</strong>), so that <span class="math inline">\(\phi_* \mathcal{O}_X = \mathcal{O}_Y\)</span> and <span class="math inline">\(L \cong \phi^* A\)</span> for an ample line bundle <span class="math inline">\(A\)</span> on <span class="math inline">\(Y\)</span> (assuming <span class="math inline">\(f(L) = 1\)</span>). By the projection formula, <span class="math inline">\(H^0(X, L^{\otimes m}) \cong H^0(Y, A^{\otimes m})\)</span>. Since <span class="math inline">\(A\)</span> is ample, it is <span class="math inline">\(m_0\)</span>-regular for some <span class="math inline">\(m_0 \gg 0\)</span>. By Castelnuovo-Mumford regularity (<a href="#lem-mumford-regularity" class="quarto-xref">Lemma&nbsp;2</a>), multiplication of sections is surjective on <span class="math inline">\(Y\)</span>, hence on <span class="math inline">\(X\)</span>.</p>
-<p><em>Proof of (2):</em> Choose <span class="math inline">\(n \ge 1\)</span> such that <span class="math inline">\(L^{\otimes n}\)</span> is base-point-free. By (1), the Veronese subring <span class="math inline">\(R(X, L^{\otimes n})^{(m_0)} = R(X, L^{\otimes n m_0})\)</span> is generated in degree 1. Hence <span class="math inline">\(R(X, L^{\otimes n m_0})\)</span> is finitely generated, and by <a href="#lem-veronese-fg" class="quarto-xref">Lemma&nbsp;1</a>, <span class="math inline">\(R(X, L)\)</span> is finitely generated.</p>
-<p><em>Proof of (3):</em> By <a href="#prp-fg-graded-ideals-powers" class="quarto-xref">Proposition&nbsp;1</a>, replacing <span class="math inline">\(D\)</span> by a multiple <span class="math inline">\(p D\)</span>, we may assume <span class="math inline">\(\mathfrak{b}(|mD|) = \mathfrak{b}_1^m\)</span> for all <span class="math inline">\(m \ge 1\)</span>. Let <span class="math inline">\(\nu: X^+ \to X\)</span> be the normalization of the blow-up <span class="math inline">\(\operatorname{Bl}_{\mathfrak{b}_1}(X)\)</span>, let <span class="math inline">\(N^+\)</span> be the exceptional divisor on <span class="math inline">\(X^+\)</span>, and set <span class="math inline">\(D^+ := \nu^* D - N^+\)</span>. As in the proof of <strong>?@thm-iitaka-fibration</strong>, <span class="math inline">\(D^+\)</span> is base-point-free, so <span class="math inline">\(R(X^+, D^+)\)</span> is finitely generated by (2). Furthermore, because <span class="math inline">\(\mathfrak{b}(|mD|) = \mathfrak{b}_1^m\)</span>, the pullback of the base locus is precisely <span class="math inline">\(m N^+\)</span>, which implies that all global sections of <span class="math inline">\(\nu^* (mD)\)</span> vanish along <span class="math inline">\(m N^+\)</span>. Thus: <span class="math display">\[
-H^0(X^+, \mathcal{O}_{X^+}(m D^+)) \cong H^0(X^+, \mathcal{O}_{X^+}(m \nu^* D)) \cong H^0(X, \mathcal{O}_X(mD)).
-\]</span> Consequently, <span class="math inline">\(R(X^+, D^+) \cong R(X, D)\)</span>, proving that <span class="math inline">\(R(X, D)\)</span> is finitely generated.</p>
-</div>
-<div id="def-multiplicity-graded-system" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 9 (Multiplicity of a Graded System of Ideals)</strong></span> Let <span class="math inline">\(\mathfrak{a}_\bullet = \{\mathfrak{a}_m\}_{m \ge 0}\)</span> be a graded system of <span class="math inline">\(\mathfrak{m}_x\)</span>-primary ideals at a closed point <span class="math inline">\(x \in X\)</span>. The <strong>multiplicity</strong> of <span class="math inline">\(\mathfrak{a}_\bullet\)</span> is defined by: <span class="math display">\[
-\operatorname{mult}(\mathfrak{a}_\bullet) := \lim_{m \to \infty} \frac{\operatorname{length}_{\mathcal{O}_{X, x}}(\mathcal{O}_{X, x} / \mathfrak{a}_m)}{m^n / n!}.
-\]</span></p>
-</div>
-<div id="thm-wilsons-theorem" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (Wilson’s Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(D\)</span> be a nef and big Cartier divisor on <span class="math inline">\(X\)</span>. Then there exists an integer <span class="math inline">\(m_0 \ge 1\)</span> and an effective Cartier divisor <span class="math inline">\(N\)</span> such that the linear system: <span class="math display">\[
-|m D - N|
-\]</span> is base-point-free for all <span class="math inline">\(m \ge m_0\)</span>.</p>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By Fujita’s Vanishing Theorem (<strong>?@thm-fujita-vanishing</strong>), there exists a very ample divisor <span class="math inline">\(B\)</span> such that for all <span class="math inline">\(i &gt; 0\)</span> and any nef divisor <span class="math inline">\(P\)</span>, <span class="math inline">\(H^i(X, \mathcal{O}_X(B + P)) = 0\)</span>. Since <span class="math inline">\(D\)</span> is big, <strong>?@cor-characterization-bigness</strong> implies that there exists an integer <span class="math inline">\(m_0 &gt; 0\)</span> and an effective divisor <span class="math inline">\(N\)</span> such that: <span class="math display">\[
-N \sim m_0 D - (n+1)B.
-\]</span> For any <span class="math inline">\(m \ge m_0\)</span>, we rewrite: <span class="math display">\[
-m D - N \sim (m - m_0)D + (n+1)B = B + n B + (m - m_0)D.
-\]</span> For each <span class="math inline">\(1 \le i \le n\)</span>, the divisor <span class="math inline">\((m D - N) - i B \sim B + (n-i)B + (m-m_0)D\)</span> has the form <span class="math inline">\(B + P\)</span> with <span class="math inline">\(P = (n-i)B + (m-m_0)D\)</span> nef. Thus: <span class="math display">\[
-H^i\big(X, \mathcal{O}_X(mD - N - i B)\big) = 0 \quad \text{for all } 1 \le i \le n.
-\]</span> Therefore, <span class="math inline">\(\mathcal{O}_X(m D - N)\)</span> is 0-regular with respect to <span class="math inline">\(B\)</span>. By Castelnuovo-Mumford regularity (<a href="#lem-mumford-regularity" class="quarto-xref">Lemma&nbsp;2</a>), <span class="math inline">\(|m D - N|\)</span> is base-point-free.</p>
-</div>
-<div id="def-multiplicity-linear-system" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 10 (Multiplicity of a Linear System at a Point)</strong></span> Let <span class="math inline">\(X\)</span> be a projective variety and <span class="math inline">\(x \in X\)</span> a fixed point. For any linear system <span class="math inline">\(|V| \subseteq |D|\)</span>, the <strong>multiplicity</strong> of <span class="math inline">\(|V|\)</span> at <span class="math inline">\(x\)</span> is: <span class="math display">\[
-\operatorname{mult}_x |V| := \min_{D' \in |V|} \big\{ \operatorname{mult}_x(D') \big\}.
-\]</span></p>
-</div>
-<div id="prp-boundedness-mult" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 3 (Uniform Boundedness of Multiplicities)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(D\)</span> be a nef and big Cartier divisor. Then for any point <span class="math inline">\(x \in X\)</span>, there exists a constant <span class="math inline">\(C &gt; 0\)</span> and an integer <span class="math inline">\(m_0\)</span> such that: <span class="math display">\[
-\operatorname{mult}_x |m D| \le C \quad \text{for all } m \ge m_0.
-\]</span></p>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By Wilson’s Theorem (<a href="#thm-wilsons-theorem" class="quarto-xref">Theorem&nbsp;2</a>), there exist <span class="math inline">\(m_0\)</span> and an effective divisor <span class="math inline">\(N\)</span> such that <span class="math inline">\(|m D - N|\)</span> is free for all <span class="math inline">\(m \ge m_0\)</span>. Choose an element <span class="math inline">\(E \in |m D - N|\)</span> not passing through <span class="math inline">\(x\)</span>, so that <span class="math inline">\(\operatorname{mult}_x(E) = 0\)</span>. Then <span class="math inline">\(E + N \in |m D|\)</span>, which yields: <span class="math display">\[
-\operatorname{mult}_x |m D| \le \operatorname{mult}_x(E + N) = \operatorname{mult}_x(N) =: C.
-\]</span></p>
-</div>
-<div id="thm-criterion-fg-nef-big" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3 (Criterion for Finite Generation of Section Rings)</strong></span> Let <span class="math inline">\(X\)</span> be a normal projective variety, and let <span class="math inline">\(D\)</span> be a nef and big Cartier divisor on <span class="math inline">\(X\)</span>. Then: <span class="math display">\[
-R(X, D) \text{ is finitely generated} \iff D \text{ is semiample}.
-\]</span></p>
-</div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><strong><span class="math inline">\((\impliedby)\)</span>:</strong> This is <a href="#prp-fg-semiample-bundles" class="quarto-xref">Proposition&nbsp;2</a>(2).</p>
-<p><strong><span class="math inline">\((\implies)\)</span>:</strong> Assume <span class="math inline">\(R(X, D)\)</span> is finitely generated. By <a href="#lem-veronese-fg" class="quarto-xref">Lemma&nbsp;1</a>, there exists an integer <span class="math inline">\(\ell \ge 1\)</span> such that <span class="math inline">\(R(X, D)^{(\ell)}\)</span> is generated in degree 1 by <span class="math inline">\(H^0(X, \mathcal{O}_X(\ell D))\)</span>. Consequently, the natural symmetric algebra evaluation: <span class="math display">\[
-\operatorname{Sym}^k H^0(X, \mathcal{O}_X(\ell D)) \twoheadrightarrow H^0(X, \mathcal{O}_X(k \ell D))
-\]</span> is surjective for all <span class="math inline">\(k \ge 1\)</span>. This implies that every element in <span class="math inline">\(|k \ell D|\)</span> is a sum of <span class="math inline">\(k\)</span> elements from <span class="math inline">\(|\ell D|\)</span>, whence: <span class="math display">\[
-\operatorname{mult}_x |k \ell D| \ge k \cdot \operatorname{mult}_x |\ell D|.
-\]</span> However, by <a href="#prp-boundedness-mult" class="quarto-xref">Proposition&nbsp;3</a>, the left-hand side is bounded by a constant <span class="math inline">\(C\)</span> independent of <span class="math inline">\(k\)</span>. Letting <span class="math inline">\(k \to \infty\)</span> forces: <span class="math display">\[
-\operatorname{mult}_x |\ell D| = 0.
-\]</span> Since this holds for every closed point <span class="math inline">\(x \in X\)</span>, the linear system <span class="math inline">\(|\ell D|\)</span> has no base points. Hence <span class="math inline">\(D\)</span> is semiample.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(p: Y \to X\)</span> be a connected finite étale cover of <span class="math inline">\(X\)</span>. Let <span class="math inline">\(Y' \subseteq Y\)</span> be an irreducible component of <span class="math inline">\(Y\)</span>. The composite map: <span class="math display">\[
+Y' \longhookrightarrow Y \xrightarrow{\;p\;} X \longhookrightarrow \mathbb{P}^r
+\]</span> is an unramified morphism from a complete variety of dimension <span class="math inline">\(n\)</span> into <span class="math inline">\(\mathbb{P}^r\)</span>. Since <span class="math inline">\(2n &gt; r\)</span>, <a href="#thm-ramification-closed-embedding" class="quarto-xref">Theorem&nbsp;5</a> implies that <span class="math inline">\(Y' \hookrightarrow \mathbb{P}^r\)</span> is a closed embedding.</p>
+<p>Consequently, <span class="math inline">\(p|_{Y'}: Y' \to X\)</span> is an isomorphism. Because <span class="math inline">\(Y\)</span> is connected and étale over <span class="math inline">\(X\)</span>, it follows that <span class="math inline">\(Y = Y'\)</span>, so <span class="math inline">\(p: Y \xrightarrow{\sim} X\)</span> is an isomorphism. Thus, <span class="math inline">\(X\)</span> has no nontrivial connected finite étale covers, which implies <span class="math inline">\(\pi_1^{\text{ét}}(X) = \{e\}\)</span>.</p>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <style>
@@ -1619,14 +1674,11 @@ nav#TOC li.active > a.nav-link {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../22_positivity/22.5 Volume.html" class="pagination-link" aria-label="22.5 Volume">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22.5 Volume</span>
+      <a href="../22_positivity/22.8 Analytic Topology.html" class="pagination-link" aria-label="22.8 Analytic Topology">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22.8 Analytic Topology</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../22_positivity/22.7 Zariski Decomposition.html" class="pagination-link" aria-label="22.7 Zariski Decomposition">
-        <span class="nav-page-text">22.7 Zariski Decomposition</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
