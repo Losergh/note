@@ -78,10 +78,7 @@ website:
         # 顺便把根目录下原作者留下的编辑指南也挂上（方便自己查公式排版）
         - href: editing.qmd
           text: "Typography"
-  
-  page-footer:
-    left: "An evolving notebook on mathematics."
-    right: "Built with Quarto and GitHub Pages."
+
 
 format:
   html:
