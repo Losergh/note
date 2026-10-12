@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-08">
+<meta name="dcterms.date" content="2026-10-12">
 
 <title>23.2 Representation II – Math Notes</title>
 <style>
@@ -36,6 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../23_algebraic_groups/23.3 Jordan Decomposition.html" rel="next">
 <link href="../23_algebraic_groups/23.1 Representation I.html" rel="prev">
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -357,6 +358,12 @@ window.Quarto = {
  <span class="menu-text">23.2 Representation II</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../23_algebraic_groups/23.3 Jordan Decomposition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">23.3 Jordan Decomposition</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -384,7 +391,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 8, 2026</p>
+      <p class="date">October 12, 2026</p>
     </div>
   </div>
   
@@ -574,13 +581,20 @@ V \otimes R @&gt;&gt;&gt; \mathcal{O}(G)^n \otimes R
 <p>Let <span class="math inline">\((\mathcal{C}, \otimes)\)</span> be a neutral Tannakian category over <span class="math inline">\(k\)</span> with a <span class="math inline">\(k\)</span>-valued fibre functor <span class="math inline">\(\omega: \mathcal{C} \to \mathbf{Vect}_k\)</span>. Then: 1. <span class="math inline">\(\underline{\operatorname{Aut}}^\otimes(\omega): k\text{-}\mathbf{Alg} \to \mathbf{Grp}\)</span> is representable by an affine group scheme <span class="math inline">\(G\)</span> over <span class="math inline">\(k\)</span>. 2. The functor <span class="math inline">\(\mathcal{C} \to \mathbf{Rep}_k(G)\)</span> defined by <span class="math inline">\(\omega\)</span> is an equivalence of tensor categories.</p>
 </div>
 <div id="rem-neutral-tannakian-category" class="proof remark">
-<p><span class="proof-title"><em>Remark 2</em> (Neutral Tannakian Categories). </span>A tuple <span class="math inline">\((\mathcal{C}, \otimes, \Phi, \Psi)\)</span> is a <strong>neutral Tannakian category</strong> over <span class="math inline">\(k\)</span> if: 1. <span class="math inline">\(\mathcal{C}\)</span> is a <span class="math inline">\(k\)</span>-linear abelian category (a subabelian category of <span class="math inline">\(\mathbf{Vect}_k\)</span>). 2. <span class="math inline">\(\otimes: \mathcal{C} \times \mathcal{C} \to \mathcal{C}\)</span> is a <span class="math inline">\(k\)</span>-bilinear functor. 3. Associativity and symmetry constraints: <span class="math display">\[
-   \Phi_{X,Y,Z}: X \otimes (Y \otimes Z) \xrightarrow{\;\sim\;} (X \otimes Y) \otimes Z, \quad \Psi_{X,Y}: X \otimes Y \xrightarrow{\;\sim\;} Y \otimes X,
-   \]</span> which imply the existence of an identity object <span class="math inline">\(\mathbf{1}\)</span> such that <span class="math inline">\(\mathcal{C} \xrightarrow{\sim} \mathcal{C}\)</span>, <span class="math inline">\(X \mapsto \mathbf{1} \otimes X\)</span>. 4. Existence of duals: for every <span class="math inline">\(X \in \operatorname{Ob}(\mathcal{C})\)</span>, there exists <span class="math inline">\(X^\vee \in \operatorname{Ob}(\mathcal{C})\)</span> and an evaluation morphism: <span class="math display">\[
-   \operatorname{ev}: X^\vee \otimes X \longrightarrow \mathbf{1}
-   \]</span> inducing an isomorphism: <span class="math display">\[
-   \operatorname{Hom}_\mathcal{C}(T, X^\vee) \xrightarrow{\;\sim\;} \operatorname{Hom}_\mathcal{C}(T \otimes X, \mathbf{1}), \quad \alpha \longmapsto \operatorname{ev} \circ (\alpha \otimes \mathrm{id}_X).
-   \]</span> 5. There exists a <strong><span class="math inline">\(k\)</span>-valued fibre functor</strong> <span class="math inline">\(\omega: (\mathcal{C}, \otimes) \to \mathbf{Vect}_k\)</span>, which is an exact, faithful <span class="math inline">\(k\)</span>-linear functor preserving tensor products.</p>
+<p><span class="proof-title"><em>Remark 2</em> (Neutral Tannakian Categories). </span>A tuple <span class="math inline">\((\mathcal{C}, \otimes, \Phi, \Psi)\)</span> is a <strong>neutral Tannakian category</strong> over <span class="math inline">\(k\)</span> if:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\mathcal{C}\)</span> is a <span class="math inline">\(k\)</span>-linear abelian category (a subabelian category of <span class="math inline">\(\mathbf{Vect}_k\)</span>).</p></li>
+<li><p><span class="math inline">\(\otimes: \mathcal{C} \times \mathcal{C} \to \mathcal{C}\)</span> is a <span class="math inline">\(k\)</span>-bilinear functor.</p></li>
+<li><p>Associativity and symmetry constraints: <span class="math display">\[
+\Phi_{X,Y,Z}: X \otimes (Y \otimes Z) \xrightarrow{\;\sim\;} (X \otimes Y) \otimes Z, \quad \Psi_{X,Y}: X \otimes Y \xrightarrow{\;\sim\;} Y \otimes X,
+\]</span> which imply the existence of an identity object <span class="math inline">\(\mathbf{1}\)</span> such that <span class="math inline">\(\mathcal{C} \xrightarrow{\sim} \mathcal{C}\)</span>, <span class="math inline">\(X \mapsto \mathbf{1} \otimes X\)</span>.</p></li>
+<li><p>Existence of duals: for every <span class="math inline">\(X \in \operatorname{Ob}(\mathcal{C})\)</span>, there exists <span class="math inline">\(X^\vee \in \operatorname{Ob}(\mathcal{C})\)</span> and an evaluation morphism: <span class="math display">\[
+\operatorname{ev}: X^\vee \otimes X \longrightarrow \mathbf{1}
+\]</span> inducing an isomorphism: <span class="math display">\[
+\operatorname{Hom}_\mathcal{C}(T, X^\vee) \xrightarrow{\;\sim\;} \operatorname{Hom}_\mathcal{C}(T \otimes X, \mathbf{1}), \quad \alpha \longmapsto \operatorname{ev} \circ (\alpha \otimes \mathrm{id}_X).
+\]</span></p></li>
+<li><p>There exists a <strong><span class="math inline">\(k\)</span>-valued fibre functor</strong> <span class="math inline">\(\omega: (\mathcal{C}, \otimes) \to \mathbf{Vect}_k\)</span>, which is an exact, faithful <span class="math inline">\(k\)</span>-linear functor preserving tensor products.</p></li>
+</ol>
 </div>
 
 
@@ -1578,6 +1592,9 @@ nav#TOC li.active > a.nav-link {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../23_algebraic_groups/23.3 Jordan Decomposition.html" class="pagination-link" aria-label="23.3 Jordan Decomposition">
+        <span class="nav-page-text">23.3 Jordan Decomposition</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

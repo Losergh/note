@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-12">
+
+<title>23.3 Jordan Decomposition – Math Notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../23_algebraic_groups/23.2 Representation II.html" rel="prev">
+<link href="../image/1.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-fc4beeabfe87e77886ceb4bd0dfd747b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-563c4aa86ebe459a68ca1af0aa8b2c22.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-fc4beeabfe87e77886ceb4bd0dfd747b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Math Notes</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Losergh/note"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../23_algebraic_groups/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../23_algebraic_groups/23.3 Jordan Decomposition.html">23.3 Jordan Decomposition</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="sidebar-tools-main">
+    <div id="quarto-search" class="quarto-navigation-tool px-1" title="Search"></div>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../23_algebraic_groups/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Algebraic Groups</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../23_algebraic_groups/23.0 Basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">23.0 Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../23_algebraic_groups/23.1 Representation I.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">23.1 Representation I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../23_algebraic_groups/23.2 Representation II.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">23.2 Representation II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../23_algebraic_groups/23.3 Jordan Decomposition.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">23.3 Jordan Decomposition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../23_algebraic_groups/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../23_algebraic_groups/23.3 Jordan Decomposition.html">23.3 Jordan Decomposition</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">23.3 Jordan Decomposition</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 12, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Motivation (Matrix case):</strong> Let <span class="math inline">\(x \in \mathrm{GL}_n(\bar{k})\)</span>. The Jordan normal form of <span class="math inline">\(x\)</span> is given by: <span class="math display">\[
+x = s^{-1} \begin{pmatrix} B_{a_1}^{n_1} &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; B_{a_r}^{n_r} \end{pmatrix} s,
+\]</span> where each <span class="math inline">\(B_{a_i}^{n_i}\)</span> is a Jordan block of size <span class="math inline">\(n_i \times n_i\)</span> with eigenvalue <span class="math inline">\(a_i\)</span>: <span class="math display">\[
+B_{a_i}^{n_i} = \begin{pmatrix}
+a_i &amp; 1 &amp; &amp; \\
+&amp; a_i &amp; \ddots &amp; \\
+&amp; &amp; \ddots &amp; 1 \\
+&amp; &amp; &amp; a_i
+\end{pmatrix}.
+\]</span> Define: <span class="math display">\[
+x_s := s^{-1} \begin{pmatrix} a_1 I_{n_1} &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; a_r I_{n_r} \end{pmatrix} s \in \mathrm{GL}_n(\bar{k}) \quad (\text{semisimple element}),
+\]</span> <span class="math display">\[
+x_u := s^{-1} \begin{pmatrix} a_1^{-1} B_{a_1}^{n_1} &amp; &amp; \\ &amp; \ddots &amp; \\ &amp; &amp; a_r^{-1} B_{a_r}^{n_r} \end{pmatrix} s \in \mathrm{GL}_n(\bar{k}) \quad (\text{unipotent element}).
+\]</span> Then: <span class="math display">\[
+x = x_s x_u = x_u x_s
+\]</span> is called the <strong>Jordan decomposition</strong> of <span class="math inline">\(x\)</span>.</p>
+<p><strong>Generalization:</strong></p>
+<ul>
+<li><p>Replace the algebraically closed field <span class="math inline">\(\bar{k}\)</span> with an arbitrary perfect field <span class="math inline">\(k\)</span>.</p></li>
+<li><p>Replace <span class="math inline">\(\mathrm{GL}_n\)</span> with an arbitrary linear algebraic group <span class="math inline">\(G\)</span>. :::</p></li>
+</ul>
+<div id="def-eigenvalues" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1</strong></span> Let <span class="math inline">\(V\)</span> be a finite-dimensional vector space over <span class="math inline">\(k\)</span>, and let <span class="math inline">\(\alpha \in \mathrm{GL}_V(k) = \mathrm{GL}_n(k)\)</span>. Let <span class="math inline">\(P_\alpha(T) := \det(T \cdot \mathrm{id} - \alpha) \in k[T]\)</span> be the characteristic polynomial of <span class="math inline">\(\alpha\)</span>.</p>
+<ol type="1">
+<li><p>The eigenvalues of <span class="math inline">\(\alpha\)</span> lie in <span class="math inline">\(k\)</span> if <span class="math inline">\(P_\alpha(T)\)</span> splits over <span class="math inline">\(k\)</span>: <span class="math display">\[
+P_\alpha(T) = (T - a_1)^{m_1} \cdots (T - a_r)^{m_r}, \quad a_i \in k.
+\]</span></p></li>
+<li><p>For each eigenvalue <span class="math inline">\(a \in k\)</span> of <span class="math inline">\(\alpha\)</span>, the primary space (generalized eigenspace) is defined by: <span class="math display">\[
+V^{(a)} := \{ v \in V \mid (\alpha - a \cdot \mathrm{id})^N v = 0 \text{ for some } N \ge 1 \}.
+\]</span> Then <span class="math inline">\(V = \bigoplus_{i=1}^r V^{(a_i)}\)</span>, and the usual Jordan decomposition works on each subspace.</p></li>
+<li><p>An element <span class="math inline">\(\alpha\)</span> is <strong>semisimple</strong> if <span class="math inline">\(\alpha_{\bar{k}} \in \operatorname{End}_{\bar{k}}(V_{\bar{k}})\)</span> is diagonalizable.</p></li>
+<li><p>An element <span class="math inline">\(\alpha\)</span> is <strong>unipotent</strong> if there exists an integer <span class="math inline">\(N \ge 1\)</span> such that <span class="math inline">\((\alpha - \mathrm{id})^N = 0\)</span>.</p></li>
+</ol>
+</div>
+<div id="thm-jordan-decomposition-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1</strong></span> Let <span class="math inline">\(V\)</span> be a finite-dimensional vector space over a perfect field <span class="math inline">\(k\)</span>. Let <span class="math inline">\(\alpha \in \operatorname{Aut}_k(V) = \mathrm{GL}_V(k)\)</span>. Then there exist unique elements <span class="math inline">\(\alpha_s, \alpha_u \in \operatorname{Aut}_k(V)\)</span> such that:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\alpha = \alpha_s \alpha_u = \alpha_u \alpha_s\)</span> (equivalently, <span class="math inline">\(\alpha = \alpha_s + \alpha_s(\alpha_u - \mathrm{id})\)</span>, where <span class="math inline">\(\alpha_s(\alpha_u - \mathrm{id})\)</span> is nilpotent);</p></li>
+<li><p><span class="math inline">\(\alpha_s\)</span> is semisimple, and <span class="math inline">\(\alpha_u\)</span> is unipotent.</p></li>
+</ol>
+<p>In this case, <span class="math inline">\(\alpha_s\)</span> and <span class="math inline">\(\alpha_u\)</span> are polynomials in <span class="math inline">\(\alpha\)</span>, i.e., <span class="math inline">\(\alpha_s, \alpha_u \in k[\alpha]\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><strong>Case 1: All eigenvalues of <span class="math inline">\(\alpha\)</span> lie in <span class="math inline">\(k\)</span>.</strong></p>
+<p>The characteristic polynomial splits over <span class="math inline">\(k\)</span>: <span class="math display">\[
+P_\alpha(T) = \prod_{i=1}^r (T - a_i)^{m_i}, \quad a_i \in k.
+\]</span> Then <span class="math inline">\(V = \bigoplus_{i=1}^r V^{(a_i)}\)</span>, where <span class="math inline">\(V^{(a_i)} = \ker(\alpha - a_i \cdot \mathrm{id})^{m_i}\)</span>.</p>
+<p>Define <span class="math inline">\(\alpha_s \in \operatorname{Aut}_k(V)\)</span> by: <span class="math display">\[
+\alpha_s\big|_{V^{(a_i)}} := a_i \cdot \mathrm{id}_{V^{(a_i)}}.
+\]</span> Define <span class="math inline">\(\alpha_u := \alpha \alpha_s^{-1}\)</span>. For each <span class="math inline">\(v_i \in V^{(a_i)}\)</span>, we have: <span class="math display">\[
+(\alpha_u - \mathrm{id})^{m_i}(v_i) = (a_i^{-1} \alpha - \mathrm{id})^{m_i}(v_i) = a_i^{-m_i} (\alpha - a_i \cdot \mathrm{id})^{m_i}(v_i) = 0.
+\]</span> Hence <span class="math inline">\(\alpha_u\)</span> is unipotent.</p>
+<p>To find a polynomial <span class="math inline">\(Q(T) \in k[T]\)</span> such that <span class="math inline">\(Q(\alpha) = \alpha_s\)</span>, it suffices to require: <span class="math display">\[
+\big(Q(\alpha) - a_i \cdot \mathrm{id}\big)\big|_{V^{(a_i)}} = 0 \quad \text{for all } 1 \le i \le r,
+\]</span> which is guaranteed if: <span class="math display">\[
+(T - a_i)^{m_i} \mid \big(Q(T) - a_i\big), \quad \text{i.e., } Q(T) \equiv a_i \pmod{(T - a_i)^{m_i}}.
+\]</span> By the Chinese Remainder Theorem, such a polynomial <span class="math inline">\(Q(T)\)</span> exists.</p>
+<p>Similarly, there exists a polynomial <span class="math inline">\(\widetilde{Q}(T) \in k[T]\)</span> such that <span class="math inline">\(\widetilde{Q}(\alpha) = \alpha_s^{-1}\)</span>. Then: <span class="math display">\[
+\alpha_u = \alpha \alpha_s^{-1} = \alpha \widetilde{Q}(\alpha)
+\]</span> is also a polynomial in <span class="math inline">\(\alpha\)</span>.</p>
+<p>Since <span class="math inline">\(\alpha_s, \alpha_u \in k[\alpha]\)</span>, they commute: <span class="math inline">\(\alpha_s \alpha_u = \alpha_u \alpha_s\)</span>. Moreover, any endomorphism <span class="math inline">\(\beta\)</span> commuting with <span class="math inline">\(\alpha\)</span> also commutes with <span class="math inline">\(\alpha_s\)</span> and <span class="math inline">\(\alpha_u\)</span>.</p>
+<p><strong>Uniqueness:</strong> If <span class="math inline">\(\alpha = \alpha_s \alpha_u = \beta_s \beta_u\)</span> is another decomposition with commuting factors in <span class="math inline">\(k[\alpha]\)</span>, then: <span class="math display">\[
+\beta_s^{-1} \alpha_s = \beta_u \alpha_u^{-1} \in k[\alpha].
+\]</span> Because <span class="math inline">\(\beta_s\)</span> and <span class="math inline">\(\alpha_s\)</span> commute, <span class="math inline">\(\beta_s^{-1} \alpha_s\)</span> is semisimple. Because <span class="math inline">\(\beta_u\)</span> and <span class="math inline">\(\alpha_u\)</span> commute, <span class="math inline">\(\beta_u \alpha_u^{-1}\)</span> is unipotent (all eigenvalues are <span class="math inline">\(1\)</span>). The only endomorphism that is simultaneously semisimple and unipotent is the identity. Thus: <span class="math display">\[
+\beta_s^{-1} \alpha_s = \beta_u \alpha_u^{-1} = \mathrm{id} \implies \alpha_s = \beta_s, \quad \alpha_u = \beta_u.
+\]</span></p>
+<p><strong>Case 2: General case over a perfect field <span class="math inline">\(k\)</span>.</strong></p>
+<p>Since <span class="math inline">\(k\)</span> is perfect, there exists a finite Galois extension <span class="math inline">\(k'/k\)</span> such that all eigenvalues of <span class="math inline">\(\alpha\)</span> lie in <span class="math inline">\(k'\)</span>. Let <span class="math inline">\(A := \alpha_{k'} \in \operatorname{Aut}_{k'}(V_{k'})\)</span>. By Case 1, <span class="math inline">\(A\)</span> admits a unique Jordan decomposition: <span class="math display">\[
+A = A_s A_u = A_u A_s.
+\]</span> For every <span class="math inline">\(\sigma \in \operatorname{Gal}(k'/k)\)</span>, applying <span class="math inline">\(\sigma\)</span> yields: <span class="math display">\[
+A = \sigma(A) = \sigma(A_s) \sigma(A_u).
+\]</span> Observe that:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\sigma(A_s)\)</span> is semisimple, and <span class="math inline">\(\sigma(A_u)\)</span> is unipotent;</p></li>
+<li><p><span class="math inline">\(\sigma(A_s) \sigma(A_u) = \sigma(A_u) \sigma(A_s)\)</span>.</p></li>
+</ol>
+<p>By the uniqueness of the Jordan decomposition of <span class="math inline">\(A\)</span> over <span class="math inline">\(k'\)</span>, we have: <span class="math display">\[
+\sigma(A_s) = A_s \quad \text{and} \quad \sigma(A_u) = A_u \quad \text{for all } \sigma \in \operatorname{Gal}(k'/k).
+\]</span> By Galois descent, <span class="math inline">\(A_s\)</span> and <span class="math inline">\(A_u\)</span> descend to <span class="math inline">\(k\)</span>, giving <span class="math inline">\(\alpha_s, \alpha_u \in \operatorname{Aut}_k(V)\)</span> such that <span class="math inline">\((\alpha_s)_{k'} = A_s\)</span> and <span class="math inline">\((\alpha_u)_{k'} = A_u\)</span>. They satisfy <span class="math inline">\(\alpha = \alpha_s \alpha_u = \alpha_u \alpha_s\)</span>, with <span class="math inline">\(\alpha_s\)</span> semisimple and <span class="math inline">\(\alpha_u\)</span> unipotent.</p>
+<p>It remains to show that <span class="math inline">\(\alpha_s, \alpha_u \in k[\alpha]\)</span>. We know <span class="math inline">\(A_s \in k'[A]\)</span>. Let <span class="math inline">\(Q(T) \in k'[T]\)</span> be a polynomial of minimal degree such that <span class="math inline">\(A_s = Q(A)\)</span>. Then <span class="math inline">\(\deg Q &lt; \deg m_k(A)\)</span>, where <span class="math inline">\(m_k(A)\)</span> is the minimal polynomial of <span class="math inline">\(A\)</span> over <span class="math inline">\(k\)</span>. Writing <span class="math inline">\(Q(T) = \sum_{j=0}^r c_j T^j\)</span> with <span class="math inline">\(c_j \in k'\)</span>, we have: <span class="math display">\[
+A_s = \sigma(A_s) = \sum_{j=0}^r \sigma(c_j) A^j \implies \big(Q - \sigma(Q)\big)(A) = 0.
+\]</span> If <span class="math inline">\(\sigma(c_j) \neq c_j\)</span> for some <span class="math inline">\(j\)</span>, this would yield a non-zero polynomial of degree strictly less than <span class="math inline">\(\deg m_k(A)\)</span> annihilating <span class="math inline">\(A\)</span>, a contradiction. Thus <span class="math inline">\(\sigma(c_j) = c_j\)</span> for all <span class="math inline">\(\sigma \in \operatorname{Gal}(k'/k)\)</span> and all <span class="math inline">\(j\)</span>, which implies <span class="math inline">\(c_j \in k\)</span>. Therefore, <span class="math inline">\(Q(T) \in k[T]\)</span>, so <span class="math inline">\(\alpha_s \in k[\alpha]\)</span>. The same argument holds for <span class="math inline">\(\alpha_u\)</span>, and uniqueness follows as in Case 1.</p>
+</div>
+<div id="exm-nonperfect-case" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1</strong></span> Let <span class="math inline">\(k\)</span> be a nonperfect field of characteristic <span class="math inline">\(2\)</span>, so that the Frobenius map <span class="math inline">\(x \mapsto x^2\)</span> is not surjective. Choose an element <span class="math inline">\(a \in k \setminus k^2\)</span>. Consider the matrix: <span class="math display">\[
+\alpha = \begin{pmatrix} 0 &amp; 1 \\ a &amp; 0 \end{pmatrix} \in \mathrm{GL}_2(k).
+\]</span> Over <span class="math inline">\(\bar{k}\)</span>, its characteristic polynomial is <span class="math inline">\(T^2 - a = (T - \sqrt{a})^2\)</span>. Its Jordan decomposition in <span class="math inline">\(\mathrm{GL}_2(k(\sqrt{a}))\)</span> is: <span class="math display">\[
+\alpha = \begin{pmatrix} \sqrt{a} &amp; 0 \\ 0 &amp; \sqrt{a} \end{pmatrix} \begin{pmatrix} 0 &amp; \frac{1}{\sqrt{a}} \\ \sqrt{a} &amp; 0 \end{pmatrix},
+\]</span> where: <span class="math display">\[
+\alpha_s = \begin{pmatrix} \sqrt{a} &amp; 0 \\ 0 &amp; \sqrt{a} \end{pmatrix} \quad (\text{semisimple}), \qquad \alpha_u = \begin{pmatrix} 0 &amp; \frac{1}{\sqrt{a}} \\ \sqrt{a} &amp; 0 \end{pmatrix} \quad (\text{unipotent}).
+\]</span> Since <span class="math inline">\(\sqrt{a} \notin k\)</span>, the components <span class="math inline">\(\alpha_s\)</span> and <span class="math inline">\(\alpha_u\)</span> cannot be defined over <span class="math inline">\(k\)</span>. Therefore, <span class="math inline">\(\alpha\)</span> has no Jordan decomposition in <span class="math inline">\(\mathrm{GL}_2(k)\)</span>.</p>
+</div>
+<div id="prp-preparation-tannakian" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p>If <span class="math inline">\(W \subseteq V\)</span> is an <span class="math inline">\(\alpha\)</span>-stable subspace, then <span class="math inline">\(W\)</span> is both <span class="math inline">\(\alpha_s\)</span>-stable and <span class="math inline">\(\alpha_u\)</span>-stable. The restriction <span class="math inline">\(\alpha|_W = \alpha_s|_W \cdot \alpha_u|_W\)</span> is the Jordan decomposition of <span class="math inline">\(\alpha|_W\)</span>. The same statement holds for the quotient space <span class="math inline">\(V/W\)</span>.</p></li>
+<li><p>If <span class="math inline">\(\varphi: W \to V\)</span> is a <span class="math inline">\(k\)</span>-linear map intertwining two operators <span class="math inline">\(\alpha_W \in \operatorname{Aut}_k(W)\)</span> and <span class="math inline">\(\alpha_V \in \operatorname{Aut}_k(V)\)</span>, i.e., <span class="math display">\[
+\begin{CD}
+W @&gt;{\varphi}&gt;&gt; V \\
+@V{\alpha_W}VV @VV{\alpha_V}V \\
+W @&gt;{\varphi}&gt;&gt; V
+\end{CD}
+\]</span> commutes, then <span class="math inline">\(\varphi\)</span> also intertwines their semisimple and unipotent parts: <span class="math display">\[
+\begin{CD}
+W @&gt;{\varphi}&gt;&gt; V \\
+@V{(\alpha_W)_s}VV @VV{(\alpha_V)_s}V \\
+W @&gt;{\varphi}&gt;&gt; V
+\end{CD}
+\qquad \text{and} \qquad
+\begin{CD}
+W @&gt;{\varphi}&gt;&gt; V \\
+@V{(\alpha_W)_u}VV @VV{(\alpha_V)_u}V \\
+W @&gt;{\varphi}&gt;&gt; V
+\end{CD}
+\]</span></p></li>
+<li><p>If <span class="math inline">\(\alpha \in \operatorname{Aut}_k(V)\)</span> and <span class="math inline">\(\beta \in \operatorname{Aut}_k(W)\)</span>, then: <span class="math display">\[
+(\alpha \otimes \beta)_s = \alpha_s \otimes \beta_s \quad \text{and} \quad (\alpha \otimes \beta)_u = \alpha_u \otimes \beta_u,
+\]</span> which gives the Jordan decomposition: <span class="math display">\[
+\alpha \otimes \beta = (\alpha_s \otimes \beta_s)(\alpha_u \otimes \beta_u) = (\alpha_u \otimes \beta_u)(\alpha_s \otimes \beta_s).
+\]</span></p></li>
+</ol>
+</div>
+<div id="def-locally-finite" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2</strong></span> Let <span class="math inline">\(V\)</span> be a vector space over <span class="math inline">\(k\)</span>, and let <span class="math inline">\(\alpha: V \to V\)</span> be a <span class="math inline">\(k\)</span>-linear endomorphism.</p>
+<ol type="1">
+<li><p><span class="math inline">\(\alpha\)</span> is <strong>locally finite</strong> if <span class="math inline">\(V\)</span> is a union of <span class="math inline">\(\alpha\)</span>-stable finite-dimensional subspaces: <span class="math display">\[
+V = \bigcup_{\substack{W \subseteq V, \, \dim W &lt; \infty \\ \alpha(W) \subseteq W}} W.
+\]</span></p></li>
+<li><p>If <span class="math inline">\(\alpha\)</span> is locally finite, then:</p>
+<ul>
+<li><p><span class="math inline">\(\alpha\)</span> is <strong>semisimple</strong> if for every finite-dimensional <span class="math inline">\(\alpha\)</span>-stable subspace <span class="math inline">\(W \subseteq V\)</span>, the restriction <span class="math inline">\(\alpha|_W\)</span> is semisimple;</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> is <strong>locally unipotent</strong> if for every finite-dimensional <span class="math inline">\(\alpha\)</span>-stable subspace <span class="math inline">\(W \subseteq V\)</span>, the restriction <span class="math inline">\(\alpha|_W\)</span> is unipotent (the integer <span class="math inline">\(N\)</span> such that <span class="math inline">\((\alpha|_W - \mathrm{id}_W)^N = 0\)</span> is not required to be bounded uniformly over all <span class="math inline">\(W\)</span>).</p></li>
+</ul></li>
+</ol>
+</div>
+<div id="exm-locally-finite-rep" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2</strong></span> Let <span class="math inline">\(G\)</span> be a linear algebraic group, and let <span class="math inline">\(r_V: G \to \mathrm{GL}_V\)</span> be a representation of <span class="math inline">\(G\)</span> on a vector space <span class="math inline">\(V\)</span>. For every <span class="math inline">\(g \in G(k)\)</span>, the operator <span class="math inline">\(r_V(g) \in \mathrm{GL}_V(k) = \operatorname{Aut}_k(V)\)</span> is locally finite.</p>
+</div>
+<div id="cor-locally-finite-jordan" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1</strong></span> Let <span class="math inline">\(\alpha: V \to V\)</span> be a locally finite operator on a vector space over a perfect field <span class="math inline">\(k\)</span>. Then there exist unique locally finite operators <span class="math inline">\(\alpha_s, \alpha_u \in \operatorname{Aut}_k(V)\)</span> such that:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\alpha = \alpha_s \alpha_u = \alpha_u \alpha_s\)</span>;</p></li>
+<li><p><span class="math inline">\(\alpha_s\)</span> is semisimple, and <span class="math inline">\(\alpha_u\)</span> is locally unipotent.</p></li>
+</ol>
+</div>
+<div id="thm-jordan-decomposition-2" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p>Let <span class="math inline">\(G\)</span> be a linear algebraic group over a perfect field <span class="math inline">\(k\)</span>. For each <span class="math inline">\(g \in G(k)\)</span>, there exist unique elements <span class="math inline">\(g_s, g_u \in G(k)\)</span> such that:</p>
+<ul>
+<li><p><span class="math inline">\(g = g_s g_u = g_u g_s\)</span> (called the <strong>Jordan decomposition</strong> of <span class="math inline">\(g\)</span>);</p></li>
+<li><p>for every representation <span class="math inline">\((V, r_V) \in \mathbf{Rep}_k G\)</span>, <span class="math display">\[
+r_V(g_s) = r_V(g)_s \quad \text{and} \quad r_V(g_u) = r_V(g)_u.
+\]</span></p></li>
+</ul></li>
+<li><p>An element <span class="math inline">\(g \in G(k)\)</span> is <strong>unipotent</strong> if <span class="math inline">\(g_s = 1\)</span>, and <strong>semisimple</strong> if <span class="math inline">\(g_u = 1\)</span>. Equivalently, <span class="math inline">\(g\)</span> is unipotent (resp. semisimple) if and only if for every representation <span class="math inline">\((V, r_V) \in \mathbf{Rep}_k G\)</span>, the operator <span class="math inline">\(r_V(g)\)</span> is unipotent (resp. semisimple).</p></li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>We use the Tannakian reconstruction theorem: <span class="math display">\[
+G(k) \xrightarrow{\;\sim\;} \underline{\operatorname{Aut}}^\otimes(\omega)(k), \quad g \longmapsto \big(r_V(g)\big)_{(V, r_V) \in \mathbf{Rep}_k G}.
+\]</span> Fixing <span class="math inline">\(g \in G(k)\)</span>, for each <span class="math inline">\((V, r_V) \in \mathbf{Rep}_k G\)</span>, the operator <span class="math inline">\(r_V(g) \in \operatorname{Aut}_k(V)\)</span> admits a unique Jordan decomposition: <span class="math display">\[
+r_V(g) = r_V(g)_s r_V(g)_u = r_V(g)_u r_V(g)_s.
+\]</span> It suffices to show that the families <span class="math inline">\(\big(r_V(g)_s\big)\)</span> and <span class="math inline">\(\big(r_V(g)_u\big)\)</span> define elements of <span class="math inline">\(\underline{\operatorname{Aut}}^\otimes(\omega)(k)\)</span>:</p>
+<ol type="1">
+<li><p>On the trivial representation <span class="math inline">\(\mathbf{1} = (k, \text{triv})\)</span>, <span class="math inline">\(r_{\mathbf{1}}(g) = \mathrm{id}_k\)</span>, so <span class="math inline">\(r_{\mathbf{1}}(g)_s = r_{\mathbf{1}}(g)_u = \mathrm{id}_k\)</span>.</p></li>
+<li><p>Compatibility with tensor products: by <a href="#prp-preparation-tannakian" class="quarto-xref">Proposition&nbsp;1</a>(3), for any <span class="math inline">\(V, W \in \mathbf{Rep}_k G\)</span>, <span class="math display">\[
+r_{V \otimes W}(g)_s = \big(r_V(g) \otimes r_W(g)\big)_s = r_V(g)_s \otimes r_W(g)_s,
+\]</span> and similarly for the unipotent parts.</p></li>
+<li><p>Functoriality: by <a href="#prp-preparation-tannakian" class="quarto-xref">Proposition&nbsp;1</a>(2), for every morphism of representations <span class="math inline">\(\varphi: W \to V\)</span>, <span class="math inline">\(\varphi\)</span> commutes with <span class="math inline">\(r_W(g)\)</span> and <span class="math inline">\(r_V(g)\)</span>, hence commutes with their semisimple and unipotent parts.</p></li>
+</ol>
+<p>Thus, <span class="math inline">\(\big(r_V(g)_s\big), \big(r_V(g)_u\big) \in \underline{\operatorname{Aut}}^\otimes(\omega)(k)\)</span>. Tracing back via the Tannakian isomorphism yields unique elements <span class="math inline">\(g_s, g_u \in G(k)\)</span> such that: <span class="math display">\[
+r_V(g) = r_V(g)_s r_V(g)_u = r_V(g)_u r_V(g)_s \implies g = g_s g_u = g_u g_s.
+\]</span></p>
+</div>
+<div id="cor-jordan-homomorphism" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 2</strong></span> Let <span class="math inline">\(\phi: G \to H\)</span> be a homomorphism of linear algebraic groups over a perfect field <span class="math inline">\(k\)</span>. Then for all <span class="math inline">\(g \in G(k)\)</span>: <span class="math display">\[
+\phi(g_s) = \phi(g)_s \quad \text{and} \quad \phi(g_u) = \phi(g)_u.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Choose a faithful representation of <span class="math inline">\(H\)</span>, <span class="math inline">\(r_V: H \hookrightarrow \mathrm{GL}_V\)</span>. Then <span class="math inline">\(r_V \circ \phi\)</span> is a representation of <span class="math inline">\(G\)</span>. By <a href="#thm-jordan-decomposition-2" class="quarto-xref">Theorem&nbsp;2</a>: <span class="math display">\[
+r_V\big(\phi(g)_s\big) = \big(r_V(\phi(g))\big)_s = \big((r_V \circ \phi)(g)\big)_s = (r_V \circ \phi)(g_s) = r_V\big(\phi(g_s)\big),
+\]</span> <span class="math display">\[
+r_V\big(\phi(g)_u\big) = \big(r_V(\phi(g))\big)_u = \big((r_V \circ \phi)(g)\big)_u = (r_V \circ \phi)(g_u) = r_V\big(\phi(g_u)\big).
+\]</span> Since <span class="math inline">\(r_V\)</span> is faithful, it is injective on <span class="math inline">\(k\)</span>-points. Therefore: <span class="math display">\[
+\phi(g_s) = \phi(g)_s \quad \text{and} \quad \phi(g_u) = \phi(g)_u.
+\]</span></p>
+</div>
+<div id="rem-alternative-proof" class="proof remark">
+<p><span class="proof-title"><em>Remark 1</em>. </span>An alternative proof of <a href="#thm-jordan-decomposition-2" class="quarto-xref">Theorem&nbsp;2</a> can be given without Tannakian categories:</p>
+<ol type="1">
+<li><p>By Theorem 5.1.18, choose a faithful representation <span class="math inline">\(r_V: G \hookrightarrow \mathrm{GL}_V\)</span>. In <span class="math inline">\(\mathrm{GL}_V(k)\)</span>, <span class="math inline">\(r_V(g)\)</span> has a Jordan decomposition <span class="math inline">\(r_V(g) = r_V(g)_s r_V(g)_u\)</span>.</p></li>
+<li><p>By Chevalley’s theorem (Theorem 5.2.1), there exists a finite-dimensional representation <span class="math inline">\(W\)</span> constructed from <span class="math inline">\(V\)</span> (via tensor products, direct sums, duals, and subquotients) and a <span class="math inline">\(1\)</span>-dimensional subspace <span class="math inline">\(L \subseteq W\)</span> such that <span class="math inline">\(G = \operatorname{Stab}_{\mathrm{GL}_V}(L)\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(\rho: \mathrm{GL}_V \to \mathrm{GL}_W\)</span> be the induced representation. Since <span class="math inline">\(W\)</span> is constructed from <span class="math inline">\(V\)</span>, by <a href="#prp-preparation-tannakian" class="quarto-xref">Proposition&nbsp;1</a>: <span class="math display">\[
+\rho\big(r_V(g)_s\big) = \rho\big(r_V(g)\big)_s \quad \text{and} \quad \rho\big(r_V(g)_u\big) = \rho\big(r_V(g)\big)_u.
+\]</span> Since <span class="math inline">\(r_V(g) \in G(k)\)</span>, <span class="math inline">\(\rho(r_V(g))\)</span> preserves <span class="math inline">\(L\)</span>. As <span class="math inline">\(L\)</span> is a <span class="math inline">\(1\)</span>-dimensional invariant subspace, its semisimple and unipotent parts must also preserve <span class="math inline">\(L\)</span>: <span class="math display">\[
+\rho\big(r_V(g)_s\big)(L) = L \quad \text{and} \quad \rho\big(r_V(g)_u\big)(L) = L.
+\]</span> Thus, <span class="math inline">\(r_V(g)_s, r_V(g)_u \in \operatorname{Stab}_{\mathrm{GL}_V}(L)(k) = G(k)\)</span>.</p></li>
+</ol>
+</div>
+
+
+
+</main> <!-- /main -->
+<style>
+
+/* --------------------------------------------------------------------------
+   缩小文章副标题 (Subtitle)
+   -------------------------------------------------------------------------- */
+.quarto-title .subtitle,
+header#title-block-header .subtitle,
+p.subtitle.lead {
+  font-size: 1.08rem !important;    /* 原默认约 1.3rem~1.4rem，建议设为 1.05rem ~ 1.15rem */
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  color: #64748b !important;        /* 适度弱化为柔和深灰色，让主副标题层级更清晰 */
+  margin-top: 0.4rem !important;
+  margin-bottom: 1rem !important;
+}
+
+
+/* 1. 标题放大（原为 1.05rem，调大至 1.2rem） */
+.theorem-header,
+.callout-header,
+.callout-title {
+  font-size: 1.05rem !important;       /* 标题字号加大（可根据喜好微调 1.18rem ~ 1.25rem） */
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+}
+
+
+
+/* --------------------------------------------------------------------------
+   7. 缩减左侧边栏最左侧留白与多级缩进（释放水平空间，防止标题折行）
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  /* (1) 压缩侧边栏主容器的左内边距（原默认约 1.5rem~2rem） */
+  #quarto-sidebar,
+  .sidebar-navigation {
+    padding-left: 0.35rem !important; /* 大幅缩减最左侧空白 */
+    padding-right: 0.5rem !important;
+  }
+
+  /* (2) 清除菜单列表容器的额外左缩进 */
+  #quarto-sidebar .sidebar-menu-container,
+  #quarto-sidebar .sidebar-menu-container ul,
+  #quarto-sidebar .sidebar-item-container {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  /* (3) 压缩二级子章节（如 22.0 Preliminaries）的层级缩进 */
+  #quarto-sidebar .sidebar-section .sidebar-item {
+    padding-left: 0.6rem !important; /* 保持轻微层级感，但不浪费宽度 */
+  }
+
+  /* (4) 紧凑化目录项链接本身的内边距 */
+  #quarto-sidebar .sidebar-link {
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
+  }
+
+  /* (5) 保证如 "22.3 Iitaka Fibration" 这样的长标题整行显示不折行 */
+  #quarto-sidebar .sidebar-link,
+  #quarto-sidebar .menu-text {
+    white-space: nowrap !important; /* 强制单行显示 */
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------
+   紧凑型页脚：压低底部栏高度
+   -------------------------------------------------------------------------- */
+/* 1. 压缩页脚整体的上下内边距 */
+footer.footer,
+.nav-footer {
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
+  min-height: unset !important;
+}
+
+/* 2. 清除文字内嵌 <p> 标签自带的下外边距，并垂直居中 */
+.nav-footer p,
+.nav-footer-left,
+.nav-footer-right {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+.nav-footer {
+  display: flex !important;
+  align-items: center !important; /* 文字垂直居中 */
+}
+
+
+/* --------------------------------------------------------------------------
+   1. 缩小右侧大纲标题 "On this page"
+   -------------------------------------------------------------------------- */
+#toc-title,
+h2#toc-title,
+nav#TOC h2,
+.sidebar .toc-title {
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  color: #64748b !important;
+  text-transform: uppercase !important;
+  margin-top: 0.3rem !important;
+  margin-bottom: 0.6rem !important;
+  padding-left: 0.2rem !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. 定理环境基础外观：深色竖线 + 8px 精致圆角 + 无底色透明
+   -------------------------------------------------------------------------- */
+.theorem {
+  margin: 1.25rem 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-left: 5px solid #1e40af !important;
+  overflow: hidden !important;
+  transition: all 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .theorem, .proof {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+}
+
+.theorem-header {
+  user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.55rem 0.95rem !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.4 !important;
+  background: transparent !important;
+}
+.theorem-header.is-clickable {
+  cursor: pointer !important;
+}
+.theorem-header.is-clickable:hover {
+  opacity: 0.82;
+}
+
+.theorem-body {
+  padding: 0.35rem 0.95rem 0.75rem !important;
+  background: transparent !important;
+}
+.theorem.is-folded .theorem-body {
+  display: none !important;
+}
+
+.fold-chevron {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.75rem;
+  opacity: 0.7;
+  transition: transform 0.25s ease;
+}
+.theorem-header:hover .fold-chevron, .proof-header:hover .fold-chevron {
+  opacity: 1;
+}
+.theorem.is-folded .fold-chevron, .proof.is-folded .fold-chevron {
+  transform: rotate(-90deg);
+}
+
+/* --------------------------------------------------------------------------
+   3. 专业深色学术色彩映射
+   -------------------------------------------------------------------------- */
+.theorem.kind-definition { border-left-color: #1e40af !important; }
+.theorem.kind-definition > .theorem-header { color: #1e40af !important; }
+
+.theorem.kind-lemma { border-left-color: #166534 !important; }
+.theorem.kind-lemma > .theorem-header { color: #166534 !important; }
+
+.theorem.kind-proposition { border-left-color: #6b21a8 !important; }
+.theorem.kind-proposition > .theorem-header { color: #6b21a8 !important; }
+
+.theorem.kind-theorem { border-left-color: #991b1b !important; }
+.theorem.kind-theorem > .theorem-header { color: #991b1b !important; }
+
+.theorem.kind-remark { border-left-color: #b45309 !important; }
+.theorem.kind-remark > .theorem-header { color: #b45309 !important; cursor: default !important; }
+
+.theorem.kind-example { border-left-color: #334155 !important; }
+.theorem.kind-example > .theorem-header { color: #334155 !important; }
+
+/* --------------------------------------------------------------------------
+   4. 证明环境 (.proof)：深烟灰、8px 圆角、默认折叠
+   -------------------------------------------------------------------------- */
+.proof {
+  margin: 0.9rem 0 1.35rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-left: 4px solid #64748b !important;
+  overflow: hidden !important;
+}
+
+.proof-header {
+  cursor: pointer !important;
+  user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.4rem 0.9rem !important;
+  font-weight: 600 !important;
+  color: #475569 !important;
+  font-size: 0.96rem !important;
+}
+.proof-header:hover { opacity: 0.85; }
+
+.proof-body {
+  padding: 0.35rem 0.9rem 0.65rem !important;
+}
+.proof.is-folded .proof-body {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. 右侧边栏条目与滚动高亮
+   -------------------------------------------------------------------------- */
+.callout-toc-item a.nav-link {
+  padding-left: 1.8rem !important;
+  font-size: 0.85rem !important;
+  opacity: 0.82;
+  cursor: pointer !important;
+  transition: all 0.15s ease;
+}
+.callout-toc-item a.nav-link:hover {
+  opacity: 1;
+  color: #1e40af !important;
+}
+
+nav#TOC a.nav-link.active-math-target,
+nav#TOC li.active > a.nav-link {
+  color: #1e40af !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+  border-left: 2.5px solid #1e40af !important;
+}
+</style>
+
+<script>
+(function() {
+  const ENV_CONFIG = {
+    definition:  { full: 'Definition',  short: 'Def' },
+    lemma:       { full: 'Lemma',       short: 'Lem' },
+    proposition: { full: 'Proposition', short: 'Prop' },
+    theorem:     { full: 'Theorem',     short: 'Thm' },
+    corollary:   { full: 'Corollary',   short: 'Cor' },
+    remark:      { full: 'Remark',      short: 'Rem' },
+    example:     { full: 'Example',     short: 'Ex' }
+  };
+
+  const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+
+  // --------------------------------------------------------------------------
+  // 【自动提取章节前缀】：优先读 CSS 变量，其次自动提取页面大标题开头的编号
+  // --------------------------------------------------------------------------
+  function getSecPrefix() {
+    // 1. 如果有通过 CSS 显式设置 --sec，直接使用
+    const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
+    if (sec) {
+      const clean = sec.replace(/["']/g, '');
+      return clean.endsWith('.') ? clean : clean + '.';
+    }
+
+    // 2. 自动从页面标题 (如 "22.0 Preliminaries") 或 document.title 提取开头的数字序号
+    const titleEl = document.querySelector('h1.title, .quarto-title h1, header#title-block-header h1, #title-block-header .title');
+    const titleText = titleEl ? titleEl.textContent.trim() : document.title.trim();
+    
+    // 匹配如 "22.0", "22.1", "23.0" 等开头的格式
+    const match = titleText.match(/^(\d+(?:\.\d+)*)\.?\s*/);
+    if (match) {
+      return match[1] + '.';
+    }
+
+    // 3. 最终保底默认值
+    return "22.0.";
+  }
+
+  function ensureTocList() {
+    let list = document.querySelector('#TOC > ul') ||
+               document.querySelector('nav[role="doc-toc"] > ul') ||
+               document.querySelector('#quarto-toc-target > ul');
+    if (list) return list;
+
+    let marginSidebar = document.querySelector('#quarto-margin-sidebar, .margin-sidebar');
+    if (!marginSidebar) {
+      const content = document.querySelector('#quarto-content') || document.querySelector('.page-columns');
+      if (content) {
+        marginSidebar = document.createElement('div');
+        marginSidebar.id = 'quarto-margin-sidebar';
+        marginSidebar.className = 'sidebar margin-sidebar';
+        content.appendChild(marginSidebar);
+      }
+    }
+
+    if (marginSidebar) {
+      marginSidebar.style.display = 'block';
+      let nav = marginSidebar.querySelector('#TOC');
+      if (!nav) {
+        nav = document.createElement('nav');
+        nav.id = 'TOC';
+        nav.setAttribute('role', 'doc-toc');
+        nav.className = 'toc-active';
+        nav.innerHTML = '<h2 id="toc-title">On this page</h2><ul></ul>';
+        marginSidebar.appendChild(nav);
+      }
+      return nav.querySelector('ul');
+    }
+    return null;
+  }
+
+  // 多维精准类型识别
+  function detectKind(node, titleText) {
+    const id = (node.id || "").toLowerCase();
+    const cls = (node.className || "").toLowerCase();
+    const title = (titleText || "").toLowerCase();
+
+    if (id.startsWith('rem-') || cls.includes('remark') || /^remark\b/.test(title)) return 'remark';
+    if (id.startsWith('exm-') || cls.includes('example') || /^example\b/.test(title)) return 'example';
+    if (id.startsWith('def-') || cls.includes('definition') || /^definition\b/.test(title)) return 'definition';
+    if (id.startsWith('lem-') || cls.includes('lemma') || /^lemma\b/.test(title)) return 'lemma';
+    if (id.startsWith('prp-') || cls.includes('proposition') || /^proposition\b/.test(title)) return 'proposition';
+    if (id.startsWith('cor-') || cls.includes('corollary') || /^corollary\b/.test(title)) return 'corollary';
+    if (id.startsWith('thm-') || cls.includes('theorem') || /^theorem\b/.test(title)) return 'theorem';
+    return 'theorem';
+  }
+
+  // 触发数学引擎排版
+  function triggerMathTypeset(elements) {
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      window.MathJax.typesetPromise(elements).catch(function(err) {
+        console.error("MathJax typeset failed: ", err);
+      });
+    } else if (window.MathJax && window.MathJax.Hub) {
+      window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, elements]);
+    }
+  }
+
+  // 1. 处理定理、例题与注记
+  function processTheorems() {
+    const secPrefix = getSecPrefix();
+    let counter = 0;
+
+    const tocList = ensureTocList();
+    if (tocList) {
+      tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
+    }
+
+    const pageNodes = document.querySelectorAll(
+      'main h2, main h3, #quarto-document-content h2, #quarto-document-content h3, .theorem, .remark, [id^="def-"], [id^="lem-"], [id^="prp-"], [id^="thm-"], [id^="cor-"], [id^="rem-"], [id^="exm-"]'
+    );
+
+    let lastTocAnchor = null;
+    const headersToTypeset = [];
+
+    pageNodes.forEach(node => {
+      if (node.tagName === 'H2' || node.tagName === 'H3') {
+        if (tocList && node.id) {
+          const a = tocList.querySelector(`a[href="#${CSS.escape(node.id)}"]`);
+          if (a) lastTocAnchor = a.closest('li');
+        }
+        return;
+      }
+
+      if (node.dataset.mathProcessed === "true") return;
+      node.dataset.mathProcessed = "true";
+
+      const titleSpan = node.querySelector('.theorem-title');
+      let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
+      let subTitle = "";
+
+      const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
+      if (match) {
+        subTitle = ` (${match[1].trim()})`;
+      }
+      if (titleSpan) titleSpan.remove();
+
+      const firstP = node.querySelector(':scope > p:first-child');
+      if (firstP && firstP.textContent.trim() === '') firstP.remove();
+
+      const kind = detectKind(node, rawTitleHtml);
+      const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
+      const numStr = secPrefix + counter;
+      counter++;
+
+      const canFold = (kind !== 'remark');
+      node.classList.add('theorem', `kind-${kind}`);
+
+      const header = document.createElement('div');
+      header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
+      header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
+
+      const body = document.createElement('div');
+      body.className = 'theorem-body';
+      while (node.firstChild) {
+        body.appendChild(node.firstChild);
+      }
+
+      node.appendChild(header);
+      node.appendChild(body);
+      headersToTypeset.push(header);
+
+      if (canFold) {
+        header.addEventListener('click', () => {
+          node.classList.toggle('is-folded');
+        });
+      }
+
+      if (!node.id) {
+        node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
+      }
+
+      // 插入右侧大纲
+      if (tocList) {
+        const li = document.createElement('li');
+        li.setAttribute('data-callout-toc', 'true');
+        li.className = 'nav-item callout-toc-item';
+
+        const a = document.createElement('a');
+        a.className = 'nav-link';
+        a.href = `#${node.id}`;
+        a.setAttribute('data-scroll-target', `#${node.id}`);
+        a.textContent = `${conf.short} ${numStr}`;
+
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const target = document.getElementById(node.id);
+          if (target) {
+            const navbar = document.querySelector('.navbar, header.fixed-top');
+            const navH = navbar ? navbar.getBoundingClientRect().height : 55;
+            const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 18;
+
+            window.scrollTo({
+              top: targetY,
+              behavior: 'smooth'
+            });
+
+            if (history.pushState) {
+              history.pushState(null, null, '#' + node.id);
+            }
+          }
+        });
+
+        li.appendChild(a);
+
+        if (lastTocAnchor && lastTocAnchor.parentNode) {
+          lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
+          lastTocAnchor = li;
+        } else {
+          tocList.appendChild(li);
+          lastTocAnchor = li;
+        }
+      }
+    });
+
+    if (headersToTypeset.length > 0) {
+      triggerMathTypeset(headersToTypeset);
+    }
+  }
+
+  // 2. 处理证明环境
+  function processProofs() {
+    const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
+    proofs.forEach(proof => {
+      if (proof.dataset.mathProcessed === "true") return;
+      proof.dataset.mathProcessed = "true";
+
+      let proofLabel = "Proof.";
+      const firstP = proof.querySelector('p');
+      if (firstP) {
+        const titleSpan = firstP.querySelector('.proof-title');
+        if (titleSpan) {
+          proofLabel = titleSpan.textContent.trim();
+          titleSpan.remove();
+        } else {
+          const em = firstP.querySelector('em');
+          if (em && /proof/i.test(em.textContent)) {
+            proofLabel = em.textContent.trim();
+            em.remove();
+          }
+        }
+      }
+
+      const header = document.createElement('div');
+      header.className = 'proof-header';
+      header.innerHTML = `<span><em>${proofLabel}</em></span>${CHEVRON_SVG}`;
+
+      const body = document.createElement('div');
+      body.className = 'proof-body';
+      while (proof.firstChild) {
+        body.appendChild(proof.firstChild);
+      }
+
+      proof.appendChild(header);
+      proof.appendChild(body);
+
+      proof.classList.add('is-folded');
+
+      header.addEventListener('click', () => {
+        proof.classList.toggle('is-folded');
+      });
+    });
+  }
+
+  // 3. 滚动监听
+  function initScrollSpy() {
+    const tocLinks = document.querySelectorAll('#TOC a.nav-link');
+    if (!tocLinks.length) return;
+
+    function onScroll() {
+      const scrollY = window.scrollY + 140;
+      const targets = Array.from(document.querySelectorAll('main h2[id], main h3[id], .theorem[id]'));
+
+      let current = null;
+      for (const el of targets) {
+        if (el.offsetTop <= scrollY) {
+          current = el;
+        } else {
+          break;
+        }
+      }
+
+      if (current) {
+        tocLinks.forEach(a => a.classList.remove('active-math-target'));
+        const activeA = document.querySelector(`#TOC a[href="#${CSS.escape(current.id)}"]`);
+        if (activeA) {
+          activeA.classList.add('active-math-target');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  let hasInit = false;
+  function run() {
+    if (hasInit) return;
+    const items = document.querySelectorAll('.theorem, [id^="def-"], [id^="lem-"], [id^="rem-"]');
+    if (!items.length && document.readyState === 'loading') return;
+    hasInit = true;
+    processTheorems();
+    processProofs();
+    initScrollSpy();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+  window.addEventListener('load', run);
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/losergh\.github\.io\/note\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../23_algebraic_groups/23.2 Representation II.html" class="pagination-link" aria-label="23.2 Representation II">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">23.2 Representation II</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
