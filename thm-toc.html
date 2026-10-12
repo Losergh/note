@@ -329,6 +329,9 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
 </style>
 
 <script>
+
+
+
 (function() {
   const ENV_CONFIG = {
     definition:  { full: 'Definition',  short: 'Def' },
@@ -557,6 +560,25 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     }
   }
 
+  // 自然数排序侧边栏
+function sortSidebarNumerically() {
+  const sidebarLists = document.querySelectorAll('#quarto-sidebar ul');
+  sidebarLists.forEach(ul => {
+    // 获取当前列表下的所有侧边栏条目
+    const items = Array.from(ul.children).filter(el => el.classList.contains('sidebar-item'));
+    if (items.length <= 1) return;
+
+    // 使用 numeric: true 开启自然数排序（自动识别 10 > 2）
+    items.sort((a, b) => {
+      const textA = a.querySelector('.sidebar-item-text, .menu-text, a')?.textContent.trim() || a.textContent.trim();
+      const textB = b.querySelector('.sidebar-item-text, .menu-text, a')?.textContent.trim() || b.textContent.trim();
+      return textA.localeCompare(textB, undefined, { numeric: true, sensitivity: 'base' });
+    });
+
+    // 将排序后的元素按新顺序重新插入 DOM
+    items.forEach(item => ul.appendChild(item));
+  });
+}
   function processProofs() {
     const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
     proofs.forEach(proof => {
@@ -646,6 +668,7 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
   function run() {
     if (isExecuting) return;
     isExecuting = true;
+    sortSidebarNumerically(); // <--- 在这里调用
     processTheorems();
     processProofs();
     initScrollSpy();

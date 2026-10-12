@@ -38,7 +38,11 @@ is called the **Jordan decomposition** of $x$.
 - Replace the algebraically closed field $\bar{k}$ with an arbitrary perfect field $k$.
 
 - Replace $\mathrm{GL}_n$ with an arbitrary linear algebraic group $G$.
+<<<<<<< HEAD
 
+=======
+:::
+>>>>>>> 2fa6ddb (awd)
 
 ::: {#def-eigenvalues}
 Let $V$ be a finite-dimensional vector space over $k$, and let $\alpha \in \mathrm{GL}_V(k) = \mathrm{GL}_n(k)$. Let $P_\alpha(T) := \det(T \cdot \mathrm{id} - \alpha) \in k[T]$ be the characteristic polynomial of $\alpha$.
@@ -312,6 +316,7 @@ An alternative proof of @thm-jordan-decomposition-2 can be given without Tannaki
    \rho\big(r_V(g)_s\big)(L) = L \quad \text{and} \quad \rho\big(r_V(g)_u\big)(L) = L.
    $$
    Thus, $r_V(g)_s, r_V(g)_u \in \operatorname{Stab}_{\mathrm{GL}_V}(L)(k) = G(k)$.
+<<<<<<< HEAD
 :::
 
 
@@ -604,3 +609,6 @@ which directly contradicts our choice of $n$ (that $a^{n-1} \neq 0$ in $A_{\math
 Therefore, we must have $\bar{a} = 0$ in $\mathfrak{p}/\mathfrak{p}^2$, which means $a \in \mathfrak{p}^2$.
 By @lem-smoothness-nilradical-criterion, $G$ is smooth.
 :::
+=======
+:::
+>>>>>>> 2fa6ddb (awd)
