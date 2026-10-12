@@ -1,0 +1,315 @@
+---
+title: "23.3 Jordan Decomposition"
+subtitle: ""
+date: last-modified
+number-sections: true
+sec: "23.3." 
+---
+
+**Motivation (Matrix case):**
+Let $x \in \mathrm{GL}_n(\bar{k})$. The Jordan normal form of $x$ is given by:
+$$
+x = s^{-1} \begin{pmatrix} B_{a_1}^{n_1} & & \\ & \ddots & \\ & & B_{a_r}^{n_r} \end{pmatrix} s,
+$$
+where each $B_{a_i}^{n_i}$ is a Jordan block of size $n_i \times n_i$ with eigenvalue $a_i$:
+$$
+B_{a_i}^{n_i} = \begin{pmatrix}
+a_i & 1 & & \\
+& a_i & \ddots & \\
+& & \ddots & 1 \\
+& & & a_i
+\end{pmatrix}.
+$$
+Define:
+$$
+x_s := s^{-1} \begin{pmatrix} a_1 I_{n_1} & & \\ & \ddots & \\ & & a_r I_{n_r} \end{pmatrix} s \in \mathrm{GL}_n(\bar{k}) \quad (\text{semisimple element}),
+$$
+$$
+x_u := s^{-1} \begin{pmatrix} a_1^{-1} B_{a_1}^{n_1} & & \\ & \ddots & \\ & & a_r^{-1} B_{a_r}^{n_r} \end{pmatrix} s \in \mathrm{GL}_n(\bar{k}) \quad (\text{unipotent element}).
+$$
+Then:
+$$
+x = x_s x_u = x_u x_s
+$$
+is called the **Jordan decomposition** of $x$.
+
+**Generalization:**
+
+- Replace the algebraically closed field $\bar{k}$ with an arbitrary perfect field $k$.
+
+- Replace $\mathrm{GL}_n$ with an arbitrary linear algebraic group $G$.
+:::
+
+::: {#def-eigenvalues}
+Let $V$ be a finite-dimensional vector space over $k$, and let $\alpha \in \mathrm{GL}_V(k) = \mathrm{GL}_n(k)$. Let $P_\alpha(T) := \det(T \cdot \mathrm{id} - \alpha) \in k[T]$ be the characteristic polynomial of $\alpha$.
+
+1. The eigenvalues of $\alpha$ lie in $k$ if $P_\alpha(T)$ splits over $k$:
+   $$
+   P_\alpha(T) = (T - a_1)^{m_1} \cdots (T - a_r)^{m_r}, \quad a_i \in k.
+   $$
+
+2. For each eigenvalue $a \in k$ of $\alpha$, the primary space (generalized eigenspace) is defined by:
+   $$
+   V^{(a)} := \{ v \in V \mid (\alpha - a \cdot \mathrm{id})^N v = 0 \text{ for some } N \ge 1 \}.
+   $$
+   Then $V = \bigoplus_{i=1}^r V^{(a_i)}$, and the usual Jordan decomposition works on each subspace.
+
+3. An element $\alpha$ is **semisimple** if $\alpha_{\bar{k}} \in \operatorname{End}_{\bar{k}}(V_{\bar{k}})$ is diagonalizable.
+
+4. An element $\alpha$ is **unipotent** if there exists an integer $N \ge 1$ such that $(\alpha - \mathrm{id})^N = 0$.
+:::
+
+::: {#thm-jordan-decomposition-1}
+Let $V$ be a finite-dimensional vector space over a perfect field $k$. Let $\alpha \in \operatorname{Aut}_k(V) = \mathrm{GL}_V(k)$. Then there exist unique elements $\alpha_s, \alpha_u \in \operatorname{Aut}_k(V)$ such that:
+
+1. $\alpha = \alpha_s \alpha_u = \alpha_u \alpha_s$ (equivalently, $\alpha = \alpha_s + \alpha_s(\alpha_u - \mathrm{id})$, where $\alpha_s(\alpha_u - \mathrm{id})$ is nilpotent);
+
+2. $\alpha_s$ is semisimple, and $\alpha_u$ is unipotent.
+
+In this case, $\alpha_s$ and $\alpha_u$ are polynomials in $\alpha$, i.e., $\alpha_s, \alpha_u \in k[\alpha]$.
+:::
+
+::: {.proof}
+**Case 1: All eigenvalues of $\alpha$ lie in $k$.**
+
+The characteristic polynomial splits over $k$:
+$$
+P_\alpha(T) = \prod_{i=1}^r (T - a_i)^{m_i}, \quad a_i \in k.
+$$
+Then $V = \bigoplus_{i=1}^r V^{(a_i)}$, where $V^{(a_i)} = \ker(\alpha - a_i \cdot \mathrm{id})^{m_i}$.
+
+Define $\alpha_s \in \operatorname{Aut}_k(V)$ by:
+$$
+\alpha_s\big|_{V^{(a_i)}} := a_i \cdot \mathrm{id}_{V^{(a_i)}}.
+$$
+Define $\alpha_u := \alpha \alpha_s^{-1}$. For each $v_i \in V^{(a_i)}$, we have:
+$$
+(\alpha_u - \mathrm{id})^{m_i}(v_i) = (a_i^{-1} \alpha - \mathrm{id})^{m_i}(v_i) = a_i^{-m_i} (\alpha - a_i \cdot \mathrm{id})^{m_i}(v_i) = 0.
+$$
+Hence $\alpha_u$ is unipotent.
+
+To find a polynomial $Q(T) \in k[T]$ such that $Q(\alpha) = \alpha_s$, it suffices to require:
+$$
+\big(Q(\alpha) - a_i \cdot \mathrm{id}\big)\big|_{V^{(a_i)}} = 0 \quad \text{for all } 1 \le i \le r,
+$$
+which is guaranteed if:
+$$
+(T - a_i)^{m_i} \mid \big(Q(T) - a_i\big), \quad \text{i.e., } Q(T) \equiv a_i \pmod{(T - a_i)^{m_i}}.
+$$
+By the Chinese Remainder Theorem, such a polynomial $Q(T)$ exists. 
+
+Similarly, there exists a polynomial $\widetilde{Q}(T) \in k[T]$ such that $\widetilde{Q}(\alpha) = \alpha_s^{-1}$. Then:
+$$
+\alpha_u = \alpha \alpha_s^{-1} = \alpha \widetilde{Q}(\alpha)
+$$
+is also a polynomial in $\alpha$.
+
+Since $\alpha_s, \alpha_u \in k[\alpha]$, they commute: $\alpha_s \alpha_u = \alpha_u \alpha_s$. Moreover, any endomorphism $\beta$ commuting with $\alpha$ also commutes with $\alpha_s$ and $\alpha_u$.
+
+**Uniqueness:**
+If $\alpha = \alpha_s \alpha_u = \beta_s \beta_u$ is another decomposition with commuting factors in $k[\alpha]$, then:
+$$
+\beta_s^{-1} \alpha_s = \beta_u \alpha_u^{-1} \in k[\alpha].
+$$
+Because $\beta_s$ and $\alpha_s$ commute, $\beta_s^{-1} \alpha_s$ is semisimple. Because $\beta_u$ and $\alpha_u$ commute, $\beta_u \alpha_u^{-1}$ is unipotent (all eigenvalues are $1$). The only endomorphism that is simultaneously semisimple and unipotent is the identity. Thus:
+$$
+\beta_s^{-1} \alpha_s = \beta_u \alpha_u^{-1} = \mathrm{id} \implies \alpha_s = \beta_s, \quad \alpha_u = \beta_u.
+$$
+
+**Case 2: General case over a perfect field $k$.**
+
+Since $k$ is perfect, there exists a finite Galois extension $k'/k$ such that all eigenvalues of $\alpha$ lie in $k'$. Let $A := \alpha_{k'} \in \operatorname{Aut}_{k'}(V_{k'})$. By Case 1, $A$ admits a unique Jordan decomposition:
+$$
+A = A_s A_u = A_u A_s.
+$$
+For every $\sigma \in \operatorname{Gal}(k'/k)$, applying $\sigma$ yields:
+$$
+A = \sigma(A) = \sigma(A_s) \sigma(A_u).
+$$
+Observe that:
+
+1. $\sigma(A_s)$ is semisimple, and $\sigma(A_u)$ is unipotent;
+
+2. $\sigma(A_s) \sigma(A_u) = \sigma(A_u) \sigma(A_s)$.
+
+By the uniqueness of the Jordan decomposition of $A$ over $k'$, we have:
+$$
+\sigma(A_s) = A_s \quad \text{and} \quad \sigma(A_u) = A_u \quad \text{for all } \sigma \in \operatorname{Gal}(k'/k).
+$$
+By Galois descent, $A_s$ and $A_u$ descend to $k$, giving $\alpha_s, \alpha_u \in \operatorname{Aut}_k(V)$ such that $(\alpha_s)_{k'} = A_s$ and $(\alpha_u)_{k'} = A_u$. They satisfy $\alpha = \alpha_s \alpha_u = \alpha_u \alpha_s$, with $\alpha_s$ semisimple and $\alpha_u$ unipotent.
+
+It remains to show that $\alpha_s, \alpha_u \in k[\alpha]$.
+We know $A_s \in k'[A]$. Let $Q(T) \in k'[T]$ be a polynomial of minimal degree such that $A_s = Q(A)$. Then $\deg Q < \deg m_k(A)$, where $m_k(A)$ is the minimal polynomial of $A$ over $k$.
+Writing $Q(T) = \sum_{j=0}^r c_j T^j$ with $c_j \in k'$, we have:
+$$
+A_s = \sigma(A_s) = \sum_{j=0}^r \sigma(c_j) A^j \implies \big(Q - \sigma(Q)\big)(A) = 0.
+$$
+If $\sigma(c_j) \neq c_j$ for some $j$, this would yield a non-zero polynomial of degree strictly less than $\deg m_k(A)$ annihilating $A$, a contradiction.
+Thus $\sigma(c_j) = c_j$ for all $\sigma \in \operatorname{Gal}(k'/k)$ and all $j$, which implies $c_j \in k$.
+Therefore, $Q(T) \in k[T]$, so $\alpha_s \in k[\alpha]$.
+The same argument holds for $\alpha_u$, and uniqueness follows as in Case 1.
+:::
+
+::: {#exm-nonperfect-case}
+Let $k$ be a nonperfect field of characteristic $2$, so that the Frobenius map $x \mapsto x^2$ is not surjective. Choose an element $a \in k \setminus k^2$. Consider the matrix:
+$$
+\alpha = \begin{pmatrix} 0 & 1 \\ a & 0 \end{pmatrix} \in \mathrm{GL}_2(k).
+$$
+Over $\bar{k}$, its characteristic polynomial is $T^2 - a = (T - \sqrt{a})^2$. Its Jordan decomposition in $\mathrm{GL}_2(k(\sqrt{a}))$ is:
+$$
+\alpha = \begin{pmatrix} \sqrt{a} & 0 \\ 0 & \sqrt{a} \end{pmatrix} \begin{pmatrix} 0 & \frac{1}{\sqrt{a}} \\ \sqrt{a} & 0 \end{pmatrix},
+$$
+where:
+$$
+\alpha_s = \begin{pmatrix} \sqrt{a} & 0 \\ 0 & \sqrt{a} \end{pmatrix} \quad (\text{semisimple}), \qquad \alpha_u = \begin{pmatrix} 0 & \frac{1}{\sqrt{a}} \\ \sqrt{a} & 0 \end{pmatrix} \quad (\text{unipotent}).
+$$
+Since $\sqrt{a} \notin k$, the components $\alpha_s$ and $\alpha_u$ cannot be defined over $k$. Therefore, $\alpha$ has no Jordan decomposition in $\mathrm{GL}_2(k)$.
+:::
+
+::: {#prp-preparation-tannakian}
+1. If $W \subseteq V$ is an $\alpha$-stable subspace, then $W$ is both $\alpha_s$-stable and $\alpha_u$-stable.
+   The restriction $\alpha|_W = \alpha_s|_W \cdot \alpha_u|_W$ is the Jordan decomposition of $\alpha|_W$.
+   The same statement holds for the quotient space $V/W$.
+
+2. If $\varphi: W \to V$ is a $k$-linear map intertwining two operators $\alpha_W \in \operatorname{Aut}_k(W)$ and $\alpha_V \in \operatorname{Aut}_k(V)$, i.e.,
+   $$
+   \begin{CD}
+   W @>{\varphi}>> V \\
+   @V{\alpha_W}VV @VV{\alpha_V}V \\
+   W @>{\varphi}>> V
+   \end{CD}
+   $$
+   commutes, then $\varphi$ also intertwines their semisimple and unipotent parts:
+   $$
+   \begin{CD}
+   W @>{\varphi}>> V \\
+   @V{(\alpha_W)_s}VV @VV{(\alpha_V)_s}V \\
+   W @>{\varphi}>> V
+   \end{CD}
+   \qquad \text{and} \qquad
+   \begin{CD}
+   W @>{\varphi}>> V \\
+   @V{(\alpha_W)_u}VV @VV{(\alpha_V)_u}V \\
+   W @>{\varphi}>> V
+   \end{CD}
+   $$
+
+3. If $\alpha \in \operatorname{Aut}_k(V)$ and $\beta \in \operatorname{Aut}_k(W)$, then:
+   $$
+   (\alpha \otimes \beta)_s = \alpha_s \otimes \beta_s \quad \text{and} \quad (\alpha \otimes \beta)_u = \alpha_u \otimes \beta_u,
+   $$
+   which gives the Jordan decomposition:
+   $$
+   \alpha \otimes \beta = (\alpha_s \otimes \beta_s)(\alpha_u \otimes \beta_u) = (\alpha_u \otimes \beta_u)(\alpha_s \otimes \beta_s).
+   $$
+:::
+
+::: {#def-locally-finite}
+Let $V$ be a vector space over $k$, and let $\alpha: V \to V$ be a $k$-linear endomorphism.
+
+1. $\alpha$ is **locally finite** if $V$ is a union of $\alpha$-stable finite-dimensional subspaces:
+   $$
+   V = \bigcup_{\substack{W \subseteq V, \, \dim W < \infty \\ \alpha(W) \subseteq W}} W.
+   $$
+
+2. If $\alpha$ is locally finite, then:
+
+   - $\alpha$ is **semisimple** if for every finite-dimensional $\alpha$-stable subspace $W \subseteq V$, the restriction $\alpha|_W$ is semisimple;
+
+   - $\alpha$ is **locally unipotent** if for every finite-dimensional $\alpha$-stable subspace $W \subseteq V$, the restriction $\alpha|_W$ is unipotent (the integer $N$ such that $(\alpha|_W - \mathrm{id}_W)^N = 0$ is not required to be bounded uniformly over all $W$).
+:::
+
+::: {#exm-locally-finite-rep}
+Let $G$ be a linear algebraic group, and let $r_V: G \to \mathrm{GL}_V$ be a representation of $G$ on a vector space $V$.
+For every $g \in G(k)$, the operator $r_V(g) \in \mathrm{GL}_V(k) = \operatorname{Aut}_k(V)$ is locally finite.
+:::
+
+::: {#cor-locally-finite-jordan}
+Let $\alpha: V \to V$ be a locally finite operator on a vector space over a perfect field $k$. Then there exist unique locally finite operators $\alpha_s, \alpha_u \in \operatorname{Aut}_k(V)$ such that:
+
+1. $\alpha = \alpha_s \alpha_u = \alpha_u \alpha_s$;
+
+2. $\alpha_s$ is semisimple, and $\alpha_u$ is locally unipotent.
+:::
+
+::: {#thm-jordan-decomposition-2}
+1. Let $G$ be a linear algebraic group over a perfect field $k$. For each $g \in G(k)$, there exist unique elements $g_s, g_u \in G(k)$ such that:
+
+   - $g = g_s g_u = g_u g_s$ (called the **Jordan decomposition** of $g$);
+
+   - for every representation $(V, r_V) \in \mathbf{Rep}_k G$,
+     $$
+     r_V(g_s) = r_V(g)_s \quad \text{and} \quad r_V(g_u) = r_V(g)_u.
+     $$
+
+2. An element $g \in G(k)$ is **unipotent** if $g_s = 1$, and **semisimple** if $g_u = 1$.
+   Equivalently, $g$ is unipotent (resp. semisimple) if and only if for every representation $(V, r_V) \in \mathbf{Rep}_k G$, the operator $r_V(g)$ is unipotent (resp. semisimple).
+:::
+
+::: {.proof}
+We use the Tannakian reconstruction theorem:
+$$
+G(k) \xrightarrow{\;\sim\;} \underline{\operatorname{Aut}}^\otimes(\omega)(k), \quad g \longmapsto \big(r_V(g)\big)_{(V, r_V) \in \mathbf{Rep}_k G}.
+$$
+Fixing $g \in G(k)$, for each $(V, r_V) \in \mathbf{Rep}_k G$, the operator $r_V(g) \in \operatorname{Aut}_k(V)$ admits a unique Jordan decomposition:
+$$
+r_V(g) = r_V(g)_s r_V(g)_u = r_V(g)_u r_V(g)_s.
+$$
+It suffices to show that the families $\big(r_V(g)_s\big)$ and $\big(r_V(g)_u\big)$ define elements of $\underline{\operatorname{Aut}}^\otimes(\omega)(k)$:
+
+1. On the trivial representation $\mathbf{1} = (k, \text{triv})$, $r_{\mathbf{1}}(g) = \mathrm{id}_k$, so $r_{\mathbf{1}}(g)_s = r_{\mathbf{1}}(g)_u = \mathrm{id}_k$.
+
+2. Compatibility with tensor products: by @prp-preparation-tannakian(3), for any $V, W \in \mathbf{Rep}_k G$,
+   $$
+   r_{V \otimes W}(g)_s = \big(r_V(g) \otimes r_W(g)\big)_s = r_V(g)_s \otimes r_W(g)_s,
+   $$
+   and similarly for the unipotent parts.
+
+3. Functoriality: by @prp-preparation-tannakian(2), for every morphism of representations $\varphi: W \to V$, $\varphi$ commutes with $r_W(g)$ and $r_V(g)$, hence commutes with their semisimple and unipotent parts.
+
+Thus, $\big(r_V(g)_s\big), \big(r_V(g)_u\big) \in \underline{\operatorname{Aut}}^\otimes(\omega)(k)$.
+Tracing back via the Tannakian isomorphism yields unique elements $g_s, g_u \in G(k)$ such that:
+$$
+r_V(g) = r_V(g)_s r_V(g)_u = r_V(g)_u r_V(g)_s \implies g = g_s g_u = g_u g_s.
+$$
+:::
+
+::: {#cor-jordan-homomorphism}
+Let $\phi: G \to H$ be a homomorphism of linear algebraic groups over a perfect field $k$. Then for all $g \in G(k)$:
+$$
+\phi(g_s) = \phi(g)_s \quad \text{and} \quad \phi(g_u) = \phi(g)_u.
+$$
+:::
+
+::: {.proof}
+Choose a faithful representation of $H$, $r_V: H \hookrightarrow \mathrm{GL}_V$. Then $r_V \circ \phi$ is a representation of $G$.
+By @thm-jordan-decomposition-2:
+$$
+r_V\big(\phi(g)_s\big) = \big(r_V(\phi(g))\big)_s = \big((r_V \circ \phi)(g)\big)_s = (r_V \circ \phi)(g_s) = r_V\big(\phi(g_s)\big),
+$$
+$$
+r_V\big(\phi(g)_u\big) = \big(r_V(\phi(g))\big)_u = \big((r_V \circ \phi)(g)\big)_u = (r_V \circ \phi)(g_u) = r_V\big(\phi(g_u)\big).
+$$
+Since $r_V$ is faithful, it is injective on $k$-points. Therefore:
+$$
+\phi(g_s) = \phi(g)_s \quad \text{and} \quad \phi(g_u) = \phi(g)_u.
+$$
+:::
+
+::: {#rem-alternative-proof}
+An alternative proof of @thm-jordan-decomposition-2 can be given without Tannakian categories:
+
+1. By Theorem 5.1.18, choose a faithful representation $r_V: G \hookrightarrow \mathrm{GL}_V$. In $\mathrm{GL}_V(k)$, $r_V(g)$ has a Jordan decomposition $r_V(g) = r_V(g)_s r_V(g)_u$.
+
+2. By Chevalley's theorem (Theorem 5.2.1), there exists a finite-dimensional representation $W$ constructed from $V$ (via tensor products, direct sums, duals, and subquotients) and a $1$-dimensional subspace $L \subseteq W$ such that $G = \operatorname{Stab}_{\mathrm{GL}_V}(L)$.
+
+3. Let $\rho: \mathrm{GL}_V \to \mathrm{GL}_W$ be the induced representation. Since $W$ is constructed from $V$, by @prp-preparation-tannakian:
+   $$
+   \rho\big(r_V(g)_s\big) = \rho\big(r_V(g)\big)_s \quad \text{and} \quad \rho\big(r_V(g)_u\big) = \rho\big(r_V(g)\big)_u.
+   $$
+   Since $r_V(g) \in G(k)$, $\rho(r_V(g))$ preserves $L$. As $L$ is a $1$-dimensional invariant subspace, its semisimple and unipotent parts must also preserve $L$:
+   $$
+   \rho\big(r_V(g)_s\big)(L) = L \quad \text{and} \quad \rho\big(r_V(g)_u\big)(L) = L.
+   $$
+   Thus, $r_V(g)_s, r_V(g)_u \in \operatorname{Stab}_{\mathrm{GL}_V}(L)(k) = G(k)$.
+:::

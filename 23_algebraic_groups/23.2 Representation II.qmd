@@ -313,13 +313,17 @@ Let $(\mathcal{C}, \otimes)$ be a neutral Tannakian category over $k$ with a $k$
 ::: {#rem-neutral-tannakian-category}
 ## Neutral Tannakian Categories
 A tuple $(\mathcal{C}, \otimes, \Phi, \Psi)$ is a **neutral Tannakian category** over $k$ if:
+
 1. $\mathcal{C}$ is a $k$-linear abelian category (a subabelian category of $\mathbf{Vect}_k$).
+
 2. $\otimes: \mathcal{C} \times \mathcal{C} \to \mathcal{C}$ is a $k$-bilinear functor.
+
 3. Associativity and symmetry constraints:
    $$
    \Phi_{X,Y,Z}: X \otimes (Y \otimes Z) \xrightarrow{\;\sim\;} (X \otimes Y) \otimes Z, \quad \Psi_{X,Y}: X \otimes Y \xrightarrow{\;\sim\;} Y \otimes X,
    $$
    which imply the existence of an identity object $\mathbf{1}$ such that $\mathcal{C} \xrightarrow{\sim} \mathcal{C}$, $X \mapsto \mathbf{1} \otimes X$.
+
 4. Existence of duals: for every $X \in \operatorname{Ob}(\mathcal{C})$, there exists $X^\vee \in \operatorname{Ob}(\mathcal{C})$ and an evaluation morphism:
    $$
    \operatorname{ev}: X^\vee \otimes X \longrightarrow \mathbf{1}
@@ -328,5 +332,6 @@ A tuple $(\mathcal{C}, \otimes, \Phi, \Psi)$ is a **neutral Tannakian category**
    $$
    \operatorname{Hom}_\mathcal{C}(T, X^\vee) \xrightarrow{\;\sim\;} \operatorname{Hom}_\mathcal{C}(T \otimes X, \mathbf{1}), \quad \alpha \longmapsto \operatorname{ev} \circ (\alpha \otimes \mathrm{id}_X).
    $$
+
 5. There exists a **$k$-valued fibre functor** $\omega: (\mathcal{C}, \otimes) \to \mathbf{Vect}_k$, which is an exact, faithful $k$-linear functor preserving tensor products.
 :::
