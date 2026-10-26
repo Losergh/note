@@ -38,7 +38,7 @@ is called the **Jordan decomposition** of $x$.
 - Replace the algebraically closed field $\bar{k}$ with an arbitrary perfect field $k$.
 
 - Replace $\mathrm{GL}_n$ with an arbitrary linear algebraic group $G$.
-:::
+
 
 ::: {#def-eigenvalues}
 Let $V$ be a finite-dimensional vector space over $k$, and let $\alpha \in \mathrm{GL}_V(k) = \mathrm{GL}_n(k)$. Let $P_\alpha(T) := \det(T \cdot \mathrm{id} - \alpha) \in k[T]$ be the characteristic polynomial of $\alpha$.
@@ -312,4 +312,295 @@ An alternative proof of @thm-jordan-decomposition-2 can be given without Tannaki
    \rho\big(r_V(g)_s\big)(L) = L \quad \text{and} \quad \rho\big(r_V(g)_u\big)(L) = L.
    $$
    Thus, $r_V(g)_s, r_V(g)_u \in \operatorname{Stab}_{\mathrm{GL}_V}(L)(k) = G(k)$.
+:::
+
+
+
+
+::: {#def-schematically-dense}
+## Schematically Dense Subsets (Def 5.3.10)
+Let $X$ be an algebraic scheme over a field $k$.
+
+1. A subset $S \subseteq X(k)$ is **schematically dense** in $X$ if the only closed subscheme $Z \subseteq X$ containing $S$ (i.e., $S \subseteq Z(k)$) is $X$ itself.
+   Equivalently:
+   - $X$ is reduced ($X = X^{\mathrm{red}}$) and $S$ is topologically dense in $|X|$ ($\overline{S} = |X|$);
+   - The canonical evaluation morphism
+     $$
+     \mathcal{O}_X \longrightarrow \prod_{s \in S} i_{s*} k, \quad f \longmapsto \big(f(s)\big)_{s \in S}
+     $$
+     is injective.
+
+2. A subset $S$ is schematically dense in $X$ if and only if it is locally schematically dense (i.e., for any open affine cover $\{U_i\}$ of $X$, $S \cap U_i(k)$ is schematically dense in $U_i$).
+
+3. Schematic density is stable under base change of the base field (by taking the inverse image). In particular, if $S \subseteq X(k)$ is schematically dense in $X$, then $X$ is geometrically reduced.
+
+4. For a field extension $k'/k$, a subset $S \subseteq X(k')$ is **schematically dense** in $X$ if the only closed subscheme $Z \subseteq X$ such that $S \subseteq Z(k')$ is $X$ itself.
+:::
+
+::: {#prp-geometrically-reduced-dense-points}
+## Geometric Reducedness Criterion (Prop 5.3.11)
+An algebraic scheme $X$ over $k$ is geometrically reduced if and only if $X(k^s)$ is schematically dense in $X$, where $k^s$ denotes the separable closure of $k$.
+:::
+
+::: {.proof}
+$(\implies)$ Since $X$ is geometrically reduced, the smooth locus $X^{\mathrm{sm}}$ is a dense open subscheme of $X$. Thus it suffices to show that $X^{\mathrm{sm}}(k^s)$ is dense in $X^{\mathrm{sm}}$, so we may assume without loss of generality that $X$ is smooth over $k$.
+
+Then the base change $X_{k^s}$ is smooth over $k^s$. For each point $x \in X_{k^s}$, there exists an étale neighborhood $U \xrightarrow{f} \mathbb{A}^d_{k^s}$. Since $k^s$ is separably closed, every non-empty étale $k^s$-scheme has $k^s$-rational points, which implies that the rational points are topologically dense:
+$$
+\overline{X_{k^s}(k^s)} = |X_{k^s}|.
+$$
+Under the projection morphism $\pi: X_{k^s} \to X$, the image of $X_{k^s}(k^s)$ is $X(k^s)$. Hence:
+$$
+\overline{X(k^s)} = \overline{\pi\big(X_{k^s}(k^s)\big)} = \pi\big(\overline{X_{k^s}(k^s)}\big) = \pi(|X_{k^s}|) = |X|.
+$$
+Because $X$ is reduced and $X(k^s)$ is dense in $|X|$, $X(k^s)$ is schematically dense in $X$.
+
+$(\impliedby)$ If $X(k^s)$ is schematically dense in $X$, then by stability under base change (@def-schematically-dense(3)), $X_{k^s}(k^s)$ is dense in $X_{k^s}$, which implies that $X_{\bar{k}}(\bar{k})$ is dense in $X_{\bar{k}}$. A scheme containing a dense set of reduced points is reduced, hence $X_{\bar{k}}$ is reduced, which means $X$ is geometrically reduced.
+:::
+
+::: {#def-frobenius}
+## Frobenius Morphisms (Def 5.3.12)
+Let $k$ be a field of characteristic $p > 0$.
+
+1. For a $k$-algebra $R$, the $p$-th power map $\sigma: R \to R$, $x \mapsto x^p$ is a ring homomorphism (the Frobenius endomorphism), but it is not a $k$-algebra homomorphism unless $k = \mathbb{F}_p$. Geometrically, this induces the **absolute Frobenius** morphism:
+   $$
+   \begin{CD}
+   \operatorname{Spec} R @>{\sigma^*}>> \operatorname{Spec} R \\
+   @VVV @VVV \\
+   \operatorname{Spec} k @>{\sigma^*}>> \operatorname{Spec} k
+   \end{CD}
+   $$
+
+2. For a $k$-scheme $X$, the **Frobenius twist** $X^{(p)}$ is defined by the fiber product (base change by $\sigma: k \to k$, $a \mapsto a^p$):
+   $$
+   \begin{CD}
+   X^{(p)} @>>> X \\
+   @VVV @VVV \\
+   \operatorname{Spec} k @>{\sigma}>> \operatorname{Spec} k
+   \end{CD}
+   $$
+   By the universal property of fiber products, the absolute Frobenius $F_{\mathrm{abs}}: X \to X$ and the structure morphism $X \to \operatorname{Spec} k$ induce a unique morphism of $k$-schemes:
+   $$
+   F_{X/k}: X \longrightarrow X^{(p)},
+   $$
+   called the **relative Frobenius morphism**.
+
+3. In terms of functors of points: for a $k$-algebra $R$, let ${}_\sigma R$ (or ${}_f R$) denote the $k$-algebra with underlying ring $R$ whose $k$-algebra structure is twisted by $\sigma$ (i.e., $a \cdot r := \sigma(a) r = a^p r$). Then the $p$-th power map $R \to {}_\sigma R$, $x \mapsto x^p$ is a homomorphism of $k$-algebras, and:
+   $$
+   X^{(p)}(R) \cong X({}_\sigma R).
+   $$
+:::
+
+::: {#prp-properties-relative-frobenius}
+## Properties of Relative Frobenius (Prop 5.3.13)
+1. **Functoriality:** For any morphism of $k$-schemes $\varphi: X \to Y$, the relative Frobenius is functorial; that is, the following diagram commutes:
+   $$
+   \begin{CD}
+   X @>{\varphi}>> Y \\
+   @V{F_{X/k}}VV @VV{F_{Y/k}}V \\
+   X^{(p)} @>{\varphi^{(p)}}>> Y^{(p)}
+   \end{CD}
+   $$
+
+2. **Compatibility with products:**
+   $$
+   F_{(X \times_k Y)/k} = F_{X/k} \times F_{Y/k}.
+   $$
+
+3. **Compatibility with base change:** For any field extension $k'/k$,
+   $$
+   (F_{X/k})_{k'} = F_{X_{k'}/k'}.
+   $$
+
+4. **Group scheme structure:** If $G$ is an algebraic group over $k$, then the functor
+   $$
+   G^{(p)}: \mathbf{Alg}_k \longrightarrow \mathbf{Grp}, \quad R \longmapsto G^{(p)}(R) = G({}_\sigma R)
+   $$
+   defines an algebraic group over $k$, and the relative Frobenius morphism $F_G: G \to G^{(p)}$ is a homomorphism of algebraic groups.
+:::
+
+::: {.proof}
+Part (4) follows from applying (1) and (2) to the multiplication map $m: G \times G \to G$. Specifically, the diagram:
+$$
+\begin{CD}
+G \times G @>{m}>> G \\
+@V{F_G \times F_G}VV @VV{F_G}V \\
+G^{(p)} \times G^{(p)} @>{m^{(p)}}>> G^{(p)}
+\end{CD}
+$$
+commutes, showing that $F_G$ preserves multiplication, hence is a homomorphism of algebraic groups.
+:::
+
+::: {#prp-frobenius-smooth-connected}
+## Relative Frobenius of Smooth Connected Groups (Prop 5.3.14)
+If $G$ is a smooth and connected (i.e., geometrically integral) algebraic group over $k$, then $G^{(p)}$ is also smooth and connected. Moreover, the relative Frobenius morphism $F_G: G \to G^{(p)}$ is fppf (faithfully flat of finite presentation).
+:::
+
+::: {.proof}
+By descent of smoothness and fppf descent of fppf morphisms, we may assume without loss of generality that $k = \bar{k}$.
+
+When $k = \bar{k}$ (hence perfect), $\sigma: k \xrightarrow{\sim} k$ is an isomorphism of fields, so $G^{(p)} \cong G$ as schemes; in particular, $G^{(p)}$ is smooth and connected.
+
+On coordinate rings, the pullback map $(F_G)^*: \mathcal{O}(G^{(p)}) \hookrightarrow \mathcal{O}(G)$ is the Frobenius map ($a \mapsto a^p$), which is integral (every element $a$ satisfies $T^p - a^p = 0$). By generic flatness and the homogeneity of algebraic groups, since $G^{(p)}$ is regular/reduced, $F_G$ is flat everywhere. Because it is dominant and integral, it is surjective on points. Hence $F_G: G \to G^{(p)}$ is fppf.
+:::
+
+::: {#cor-iterated-frobenius}
+## Iterated Frobenius (Corollary 5.3.15)
+For each $n \ge 1$, define the $n$-th Frobenius twist inductively by $G^{(p^n)} := (G^{(p^{n-1})})^{(p)}$ with $G^{(p^0)} := G$.
+Then the $n$-th iterate of relative Frobenius:
+$$
+F_G^n: G \xrightarrow{F_G} G^{(p)} \xrightarrow{F_{G^{(p)}}} \cdots \xrightarrow{F_{G^{(p^{n-1})}}} G^{(p^n)}
+$$
+is a homomorphism of algebraic groups.
+If $G$ is smooth and connected, then $G^{(p^n)}$ is smooth and connected, and $F_G^n$ is fppf.
+:::
+
+::: {#prp-frobenius-image-hopf-reduced}
+## Hopf Subalgebra $\mathcal{O}(G)^{p^n}$ (Prop 5.3.16)
+Let $G$ be a linear algebraic group over a perfect field $k$ of characteristic $p > 0$.
+For $n \ge 1$, let $\mathcal{O}(G)^{p^n} := \operatorname{Im}(f^n)$, where $f^n: \mathcal{O}(G) \to \mathcal{O}(G)$ is the $p^n$-th power map $a \mapsto a^{p^n}$.
+Then $\mathcal{O}(G)^{p^n}$ is a Hopf subalgebra of $\mathcal{O}(G)$, which is geometrically reduced for all $n \gg 0$.
+:::
+
+::: {.proof}
+Let $A := \mathcal{O}(G)$ be the coordinate Hopf algebra of $G$.
+The comorphism of the $n$-th relative Frobenius is:
+$$
+(F_G^n)^*: A \otimes_{k, \sigma^n} k \longrightarrow A, \quad a \otimes b \longmapsto a^{p^n} b.
+$$
+Since $k$ is perfect, every $b \in k$ has a unique $p^n$-th root $b^{1/p^n} \in k$, so $a^{p^n} b = (a b^{1/p^n})^{p^n}$. Thus:
+$$
+\operatorname{Im}\big((F_G^n)^*\big) = A^{p^n} = \mathcal{O}(G)^{p^n}.
+$$
+Since $F_G^n: G \to G^{(p^n)}$ is a homomorphism of algebraic groups, the image of its comorphism is a Hopf subalgebra of $A$.
+
+Because $A$ is a Noetherian ring, its nilradical $\operatorname{nil}(A)$ is finitely generated, hence nilpotent: there exists an integer $n_0 \ge 1$ such that $\operatorname{nil}(A)^{p^{n_0}} = 0$.
+Taking $n \gg 0$ such that $p^n > n_0$, any nilpotent element in $A$ has its $p^n$-th power equal to $0$.
+Therefore, $\mathcal{O}(G)^{p^n}$ has no non-zero nilpotent elements, so it is reduced.
+Because $k$ is perfect, reduced implies geometrically reduced (reduced over $k = k^{p^n} \iff$ reduced over $\bar{k}$).
+:::
+
+::: {#cor-factorization-frobenius-smooth}
+## Factorization via Smooth Algebraic Groups (Corollary 5.3.17)
+Let $G$ be a linear algebraic group over a perfect field $k$ of characteristic $p > 0$. Consider the $n$-th relative Frobenius $F_G^n: G \to G^{(p^n)}$, and let $I_n := \operatorname{Spec}\big(\mathcal{O}(G)^{p^n}\big) = \operatorname{Spec}\big(\operatorname{Im}((F_G^n)^*)\big)$ be its scheme-theoretic image:
+$$
+\begin{CD}
+G @>{F_G^n}>> G^{(p^n)} \\
+@V{\text{fppf}}VV @AAA \\
+I_n @= I_n
+\end{CD}
+$$
+
+1. If $G$ is smooth and connected, then $F_G^n$ is fppf, hence $I_n = G^{(p^n)}$, which is smooth and connected.
+
+2. In general, for all $n \gg 0$, $I_n$ is a smooth linear algebraic group over $k$, and the canonical morphism $G \to I_n$ is fppf.
+:::
+
+::: {#lem-smoothness-nilradical-criterion}
+## Smoothness Criterion via Nilradical (Lemma 5.3.18)
+Let $G$ be a linear algebraic group over an algebraically closed field $k$. If $\operatorname{nil}(\mathcal{O}(G)) \subseteq \mathfrak{m}_e^2$, where $\mathfrak{m}_e$ is the maximal ideal at the identity element $e \in G$, then $G$ is smooth.
+:::
+
+::: {.proof}
+An algebraic group $G$ is smooth if and only if $\dim T_e G = \dim G$.
+Let $G^{\mathrm{red}}$ be the associated reduced algebraic group. Over an algebraically closed field $k$, $G^{\mathrm{red}}$ is a smooth algebraic group, so:
+$$
+\dim T_e G^{\mathrm{red}} = \dim G^{\mathrm{red}} = \dim G.
+$$
+Thus it suffices to show that $\dim T_e G = \dim T_e G^{\mathrm{red}}$.
+
+The maximal ideal of the local ring of $G^{\mathrm{red}}$ at $e$ is $\mathfrak{m}_e^{\mathrm{red}} = \mathfrak{m}_e / \operatorname{nil}(\mathcal{O}(G))$. The canonical quotient morphism on Zariski cotangent spaces:
+$$
+\mathfrak{m}_e / \mathfrak{m}_e^2 \longrightarrow \mathfrak{m}_e^{\mathrm{red}} / (\mathfrak{m}_e^{\mathrm{red}})^2 \cong \mathfrak{m}_e / \big(\mathfrak{m}_e^2 + \operatorname{nil}(\mathcal{O}(G))\big)
+$$
+is an isomorphism because $\operatorname{nil}(\mathcal{O}(G)) \subseteq \mathfrak{m}_e^2$ implies $\mathfrak{m}_e^2 + \operatorname{nil}(\mathcal{O}(G)) = \mathfrak{m}_e^2$.
+Dualizing gives an isomorphism on tangent spaces $T_e G^{\mathrm{red}} \xrightarrow{\sim} T_e G$, so:
+$$
+\dim T_e G = \dim T_e G^{\mathrm{red}} = \dim G.
+$$
+Hence $G$ is smooth at $e$, and by group translations, $G$ is smooth everywhere.
+:::
+
+::: {#thm-cartier}
+## Cartier's Theorem (Theorem 5.3.19)
+Every linear algebraic group (and indeed every group scheme of finite type) over a field $k$ of characteristic zero is smooth.
+:::
+
+::: {.proof}
+By fppf descent of smoothness, we may assume without loss of generality that $k = \bar{k}$.
+
+Write $G = \operatorname{Spec} A$, where $A = \mathcal{O}(G)$ is the coordinate Hopf algebra of $G$, and let $\mathfrak{p} := \mathfrak{m}_e = \ker(\epsilon: A \to k)$ be the augmentation ideal corresponding to the identity element $e \in G$.
+By @lem-smoothness-nilradical-criterion, it suffices to show that every nilpotent element $a \in A$ satisfies $a \in \mathfrak{p}^2$.
+
+Since $A/\mathfrak{p} \cong k$ has no non-zero nilpotents, $a \in \mathfrak{p}$. If the image of $a$ in the localization $A_{\mathfrak{p}}$ is zero, then its image in $A_{\mathfrak{p}}/(\mathfrak{p}A_{\mathfrak{p}})^2 \cong A/\mathfrak{p}^2$ is zero, which implies $a \in \mathfrak{p}^2$, and there is nothing to prove.
+
+Thus, we may assume that the image of $a$ in $A_{\mathfrak{p}}$ is non-zero. Let $n \ge 2$ be an integer such that:
+$$
+a^n = 0 \text{ in } A_{\mathfrak{p}}, \quad \text{but} \quad a^{n-1} \neq 0 \text{ in } A_{\mathfrak{p}}.
+$$
+Since $a^n = 0$ in $A_{\mathfrak{p}}$, there exists an element $s \in A \setminus \mathfrak{p}$ such that $s a^n = 0$ in $A$. Replacing $a$ with $sa$ (note that $sa \equiv s(e) a \pmod{\mathfrak{p}^2}$ with $s(e) \in k^\times$, so $a \in \mathfrak{p}^2 \iff sa \in \mathfrak{p}^2$, and $(sa)^{n-1} = s^{n-1} a^{n-1} \neq 0$ in $A_{\mathfrak{p}}$), we may assume:
+$$
+a^n = 0 \text{ in } A, \quad \text{and} \quad a^{n-1} \neq 0 \text{ in } A_{\mathfrak{p}}.
+$$
+
+**Claim:** $m^*(a) - a \otimes 1 - 1 \otimes a \in \mathfrak{p} \otimes \mathfrak{p}$, where $m^*: A \to A \otimes_k A$ is the comultiplication map.
+
+*Proof of Claim:* The counit axioms state that:
+$$
+(\epsilon \otimes \mathrm{id}) \circ m^* = \mathrm{id} \quad \text{and} \quad (\mathrm{id} \otimes \epsilon) \circ m^* = \mathrm{id}.
+$$
+Since $\mathfrak{p} = \ker \epsilon$, we have:
+$$
+m^*(a) \equiv 1 \otimes a \pmod{\mathfrak{p} \otimes A} \quad \text{and} \quad m^*(a) \equiv a \otimes 1 \pmod{A \otimes \mathfrak{p}}.
+$$
+Under the decomposition $A = k \cdot 1 \oplus \mathfrak{p}$,
+$$
+A \otimes_k A = (k \cdot 1 \otimes 1) \oplus (k \cdot 1 \otimes \mathfrak{p}) \oplus (\mathfrak{p} \otimes k \cdot 1) \oplus (\mathfrak{p} \otimes \mathfrak{p}).
+$$
+Comparing with the congruences above yields:
+$$
+m^*(a) = a \otimes 1 + 1 \otimes a + y \quad \text{for some } y \in \mathfrak{p} \otimes_k \mathfrak{p}.
+$$
+This establishes the Claim.
+
+Now, because $m^*$ is a $k$-algebra homomorphism and $a^n = 0$ in $A$:
+$$
+0 = m^*(a^n) = \big(m^*(a)\big)^n = (a \otimes 1 + 1 \otimes a + y)^n.
+$$
+Expanding this product modulo $A \otimes \mathfrak{p}^2$, note that any term containing $(1 \otimes a + y)^k$ with $k \ge 2$ lies in $A \otimes \mathfrak{p}^2$ because $1 \otimes a + y \in A \otimes \mathfrak{p}$. Therefore:
+$$
+0 \equiv a^n \otimes 1 + n (a^{n-1} \otimes 1)(1 \otimes a + y) \pmod{A \otimes \mathfrak{p}^2}.
+$$
+Since $a^n = 0$ in $A$, this reduces to:
+$$
+n a^{n-1} \otimes a + n (a^{n-1} \otimes 1) y \in A \otimes \mathfrak{p}^2.
+$$
+Because $y \in \mathfrak{p} \otimes \mathfrak{p}$, we have $(a^{n-1} \otimes 1) y \in a^{n-1}\mathfrak{p} \otimes \mathfrak{p}$. Thus:
+$$
+n a^{n-1} \otimes a \in a^{n-1}\mathfrak{p} \otimes \mathfrak{p} + A \otimes \mathfrak{p}^2.
+$$
+Passing to the quotient $A \otimes (\mathfrak{p}/\mathfrak{p}^2)$, and denoting the image of $a$ by $\bar{a} \in \mathfrak{p}/\mathfrak{p}^2$, we obtain:
+$$
+n a^{n-1} \otimes \bar{a} \in a^{n-1}\mathfrak{p} \otimes (\mathfrak{p}/\mathfrak{p}^2) \quad \text{in } A \otimes_k (\mathfrak{p}/\mathfrak{p}^2).
+$$
+If $\bar{a} \neq 0$ in $\mathfrak{p}/\mathfrak{p}^2$, then $\bar{a}$ can be extended to a basis of $\mathfrak{p}/\mathfrak{p}^2$, which forces:
+$$
+n a^{n-1} \in a^{n-1}\mathfrak{p}.
+$$
+Since $\operatorname{char}(k) = 0$, the integer $n$ is invertible in $k$, so:
+$$
+a^{n-1} \in a^{n-1}\mathfrak{p}.
+$$
+Thus there exists an element $x \in \mathfrak{p}$ such that $a^{n-1} = a^{n-1} x$, which implies:
+$$
+a^{n-1}(1 - x) = 0.
+$$
+Because $x \in \mathfrak{p} = \mathfrak{m}_e$, the element $1 - x$ is a unit in the local ring $A_{\mathfrak{p}}$. Multiplying by its inverse in $A_{\mathfrak{p}}$ yields:
+$$
+a^{n-1} = 0 \quad \text{in } A_{\mathfrak{p}},
+$$
+which directly contradicts our choice of $n$ (that $a^{n-1} \neq 0$ in $A_{\mathfrak{p}}$).
+
+Therefore, we must have $\bar{a} = 0$ in $\mathfrak{p}/\mathfrak{p}^2$, which means $a \in \mathfrak{p}^2$.
+By @lem-smoothness-nilradical-criterion, $G$ is smooth.
 :::

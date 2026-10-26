@@ -1,0 +1,354 @@
+---
+title: "23.4 Quotients"
+subtitle: ""
+date: last-modified
+number-sections: true
+sec: "23.4."
+---
+
+::: {#thm-quotient-universal-property}
+## Universal Property of Quotients
+Let $k$ be a field, and let $G, G'$ be linear algebraic groups over $k$.
+
+1. A homomorphism $p: G \to Q$ of linear algebraic groups is a **quotient map** if and only if it is faithfully flat of finite presentation (fppf).
+   Equivalently, at the level of coordinate Hopf algebras, $A = \mathcal{O}(Q) \hookrightarrow B = \mathcal{O}(G)$ is an injective Hopf subalgebra map such that $B$ is faithfully flat over $A$.
+
+2. Let $p: G \to Q$ be a quotient map of linear algebraic groups, and let $N = \ker p$. Every homomorphism $\varphi: G \to G'$ such that $\ker \varphi \supseteq \ker p$ factors uniquely through $p$:
+   $$
+   \begin{CD}
+   G @>{p}>> Q \\
+   @V{\varphi}VV @VV{\exists!\,\bar{\varphi}}V \\
+   G' @= G'
+   \end{CD}
+   $$
+:::
+
+::: {.proof}
+To prove (2), consider the kernel pair diagram (coequalizer):
+$$
+G \times_Q G \;\rightrightarrows\; G \xrightarrow{\;\varphi\;} G'.
+$$
+We check this condition on points: for every $R \in \mathbf{Alg}_{/k}$,
+$$
+\begin{CD}
+G(R) \times_{Q(R)} G(R) @>{p_1, p_2}>> G(R) @>{\varphi}>> G'(R) \\
+@V{p \times p}VV @VV{p}V @VV{\varphi}V \\
+Q(R) \times Q(R) @>>> Q(R) @>>> G'(R)
+\end{CD}
+$$
+Since $\ker p \subseteq \ker \varphi$, for every $R \in \mathbf{Alg}_{/k}$ we have $\ker p(R) \subseteq \ker \varphi(R)$.
+For any pair $(g_1, g_2) \in G(R) \times_{Q(R)} G(R)$, we have $p(g_1) = p(g_2)$, so:
+$$
+g_1 g_2^{-1} \in \ker p(R) \subseteq \ker \varphi(R) \implies \varphi(g_1 g_2^{-1}) = 1 \implies \varphi(g_1) = \varphi(g_2).
+$$
+Hence the two compositions $G \times_Q G \rightrightarrows G \xrightarrow{\varphi} G'$ coincide.
+
+At the level of coordinate rings, let $B = \mathcal{O}(G)$ and $A = \mathcal{O}(Q)$. Since $B$ is faithfully flat over $A$, the Amitsur complex
+$$
+A \longrightarrow B \;\rightrightarrows\; B \otimes_A B
+$$
+is exact (i.e., $A = \{ b \in B \mid b \otimes 1 = 1 \otimes b \}$).
+The equality of the two pullbacks on $B \otimes_A B$ ensures that the comorphism $\varphi^\sharp: \mathcal{O}(G') \to B$ has image landing in the equalizer $A = \mathcal{O}(Q)$:
+$$
+\begin{CD}
+B \otimes B @<<< B @<{\varphi^\sharp}<< \mathcal{O}(G') \\
+@AAA @AAA @| \\
+B \otimes_A B @<<< A @<<{\exists!\,\bar{\varphi}^\sharp}< \mathcal{O}(G')
+\end{CD}
+$$
+Thus, there exists a unique $k$-algebra homomorphism $\bar{\varphi}^\sharp: \mathcal{O}(G') \to \mathcal{O}(Q)$, inducing the unique group homomorphism $\bar{\varphi}: Q \to G'$.
+:::
+
+::: {#def-quotient-group}
+Let $G$ be a linear algebraic group and $N \unlhd G$ a normal closed subgroup. If there exists a quotient map $q: G \to Q$ such that $\ker q = N$, then $Q$ is called the **quotient group** of $G$ by $N$, denoted $G/N$. By @thm-quotient-universal-property, $Q$ is unique up to unique isomorphism.
+:::
+
+::: {#def-fixed-points}
+Let $G$ be a linear algebraic group, and let $r: G \to \mathrm{GL}_V$ be a representation of $G$ on a finite-dimensional $k$-vector space $V$. The **subspace of invariants** (or fixed points) is defined by:
+$$
+V^G := \big\{ v \in V \;\big|\; g \cdot v_R = v_R \quad \forall R \in \mathbf{Alg}_{/k}, \, \forall g \in G(R) \big\},
+$$
+where $v_R = v \otimes 1 \in V \otimes_k R$.
+:::
+
+::: {#lem-fixed-points-base-change}
+For every $k$-algebra $R \in \mathbf{Alg}_{/k}$, the formation of invariants commutes with base change:
+$$
+V^G \otimes_k R = \big\{ v' \in V \otimes_k R \;\big|\; g \cdot v'_S = v'_S \quad \forall S \in \mathbf{Alg}_{/R}, \, \forall g \in G(S) \big\}.
+$$
+:::
+
+::: {.proof}
+The inclusion $\mathrm{LHS} \subseteq \mathrm{RHS}$ is clear.
+Conversely, choose a $k$-basis $\{e_i\}_{i \in I}$ of $R$.
+Any element $v' \in V \otimes_k R$ can be uniquely written as a finite sum:
+$$
+v' = \sum_{i \in I} v_i \otimes e_i, \quad v_i \in V.
+$$
+Suppose $v' \in \mathrm{RHS}$. We want to show that $v_i \in V^G$ for each $i \in I$.
+For any $S \in \mathbf{Alg}_{/k}$ and any $g \in G(S)$, consider the canonical base extension $S \to S \otimes_k R$ given by $a \mapsto a \otimes 1$. This induces a map $G(S) \to G(S \otimes_k R)$, sending $g \mapsto g'$.
+Viewing $S \otimes_k R$ as an $R$-algebra, the assumption on $v'$ implies:
+$$
+g' \cdot v'_{S \otimes_k R} = v'_{S \otimes_k R} \quad \text{in } V \otimes_k S \otimes_k R.
+$$
+Expanding in the basis $\{e_i\}$:
+$$
+\sum_{i \in I} \big( g \cdot (v_i)_S \big) \otimes e_i = \sum_{i \in I} (v_i)_S \otimes e_i \quad \text{in } (V \otimes_k S) \otimes_k R.
+$$
+Since the elements $e_i$ are linearly independent over $k$, we deduce that for each $i \in I$:
+$$
+g \cdot (v_i)_S = (v_i)_S \quad \text{in } V \otimes_k S.
+$$
+Because this holds for all $S$ and all $g \in G(S)$, it follows that $v_i \in V^G$ for all $i \in I$. Thus $v' \in V^G \otimes_k R$.
+:::
+
+::: {#lem-normal-fixed-stable}
+Let $G$ be a linear algebraic group, $N \unlhd G$ a normal subgroup, and $(V, r) \in \mathbf{Rep}_k(G)$. Then the invariant subspace $V^N$ is stable under $G$ (i.e., $g \cdot V^N = V^N$ for all $g \in G$).
+:::
+
+::: {.proof}
+Let $R \in \mathbf{Alg}_{/k}$ and $v \in V^N \otimes_k R$. For any $R$-algebra $R'$ and any $g \in G(R')$, we must show that:
+$$
+(g \cdot v_R)_{R'} \in V^N \otimes_k R'.
+$$
+By @lem-fixed-points-base-change, it suffices to show that for any $n' \in N(R')$:
+$$
+n' \cdot (g \cdot v_R)_{R'} = (g \cdot v_R)_{R'}.
+$$
+Writing $g'$ for the image of $g$ in $G(R')$, since $N \unlhd G$ is normal, $g'^{-1} n' g' \in N(R')$. Since $v \in V^N \otimes_k R$, $(g'^{-1} n' g') \cdot v_{R'} = v_{R'}$. Therefore:
+$$
+n' \cdot (g' \cdot v_{R'}) = g' \cdot \big( (g'^{-1} n' g') \cdot v_{R'} \big) = g' \cdot v_{R'} = (g \cdot v_R)_{R'}.
+$$
+Thus $(g \cdot v_R) \in V^N \otimes_k R$, so $V^N$ is stable under $G$.
+:::
+
+::: {#prp-chevalley-normal}
+Let $k = \bar{k}$, let $G$ be a linear algebraic group, and let $H \unlhd G$ be a closed normal subgroup.
+Then there exists a representation $(V, r) \in \mathbf{Rep}_k(G)$ and a $1$-dimensional subspace $L \subseteq V$ such that:
+$$
+H = \operatorname{Stab}_G(L) \quad \text{and } H \text{ acts trivially on } L.
+$$
+:::
+
+To prove @prp-chevalley-normal, we establish two preliminary lemmas.
+
+::: {#lem-semisimple-summand}
+## Lemma B
+Let $G$ be a linear algebraic group over $k$, and let $(V, r) \in \mathbf{Rep}_k(G)$. If $V = \sum_{i \in I} S_i$ is a sum of simple subrepresentations, then for every subrepresentation $W \subseteq V$, there exists a subset $J \subseteq I$ such that:
+$$
+V = W \oplus \bigoplus_{j \in J} S_j.
+$$
+In particular, $V$ is a direct sum of simple representations, and every subrepresentation $W$ is a direct summand.
+:::
+
+::: {#lem-character-dual}
+## Lemma A
+Let $k = \bar{k}$, let $G$ be a linear algebraic group, and let $H \unlhd G$ be a closed normal subgroup.
+If a character $\chi \in X^*(H)$ occurs in a representation $(V, r)$ of $G$ (meaning there is an $H$-stable line $L \subseteq V$ on which $H$ acts via $\chi$), then there exists an integer $m \ge 1$ such that $-m\chi$ occurs in a representation (possibly different) of $G$.
+:::
+
+::: {.proof}
+**Step 1: Reduction using Lemma B.**
+Suppose $\chi$ occurs on a line $L \subseteq V$. It suffices to find a representation $(W, r_W) \in \mathbf{Rep}_k(G)$ containing a $1$-dimensional subspace $L_1 \subseteq W$ such that:
+
+1. $H \le \operatorname{Stab}_G(L_1)$ with $H$ acting on $L_1$ via $m\chi$;
+
+2. $L_1$ is a direct summand of $W$ as a representation of $H$.
+
+If such a $W$ exists, then in the dual representation $W^\vee \in \mathbf{Rep}_k(G)$, the dual line $L_1^\vee$ is an $H$-subrepresentation on which $H$ acts via $-m\chi$.
+
+**Step 2: Case 1 — $G(k)$ is Zariski dense in $G$.**
+This occurs, for example, when $G$ is smooth or reduced over an algebraically closed field.
+Let $W \subseteq V$ be the sum of all $1$-dimensional $H$-stable subspaces of $V$.
+We claim that $W$ is $G$-stable:
+Since $H \unlhd G$, for any $g \in G(k)$ and $h \in H(k)$, $g^{-1} h g \in H(k)$. For any $v \in L_\chi \subseteq W$,
+$$
+h \cdot (g \cdot v) = g \cdot (g^{-1} h g \cdot v) = g \cdot \big(\chi(g^{-1} h g) v\big) = \chi(g^{-1} h g) (g \cdot v).
+$$
+Hence $g \cdot v$ is an eigenvector for $H$, so $g \cdot W \subseteq W$. Since $G(k)$ is Zariski dense in $G$, $\operatorname{Stab}_G(W) = G$, so $(W, r|_W) \in \mathbf{Rep}_k(G)$.
+By definition, $W$ is a sum of $1$-dimensional (hence simple) $H$-representations. By @lem-semisimple-summand (Lemma B), $L$ is a direct summand of $W$ as an $H$-representation. Thus $L^\vee \subseteq W^\vee$ is a subrepresentation with character $-\chi$ (here $m = 1$).
+
+**Step 3: Case 2 — General case (characteristic $p > 0$).**
+If $\operatorname{char} k = 0$, $G$ is always smooth, so Case 1 applies.
+Assume $\operatorname{char} k = p > 0$. For a sufficiently large integer $r \ge 1$, let $F_G^r: G \to G^{(p^r)}$ be the $r$-th Frobenius morphism, and let $N = \ker F_G^r$ be the Frobenius kernel.
+Consider the representation $S^{p^r}(V) \in \mathbf{Rep}_k(G)$ and the line $L^{\otimes p^r} \subseteq S^{p^r}(V)$.
+Choose a basis $\{e_1, \dots, e_n\}$ of $V$ such that $L = k e_1$. Under $r: G \to \mathrm{GL}_n$, the elements $n \in N(R)$ satisfy $r(n) = (a_{ij})$ with $a_{ij}^{p^r} = \delta_{ij}$.
+In the symmetric power $S^{p^r}(V)$,
+$$
+n \cdot e_1^{\otimes p^r} = \left(\sum_{i=1}^n a_{i1} e_i\right)^{\!\![p^r]} = \sum_{i=1}^n a_{i1}^{p^r} e_i^{[p^r]} = e_1^{[p^r]}.
+$$
+Therefore, $L^{\otimes p^r} \subseteq \big(S^{p^r}(V)\big)^N$.
+By @lem-normal-fixed-stable, $V_1 := \big(S^{p^r}(V)\big)^N$ is a subrepresentation of $G$.
+Since $N$ acts trivially on $V_1$, the action of $G$ on $V_1$ factors through the quotient $Z := G/N \cong \operatorname{Im}(F_G^r)$.
+For $r \gg 0$, $Z$ is reduced, and since $k = \bar{k}$, $Z(k)$ is Zariski dense in $Z$.
+Applying Case 1 to $Z$, there exists a subrepresentation $W \subseteq V_1$ containing a line $L_1$ on which $H$ acts via $\chi^{p^r}$, and $L_1$ is a direct summand of $W$. Thus the dual representation yields the character $-p^r \chi$ (with $m = p^r$).
+:::
+
+::: {.proof}
+*(Proof of @prp-chevalley-normal)*
+By Chevalley's theorem (Theorem 5.2.1), there exists a representation $(V, r_V) \in \mathbf{Rep}_k(G)$ and a $1$-dimensional subspace $L \subseteq V$ such that $H = \operatorname{Stab}_G(L)$.
+The subgroup $H$ acts on $L$ via a character $\chi: H \to \mathrm{GL}(L) \cong \mathbb{G}_m$.
+If $\chi = 1$ is trivial, the statement is already satisfied.
+If $\chi \ne 1$, by @lem-character-dual (Lemma A), there exists a representation $(W, r_W) \in \mathbf{Rep}_k(G)$ and a line $L' \subseteq W$ such that $H \le \operatorname{Stab}_G(L')$ and $H$ acts on $L'$ via $-m\chi$ for some $m \ge 1$.
+Consider the representation
+$$
+\widetilde{V} := V^{\otimes m} \otimes_k W \in \mathbf{Rep}_k(G),
+$$
+and the $1$-dimensional subspace $\widetilde{L} := L^{\otimes m} \otimes_k L' \subseteq \widetilde{V}$.
+The character by which $H$ acts on $\widetilde{L}$ is:
+$$
+\chi^m \cdot (-m\chi) = 1 \quad (\text{trivial}).
+$$
+Furthermore, $\operatorname{Stab}_G(\widetilde{L}) \ge \operatorname{Stab}_G(L) \cap \operatorname{Stab}_G(L') \ge H$.
+To ensure the stabilizer is exactly $H$, we take $V' = V \oplus \widetilde{V}$ and $L'' = \widetilde{L}$ inside a suitable direct sum, or simply replace $V$ with $V^{\oplus m} \oplus \widetilde{V}$ so that $\operatorname{Stab}_G(\widetilde{L}) = H$.
+:::
+
+::: {#def-weil-restriction}
+## Weil Restriction of Scalars
+Let $A$ be a finite $k$-algebra, and let $X$ be a quasi-projective scheme over $A$.
+The **Weil restriction of scalars** of $X$ from $A$ to $k$, denoted $\operatorname{Res}_{A/k} X$, is the functor:
+$$
+\operatorname{Res}_{A/k} X: \mathbf{Alg}_{/k} \longrightarrow \mathbf{Sets}, \quad R \longmapsto X(A \otimes_k R).
+$$
+The functor $\operatorname{Res}_{A/k}: \mathbf{Sch}_{/A} \to \mathbf{Sch}_{/k}$ is the right adjoint to base change:
+$$
+\operatorname{Hom}_{\mathbf{Sch}_{/A}}(Y_A, X) \cong \operatorname{Hom}_{\mathbf{Sch}_{/k}}(Y, \operatorname{Res}_{A/k} X).
+$$
+:::
+
+::: {#prp-weil-restriction}
+Let $A$ be a finite $k$-algebra.
+
+1. If $G$ is an algebraic group over $A$, then $\operatorname{Res}_{A/k} G$ is an algebraic group over $k$.
+
+2. If $G$ is a linear algebraic group over $A$, then $\operatorname{Res}_{A/k} G$ is a linear algebraic group over $k$.
+:::
+
+::: {#exm-weil-restriction}
+1. For any $k$-algebraic group $G$, the unit of the adjunction gives a canonical homomorphism:
+   $$
+   i_G: G \longrightarrow \operatorname{Res}_{A/k}(G_A),
+   $$
+   which on $R$-points is given by:
+   $$
+   i_G(R): G(R) \longrightarrow G_A(A \otimes_k R) = G(A \otimes_k R),
+   $$
+   induced by the natural $k$-algebra homomorphism $R \to A \otimes_k R$, $r \mapsto 1 \otimes r$.
+
+2. If $f: G_A \to H$ is a homomorphism of $A$-algebraic groups, the adjunction gives:
+   $$
+   \operatorname{Hom}_{\mathbf{Grp}/A}(G_A, H) \xrightarrow{\;\sim\;} \operatorname{Hom}_{\mathbf{Grp}/k}\big(G, \operatorname{Res}_{A/k} H\big), \quad f \longmapsto \operatorname{Res}_{A/k}(f) \circ i_G.
+   $$
+:::
+
+::: {#thm-quotient-existence}
+## Existence of Quotients
+Every closed normal subgroup $H$ of a linear algebraic group $G$ over a field $k$ is the kernel of a quotient map $p: G \to Q$, where $Q$ is a linear algebraic group.
+:::
+
+::: {.proof}
+**Case 1: $k = \bar{k}$.**
+By @prp-chevalley-normal, there exists a representation $(V, r_V) \in \mathbf{Rep}_k(G)$ and a line $L \subseteq V$ such that $\operatorname{Stab}_G(L) = H$ and $H$ acts trivially on $L$.
+Since $H$ acts trivially on $L$, we have $L \subseteq V^H$.
+By @lem-normal-fixed-stable, $V^H$ is a $G$-subrepresentation of $V$.
+Let $\alpha: G \to \mathrm{GL}(V^H)$ be the restriction of $r_V$ to $V^H$.
+Since $H$ acts trivially on $V^H$, we have $H \le \ker \alpha$.
+On the other hand, since $L \subseteq V^H$, any $g \in \ker \alpha$ fixes $L$ pointwise, which means:
+$$
+\ker \alpha \le \operatorname{Stab}_G(L) = H.
+$$
+Thus $\ker \alpha = H$.
+Setting $Q := \operatorname{Im}(\alpha) \subseteq \mathrm{GL}(V^H)$ (the scheme-theoretic image), the map $p: G \to Q$ is faithfully flat (fppf), and $\ker p = H$. Thus $Q \cong G/H$ is a linear algebraic group.
+
+**Case 2: Arbitrary ground field $k$.**
+Over $\bar{k}$, by Case 1 there exists a quotient $G_{\bar{k}} \to Q_{\bar{k}}$ with kernel $H_{\bar{k}}$, and choosing a faithful representation of $Q_{\bar{k}}$ yields a representation $r: G_{\bar{k}} \to \mathrm{GL}_{n,\bar{k}}$ such that $\ker r = H_{\bar{k}}$.
+Since $G$ and $H$ are defined over $k$, the representation $r$ is defined over some finite field extension $k'/k$:
+$$
+r': G_{k'} \longrightarrow \mathrm{GL}(V') \quad \text{such that} \quad \ker r' = H_{k'},
+$$
+where $V'$ is a finite-dimensional $k'$-vector space.
+Applying Weil restriction $\operatorname{Res}_{k'/k}$ to $r'$ and precomposing with the canonical map $i_G: G \to \operatorname{Res}_{k'/k} G_{k'}$, we obtain a homomorphism of linear algebraic groups over $k$:
+$$
+\alpha: G \xrightarrow{\;i_G\;} \operatorname{Res}_{k'/k}(G_{k'}) \xrightarrow{\;\operatorname{Res}_{k'/k}(r')\;} \operatorname{Res}_{k'/k}\big(\mathrm{GL}(V')\big).
+$$
+For every $k$-algebra $R \in \mathbf{Alg}_{/k}$, the map on $R$-points is:
+$$
+\alpha(R): G(R) \longrightarrow G(R \otimes_k k') \xrightarrow{\;r'(R \otimes_k k')\;} \mathrm{GL}_{V'}(R \otimes_k k').
+$$
+Its kernel is:
+$$
+\ker \alpha(R) = G(R) \cap \ker\big(r'(R \otimes_k k')\big) = G(R) \cap H(R \otimes_k k') = H(R).
+$$
+Hence $\ker \alpha = H$.
+Defining $Q := \operatorname{Im} \alpha$ as the scheme-theoretic image of $\alpha$ inside $\operatorname{Res}_{k'/k}(\mathrm{GL}(V'))$, we obtain a quotient map $p: G \to Q$ with $\ker p = H$.
+By @prp-weil-restriction, $\operatorname{Res}_{k'/k}(\mathrm{GL}(V'))$ is a linear algebraic group, so its closed subgroup $Q$ is also a linear algebraic group.
+:::
+
+::: {#cor-quotient-properties}
+1. For every closed normal subgroup $H \unlhd G$, there exists a representation $(V, r)$ of $G$ such that $H = \ker r$.
+
+2. Let $0 \to H \to G \xrightarrow{\pi} Q \to 0$ be a sequence of linear algebraic groups. The following are equivalent:
+   
+   (a) It is an exact sequence of group sheaves in the fppf topology on $(\mathbf{Sch}_{/k})_{\text{fppf}}$;
+   
+   (b) $Q$ is the quotient group $G/H$;
+   
+   (c) $\pi$ is fppf and $H = \ker \pi$.
+:::
+
+::: {.proof}
+(1) By @thm-quotient-existence, $Q = G/H$ is a linear algebraic group. Choosing a faithful representation $\rho: Q \hookrightarrow \mathrm{GL}_V$, the composite $r = \rho \circ \pi: G \to \mathrm{GL}_V$ satisfies $\ker r = \ker \pi = H$.
+
+(2) The equivalence (b) $\iff$ (c) is the definition of a quotient map.
+(a) $\implies$ (c): Since $G \to Q$ is an fppf epimorphism, $Q$ is an $H$-torsor over $G$, which implies $\pi$ is fppf and $H = \ker \pi$.
+(c) $\implies$ (a): For every $R \in \mathbf{Alg}_{/k}$ and every $\bar{g} \in Q(R)$, the fiber product $R' := R \times_Q G$ is an fppf $R$-algebra, and the image of $\bar{g}$ in $Q(R')$ lifts to $G(R')$. Hence $G \to Q$ is an epimorphism of fppf sheaves. Exactness at $G$ follows from $H = \ker \pi$.
+:::
+
+::: {#prp-orbit-map}
+1. Let $f: X \to Y$ be a $G$-equivariant morphism of $k$-schemes of finite type. Then the image $f(X)$ is locally closed in $Y$.
+   If $X$ is reduced, $f$ factors as:
+   $$
+   X \xrightarrow{\;\text{fppf}\;} f(X) \hookrightarrow Y.
+   $$
+
+2. In particular, for any action $G \times X \to X$ and any $k$-point $x \in X(k)$, the orbit map induces a morphism:
+   $$
+   G \xrightarrow{\;\text{fppf}\;} G \cdot x \hookrightarrow X.
+   $$
+   If $G$ is reduced, the orbit $G \cdot x$ is locally closed and stable under $G$. The sequence
+   $$
+   0 \longrightarrow G_x \longrightarrow G \longrightarrow G \cdot x \longrightarrow 0
+   $$
+   is an exact sequence of fppf sheaves.
+   If $G$ is smooth, then $G \cdot x$ is smooth.
+:::
+
+::: {#thm-homogeneous-space}
+## Quotient by an Arbitrary Subgroup
+Let $G$ be a smooth linear algebraic group, and let $H \le G$ be any closed subgroup (not necessarily normal).
+Then the fppf quotient sheaf $G/H$ is representable by a smooth quasi-projective scheme over $k$.
+:::
+
+::: {.proof}
+By Chevalley's theorem (Theorem 5.2.1), there exists a representation $(V, r) \in \mathbf{Rep}_k(G)$ and a $1$-dimensional subspace $L \subseteq V$ such that:
+$$
+H = \operatorname{Stab}_G(L).
+$$
+Consider the projective space $\mathbb{P}(V)$ and the point $x := [L] \in \mathbb{P}(V)(k)$.
+The representation $r$ induces a regular algebraic action $G \times \mathbb{P}(V) \to \mathbb{P}(V)$.
+The stabilizer scheme of the point $x$ is:
+$$
+G_x = \operatorname{Stab}_G(L) = H.
+$$
+By @prp-orbit-map, the orbit $G \cdot x \subseteq \mathbb{P}(V)$ is a locally closed subscheme of $\mathbb{P}(V)$ (hence a quasi-projective variety), and the orbit map
+$$
+G \longrightarrow G \cdot x
+$$
+is faithfully flat (fppf).
+Consequently, the sequence of fppf sheaves
+$$
+0 \longrightarrow H \longrightarrow G \longrightarrow G \cdot x \longrightarrow 0
+$$
+is exact. Therefore, the orbit $G \cdot x$ represents the fppf quotient sheaf $G/H$.
+Since $G$ is smooth, the homogeneous space $G/H \cong G \cdot x$ is also smooth.
+:::

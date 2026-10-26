@@ -8,6 +8,7 @@
    2. 主题变量系统（完整支持亮色模式与 Quarto 暗色切换）
    ========================================================================== */
 :root {
+  /* 页面基础 (日间) */
   --note-bg: #ffffff;
   --note-text: #24292f;
   --note-heading: #111827;
@@ -16,13 +17,16 @@
   --note-paper: #fbfaf7;
   --note-border: #d0dfec;          /* 泛浅蓝的温和边框 */
   
+  /* 侧边栏与面包屑 (日间) */
+  --sidebar-bg: #f8fafc;
+  --secondary-nav-bg: #f1f5f9;
   --sidebar-text: #4a5568;
   --sidebar-hover: #111111;
   
   --link-color: #1a1a1a;
   --link-underline: #a0aec0;
   
-  /* 顶部导航专属 (亮色) */
+  /* 顶部导航专属 (日间) */
   --navbar-bg: #eaf2f8;
   --navbar-text: #1d3557;
   --navbar-hover: #dbeaf5;
@@ -32,55 +36,61 @@
   --callout-border: #cbd5e1;
 }
 
-/* 兼容 Quarto 切换开关（body.quarto-dark）与系统深色首选 */
+/* 核心修复：点击夜间模式后，强制全局所有层级同步变黑 */
 body.quarto-dark,
 html[data-bs-theme="dark"] body {
-  --note-bg: #181d24;              /* 舒适护眼的暗夜蓝灰底色 */
-  --note-text: #d3dce6;            /* 高可读性冷浅灰 */
-  --note-heading: #f1f5f9;         /* 标题明亮白 */
-  --note-muted: #8c9ba8;
-  --note-accent: #60a5fa;          /* 深色模式下的明亮冰蓝 */
-  --note-paper: #202630;           /* 卡片深色底色 */
-  --note-border: #323f4f;          /* 温和深色边框 */
+  /* 页面基础 (夜间) */
+  --note-bg: #181d24 !important;              /* 舒适护眼的暗夜蓝灰底色 */
+  --note-text: #d3dce6 !important;            /* 高可读性冷浅灰 */
+  --note-heading: #f1f5f9 !important;         /* 标题明亮白 */
+  --note-muted: #8c9ba8 !important;
+  --note-accent: #60a5fa !important;          /* 深色模式下的明亮冰蓝 */
+  --note-paper: #202630 !important;           /* 卡片深色底色 */
+  --note-border: #323f4f !important;          /* 温和深色边框 */
   
-  --sidebar-text: #94a3b8;
-  --sidebar-hover: #f1f5f9;
+  /* 侧边栏与面包屑 (夜间) */
+  --sidebar-bg: #14181f !important;
+  --secondary-nav-bg: #181d24 !important;
+  --sidebar-text: #94a3b8 !important;
+  --sidebar-hover: #f1f5f9 !important;
   
-  --link-color: #93c5fd;
-  --link-underline: #475569;
+  --link-color: #93c5fd !important;
+  --link-underline: #475569 !important;
   
-  /* 顶部导航专属 (暗色) */
-  --navbar-bg: #151d27;
-  --navbar-text: #e2e8f0;
-  --navbar-hover: #212e3e;
+  /* 顶部导航专属 (夜间) */
+  --navbar-bg: #13171e !important;
+  --navbar-text: #e2e8f0 !important;
+  --navbar-hover: #212e3e !important;
 
-  --callout-bg: #1e252f;
-  --callout-border: #334454;
+  --callout-bg: #1e252f !important;
+  --callout-border: #334454 !important;
 }
 
 @media (prefers-color-scheme: dark) {
   body:not(.quarto-light) {
-    --note-bg: #181d24;
-    --note-text: #d3dce6;
-    --note-heading: #f1f5f9;
-    --note-muted: #8c9ba8;
-    --note-accent: #60a5fa;
-    --note-paper: #202630;
-    --note-border: #323f4f;
-    --sidebar-text: #94a3b8;
-    --sidebar-hover: #f1f5f9;
-    --link-color: #93c5fd;
-    --link-underline: #475569;
-    --navbar-bg: #151d27;
-    --navbar-text: #e2e8f0;
-    --navbar-hover: #212e3e;
-    --callout-bg: #1e252f;
-    --callout-border: #334454;
+    --note-bg: #181d24 !important;
+    --note-text: #d3dce6 !important;
+    --note-heading: #f1f5f9 !important;
+    --note-muted: #8c9ba8 !important;
+    --note-accent: #60a5fa !important;
+    --note-paper: #202630 !important;
+    --note-border: #323f4f !important;
+    --sidebar-bg: #14181f !important;
+    --secondary-nav-bg: #181d24 !important;
+    --sidebar-text: #94a3b8 !important;
+    --sidebar-hover: #f1f5f9 !important;
+    --link-color: #93c5fd !important;
+    --link-underline: #475569 !important;
+    --navbar-bg: #13171e !important;
+    --navbar-text: #e2e8f0 !important;
+    --navbar-hover: #212e3e !important;
+    --callout-bg: #1e252f !important;
+    --callout-border: #334454 !important;
   }
 }
 
 /* ==========================================================================
-   3. 全局排版与吸顶跳转安全修正
+   3. 全局排版、吸顶跳转与暗色彻底覆写
    ========================================================================== */
 html {
   scroll-behavior: smooth;
@@ -96,6 +106,24 @@ body {
   color: var(--note-text) !important;
   background-color: var(--note-bg) !important;
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* 核心：消除正文容器残留的白底 */
+#quarto-content,
+#quarto-document-content,
+main,
+main.content,
+.page-columns,
+.content {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+body.quarto-dark,
+body.quarto-dark #quarto-content,
+body.quarto-dark main {
+  background-color: #181d24 !important;
+  color: #d3dce6 !important;
 }
 
 .content p, main p {
@@ -189,14 +217,25 @@ div.callout-body > p {
 }
 
 /* ==========================================================================
-   5. 左侧边栏与面包屑导航
+   5. 左侧边栏与面包屑导航（消灭突兀黑块）
    ========================================================================== */
+#quarto-sidebar,
 .sidebar {
   text-align: left !important;
   word-spacing: normal !important;
-  background-color: transparent !important;
+  background-color: var(--sidebar-bg) !important;
+  border-right: 1px solid var(--note-border) !important;
 }
 
+.quarto-secondary-nav,
+nav.quarto-secondary-nav,
+header.quarto-secondary-nav {
+  background-color: var(--secondary-nav-bg) !important;
+  border-bottom: 1px solid var(--note-border) !important;
+  box-shadow: none !important;
+}
+
+.quarto-secondary-nav *,
 .sidebar a,
 .sidebar-item-text,
 .breadcrumb a {
@@ -205,6 +244,7 @@ div.callout-body > p {
   text-align: left !important;
 }
 
+.quarto-secondary-nav a:hover,
 .sidebar a:hover,
 .breadcrumb a:hover {
   color: var(--sidebar-hover) !important;
@@ -324,7 +364,7 @@ body.quarto-dark a[role="doc-biblioref"] {
 }
 
 /* ==========================================================================
-   8. 首页卡片样式
+   8. 首页卡片样式（完整保留，无删减）
    ========================================================================== */
 .hero-note {
   max-width: 52rem;
@@ -395,13 +435,14 @@ body.quarto-dark a[role="doc-biblioref"] {
 }
 
 /* ==========================================================================
-   9. 顶部导航栏安全优化
+   9. 顶部导航栏与【高对比度极醒目暗色开关】（彻底解决选择器与隐形 Bug）
    ========================================================================== */
 .navbar {
   padding-top: 0.2rem !important;
   padding-bottom: 0.2rem !important;
   background-color: var(--navbar-bg) !important;
   border-bottom: 1px solid var(--note-border) !important;
+  transition: background-color 0.2s ease;
 }
 
 .navbar .navbar-brand {
@@ -439,13 +480,80 @@ body.quarto-dark a[role="doc-biblioref"] {
   opacity: 0.88 !important;
 }
 
-/* 导航栏暗色切换开关（去除了原 CSS 中的重复定义） */
-.navbar .quarto-color-scheme-toggle .form-check-input {
-  border: 1.5px solid var(--navbar-text) !important;
-  background-color: rgba(125, 150, 180, 0.25) !important;
-  cursor: pointer;
+/* ====== 核心重写：直接作用于正确的 .quarto-color-scheme-toggle 节点 ====== */
+.navbar .quarto-color-scheme-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.2rem 0.55rem !important;
+  margin: 0 0.35rem !important;
+  border-radius: 16px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
 }
 
-.navbar .quarto-color-scheme-toggle .form-check-input:checked {
-  background-color: var(--navbar-text) !important;
+/* 1. 日间状态（亮色底）：淡蓝实体药丸 + 醒目深蓝 toggle-off 图标 */
+.navbar .quarto-color-scheme-toggle:not(.alternate) {
+  background-color: #dbeafe !important;
+  border: 1.5px solid #93c5fd !important;
+}
+
+.navbar .quarto-color-scheme-toggle:not(.alternate) .bi::before {
+  content: "" !important;
+  display: block !important;
+  width: 1.4rem !important;
+  height: 1.1rem !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='16' fill='%231e3a8a' class='bi bi-toggle-off' viewBox='0 0 16 16'%3E%3Cpath d='M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z'/%3E%3C/svg%3E") !important;
+}
+
+/* 2. 夜间状态（已点击）：深灰蓝药丸 + 璀璨金黄发光 toggle-on 图标 */
+body.quarto-dark .navbar .quarto-color-scheme-toggle,
+.navbar .quarto-color-scheme-toggle.alternate {
+  background-color: #1e293b !important;
+  border: 1.5px solid #fbbf24 !important;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.35) !important;
+}
+
+body.quarto-dark .navbar .quarto-color-scheme-toggle .bi::before,
+.navbar .quarto-color-scheme-toggle.alternate .bi::before {
+  content: "" !important;
+  display: block !important;
+  width: 1.4rem !important;
+  height: 1.1rem !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='16' fill='%23fbbf24' class='bi bi-toggle-on' viewBox='0 0 16 16'%3E%3Cpath d='M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z'/%3E%3C/svg%3E") !important;
+}
+
+.navbar .quarto-color-scheme-toggle:hover {
+  transform: scale(1.08);
+}
+
+
+/* ==========================================================================
+   10. 右侧边栏与锚点跳转的绝对保障
+   ========================================================================== */
+/* 强制消除暗色主题可能对 margin-sidebar 设置的隐藏 */
+#quarto-margin-sidebar,
+.margin-sidebar {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* 确保所有定理、定义、命题、例题在点击跳转时，精准避让顶部导航栏 5rem */
+.theorem,
+.proof,
+[id^="thm-"],
+[id^="def-"],
+[id^="lem-"],
+[id^="prp-"],
+[id^="cor-"],
+[id^="rem-"],
+[id^="exm-"] {
+  scroll-margin-top: 5.2rem !important;
 }
