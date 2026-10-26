@@ -219,6 +219,17 @@ div.callout-body > p {
 /* ==========================================================================
    5. 左侧边栏与面包屑导航（消灭突兀黑块）
    ========================================================================== */
+
+
+
+/* 3. 左侧边栏置顶：清除顶部空白 + 随页面滚动时牢牢吸附在屏幕左侧 */
+#quarto-margin-sidebar,
+  .margin-sidebar {
+    grid-column: margin-start / screen-end !important;
+    margin-right: 0 !important;
+    padding-right: 0.4rem !important;
+  }
+
 #quarto-sidebar,
 .sidebar {
   text-align: left !important;
@@ -276,10 +287,25 @@ ol.breadcrumb,
   line-height: 1.3 !important;
 }
 
+
+
+main.content,
+#quarto-document-content {
+  padding-top: 0.3rem !important;
+  margin-top: 0 !important;
+}
+
+.breadcrumb,
+.quarto-page-breadcrumbs,
+.quarto-title-breadcrumbs {
+  margin-top: 0.1rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
 /* 统一标题块整体的顶部起始位置 */
 header#title-block-header,
 .quarto-title-block {
-  margin-top: 0.3rem !important;
+  margin-top: 0.1rem !important;
   padding-top: 0 !important;
 }
 
@@ -290,13 +316,24 @@ h1.title,
   margin-bottom: 0.35rem !important;
 }
 
-/* 锁定副标题位置 */
+/* 1. 主标题下方留出自然间距 */
+h1.title,
+.quarto-title h1 {
+  margin-top: 0.4rem !important;
+  margin-bottom: 0.75rem !important; /* 原来是 0.35rem 太挤，改成 0.75rem 拉开距离 */
+  line-height: 1.25 !important;
+}
+
+/* 2. 副标题与大标题保持舒适距离，并与下方的 PUBLISHED 形成层次 */
 .quarto-title .subtitle,
 header#title-block-header .subtitle,
 p.subtitle.lead {
-  margin-top: 0.2rem !important;
-  margin-bottom: 0.8rem !important;
+  margin-top: 0.3rem !important;
+  margin-bottom: 1.4rem !important;  /* 与下方 PUBLISHED 日期拉开距离 */
+  line-height: 1.55 !important;
+  font-size: 1.1rem !important;
 }
+
 
 /* ==========================================================================
    6. 右侧边栏与目录（TOC）样式重构（彻底解决双高亮与断裂 Bug）
@@ -593,3 +630,13 @@ body.quarto-dark .navbar .quarto-color-scheme-toggle .bi::before,
 [id^="exm-"] {
   scroll-margin-top: 5.2rem !important;
 }
+
+
+/* 4. 面包屑导航与正文之间保持匀称节奏 */
+.breadcrumb,
+.quarto-page-breadcrumbs,
+.quarto-title-breadcrumbs {
+  margin-top: 0.5rem !important;
+  margin-bottom: 1.0rem !important;
+}
+
