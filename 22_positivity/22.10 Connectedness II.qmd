@@ -1,0 +1,531 @@
+---
+title: "22.10 Connectedness II"
+subtitle: "Secant and Tangent Varieties, Zak's Theorems on Tangencies, Ramification, and Linear Normality"
+date: last-modified
+number-sections: true
+sec: "22.10." 
+---
+
+::: {#def-secant-tangent-varieties}
+## Secant and Tangent Varieties
+Let $X \subseteq \mathbb{P}^r$ be a smooth irreducible subvariety of dimension $n$. We define the **secant variety** $\operatorname{Sec}(X)$ and the **tangent variety** $\operatorname{Tan}(X)$ via the secant and tangent bundles:
+
+1. **Tangent variety via Grassmannian incidence:**
+   Let $G = \operatorname{Gr}(n, \mathbb{P}^r) \cong \operatorname{Gr}(n+1, r+1)$ be the Grassmannian of $n$-planes in $\mathbb{P}^r$, and let:
+   $$
+   \mathcal{I} := \big\{ (x, L) \in \mathbb{P}^r \times G \;\big|\; x \in L \big\} \subseteq \mathbb{P}^r \times G
+   $$
+   be the universal incidence family over $G$. 
+
+   The Euler sequence on $\mathbb{P}^r$ restricted to $X$ gives:
+   $$
+   0 \longrightarrow \mathcal{O}_X \longrightarrow \mathcal{O}_X(1)^{\oplus (r+1)} \longrightarrow T_{\mathbb{P}^r}|_X \longrightarrow 0.
+   $$
+   The subbundle $T_X(-1) \subseteq T_{\mathbb{P}^r}|_X(-1)$ lifts to a subbundle $\widehat{T}_X \subseteq \mathcal{O}_X^{\oplus (r+1)}$ of rank $n+1$, defining the Gauss map $f: X \to G$, $x \mapsto \mathbb{T}_x$. Pulling back the universal family:
+   $$
+   \begin{CD}
+   \mathcal{I} @>{\pi_2}>> \mathbb{P}^r \\
+   @V{\pi_1}VV \\
+   G
+   \end{CD}
+   $$
+   the **tangent variety** is the closed subvariety defined by:
+   $$
+   \operatorname{Tan}(X) := \pi_2\big(\pi_1^{-1}(f(X))\big) \subseteq \mathbb{P}^r.
+   $$
+
+2. **Secant variety via the Hilbert scheme of two points:**
+   Let $X^{[2]} := \operatorname{Hilb}_2(X)$ be the Hilbert scheme of length-$2$ zero-dimensional subschemes of $X$, and let $\mathcal{Z} \subseteq X \times X^{[2]} \subseteq \mathbb{P}^r \times X^{[2]}$ be the universal subscheme. The projection $\pi_2: \mathcal{Z} \to X^{[2]}$ is finite flat of degree $2$. 
+
+   The evaluation map on global sections gives a surjection:
+   $$
+   \mathcal{O}_{X^{[2]}}^{\oplus (r+1)} \twoheadrightarrow \mathcal{E} := {\pi_2}_* \mathcal{O}_{\mathcal{Z}}(1),
+   $$
+   where $\mathcal{E}$ is locally free of rank $2$ on $X^{[2]}$. This induces a morphism:
+   $$
+   f: X^{[2]} \longrightarrow \operatorname{Gr}(1, \mathbb{P}^r) = \operatorname{Gr}(2, r+1),
+   $$
+   mapping each length-$2$ subscheme to the unique line it spans in $\mathbb{P}^r$. Let $\mathcal{U} = \mathbb{P}(\mathcal{E}) \subseteq \mathbb{P}^r \times X^{[2]}$ be the family of lines over $X^{[2]}$ with projections $p_1: \mathcal{U} \to X^{[2]}$ and $p_2: \mathcal{U} \to \mathbb{P}^r$. The **secant variety** is the irreducible subvariety:
+   $$
+   \operatorname{Sec}(X) := p_2(\mathcal{U}) = p_2\big(p_1^{-1}(X^{[2]})\big) \subseteq \mathbb{P}^r.
+   $$
+   Under the Hilbert–Chow morphism $\varphi: X^{[2]} \to X^{(2)} = (X \times X) / S_2$, let $\Delta^{[2]} := \varphi^{-1}(\Delta)$ denote the exceptional divisor parameterizing non-reduced subschemes. Then the tangent variety can also be realized as:
+   $$
+   \operatorname{Tan}(X) = p_2\big(p_1^{-1}(\Delta^{[2]})\big) \subseteq \operatorname{Sec}(X),
+   $$
+   which is an irreducible closed subvariety of $\mathbb{P}^r$.
+:::
+
+::: {#prp-dimension-sec-tan}
+## Dimension of $\operatorname{Sec}(X)$ and $\operatorname{Tan}(X)$
+Let $X \subseteq \mathbb{P}^r$ be a smooth irreducible subvariety of dimension $n$. Then either:
+$$
+\dim \operatorname{Sec}(X) = 2n + 1 \quad \text{and} \quad \dim \operatorname{Tan}(X) = 2n,
+$$
+or:
+$$
+\operatorname{Sec}(X) = \operatorname{Tan}(X).
+$$
+:::
+
+::: {.proof}
+Assume $\operatorname{Tan}(X) \neq \operatorname{Sec}(X)$. It suffices to prove that $\dim \operatorname{Tan}(X) \ge 2n$. (Indeed, if $\dim \operatorname{Tan}(X) = 2n$, then $2n + 1 \le \dim \operatorname{Sec}(X) \le \dim X^{[2]} + 1 = 2n + 1$, forcing $\dim \operatorname{Sec}(X) = 2n + 1$).
+
+Suppose for contradiction that $\dim \operatorname{Tan}(X) < 2n$. Since $\dim \operatorname{Sec}(X) > \dim \operatorname{Tan}(X)$, we can choose a general linear subspace $L \subseteq \mathbb{P}^r$ of codimension $\le 2n$ such that:
+$$
+L \cap \operatorname{Tan}(X) = \varnothing \quad \text{but} \quad L \cap \operatorname{Sec}(X) \neq \varnothing.
+$$
+In particular, $L \cap X = \varnothing$. Projection away from the center $L$ yields a morphism:
+$$
+\varphi: X \longrightarrow \mathbb{P}^{r'}, \quad \text{where } r' \le \operatorname{codim}(L) - 1 < 2n.
+$$
+Because $L \cap \operatorname{Tan}(X) = \varnothing$, no tangent space of $X$ intersects $L$, which means the differential $d\varphi_x$ is injective everywhere; hence $\varphi$ is unramified. On the other hand, because $L \cap \operatorname{Sec}(X) \neq \varnothing$, there exists a secant line of $X$ meeting $L$, so $\varphi$ is not injective on closed points.
+
+However, since $X$ is complete and $2n > r'$, the Ramification Theorem implies that any unramified morphism $\varphi: X \to \mathbb{P}^{r'}$ must be a closed embedding, hence injective on points. This contradiction shows that $\dim \operatorname{Tan}(X) \ge 2n$.
+:::
+
+---
+
+::: {#def-local-degree-ramification}
+## Local Degree and Ramification Loci
+Let $f: X \to Y$ be a finite surjective morphism of irreducible varieties of dimension $n$ over $\mathbb{C}$.
+
+1. **Ramification and Branch Loci:**
+   If $Y$ is smooth, the relative cotangent sheaf $\Omega^1_{X/Y}$ has generic stalk $(\Omega^1_{X/Y})_\eta = \Omega^1_{k(X)/k(Y)} = 0$ (since $\mathbb{C}$ is of characteristic zero). The open set:
+   $$
+   U := X \setminus \operatorname{Supp}(\Omega^1_{X/Y})
+   $$
+   is the unramified locus. The closed subset $R := X \setminus U$ is the **ramification locus**, and $B(f) := f(R) \subseteq Y$ is the **branch locus**.
+
+2. **Étaleness over the Unbranched Locus:**
+   Over the complement $Y \setminus B(f)$, the restriction $f^{-1}(Y \setminus B(f)) \to Y \setminus B(f)$ is étale. 
+   Indeed, for any $y \in Y \setminus B(f)$ and $x \in f^{-1}(y)$:
+   $$
+   \dim X \le \dim T_x X \le \dim T_y Y = \dim Y = \dim X,
+   $$
+   which implies $\dim T_x X = \dim X$, so $X$ is smooth at $x$. By Miracle Flatness, a surjective morphism from a Cohen–Macaulay variety to a regular variety with equidimensional fibers is flat; hence $f$ is flat and unramified, thus étale.
+   *(If $Y$ is not smooth, this may fail: consider the normalization of a nodal curve $\mathbb{A}^1 \to C$).*
+
+3. **Local Degree:**
+   Analytically, for every $y \in Y$, there exists an open neighborhood $U(y) \subseteq Y$ such that:
+   $$
+   f^{-1}(U(y)) = \coprod_{x \in f^{-1}(y)} V(x),
+   $$
+   where each $V(x) \subseteq X$ is a disjoint open neighborhood of $x$, and each restriction $f|_{V(x)}: V(x) \to U(y)$ is finite (quasi-finite and proper). 
+   The **local degree** $e_f(x)$ is defined by:
+   $$
+   e_f(x) := \deg\big(V(x) \to U(y)\big).
+   $$
+   Since $B(f)$ is a proper closed subvariety of $Y$, $U(y) \setminus B(f)$ is dense in $U(y)$. Taking a sequence $y_k \to y$ in $U(y) \setminus B(f)$, $f|_{V(x)}$ is a topological covering of degree $e_f(x)$ over $y_k$, so:
+   $$
+   e_f(x) = \lim_{k \to \infty} \#\big(f|_{V(x)}^{-1}(y_k)\big), \quad \text{and} \quad \deg f = \sum_{x \in f^{-1}(y)} e_f(x).
+   $$
+   The function $x \mapsto e_f(x)$ is upper semicontinuous in the analytic topology.
+
+4. **Higher Ramification Loci:**
+   For any integer $l \ge 1$, the **$l$-th higher ramification locus** is:
+   $$
+   R_l(f) := \big\{ x \in X \;\big|\; e_f(x) > l \big\}.
+   $$
+   In particular, $R_1(f) = R(f)$. By Serre's GAGA, every analytic closed subset in a projective variety is Zariski closed, so $R_l(f)$ is a Zariski closed subvariety of $X$.
+:::
+
+::: {#lem-additivity-local-degree}
+## Additivity of Local Degree
+Let $f: X \to Y$ be a finite surjective morphism of complex varieties. Let $\{x_k\}$ and $\{z_k\}$ be two sequences of points in $X$ such that $x_k \neq z_k$, $f(x_k) = f(z_k)$, and:
+$$
+\lim_{k \to \infty} x_k = \lim_{k \to \infty} z_k = x^* \in X.
+$$
+Then:
+$$
+e_f(x^*) \ge \limsup_{k \to \infty} \big(e_f(x_k) + e_f(z_k)\big).
+$$
+:::
+
+::: {.proof}
+Work in the analytic topology. Choose disjoint neighborhoods $V(x^*)$ and $U(f(x^*))$ such that $f|_{V(x^*)}: V(x^*) \to U(f(x^*))$ is finite of degree $e_f(x^*)$. For $k \gg 0$, both $x_k, z_k \in V(x^*)$, and $y_k := f(x_k) = f(z_k) \in U(f(x^*))$. 
+
+For any point $y \in U(f(x^*))$, the degree is the sum of local degrees over the fiber in $V(x^*)$:
+$$
+e_f(x^*) = \sum_{w \in V(x^*) \cap f^{-1}(y_k)} e_f(w) \ge e_f(x_k) + e_f(z_k).
+$$
+Since $e_f$ takes values in $\mathbb{Z}_{\ge 1}$, taking the limit superior yields $e_f(x^*) \ge \limsup_{k \to \infty} (e_f(x_k) + e_f(z_k))$.
+:::
+
+---
+
+::: {#thm-ramification-projective-space}
+## Ramification of Coverings of Projective Space
+Let $X$ be an irreducible projective variety of dimension $n$, and let $f: X \to \mathbb{P}^n$ be a finite branched covering of degree $d$. 
+
+1. There exists a point $x \in X$ such that:
+   $$
+   e_f(x) \ge \min\{d, \, n + 1\}.
+   $$
+2. More generally, for each $1 \le l \le \min\{d - 1, \, n\}$, the higher ramification locus satisfies:
+   $$
+   \operatorname{codim}_X R_l(f) \le l.
+   $$
+   In particular, for $l = \min\{d - 1, \, n\}$, the locus $R_l(f) = \{ x \in X \mid e_f(x) \ge \min\{d, n+1\} \}$ has codimension $\le n$, hence is non-empty.
+:::
+
+::: {.proof}
+If $d = 1$, the map is birational and finite, hence an isomorphism since $\mathbb{P}^n$ is normal; the claim is trivial. Assume $d \ge 2$. We proceed by induction on $n$:
+
+- **Base case $n = 1$:** Here $l = 1$, and we must show $R_1(f) \neq \varnothing$. If $R_1(f) = \varnothing$, then $f: X \to \mathbb{P}^1$ is a finite étale cover of degree $d \ge 2$. But $\mathbb{P}^1$ is simply connected ($\pi_1^{\text{ét}}(\mathbb{P}^1) = \{e\}$), so it admits no non-trivial connected étale covers, a contradiction.
+
+- **Inductive step $n \ge 2$:** Let $L \subseteq \mathbb{P}^n$ be a general hyperplane such that $X' := f^{-1}(L)$ is irreducible (by Bertini's Theorem). Let $f' := f|_{X'}: X' \to L \cong \mathbb{P}^{n-1}$, which is a finite covering of degree $d$. 
+  
+  For a general hyperplane $L$, $L$ meets the unbranched locus $V \subseteq \mathbb{P}^n$, and for any $x \in f^{-1}(L)$, we have $e_{f'}(x) = e_f(x)$. Thus $R_l(f') = R_l(f) \cap X'$. By induction, for all $l \le \min\{d - 1, \, n - 1\}$:
+  $$
+  \operatorname{codim}_{X'} R_l(f') \le l \implies \operatorname{codim}_X R_l(f) \le l.
+  $$
+
+- **The case $l = n$ (when $d \ge n + 1$):**
+  It remains to prove that $R_n(f) \neq \varnothing$, i.e., there exists $s^* \in X$ with $e_f(s^*) \ge n + 1$.
+  By the codimension bound for $l = n - 1$, we have $\operatorname{codim}_X R_{n-1}(f) \le n - 1$, so:
+  $$
+  \dim R_{n-1}(f) \ge n - (n - 1) = 1.
+  $$
+  Let $S$ be an irreducible component of $R_{n-1}(f)$ of dimension $\ge 1$. Consider the product morphism:
+  $$
+  F := f \times f|_S: X \times S \longrightarrow \mathbb{P}^n \times \mathbb{P}^n.
+  $$
+  The space $X \times S$ is irreducible of dimension $\dim(X \times S) = n + \dim S \ge n + 1 > n$. Since $F$ is finite, $\dim F(X \times S) \ge n + 1 > n$. By the Fulton–Hansen Connectedness Theorem, the preimage:
+  $$
+  F^{-1}(\Delta_{\mathbb{P}^n}) = X \times_{\mathbb{P}^n} S = \big\{ (x, s) \in X \times S \;\big|\; f(x) = f(s) \big\}
+  $$
+  is connected.
+
+  Notice that $\Delta_S := \{ (s, s) \mid s \in S \} \subseteq F^{-1}(\Delta_{\mathbb{P}^n})$ is an irreducible component of dimension $\dim S$.
+  - If $\Delta_S = F^{-1}(\Delta_{\mathbb{P}^n})$, then $f(x) = f(s)$ implies $x = s$, meaning every point $s \in S$ has a unique preimage $\# f^{-1}(f(s)) = 1$. Thus $e_f(s) = d \ge n + 1$, which gives $S \subseteq R_n(f)$, so $R_n(f) \neq \varnothing$.
+  - If $\Delta_S \subsetneq F^{-1}(\Delta_{\mathbb{P}^n})$, by connectedness of $F^{-1}(\Delta_{\mathbb{P}^n})$ there exists another irreducible component $T \neq \Delta_S$ meeting $\Delta_S$:
+    $$
+    T \cap \Delta_S \neq \varnothing.
+    $$
+    Choose a point $(s^*, s^*) \in T \cap \Delta_S$ and a sequence $(x_k, s_k) \in T \setminus \Delta_S$ converging to $(s^*, s^*)$ with $x_k \neq s_k$ and $f(x_k) = f(s_k)$. Then $\lim x_k = \lim s_k = s^*$.
+    Because $s_k \in S \subseteq R_{n-1}(f)$, we have $e_f(s_k) \ge n$, and trivially $e_f(x_k) \ge 1$. By @lem-additivity-local-degree:
+    $$
+    e_f(s^*) \ge \limsup_{k \to \infty}\big(e_f(s_k) + e_f(x_k)\big) \ge n + 1.
+    $$
+    Therefore, $s^* \in R_n(f)$, completing the proof.
+:::
+
+::: {#cor-ramification-applications}
+## Geometric Consequences for Branched Coverings
+Let $X$ be an irreducible projective variety of dimension $n$, and let $f: X \to \mathbb{P}^n$ be a branched covering of degree $d$.
+
+1. If $d \le n + 1$, there exists a subvariety $T \subseteq \mathbb{P}^n$ of dimension $\ge n + 1 - d$ over which $f$ is bijective.
+2. If $X$ is normal and $d \le n$, then the étale fundamental group of $X$ is trivial:
+   $$
+   \pi_1^{\text{ét}}(X) = \{e\}.
+   $$
+:::
+
+::: {.proof}
+1. For $l = d - 1 \le n$, @thm-ramification-projective-space implies that $\operatorname{codim}_X R_{d-1}(f) \le d - 1$. For any $x \in R_{d-1}(f)$, we have $e_f(x) \ge d$, which forces $f^{-1}(f(x)) = \{x\}$ because $\sum_{x' \in f^{-1}(f(x))} e_f(x') = d$. Hence $f$ is bijective over $T := f(R_{d-1}(f))$, where $\dim T \ge n - (d - 1) = n + 1 - d$.
+
+2. Suppose $p: Y \to X$ is a connected finite étale cover of degree $m \ge 2$. Because $X$ is normal and connected, $Y$ is an irreducible normal variety of dimension $n$. Consider the composite morphism:
+   $$
+   g := f \circ p: Y \longrightarrow \mathbb{P}^n, \quad \deg g = m \cdot d \ge 2d.
+   $$
+   Because $d \le n$ and $2d - 1 \ge d$, we have $d \le \min\{\deg g - 1, \, n\}$. By @thm-ramification-projective-space applied to $g$, there exists a point $y \in Y$ such that:
+   $$
+   e_g(y) \ge d + 1.
+   $$
+   However, since $p$ is étale, $e_g(y) = e_p(y) \cdot e_f(p(y)) = 1 \cdot e_f(p(y)) \le d$, a contradiction. Thus $X$ has no non-trivial connected finite étale covers, so $\pi_1^{\text{ét}}(X) = \{e\}$.
+:::
+
+::: {#exm-boundary-covering}
+## Sharpness of the Degree Bound
+The bound $d \le n$ is sharp. Let $E \subseteq \mathbb{P}^n$ be an elliptic curve of degree $n + 1$ (for $n \ge 2$, any degree $n+1$ line bundle on $E$ is very ample, and $h^0(E, \mathcal{L}) = \deg \mathcal{L} + 1 - g = n + 1$). 
+
+Define the incidence variety:
+$$
+X := \big\{ (x, H) \in E \times \check{\mathbb{P}}^n \;\big|\; x \in H \big\} \subseteq E \times \check{\mathbb{P}}^n.
+$$
+The second projection $p_2: X \to \check{\mathbb{P}}^n \cong \mathbb{P}^n$ is a finite covering of degree $n + 1$. On the other hand, the first projection $p_1: X \to E$ realizes $X$ as a $\mathbb{P}^{n-1}$-bundle over $E$. From the homotopy exact sequence:
+$$
+\pi_1(\mathbb{P}^{n-1}) \longrightarrow \pi_1(X) \longrightarrow \pi_1(E) \longrightarrow \pi_0(\mathbb{P}^{n-1}) \implies \pi_1(X) \cong \pi_1(E) \cong \mathbb{Z}^2,
+$$
+so $\pi_1^{\text{ét}}(X) \cong \widehat{\mathbb{Z}}^2 \neq \{e\}$.
+:::
+
+---
+
+::: {#def-relative-sec-tan}
+## Relative Secant and Tangent Varieties
+Let $X \subseteq \mathbb{P}^r$ be a smooth subvariety of dimension $n$, and let $V \subseteq X$ be a subvariety of dimension $v$.
+1. A linear subspace $L \subseteq \mathbb{P}^r$ is **tangent to $X$ at $x$** if $x \in L \cap X$ and $\mathbb{T}_x \subseteq L$.
+2. Considering the incidence along $V \times X \subseteq X \times X$ inside the blow-up $\mathrm{Bl}_{\Delta}(X \times X) / S_2 \cong X^{[2]}$, the **relative secant variety** and **relative tangent variety** of $X$ with respect to $V$ are:
+   $$
+   \operatorname{Sec}_V(X) := \bigcup_{x \in V, \, y \in X} \overline{xy}, \qquad \operatorname{Tan}_V(X) := \bigcup_{x \in V} \mathbb{T}_x.
+   $$
+   Clearly $\operatorname{Tan}_V(X) \subseteq \operatorname{Sec}_V(X)$ and $X \subseteq \operatorname{Sec}_V(X)$.
+:::
+
+::: {#prp-relative-sec-tan-dimension}
+## Dimension of Relative Secant and Tangent Varieties
+Let $X \subseteq \mathbb{P}^r$ be a smooth irreducible subvariety of dimension $n$, and let $V \subseteq X$ be a subvariety of dimension $v$. Then either:
+$$
+\dim \operatorname{Sec}_V(X) = n + v + 1 \quad \text{and} \quad \dim \operatorname{Tan}_V(X) = n + v,
+$$
+or:
+$$
+\operatorname{Tan}_V(X) = \operatorname{Sec}_V(X).
+$$
+:::
+
+::: {.proof}
+Suppose $\operatorname{Tan}_V(X) \neq \operatorname{Sec}_V(X)$, and suppose for contradiction that $\dim \operatorname{Tan}_V(X) = t < n + v$.
+A general linear space $L \subseteq \mathbb{P}^r$ of codimension $t + 1$ satisfies:
+$$
+L \cap \operatorname{Sec}_V(X) \neq \varnothing \quad \text{and} \quad L \cap \operatorname{Tan}_V(X) = \varnothing.
+$$
+Projection away from $L$ gives $p: X \to \mathbb{P}^t$. Consider the product morphism:
+$$
+F := p|_V \times p: V \times X \longrightarrow \mathbb{P}^t \times \mathbb{P}^t.
+$$
+Because $\dim(V \times X) = n + v > t$, the Fulton–Hansen Connectedness Theorem implies that $F^{-1}(\Delta_{\mathbb{P}^t})$ is connected.
+
+Since $L \cap \operatorname{Sec}_V(X) \neq \varnothing$, there exist $v_0 \in V$ and $x_0 \in X$ with $x_0 \neq v_0$ such that the line $\overline{v_0 x_0}$ intersects $L$, meaning $p(v_0) = p(x_0)$. Hence $(v_0, x_0) \in F^{-1}(\Delta_{\mathbb{P}^t}) \setminus \Delta_V$.
+By connectedness, there exists an irreducible component $T \subseteq F^{-1}(\Delta_{\mathbb{P}^t})$ containing $(v_0, x_0)$ such that:
+$$
+T \cap \Delta_V \neq \varnothing.
+$$
+Pick $(v^*, v^*) \in T \cap \Delta_V$, and choose a sequence $(v_k, x_k) \in T \setminus \Delta_V$ converging to $(v^*, v^*)$ with $v_k \neq x_k$ and $p(v_k) = p(x_k)$. Then the secant lines $\overline{v_k x_k}$ meet $L$. Since the incidence variety $\mathcal{U}_L := \{ (x, y, l) \mid l \in \overline{xy} \cap L \}$ is proper over $V \times X$, taking the limit as $k \to \infty$ shows that the limiting line is tangent to $X$ at $v^*$ and intersects $L$. 
+
+Thus $\mathbb{T}_{v^*} \cap L \neq \varnothing$, which contradicts $L \cap \operatorname{Tan}_V(X) = \varnothing$.
+:::
+
+---
+
+::: {#thm-zaks-tangencies}
+## Zak's Theorem on Tangencies
+Let $X \subseteq \mathbb{P}^r$ be a smooth, non-degenerate irreducible subvariety of dimension $n$. Let $L \subseteq \mathbb{P}^r$ be a linear subspace of dimension $k$ with $n \le k \le r - 1$. Then the tangency locus:
+$$
+\big\{ x \in X \;\big|\; \mathbb{T}_x \subseteq L \big\}
+$$
+has dimension:
+$$
+\dim\big\{ x \in X \;\big|\; \mathbb{T}_x \subseteq L \big\} \le k - n.
+$$
+In particular, its dimension is at most $\min\{k - n, \, n - 1\}$.
+:::
+
+::: {.proof}
+Suppose for contradiction that there exists an irreducible component $V \subseteq \{ x \in X \mid \mathbb{T}_x \subseteq L \}$ of dimension:
+$$
+v := \dim V \ge k + 1 - n.
+$$
+Then by definition, for every $x \in V$, the embedded tangent space $\mathbb{T}_x \subseteq L$, which implies:
+$$
+\operatorname{Tan}_V(X) = \bigcup_{x \in V} \mathbb{T}_x \subseteq L.
+$$
+Thus $\dim \operatorname{Tan}_V(X) \le \dim L = k \le v + n - 1$. By @prp-relative-sec-tan-dimension, we must have:
+$$
+\operatorname{Tan}_V(X) = \operatorname{Sec}_V(X).
+$$
+However, $X \subseteq \operatorname{Sec}_V(X) = \operatorname{Tan}_V(X) \subseteq L$, which forces $X \subseteq L$. This contradicts the assumption that $X$ is non-degenerate in $\mathbb{P}^r$.
+:::
+
+::: {#cor-zaks-consequences}
+## Consequences of Zak's Theorem
+Let $X \subseteq \mathbb{P}^r$ be a smooth, non-degenerate irreducible subvariety of dimension $n$.
+
+1. **Finiteness of the Gauss Map:**
+   The Gauss map $\gamma: X \to \operatorname{Gr}(n, \mathbb{P}^r)$, $x \mapsto \mathbb{T}_x$ is a finite morphism.
+2. **Singularities of Hyperplane Sections:**
+   For any hyperplane $H \subseteq \mathbb{P}^r$:
+   $$
+   \dim \operatorname{Sing}(X \cap H) \le r - 1 - n.
+   $$
+   Consequently:
+   - If $2n \ge r + 1$, then $X \cap H$ is reduced for general $H$.
+   - If $2n \ge r + 2$, then $X \cap H$ is normal for general $H$.
+3. **Dimension of the Dual Variety:**
+   Let $\mathcal{P} := \{ (x, H) \in X \times \check{\mathbb{P}}^r \mid \mathbb{T}_x \subseteq H \}$. Then $\mathcal{P}$ is a $\mathbb{P}^{r - 1 - n}$-bundle over $X$ with $\dim \mathcal{P} = r - 1$. The dual variety $X^* := p_2(\mathcal{P}) \subseteq \check{\mathbb{P}}^r$ satisfies:
+   $$
+   \dim X^* \ge n.
+   $$
+:::
+
+::: {.proof}
+1. Setting $k = n$ in @thm-zaks-tangencies, for any $n$-plane $L$, $\dim \{ x \in X \mid \mathbb{T}_x = L \} \le n - n = 0$. Hence every fiber of the Gauss map is zero-dimensional; being projective, $\gamma$ is finite.
+
+2. A point $x \in X \cap H$ is singular if and only if the differential $d(s|_X)$ vanishes at $x$, which is equivalent to $\mathbb{T}_x \subseteq H$. Thus:
+   $$
+   \operatorname{Sing}(X \cap H) = \big\{ x \in X \;\big|\; \mathbb{T}_x \subseteq H \big\}.
+   $$
+   Applying Zak's Theorem with $k = r - 1$, we obtain $\dim \operatorname{Sing}(X \cap H) \le (r - 1) - n = r - 1 - n$.
+   - If $2n \ge r + 1$, then $\dim \operatorname{Sing}(X \cap H) \le n - 2 = \dim(X \cap H) - 1$, so $X \cap H$ is regular in codimension $0$ ($R_0$). Since $X$ is smooth (hence Cohen–Macaulay), the hypersurface section $X \cap H$ is Cohen–Macaulay ($S_1$). By Serre's criterion, $R_0 + S_1$ implies that $X \cap H$ is reduced.
+   - If $2n \ge r + 2$, then $\dim \operatorname{Sing}(X \cap H) \le n - 3 = \dim(X \cap H) - 2$, so $X \cap H$ satisfies $R_1$. Together with $S_2$, Serre's criterion implies that $X \cap H$ is normal.
+
+3. For any $H \in X^*$, the fiber $p_2^{-1}(H) \cong \{ x \in X \mid \mathbb{T}_x \subseteq H \}$ has dimension at most $r - 1 - n$. By fiber dimension:
+   $$
+   \dim X^* \ge \dim \mathcal{P} - (r - 1 - n) = (r - 1) - (r - 1 - n) = n.
+   $$
+:::
+
+::: {#rem-join-varieties}
+## Join of Varieties
+Replacing $\operatorname{Hilb}_2(X)$ with the blow-up of $X \times Y$ along the diagonal, one defines the **join** $X * Y$ and the **infinitesimal join** $\mathcal{L}\operatorname{Join}(X, Y)$. By identical arguments, either $\dim(X * Y) = \dim X + \dim Y + 1$ and $\dim \mathcal{L}\operatorname{Join}(X, Y) = \dim X + \dim Y$, or $\mathcal{L}\operatorname{Join}(X, Y) = X * Y$.
+:::
+
+---
+
+::: {#thm-linear-normality-1}
+## Zak's Theorem on Linear Normality (Form I)
+Let $X \subseteq \mathbb{P}^r$ be a smooth projective variety of dimension $n$. If:
+$$
+3n > 2(r - 1),
+$$
+then $X$ is **linearly normal**, meaning the restriction map:
+$$
+H^0(\mathbb{P}^r, \mathcal{O}_{\mathbb{P}^r}(1)) \longrightarrow H^0(X, \mathcal{O}_X(1))
+$$
+is surjective.
+:::
+
+::: {#prp-characterization-linear-normality}
+## Geometric Characterization of Linear Normality
+For a smooth projective variety $X \subseteq \mathbb{P}^r$, the following are equivalent:
+1. $X$ is not linearly normal.
+2. $X$ is the projection of a non-degenerate embedding in $\mathbb{P}^{r+1}$ from an external point $P \notin X$.
+3. There exists a non-degenerate embedding $X \hookrightarrow \mathbb{P}^{r+1}$ such that $\operatorname{Sec}(X) \subsetneq \mathbb{P}^{r+1}$.
+
+Consequently, @thm-linear-normality-1 is equivalent to:
+
+**Zak's Theorem on Linear Normality (Form II):**
+Let $X \subseteq \mathbb{P}^m$ be a smooth, non-degenerate projective variety of dimension $n$. If:
+$$
+3n > 2(m - 2),
+$$
+then:
+$$
+\operatorname{Sec}(X) = \mathbb{P}^m.
+$$
+:::
+
+::: {.proof}
+- **(1) $\iff$ (2):** The map $H^0(\mathbb{P}^r, \mathcal{O}(1)) \to H^0(X, \mathcal{O}_X(1))$ fails to be surjective if and only if there exists a section $f \in H^0(X, \mathcal{O}_X(1))$ not in the image. Choosing a basis $s_0, \dots, s_r$ of $H^0(\mathbb{P}^r, \mathcal{O}(1))$ and setting $s_{r+1} := f$, the linear system $\langle s_0, \dots, s_{r+1} \rangle$ defines an embedding $X \hookrightarrow \mathbb{P}^{r+1}$ whose projection from $[0: \dots : 0: 1]$ recovers the original map to $\mathbb{P}^r$.
+- **(2) $\iff$ (3):** The projection from $P \in \mathbb{P}^{r+1}$ restricts to an embedding on $X$ if and only if $P$ lies on no secant or tangent line of $X$, which means $P \notin \operatorname{Sec}(X)$. Such a point $P$ exists if and only if $\operatorname{Sec}(X) \subsetneq \mathbb{P}^{r+1}$.
+:::
+
+---
+
+::: {#def-trisecant-variety}
+## Trisecant and Higher Secant Varieties
+Let $X \subseteq \mathbb{P}^m$ be a smooth variety of dimension $n$. A closed subscheme $Z \subseteq X$ of dimension $0$ and length $3$ has local rings $\mathcal{O}_Z = \prod A_i$ with $\sum \operatorname{length}(A_i) = 3$:
+- Three distinct points: $A_1 \times A_2 \times A_3$;
+- Two points (one tangent vector): $A_1 \times A_2$ with $\operatorname{length}(A_2) = 2$;
+- One point (length $3$ local ring): $\mathcal{O}_{X, x} / I$ where:
+  - If $\mathfrak{m} / \mathfrak{m}^2$ has image of dimension $1$, $I = (x_1^3, x_2, \dots, x_n)$, which defines an osculating plane $\mathbb{P}^2 \subseteq T_x^{(2)} X$;
+  - If $\mathfrak{m} / \mathfrak{m}^2$ has image of dimension $2$, $I = (x_1^2, x_1 x_2, x_2^2, x_3, \dots, x_n)$, whose spanned plane is already contained in $\mathbb{T}_x X \subseteq \operatorname{Sec}(X)$.
+
+The **trisecant variety** is the variety:
+$$
+\operatorname{Trisec}(X) := \operatorname{Sec}^3(X) = \bigcup_{Z \in \operatorname{Hilb}_3(X)} \operatorname{Span}(Z) = X * X * X \subseteq \mathbb{P}^m.
+$$
+More generally, the $k$-th secant variety is $\operatorname{Sec}^k(X) := X * \dots * X$ ($k$ times).
+:::
+
+::: {#rem-hilbert-schemes-smoothness}
+## Smoothness and Irreducibility of Hilbert Schemes of Points
+- By Fogarty (1968), $\operatorname{Hilb}_m(X)$ is smooth if and only if $\dim X \le 2$ or $m \le 3$.
+- $\operatorname{Hilb}_m(X)$ is irreducible if $\dim X \le 2$.
+- $\operatorname{Hilb}_m(\mathbb{P}^3)$ is irreducible for $m \le 7$ (Mozgovoy 2008), has two irreducible components for $m = 8$ (Cartwright–Erman–Velasco–Viray 2008), while $\operatorname{Hilb}_{11}(\mathbb{P}^3)$ is irreducible (DJUNT 2017).
+:::
+
+::: {#lem-terracini}
+## Terracini's Lemma
+Let $X \subseteq \mathbb{P}^m$ be a smooth, irreducible subvariety.
+1. For distinct points $x, y \in X$ and $p \in \overline{xy}$:
+   $$
+   \operatorname{Span}(\mathbb{T}_x, \, \mathbb{T}_y) \subseteq T_p \operatorname{Sec}(X),
+   $$
+   with equality holding for general $x, y \in X$ and general $p \in \overline{xy}$.
+2. For non-collinear points $x, y, z \in X$ and $p \in \overline{xyz}$:
+   $$
+   \operatorname{Span}(\mathbb{T}_x, \, \mathbb{T}_y, \, \mathbb{T}_z) \subseteq T_p \operatorname{Trisec}(X),
+   $$
+   with equality holding for general points.
+:::
+
+::: {#cor-sec-equals-trisec}
+## Secant Equals Trisecant
+Let $X \subseteq \mathbb{P}^m$ be a smooth, non-degenerate projective variety. Then:
+$$
+\operatorname{Sec}(X) = \mathbb{P}^m \iff \operatorname{Sec}(X) = \operatorname{Trisec}(X).
+$$
+:::
+
+::: {.proof}
+The implication $(\implies)$ is immediate since $\operatorname{Sec}(X) \subseteq \operatorname{Trisec}(X) \subseteq \mathbb{P}^m$. 
+
+Conversely, suppose $\operatorname{Sec}(X) \subsetneq \mathbb{P}^m$. For general $x, y \in X$ and general $p \in \overline{xy}$, Terracini's Lemma gives $T_p \operatorname{Sec}(X) = \operatorname{Span}(\mathbb{T}_x, \mathbb{T}_y) =: \Lambda \subsetneq \mathbb{P}^m$. Because $X$ is non-degenerate, $X \nsubseteq \Lambda$. Choosing $z \in X \setminus \Lambda$, we have:
+$$
+\operatorname{Span}(\mathbb{T}_x, \mathbb{T}_y, \mathbb{T}_z) \supsetneq \operatorname{Span}(\mathbb{T}_x, \mathbb{T}_y),
+$$
+which implies $\dim \operatorname{Trisec}(X) > \dim \operatorname{Sec}(X)$, so $\operatorname{Sec}(X) \neq \operatorname{Trisec}(X)$.
+:::
+
+::: {#prp-proof-linear-normality-2}
+## Proof of Linear Normality (Form II)
+Let $X \subseteq \mathbb{P}^m$ be a smooth projective variety of dimension $n$. If:
+$$
+3n > 2(m - 2),
+$$
+then $\operatorname{Sec}(X) = \operatorname{Trisec}(X)$, and consequently $\operatorname{Sec}(X) = \mathbb{P}^m$.
+:::
+
+::: {.proof}
+Suppose for contradiction that $\operatorname{Sec}(X) \subsetneq \operatorname{Trisec}(X)$. Then there exist points $x_0, y_0, z_0 \in X$ spanning a plane $\overline{x_0 y_0 z_0} \cong \mathbb{P}^2$ not contained in $\operatorname{Sec}(X)$. Thus:
+$$
+\operatorname{Sec}(X) \cap \overline{x_0 y_0 z_0} \subsetneq \mathbb{P}^2
+$$
+is a proper closed algebraic subset, hence has dimension $\le 1$. In particular, $X \cap \overline{x_0 y_0 z_0}$ consists of only finitely many points (otherwise, any curve in the plane would force its secants to fill the entire $\mathbb{P}^2$).
+
+Choose a general line $L \subseteq \overline{x_0 y_0 z_0}$. Then $L$ meets $\operatorname{Sec}(X)$ transversely in finitely many points, and $L \cap X = \varnothing$. Projection away from $L$ defines a finite morphism:
+$$
+\pi: X \longrightarrow \mathbb{P}^{m-2}.
+$$
+Consider the triple product map:
+$$
+F := \pi \times \pi \times \pi: X \times X \times X \longrightarrow \mathbb{P}^{m-2} \times \mathbb{P}^{m-2} \times \mathbb{P}^{m-2}.
+$$
+Because $\dim(X \times X \times X) = 3n > 2(m - 2)$, Fulton–Hansen Connectedness implies that:
+$$
+F^{-1}(\Delta_{\mathbb{P}^{m-2}}) = \big\{ (x, y, z) \in X^3 \;\big|\; \pi(x) = \pi(y) = \pi(z) \big\}
+$$
+is connected. Geometrically, $\pi(x) = \pi(y) = \pi(z)$ means that the secant lines $\overline{xy}$, $\overline{xz}$, and $\overline{yz}$ all meet the line $L$.
+
+Define the continuous map:
+$$
+\Phi: F^{-1}(\Delta_{\mathbb{P}^{m-2}}) \setminus D_X \longrightarrow L \times L \times L, \quad (x, y, z) \longmapsto (\overline{yz} \cap L, \; \overline{xz} \cap L, \; \overline{xy} \cap L),
+$$
+where $D_X := (\Delta_X \times X) \cup (X \times \Delta_X) \cup (\Delta_{1,3})$. Because $L \cap \operatorname{Sec}(X)$ is a finite set of points, the image of $\Phi$ is finite, so $\Phi$ is locally constant. 
+
+By the connectedness of $F^{-1}(\Delta_{\mathbb{P}^{m-2}})$, $\Phi$ must be constant on every component:
+$$
+\Phi(x, y, z) = (a, b, c) \in L^3,
+$$
+where $a, b, c$ are distinct points on $L$ (if, say, $a = b$, then $\overline{xy}$ and $\overline{xz}$ meet $L$ at the same point, which forces $x, y, z$ to be collinear, contradicting $L \cap X = \varnothing$).
+
+Now take a smooth curve $T$ in an irreducible component of $F^{-1}(\Delta_{\mathbb{P}^{m-2}})$ specializing a general point $(x_t, y_t, z_t)$ to a point $(x^*, y^*, z^*) \in D_X$ at $t = t^*$:
+- If $y^* = z^* \neq x^*$, then the two secant lines $\overline{x_t y_t}$ and $\overline{x_t z_t}$ both degenerate to the single line $\overline{x^* y^*}$, forcing their intersection points $a$ and $b$ on $L$ to coincide, a contradiction.
+- If $x^* = y^* = z^*$, then by the valuative criterion, the limits of $\overline{x_t y_t}$, $\overline{x_t z_t}$, and $\overline{y_t z_t}$ are three distinct tangent lines of $X$ at $x^*$ meeting $L$ at $a, b, c$. This implies that $L \subseteq \mathbb{T}_{x^*} X \subseteq \operatorname{Sec}(X)$, which contradicts the fact that $L \cap \operatorname{Sec}(X)$ is finite.
+
+This contradiction establishes that $\operatorname{Sec}(X) = \operatorname{Trisec}(X)$, and thus $\operatorname{Sec}(X) = \mathbb{P}^m$.
+:::
+
+---
+
+::: {#thm-zariskis-problem}
+## Branching over Nodal Curves (Zariski's Problem)
+Let $C \subseteq \mathbb{P}^2$ be a (possibly reducible) plane curve having only nodal singularities (i.e., at every singular point $p \in C$, the formal completion satisfies $\widehat{\mathcal{O}}_{C, p} \cong k[[x, y]] / (xy)$). 
+
+If $f: X \to \mathbb{P}^2$ is a finite covering branched only along $C$ (i.e., $B(f) \subseteq C$), then:
+1. $f$ is a Galois covering;
+2. The Galois group $\operatorname{Gal}(X / \mathbb{P}^2)$ is abelian.
+:::
