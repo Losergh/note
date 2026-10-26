@@ -1,5 +1,5 @@
 ---
-title: "22.9 Connectedness"
+title: "22.9 Connectedness I"
 subtitle: "Bertini Theorems, Fulton–Hansen Theorem, Grothendieck's Connectedness Theorem, and Applications"
 date: last-modified
 number-sections: true
