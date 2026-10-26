@@ -36,6 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../23_algebraic_groups/23.4 Quotients.html" rel="next">
 <link href="../23_algebraic_groups/23.2 Representation II.html" rel="prev">
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -49,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fc4beeabfe87e77886ceb4bd0dfd747b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-563c4aa86ebe459a68ca1af0aa8b2c22.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-fc4beeabfe87e77886ceb4bd0dfd747b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b3e687515111ec8d6a8b8c0a1a8317de.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-3957401bcfc98edf50fe4f72d2a6ae90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-b3e687515111ec8d6a8b8c0a1a8317de.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -299,11 +300,6 @@ window.Quarto = {
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
-  <div class="quarto-reader-toggle-btn">
-  <i class="bi"></i>
-  </div>
-</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -361,6 +357,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../23_algebraic_groups/23.3 Jordan Decomposition.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">23.3 Jordan Decomposition</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../23_algebraic_groups/23.4 Quotients.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">23.4 Quotients</span></a>
   </div>
 </li>
       </ul>
@@ -421,7 +423,7 @@ x = x_s x_u = x_u x_s
 <p><strong>Generalization:</strong></p>
 <ul>
 <li><p>Replace the algebraically closed field <span class="math inline">\(\bar{k}\)</span> with an arbitrary perfect field <span class="math inline">\(k\)</span>.</p></li>
-<li><p>Replace <span class="math inline">\(\mathrm{GL}_n\)</span> with an arbitrary linear algebraic group <span class="math inline">\(G\)</span>. :::</p></li>
+<li><p>Replace <span class="math inline">\(\mathrm{GL}_n\)</span> with an arbitrary linear algebraic group <span class="math inline">\(G\)</span>.</p></li>
 </ul>
 <div id="def-eigenvalues" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1</strong></span> Let <span class="math inline">\(V\)</span> be a finite-dimensional vector space over <span class="math inline">\(k\)</span>, and let <span class="math inline">\(\alpha \in \mathrm{GL}_V(k) = \mathrm{GL}_n(k)\)</span>. Let <span class="math inline">\(P_\alpha(T) := \det(T \cdot \mathrm{id} - \alpha) \in k[T]\)</span> be the characteristic polynomial of <span class="math inline">\(\alpha\)</span>.</p>
@@ -603,13 +605,204 @@ r_V\big(\phi(g)_u\big) = \big(r_V(\phi(g))\big)_u = \big((r_V \circ \phi)(g)\big
 \]</span> Thus, <span class="math inline">\(r_V(g)_s, r_V(g)_u \in \operatorname{Stab}_{\mathrm{GL}_V}(L)(k) = G(k)\)</span>.</p></li>
 </ol>
 </div>
+<div id="def-schematically-dense" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Schematically Dense Subsets (Def 5.3.10))</strong></span> Let <span class="math inline">\(X\)</span> be an algebraic scheme over a field <span class="math inline">\(k\)</span>.</p>
+<ol type="1">
+<li><p>A subset <span class="math inline">\(S \subseteq X(k)\)</span> is <strong>schematically dense</strong> in <span class="math inline">\(X\)</span> if the only closed subscheme <span class="math inline">\(Z \subseteq X\)</span> containing <span class="math inline">\(S\)</span> (i.e., <span class="math inline">\(S \subseteq Z(k)\)</span>) is <span class="math inline">\(X\)</span> itself. Equivalently:</p>
+<ul>
+<li><span class="math inline">\(X\)</span> is reduced (<span class="math inline">\(X = X^{\mathrm{red}}\)</span>) and <span class="math inline">\(S\)</span> is topologically dense in <span class="math inline">\(|X|\)</span> (<span class="math inline">\(\overline{S} = |X|\)</span>);</li>
+<li>The canonical evaluation morphism <span class="math display">\[
+\mathcal{O}_X \longrightarrow \prod_{s \in S} i_{s*} k, \quad f \longmapsto \big(f(s)\big)_{s \in S}
+\]</span> is injective.</li>
+</ul></li>
+<li><p>A subset <span class="math inline">\(S\)</span> is schematically dense in <span class="math inline">\(X\)</span> if and only if it is locally schematically dense (i.e., for any open affine cover <span class="math inline">\(\{U_i\}\)</span> of <span class="math inline">\(X\)</span>, <span class="math inline">\(S \cap U_i(k)\)</span> is schematically dense in <span class="math inline">\(U_i\)</span>).</p></li>
+<li><p>Schematic density is stable under base change of the base field (by taking the inverse image). In particular, if <span class="math inline">\(S \subseteq X(k)\)</span> is schematically dense in <span class="math inline">\(X\)</span>, then <span class="math inline">\(X\)</span> is geometrically reduced.</p></li>
+<li><p>For a field extension <span class="math inline">\(k'/k\)</span>, a subset <span class="math inline">\(S \subseteq X(k')\)</span> is <strong>schematically dense</strong> in <span class="math inline">\(X\)</span> if the only closed subscheme <span class="math inline">\(Z \subseteq X\)</span> such that <span class="math inline">\(S \subseteq Z(k')\)</span> is <span class="math inline">\(X\)</span> itself.</p></li>
+</ol>
+</div>
+<div id="prp-geometrically-reduced-dense-points" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (Geometric Reducedness Criterion (Prop 5.3.11))</strong></span> An algebraic scheme <span class="math inline">\(X\)</span> over <span class="math inline">\(k\)</span> is geometrically reduced if and only if <span class="math inline">\(X(k^s)\)</span> is schematically dense in <span class="math inline">\(X\)</span>, where <span class="math inline">\(k^s\)</span> denotes the separable closure of <span class="math inline">\(k\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><span class="math inline">\((\implies)\)</span> Since <span class="math inline">\(X\)</span> is geometrically reduced, the smooth locus <span class="math inline">\(X^{\mathrm{sm}}\)</span> is a dense open subscheme of <span class="math inline">\(X\)</span>. Thus it suffices to show that <span class="math inline">\(X^{\mathrm{sm}}(k^s)\)</span> is dense in <span class="math inline">\(X^{\mathrm{sm}}\)</span>, so we may assume without loss of generality that <span class="math inline">\(X\)</span> is smooth over <span class="math inline">\(k\)</span>.</p>
+<p>Then the base change <span class="math inline">\(X_{k^s}\)</span> is smooth over <span class="math inline">\(k^s\)</span>. For each point <span class="math inline">\(x \in X_{k^s}\)</span>, there exists an étale neighborhood <span class="math inline">\(U \xrightarrow{f} \mathbb{A}^d_{k^s}\)</span>. Since <span class="math inline">\(k^s\)</span> is separably closed, every non-empty étale <span class="math inline">\(k^s\)</span>-scheme has <span class="math inline">\(k^s\)</span>-rational points, which implies that the rational points are topologically dense: <span class="math display">\[
+\overline{X_{k^s}(k^s)} = |X_{k^s}|.
+\]</span> Under the projection morphism <span class="math inline">\(\pi: X_{k^s} \to X\)</span>, the image of <span class="math inline">\(X_{k^s}(k^s)\)</span> is <span class="math inline">\(X(k^s)\)</span>. Hence: <span class="math display">\[
+\overline{X(k^s)} = \overline{\pi\big(X_{k^s}(k^s)\big)} = \pi\big(\overline{X_{k^s}(k^s)}\big) = \pi(|X_{k^s}|) = |X|.
+\]</span> Because <span class="math inline">\(X\)</span> is reduced and <span class="math inline">\(X(k^s)\)</span> is dense in <span class="math inline">\(|X|\)</span>, <span class="math inline">\(X(k^s)\)</span> is schematically dense in <span class="math inline">\(X\)</span>.</p>
+<p><span class="math inline">\((\impliedby)\)</span> If <span class="math inline">\(X(k^s)\)</span> is schematically dense in <span class="math inline">\(X\)</span>, then by stability under base change (<a href="#def-schematically-dense" class="quarto-xref">Definition&nbsp;3</a>(3)), <span class="math inline">\(X_{k^s}(k^s)\)</span> is dense in <span class="math inline">\(X_{k^s}\)</span>, which implies that <span class="math inline">\(X_{\bar{k}}(\bar{k})\)</span> is dense in <span class="math inline">\(X_{\bar{k}}\)</span>. A scheme containing a dense set of reduced points is reduced, hence <span class="math inline">\(X_{\bar{k}}\)</span> is reduced, which means <span class="math inline">\(X\)</span> is geometrically reduced.</p>
+</div>
+<div id="def-frobenius" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 (Frobenius Morphisms (Def 5.3.12))</strong></span> Let <span class="math inline">\(k\)</span> be a field of characteristic <span class="math inline">\(p &gt; 0\)</span>.</p>
+<ol type="1">
+<li><p>For a <span class="math inline">\(k\)</span>-algebra <span class="math inline">\(R\)</span>, the <span class="math inline">\(p\)</span>-th power map <span class="math inline">\(\sigma: R \to R\)</span>, <span class="math inline">\(x \mapsto x^p\)</span> is a ring homomorphism (the Frobenius endomorphism), but it is not a <span class="math inline">\(k\)</span>-algebra homomorphism unless <span class="math inline">\(k = \mathbb{F}_p\)</span>. Geometrically, this induces the <strong>absolute Frobenius</strong> morphism: <span class="math display">\[
+\begin{CD}
+\operatorname{Spec} R @&gt;{\sigma^*}&gt;&gt; \operatorname{Spec} R \\
+@VVV @VVV \\
+\operatorname{Spec} k @&gt;{\sigma^*}&gt;&gt; \operatorname{Spec} k
+\end{CD}
+\]</span></p></li>
+<li><p>For a <span class="math inline">\(k\)</span>-scheme <span class="math inline">\(X\)</span>, the <strong>Frobenius twist</strong> <span class="math inline">\(X^{(p)}\)</span> is defined by the fiber product (base change by <span class="math inline">\(\sigma: k \to k\)</span>, <span class="math inline">\(a \mapsto a^p\)</span>): <span class="math display">\[
+\begin{CD}
+X^{(p)} @&gt;&gt;&gt; X \\
+@VVV @VVV \\
+\operatorname{Spec} k @&gt;{\sigma}&gt;&gt; \operatorname{Spec} k
+\end{CD}
+\]</span> By the universal property of fiber products, the absolute Frobenius <span class="math inline">\(F_{\mathrm{abs}}: X \to X\)</span> and the structure morphism <span class="math inline">\(X \to \operatorname{Spec} k\)</span> induce a unique morphism of <span class="math inline">\(k\)</span>-schemes: <span class="math display">\[
+F_{X/k}: X \longrightarrow X^{(p)},
+\]</span> called the <strong>relative Frobenius morphism</strong>.</p></li>
+<li><p>In terms of functors of points: for a <span class="math inline">\(k\)</span>-algebra <span class="math inline">\(R\)</span>, let <span class="math inline">\({}_\sigma R\)</span> (or <span class="math inline">\({}_f R\)</span>) denote the <span class="math inline">\(k\)</span>-algebra with underlying ring <span class="math inline">\(R\)</span> whose <span class="math inline">\(k\)</span>-algebra structure is twisted by <span class="math inline">\(\sigma\)</span> (i.e., <span class="math inline">\(a \cdot r := \sigma(a) r = a^p r\)</span>). Then the <span class="math inline">\(p\)</span>-th power map <span class="math inline">\(R \to {}_\sigma R\)</span>, <span class="math inline">\(x \mapsto x^p\)</span> is a homomorphism of <span class="math inline">\(k\)</span>-algebras, and: <span class="math display">\[
+X^{(p)}(R) \cong X({}_\sigma R).
+\]</span></p></li>
+</ol>
+</div>
+<div id="prp-properties-relative-frobenius" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3 (Properties of Relative Frobenius (Prop 5.3.13))</strong></span> &nbsp;</p>
+<ol type="1">
+<li><p><strong>Functoriality:</strong> For any morphism of <span class="math inline">\(k\)</span>-schemes <span class="math inline">\(\varphi: X \to Y\)</span>, the relative Frobenius is functorial; that is, the following diagram commutes: <span class="math display">\[
+\begin{CD}
+X @&gt;{\varphi}&gt;&gt; Y \\
+@V{F_{X/k}}VV @VV{F_{Y/k}}V \\
+X^{(p)} @&gt;{\varphi^{(p)}}&gt;&gt; Y^{(p)}
+\end{CD}
+\]</span></p></li>
+<li><p><strong>Compatibility with products:</strong> <span class="math display">\[
+F_{(X \times_k Y)/k} = F_{X/k} \times F_{Y/k}.
+\]</span></p></li>
+<li><p><strong>Compatibility with base change:</strong> For any field extension <span class="math inline">\(k'/k\)</span>, <span class="math display">\[
+(F_{X/k})_{k'} = F_{X_{k'}/k'}.
+\]</span></p></li>
+<li><p><strong>Group scheme structure:</strong> If <span class="math inline">\(G\)</span> is an algebraic group over <span class="math inline">\(k\)</span>, then the functor <span class="math display">\[
+G^{(p)}: \mathbf{Alg}_k \longrightarrow \mathbf{Grp}, \quad R \longmapsto G^{(p)}(R) = G({}_\sigma R)
+\]</span> defines an algebraic group over <span class="math inline">\(k\)</span>, and the relative Frobenius morphism <span class="math inline">\(F_G: G \to G^{(p)}\)</span> is a homomorphism of algebraic groups.</p></li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Part (4) follows from applying (1) and (2) to the multiplication map <span class="math inline">\(m: G \times G \to G\)</span>. Specifically, the diagram: <span class="math display">\[
+\begin{CD}
+G \times G @&gt;{m}&gt;&gt; G \\
+@V{F_G \times F_G}VV @VV{F_G}V \\
+G^{(p)} \times G^{(p)} @&gt;{m^{(p)}}&gt;&gt; G^{(p)}
+\end{CD}
+\]</span> commutes, showing that <span class="math inline">\(F_G\)</span> preserves multiplication, hence is a homomorphism of algebraic groups.</p>
+</div>
+<div id="prp-frobenius-smooth-connected" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4 (Relative Frobenius of Smooth Connected Groups (Prop 5.3.14))</strong></span> If <span class="math inline">\(G\)</span> is a smooth and connected (i.e., geometrically integral) algebraic group over <span class="math inline">\(k\)</span>, then <span class="math inline">\(G^{(p)}\)</span> is also smooth and connected. Moreover, the relative Frobenius morphism <span class="math inline">\(F_G: G \to G^{(p)}\)</span> is fppf (faithfully flat of finite presentation).</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By descent of smoothness and fppf descent of fppf morphisms, we may assume without loss of generality that <span class="math inline">\(k = \bar{k}\)</span>.</p>
+<p>When <span class="math inline">\(k = \bar{k}\)</span> (hence perfect), <span class="math inline">\(\sigma: k \xrightarrow{\sim} k\)</span> is an isomorphism of fields, so <span class="math inline">\(G^{(p)} \cong G\)</span> as schemes; in particular, <span class="math inline">\(G^{(p)}\)</span> is smooth and connected.</p>
+<p>On coordinate rings, the pullback map <span class="math inline">\((F_G)^*: \mathcal{O}(G^{(p)}) \hookrightarrow \mathcal{O}(G)\)</span> is the Frobenius map (<span class="math inline">\(a \mapsto a^p\)</span>), which is integral (every element <span class="math inline">\(a\)</span> satisfies <span class="math inline">\(T^p - a^p = 0\)</span>). By generic flatness and the homogeneity of algebraic groups, since <span class="math inline">\(G^{(p)}\)</span> is regular/reduced, <span class="math inline">\(F_G\)</span> is flat everywhere. Because it is dominant and integral, it is surjective on points. Hence <span class="math inline">\(F_G: G \to G^{(p)}\)</span> is fppf.</p>
+</div>
+<div id="cor-iterated-frobenius" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 3 (Iterated Frobenius (Corollary 5.3.15))</strong></span> For each <span class="math inline">\(n \ge 1\)</span>, define the <span class="math inline">\(n\)</span>-th Frobenius twist inductively by <span class="math inline">\(G^{(p^n)} := (G^{(p^{n-1})})^{(p)}\)</span> with <span class="math inline">\(G^{(p^0)} := G\)</span>. Then the <span class="math inline">\(n\)</span>-th iterate of relative Frobenius: <span class="math display">\[
+F_G^n: G \xrightarrow{F_G} G^{(p)} \xrightarrow{F_{G^{(p)}}} \cdots \xrightarrow{F_{G^{(p^{n-1})}}} G^{(p^n)}
+\]</span> is a homomorphism of algebraic groups. If <span class="math inline">\(G\)</span> is smooth and connected, then <span class="math inline">\(G^{(p^n)}\)</span> is smooth and connected, and <span class="math inline">\(F_G^n\)</span> is fppf.</p>
+</div>
+<div id="prp-frobenius-image-hopf-reduced" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 5 (Hopf Subalgebra <span class="math inline">\(\mathcal{O}(G)^{p^n}\)</span> (Prop 5.3.16))</strong></span> Let <span class="math inline">\(G\)</span> be a linear algebraic group over a perfect field <span class="math inline">\(k\)</span> of characteristic <span class="math inline">\(p &gt; 0\)</span>. For <span class="math inline">\(n \ge 1\)</span>, let <span class="math inline">\(\mathcal{O}(G)^{p^n} := \operatorname{Im}(f^n)\)</span>, where <span class="math inline">\(f^n: \mathcal{O}(G) \to \mathcal{O}(G)\)</span> is the <span class="math inline">\(p^n\)</span>-th power map <span class="math inline">\(a \mapsto a^{p^n}\)</span>. Then <span class="math inline">\(\mathcal{O}(G)^{p^n}\)</span> is a Hopf subalgebra of <span class="math inline">\(\mathcal{O}(G)\)</span>, which is geometrically reduced for all <span class="math inline">\(n \gg 0\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(A := \mathcal{O}(G)\)</span> be the coordinate Hopf algebra of <span class="math inline">\(G\)</span>. The comorphism of the <span class="math inline">\(n\)</span>-th relative Frobenius is: <span class="math display">\[
+(F_G^n)^*: A \otimes_{k, \sigma^n} k \longrightarrow A, \quad a \otimes b \longmapsto a^{p^n} b.
+\]</span> Since <span class="math inline">\(k\)</span> is perfect, every <span class="math inline">\(b \in k\)</span> has a unique <span class="math inline">\(p^n\)</span>-th root <span class="math inline">\(b^{1/p^n} \in k\)</span>, so <span class="math inline">\(a^{p^n} b = (a b^{1/p^n})^{p^n}\)</span>. Thus: <span class="math display">\[
+\operatorname{Im}\big((F_G^n)^*\big) = A^{p^n} = \mathcal{O}(G)^{p^n}.
+\]</span> Since <span class="math inline">\(F_G^n: G \to G^{(p^n)}\)</span> is a homomorphism of algebraic groups, the image of its comorphism is a Hopf subalgebra of <span class="math inline">\(A\)</span>.</p>
+<p>Because <span class="math inline">\(A\)</span> is a Noetherian ring, its nilradical <span class="math inline">\(\operatorname{nil}(A)\)</span> is finitely generated, hence nilpotent: there exists an integer <span class="math inline">\(n_0 \ge 1\)</span> such that <span class="math inline">\(\operatorname{nil}(A)^{p^{n_0}} = 0\)</span>. Taking <span class="math inline">\(n \gg 0\)</span> such that <span class="math inline">\(p^n &gt; n_0\)</span>, any nilpotent element in <span class="math inline">\(A\)</span> has its <span class="math inline">\(p^n\)</span>-th power equal to <span class="math inline">\(0\)</span>. Therefore, <span class="math inline">\(\mathcal{O}(G)^{p^n}\)</span> has no non-zero nilpotent elements, so it is reduced. Because <span class="math inline">\(k\)</span> is perfect, reduced implies geometrically reduced (reduced over <span class="math inline">\(k = k^{p^n} \iff\)</span> reduced over <span class="math inline">\(\bar{k}\)</span>).</p>
+</div>
+<div id="cor-factorization-frobenius-smooth" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 4 (Factorization via Smooth Algebraic Groups (Corollary 5.3.17))</strong></span> Let <span class="math inline">\(G\)</span> be a linear algebraic group over a perfect field <span class="math inline">\(k\)</span> of characteristic <span class="math inline">\(p &gt; 0\)</span>. Consider the <span class="math inline">\(n\)</span>-th relative Frobenius <span class="math inline">\(F_G^n: G \to G^{(p^n)}\)</span>, and let <span class="math inline">\(I_n := \operatorname{Spec}\big(\mathcal{O}(G)^{p^n}\big) = \operatorname{Spec}\big(\operatorname{Im}((F_G^n)^*)\big)\)</span> be its scheme-theoretic image: <span class="math display">\[
+\begin{CD}
+G @&gt;{F_G^n}&gt;&gt; G^{(p^n)} \\
+@V{\text{fppf}}VV @AAA \\
+I_n @= I_n
+\end{CD}
+\]</span></p>
+<ol type="1">
+<li><p>If <span class="math inline">\(G\)</span> is smooth and connected, then <span class="math inline">\(F_G^n\)</span> is fppf, hence <span class="math inline">\(I_n = G^{(p^n)}\)</span>, which is smooth and connected.</p></li>
+<li><p>In general, for all <span class="math inline">\(n \gg 0\)</span>, <span class="math inline">\(I_n\)</span> is a smooth linear algebraic group over <span class="math inline">\(k\)</span>, and the canonical morphism <span class="math inline">\(G \to I_n\)</span> is fppf.</p></li>
+</ol>
+</div>
+<div id="lem-smoothness-nilradical-criterion" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1 (Smoothness Criterion via Nilradical (Lemma 5.3.18))</strong></span> Let <span class="math inline">\(G\)</span> be a linear algebraic group over an algebraically closed field <span class="math inline">\(k\)</span>. If <span class="math inline">\(\operatorname{nil}(\mathcal{O}(G)) \subseteq \mathfrak{m}_e^2\)</span>, where <span class="math inline">\(\mathfrak{m}_e\)</span> is the maximal ideal at the identity element <span class="math inline">\(e \in G\)</span>, then <span class="math inline">\(G\)</span> is smooth.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>An algebraic group <span class="math inline">\(G\)</span> is smooth if and only if <span class="math inline">\(\dim T_e G = \dim G\)</span>. Let <span class="math inline">\(G^{\mathrm{red}}\)</span> be the associated reduced algebraic group. Over an algebraically closed field <span class="math inline">\(k\)</span>, <span class="math inline">\(G^{\mathrm{red}}\)</span> is a smooth algebraic group, so: <span class="math display">\[
+\dim T_e G^{\mathrm{red}} = \dim G^{\mathrm{red}} = \dim G.
+\]</span> Thus it suffices to show that <span class="math inline">\(\dim T_e G = \dim T_e G^{\mathrm{red}}\)</span>.</p>
+<p>The maximal ideal of the local ring of <span class="math inline">\(G^{\mathrm{red}}\)</span> at <span class="math inline">\(e\)</span> is <span class="math inline">\(\mathfrak{m}_e^{\mathrm{red}} = \mathfrak{m}_e / \operatorname{nil}(\mathcal{O}(G))\)</span>. The canonical quotient morphism on Zariski cotangent spaces: <span class="math display">\[
+\mathfrak{m}_e / \mathfrak{m}_e^2 \longrightarrow \mathfrak{m}_e^{\mathrm{red}} / (\mathfrak{m}_e^{\mathrm{red}})^2 \cong \mathfrak{m}_e / \big(\mathfrak{m}_e^2 + \operatorname{nil}(\mathcal{O}(G))\big)
+\]</span> is an isomorphism because <span class="math inline">\(\operatorname{nil}(\mathcal{O}(G)) \subseteq \mathfrak{m}_e^2\)</span> implies <span class="math inline">\(\mathfrak{m}_e^2 + \operatorname{nil}(\mathcal{O}(G)) = \mathfrak{m}_e^2\)</span>. Dualizing gives an isomorphism on tangent spaces <span class="math inline">\(T_e G^{\mathrm{red}} \xrightarrow{\sim} T_e G\)</span>, so: <span class="math display">\[
+\dim T_e G = \dim T_e G^{\mathrm{red}} = \dim G.
+\]</span> Hence <span class="math inline">\(G\)</span> is smooth at <span class="math inline">\(e\)</span>, and by group translations, <span class="math inline">\(G\)</span> is smooth everywhere.</p>
+</div>
+<div id="thm-cartier" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Cartier’s Theorem (Theorem 5.3.19))</strong></span> Every linear algebraic group (and indeed every group scheme of finite type) over a field <span class="math inline">\(k\)</span> of characteristic zero is smooth.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By fppf descent of smoothness, we may assume without loss of generality that <span class="math inline">\(k = \bar{k}\)</span>.</p>
+<p>Write <span class="math inline">\(G = \operatorname{Spec} A\)</span>, where <span class="math inline">\(A = \mathcal{O}(G)\)</span> is the coordinate Hopf algebra of <span class="math inline">\(G\)</span>, and let <span class="math inline">\(\mathfrak{p} := \mathfrak{m}_e = \ker(\epsilon: A \to k)\)</span> be the augmentation ideal corresponding to the identity element <span class="math inline">\(e \in G\)</span>. By <a href="#lem-smoothness-nilradical-criterion" class="quarto-xref">Lemma&nbsp;1</a>, it suffices to show that every nilpotent element <span class="math inline">\(a \in A\)</span> satisfies <span class="math inline">\(a \in \mathfrak{p}^2\)</span>.</p>
+<p>Since <span class="math inline">\(A/\mathfrak{p} \cong k\)</span> has no non-zero nilpotents, <span class="math inline">\(a \in \mathfrak{p}\)</span>. If the image of <span class="math inline">\(a\)</span> in the localization <span class="math inline">\(A_{\mathfrak{p}}\)</span> is zero, then its image in <span class="math inline">\(A_{\mathfrak{p}}/(\mathfrak{p}A_{\mathfrak{p}})^2 \cong A/\mathfrak{p}^2\)</span> is zero, which implies <span class="math inline">\(a \in \mathfrak{p}^2\)</span>, and there is nothing to prove.</p>
+<p>Thus, we may assume that the image of <span class="math inline">\(a\)</span> in <span class="math inline">\(A_{\mathfrak{p}}\)</span> is non-zero. Let <span class="math inline">\(n \ge 2\)</span> be an integer such that: <span class="math display">\[
+a^n = 0 \text{ in } A_{\mathfrak{p}}, \quad \text{but} \quad a^{n-1} \neq 0 \text{ in } A_{\mathfrak{p}}.
+\]</span> Since <span class="math inline">\(a^n = 0\)</span> in <span class="math inline">\(A_{\mathfrak{p}}\)</span>, there exists an element <span class="math inline">\(s \in A \setminus \mathfrak{p}\)</span> such that <span class="math inline">\(s a^n = 0\)</span> in <span class="math inline">\(A\)</span>. Replacing <span class="math inline">\(a\)</span> with <span class="math inline">\(sa\)</span> (note that <span class="math inline">\(sa \equiv s(e) a \pmod{\mathfrak{p}^2}\)</span> with <span class="math inline">\(s(e) \in k^\times\)</span>, so <span class="math inline">\(a \in \mathfrak{p}^2 \iff sa \in \mathfrak{p}^2\)</span>, and <span class="math inline">\((sa)^{n-1} = s^{n-1} a^{n-1} \neq 0\)</span> in <span class="math inline">\(A_{\mathfrak{p}}\)</span>), we may assume: <span class="math display">\[
+a^n = 0 \text{ in } A, \quad \text{and} \quad a^{n-1} \neq 0 \text{ in } A_{\mathfrak{p}}.
+\]</span></p>
+<p><strong>Claim:</strong> <span class="math inline">\(m^*(a) - a \otimes 1 - 1 \otimes a \in \mathfrak{p} \otimes \mathfrak{p}\)</span>, where <span class="math inline">\(m^*: A \to A \otimes_k A\)</span> is the comultiplication map.</p>
+<p><em>Proof of Claim:</em> The counit axioms state that: <span class="math display">\[
+(\epsilon \otimes \mathrm{id}) \circ m^* = \mathrm{id} \quad \text{and} \quad (\mathrm{id} \otimes \epsilon) \circ m^* = \mathrm{id}.
+\]</span> Since <span class="math inline">\(\mathfrak{p} = \ker \epsilon\)</span>, we have: <span class="math display">\[
+m^*(a) \equiv 1 \otimes a \pmod{\mathfrak{p} \otimes A} \quad \text{and} \quad m^*(a) \equiv a \otimes 1 \pmod{A \otimes \mathfrak{p}}.
+\]</span> Under the decomposition <span class="math inline">\(A = k \cdot 1 \oplus \mathfrak{p}\)</span>, <span class="math display">\[
+A \otimes_k A = (k \cdot 1 \otimes 1) \oplus (k \cdot 1 \otimes \mathfrak{p}) \oplus (\mathfrak{p} \otimes k \cdot 1) \oplus (\mathfrak{p} \otimes \mathfrak{p}).
+\]</span> Comparing with the congruences above yields: <span class="math display">\[
+m^*(a) = a \otimes 1 + 1 \otimes a + y \quad \text{for some } y \in \mathfrak{p} \otimes_k \mathfrak{p}.
+\]</span> This establishes the Claim.</p>
+<p>Now, because <span class="math inline">\(m^*\)</span> is a <span class="math inline">\(k\)</span>-algebra homomorphism and <span class="math inline">\(a^n = 0\)</span> in <span class="math inline">\(A\)</span>: <span class="math display">\[
+0 = m^*(a^n) = \big(m^*(a)\big)^n = (a \otimes 1 + 1 \otimes a + y)^n.
+\]</span> Expanding this product modulo <span class="math inline">\(A \otimes \mathfrak{p}^2\)</span>, note that any term containing <span class="math inline">\((1 \otimes a + y)^k\)</span> with <span class="math inline">\(k \ge 2\)</span> lies in <span class="math inline">\(A \otimes \mathfrak{p}^2\)</span> because <span class="math inline">\(1 \otimes a + y \in A \otimes \mathfrak{p}\)</span>. Therefore: <span class="math display">\[
+0 \equiv a^n \otimes 1 + n (a^{n-1} \otimes 1)(1 \otimes a + y) \pmod{A \otimes \mathfrak{p}^2}.
+\]</span> Since <span class="math inline">\(a^n = 0\)</span> in <span class="math inline">\(A\)</span>, this reduces to: <span class="math display">\[
+n a^{n-1} \otimes a + n (a^{n-1} \otimes 1) y \in A \otimes \mathfrak{p}^2.
+\]</span> Because <span class="math inline">\(y \in \mathfrak{p} \otimes \mathfrak{p}\)</span>, we have <span class="math inline">\((a^{n-1} \otimes 1) y \in a^{n-1}\mathfrak{p} \otimes \mathfrak{p}\)</span>. Thus: <span class="math display">\[
+n a^{n-1} \otimes a \in a^{n-1}\mathfrak{p} \otimes \mathfrak{p} + A \otimes \mathfrak{p}^2.
+\]</span> Passing to the quotient <span class="math inline">\(A \otimes (\mathfrak{p}/\mathfrak{p}^2)\)</span>, and denoting the image of <span class="math inline">\(a\)</span> by <span class="math inline">\(\bar{a} \in \mathfrak{p}/\mathfrak{p}^2\)</span>, we obtain: <span class="math display">\[
+n a^{n-1} \otimes \bar{a} \in a^{n-1}\mathfrak{p} \otimes (\mathfrak{p}/\mathfrak{p}^2) \quad \text{in } A \otimes_k (\mathfrak{p}/\mathfrak{p}^2).
+\]</span> If <span class="math inline">\(\bar{a} \neq 0\)</span> in <span class="math inline">\(\mathfrak{p}/\mathfrak{p}^2\)</span>, then <span class="math inline">\(\bar{a}\)</span> can be extended to a basis of <span class="math inline">\(\mathfrak{p}/\mathfrak{p}^2\)</span>, which forces: <span class="math display">\[
+n a^{n-1} \in a^{n-1}\mathfrak{p}.
+\]</span> Since <span class="math inline">\(\operatorname{char}(k) = 0\)</span>, the integer <span class="math inline">\(n\)</span> is invertible in <span class="math inline">\(k\)</span>, so: <span class="math display">\[
+a^{n-1} \in a^{n-1}\mathfrak{p}.
+\]</span> Thus there exists an element <span class="math inline">\(x \in \mathfrak{p}\)</span> such that <span class="math inline">\(a^{n-1} = a^{n-1} x\)</span>, which implies: <span class="math display">\[
+a^{n-1}(1 - x) = 0.
+\]</span> Because <span class="math inline">\(x \in \mathfrak{p} = \mathfrak{m}_e\)</span>, the element <span class="math inline">\(1 - x\)</span> is a unit in the local ring <span class="math inline">\(A_{\mathfrak{p}}\)</span>. Multiplying by its inverse in <span class="math inline">\(A_{\mathfrak{p}}\)</span> yields: <span class="math display">\[
+a^{n-1} = 0 \quad \text{in } A_{\mathfrak{p}},
+\]</span> which directly contradicts our choice of <span class="math inline">\(n\)</span> (that <span class="math inline">\(a^{n-1} \neq 0\)</span> in <span class="math inline">\(A_{\mathfrak{p}}\)</span>).</p>
+<p>Therefore, we must have <span class="math inline">\(\bar{a} = 0\)</span> in <span class="math inline">\(\mathfrak{p}/\mathfrak{p}^2\)</span>, which means <span class="math inline">\(a \in \mathfrak{p}^2\)</span>. By <a href="#lem-smoothness-nilradical-criterion" class="quarto-xref">Lemma&nbsp;1</a>, <span class="math inline">\(G\)</span> is smooth.</p>
+</div>
 
 
 
 </main> <!-- /main -->
 <style>
 /* --------------------------------------------------------------------------
-   1. 缩小文章副标题 (Subtitle) 与暗色适配
+   1. 侧边栏常驻与容器保护
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  #quarto-margin-sidebar,
+  .margin-sidebar,
+  nav#TOC {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+body.quarto-reader-mode #quarto-margin-sidebar {
+  display: block !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. 副标题与排版微调
    -------------------------------------------------------------------------- */
 .quarto-title .subtitle,
 header#title-block-header .subtitle,
@@ -628,7 +821,6 @@ body.quarto-dark p.subtitle.lead {
   color: #94a3b8 !important;
 }
 
-/* 标题字号微调 */
 .theorem-header,
 .callout-header,
 .callout-title {
@@ -638,7 +830,7 @@ body.quarto-dark p.subtitle.lead {
 }
 
 /* --------------------------------------------------------------------------
-   2. 紧凑左侧边栏留白与缩进（防止长标题折行）
+   3. 紧凑左侧边栏留白与缩进
    -------------------------------------------------------------------------- */
 @media (min-width: 992px) {
   #quarto-sidebar,
@@ -670,7 +862,7 @@ body.quarto-dark p.subtitle.lead {
 }
 
 /* --------------------------------------------------------------------------
-   3. 紧凑型页脚
+   4. 紧凑型页脚
    -------------------------------------------------------------------------- */
 footer.footer,
 .nav-footer {
@@ -690,7 +882,7 @@ footer.footer,
 }
 
 /* --------------------------------------------------------------------------
-   4. 右侧目录标题 "ON THIS PAGE"
+   5. 右侧目录标题 "ON THIS PAGE"
    -------------------------------------------------------------------------- */
 #toc-title,
 h2#toc-title,
@@ -714,7 +906,7 @@ body.quarto-dark .sidebar .toc-title {
 }
 
 /* --------------------------------------------------------------------------
-   5. 定理环境基础外观与折叠动画
+   6. 定理外观与折叠动画
    -------------------------------------------------------------------------- */
 .theorem {
   margin: 1.25rem 0 !important;
@@ -724,7 +916,6 @@ body.quarto-dark .sidebar .toc-title {
   border: 1px solid rgba(0, 0, 0, 0.09) !important;
   border-left: 4.5px solid #2b6cb0 !important;
   overflow: hidden !important;
-  scroll-margin-top: 4.8rem !important; /* 关键：锚点跳转时避开顶部导航栏 */
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
@@ -732,14 +923,6 @@ body.quarto-dark .theorem,
 body.quarto-dark .proof {
   border-color: rgba(255, 255, 255, 0.12) !important;
   background-color: rgba(255, 255, 255, 0.02) !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  body:not(.quarto-light) .theorem,
-  body:not(.quarto-light) .proof {
-    border-color: rgba(255, 255, 255, 0.12) !important;
-    background-color: rgba(255, 255, 255, 0.02) !important;
-  }
 }
 
 .theorem-header {
@@ -790,54 +973,43 @@ body.quarto-dark .proof {
   transform: rotate(-90deg);
 }
 
-/* --------------------------------------------------------------------------
-   6. 专业学术色彩系统：同时兼容日间深沉与夜间明亮高对比度
-   -------------------------------------------------------------------------- */
-/* 定义 (Definition) - 蔚蓝 */
+/* 学术色彩映射 (日间 & 夜间) */
 .theorem.kind-definition { border-left-color: #1e40af !important; }
 .theorem.kind-definition > .theorem-header { color: #1e40af !important; }
 body.quarto-dark .theorem.kind-definition { border-left-color: #3b82f6 !important; }
 body.quarto-dark .theorem.kind-definition > .theorem-header { color: #60a5fa !important; }
 
-/* 引理 (Lemma) - 翠绿 */
 .theorem.kind-lemma { border-left-color: #166534 !important; }
 .theorem.kind-lemma > .theorem-header { color: #166534 !important; }
 body.quarto-dark .theorem.kind-lemma { border-left-color: #22c55e !important; }
 body.quarto-dark .theorem.kind-lemma > .theorem-header { color: #4ade80 !important; }
 
-/* 命题 (Proposition) - 紫罗兰 */
 .theorem.kind-proposition { border-left-color: #6b21a8 !important; }
 .theorem.kind-proposition > .theorem-header { color: #6b21a8 !important; }
 body.quarto-dark .theorem.kind-proposition { border-left-color: #a855f7 !important; }
 body.quarto-dark .theorem.kind-proposition > .theorem-header { color: #c084fc !important; }
 
-/* 定理 (Theorem) - 绯红 */
 .theorem.kind-theorem { border-left-color: #991b1b !important; }
 .theorem.kind-theorem > .theorem-header { color: #991b1b !important; }
 body.quarto-dark .theorem.kind-theorem { border-left-color: #ef4444 !important; }
 body.quarto-dark .theorem.kind-theorem > .theorem-header { color: #f87171 !important; }
 
-/* 推论 (Corollary) - 暖橙 */
 .theorem.kind-corollary { border-left-color: #c2410c !important; }
 .theorem.kind-corollary > .theorem-header { color: #c2410c !important; }
 body.quarto-dark .theorem.kind-corollary { border-left-color: #f97316 !important; }
 body.quarto-dark .theorem.kind-corollary > .theorem-header { color: #fb923c !important; }
 
-/* 注记 (Remark) - 琥珀金 */
 .theorem.kind-remark { border-left-color: #b45309 !important; }
 .theorem.kind-remark > .theorem-header { color: #b45309 !important; cursor: default !important; }
 body.quarto-dark .theorem.kind-remark { border-left-color: #f59e0b !important; }
 body.quarto-dark .theorem.kind-remark > .theorem-header { color: #fbbf24 !important; }
 
-/* 例题 (Example) - 冷灰蓝 */
 .theorem.kind-example { border-left-color: #334155 !important; }
 .theorem.kind-example > .theorem-header { color: #334155 !important; }
 body.quarto-dark .theorem.kind-example { border-left-color: #64748b !important; }
 body.quarto-dark .theorem.kind-example > .theorem-header { color: #cbd5e1 !important; }
 
-/* --------------------------------------------------------------------------
-   7. 证明环境 (.proof)
-   -------------------------------------------------------------------------- */
+/* 证明环境 */
 .proof {
   margin: 0.9rem 0 1.35rem !important;
   padding: 0 !important;
@@ -846,7 +1018,6 @@ body.quarto-dark .theorem.kind-example > .theorem-header { color: #cbd5e1 !impor
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   border-left: 4px solid #64748b !important;
   overflow: hidden !important;
-  scroll-margin-top: 4.8rem !important;
 }
 
 body.quarto-dark .proof {
@@ -878,9 +1049,8 @@ body.quarto-dark .proof-header {
 }
 
 /* --------------------------------------------------------------------------
-   8. 右侧边栏条目重构（一体贯通导轨 + 彻底消灭青蓝双竖线冲突）
+   7. 右侧边栏条目与贯通标尺
    -------------------------------------------------------------------------- */
-/* 统一定制 TOC 目录的贯通导轨竖线 */
 nav#TOC > ul {
   list-style: none !important;
   padding-left: 0 !important;
@@ -897,12 +1067,11 @@ nav#TOC li {
   list-style: none !important;
 }
 
-/* 紧凑对齐，取消导致断层的大缩进 (原 1.8rem) */
 nav#TOC a.nav-link,
 .callout-toc-item a.nav-link {
   display: block !important;
   padding: 0.22rem 0.5rem 0.22rem 0.75rem !important;
-  margin-left: -1.5px !important; /* 紧密吻合左侧导轨 */
+  margin-left: -1.5px !important;
   border-left: 2.5px solid transparent !important;
   font-size: 0.86rem !important;
   color: #4a5568 !important;
@@ -929,7 +1098,6 @@ body.quarto-dark .callout-toc-item a.nav-link:hover {
   background-color: rgba(96, 165, 250, 0.08) !important;
 }
 
-/* 核心修复：彻底覆盖 Quarto 默认 Cosmo 青色，统一高亮规范 */
 div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
 div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
 nav#TOC a.nav-link.active,
@@ -967,7 +1135,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
 
   const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
 
-  // 1. 自动提取页面章节前缀（如 22.8.）
   function getSecPrefix() {
     const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
     if (sec) {
@@ -984,7 +1151,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     return "22.0.";
   }
 
-  // 2. 确保右侧大纲容器准备完毕
   function ensureTocList() {
     let list = document.querySelector('#TOC > ul') ||
                document.querySelector('nav[role="doc-toc"] > ul') ||
@@ -992,16 +1158,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     if (list) return list;
 
     let marginSidebar = document.querySelector('#quarto-margin-sidebar, .margin-sidebar');
-    if (!marginSidebar) {
-      const content = document.querySelector('#quarto-content') || document.querySelector('.page-columns');
-      if (content) {
-        marginSidebar = document.createElement('div');
-        marginSidebar.id = 'quarto-margin-sidebar';
-        marginSidebar.className = 'sidebar margin-sidebar';
-        content.appendChild(marginSidebar);
-      }
-    }
-
     if (marginSidebar) {
       marginSidebar.style.display = 'block';
       let nav = marginSidebar.querySelector('#TOC');
@@ -1018,7 +1174,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     return null;
   }
 
-  // 3. 多维精准定理类型识别
   function detectKind(node, titleText) {
     const id = (node.id || "").toLowerCase();
     const cls = (node.className || "").toLowerCase();
@@ -1036,23 +1191,22 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
 
   function triggerMathTypeset(elements) {
     if (window.MathJax && window.MathJax.typesetPromise) {
-      window.MathJax.typesetPromise(elements).catch(function(err) {
-        console.error("MathJax typeset failed: ", err);
-      });
+      window.MathJax.typesetPromise(elements).catch(function(err) {});
     } else if (window.MathJax && window.MathJax.Hub) {
       window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, elements]);
     }
   }
 
-  // 4. 处理定理、例题与右侧大纲挂载
+  // 核心：处理定理并绑定平滑跳转
   function processTheorems() {
     const secPrefix = getSecPrefix();
     let counter = 0;
 
     const tocList = ensureTocList();
-    if (tocList) {
-      tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
-    }
+    if (!tocList) return;
+
+    // 清理旧自定义条目
+    tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
 
     const pageNodes = document.querySelectorAll(
       'main h2, main h3, #quarto-document-content h2, #quarto-document-content h3, .theorem, .remark, [id^="def-"], [id^="lem-"], [id^="prp-"], [id^="thm-"], [id^="cor-"], [id^="rem-"], [id^="exm-"]'
@@ -1062,121 +1216,132 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     const headersToTypeset = [];
 
     pageNodes.forEach(node => {
-      // 记录最近的 H2 / H3 标题位置，保证定理按章节就近插入
       if (node.tagName === 'H2' || node.tagName === 'H3') {
-        if (tocList && node.id) {
+        if (node.id) {
           const a = tocList.querySelector(`a[href="#${CSS.escape(node.id)}"]`);
           if (a) lastTocAnchor = a.closest('li');
         }
         return;
       }
 
-      if (node.dataset.mathProcessed === "true") return;
-      node.dataset.mathProcessed = "true";
+      // 如果未做过 DOM 改写，执行改写；如果已经改写过，仅补充挂载到目录
+      if (node.dataset.mathProcessed !== "true") {
+        node.dataset.mathProcessed = "true";
 
-      const titleSpan = node.querySelector('.theorem-title');
-      let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
-      let subTitle = "";
+        const titleSpan = node.querySelector('.theorem-title');
+        let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
+        let subTitle = "";
 
-      const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
-      if (match) {
-        subTitle = ` (${match[1].trim()})`;
+        const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
+        if (match) {
+          subTitle = ` (${match[1].trim()})`;
+        }
+        if (titleSpan) titleSpan.remove();
+
+        const firstP = node.querySelector(':scope > p:first-child');
+        if (firstP && firstP.textContent.trim() === '') firstP.remove();
+
+        const kind = detectKind(node, rawTitleHtml);
+        const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
+        const numStr = secPrefix + counter;
+        counter++;
+
+        const canFold = (kind !== 'remark');
+        node.classList.add('theorem', `kind-${kind}`);
+        node.dataset.kindShort = conf.short;
+        node.dataset.kindFull = conf.full;
+        node.dataset.numStr = numStr;
+        node.dataset.subTitle = subTitle;
+
+        const header = document.createElement('div');
+        header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
+        header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
+
+        const body = document.createElement('div');
+        body.className = 'theorem-body';
+        while (node.firstChild) {
+          body.appendChild(node.firstChild);
+        }
+
+        node.appendChild(header);
+        node.appendChild(body);
+        headersToTypeset.push(header);
+
+        if (canFold) {
+          header.addEventListener('click', () => {
+            node.classList.toggle('is-folded');
+          });
+        }
+
+        if (!node.id) {
+          node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
+        } else if (node.id.includes('.')) {
+          node.id = node.id.replace(/\./g, '-');
+        }
       }
-      if (titleSpan) titleSpan.remove();
 
-      const firstP = node.querySelector(':scope > p:first-child');
-      if (firstP && firstP.textContent.trim() === '') firstP.remove();
-
-      const kind = detectKind(node, rawTitleHtml);
-      const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
-      const numStr = secPrefix + counter;
-      counter++;
-
-      const canFold = (kind !== 'remark');
-      node.classList.add('theorem', `kind-${kind}`);
-
-      const header = document.createElement('div');
-      header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
-      header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
-
-      const body = document.createElement('div');
-      body.className = 'theorem-body';
-      while (node.firstChild) {
-        body.appendChild(node.firstChild);
-      }
-
-      node.appendChild(header);
-      node.appendChild(body);
-      headersToTypeset.push(header);
-
-      if (canFold) {
-        header.addEventListener('click', () => {
-          node.classList.toggle('is-folded');
-        });
-      }
-
-      // 生成安全的 ID（用短横替换点号，避免 querySelector 解析异常）
-      if (!node.id) {
-        node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
-      } else if (node.id.includes('.')) {
-        node.id = node.id.replace(/\./g, '-');
-      }
+      const targetId = node.id;
+      const shortLabel = node.dataset.kindShort || "Thm";
+      const numLabel = node.dataset.numStr || "";
+      const subLabel = node.dataset.subTitle || "";
+      const fullLabel = node.dataset.kindFull || "Theorem";
 
       // 挂载到右侧 TOC 目录
-      if (tocList) {
-        const li = document.createElement('li');
-        li.setAttribute('data-callout-toc', 'true');
-        li.className = 'nav-item callout-toc-item';
+      const li = document.createElement('li');
+      li.setAttribute('data-callout-toc', 'true');
+      li.className = 'nav-item callout-toc-item';
 
-        const a = document.createElement('a');
-        a.className = 'nav-link';
-        a.href = `#${node.id}`;
-        a.textContent = `${conf.short} ${numStr}`;
-        if (subTitle) a.title = `${conf.full} ${numStr}${subTitle}`;
+      const a = document.createElement('a');
+      a.className = 'nav-link';
+      a.href = `#${targetId}`;
+      a.textContent = `${shortLabel} ${numLabel}`;
+      if (subLabel) a.title = `${fullLabel} ${numLabel}${subLabel}`;
 
-        // 核心：点击平滑跳转 + 自动展开折叠块
-        a.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
+      // ====== 终极修复：百分之百生效的精准跳转 ======
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
 
-          const target = document.getElementById(node.id);
-          if (target) {
-            // 如果目标被折叠，点击时自动展开
-            if (target.classList.contains('is-folded')) {
-              target.classList.remove('is-folded');
-            }
-
-            // 计算避让吸顶导航栏高度
-            const navbar = document.querySelector('.navbar, header.fixed-top');
-            const navH = navbar ? navbar.getBoundingClientRect().height : 55;
-            const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 16;
-
-            window.scrollTo({
-              top: targetY,
-              behavior: 'smooth'
-            });
-
-            // 立即清除所有项的激活态并点亮当前项
-            tocList.querySelectorAll('a.nav-link').forEach(link => {
-              link.classList.remove('active', 'active-math-target');
-            });
-            a.classList.add('active', 'active-math-target');
-
-            if (history.pushState) {
-              history.pushState(null, null, '#' + node.id);
-            }
+        const target = document.getElementById(targetId);
+        if (target) {
+          // 1. 如果该定理处于折叠状态，点击立刻平滑展开
+          if (target.classList.contains('is-folded')) {
+            target.classList.remove('is-folded');
           }
-        });
 
-        li.appendChild(a);
+          // 2. 计算绝对距离，避开吸顶导航栏与外层容器干扰
+          const navbar = document.querySelector('.navbar, header.fixed-top');
+          const navH = navbar ? navbar.getBoundingClientRect().height : 55;
+          const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 18;
 
-        if (lastTocAnchor && lastTocAnchor.parentNode) {
-          lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
-          lastTocAnchor = li;
-        } else {
-          tocList.appendChild(li);
-          lastTocAnchor = li;
+          // 3. 执行平滑滚动
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth'
+          });
+
+          // 4. 同步点亮目录项
+          tocList.querySelectorAll('a.nav-link').forEach(link => {
+            link.classList.remove('active', 'active-math-target');
+          });
+          a.classList.add('active', 'active-math-target');
+
+          // 5. 更新地址栏哈希
+          if (history.pushState) {
+            history.pushState(null, null, `#${targetId}`);
+          }
         }
+      });
+
+      li.appendChild(a);
+
+      if (lastTocAnchor && lastTocAnchor.parentNode) {
+        lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
+        lastTocAnchor = li;
+      } else {
+        tocList.appendChild(li);
+        lastTocAnchor = li;
       }
     });
 
@@ -1185,7 +1350,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     }
   }
 
-  // 5. 处理证明环境 (.proof)
   function processProofs() {
     const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
     proofs.forEach(proof => {
@@ -1221,7 +1385,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
       proof.appendChild(header);
       proof.appendChild(body);
 
-      // 默认折叠
       proof.classList.add('is-folded');
 
       header.addEventListener('click', () => {
@@ -1230,7 +1393,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     });
   }
 
-  // 6. 精准滚动监听（修复原 offsetTop 跨容器错乱与一青一蓝双高亮 Bug）
   function initScrollSpy() {
     const tocList = ensureTocList();
     if (!tocList) return;
@@ -1239,10 +1401,9 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
       const targets = Array.from(document.querySelectorAll('main h2[id], main h3[id], #quarto-document-content h2[id], #quarto-document-content h3[id], .theorem[id]'));
       if (!targets.length) return;
 
-      const threshold = 130; // 判定线：视口上方 130px
+      const threshold = 140;
       let current = null;
 
-      // 使用真实屏幕视口坐标 rect.top，彻底杜绝 offsetTop 的定位失效问题
       for (const el of targets) {
         const rect = el.getBoundingClientRect();
         if (rect.top <= threshold) {
@@ -1252,13 +1413,11 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
         }
       }
 
-      // 处于页面最顶部时激活第一项
       if (!current && window.scrollY < 120) {
         current = targets[0];
       }
 
       if (current) {
-        // 同时清理 active 与 active-math-target，消灭冲突
         const allLinks = tocList.querySelectorAll('a.nav-link');
         allLinks.forEach(a => {
           a.classList.remove('active', 'active-math-target');
@@ -1272,19 +1431,18 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    // 初始化时执行一次判定
-    setTimeout(onScroll, 100);
+    setTimeout(onScroll, 150);
   }
 
-  let hasInit = false;
+  // 严格执行控制，彻底消除二次清空 Bug
+  let isExecuting = false;
   function run() {
-    if (hasInit) return;
-    const items = document.querySelectorAll('.theorem, [id^="def-"], [id^="lem-"], [id^="rem-"], [id^="thm-"], [id^="cor-"], [id^="prp-"], [id^="exm-"]');
-    if (!items.length && document.readyState === 'loading') return;
-    hasInit = true;
+    if (isExecuting) return;
+    isExecuting = true;
     processTheorems();
     processProofs();
     initScrollSpy();
+    setTimeout(() => { isExecuting = false; }, 200);
   }
 
   if (document.readyState === 'loading') {
@@ -1293,6 +1451,11 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     run();
   }
   window.addEventListener('load', run);
+
+  // 切换深浅模式时，重新对齐挂载
+  window.addEventListener('quarto-color-scheme-change', () => {
+    setTimeout(run, 150);
+  });
 })();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1720,6 +1883,9 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../23_algebraic_groups/23.4 Quotients.html" class="pagination-link" aria-label="23.4 Quotients">
+        <span class="nav-page-text">23.4 Quotients</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

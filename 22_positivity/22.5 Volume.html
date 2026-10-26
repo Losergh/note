@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fc4beeabfe87e77886ceb4bd0dfd747b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-563c4aa86ebe459a68ca1af0aa8b2c22.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-fc4beeabfe87e77886ceb4bd0dfd747b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b3e687515111ec8d6a8b8c0a1a8317de.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-3957401bcfc98edf50fe4f72d2a6ae90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-b3e687515111ec8d6a8b8c0a1a8317de.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -300,11 +300,6 @@ window.Quarto = {
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
-  <div class="quarto-reader-toggle-btn">
-  <i class="bi"></i>
-  </div>
-</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -586,7 +581,24 @@ h^0(X, \mathcal{O}_X(k)) = \sum_{i+j=k, \, j \le \sigma i} h^0(V, \mathcal{O}_V(
 </main> <!-- /main -->
 <style>
 /* --------------------------------------------------------------------------
-   1. 缩小文章副标题 (Subtitle) 与暗色适配
+   1. 侧边栏常驻与容器保护
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  #quarto-margin-sidebar,
+  .margin-sidebar,
+  nav#TOC {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+body.quarto-reader-mode #quarto-margin-sidebar {
+  display: block !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. 副标题与排版微调
    -------------------------------------------------------------------------- */
 .quarto-title .subtitle,
 header#title-block-header .subtitle,
@@ -605,7 +617,6 @@ body.quarto-dark p.subtitle.lead {
   color: #94a3b8 !important;
 }
 
-/* 标题字号微调 */
 .theorem-header,
 .callout-header,
 .callout-title {
@@ -615,7 +626,7 @@ body.quarto-dark p.subtitle.lead {
 }
 
 /* --------------------------------------------------------------------------
-   2. 紧凑左侧边栏留白与缩进（防止长标题折行）
+   3. 紧凑左侧边栏留白与缩进
    -------------------------------------------------------------------------- */
 @media (min-width: 992px) {
   #quarto-sidebar,
@@ -647,7 +658,7 @@ body.quarto-dark p.subtitle.lead {
 }
 
 /* --------------------------------------------------------------------------
-   3. 紧凑型页脚
+   4. 紧凑型页脚
    -------------------------------------------------------------------------- */
 footer.footer,
 .nav-footer {
@@ -667,7 +678,7 @@ footer.footer,
 }
 
 /* --------------------------------------------------------------------------
-   4. 右侧目录标题 "ON THIS PAGE"
+   5. 右侧目录标题 "ON THIS PAGE"
    -------------------------------------------------------------------------- */
 #toc-title,
 h2#toc-title,
@@ -691,7 +702,7 @@ body.quarto-dark .sidebar .toc-title {
 }
 
 /* --------------------------------------------------------------------------
-   5. 定理环境基础外观与折叠动画
+   6. 定理外观与折叠动画
    -------------------------------------------------------------------------- */
 .theorem {
   margin: 1.25rem 0 !important;
@@ -701,7 +712,6 @@ body.quarto-dark .sidebar .toc-title {
   border: 1px solid rgba(0, 0, 0, 0.09) !important;
   border-left: 4.5px solid #2b6cb0 !important;
   overflow: hidden !important;
-  scroll-margin-top: 4.8rem !important; /* 关键：锚点跳转时避开顶部导航栏 */
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
@@ -709,14 +719,6 @@ body.quarto-dark .theorem,
 body.quarto-dark .proof {
   border-color: rgba(255, 255, 255, 0.12) !important;
   background-color: rgba(255, 255, 255, 0.02) !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  body:not(.quarto-light) .theorem,
-  body:not(.quarto-light) .proof {
-    border-color: rgba(255, 255, 255, 0.12) !important;
-    background-color: rgba(255, 255, 255, 0.02) !important;
-  }
 }
 
 .theorem-header {
@@ -767,54 +769,43 @@ body.quarto-dark .proof {
   transform: rotate(-90deg);
 }
 
-/* --------------------------------------------------------------------------
-   6. 专业学术色彩系统：同时兼容日间深沉与夜间明亮高对比度
-   -------------------------------------------------------------------------- */
-/* 定义 (Definition) - 蔚蓝 */
+/* 学术色彩映射 (日间 & 夜间) */
 .theorem.kind-definition { border-left-color: #1e40af !important; }
 .theorem.kind-definition > .theorem-header { color: #1e40af !important; }
 body.quarto-dark .theorem.kind-definition { border-left-color: #3b82f6 !important; }
 body.quarto-dark .theorem.kind-definition > .theorem-header { color: #60a5fa !important; }
 
-/* 引理 (Lemma) - 翠绿 */
 .theorem.kind-lemma { border-left-color: #166534 !important; }
 .theorem.kind-lemma > .theorem-header { color: #166534 !important; }
 body.quarto-dark .theorem.kind-lemma { border-left-color: #22c55e !important; }
 body.quarto-dark .theorem.kind-lemma > .theorem-header { color: #4ade80 !important; }
 
-/* 命题 (Proposition) - 紫罗兰 */
 .theorem.kind-proposition { border-left-color: #6b21a8 !important; }
 .theorem.kind-proposition > .theorem-header { color: #6b21a8 !important; }
 body.quarto-dark .theorem.kind-proposition { border-left-color: #a855f7 !important; }
 body.quarto-dark .theorem.kind-proposition > .theorem-header { color: #c084fc !important; }
 
-/* 定理 (Theorem) - 绯红 */
 .theorem.kind-theorem { border-left-color: #991b1b !important; }
 .theorem.kind-theorem > .theorem-header { color: #991b1b !important; }
 body.quarto-dark .theorem.kind-theorem { border-left-color: #ef4444 !important; }
 body.quarto-dark .theorem.kind-theorem > .theorem-header { color: #f87171 !important; }
 
-/* 推论 (Corollary) - 暖橙 */
 .theorem.kind-corollary { border-left-color: #c2410c !important; }
 .theorem.kind-corollary > .theorem-header { color: #c2410c !important; }
 body.quarto-dark .theorem.kind-corollary { border-left-color: #f97316 !important; }
 body.quarto-dark .theorem.kind-corollary > .theorem-header { color: #fb923c !important; }
 
-/* 注记 (Remark) - 琥珀金 */
 .theorem.kind-remark { border-left-color: #b45309 !important; }
 .theorem.kind-remark > .theorem-header { color: #b45309 !important; cursor: default !important; }
 body.quarto-dark .theorem.kind-remark { border-left-color: #f59e0b !important; }
 body.quarto-dark .theorem.kind-remark > .theorem-header { color: #fbbf24 !important; }
 
-/* 例题 (Example) - 冷灰蓝 */
 .theorem.kind-example { border-left-color: #334155 !important; }
 .theorem.kind-example > .theorem-header { color: #334155 !important; }
 body.quarto-dark .theorem.kind-example { border-left-color: #64748b !important; }
 body.quarto-dark .theorem.kind-example > .theorem-header { color: #cbd5e1 !important; }
 
-/* --------------------------------------------------------------------------
-   7. 证明环境 (.proof)
-   -------------------------------------------------------------------------- */
+/* 证明环境 */
 .proof {
   margin: 0.9rem 0 1.35rem !important;
   padding: 0 !important;
@@ -823,7 +814,6 @@ body.quarto-dark .theorem.kind-example > .theorem-header { color: #cbd5e1 !impor
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   border-left: 4px solid #64748b !important;
   overflow: hidden !important;
-  scroll-margin-top: 4.8rem !important;
 }
 
 body.quarto-dark .proof {
@@ -855,9 +845,8 @@ body.quarto-dark .proof-header {
 }
 
 /* --------------------------------------------------------------------------
-   8. 右侧边栏条目重构（一体贯通导轨 + 彻底消灭青蓝双竖线冲突）
+   7. 右侧边栏条目与贯通标尺
    -------------------------------------------------------------------------- */
-/* 统一定制 TOC 目录的贯通导轨竖线 */
 nav#TOC > ul {
   list-style: none !important;
   padding-left: 0 !important;
@@ -874,12 +863,11 @@ nav#TOC li {
   list-style: none !important;
 }
 
-/* 紧凑对齐，取消导致断层的大缩进 (原 1.8rem) */
 nav#TOC a.nav-link,
 .callout-toc-item a.nav-link {
   display: block !important;
   padding: 0.22rem 0.5rem 0.22rem 0.75rem !important;
-  margin-left: -1.5px !important; /* 紧密吻合左侧导轨 */
+  margin-left: -1.5px !important;
   border-left: 2.5px solid transparent !important;
   font-size: 0.86rem !important;
   color: #4a5568 !important;
@@ -906,7 +894,6 @@ body.quarto-dark .callout-toc-item a.nav-link:hover {
   background-color: rgba(96, 165, 250, 0.08) !important;
 }
 
-/* 核心修复：彻底覆盖 Quarto 默认 Cosmo 青色，统一高亮规范 */
 div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
 div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
 nav#TOC a.nav-link.active,
@@ -944,7 +931,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
 
   const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
 
-  // 1. 自动提取页面章节前缀（如 22.8.）
   function getSecPrefix() {
     const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
     if (sec) {
@@ -961,7 +947,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     return "22.0.";
   }
 
-  // 2. 确保右侧大纲容器准备完毕
   function ensureTocList() {
     let list = document.querySelector('#TOC > ul') ||
                document.querySelector('nav[role="doc-toc"] > ul') ||
@@ -969,16 +954,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     if (list) return list;
 
     let marginSidebar = document.querySelector('#quarto-margin-sidebar, .margin-sidebar');
-    if (!marginSidebar) {
-      const content = document.querySelector('#quarto-content') || document.querySelector('.page-columns');
-      if (content) {
-        marginSidebar = document.createElement('div');
-        marginSidebar.id = 'quarto-margin-sidebar';
-        marginSidebar.className = 'sidebar margin-sidebar';
-        content.appendChild(marginSidebar);
-      }
-    }
-
     if (marginSidebar) {
       marginSidebar.style.display = 'block';
       let nav = marginSidebar.querySelector('#TOC');
@@ -995,7 +970,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     return null;
   }
 
-  // 3. 多维精准定理类型识别
   function detectKind(node, titleText) {
     const id = (node.id || "").toLowerCase();
     const cls = (node.className || "").toLowerCase();
@@ -1013,23 +987,22 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
 
   function triggerMathTypeset(elements) {
     if (window.MathJax && window.MathJax.typesetPromise) {
-      window.MathJax.typesetPromise(elements).catch(function(err) {
-        console.error("MathJax typeset failed: ", err);
-      });
+      window.MathJax.typesetPromise(elements).catch(function(err) {});
     } else if (window.MathJax && window.MathJax.Hub) {
       window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, elements]);
     }
   }
 
-  // 4. 处理定理、例题与右侧大纲挂载
+  // 核心：处理定理并绑定平滑跳转
   function processTheorems() {
     const secPrefix = getSecPrefix();
     let counter = 0;
 
     const tocList = ensureTocList();
-    if (tocList) {
-      tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
-    }
+    if (!tocList) return;
+
+    // 清理旧自定义条目
+    tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
 
     const pageNodes = document.querySelectorAll(
       'main h2, main h3, #quarto-document-content h2, #quarto-document-content h3, .theorem, .remark, [id^="def-"], [id^="lem-"], [id^="prp-"], [id^="thm-"], [id^="cor-"], [id^="rem-"], [id^="exm-"]'
@@ -1039,121 +1012,132 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     const headersToTypeset = [];
 
     pageNodes.forEach(node => {
-      // 记录最近的 H2 / H3 标题位置，保证定理按章节就近插入
       if (node.tagName === 'H2' || node.tagName === 'H3') {
-        if (tocList && node.id) {
+        if (node.id) {
           const a = tocList.querySelector(`a[href="#${CSS.escape(node.id)}"]`);
           if (a) lastTocAnchor = a.closest('li');
         }
         return;
       }
 
-      if (node.dataset.mathProcessed === "true") return;
-      node.dataset.mathProcessed = "true";
+      // 如果未做过 DOM 改写，执行改写；如果已经改写过，仅补充挂载到目录
+      if (node.dataset.mathProcessed !== "true") {
+        node.dataset.mathProcessed = "true";
 
-      const titleSpan = node.querySelector('.theorem-title');
-      let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
-      let subTitle = "";
+        const titleSpan = node.querySelector('.theorem-title');
+        let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
+        let subTitle = "";
 
-      const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
-      if (match) {
-        subTitle = ` (${match[1].trim()})`;
+        const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
+        if (match) {
+          subTitle = ` (${match[1].trim()})`;
+        }
+        if (titleSpan) titleSpan.remove();
+
+        const firstP = node.querySelector(':scope > p:first-child');
+        if (firstP && firstP.textContent.trim() === '') firstP.remove();
+
+        const kind = detectKind(node, rawTitleHtml);
+        const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
+        const numStr = secPrefix + counter;
+        counter++;
+
+        const canFold = (kind !== 'remark');
+        node.classList.add('theorem', `kind-${kind}`);
+        node.dataset.kindShort = conf.short;
+        node.dataset.kindFull = conf.full;
+        node.dataset.numStr = numStr;
+        node.dataset.subTitle = subTitle;
+
+        const header = document.createElement('div');
+        header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
+        header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
+
+        const body = document.createElement('div');
+        body.className = 'theorem-body';
+        while (node.firstChild) {
+          body.appendChild(node.firstChild);
+        }
+
+        node.appendChild(header);
+        node.appendChild(body);
+        headersToTypeset.push(header);
+
+        if (canFold) {
+          header.addEventListener('click', () => {
+            node.classList.toggle('is-folded');
+          });
+        }
+
+        if (!node.id) {
+          node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
+        } else if (node.id.includes('.')) {
+          node.id = node.id.replace(/\./g, '-');
+        }
       }
-      if (titleSpan) titleSpan.remove();
 
-      const firstP = node.querySelector(':scope > p:first-child');
-      if (firstP && firstP.textContent.trim() === '') firstP.remove();
-
-      const kind = detectKind(node, rawTitleHtml);
-      const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
-      const numStr = secPrefix + counter;
-      counter++;
-
-      const canFold = (kind !== 'remark');
-      node.classList.add('theorem', `kind-${kind}`);
-
-      const header = document.createElement('div');
-      header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
-      header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
-
-      const body = document.createElement('div');
-      body.className = 'theorem-body';
-      while (node.firstChild) {
-        body.appendChild(node.firstChild);
-      }
-
-      node.appendChild(header);
-      node.appendChild(body);
-      headersToTypeset.push(header);
-
-      if (canFold) {
-        header.addEventListener('click', () => {
-          node.classList.toggle('is-folded');
-        });
-      }
-
-      // 生成安全的 ID（用短横替换点号，避免 querySelector 解析异常）
-      if (!node.id) {
-        node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
-      } else if (node.id.includes('.')) {
-        node.id = node.id.replace(/\./g, '-');
-      }
+      const targetId = node.id;
+      const shortLabel = node.dataset.kindShort || "Thm";
+      const numLabel = node.dataset.numStr || "";
+      const subLabel = node.dataset.subTitle || "";
+      const fullLabel = node.dataset.kindFull || "Theorem";
 
       // 挂载到右侧 TOC 目录
-      if (tocList) {
-        const li = document.createElement('li');
-        li.setAttribute('data-callout-toc', 'true');
-        li.className = 'nav-item callout-toc-item';
+      const li = document.createElement('li');
+      li.setAttribute('data-callout-toc', 'true');
+      li.className = 'nav-item callout-toc-item';
 
-        const a = document.createElement('a');
-        a.className = 'nav-link';
-        a.href = `#${node.id}`;
-        a.textContent = `${conf.short} ${numStr}`;
-        if (subTitle) a.title = `${conf.full} ${numStr}${subTitle}`;
+      const a = document.createElement('a');
+      a.className = 'nav-link';
+      a.href = `#${targetId}`;
+      a.textContent = `${shortLabel} ${numLabel}`;
+      if (subLabel) a.title = `${fullLabel} ${numLabel}${subLabel}`;
 
-        // 核心：点击平滑跳转 + 自动展开折叠块
-        a.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
+      // ====== 终极修复：百分之百生效的精准跳转 ======
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
 
-          const target = document.getElementById(node.id);
-          if (target) {
-            // 如果目标被折叠，点击时自动展开
-            if (target.classList.contains('is-folded')) {
-              target.classList.remove('is-folded');
-            }
-
-            // 计算避让吸顶导航栏高度
-            const navbar = document.querySelector('.navbar, header.fixed-top');
-            const navH = navbar ? navbar.getBoundingClientRect().height : 55;
-            const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 16;
-
-            window.scrollTo({
-              top: targetY,
-              behavior: 'smooth'
-            });
-
-            // 立即清除所有项的激活态并点亮当前项
-            tocList.querySelectorAll('a.nav-link').forEach(link => {
-              link.classList.remove('active', 'active-math-target');
-            });
-            a.classList.add('active', 'active-math-target');
-
-            if (history.pushState) {
-              history.pushState(null, null, '#' + node.id);
-            }
+        const target = document.getElementById(targetId);
+        if (target) {
+          // 1. 如果该定理处于折叠状态，点击立刻平滑展开
+          if (target.classList.contains('is-folded')) {
+            target.classList.remove('is-folded');
           }
-        });
 
-        li.appendChild(a);
+          // 2. 计算绝对距离，避开吸顶导航栏与外层容器干扰
+          const navbar = document.querySelector('.navbar, header.fixed-top');
+          const navH = navbar ? navbar.getBoundingClientRect().height : 55;
+          const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 18;
 
-        if (lastTocAnchor && lastTocAnchor.parentNode) {
-          lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
-          lastTocAnchor = li;
-        } else {
-          tocList.appendChild(li);
-          lastTocAnchor = li;
+          // 3. 执行平滑滚动
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth'
+          });
+
+          // 4. 同步点亮目录项
+          tocList.querySelectorAll('a.nav-link').forEach(link => {
+            link.classList.remove('active', 'active-math-target');
+          });
+          a.classList.add('active', 'active-math-target');
+
+          // 5. 更新地址栏哈希
+          if (history.pushState) {
+            history.pushState(null, null, `#${targetId}`);
+          }
         }
+      });
+
+      li.appendChild(a);
+
+      if (lastTocAnchor && lastTocAnchor.parentNode) {
+        lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
+        lastTocAnchor = li;
+      } else {
+        tocList.appendChild(li);
+        lastTocAnchor = li;
       }
     });
 
@@ -1162,7 +1146,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     }
   }
 
-  // 5. 处理证明环境 (.proof)
   function processProofs() {
     const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
     proofs.forEach(proof => {
@@ -1198,7 +1181,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
       proof.appendChild(header);
       proof.appendChild(body);
 
-      // 默认折叠
       proof.classList.add('is-folded');
 
       header.addEventListener('click', () => {
@@ -1207,7 +1189,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     });
   }
 
-  // 6. 精准滚动监听（修复原 offsetTop 跨容器错乱与一青一蓝双高亮 Bug）
   function initScrollSpy() {
     const tocList = ensureTocList();
     if (!tocList) return;
@@ -1216,10 +1197,9 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
       const targets = Array.from(document.querySelectorAll('main h2[id], main h3[id], #quarto-document-content h2[id], #quarto-document-content h3[id], .theorem[id]'));
       if (!targets.length) return;
 
-      const threshold = 130; // 判定线：视口上方 130px
+      const threshold = 140;
       let current = null;
 
-      // 使用真实屏幕视口坐标 rect.top，彻底杜绝 offsetTop 的定位失效问题
       for (const el of targets) {
         const rect = el.getBoundingClientRect();
         if (rect.top <= threshold) {
@@ -1229,13 +1209,11 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
         }
       }
 
-      // 处于页面最顶部时激活第一项
       if (!current && window.scrollY < 120) {
         current = targets[0];
       }
 
       if (current) {
-        // 同时清理 active 与 active-math-target，消灭冲突
         const allLinks = tocList.querySelectorAll('a.nav-link');
         allLinks.forEach(a => {
           a.classList.remove('active', 'active-math-target');
@@ -1249,19 +1227,18 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    // 初始化时执行一次判定
-    setTimeout(onScroll, 100);
+    setTimeout(onScroll, 150);
   }
 
-  let hasInit = false;
+  // 严格执行控制，彻底消除二次清空 Bug
+  let isExecuting = false;
   function run() {
-    if (hasInit) return;
-    const items = document.querySelectorAll('.theorem, [id^="def-"], [id^="lem-"], [id^="rem-"], [id^="thm-"], [id^="cor-"], [id^="prp-"], [id^="exm-"]');
-    if (!items.length && document.readyState === 'loading') return;
-    hasInit = true;
+    if (isExecuting) return;
+    isExecuting = true;
     processTheorems();
     processProofs();
     initScrollSpy();
+    setTimeout(() => { isExecuting = false; }, 200);
   }
 
   if (document.readyState === 'loading') {
@@ -1270,6 +1247,11 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     run();
   }
   window.addEventListener('load', run);
+
+  // 切换深浅模式时，重新对齐挂载
+  window.addEventListener('quarto-color-scheme-change', () => {
+    setTimeout(run, 150);
+  });
 })();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">

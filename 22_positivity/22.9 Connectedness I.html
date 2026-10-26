@@ -49,9 +49,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fc4beeabfe87e77886ceb4bd0dfd747b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-563c4aa86ebe459a68ca1af0aa8b2c22.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-fc4beeabfe87e77886ceb4bd0dfd747b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b3e687515111ec8d6a8b8c0a1a8317de.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-3957401bcfc98edf50fe4f72d2a6ae90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-b3e687515111ec8d6a8b8c0a1a8317de.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -299,11 +299,6 @@ window.Quarto = {
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
-  <div class="quarto-reader-toggle-btn">
-  <i class="bi"></i>
-  </div>
-</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -440,118 +435,128 @@ window.Quarto = {
 
 
 <div id="thm-bertini-irreducibility" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Bertini’s Theorem on Irreducibility)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible variety over <span class="math inline">\(\mathbb{C}\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r\)</span> be a morphism. Fix an integer <span class="math inline">\(d &lt; \dim \overline{f(X)}\)</span>. If <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> is a general <span class="math inline">\((r - d)\)</span>-plane (i.e., belonging to a dense open subset of the Grassmannian <span class="math inline">\(\mathbb{G}(r - d, r)\)</span>), then the preimage: <span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 1 (Bertini’s Theorem on Irreducibility)</strong></span> Let <span class="math inline">\(X\)</span> be a variety over <span class="math inline">\(\mathbb{C}\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r\)</span> be a morphism. Fix an integer <span class="math inline">\(d &lt; \dim \overline{f(X)}\)</span>. If <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> is a general <span class="math inline">\((r - d)\)</span>-plane (i.e., belonging to a dense open subset in the Grassmannian <span class="math inline">\(\mathbb{G}(r - d, r)\)</span>), then the preimage: <span class="math display">\[
 f^{-1}(L)
 \]</span> is irreducible.</p>
 </div>
 <div id="lem-irreducibility-fibers-section" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 1 (Irreducibility of Fibers Admitting a Section)</strong></span> Let <span class="math inline">\(p: V \to T\)</span> be a dominant morphism of irreducible complex varieties. If <span class="math inline">\(p\)</span> admits a section <span class="math inline">\(s: T \to V\)</span> such that <span class="math inline">\(s(T) \nsubseteq \operatorname{Sing}(V)\)</span>, then the fiber <span class="math inline">\(V_t = p^{-1}(t)\)</span> is irreducible for general <span class="math inline">\(t \in T\)</span>.</p>
+<p><span class="theorem-title"><strong>Lemma 1 (Irreducibility of Fibers Admitting a Section)</strong></span> Let <span class="math inline">\(p: V \to T\)</span> be a dominant morphism of irreducible complex varieties. If <span class="math inline">\(p\)</span> admits a section <span class="math inline">\(s: T \to V\)</span> such that <span class="math inline">\(s(T) \nsubseteq \operatorname{Sing}(V)\)</span>, then the fiber: <span class="math display">\[
+V_t = p^{-1}(t)
+\]</span> is irreducible for general <span class="math inline">\(t \in T\)</span>.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Since <span class="math inline">\(s(T) \nsubseteq \operatorname{Sing}(V)\)</span>, the generic point <span class="math inline">\(\eta_T\)</span> does not lie in <span class="math inline">\(s^{-1}(\operatorname{Sing} V)\)</span>. Setting <span class="math inline">\(U := T \setminus s^{-1}(\operatorname{Sing} V)\)</span> and shrinking <span class="math inline">\(T\)</span> to <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> to <span class="math inline">\(p^{-1}(U)\)</span>, we may assume without loss of generality that <span class="math inline">\(T\)</span> is smooth, <span class="math inline">\(s(T) \cap \operatorname{Sing}(V) = \varnothing\)</span>, and <span class="math inline">\(p\)</span> is flat (hence every fiber has pure dimension).</p>
-<p>For general <span class="math inline">\(t \in T\)</span>, since <span class="math inline">\(s(t) \notin \operatorname{Sing}(V)\)</span>, we have <span class="math inline">\(V_t \nsubseteq \operatorname{Sing}(V)\)</span>, so <span class="math inline">\(V_t \setminus \operatorname{Sing}(V)\)</span> is dense in <span class="math inline">\(V_t\)</span>. Replacing <span class="math inline">\(V\)</span> by <span class="math inline">\(V \setminus \operatorname{Sing}(V)\)</span>, we may assume that <span class="math inline">\(V\)</span> is smooth. By generic smoothness, shrinking <span class="math inline">\(T\)</span> further, we may assume that <span class="math inline">\(p\)</span> is smooth.</p>
-<p>To show that the general fiber of <span class="math inline">\(p\)</span> is irreducible, it suffices to show that its fibers are connected: 1. By [Stacks Project, Tag 055J], for a smooth morphism, the fibers are geometrically irreducible if and only if they are geometrically connected. Hence it suffices to show that the geometric generic fiber <span class="math inline">\(V_{\bar{\eta}}\)</span> is irreducible. 2. By [Stacks Project, Tag 054Q], this is equivalent to showing that the function field <span class="math inline">\(k(T)\)</span> is separably closed in <span class="math inline">\(k(V)\)</span>.</p>
-<p>Consider the Stein factorization of <span class="math inline">\(p\)</span>: let <span class="math inline">\(\widetilde{k(T)}\)</span> be the separable closure of <span class="math inline">\(k(T)\)</span> in <span class="math inline">\(k(V)\)</span>, and let <span class="math inline">\(\tilde{T}\)</span> be the normalization of <span class="math inline">\(T\)</span> in <span class="math inline">\(\widetilde{k(T)}\)</span>. This yields a factorization: <span class="math display">\[
+<p><span class="proof-title"><em>Proof</em>. </span>Since <span class="math inline">\(s(T) \nsubseteq \operatorname{Sing}(V)\)</span>, the generic point <span class="math inline">\(\eta_T \notin s^{-1}(\operatorname{Sing} V)\)</span>. Define the open subset <span class="math inline">\(U := T \setminus s^{-1}(\operatorname{Sing} V)\)</span>. Shrinking <span class="math inline">\(T\)</span> to <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> to <span class="math inline">\(p^{-1}(U)\)</span>, we may assume without loss of generality that <span class="math inline">\(T\)</span> is smooth, <span class="math inline">\(s(T) \cap \operatorname{Sing}(V) = \varnothing\)</span>, and <span class="math inline">\(p\)</span> is flat (hence every fiber has pure dimension).</p>
+<p>Now consider <span class="math inline">\(V_t \cap \operatorname{Sing}(V)\)</span>. Since <span class="math inline">\(s(t) \notin \operatorname{Sing}(V)\)</span>, we have <span class="math inline">\(V_t \nsubseteq \operatorname{Sing}(V)\)</span>, so <span class="math inline">\(V_t \setminus \operatorname{Sing}(V)\)</span> is dense in <span class="math inline">\(V_t\)</span>. Replacing <span class="math inline">\(V\)</span> by <span class="math inline">\(V \setminus \operatorname{Sing}(V)\)</span>, we may assume that <span class="math inline">\(V\)</span> is smooth. By generic smoothness, shrinking the target <span class="math inline">\(T\)</span> further, we may assume that <span class="math inline">\(p\)</span> is smooth.</p>
+<p>It now suffices to show that the fibers of <span class="math inline">\(p\)</span> are generally connected: 1. By [Stacks Project, Tag 055J], for a smooth morphism, the fibers are geometrically irreducible if and only if they are geometrically connected. Hence it suffices to show that the geometric generic fiber <span class="math inline">\(V_{\bar{\eta}}\)</span> is irreducible. 2. By [Stacks Project, Tag 054Q], this is equivalent to showing that the function field <span class="math inline">\(k(T)\)</span> is separably closed in <span class="math inline">\(k(V)\)</span>.</p>
+<p>Consider the Stein factorization: let <span class="math inline">\(\widetilde{k(T)}\)</span> be the separable closure of <span class="math inline">\(k(T)\)</span> in <span class="math inline">\(k(V)\)</span>, and let <span class="math inline">\(\widetilde{T}\)</span> be the normalization of <span class="math inline">\(T\)</span> with respect to <span class="math inline">\(\widetilde{k(T)}\)</span>. This yields the factorization: <span class="math display">\[
 \begin{CD}
-V @&gt;{\tilde{p}}&gt;&gt; \tilde{T} \\
+V @&gt;{\tilde{p}}&gt;&gt; \widetilde{T} \\
 @V{p}VV @VV{f}V \\
 T @= T
 \end{CD}
-\]</span> where <span class="math inline">\(f: \tilde{T} \to T\)</span> is finite and <span class="math inline">\(\tilde{p}: V \to \tilde{T}\)</span> has geometrically connected fibers. Because <span class="math inline">\(p\)</span> admits a section <span class="math inline">\(s: T \to V\)</span> with <span class="math inline">\(p \circ s = \operatorname{id}_T\)</span>, the composition: <span class="math display">\[
-f \circ (\tilde{p} \circ s) = \operatorname{id}_T
-\]</span> shows that <span class="math inline">\(\tilde{p} \circ s\)</span> is a section of the finite morphism <span class="math inline">\(f\)</span>. Since <span class="math inline">\(T\)</span> is normal and <span class="math inline">\(f\)</span> is a finite morphism admitting a section, <span class="math inline">\(f\)</span> must be birational, and hence <span class="math inline">\(f: \tilde{T} \xrightarrow{\sim} T\)</span> is an isomorphism. Therefore, <span class="math inline">\(\widetilde{k(T)} = k(T)\)</span>, which proves that the fibers of <span class="math inline">\(p\)</span> are irreducible for general <span class="math inline">\(t \in T\)</span>.</p>
+\]</span> where <span class="math inline">\(\tilde{p}\)</span> is induced by <span class="math inline">\(\mathcal{O}_T \hookrightarrow \widetilde{\mathcal{O}}_T \hookrightarrow p_* \mathcal{O}_V\)</span> (using that <span class="math inline">\(V\)</span> is normal).</p>
+<p>Then <span class="math inline">\(f: \widetilde{T} \to T\)</span> is finite, and <span class="math inline">\(\tilde{p}: V \to \widetilde{T}\)</span> has geometrically connected fibers. Because <span class="math inline">\(p \circ s = \operatorname{id}_T\)</span>, we have: <span class="math display">\[
+f \circ (\tilde{p} \circ s) = \operatorname{id}_T,
+\]</span> so <span class="math inline">\(\tilde{p} \circ s\)</span> is a section of <span class="math inline">\(f\)</span>. Since <span class="math inline">\(T\)</span> is normal and <span class="math inline">\(f\)</span> is a finite morphism admitting a section, <span class="math inline">\(f\)</span> must be an isomorphism (<span class="math inline">\(\widetilde{T} \cong T\)</span>). Hence <span class="math inline">\(\widetilde{k(T)} = k(T)\)</span>, which proves that the fibers of <span class="math inline">\(p\)</span> are irreducible for general <span class="math inline">\(t \in T\)</span>.</p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span><em>(Proof of <a href="#thm-bertini-irreducibility" class="quarto-xref">Theorem&nbsp;1</a>)</em> Let <span class="math inline">\(n := \dim \overline{f(X)}\)</span>. It suffices to prove the theorem for <span class="math inline">\(d = n - 1\)</span>.</p>
-<p>Indeed, suppose the result holds for <span class="math inline">\(d = n - 1\)</span>. For any <span class="math inline">\(d &lt; n - 1\)</span>, let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be an <span class="math inline">\((r - d)\)</span>-plane. If <span class="math inline">\(f^{-1}(L)\)</span> were reducible for general <span class="math inline">\(L\)</span>, we could choose a general <span class="math inline">\((r - n + 1)\)</span>-plane <span class="math inline">\(L' \subseteq L\)</span> such that <span class="math inline">\(f^{-1}(L')\)</span> is irreducible. Writing <span class="math inline">\(f^{-1}(L) = Y_1 \cup Y_2\)</span> with <span class="math inline">\(Y_1, Y_2\)</span> irreducible, each component has dimension <span class="math inline">\(\dim Y_i \ge n - d\)</span>. Setting <span class="math inline">\(k := n - 1 - d \ge 1\)</span>, we have <span class="math inline">\(\dim Y_i \ge k + 1\)</span>. Then: <span class="math display">\[
+<p>Indeed, suppose the result holds for <span class="math inline">\(d = n - 1\)</span>. For any other <span class="math inline">\(d &lt; n - 1\)</span>, let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be an <span class="math inline">\((r - d)\)</span>-plane. If <span class="math inline">\(f^{-1}(L)\)</span> were reducible for general <span class="math inline">\(L\)</span>, we could choose an <span class="math inline">\((r - n + 1)\)</span>-plane <span class="math inline">\(L' \subseteq L\)</span> such that <span class="math inline">\(L'\)</span> is “general” (i.e., <span class="math inline">\(f^{-1}(L')\)</span> is irreducible).</p>
+<p>Writing <span class="math inline">\(f^{-1}(L) = Y_1 \cup Y_2\)</span> with <span class="math inline">\(Y_1, Y_2\)</span> irreducible, each component has dimension <span class="math inline">\(\dim Y_i \ge n - d\)</span>. Setting <span class="math inline">\(k := n - 1 - d \ge 1\)</span>, we have <span class="math inline">\(\dim Y_i \ge k + 1\)</span>. Then: <span class="math display">\[
 f^{-1}(L') = \big(f^{-1}(L') \cap Y_1\big) \cup \big(f^{-1}(L') \cap Y_2\big).
-\]</span> Adjusting <span class="math inline">\(L'\)</span> so that <span class="math inline">\(\dim\big(f^{-1}(L') \cap Y_1 \cap Y_2\big) = \dim(Y_1 \cap Y_2) - k\)</span>, if <span class="math inline">\(f^{-1}(L') \cap Y_1 \subseteq f^{-1}(L') \cap Y_2\)</span>, we would have: <span class="math display">\[
+\]</span> Adjust <span class="math inline">\(L'\)</span> so that <span class="math inline">\(\dim\big(f^{-1}(L') \cap Y_1 \cap Y_2\big) = \dim(Y_1 \cap Y_2) - k\)</span>. If <span class="math inline">\(f^{-1}(L') \cap Y_1 \subseteq f^{-1}(L') \cap Y_2\)</span>, then <span class="math inline">\(f^{-1}(L') \cap Y_1 \subseteq f^{-1}(L') \cap Y_1 \cap Y_2\)</span>, which yields: <span class="math display">\[
 \dim\big(f^{-1}(L') \cap Y_1\big) \ge \dim Y_1 - 1, \quad \text{while} \quad \dim\big(f^{-1}(L') \cap Y_1 \cap Y_2\big) \le \dim Y_1 - 1 - k,
-\]</span> a contradiction. The same holds for <span class="math inline">\(Y_2\)</span>, which would imply that <span class="math inline">\(f^{-1}(L')\)</span> is reducible, contradicting the choice of <span class="math inline">\(L'\)</span>. Thus, the general case reduces to <span class="math inline">\(d = n - 1\)</span>.</p>
-<p>Now assume <span class="math inline">\(d = n - 1\)</span>. Fix a general <span class="math inline">\((r - n)\)</span>-plane <span class="math inline">\(\Lambda \subseteq \mathbb{P}^r\)</span>. The pencil of <span class="math inline">\((r - n + 1)\)</span>-planes <span class="math inline">\(L_t \subseteq \mathbb{P}^r\)</span> containing <span class="math inline">\(\Lambda\)</span> is parametrized by <span class="math inline">\(T = \mathbb{P}^{n-1}\)</span>. Consider the incidence variety: <span class="math display">\[
+\]</span> a contradiction! The same argument applies to <span class="math inline">\(Y_2\)</span>, which would imply that <span class="math inline">\(f^{-1}(L')\)</span> is reducible, contradicting the choice of <span class="math inline">\(L'\)</span>. Therefore, <span class="math inline">\(f^{-1}(L)\)</span> must be irreducible.</p>
+<p>Now assume <span class="math inline">\(d = n - 1\)</span>. Fix a general <span class="math inline">\((r - n)\)</span>-plane <span class="math inline">\(\Lambda \subseteq \mathbb{P}^r\)</span>. The set of all <span class="math inline">\((r - n + 1)\)</span>-planes <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> passing through <span class="math inline">\(\Lambda\)</span> is parametrized by <span class="math inline">\(T = \mathbb{P}^{n-1}\)</span>. Consider the incidence family: <span class="math display">\[
 V := \big\{ (x, t) \in X \times T \;\big|\; f(x) \in L_t \big\} \subseteq X \times T,
-\]</span> equipped with the natural projection <span class="math inline">\(p: V \to T\)</span>. It suffices to show that the general fiber of <span class="math inline">\(p\)</span> is irreducible.</p>
-<p>For <span class="math inline">\(x \in X \setminus f^{-1}(\Lambda)\)</span>, the point <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(\Lambda\)</span> span a unique <span class="math inline">\((r - n + 1)\)</span>-plane <span class="math inline">\(L_t\)</span>, which defines a unique <span class="math inline">\(t \in T\)</span>. Thus: <span class="math display">\[
+\]</span> equipped with the projection <span class="math inline">\(p: V \to T\)</span>. It suffices to show that the general fiber of <span class="math inline">\(p\)</span> is irreducible.</p>
+<p>Observe the projection <span class="math inline">\(V \to X\)</span>. For any <span class="math inline">\(x \in X \setminus f^{-1}(\Lambda)\)</span>, the point <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(\Lambda\)</span> span a unique <span class="math inline">\((r - n + 1)\)</span>-plane <span class="math inline">\(L_t\)</span>, which defines a unique <span class="math inline">\(t \in T\)</span>. Thus: <span class="math display">\[
 V \setminus \big(f^{-1}(\Lambda) \times T\big) \xrightarrow{\;\sim\;} X \setminus f^{-1}(\Lambda).
-\]</span> Since <span class="math inline">\(X\)</span> is irreducible and <span class="math inline">\(f^{-1}(\Lambda)\)</span> is a proper closed subset, <span class="math inline">\(V \setminus (f^{-1}(\Lambda) \times T)\)</span> is irreducible and dense in <span class="math inline">\(V\)</span>, so <span class="math inline">\(V\)</span> is irreducible.</p>
-<p>Notice that the blow-up <span class="math inline">\(\mathrm{Bl}_\Lambda \mathbb{P}^r\)</span> embeds into <span class="math inline">\(\mathbb{P}^r \times T\)</span> as the incidence variety <span class="math inline">\(\{ (x, L_t) \mid x \in L_t \}\)</span>. We obtain a commutative diagram with Cartesian squares: <span class="math display">\[
+\]</span> Since <span class="math inline">\(X \setminus f^{-1}(\Lambda)\)</span> is irreducible, <span class="math inline">\(V \setminus (f^{-1}(\Lambda) \times T)\)</span> is irreducible and dense in <span class="math inline">\(V\)</span>, so <span class="math inline">\(V\)</span> is irreducible.</p>
+<p>Note that the blow-up <span class="math inline">\(\mathrm{Bl}_\Lambda \mathbb{P}^r \hookrightarrow \mathbb{P}^r \times T\)</span> has image <span class="math inline">\(\big\{ (x, L_t) \mid x \in L_t \big\}\)</span>. We obtain a commutative diagram with strict transforms: <span class="math display">\[
 \begin{CD}
 \mathrm{Bl}_{f^{-1}(\Lambda)} X @&gt;&gt;&gt; X \times T @&gt;&gt;&gt; X \\
-@VV{\text{strict transform}}V @VVV @VVV \\
+@VV{\text{strict transf.}}V @VVV @VVV \\
 \mathrm{Bl}_\Lambda \mathbb{P}^r @&gt;&gt;&gt; \mathbb{P}^r \times T @&gt;&gt;&gt; \mathbb{P}^r
 \end{CD}
-\]</span> Choosing <span class="math inline">\(\Lambda\)</span> such that <span class="math inline">\(f^{-1}(\Lambda)\)</span> is cut out by a regular sequence, we have <span class="math inline">\(V = \mathrm{Bl}_{f^{-1}(\Lambda)} X\)</span>. In particular, for any <span class="math inline">\(x \in f^{-1}(\Lambda) \cap X^{\mathrm{reg}}\)</span>, the variety <span class="math inline">\(V\)</span> is smooth near <span class="math inline">\(x\)</span>.</p>
-<p>Since <span class="math inline">\(X \to \overline{f(X)}\)</span> is generically smooth on the source, there exist open dense subsets <span class="math inline">\(U \subseteq X^{\mathrm{reg}}\)</span> and <span class="math inline">\(W \subseteq \overline{f(X)}\)</span> such that <span class="math inline">\(U \to W\)</span> is smooth. Choosing <span class="math inline">\(\Lambda\)</span> such that <span class="math inline">\(\Lambda \cap W \neq \varnothing\)</span>, there exists a point <span class="math inline">\(x_0 \in f^{-1}(\Lambda) \cap X^{\mathrm{reg}} \cap f^{-1}(W)^{\mathrm{reg}}\)</span>. Then the map: <span class="math display">\[
+\]</span> Choosing <span class="math inline">\(\Lambda\)</span> such that <span class="math inline">\(f^{-1}(\Lambda)\)</span> is cut out by a regular sequence (i.e., intersects properly), we have <span class="math inline">\(V = \mathrm{Bl}_{f^{-1}(\Lambda)} X\)</span>. In particular, for any <span class="math inline">\(x \in f^{-1}(\Lambda) \cap X^{\mathrm{reg}}\)</span>, <span class="math inline">\(V\)</span> is smooth near <span class="math inline">\(x\)</span>.</p>
+<p>Since <span class="math inline">\(X \to \overline{f(X)}\)</span> is generically smooth on the source, there exist open dense subsets <span class="math inline">\(U \subseteq X^{\mathrm{reg}}\)</span> and <span class="math inline">\(W \subseteq \overline{f(X)}\)</span> such that <span class="math inline">\(U \to W\)</span> is smooth. Choosing <span class="math inline">\(\Lambda\)</span> such that <span class="math inline">\(\Lambda \cap W \neq \varnothing\)</span>, there exists a point: <span class="math display">\[
+x_0 \in f^{-1}(\Lambda) \cap X^{\mathrm{reg}} \cap f^{-1}(W)^{\mathrm{reg}}.
+\]</span> Then the map: <span class="math display">\[
 s: T \longrightarrow V, \quad t \longmapsto (x_0, t)
-\]</span> defines a section of <span class="math inline">\(p: V \to T\)</span> whose image lies in <span class="math inline">\(V^{\mathrm{reg}}\)</span>. By <a href="#lem-irreducibility-fibers-section" class="quarto-xref">Lemma&nbsp;1</a>, the general fiber of <span class="math inline">\(p\)</span> is irreducible, which completes the proof.</p>
+\]</span> defines a section of <span class="math inline">\(p: V \to T\)</span> with <span class="math inline">\(s(T) \subseteq V^{\mathrm{reg}}\)</span>. By <a href="#lem-irreducibility-fibers-section" class="quarto-xref">Lemma&nbsp;1</a>, the general fiber of <span class="math inline">\(p\)</span> is irreducible.</p>
 </div>
 <hr>
 <div id="thm-bertini-connectedness-proper" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 2 (Bertini’s Theorem for Connectedness (Proper Version))</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible proper variety over <span class="math inline">\(\mathbb{C}\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r\)</span> be a morphism. Let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be a linear subspace of codimension <span class="math inline">\(d &lt; \dim \overline{f(X)}\)</span>. Then the preimage: <span class="math display">\[
 f^{-1}(L)
-\]</span> is connected for <strong>all</strong> linear subspaces <span class="math inline">\(L\)</span>.</p>
+\]</span> is connected for <strong>all</strong> <span class="math inline">\(L\)</span>. (More generally, this holds whenever <span class="math inline">\(f^{-1}(L)\)</span> is proper).</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(G = \mathbb{G}(r - d, r)\)</span> be the Grassmannian parameterizing all linear subspaces of codimension <span class="math inline">\(d\)</span> in <span class="math inline">\(\mathbb{P}^r\)</span>. Consider the closed incidence variety: <span class="math display">\[
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(G = \mathbb{G}(r - d, r)\)</span> be the Grassmannian parametrizing all codimension <span class="math inline">\(d\)</span> linear spaces in <span class="math inline">\(\mathbb{P}^r\)</span>. Consider the closed incidence variety: <span class="math display">\[
 Z := \big\{ (x, L) \in X \times G \;\big|\; x \in f^{-1}(L) \big\} \subseteq X \times G.
-\]</span> The projection <span class="math inline">\(Z \to X\)</span> realizes <span class="math inline">\(Z\)</span> as a Grassmannian bundle over <span class="math inline">\(X\)</span> with smooth, irreducible fibers. Since <span class="math inline">\(X\)</span> is irreducible, <span class="math inline">\(Z\)</span> is irreducible.</p>
-<p>Let <span class="math inline">\(p: Z \to G\)</span> be the projection onto the second factor. Because <span class="math inline">\(X\)</span> is proper, <span class="math inline">\(p\)</span> is a proper morphism. Consider the Stein factorization of <span class="math inline">\(p\)</span>: <span class="math display">\[
-Z \xrightarrow{\;\tilde{p}\;} W \xrightarrow{\;r\;} G,
-\]</span> where <span class="math inline">\(\tilde{p}\)</span> has connected fibers and <span class="math inline">\(r\)</span> is finite. By <a href="#thm-bertini-irreducibility" class="quarto-xref">Theorem&nbsp;1</a>, the general fiber of <span class="math inline">\(p\)</span> is irreducible, so <span class="math inline">\(r: W \to G\)</span> is generically bijective. Since <span class="math inline">\(G\)</span> is smooth, it is normal. By Zariski’s Main Theorem, a finite birational morphism onto a normal variety is an isomorphism, so <span class="math inline">\([K(W) : K(G)] = 1\)</span> and <span class="math inline">\(W \cong G\)</span>.</p>
-<p>Therefore, every fiber of <span class="math inline">\(p\)</span> is connected, which implies that <span class="math inline">\(f^{-1}(L)\)</span> is connected for every <span class="math inline">\(L \in G\)</span>.</p>
+\]</span> The projection <span class="math inline">\(Z \to X\)</span> realizes <span class="math inline">\(Z\)</span> as a Grassmannian bundle over <span class="math inline">\(X\)</span>. Since <span class="math inline">\(Z \to X\)</span> is an irreducible smooth bundle with irreducible fibers and <span class="math inline">\(X\)</span> is irreducible, <span class="math inline">\(Z\)</span> is irreducible.</p>
+<p>Let <span class="math inline">\(p: Z \to G\)</span> be the projection onto the second factor. Because <span class="math inline">\(X\)</span> is proper, <span class="math inline">\(p\)</span> is proper. Consider its Stein factorization: <span class="math display">\[
+Z \xrightarrow{\;\tilde{p}\;} W \xrightarrow{\;r\;} G.
+\]</span> The general fiber of <span class="math inline">\(p\)</span> is irreducible by <a href="#thm-bertini-irreducibility" class="quarto-xref">Theorem&nbsp;1</a>, so <span class="math inline">\(r: W \to G\)</span> is generically bijective. Since <span class="math inline">\(G\)</span> is smooth, it is normal. By Zariski’s Main Theorem, <span class="math inline">\([K(W) : K(G)] = 1\)</span> implies <span class="math inline">\(W \cong G\)</span>. Therefore, every fiber of <span class="math inline">\(p\)</span> is connected, which shows that <span class="math inline">\(f^{-1}(L)\)</span> is connected for all <span class="math inline">\(L\)</span>.</p>
 </div>
 <div id="cor-curve-connecting-points" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Curves Connecting Two Points)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible quasi-projective variety over <span class="math inline">\(\mathbb{C}\)</span>. For any two distinct points <span class="math inline">\(x_1, x_2 \in X\)</span>, there exists an irreducible curve <span class="math inline">\(C \subseteq X\)</span> containing both <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> (which may not be smooth).</p>
+<p><span class="theorem-title"><strong>Corollary 1 (Curves Connecting Two Points)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible quasi-projective variety over <span class="math inline">\(\mathbb{C}\)</span>. Any two distinct points <span class="math inline">\(x_1, x_2 \in X\)</span> can be joined by an irreducible curve <span class="math inline">\(C \subseteq X\)</span> (which may not be smooth).</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(X' := \mathrm{Bl}_{\{x_1, x_2\}} X\)</span>, and let <span class="math inline">\(E_1, E_2 \subseteq X'\)</span> be the exceptional divisors. Choose a quasi-finite morphism <span class="math inline">\(f: X' \to \mathbb{P}^r\)</span>. Let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be a general linear subspace of codimension <span class="math inline">\(\dim X - 1\)</span> meeting both <span class="math inline">\(f(E_1)\)</span> and <span class="math inline">\(f(E_2)\)</span>.</p>
-<p>Since <span class="math inline">\(L\)</span> is general, <span class="math inline">\(f|_{E_i}\)</span> is finite, and by <a href="#thm-bertini-irreducibility" class="quarto-xref">Theorem&nbsp;1</a>, <span class="math inline">\(f^{-1}(L)\)</span> is an irreducible curve in <span class="math inline">\(X'\)</span>. Setting <span class="math inline">\(\widetilde{C} := f^{-1}(L)\)</span> and taking its image <span class="math inline">\(C := \pi(\widetilde{C}) \subseteq X\)</span> under the blow-down morphism <span class="math inline">\(\pi: X' \to X\)</span>, we obtain an irreducible curve <span class="math inline">\(C\)</span> connecting <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>.</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(X' := \mathrm{Bl}_{\{x_1, x_2\}} X\)</span>, and let <span class="math inline">\(E_1, E_2 \subseteq X'\)</span> be the exceptional divisors. Choose a quasi-finite morphism <span class="math inline">\(f: X' \to \mathbb{P}^r\)</span>. Let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be a linear subspace of codimension <span class="math inline">\(\dim X - 1\)</span> such that <span class="math inline">\(f(E_i) \cap L \neq \varnothing\)</span>. For a general choice of <span class="math inline">\(L\)</span>, the restriction <span class="math inline">\(f|_{E_i}\)</span> is finite.</p>
+<p>By <a href="#thm-bertini-irreducibility" class="quarto-xref">Theorem&nbsp;1</a>, <span class="math inline">\(f^{-1}(L)\)</span> is irreducible of dimension <span class="math inline">\(1\)</span>. Setting <span class="math inline">\(\widetilde{C} := f^{-1}(L)\)</span> and taking its image <span class="math inline">\(C := \pi\big(f^{-1}(L)\big) \subseteq X\)</span> under the blow-down morphism <span class="math inline">\(\pi: X' \to X\)</span>, we obtain an irreducible curve <span class="math inline">\(C\)</span> joining <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>.</p>
 </div>
 <hr>
 <div id="thm-fulton-hansen" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 3 (Fulton–Hansen Connectedness Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible proper variety over <span class="math inline">\(\mathbb{C}\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r \times \mathbb{P}^r\)</span> be a morphism such that <span class="math inline">\(\dim \overline{f(X)} &gt; r\)</span>. Then: <span class="math display">\[
 f^{-1}(\Delta) \subseteq X
-\]</span> is connected, where <span class="math inline">\(\Delta \subseteq \mathbb{P}^r \times \mathbb{P}^r\)</span> denotes the diagonal.</p>
+\]</span> is connected, where <span class="math inline">\(\Delta \subseteq \mathbb{P}^r \times \mathbb{P}^r\)</span> is the diagonal projective subspace.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><strong>Step 1: The geometric construction.</strong> Consider two disjoint linear subspaces of <span class="math inline">\(\mathbb{P}^{2r+1}\)</span>: <span class="math display">\[
-L_1 = \big\{ [0, \dots, 0, y_0, \dots, y_r] \big\} \cong \mathbb{P}^r, \qquad L_2 = \big\{ [x_0, \dots, x_r, 0, \dots, 0] \big\} \cong \mathbb{P}^r.
-\]</span> Let <span class="math inline">\(U := \mathbb{P}^{2r+1} \setminus (L_1 \cup L_2)\)</span>. There is a natural projection: <span class="math display">\[
-p: U \longrightarrow \mathbb{P}^r \times \mathbb{P}^r, \quad [x_0, \dots, x_r, y_0, \dots, y_r] \longmapsto \big([x_0, \dots, x_r], [y_0, \dots, y_r]\big).
-\]</span> Locally over the standard open set <span class="math inline">\(\mathbb{P}^r \times D(y_i)\)</span>, the fiber is isomorphic to <span class="math inline">\((\mathbb{A}^{r+1} \setminus \{0\}) \times \mathbb{A}^r\)</span>. Hence <span class="math inline">\(p: U \to \mathbb{P}^r \times \mathbb{P}^r\)</span> is a principal <span class="math inline">\(\mathbb{G}_m\)</span>-bundle.</p>
-<p>Define the linear subspace: <span class="math display">\[
-\mathcal{L} := \big\{ [x_0, \dots, x_r, y_0, \dots, y_r] \in \mathbb{P}^{2r+1} \;\big|\; x_i = y_i \text{ for all } 0 \le i \le r \big\} \subseteq U.
-\]</span> Then <span class="math inline">\(\mathcal{L} \cong \mathbb{P}^r\)</span>, and <span class="math inline">\(p\)</span> restricts to an isomorphism <span class="math inline">\(\mathcal{L} \xrightarrow{\sim} \Delta\)</span>: <span class="math display">\[
+<p><span class="proof-title"><em>Proof</em>. </span><strong>Observation:</strong> Consider the open subvariety <span class="math inline">\(V \subseteq \mathbb{P}^{2r+1}\)</span> defined by <span class="math inline">\(V := \mathbb{P}^{2r+1} \setminus (L_1 \cup L_2)\)</span>, where: <span class="math display">\[
+L_1 = \big\{ [0, \dots, 0, y_0, \dots, y_r] \big\}, \qquad L_2 = \big\{ [x_0, \dots, x_r, 0, \dots, 0] \big\}.
+\]</span> The morphism <span class="math inline">\(p: V \to \mathbb{P}^r \times \mathbb{P}^r\)</span> is defined by: <span class="math display">\[
+[x_0, \dots, x_r, y_0, \dots, y_r] \longmapsto \big([x_0, \dots, x_r], [y_0, \dots, y_r]\big).
+\]</span> Locally on <span class="math inline">\(\mathbb{P}^r \times D(y_i)\)</span>, we have <span class="math inline">\(V|_{\mathbb{P}^r \times D(y_i)} \cong (\mathbb{A}^{r+1} \setminus \{0\}) \times \mathbb{A}^r\)</span>, fitting into the Cartesian diagram: <span class="math display">\[
 \begin{CD}
-\mathcal{L} @&gt;{\sim}&gt;&gt; \Delta \\
-@VV{\cap}V @VV{\cap}V \\
-U @&gt;&gt;&gt; \mathbb{P}^r \times \mathbb{P}^r
+V|_{\mathbb{P}^r \times D(y_i)} @&gt;{\sim}&gt;&gt; (\mathbb{A}^{r+1} \setminus \{0\}) \times \mathbb{A}^r \\
+@VVV @VVV \\
+\mathbb{P}^r \times D(y_i) @&gt;{\sim}&gt;&gt; \mathbb{P}^r \times \mathbb{A}^r
 \end{CD}
-\]</span></p>
-<p><strong>Step 2: Base change.</strong> Pull back the bundle <span class="math inline">\(U \to \mathbb{P}^r \times \mathbb{P}^r\)</span> along <span class="math inline">\(f: X \to \mathbb{P}^r \times \mathbb{P}^r\)</span>: <span class="math display">\[
+\]</span> where <span class="math inline">\(\mathbb{A}^{r+1} \setminus \{0\} \to \mathbb{P}^r\)</span> is the natural projection. Hence <span class="math inline">\(V \to \mathbb{P}^r \times \mathbb{P}^r\)</span> is a principal <span class="math inline">\(\mathbb{G}_m\)</span>-bundle.</p>
+<p>Define the projective subspace: <span class="math display">\[
+\mathcal{L} := \big\{ [x_0, \dots, x_r, y_0, \dots, y_r] \in V \;\big|\; x_i = y_i \text{ for all } i \big\} \subseteq V.
+\]</span> Then <span class="math inline">\(\mathcal{L} \xrightarrow{\sim} \Delta\)</span> under <span class="math inline">\(p\)</span>.</p>
+<p>Now, given <span class="math inline">\(f: X \to \mathbb{P}^r \times \mathbb{P}^r\)</span>, form the fiber product: <span class="math display">\[
 \begin{CD}
-V_X @&gt;{f_U}&gt;&gt; U \\
+V_X @&gt;{f_V}&gt;&gt; V \\
 @V{p}VV @VV{p}V \\
 X @&gt;{f}&gt;&gt; \mathbb{P}^r \times \mathbb{P}^r
 \end{CD}
-\]</span> Because <span class="math inline">\(X\)</span> is irreducible and <span class="math inline">\(V_X \to X\)</span> is smooth with irreducible fibers (isomorphic to <span class="math inline">\(\mathbb{G}_m\)</span>), the total space <span class="math inline">\(V_X\)</span> is irreducible. Furthermore, since <span class="math inline">\(f\)</span> is proper, <span class="math inline">\(f_U: V_X \to U\)</span> is proper.</p>
-<p>The image <span class="math inline">\(U_{f(X)} := f_U(V_X)\)</span> is a <span class="math inline">\(\mathbb{G}_m\)</span>-bundle over <span class="math inline">\(f(X)\)</span>, which gives: <span class="math display">\[
-\dim \overline{f_U(V_X)} = \dim \overline{f(X)} + 1 &gt; r + 1 = \operatorname{codim}_{\mathbb{P}^{2r+1}}(\mathcal{L}).
-\]</span></p>
-<p><strong>Step 3: Applying Bertini for connectedness.</strong> By <a href="#thm-bertini-connectedness-proper" class="quarto-xref">Theorem&nbsp;2</a>, the preimage <span class="math inline">\(f_U^{-1}(\mathcal{L}) \subseteq V_X\)</span> is connected.</p>
-<p>Set-theoretically, we claim that <span class="math inline">\(p\big(f_U^{-1}(\mathcal{L})\big) = f^{-1}(\Delta)\)</span>: - If <span class="math inline">\((x, y) \in f_U^{-1}(\mathcal{L})\)</span>, then <span class="math inline">\(f_U(x, y) \in \mathcal{L}\)</span>, so <span class="math inline">\(f(x) = p(f_U(x, y)) \in p(\mathcal{L}) = \Delta\)</span>, hence <span class="math inline">\(x \in f^{-1}(\Delta)\)</span>. - Conversely, for any <span class="math inline">\(x \in f^{-1}(\Delta)\)</span>, the point <span class="math inline">\(f(x) \in \Delta\)</span> lifts to a unique point <span class="math inline">\(y \in \mathcal{L}\)</span>. Then <span class="math inline">\((x, y) \in V_X\)</span> satisfies <span class="math inline">\(f_U(x, y) = y \in \mathcal{L}\)</span>, so <span class="math inline">\((x, y) \in f_U^{-1}(\mathcal{L})\)</span> and <span class="math inline">\(p(x, y) = x\)</span>.</p>
-<p>Since <span class="math inline">\(p\)</span> is continuous and <span class="math inline">\(f_U^{-1}(\mathcal{L})\)</span> is connected, its image <span class="math inline">\(f^{-1}(\Delta) = p\big(f_U^{-1}(\mathcal{L})\big)\)</span> is connected.</p>
+\]</span> Since <span class="math inline">\(X\)</span> is irreducible and <span class="math inline">\(V_X \to X\)</span> is smooth with irreducible fibers (hence an open map), <span class="math inline">\(V_X\)</span> is irreducible. Moreover, <span class="math inline">\(f\)</span> proper implies <span class="math inline">\(f_V\)</span> is proper.</p>
+<p>Consider the factorization through the image: <span class="math display">\[
+\begin{CD}
+V_X @&gt;&gt;&gt; V_{f(X)} @&gt;&gt;&gt; V \\
+@VVV @VVV @VV{p}V \\
+X @&gt;&gt;&gt; f(X) @&gt;&gt;&gt; \mathbb{P}^r \times \mathbb{P}^r
+\end{CD}
+\]</span> where <span class="math inline">\(V_{f(X)} := \operatorname{Im}(f_V)\)</span> is a <span class="math inline">\(\mathbb{G}_m\)</span>-bundle over <span class="math inline">\(f(X)\)</span>. By flatness, <span class="math inline">\(\dim V_{f(X)} = \dim \overline{f(X)} + 1\)</span>. Thus: <span class="math display">\[
+\dim \overline{f_V(V_X)} = \dim \overline{f(X)} + 1 &gt; r + 1 = \operatorname{codim}_{\mathbb{P}^{2r+1}}(\mathcal{L}).
+\]</span> By <a href="#thm-bertini-connectedness-proper" class="quarto-xref">Theorem&nbsp;2</a>, <span class="math inline">\(f_V^{-1}(\mathcal{L})\)</span> is connected.</p>
+<p>Set-theoretically, we have <span class="math inline">\(p\big(f_V^{-1}(\mathcal{L})\big) = f^{-1}(\Delta)\)</span>: - First, <span class="math inline">\(p\big(f_V^{-1}(\mathcal{L})\big) \subseteq f^{-1}(\Delta)\)</span> is clear because <span class="math inline">\(p(\mathcal{L}) = \Delta\)</span>. - Conversely, for any <span class="math inline">\(x \in f^{-1}(\Delta)\)</span>, lift <span class="math inline">\(f(x)\)</span> to the unique point <span class="math inline">\(y \in \mathcal{L}\)</span>. Then there exists a unique <span class="math inline">\((x, y) \in V_X\)</span> such that <span class="math inline">\(f_V(x, y) = y \in \mathcal{L}\)</span> and <span class="math inline">\(p(x, y) = x\)</span>. Thus <span class="math inline">\((x, y) \in f_V^{-1}(\mathcal{L})\)</span>, which gives <span class="math inline">\(x \in p\big(f_V^{-1}(\mathcal{L})\big)\)</span>.</p>
+<p>Since <span class="math inline">\(p\)</span> is continuous, <span class="math inline">\(f^{-1}(\Delta) = p\big(f_V^{-1}(\mathcal{L})\big)\)</span> is connected.</p>
 </div>
 <div id="exm-intersection-projective-space" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1 (Intersection of Subvarieties in Projective Space)</strong></span> Let <span class="math inline">\(X, Y \subseteq \mathbb{P}^r\)</span> be irreducible subvarieties over <span class="math inline">\(\mathbb{C}\)</span>. If <span class="math inline">\(\dim X + \dim Y &gt; r\)</span>, then: <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 1 (Intersection of Subvarieties in Projective Space)</strong></span> Let <span class="math inline">\(X, Y \subseteq \mathbb{P}^r\)</span> be irreducible subvarieties over an algebraically closed field. If <span class="math inline">\(\dim X + \dim Y &gt; r\)</span>, then: <span class="math display">\[
 X \cap Y
 \]</span> is connected.</p>
-<p><em>Proof:</em> Realize <span class="math inline">\(X \cap Y\)</span> as the preimage of the diagonal <span class="math inline">\(\Delta \subseteq \mathbb{P}^r \times \mathbb{P}^r\)</span> under the inclusion <span class="math inline">\(X \times Y \hookrightarrow \mathbb{P}^r \times \mathbb{P}^r\)</span>. Since <span class="math inline">\(\dim(X \times Y) = \dim X + \dim Y &gt; r\)</span>, the connectedness follows directly from <a href="#thm-fulton-hansen" class="quarto-xref">Theorem&nbsp;3</a>.</p>
+<p><em>Proof:</em> Notice that <span class="math inline">\(X \cap Y\)</span> is the preimage of <span class="math inline">\(\Delta\)</span> under the inclusion <span class="math inline">\(X \times Y \hookrightarrow \mathbb{P}^r \times \mathbb{P}^r\)</span>. Since <span class="math inline">\(\dim(X \times Y) = \dim X + \dim Y &gt; r\)</span>, the connectedness follows directly from <a href="#thm-fulton-hansen" class="quarto-xref">Theorem&nbsp;3</a>.</p>
 </div>
 <div id="exm-multiprojective-connectedness" class="theorem example">
-<p><span class="theorem-title"><strong>Example 2 (Generalization to Multi-Projective Spaces)</strong></span> Let <span class="math inline">\(f: X \to \prod_{i=1}^k \mathbb{P}^r\)</span> be a morphism from an irreducible proper variety <span class="math inline">\(X\)</span>. If: <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 2 (Generalization to Multi-Projective Spaces)</strong></span> Let <span class="math inline">\(f: X \to \prod_{i=1}^k \mathbb{P}^r\)</span> be a morphism from an irreducible projective variety <span class="math inline">\(X\)</span>. If: <span class="math display">\[
 \dim \overline{f(X)} &gt; (k - 1)r,
-\]</span> then <span class="math inline">\(f^{-1}(\Delta)\)</span> is connected, where <span class="math inline">\(\Delta \cong \mathbb{P}^r\)</span> is the small diagonal in <span class="math inline">\((\mathbb{P}^r)^k\)</span> (viewed via embedding into <span class="math inline">\(\mathbb{P}^{kr + k - 1}\)</span>).</p>
+\]</span> then <span class="math inline">\(f^{-1}(\Delta)\)</span> is connected, where <span class="math inline">\(\Delta \cong \mathbb{P}^r\)</span> is the diagonal (using the embedding <span class="math inline">\(V \hookrightarrow \mathbb{P}^{kr + k - 1}\)</span>).</p>
 </div>
 <hr>
 <div id="def-connectedness-dim-k" class="theorem definition">
@@ -559,116 +564,123 @@ X \cap Y
 X \setminus T
 \]</span> is connected.</p>
 </div>
-<div id="rem-why-codim-two" class="proof remark">
-<p><span class="proof-title"><em>Remark 1</em> (Why Require <span class="math inline">\(\dim T &lt; k \le \dim X\)</span>?). </span>Let <span class="math inline">\(X = X_1 \cup \dots \cup X_m\)</span> be the decomposition into irreducible components, with <span class="math inline">\(\dim X_1 \ge \dots \ge \dim X_m\)</span>. The intersection of <span class="math inline">\(X_1\)</span> with the other components satisfies: <span class="math display">\[
-\dim(X_1 \cap X_i) \le \dim X_1 - 1 = \dim X - 1.
-\]</span> Removing the closed subset <span class="math inline">\(T = \bigcup_{i \ge 2} (X_1 \cap X_i)\)</span> of codimension <span class="math inline">\(\ge 1\)</span> disconnects <span class="math inline">\(X\)</span>, because: <span class="math display">\[
-\left(X_1 \setminus \bigcup_{i \ge 2} X_i\right) \cap \left(\bigcup_{i \ge 2} X_i \setminus X_1\right) = \varnothing.
-\]</span> Thus, to prevent a space from being trivially disconnected by removing components, one must test against closed subsets of dimension at most <span class="math inline">\(\dim X - 2\)</span>.</p>
-</div>
 <div id="exm-properties-k-connectedness" class="theorem example">
 <p><span class="theorem-title"><strong>Example 3 (Basic Properties of <span class="math inline">\(k\)</span>-Connectedness)</strong></span> &nbsp;</p>
 <ol type="1">
-<li><span class="math inline">\(X\)</span> is connected if and only if <span class="math inline">\(X\)</span> is <span class="math inline">\(0\)</span>-connected (since <span class="math inline">\(\dim \varnothing = -1 &lt; 0\)</span>).</li>
+<li><span class="math inline">\(X\)</span> is connected if and only if <span class="math inline">\(X\)</span> is <span class="math inline">\(0\)</span>-connected (since <span class="math inline">\(\dim \varnothing = -1\)</span>).</li>
 <li>If <span class="math inline">\(X\)</span> is <span class="math inline">\(d\)</span>-connected and <span class="math inline">\(d' \le d\)</span>, then <span class="math inline">\(X\)</span> is <span class="math inline">\(d'\)</span>-connected.</li>
-<li>If <span class="math inline">\(X\)</span> is an irreducible variety of dimension <span class="math inline">\(n\)</span>, then <span class="math inline">\(X\)</span> is <span class="math inline">\((n - 1)\)</span>-connected. In fact, <span class="math inline">\(X\)</span> is irreducible if and only if <span class="math inline">\(X\)</span> is “<span class="math inline">\(\dim X\)</span>-connected”.</li>
+<li>If <span class="math inline">\(X\)</span> is irreducible of dimension <span class="math inline">\(n\)</span>, then <span class="math inline">\(X\)</span> is <span class="math inline">\((n - 1)\)</span>-connected (in fact, <span class="math inline">\(X\)</span> is irreducible if and only if <span class="math inline">\(X\)</span> is “<span class="math inline">\(\dim X\)</span>-connected”).</li>
 </ol>
 </div>
-<div id="exm-chain-characterization" class="theorem example">
-<p><span class="theorem-title"><strong>Example 4 (Characterization via Chains of Irreducible Components)</strong></span> For <span class="math inline">\(k &lt; \dim X\)</span>, a Noetherian scheme <span class="math inline">\(X\)</span> is <span class="math inline">\(k\)</span>-connected if and only if for any two irreducible components <span class="math inline">\(X\)</span> and <span class="math inline">\(X'\)</span>, there exists a sequence of irreducible components: <span class="math display">\[
-X_0 = X, \; X_1, \; \dots, \; X_p = X'
-\]</span> such that for each <span class="math inline">\(1 \le i \le p\)</span>, the intersection satisfies: <span class="math display">\[
+<div id="prp-chain-components" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (Characterization via Chains of Irreducible Components)</strong></span> For any <span class="math inline">\(k &lt; \dim X\)</span>, a Noetherian scheme <span class="math inline">\(X\)</span> is <span class="math inline">\(k\)</span>-connected if and only if for every pair of irreducible components <span class="math inline">\(X \neq X'\)</span>, there exists a sequence of components: <span class="math display">\[
+X_0 = X, \; X_1, \; \dots, \; X_p = X' \quad (X_i \neq X_j)
+\]</span> such that for all <span class="math inline">\(1 \le i \le p\)</span>: <span class="math display">\[
 \dim(X_{i-1} \cap X_i) \ge k.
 \]</span></p>
 </div>
+<div id="rem-why-codimension-two" class="proof remark">
+<p><span class="proof-title"><em>Remark 1</em> (Restriction on the Dimension of <span class="math inline">\(T\)</span>). </span>Why do we require <span class="math inline">\(\dim T &lt; k \le \dim X\)</span>, and what happens if <span class="math inline">\(\dim T = \dim X - 1\)</span>?</p>
+<p>If <span class="math inline">\(X = X_1 \cup \dots \cup X_m\)</span> is the decomposition into irreducible components with <span class="math inline">\(\dim X_1 \ge \dots \ge \dim X_m\)</span>, then: <span class="math display">\[
+\dim(X_1 \cap X_i) \le \dim X_1 - 1 = \dim X - 1.
+\]</span> Since <span class="math inline">\(\big(X_1 \setminus \bigcup_{i \ge 2} X_i\big) \cap \big(\bigcup_{i \ge 2} X_i \setminus X_1\big) = \varnothing\)</span>, removing the closed subset: <span class="math display">\[
+T := \bigcup_{i \ge 2} (X_1 \cap X_i)
+\]</span> of codimension <span class="math inline">\(\ge 1\)</span> disconnects <span class="math inline">\(X\)</span>. Thus, to have a non-trivial notion of connectedness, one must test against closed subsets <span class="math inline">\(T\)</span> with <span class="math inline">\(\dim T \le \dim X - 2\)</span>.</p>
+</div>
 <div id="thm-grothendieck-connectedness" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4 (Grothendieck’s Connectedness Theorem)</strong></span> Let <span class="math inline">\((A, \mathfrak{m})\)</span> be a complete local Noetherian ring, and let <span class="math inline">\(k \ge 1\)</span>. If <span class="math inline">\(\operatorname{Spec} A\)</span> is <span class="math inline">\(k\)</span>-connected, then for any element <span class="math inline">\(f \in \mathfrak{m}\)</span>, the scheme: <span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 4 (Grothendieck’s Connectedness Theorem)</strong></span> Let <span class="math inline">\((A, \mathfrak{m})\)</span> be a complete local Noetherian ring, and let <span class="math inline">\(k \ge 1\)</span>. If <span class="math inline">\(X = \operatorname{Spec} A\)</span> is <span class="math inline">\(k\)</span>-connected, then for any <span class="math inline">\(f \in \mathfrak{m}\)</span>, the scheme: <span class="math display">\[
 \operatorname{Spec}(A / fA)
 \]</span> is <span class="math inline">\((k - 1)\)</span>-connected.</p>
 </div>
 <div id="cor-complete-local-domain" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 2 (Complete Local Noetherian Domains)</strong></span> Let <span class="math inline">\((A, \mathfrak{m})\)</span> be a complete local Noetherian domain of dimension <span class="math inline">\(n\)</span>. Fix <span class="math inline">\(d \le n - 1\)</span>. For any elements <span class="math inline">\(f_1, \dots, f_d \in \mathfrak{m}\)</span>, the scheme: <span class="math display">\[
+<p><span class="theorem-title"><strong>Corollary 2 (Complete Local Noetherian Domains)</strong></span> Let <span class="math inline">\((A, \mathfrak{m})\)</span> be a complete local Noetherian domain of dimension <span class="math inline">\(n\)</span>. Fix <span class="math inline">\(d \le n - 1\)</span>. For any <span class="math inline">\(f_1, \dots, f_d \in \mathfrak{m}\)</span>, the scheme: <span class="math display">\[
 \operatorname{Spec}\big(A / (f_1, \dots, f_d)\big)
 \]</span> is <span class="math inline">\((n - d - 1)\)</span>-connected.</p>
 </div>
 <div id="cor-stronger-bertini" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 3 (Stronger Bertini for Connectedness)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a closed algebraic set that is <span class="math inline">\(k\)</span>-connected, and let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be a linear subspace of codimension <span class="math inline">\(d\)</span>. Then: <span class="math display">\[
+<p><span class="theorem-title"><strong>Corollary 3 (Stronger Bertini for Connectedness)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a closed algebraic subset that is <span class="math inline">\(k\)</span>-connected, and let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be a linear subspace of codimension <span class="math inline">\(d\)</span>. Then: <span class="math display">\[
 X \cap L
 \]</span> is connected in dimension <span class="math inline">\(k - d\)</span>.</p>
 <p>In particular, if <span class="math inline">\(X\)</span> is irreducible of dimension <span class="math inline">\(n\)</span>, it is <span class="math inline">\((n - 1)\)</span>-connected. If <span class="math inline">\(d &lt; n\)</span>, then <span class="math inline">\(k - d = n - 1 - d \ge 0\)</span>, so <span class="math inline">\(X \cap L\)</span> is <span class="math inline">\(0\)</span>-connected (i.e., connected).</p>
 </div>
-<div id="exm-set-theoretic-lci" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5 (Verification of Set-Theoretic Complete Intersections)</strong></span> Consider the union of two <span class="math inline">\(3\)</span>-planes in <span class="math inline">\(\mathbb{A}^6_{\mathbb{C}}\)</span> meeting only at the origin: <span class="math display">\[
-X = V(x_1, x_2, x_3) \cup V(x_4, x_5, x_6) \subseteq \mathbb{A}^6, \quad \dim X = 3.
-\]</span> The defining ideal is generated by the <span class="math inline">\(9\)</span> pairwise products: <span class="math display">\[
-I(X) = (x_1 x_4, \, x_1 x_5, \, x_1 x_6, \, x_2 x_4, \, x_2 x_5, \, x_2 x_6, \, x_3 x_4, \, x_3 x_5, \, x_3 x_6).
+<div id="exm-verify-set-theoretic-lci" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4 (Verification of Set-Theoretic Complete Intersections)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{A}^6_{\mathbb{C}}\)</span> be the union of two <span class="math inline">\(3\)</span>-planes meeting only at the origin: <span class="math display">\[
+X = V(x_1, x_2, x_3) \cup V(x_4, x_5, x_6) = V\big(\{x_i x_j \mid 1 \le i \le 3, \; 4 \le j \le 6\}\big) \subseteq \mathbb{A}^6, \quad \dim X = 3.
 \]</span></p>
-<p><strong>Question:</strong> Is <span class="math inline">\(X\)</span> a set-theoretic local complete intersection (LCI) defined by <span class="math inline">\(3\)</span> functions at the origin?</p>
-<p><strong>Analysis:</strong> Because <span class="math inline">\(V(x_1, x_2, x_3) \cap V(x_4, x_5, x_6) = \{0\}\)</span>, the space <span class="math inline">\(X\)</span> is <span class="math inline">\(0\)</span>-connected, but <strong>not</strong> <span class="math inline">\(1\)</span>-connected.</p>
-<p>Suppose <span class="math inline">\(U \subseteq \mathbb{A}^6\)</span> is an affine open neighborhood of <span class="math inline">\(0\)</span> such that <span class="math inline">\(U \cap X = \operatorname{Spec}(A / (f_1, f_2, f_3))\)</span> with <span class="math inline">\(A = \mathcal{O}(U)\)</span> regular of dimension <span class="math inline">\(6\)</span>. By <a href="#cor-complete-local-domain" class="quarto-xref">Corollary&nbsp;2</a>: <span class="math display">\[
+<p><strong>Question:</strong> Is <span class="math inline">\(X\)</span> a set-theoretic local complete intersection (LCI) defined by <span class="math inline">\(3\)</span> functions at the origin? (Check on stalk/completion).</p>
+<p><strong>Analysis:</strong> Since <span class="math inline">\(V(x_1, x_2, x_3) \cap V(x_4, x_5, x_6) = \{0\}\)</span>, the scheme <span class="math inline">\(X\)</span> is <span class="math inline">\(0\)</span>-connected, but <strong>not</strong> <span class="math inline">\(1\)</span>-connected.</p>
+<p>For any affine open neighborhood <span class="math inline">\(U = \operatorname{Spec} A \ni 0\)</span> with <span class="math inline">\(A\)</span> regular of dimension <span class="math inline">\(6\)</span>, if <span class="math inline">\(U \cap X = \operatorname{Spec}\big(A / (f_1, f_2, f_3)\big)\)</span>, then by <a href="#cor-complete-local-domain" class="quarto-xref">Corollary&nbsp;2</a>: <span class="math display">\[
 U \cap X \quad \text{would be } (6 - 1 - 3 = 2)\text{-connected},
-\]</span> a contradiction! Similarly, <span class="math inline">\(X\)</span> cannot be cut out set-theoretically by <span class="math inline">\(4\)</span> functions, because that would force it to be <span class="math inline">\((6 - 1 - 4 = 1)\)</span>-connected.</p>
-<p><strong>Answer:</strong> However, <span class="math inline">\(X\)</span> <strong>is</strong> a set-theoretic complete intersection of <span class="math inline">\(5\)</span> functions! Consider the auxiliary polynomials in the variable <span class="math inline">\(T\)</span>: <span class="math display">\[
+\]</span> which is a contradiction. The claim is even false for <span class="math inline">\(4\)</span> functions (which would force <span class="math inline">\(U \cap X\)</span> to be <span class="math inline">\(1\)</span>-connected). What about <span class="math inline">\(5\)</span> functions?</p>
+<p><strong>Answer:</strong> <span class="math inline">\(X\)</span> <strong>is</strong> a set-theoretic complete intersection of <span class="math inline">\(5\)</span> functions. Consider the polynomials in the indeterminate <span class="math inline">\(T\)</span>: <span class="math display">\[
 f_1(T) = x_1 + x_2 T + x_3 T^2, \qquad f_2(T) = x_4 + x_5 T + x_6 T^2.
-\]</span> Then <span class="math inline">\(f_1(T) f_2(T) = 0\)</span> for all <span class="math inline">\(T\)</span> if and only if <span class="math inline">\(f_1 \equiv 0\)</span> or <span class="math inline">\(f_2 \equiv 0\)</span>, which is equivalent to <span class="math inline">\(x \in X\)</span>. Expanding the product gives: <span class="math display">\[
+\]</span> Then <span class="math inline">\(f_1(T) f_2(T) \equiv 0\)</span> if and only if <span class="math inline">\(f_1 \equiv 0\)</span> or <span class="math inline">\(f_2 \equiv 0\)</span>, which is equivalent to <span class="math inline">\(x \in X\)</span>. Expanding the product: <span class="math display">\[
 f_1 f_2 = x_1 x_4 + (x_1 x_5 + x_2 x_4) T + (x_1 x_6 + x_2 x_5 + x_3 x_4) T^2 + (x_2 x_6 + x_3 x_5) T^3 + x_3 x_6 T^4.
-\]</span> The vanishing of the <span class="math inline">\(5\)</span> coefficients cuts out <span class="math inline">\(X\)</span> set-theoretically in <span class="math inline">\(\mathbb{A}^6\)</span>.</p>
+\]</span> The vanishing of these <span class="math inline">\(5\)</span> coefficients cuts out <span class="math inline">\(X\)</span> set-theoretically.</p>
 </div>
 <hr>
 <div id="thm-ramification-closed-embedding" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 5 (Unramified Morphisms into Projective Space)</strong></span> Let <span class="math inline">\(X\)</span> be a complete irreducible variety of dimension <span class="math inline">\(n\)</span> over <span class="math inline">\(\mathbb{C}\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r\)</span> be an unramified morphism. If: <span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 5 (Unramified Morphisms into Projective Space)</strong></span> Let <span class="math inline">\(X\)</span> be a complete irreducible variety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^r\)</span> be an unramified morphism. If: <span class="math display">\[
 2n &gt; r,
 \]</span> then <span class="math inline">\(f\)</span> is a closed embedding.</p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span><strong>Fact:</strong> A morphism from a complete variety that is injective on closed points and unramified is a closed immersion.</p>
-<p>Consider the product morphism <span class="math inline">\(F = f \times f: X \times X \to \mathbb{P}^r \times \mathbb{P}^r\)</span>. The preimage of the diagonal is: <span class="math display">\[
+<p>Consider the product morphism <span class="math inline">\(F = f \times f: X \times X \to \mathbb{P}^r \times \mathbb{P}^r\)</span>. Then: <span class="math display">\[
 F^{-1}(\Delta_{\mathbb{P}^r}) = X \times_{\mathbb{P}^r} X = \big\{ (x, y) \in X \times X \;\big|\; f(x) = f(y) \big\}.
-\]</span> The morphism <span class="math inline">\(f\)</span> is injective if and only if <span class="math inline">\(F^{-1}(\Delta_{\mathbb{P}^r}) = \Delta_X\)</span>.</p>
-<p>Since <span class="math inline">\(\dim \overline{\operatorname{Im} F} = \dim(X \times X) = 2n &gt; r\)</span>, the Fulton–Hansen Connectedness Theorem (<a href="#thm-fulton-hansen" class="quarto-xref">Theorem&nbsp;3</a>) implies that: <span class="math display">\[
+\]</span> The morphism <span class="math inline">\(f\)</span> is injective on closed points if and only if <span class="math inline">\(F^{-1}(\Delta_{\mathbb{P}^r}) = \Delta_X\)</span>.</p>
+<p>Because <span class="math inline">\(\dim \overline{\operatorname{Im} F} = \dim(X \times X) = 2n &gt; r\)</span>, <a href="#thm-fulton-hansen" class="quarto-xref">Theorem&nbsp;3</a> implies that: <span class="math display">\[
 X \times_{\mathbb{P}^r} X
 \]</span> is connected.</p>
-<p>On the other hand, because <span class="math inline">\(X \to \mathbb{P}^r\)</span> is separated and unramified, the diagonal morphism: <span class="math display">\[
+<p>Since <span class="math inline">\(f: X \to \mathbb{P}^r\)</span> is separated and unramified, the diagonal morphism: <span class="math display">\[
 \Delta_{X / \mathbb{P}^r}: X \longrightarrow X \times_{\mathbb{P}^r} X
-\]</span> is both a closed immersion and an open immersion (i.e., a clopen immersion). Since <span class="math inline">\(X \times_{\mathbb{P}^r} X\)</span> is connected, the open and closed subset <span class="math inline">\(\Delta_X\)</span> must be the entire space: <span class="math display">\[
+\]</span> is an open and closed immersion (unramified and proper implies finite, hence clopen). Since <span class="math inline">\(X \times_{\mathbb{P}^r} X\)</span> is connected, the clopen subset <span class="math inline">\(\Delta_X\)</span> must be the entire space: <span class="math display">\[
 \Delta_X = X \times_{\mathbb{P}^r} X.
-\]</span> Therefore, <span class="math inline">\(f\)</span> is injective on points, hence a closed embedding.</p>
+\]</span> Therefore, <span class="math inline">\(f\)</span> is injective, which implies that <span class="math inline">\(f\)</span> is a closed embedding.</p>
 </div>
 <div id="rem-sharpness-ramification" class="proof remark">
-<p><span class="proof-title"><em>Remark 2</em> (Sharpness). </span>The inequality <span class="math inline">\(2n &gt; r\)</span> is sharp: for <span class="math inline">\(n = 1\)</span> and <span class="math inline">\(r = 2\)</span>, let <span class="math inline">\(C \subseteq \mathbb{P}^2\)</span> be a nodal cubic curve and <span class="math inline">\(X = \widetilde{C} \cong \mathbb{P}^1\)</span> its normalization. The normalization map <span class="math inline">\(X \to C \hookrightarrow \mathbb{P}^2\)</span> is unramified, but not an embedding.</p>
+<p><span class="proof-title"><em>Remark 2</em> (Sharpness and Geometric Intuition). </span>The inequality <span class="math inline">\(2n &gt; r\)</span> is sharp: for <span class="math inline">\(n = 1\)</span> and <span class="math inline">\(r = 2\)</span>, let <span class="math inline">\(C \subseteq \mathbb{P}^2\)</span> be a nodal curve and let <span class="math inline">\(X = \widetilde{C} \cong \mathbb{P}^1\)</span> be its normalization. Then <span class="math inline">\(X \to C \hookrightarrow \mathbb{P}^2\)</span> is unramified, but not an embedding.</p>
+<p>Geometrically, one has to fold something to map <span class="math inline">\(X\)</span> into <span class="math inline">\(\mathbb{P}^r\)</span> when <span class="math inline">\(2n &gt; r\)</span>.</p>
 </div>
-<div id="exm-no-normal-crossing-hypersurface" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6 (Nonexistence of Hypersurfaces with Normal Crossing Singularities)</strong></span> If <span class="math inline">\(r \ge 3\)</span>, there are <strong>no</strong> irreducible singular hypersurfaces <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> having only normal crossing singularities.</p>
+<div id="exm-no-normal-crossing-hypersurfaces" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5 (Nonexistence of Hypersurfaces with Normal Crossing Singularities)</strong></span> If <span class="math inline">\(r \ge 3\)</span>, there are <strong>no</strong> irreducible singular hypersurfaces <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> having only normal crossing singularities.</p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Recall that <span class="math inline">\(X\)</span> has a <strong>normal crossing singularity</strong> at <span class="math inline">\(p\)</span> if and only if: <span class="math display">\[
-\widehat{\mathcal{O}}_{X, p} \cong k[[x_1, \dots, x_r]] / (x_1 \cdots x_k) \quad \text{for some } k \ge 2,
-\]</span> which is equivalent to admitting an étale neighborhood isomorphic to <span class="math inline">\(\operatorname{Spec}\big(k[x_1, \dots, x_r]/(x_1 \cdots x_k)\big)\)</span>.</p>
-<p>At such a singular point <span class="math inline">\(x\)</span>, the normalization <span class="math inline">\(\widetilde{\mathcal{O}}_{X, x}\)</span> is: <span class="math display">\[
+<p><span class="proof-title"><em>Proof</em>. </span>A hypersurface <span class="math inline">\(X\)</span> has a <strong>normal crossing singularity</strong> at <span class="math inline">\(p\)</span> if and only if: - Formally: <span class="math inline">\(\widehat{\mathcal{O}}_{X, p} \cong k[[x_1, \dots, x_r]] / (x_1 \cdots x_k)\)</span> for some <span class="math inline">\(k \ge 2\)</span>; - Étale-locally: there exists an étale neighborhood <span class="math inline">\((V, v) \to (X, p)\)</span> and <span class="math inline">\((V, v) \to (U, 0)\)</span>, where <span class="math inline">\(U = \operatorname{Spec}\big(k[x_1, \dots, x_r]/(x_1 \cdots x_k)\big)\)</span> (by Artin approximation [Alper, Theorem B.5.2]); - Analytically: there exists a neighborhood <span class="math inline">\(U \ni p\)</span> with <span class="math inline">\(U \cong V \cap V(z_1 \cdots z_k) \subseteq \mathbb{C}^n\)</span> for <span class="math inline">\(V \subseteq \mathbb{C}^n\)</span> open (Grothendieck–Riemann extension).</p>
+<p>If <span class="math inline">\(X\)</span> has only normal crossing singularities, then at each singular point <span class="math inline">\(x\)</span>: <span class="math display">\[
+\widehat{\mathcal{O}}_{X, x} \cong k[[x_1, \dots, x_r]] / (x_1 \cdots x_k).
+\]</span> The normalization <span class="math inline">\(\widetilde{\mathcal{O}}_{X, x}\)</span> satisfies: <span class="math display">\[
 \widetilde{\widehat{\mathcal{O}}_{X, x}} \cong \prod_{i=1}^k k[[x_1, \dots, x_r]] / (x_i).
-\]</span> The cotangent space of <span class="math inline">\(X\)</span> at <span class="math inline">\(x\)</span> has dimension: <span class="math display">\[
-T_x X^\vee \cong (x_1, \dots, x_r) / \big((x_1 \cdots x_k) + (x_i x_j)_{i, j}\big) \cong (x_1, \dots, x_r) / (x_i x_j) \cong \bigoplus_{i=1}^r k \cdot x_i.
-\]</span> For each point <span class="math inline">\(y_i \in \widetilde{X}\)</span> lying above <span class="math inline">\(x\)</span>, the local ring <span class="math inline">\(\mathcal{O}_{\widetilde{X}, y_i}\)</span> is regular with cotangent space <span class="math inline">\(k^{r-1}\)</span>, and the cotangent map: <span class="math display">\[
-T_x X^\vee \twoheadrightarrow T_{y_i} \widetilde{X}^\vee, \quad \sum a_j x_j \longmapsto (a_1, \dots, \hat{a}_i, \dots, a_r)
-\]</span> is surjective. Therefore, the normalization morphism <span class="math inline">\(\nu: \widetilde{X} \to X\)</span> is unramified, and <span class="math inline">\(\widetilde{X}\)</span> is a smooth variety of dimension <span class="math inline">\(r - 1\)</span>.</p>
+\]</span> Checking the tangent space: <span class="math display">\[
+T_x X^\vee = T(\mathcal{O}_{X, x})^\vee = T(\widehat{\mathcal{O}}_{X, x})^\vee = (x_1, \dots, x_r) / \big((x_1 \cdots x_k) + (x_i x_j)\big).
+\]</span> For <span class="math inline">\(r \ge 2\)</span>, this equals <span class="math inline">\((x_1, \dots, x_r) / (x_i x_j) = \big\{ \sum_{i=1}^r a_i x_i \mid a_i \in k \big\}\)</span>.</p>
+<p>Because normalization commutes with localization, we have the Cartesian diagram: <span class="math display">\[
+\begin{CD}
+\prod_{i=1}^k \mathcal{O}_{\widetilde{X}, y_i} @&gt;&gt;&gt; \widetilde{X} \\
+@VVV @VV{\nu}V \\
+\mathcal{O}_{X, x} @&gt;&gt;&gt; X
+\end{CD}
+\]</span> Analytically, <span class="math inline">\(\widehat{\mathcal{O}}_{\widetilde{X}, y_i} \cong k[[x_1, \dots, x_{r-1}]]\)</span>, which has cotangent space <span class="math inline">\(k^{r-1}\)</span>. The differential map on cotangent spaces: <span class="math display">\[
+T_x X^\vee \twoheadrightarrow T_{y_i} \widetilde{X}^\vee, \quad \sum_{j=1}^r a_j x_j \longmapsto (a_1, \dots, \hat{a}_i, \dots, a_r)
+\]</span> is surjective. Hence the normalization map <span class="math inline">\(\widetilde{X} \to X\)</span> is unramified, and <span class="math inline">\(\widetilde{X}\)</span> is regular of dimension <span class="math inline">\(r - 1\)</span>.</p>
 <p>Now consider the composition: <span class="math display">\[
-g: \widetilde{X} \xrightarrow{\;\nu\;} X \longhookrightarrow \mathbb{P}^r.
-\]</span> Since <span class="math inline">\(\nu\)</span> and the inclusion are unramified, <span class="math inline">\(g\)</span> is an unramified morphism. Because <span class="math inline">\(\dim \widetilde{X} = r - 1\)</span> and <span class="math inline">\(r \ge 3\)</span>, we have: <span class="math display">\[
-2 \dim \widetilde{X} = 2(r - 1) = 2r - 2 &gt; r \iff r &gt; 2.
-\]</span> By <a href="#thm-ramification-closed-embedding" class="quarto-xref">Theorem&nbsp;5</a>, <span class="math inline">\(g: \widetilde{X} \hookrightarrow \mathbb{P}^r\)</span> is a closed embedding. But then <span class="math inline">\(X = g(\widetilde{X})\)</span> must be smooth, contradicting the assumption that <span class="math inline">\(X\)</span> is singular.</p>
+\widetilde{X} \xrightarrow{\;\nu\;} X \longhookrightarrow \mathbb{P}^r.
+\]</span> Then <span class="math inline">\(\widetilde{X} \to \mathbb{P}^r\)</span> is an unramified morphism from a complete variety of dimension <span class="math inline">\(\dim \widetilde{X} = r - 1\)</span>. Since <span class="math inline">\(r \ge 3\)</span>: <span class="math display">\[
+2(r - 1) = 2r - 2 &gt; r.
+\]</span> By <a href="#thm-ramification-closed-embedding" class="quarto-xref">Theorem&nbsp;5</a>, <span class="math inline">\(\widetilde{X} \hookrightarrow \mathbb{P}^r\)</span> must be a closed embedding. But this implies that <span class="math inline">\(X \cong \widetilde{X}\)</span> is smooth, contradicting the assumption that <span class="math inline">\(X\)</span> is singular.</p>
 </div>
-<div id="exm-etale-fundamental-group" class="theorem example">
-<p><span class="theorem-title"><strong>Example 7 (Simple Connectedness of Large Subvarieties)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be an irreducible smooth subvariety of dimension <span class="math inline">\(n\)</span>. If: <span class="math display">\[
+<div id="exm-simple-connectedness" class="theorem example">
+<p><span class="theorem-title"><strong>Example 6 (Étale Fundamental Group of Large Subvarieties)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be an irreducible subvariety of dimension <span class="math inline">\(n\)</span>. If: <span class="math display">\[
 2n &gt; r,
 \]</span> then the étale fundamental group of <span class="math inline">\(X\)</span> is trivial: <span class="math display">\[
 \pi_1^{\text{ét}}(X) = \{e\}.
 \]</span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(p: Y \to X\)</span> be a connected finite étale cover of <span class="math inline">\(X\)</span>. Let <span class="math inline">\(Y' \subseteq Y\)</span> be an irreducible component of <span class="math inline">\(Y\)</span>. The composite map: <span class="math display">\[
+<p><span class="proof-title"><em>Proof</em>. </span>Suppose <span class="math inline">\(p: Y \to X\)</span> is a connected finite étale cover. Let <span class="math inline">\(Y' \subseteq Y\)</span> be an irreducible component of <span class="math inline">\(Y\)</span>. The composite morphism: <span class="math display">\[
 Y' \longhookrightarrow Y \xrightarrow{\;p\;} X \longhookrightarrow \mathbb{P}^r
-\]</span> is an unramified morphism from a complete variety of dimension <span class="math inline">\(n\)</span> into <span class="math inline">\(\mathbb{P}^r\)</span>. Since <span class="math inline">\(2n &gt; r\)</span>, <a href="#thm-ramification-closed-embedding" class="quarto-xref">Theorem&nbsp;5</a> implies that <span class="math inline">\(Y' \hookrightarrow \mathbb{P}^r\)</span> is a closed embedding.</p>
-<p>Consequently, <span class="math inline">\(p|_{Y'}: Y' \to X\)</span> is an isomorphism. Because <span class="math inline">\(Y\)</span> is connected and étale over <span class="math inline">\(X\)</span>, it follows that <span class="math inline">\(Y = Y'\)</span>, so <span class="math inline">\(p: Y \xrightarrow{\sim} X\)</span> is an isomorphism. Thus, <span class="math inline">\(X\)</span> has no nontrivial connected finite étale covers, which implies <span class="math inline">\(\pi_1^{\text{ét}}(X) = \{e\}\)</span>.</p>
+\]</span> is unramified. Since <span class="math inline">\(\dim Y' = n\)</span> and <span class="math inline">\(2n &gt; r\)</span>, <a href="#thm-ramification-closed-embedding" class="quarto-xref">Theorem&nbsp;5</a> implies that <span class="math inline">\(Y' \hookrightarrow \mathbb{P}^r\)</span> is a closed embedding.</p>
+<p>Therefore, <span class="math inline">\(p|_{Y'}: Y' \xrightarrow{\sim} X\)</span> is an isomorphism. Because <span class="math inline">\(Y\)</span> is connected and étale over <span class="math inline">\(X\)</span>, it follows that <span class="math inline">\(Y = Y' \cong X\)</span>, so <span class="math inline">\(X\)</span> admits no nontrivial connected finite étale covers. Hence <span class="math inline">\(\pi_1^{\text{ét}}(X) = \{e\}\)</span>.</p>
 </div>
 
 
@@ -676,7 +688,24 @@ Y' \longhookrightarrow Y \xrightarrow{\;p\;} X \longhookrightarrow \mathbb{P}^r
 </main> <!-- /main -->
 <style>
 /* --------------------------------------------------------------------------
-   1. 缩小文章副标题 (Subtitle) 与暗色适配
+   1. 侧边栏常驻与容器保护
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  #quarto-margin-sidebar,
+  .margin-sidebar,
+  nav#TOC {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+body.quarto-reader-mode #quarto-margin-sidebar {
+  display: block !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. 副标题与排版微调
    -------------------------------------------------------------------------- */
 .quarto-title .subtitle,
 header#title-block-header .subtitle,
@@ -695,7 +724,6 @@ body.quarto-dark p.subtitle.lead {
   color: #94a3b8 !important;
 }
 
-/* 标题字号微调 */
 .theorem-header,
 .callout-header,
 .callout-title {
@@ -705,7 +733,7 @@ body.quarto-dark p.subtitle.lead {
 }
 
 /* --------------------------------------------------------------------------
-   2. 紧凑左侧边栏留白与缩进（防止长标题折行）
+   3. 紧凑左侧边栏留白与缩进
    -------------------------------------------------------------------------- */
 @media (min-width: 992px) {
   #quarto-sidebar,
@@ -737,7 +765,7 @@ body.quarto-dark p.subtitle.lead {
 }
 
 /* --------------------------------------------------------------------------
-   3. 紧凑型页脚
+   4. 紧凑型页脚
    -------------------------------------------------------------------------- */
 footer.footer,
 .nav-footer {
@@ -757,7 +785,7 @@ footer.footer,
 }
 
 /* --------------------------------------------------------------------------
-   4. 右侧目录标题 "ON THIS PAGE"
+   5. 右侧目录标题 "ON THIS PAGE"
    -------------------------------------------------------------------------- */
 #toc-title,
 h2#toc-title,
@@ -781,7 +809,7 @@ body.quarto-dark .sidebar .toc-title {
 }
 
 /* --------------------------------------------------------------------------
-   5. 定理环境基础外观与折叠动画
+   6. 定理外观与折叠动画
    -------------------------------------------------------------------------- */
 .theorem {
   margin: 1.25rem 0 !important;
@@ -791,7 +819,6 @@ body.quarto-dark .sidebar .toc-title {
   border: 1px solid rgba(0, 0, 0, 0.09) !important;
   border-left: 4.5px solid #2b6cb0 !important;
   overflow: hidden !important;
-  scroll-margin-top: 4.8rem !important; /* 关键：锚点跳转时避开顶部导航栏 */
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
@@ -799,14 +826,6 @@ body.quarto-dark .theorem,
 body.quarto-dark .proof {
   border-color: rgba(255, 255, 255, 0.12) !important;
   background-color: rgba(255, 255, 255, 0.02) !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  body:not(.quarto-light) .theorem,
-  body:not(.quarto-light) .proof {
-    border-color: rgba(255, 255, 255, 0.12) !important;
-    background-color: rgba(255, 255, 255, 0.02) !important;
-  }
 }
 
 .theorem-header {
@@ -857,54 +876,43 @@ body.quarto-dark .proof {
   transform: rotate(-90deg);
 }
 
-/* --------------------------------------------------------------------------
-   6. 专业学术色彩系统：同时兼容日间深沉与夜间明亮高对比度
-   -------------------------------------------------------------------------- */
-/* 定义 (Definition) - 蔚蓝 */
+/* 学术色彩映射 (日间 & 夜间) */
 .theorem.kind-definition { border-left-color: #1e40af !important; }
 .theorem.kind-definition > .theorem-header { color: #1e40af !important; }
 body.quarto-dark .theorem.kind-definition { border-left-color: #3b82f6 !important; }
 body.quarto-dark .theorem.kind-definition > .theorem-header { color: #60a5fa !important; }
 
-/* 引理 (Lemma) - 翠绿 */
 .theorem.kind-lemma { border-left-color: #166534 !important; }
 .theorem.kind-lemma > .theorem-header { color: #166534 !important; }
 body.quarto-dark .theorem.kind-lemma { border-left-color: #22c55e !important; }
 body.quarto-dark .theorem.kind-lemma > .theorem-header { color: #4ade80 !important; }
 
-/* 命题 (Proposition) - 紫罗兰 */
 .theorem.kind-proposition { border-left-color: #6b21a8 !important; }
 .theorem.kind-proposition > .theorem-header { color: #6b21a8 !important; }
 body.quarto-dark .theorem.kind-proposition { border-left-color: #a855f7 !important; }
 body.quarto-dark .theorem.kind-proposition > .theorem-header { color: #c084fc !important; }
 
-/* 定理 (Theorem) - 绯红 */
 .theorem.kind-theorem { border-left-color: #991b1b !important; }
 .theorem.kind-theorem > .theorem-header { color: #991b1b !important; }
 body.quarto-dark .theorem.kind-theorem { border-left-color: #ef4444 !important; }
 body.quarto-dark .theorem.kind-theorem > .theorem-header { color: #f87171 !important; }
 
-/* 推论 (Corollary) - 暖橙 */
 .theorem.kind-corollary { border-left-color: #c2410c !important; }
 .theorem.kind-corollary > .theorem-header { color: #c2410c !important; }
 body.quarto-dark .theorem.kind-corollary { border-left-color: #f97316 !important; }
 body.quarto-dark .theorem.kind-corollary > .theorem-header { color: #fb923c !important; }
 
-/* 注记 (Remark) - 琥珀金 */
 .theorem.kind-remark { border-left-color: #b45309 !important; }
 .theorem.kind-remark > .theorem-header { color: #b45309 !important; cursor: default !important; }
 body.quarto-dark .theorem.kind-remark { border-left-color: #f59e0b !important; }
 body.quarto-dark .theorem.kind-remark > .theorem-header { color: #fbbf24 !important; }
 
-/* 例题 (Example) - 冷灰蓝 */
 .theorem.kind-example { border-left-color: #334155 !important; }
 .theorem.kind-example > .theorem-header { color: #334155 !important; }
 body.quarto-dark .theorem.kind-example { border-left-color: #64748b !important; }
 body.quarto-dark .theorem.kind-example > .theorem-header { color: #cbd5e1 !important; }
 
-/* --------------------------------------------------------------------------
-   7. 证明环境 (.proof)
-   -------------------------------------------------------------------------- */
+/* 证明环境 */
 .proof {
   margin: 0.9rem 0 1.35rem !important;
   padding: 0 !important;
@@ -913,7 +921,6 @@ body.quarto-dark .theorem.kind-example > .theorem-header { color: #cbd5e1 !impor
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   border-left: 4px solid #64748b !important;
   overflow: hidden !important;
-  scroll-margin-top: 4.8rem !important;
 }
 
 body.quarto-dark .proof {
@@ -945,9 +952,8 @@ body.quarto-dark .proof-header {
 }
 
 /* --------------------------------------------------------------------------
-   8. 右侧边栏条目重构（一体贯通导轨 + 彻底消灭青蓝双竖线冲突）
+   7. 右侧边栏条目与贯通标尺
    -------------------------------------------------------------------------- */
-/* 统一定制 TOC 目录的贯通导轨竖线 */
 nav#TOC > ul {
   list-style: none !important;
   padding-left: 0 !important;
@@ -964,12 +970,11 @@ nav#TOC li {
   list-style: none !important;
 }
 
-/* 紧凑对齐，取消导致断层的大缩进 (原 1.8rem) */
 nav#TOC a.nav-link,
 .callout-toc-item a.nav-link {
   display: block !important;
   padding: 0.22rem 0.5rem 0.22rem 0.75rem !important;
-  margin-left: -1.5px !important; /* 紧密吻合左侧导轨 */
+  margin-left: -1.5px !important;
   border-left: 2.5px solid transparent !important;
   font-size: 0.86rem !important;
   color: #4a5568 !important;
@@ -996,7 +1001,6 @@ body.quarto-dark .callout-toc-item a.nav-link:hover {
   background-color: rgba(96, 165, 250, 0.08) !important;
 }
 
-/* 核心修复：彻底覆盖 Quarto 默认 Cosmo 青色，统一高亮规范 */
 div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
 div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
 nav#TOC a.nav-link.active,
@@ -1034,7 +1038,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
 
   const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
 
-  // 1. 自动提取页面章节前缀（如 22.8.）
   function getSecPrefix() {
     const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
     if (sec) {
@@ -1051,7 +1054,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     return "22.0.";
   }
 
-  // 2. 确保右侧大纲容器准备完毕
   function ensureTocList() {
     let list = document.querySelector('#TOC > ul') ||
                document.querySelector('nav[role="doc-toc"] > ul') ||
@@ -1059,16 +1061,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     if (list) return list;
 
     let marginSidebar = document.querySelector('#quarto-margin-sidebar, .margin-sidebar');
-    if (!marginSidebar) {
-      const content = document.querySelector('#quarto-content') || document.querySelector('.page-columns');
-      if (content) {
-        marginSidebar = document.createElement('div');
-        marginSidebar.id = 'quarto-margin-sidebar';
-        marginSidebar.className = 'sidebar margin-sidebar';
-        content.appendChild(marginSidebar);
-      }
-    }
-
     if (marginSidebar) {
       marginSidebar.style.display = 'block';
       let nav = marginSidebar.querySelector('#TOC');
@@ -1085,7 +1077,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     return null;
   }
 
-  // 3. 多维精准定理类型识别
   function detectKind(node, titleText) {
     const id = (node.id || "").toLowerCase();
     const cls = (node.className || "").toLowerCase();
@@ -1103,23 +1094,22 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
 
   function triggerMathTypeset(elements) {
     if (window.MathJax && window.MathJax.typesetPromise) {
-      window.MathJax.typesetPromise(elements).catch(function(err) {
-        console.error("MathJax typeset failed: ", err);
-      });
+      window.MathJax.typesetPromise(elements).catch(function(err) {});
     } else if (window.MathJax && window.MathJax.Hub) {
       window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, elements]);
     }
   }
 
-  // 4. 处理定理、例题与右侧大纲挂载
+  // 核心：处理定理并绑定平滑跳转
   function processTheorems() {
     const secPrefix = getSecPrefix();
     let counter = 0;
 
     const tocList = ensureTocList();
-    if (tocList) {
-      tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
-    }
+    if (!tocList) return;
+
+    // 清理旧自定义条目
+    tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
 
     const pageNodes = document.querySelectorAll(
       'main h2, main h3, #quarto-document-content h2, #quarto-document-content h3, .theorem, .remark, [id^="def-"], [id^="lem-"], [id^="prp-"], [id^="thm-"], [id^="cor-"], [id^="rem-"], [id^="exm-"]'
@@ -1129,121 +1119,132 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     const headersToTypeset = [];
 
     pageNodes.forEach(node => {
-      // 记录最近的 H2 / H3 标题位置，保证定理按章节就近插入
       if (node.tagName === 'H2' || node.tagName === 'H3') {
-        if (tocList && node.id) {
+        if (node.id) {
           const a = tocList.querySelector(`a[href="#${CSS.escape(node.id)}"]`);
           if (a) lastTocAnchor = a.closest('li');
         }
         return;
       }
 
-      if (node.dataset.mathProcessed === "true") return;
-      node.dataset.mathProcessed = "true";
+      // 如果未做过 DOM 改写，执行改写；如果已经改写过，仅补充挂载到目录
+      if (node.dataset.mathProcessed !== "true") {
+        node.dataset.mathProcessed = "true";
 
-      const titleSpan = node.querySelector('.theorem-title');
-      let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
-      let subTitle = "";
+        const titleSpan = node.querySelector('.theorem-title');
+        let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
+        let subTitle = "";
 
-      const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
-      if (match) {
-        subTitle = ` (${match[1].trim()})`;
+        const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
+        if (match) {
+          subTitle = ` (${match[1].trim()})`;
+        }
+        if (titleSpan) titleSpan.remove();
+
+        const firstP = node.querySelector(':scope > p:first-child');
+        if (firstP && firstP.textContent.trim() === '') firstP.remove();
+
+        const kind = detectKind(node, rawTitleHtml);
+        const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
+        const numStr = secPrefix + counter;
+        counter++;
+
+        const canFold = (kind !== 'remark');
+        node.classList.add('theorem', `kind-${kind}`);
+        node.dataset.kindShort = conf.short;
+        node.dataset.kindFull = conf.full;
+        node.dataset.numStr = numStr;
+        node.dataset.subTitle = subTitle;
+
+        const header = document.createElement('div');
+        header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
+        header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
+
+        const body = document.createElement('div');
+        body.className = 'theorem-body';
+        while (node.firstChild) {
+          body.appendChild(node.firstChild);
+        }
+
+        node.appendChild(header);
+        node.appendChild(body);
+        headersToTypeset.push(header);
+
+        if (canFold) {
+          header.addEventListener('click', () => {
+            node.classList.toggle('is-folded');
+          });
+        }
+
+        if (!node.id) {
+          node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
+        } else if (node.id.includes('.')) {
+          node.id = node.id.replace(/\./g, '-');
+        }
       }
-      if (titleSpan) titleSpan.remove();
 
-      const firstP = node.querySelector(':scope > p:first-child');
-      if (firstP && firstP.textContent.trim() === '') firstP.remove();
-
-      const kind = detectKind(node, rawTitleHtml);
-      const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
-      const numStr = secPrefix + counter;
-      counter++;
-
-      const canFold = (kind !== 'remark');
-      node.classList.add('theorem', `kind-${kind}`);
-
-      const header = document.createElement('div');
-      header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
-      header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
-
-      const body = document.createElement('div');
-      body.className = 'theorem-body';
-      while (node.firstChild) {
-        body.appendChild(node.firstChild);
-      }
-
-      node.appendChild(header);
-      node.appendChild(body);
-      headersToTypeset.push(header);
-
-      if (canFold) {
-        header.addEventListener('click', () => {
-          node.classList.toggle('is-folded');
-        });
-      }
-
-      // 生成安全的 ID（用短横替换点号，避免 querySelector 解析异常）
-      if (!node.id) {
-        node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
-      } else if (node.id.includes('.')) {
-        node.id = node.id.replace(/\./g, '-');
-      }
+      const targetId = node.id;
+      const shortLabel = node.dataset.kindShort || "Thm";
+      const numLabel = node.dataset.numStr || "";
+      const subLabel = node.dataset.subTitle || "";
+      const fullLabel = node.dataset.kindFull || "Theorem";
 
       // 挂载到右侧 TOC 目录
-      if (tocList) {
-        const li = document.createElement('li');
-        li.setAttribute('data-callout-toc', 'true');
-        li.className = 'nav-item callout-toc-item';
+      const li = document.createElement('li');
+      li.setAttribute('data-callout-toc', 'true');
+      li.className = 'nav-item callout-toc-item';
 
-        const a = document.createElement('a');
-        a.className = 'nav-link';
-        a.href = `#${node.id}`;
-        a.textContent = `${conf.short} ${numStr}`;
-        if (subTitle) a.title = `${conf.full} ${numStr}${subTitle}`;
+      const a = document.createElement('a');
+      a.className = 'nav-link';
+      a.href = `#${targetId}`;
+      a.textContent = `${shortLabel} ${numLabel}`;
+      if (subLabel) a.title = `${fullLabel} ${numLabel}${subLabel}`;
 
-        // 核心：点击平滑跳转 + 自动展开折叠块
-        a.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
+      // ====== 终极修复：百分之百生效的精准跳转 ======
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
 
-          const target = document.getElementById(node.id);
-          if (target) {
-            // 如果目标被折叠，点击时自动展开
-            if (target.classList.contains('is-folded')) {
-              target.classList.remove('is-folded');
-            }
-
-            // 计算避让吸顶导航栏高度
-            const navbar = document.querySelector('.navbar, header.fixed-top');
-            const navH = navbar ? navbar.getBoundingClientRect().height : 55;
-            const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 16;
-
-            window.scrollTo({
-              top: targetY,
-              behavior: 'smooth'
-            });
-
-            // 立即清除所有项的激活态并点亮当前项
-            tocList.querySelectorAll('a.nav-link').forEach(link => {
-              link.classList.remove('active', 'active-math-target');
-            });
-            a.classList.add('active', 'active-math-target');
-
-            if (history.pushState) {
-              history.pushState(null, null, '#' + node.id);
-            }
+        const target = document.getElementById(targetId);
+        if (target) {
+          // 1. 如果该定理处于折叠状态，点击立刻平滑展开
+          if (target.classList.contains('is-folded')) {
+            target.classList.remove('is-folded');
           }
-        });
 
-        li.appendChild(a);
+          // 2. 计算绝对距离，避开吸顶导航栏与外层容器干扰
+          const navbar = document.querySelector('.navbar, header.fixed-top');
+          const navH = navbar ? navbar.getBoundingClientRect().height : 55;
+          const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 18;
 
-        if (lastTocAnchor && lastTocAnchor.parentNode) {
-          lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
-          lastTocAnchor = li;
-        } else {
-          tocList.appendChild(li);
-          lastTocAnchor = li;
+          // 3. 执行平滑滚动
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth'
+          });
+
+          // 4. 同步点亮目录项
+          tocList.querySelectorAll('a.nav-link').forEach(link => {
+            link.classList.remove('active', 'active-math-target');
+          });
+          a.classList.add('active', 'active-math-target');
+
+          // 5. 更新地址栏哈希
+          if (history.pushState) {
+            history.pushState(null, null, `#${targetId}`);
+          }
         }
+      });
+
+      li.appendChild(a);
+
+      if (lastTocAnchor && lastTocAnchor.parentNode) {
+        lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
+        lastTocAnchor = li;
+      } else {
+        tocList.appendChild(li);
+        lastTocAnchor = li;
       }
     });
 
@@ -1252,7 +1253,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     }
   }
 
-  // 5. 处理证明环境 (.proof)
   function processProofs() {
     const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
     proofs.forEach(proof => {
@@ -1288,7 +1288,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
       proof.appendChild(header);
       proof.appendChild(body);
 
-      // 默认折叠
       proof.classList.add('is-folded');
 
       header.addEventListener('click', () => {
@@ -1297,7 +1296,6 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     });
   }
 
-  // 6. 精准滚动监听（修复原 offsetTop 跨容器错乱与一青一蓝双高亮 Bug）
   function initScrollSpy() {
     const tocList = ensureTocList();
     if (!tocList) return;
@@ -1306,10 +1304,9 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
       const targets = Array.from(document.querySelectorAll('main h2[id], main h3[id], #quarto-document-content h2[id], #quarto-document-content h3[id], .theorem[id]'));
       if (!targets.length) return;
 
-      const threshold = 130; // 判定线：视口上方 130px
+      const threshold = 140;
       let current = null;
 
-      // 使用真实屏幕视口坐标 rect.top，彻底杜绝 offsetTop 的定位失效问题
       for (const el of targets) {
         const rect = el.getBoundingClientRect();
         if (rect.top <= threshold) {
@@ -1319,13 +1316,11 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
         }
       }
 
-      // 处于页面最顶部时激活第一项
       if (!current && window.scrollY < 120) {
         current = targets[0];
       }
 
       if (current) {
-        // 同时清理 active 与 active-math-target，消灭冲突
         const allLinks = tocList.querySelectorAll('a.nav-link');
         allLinks.forEach(a => {
           a.classList.remove('active', 'active-math-target');
@@ -1339,19 +1334,18 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    // 初始化时执行一次判定
-    setTimeout(onScroll, 100);
+    setTimeout(onScroll, 150);
   }
 
-  let hasInit = false;
+  // 严格执行控制，彻底消除二次清空 Bug
+  let isExecuting = false;
   function run() {
-    if (hasInit) return;
-    const items = document.querySelectorAll('.theorem, [id^="def-"], [id^="lem-"], [id^="rem-"], [id^="thm-"], [id^="cor-"], [id^="prp-"], [id^="exm-"]');
-    if (!items.length && document.readyState === 'loading') return;
-    hasInit = true;
+    if (isExecuting) return;
+    isExecuting = true;
     processTheorems();
     processProofs();
     initScrollSpy();
+    setTimeout(() => { isExecuting = false; }, 200);
   }
 
   if (document.readyState === 'loading') {
@@ -1360,6 +1354,11 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     run();
   }
   window.addEventListener('load', run);
+
+  // 切换深浅模式时，重新对齐挂载
+  window.addEventListener('quarto-color-scheme-change', () => {
+    setTimeout(run, 150);
+  });
 })();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
