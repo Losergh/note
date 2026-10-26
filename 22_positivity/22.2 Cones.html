@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5a339d2026bd3e8b86215bb47ee6a649.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-a8584db854083bb65235771b3f09df70.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-5a339d2026bd3e8b86215bb47ee6a649.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-aea0307008146ee079b1533de64c4571.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-10aed12f2e75d254f234caddaa5283e4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-aea0307008146ee079b1533de64c4571.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -952,6 +952,9 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
 </style>
 
 <script>
+
+
+
 (function() {
   const ENV_CONFIG = {
     definition:  { full: 'Definition',  short: 'Def' },
@@ -1180,6 +1183,25 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
     }
   }
 
+  // 自然数排序侧边栏
+function sortSidebarNumerically() {
+  const sidebarLists = document.querySelectorAll('#quarto-sidebar ul');
+  sidebarLists.forEach(ul => {
+    // 获取当前列表下的所有侧边栏条目
+    const items = Array.from(ul.children).filter(el => el.classList.contains('sidebar-item'));
+    if (items.length <= 1) return;
+
+    // 使用 numeric: true 开启自然数排序（自动识别 10 > 2）
+    items.sort((a, b) => {
+      const textA = a.querySelector('.sidebar-item-text, .menu-text, a')?.textContent.trim() || a.textContent.trim();
+      const textB = b.querySelector('.sidebar-item-text, .menu-text, a')?.textContent.trim() || b.textContent.trim();
+      return textA.localeCompare(textB, undefined, { numeric: true, sensitivity: 'base' });
+    });
+
+    // 将排序后的元素按新顺序重新插入 DOM
+    items.forEach(item => ul.appendChild(item));
+  });
+}
   function processProofs() {
     const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
     proofs.forEach(proof => {
@@ -1269,6 +1291,7 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
   function run() {
     if (isExecuting) return;
     isExecuting = true;
+    sortSidebarNumerically(); // <--- 在这里调用
     processTheorems();
     processProofs();
     initScrollSpy();

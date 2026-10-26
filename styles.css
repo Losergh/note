@@ -225,7 +225,7 @@ div.callout-body > p {
 /* 3. 左侧边栏置顶：清除顶部空白 + 随页面滚动时牢牢吸附在屏幕左侧 */
 #quarto-margin-sidebar,
   .margin-sidebar {
-    grid-column: margin-start / screen-end !important;
+    grid-column: body-end / screen-end !important;
     margin-right: 0 !important;
     padding-right: 0.4rem !important;
   }
@@ -618,18 +618,7 @@ body.quarto-dark .navbar .quarto-color-scheme-toggle .bi::before,
   opacity: 1 !important;
 }
 
-/* 确保所有定理、定义、命题、例题在点击跳转时，精准避让顶部导航栏 5rem */
-.theorem,
-.proof,
-[id^="thm-"],
-[id^="def-"],
-[id^="lem-"],
-[id^="prp-"],
-[id^="cor-"],
-[id^="rem-"],
-[id^="exm-"] {
-  scroll-margin-top: 5.2rem !important;
-}
+
 
 
 /* 4. 面包屑导航与正文之间保持匀称节奏 */
@@ -639,4 +628,6 @@ body.quarto-dark .navbar .quarto-color-scheme-toggle .bi::before,
   margin-top: 0.5rem !important;
   margin-bottom: 1.0rem !important;
 }
+
+
 
