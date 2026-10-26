@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-26">
+
+<title>22.10 Connectedness II – Math Notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../22_positivity/22.2 Cones.html" rel="next">
+<link href="../22_positivity/22.1 Nef Divisors.html" rel="prev">
+<link href="../image/1.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b3e687515111ec8d6a8b8c0a1a8317de.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-3957401bcfc98edf50fe4f72d2a6ae90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-b3e687515111ec8d6a8b8c0a1a8317de.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Math Notes</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Losergh/note"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.10 Connectedness II.html">22.10 Connectedness II</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="sidebar-tools-main">
+    <div id="quarto-search" class="quarto-navigation-tool px-1" title="Search"></div>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../22_positivity/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Positivity in AG</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.0 Preliminaries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.0 Preliminaries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.1 Nef Divisors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.1 Nef-Divisors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.10 Connectedness II.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">22.10 Connectedness II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.2 Cones.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.2 Cones</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.3 Itaka Fibration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.3 Iitaka Fibration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.4 Big Line Bundle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.4 Big Line Bundles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.5 Volume.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.5 Volume</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.6 Graded Linear Series.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.6 Graded Linear Series</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.7 Zariski Decomposition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.7 Zariski Decomposition</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.8 Analytic Topology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.8 Analytic Topology</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../22_positivity/22.9 Connectedness I.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22.9 Connectedness I</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.10 Connectedness II.html">22.10 Connectedness II</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">22.10 Connectedness II</h1>
+<p class="subtitle lead">Secant and Tangent Varieties, Zak’s Theorems on Tangencies, Ramification, and Linear Normality</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 26, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="def-secant-tangent-varieties" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Secant and Tangent Varieties)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a smooth irreducible subvariety of dimension <span class="math inline">\(n\)</span>. We define the <strong>secant variety</strong> <span class="math inline">\(\operatorname{Sec}(X)\)</span> and the <strong>tangent variety</strong> <span class="math inline">\(\operatorname{Tan}(X)\)</span> via the secant and tangent bundles:</p>
+<ol type="1">
+<li><p><strong>Tangent variety via Grassmannian incidence:</strong> Let <span class="math inline">\(G = \operatorname{Gr}(n, \mathbb{P}^r) \cong \operatorname{Gr}(n+1, r+1)\)</span> be the Grassmannian of <span class="math inline">\(n\)</span>-planes in <span class="math inline">\(\mathbb{P}^r\)</span>, and let: <span class="math display">\[
+\mathcal{I} := \big\{ (x, L) \in \mathbb{P}^r \times G \;\big|\; x \in L \big\} \subseteq \mathbb{P}^r \times G
+\]</span> be the universal incidence family over <span class="math inline">\(G\)</span>.</p>
+<p>The Euler sequence on <span class="math inline">\(\mathbb{P}^r\)</span> restricted to <span class="math inline">\(X\)</span> gives: <span class="math display">\[
+0 \longrightarrow \mathcal{O}_X \longrightarrow \mathcal{O}_X(1)^{\oplus (r+1)} \longrightarrow T_{\mathbb{P}^r}|_X \longrightarrow 0.
+\]</span> The subbundle <span class="math inline">\(T_X(-1) \subseteq T_{\mathbb{P}^r}|_X(-1)\)</span> lifts to a subbundle <span class="math inline">\(\widehat{T}_X \subseteq \mathcal{O}_X^{\oplus (r+1)}\)</span> of rank <span class="math inline">\(n+1\)</span>, defining the Gauss map <span class="math inline">\(f: X \to G\)</span>, <span class="math inline">\(x \mapsto \mathbb{T}_x\)</span>. Pulling back the universal family: <span class="math display">\[
+\begin{CD}
+\mathcal{I} @&gt;{\pi_2}&gt;&gt; \mathbb{P}^r \\
+@V{\pi_1}VV \\
+G
+\end{CD}
+\]</span> the <strong>tangent variety</strong> is the closed subvariety defined by: <span class="math display">\[
+\operatorname{Tan}(X) := \pi_2\big(\pi_1^{-1}(f(X))\big) \subseteq \mathbb{P}^r.
+\]</span></p></li>
+<li><p><strong>Secant variety via the Hilbert scheme of two points:</strong> Let <span class="math inline">\(X^{[2]} := \operatorname{Hilb}_2(X)\)</span> be the Hilbert scheme of length-<span class="math inline">\(2\)</span> zero-dimensional subschemes of <span class="math inline">\(X\)</span>, and let <span class="math inline">\(\mathcal{Z} \subseteq X \times X^{[2]} \subseteq \mathbb{P}^r \times X^{[2]}\)</span> be the universal subscheme. The projection <span class="math inline">\(\pi_2: \mathcal{Z} \to X^{[2]}\)</span> is finite flat of degree <span class="math inline">\(2\)</span>.</p>
+<p>The evaluation map on global sections gives a surjection: <span class="math display">\[
+\mathcal{O}_{X^{[2]}}^{\oplus (r+1)} \twoheadrightarrow \mathcal{E} := {\pi_2}_* \mathcal{O}_{\mathcal{Z}}(1),
+\]</span> where <span class="math inline">\(\mathcal{E}\)</span> is locally free of rank <span class="math inline">\(2\)</span> on <span class="math inline">\(X^{[2]}\)</span>. This induces a morphism: <span class="math display">\[
+f: X^{[2]} \longrightarrow \operatorname{Gr}(1, \mathbb{P}^r) = \operatorname{Gr}(2, r+1),
+\]</span> mapping each length-<span class="math inline">\(2\)</span> subscheme to the unique line it spans in <span class="math inline">\(\mathbb{P}^r\)</span>. Let <span class="math inline">\(\mathcal{U} = \mathbb{P}(\mathcal{E}) \subseteq \mathbb{P}^r \times X^{[2]}\)</span> be the family of lines over <span class="math inline">\(X^{[2]}\)</span> with projections <span class="math inline">\(p_1: \mathcal{U} \to X^{[2]}\)</span> and <span class="math inline">\(p_2: \mathcal{U} \to \mathbb{P}^r\)</span>. The <strong>secant variety</strong> is the irreducible subvariety: <span class="math display">\[
+\operatorname{Sec}(X) := p_2(\mathcal{U}) = p_2\big(p_1^{-1}(X^{[2]})\big) \subseteq \mathbb{P}^r.
+\]</span> Under the Hilbert–Chow morphism <span class="math inline">\(\varphi: X^{[2]} \to X^{(2)} = (X \times X) / S_2\)</span>, let <span class="math inline">\(\Delta^{[2]} := \varphi^{-1}(\Delta)\)</span> denote the exceptional divisor parameterizing non-reduced subschemes. Then the tangent variety can also be realized as: <span class="math display">\[
+\operatorname{Tan}(X) = p_2\big(p_1^{-1}(\Delta^{[2]})\big) \subseteq \operatorname{Sec}(X),
+\]</span> which is an irreducible closed subvariety of <span class="math inline">\(\mathbb{P}^r\)</span>.</p></li>
+</ol>
+</div>
+<div id="prp-dimension-sec-tan" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (Dimension of <span class="math inline">\(\operatorname{Sec}(X)\)</span> and <span class="math inline">\(\operatorname{Tan}(X)\)</span>)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a smooth irreducible subvariety of dimension <span class="math inline">\(n\)</span>. Then either: <span class="math display">\[
+\dim \operatorname{Sec}(X) = 2n + 1 \quad \text{and} \quad \dim \operatorname{Tan}(X) = 2n,
+\]</span> or: <span class="math display">\[
+\operatorname{Sec}(X) = \operatorname{Tan}(X).
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Assume <span class="math inline">\(\operatorname{Tan}(X) \neq \operatorname{Sec}(X)\)</span>. It suffices to prove that <span class="math inline">\(\dim \operatorname{Tan}(X) \ge 2n\)</span>. (Indeed, if <span class="math inline">\(\dim \operatorname{Tan}(X) = 2n\)</span>, then <span class="math inline">\(2n + 1 \le \dim \operatorname{Sec}(X) \le \dim X^{[2]} + 1 = 2n + 1\)</span>, forcing <span class="math inline">\(\dim \operatorname{Sec}(X) = 2n + 1\)</span>).</p>
+<p>Suppose for contradiction that <span class="math inline">\(\dim \operatorname{Tan}(X) &lt; 2n\)</span>. Since <span class="math inline">\(\dim \operatorname{Sec}(X) &gt; \dim \operatorname{Tan}(X)\)</span>, we can choose a general linear subspace <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> of codimension <span class="math inline">\(\le 2n\)</span> such that: <span class="math display">\[
+L \cap \operatorname{Tan}(X) = \varnothing \quad \text{but} \quad L \cap \operatorname{Sec}(X) \neq \varnothing.
+\]</span> In particular, <span class="math inline">\(L \cap X = \varnothing\)</span>. Projection away from the center <span class="math inline">\(L\)</span> yields a morphism: <span class="math display">\[
+\varphi: X \longrightarrow \mathbb{P}^{r'}, \quad \text{where } r' \le \operatorname{codim}(L) - 1 &lt; 2n.
+\]</span> Because <span class="math inline">\(L \cap \operatorname{Tan}(X) = \varnothing\)</span>, no tangent space of <span class="math inline">\(X\)</span> intersects <span class="math inline">\(L\)</span>, which means the differential <span class="math inline">\(d\varphi_x\)</span> is injective everywhere; hence <span class="math inline">\(\varphi\)</span> is unramified. On the other hand, because <span class="math inline">\(L \cap \operatorname{Sec}(X) \neq \varnothing\)</span>, there exists a secant line of <span class="math inline">\(X\)</span> meeting <span class="math inline">\(L\)</span>, so <span class="math inline">\(\varphi\)</span> is not injective on closed points.</p>
+<p>However, since <span class="math inline">\(X\)</span> is complete and <span class="math inline">\(2n &gt; r'\)</span>, the Ramification Theorem implies that any unramified morphism <span class="math inline">\(\varphi: X \to \mathbb{P}^{r'}\)</span> must be a closed embedding, hence injective on points. This contradiction shows that <span class="math inline">\(\dim \operatorname{Tan}(X) \ge 2n\)</span>.</p>
+</div>
+<hr>
+<div id="def-local-degree-ramification" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (Local Degree and Ramification Loci)</strong></span> Let <span class="math inline">\(f: X \to Y\)</span> be a finite surjective morphism of irreducible varieties of dimension <span class="math inline">\(n\)</span> over <span class="math inline">\(\mathbb{C}\)</span>.</p>
+<ol type="1">
+<li><p><strong>Ramification and Branch Loci:</strong> If <span class="math inline">\(Y\)</span> is smooth, the relative cotangent sheaf <span class="math inline">\(\Omega^1_{X/Y}\)</span> has generic stalk <span class="math inline">\((\Omega^1_{X/Y})_\eta = \Omega^1_{k(X)/k(Y)} = 0\)</span> (since <span class="math inline">\(\mathbb{C}\)</span> is of characteristic zero). The open set: <span class="math display">\[
+U := X \setminus \operatorname{Supp}(\Omega^1_{X/Y})
+\]</span> is the unramified locus. The closed subset <span class="math inline">\(R := X \setminus U\)</span> is the <strong>ramification locus</strong>, and <span class="math inline">\(B(f) := f(R) \subseteq Y\)</span> is the <strong>branch locus</strong>.</p></li>
+<li><p><strong>Étaleness over the Unbranched Locus:</strong> Over the complement <span class="math inline">\(Y \setminus B(f)\)</span>, the restriction <span class="math inline">\(f^{-1}(Y \setminus B(f)) \to Y \setminus B(f)\)</span> is étale. Indeed, for any <span class="math inline">\(y \in Y \setminus B(f)\)</span> and <span class="math inline">\(x \in f^{-1}(y)\)</span>: <span class="math display">\[
+\dim X \le \dim T_x X \le \dim T_y Y = \dim Y = \dim X,
+\]</span> which implies <span class="math inline">\(\dim T_x X = \dim X\)</span>, so <span class="math inline">\(X\)</span> is smooth at <span class="math inline">\(x\)</span>. By Miracle Flatness, a surjective morphism from a Cohen–Macaulay variety to a regular variety with equidimensional fibers is flat; hence <span class="math inline">\(f\)</span> is flat and unramified, thus étale. <em>(If <span class="math inline">\(Y\)</span> is not smooth, this may fail: consider the normalization of a nodal curve <span class="math inline">\(\mathbb{A}^1 \to C\)</span>).</em></p></li>
+<li><p><strong>Local Degree:</strong> Analytically, for every <span class="math inline">\(y \in Y\)</span>, there exists an open neighborhood <span class="math inline">\(U(y) \subseteq Y\)</span> such that: <span class="math display">\[
+f^{-1}(U(y)) = \coprod_{x \in f^{-1}(y)} V(x),
+\]</span> where each <span class="math inline">\(V(x) \subseteq X\)</span> is a disjoint open neighborhood of <span class="math inline">\(x\)</span>, and each restriction <span class="math inline">\(f|_{V(x)}: V(x) \to U(y)\)</span> is finite (quasi-finite and proper). The <strong>local degree</strong> <span class="math inline">\(e_f(x)\)</span> is defined by: <span class="math display">\[
+e_f(x) := \deg\big(V(x) \to U(y)\big).
+\]</span> Since <span class="math inline">\(B(f)\)</span> is a proper closed subvariety of <span class="math inline">\(Y\)</span>, <span class="math inline">\(U(y) \setminus B(f)\)</span> is dense in <span class="math inline">\(U(y)\)</span>. Taking a sequence <span class="math inline">\(y_k \to y\)</span> in <span class="math inline">\(U(y) \setminus B(f)\)</span>, <span class="math inline">\(f|_{V(x)}\)</span> is a topological covering of degree <span class="math inline">\(e_f(x)\)</span> over <span class="math inline">\(y_k\)</span>, so: <span class="math display">\[
+e_f(x) = \lim_{k \to \infty} \#\big(f|_{V(x)}^{-1}(y_k)\big), \quad \text{and} \quad \deg f = \sum_{x \in f^{-1}(y)} e_f(x).
+\]</span> The function <span class="math inline">\(x \mapsto e_f(x)\)</span> is upper semicontinuous in the analytic topology.</p></li>
+<li><p><strong>Higher Ramification Loci:</strong> For any integer <span class="math inline">\(l \ge 1\)</span>, the <strong><span class="math inline">\(l\)</span>-th higher ramification locus</strong> is: <span class="math display">\[
+R_l(f) := \big\{ x \in X \;\big|\; e_f(x) &gt; l \big\}.
+\]</span> In particular, <span class="math inline">\(R_1(f) = R(f)\)</span>. By Serre’s GAGA, every analytic closed subset in a projective variety is Zariski closed, so <span class="math inline">\(R_l(f)\)</span> is a Zariski closed subvariety of <span class="math inline">\(X\)</span>.</p></li>
+</ol>
+</div>
+<div id="lem-additivity-local-degree" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1 (Additivity of Local Degree)</strong></span> Let <span class="math inline">\(f: X \to Y\)</span> be a finite surjective morphism of complex varieties. Let <span class="math inline">\(\{x_k\}\)</span> and <span class="math inline">\(\{z_k\}\)</span> be two sequences of points in <span class="math inline">\(X\)</span> such that <span class="math inline">\(x_k \neq z_k\)</span>, <span class="math inline">\(f(x_k) = f(z_k)\)</span>, and: <span class="math display">\[
+\lim_{k \to \infty} x_k = \lim_{k \to \infty} z_k = x^* \in X.
+\]</span> Then: <span class="math display">\[
+e_f(x^*) \ge \limsup_{k \to \infty} \big(e_f(x_k) + e_f(z_k)\big).
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Work in the analytic topology. Choose disjoint neighborhoods <span class="math inline">\(V(x^*)\)</span> and <span class="math inline">\(U(f(x^*))\)</span> such that <span class="math inline">\(f|_{V(x^*)}: V(x^*) \to U(f(x^*))\)</span> is finite of degree <span class="math inline">\(e_f(x^*)\)</span>. For <span class="math inline">\(k \gg 0\)</span>, both <span class="math inline">\(x_k, z_k \in V(x^*)\)</span>, and <span class="math inline">\(y_k := f(x_k) = f(z_k) \in U(f(x^*))\)</span>.</p>
+<p>For any point <span class="math inline">\(y \in U(f(x^*))\)</span>, the degree is the sum of local degrees over the fiber in <span class="math inline">\(V(x^*)\)</span>: <span class="math display">\[
+e_f(x^*) = \sum_{w \in V(x^*) \cap f^{-1}(y_k)} e_f(w) \ge e_f(x_k) + e_f(z_k).
+\]</span> Since <span class="math inline">\(e_f\)</span> takes values in <span class="math inline">\(\mathbb{Z}_{\ge 1}\)</span>, taking the limit superior yields <span class="math inline">\(e_f(x^*) \ge \limsup_{k \to \infty} (e_f(x_k) + e_f(z_k))\)</span>.</p>
+</div>
+<hr>
+<div id="thm-ramification-projective-space" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Ramification of Coverings of Projective Space)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^n\)</span> be a finite branched covering of degree <span class="math inline">\(d\)</span>.</p>
+<ol type="1">
+<li>There exists a point <span class="math inline">\(x \in X\)</span> such that: <span class="math display">\[
+e_f(x) \ge \min\{d, \, n + 1\}.
+\]</span></li>
+<li>More generally, for each <span class="math inline">\(1 \le l \le \min\{d - 1, \, n\}\)</span>, the higher ramification locus satisfies: <span class="math display">\[
+\operatorname{codim}_X R_l(f) \le l.
+\]</span> In particular, for <span class="math inline">\(l = \min\{d - 1, \, n\}\)</span>, the locus <span class="math inline">\(R_l(f) = \{ x \in X \mid e_f(x) \ge \min\{d, n+1\} \}\)</span> has codimension <span class="math inline">\(\le n\)</span>, hence is non-empty.</li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>If <span class="math inline">\(d = 1\)</span>, the map is birational and finite, hence an isomorphism since <span class="math inline">\(\mathbb{P}^n\)</span> is normal; the claim is trivial. Assume <span class="math inline">\(d \ge 2\)</span>. We proceed by induction on <span class="math inline">\(n\)</span>:</p>
+<ul>
+<li><p><strong>Base case <span class="math inline">\(n = 1\)</span>:</strong> Here <span class="math inline">\(l = 1\)</span>, and we must show <span class="math inline">\(R_1(f) \neq \varnothing\)</span>. If <span class="math inline">\(R_1(f) = \varnothing\)</span>, then <span class="math inline">\(f: X \to \mathbb{P}^1\)</span> is a finite étale cover of degree <span class="math inline">\(d \ge 2\)</span>. But <span class="math inline">\(\mathbb{P}^1\)</span> is simply connected (<span class="math inline">\(\pi_1^{\text{ét}}(\mathbb{P}^1) = \{e\}\)</span>), so it admits no non-trivial connected étale covers, a contradiction.</p></li>
+<li><p><strong>Inductive step <span class="math inline">\(n \ge 2\)</span>:</strong> Let <span class="math inline">\(L \subseteq \mathbb{P}^n\)</span> be a general hyperplane such that <span class="math inline">\(X' := f^{-1}(L)\)</span> is irreducible (by Bertini’s Theorem). Let <span class="math inline">\(f' := f|_{X'}: X' \to L \cong \mathbb{P}^{n-1}\)</span>, which is a finite covering of degree <span class="math inline">\(d\)</span>.</p>
+<p>For a general hyperplane <span class="math inline">\(L\)</span>, <span class="math inline">\(L\)</span> meets the unbranched locus <span class="math inline">\(V \subseteq \mathbb{P}^n\)</span>, and for any <span class="math inline">\(x \in f^{-1}(L)\)</span>, we have <span class="math inline">\(e_{f'}(x) = e_f(x)\)</span>. Thus <span class="math inline">\(R_l(f') = R_l(f) \cap X'\)</span>. By induction, for all <span class="math inline">\(l \le \min\{d - 1, \, n - 1\}\)</span>: <span class="math display">\[
+\operatorname{codim}_{X'} R_l(f') \le l \implies \operatorname{codim}_X R_l(f) \le l.
+\]</span></p></li>
+<li><p><strong>The case <span class="math inline">\(l = n\)</span> (when <span class="math inline">\(d \ge n + 1\)</span>):</strong> It remains to prove that <span class="math inline">\(R_n(f) \neq \varnothing\)</span>, i.e., there exists <span class="math inline">\(s^* \in X\)</span> with <span class="math inline">\(e_f(s^*) \ge n + 1\)</span>. By the codimension bound for <span class="math inline">\(l = n - 1\)</span>, we have <span class="math inline">\(\operatorname{codim}_X R_{n-1}(f) \le n - 1\)</span>, so: <span class="math display">\[
+\dim R_{n-1}(f) \ge n - (n - 1) = 1.
+\]</span> Let <span class="math inline">\(S\)</span> be an irreducible component of <span class="math inline">\(R_{n-1}(f)\)</span> of dimension <span class="math inline">\(\ge 1\)</span>. Consider the product morphism: <span class="math display">\[
+F := f \times f|_S: X \times S \longrightarrow \mathbb{P}^n \times \mathbb{P}^n.
+\]</span> The space <span class="math inline">\(X \times S\)</span> is irreducible of dimension <span class="math inline">\(\dim(X \times S) = n + \dim S \ge n + 1 &gt; n\)</span>. Since <span class="math inline">\(F\)</span> is finite, <span class="math inline">\(\dim F(X \times S) \ge n + 1 &gt; n\)</span>. By the Fulton–Hansen Connectedness Theorem, the preimage: <span class="math display">\[
+F^{-1}(\Delta_{\mathbb{P}^n}) = X \times_{\mathbb{P}^n} S = \big\{ (x, s) \in X \times S \;\big|\; f(x) = f(s) \big\}
+\]</span> is connected.</p>
+<p>Notice that <span class="math inline">\(\Delta_S := \{ (s, s) \mid s \in S \} \subseteq F^{-1}(\Delta_{\mathbb{P}^n})\)</span> is an irreducible component of dimension <span class="math inline">\(\dim S\)</span>.</p>
+<ul>
+<li>If <span class="math inline">\(\Delta_S = F^{-1}(\Delta_{\mathbb{P}^n})\)</span>, then <span class="math inline">\(f(x) = f(s)\)</span> implies <span class="math inline">\(x = s\)</span>, meaning every point <span class="math inline">\(s \in S\)</span> has a unique preimage <span class="math inline">\(\# f^{-1}(f(s)) = 1\)</span>. Thus <span class="math inline">\(e_f(s) = d \ge n + 1\)</span>, which gives <span class="math inline">\(S \subseteq R_n(f)\)</span>, so <span class="math inline">\(R_n(f) \neq \varnothing\)</span>.</li>
+<li>If <span class="math inline">\(\Delta_S \subsetneq F^{-1}(\Delta_{\mathbb{P}^n})\)</span>, by connectedness of <span class="math inline">\(F^{-1}(\Delta_{\mathbb{P}^n})\)</span> there exists another irreducible component <span class="math inline">\(T \neq \Delta_S\)</span> meeting <span class="math inline">\(\Delta_S\)</span>: <span class="math display">\[
+T \cap \Delta_S \neq \varnothing.
+\]</span> Choose a point <span class="math inline">\((s^*, s^*) \in T \cap \Delta_S\)</span> and a sequence <span class="math inline">\((x_k, s_k) \in T \setminus \Delta_S\)</span> converging to <span class="math inline">\((s^*, s^*)\)</span> with <span class="math inline">\(x_k \neq s_k\)</span> and <span class="math inline">\(f(x_k) = f(s_k)\)</span>. Then <span class="math inline">\(\lim x_k = \lim s_k = s^*\)</span>. Because <span class="math inline">\(s_k \in S \subseteq R_{n-1}(f)\)</span>, we have <span class="math inline">\(e_f(s_k) \ge n\)</span>, and trivially <span class="math inline">\(e_f(x_k) \ge 1\)</span>. By <a href="#lem-additivity-local-degree" class="quarto-xref">Lemma&nbsp;1</a>: <span class="math display">\[
+e_f(s^*) \ge \limsup_{k \to \infty}\big(e_f(s_k) + e_f(x_k)\big) \ge n + 1.
+\]</span> Therefore, <span class="math inline">\(s^* \in R_n(f)\)</span>, completing the proof.</li>
+</ul></li>
+</ul>
+</div>
+<div id="cor-ramification-applications" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 (Geometric Consequences for Branched Coverings)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(f: X \to \mathbb{P}^n\)</span> be a branched covering of degree <span class="math inline">\(d\)</span>.</p>
+<ol type="1">
+<li>If <span class="math inline">\(d \le n + 1\)</span>, there exists a subvariety <span class="math inline">\(T \subseteq \mathbb{P}^n\)</span> of dimension <span class="math inline">\(\ge n + 1 - d\)</span> over which <span class="math inline">\(f\)</span> is bijective.</li>
+<li>If <span class="math inline">\(X\)</span> is normal and <span class="math inline">\(d \le n\)</span>, then the étale fundamental group of <span class="math inline">\(X\)</span> is trivial: <span class="math display">\[
+\pi_1^{\text{ét}}(X) = \{e\}.
+\]</span></li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span></p>
+<ol type="1">
+<li><p>For <span class="math inline">\(l = d - 1 \le n\)</span>, <a href="#thm-ramification-projective-space" class="quarto-xref">Theorem&nbsp;1</a> implies that <span class="math inline">\(\operatorname{codim}_X R_{d-1}(f) \le d - 1\)</span>. For any <span class="math inline">\(x \in R_{d-1}(f)\)</span>, we have <span class="math inline">\(e_f(x) \ge d\)</span>, which forces <span class="math inline">\(f^{-1}(f(x)) = \{x\}\)</span> because <span class="math inline">\(\sum_{x' \in f^{-1}(f(x))} e_f(x') = d\)</span>. Hence <span class="math inline">\(f\)</span> is bijective over <span class="math inline">\(T := f(R_{d-1}(f))\)</span>, where <span class="math inline">\(\dim T \ge n - (d - 1) = n + 1 - d\)</span>.</p></li>
+<li><p>Suppose <span class="math inline">\(p: Y \to X\)</span> is a connected finite étale cover of degree <span class="math inline">\(m \ge 2\)</span>. Because <span class="math inline">\(X\)</span> is normal and connected, <span class="math inline">\(Y\)</span> is an irreducible normal variety of dimension <span class="math inline">\(n\)</span>. Consider the composite morphism: <span class="math display">\[
+g := f \circ p: Y \longrightarrow \mathbb{P}^n, \quad \deg g = m \cdot d \ge 2d.
+\]</span> Because <span class="math inline">\(d \le n\)</span> and <span class="math inline">\(2d - 1 \ge d\)</span>, we have <span class="math inline">\(d \le \min\{\deg g - 1, \, n\}\)</span>. By <a href="#thm-ramification-projective-space" class="quarto-xref">Theorem&nbsp;1</a> applied to <span class="math inline">\(g\)</span>, there exists a point <span class="math inline">\(y \in Y\)</span> such that: <span class="math display">\[
+e_g(y) \ge d + 1.
+\]</span> However, since <span class="math inline">\(p\)</span> is étale, <span class="math inline">\(e_g(y) = e_p(y) \cdot e_f(p(y)) = 1 \cdot e_f(p(y)) \le d\)</span>, a contradiction. Thus <span class="math inline">\(X\)</span> has no non-trivial connected finite étale covers, so <span class="math inline">\(\pi_1^{\text{ét}}(X) = \{e\}\)</span>.</p></li>
+</ol>
+</div>
+<div id="exm-boundary-covering" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (Sharpness of the Degree Bound)</strong></span> The bound <span class="math inline">\(d \le n\)</span> is sharp. Let <span class="math inline">\(E \subseteq \mathbb{P}^n\)</span> be an elliptic curve of degree <span class="math inline">\(n + 1\)</span> (for <span class="math inline">\(n \ge 2\)</span>, any degree <span class="math inline">\(n+1\)</span> line bundle on <span class="math inline">\(E\)</span> is very ample, and <span class="math inline">\(h^0(E, \mathcal{L}) = \deg \mathcal{L} + 1 - g = n + 1\)</span>).</p>
+<p>Define the incidence variety: <span class="math display">\[
+X := \big\{ (x, H) \in E \times \check{\mathbb{P}}^n \;\big|\; x \in H \big\} \subseteq E \times \check{\mathbb{P}}^n.
+\]</span> The second projection <span class="math inline">\(p_2: X \to \check{\mathbb{P}}^n \cong \mathbb{P}^n\)</span> is a finite covering of degree <span class="math inline">\(n + 1\)</span>. On the other hand, the first projection <span class="math inline">\(p_1: X \to E\)</span> realizes <span class="math inline">\(X\)</span> as a <span class="math inline">\(\mathbb{P}^{n-1}\)</span>-bundle over <span class="math inline">\(E\)</span>. From the homotopy exact sequence: <span class="math display">\[
+\pi_1(\mathbb{P}^{n-1}) \longrightarrow \pi_1(X) \longrightarrow \pi_1(E) \longrightarrow \pi_0(\mathbb{P}^{n-1}) \implies \pi_1(X) \cong \pi_1(E) \cong \mathbb{Z}^2,
+\]</span> so <span class="math inline">\(\pi_1^{\text{ét}}(X) \cong \widehat{\mathbb{Z}}^2 \neq \{e\}\)</span>.</p>
+</div>
+<hr>
+<div id="def-relative-sec-tan" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 3 (Relative Secant and Tangent Varieties)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a smooth subvariety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(V \subseteq X\)</span> be a subvariety of dimension <span class="math inline">\(v\)</span>. 1. A linear subspace <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> is <strong>tangent to <span class="math inline">\(X\)</span> at <span class="math inline">\(x\)</span></strong> if <span class="math inline">\(x \in L \cap X\)</span> and <span class="math inline">\(\mathbb{T}_x \subseteq L\)</span>. 2. Considering the incidence along <span class="math inline">\(V \times X \subseteq X \times X\)</span> inside the blow-up <span class="math inline">\(\mathrm{Bl}_{\Delta}(X \times X) / S_2 \cong X^{[2]}\)</span>, the <strong>relative secant variety</strong> and <strong>relative tangent variety</strong> of <span class="math inline">\(X\)</span> with respect to <span class="math inline">\(V\)</span> are: <span class="math display">\[
+   \operatorname{Sec}_V(X) := \bigcup_{x \in V, \, y \in X} \overline{xy}, \qquad \operatorname{Tan}_V(X) := \bigcup_{x \in V} \mathbb{T}_x.
+   \]</span> Clearly <span class="math inline">\(\operatorname{Tan}_V(X) \subseteq \operatorname{Sec}_V(X)\)</span> and <span class="math inline">\(X \subseteq \operatorname{Sec}_V(X)\)</span>.</p>
+</div>
+<div id="prp-relative-sec-tan-dimension" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (Dimension of Relative Secant and Tangent Varieties)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a smooth irreducible subvariety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(V \subseteq X\)</span> be a subvariety of dimension <span class="math inline">\(v\)</span>. Then either: <span class="math display">\[
+\dim \operatorname{Sec}_V(X) = n + v + 1 \quad \text{and} \quad \dim \operatorname{Tan}_V(X) = n + v,
+\]</span> or: <span class="math display">\[
+\operatorname{Tan}_V(X) = \operatorname{Sec}_V(X).
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Suppose <span class="math inline">\(\operatorname{Tan}_V(X) \neq \operatorname{Sec}_V(X)\)</span>, and suppose for contradiction that <span class="math inline">\(\dim \operatorname{Tan}_V(X) = t &lt; n + v\)</span>. A general linear space <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> of codimension <span class="math inline">\(t + 1\)</span> satisfies: <span class="math display">\[
+L \cap \operatorname{Sec}_V(X) \neq \varnothing \quad \text{and} \quad L \cap \operatorname{Tan}_V(X) = \varnothing.
+\]</span> Projection away from <span class="math inline">\(L\)</span> gives <span class="math inline">\(p: X \to \mathbb{P}^t\)</span>. Consider the product morphism: <span class="math display">\[
+F := p|_V \times p: V \times X \longrightarrow \mathbb{P}^t \times \mathbb{P}^t.
+\]</span> Because <span class="math inline">\(\dim(V \times X) = n + v &gt; t\)</span>, the Fulton–Hansen Connectedness Theorem implies that <span class="math inline">\(F^{-1}(\Delta_{\mathbb{P}^t})\)</span> is connected.</p>
+<p>Since <span class="math inline">\(L \cap \operatorname{Sec}_V(X) \neq \varnothing\)</span>, there exist <span class="math inline">\(v_0 \in V\)</span> and <span class="math inline">\(x_0 \in X\)</span> with <span class="math inline">\(x_0 \neq v_0\)</span> such that the line <span class="math inline">\(\overline{v_0 x_0}\)</span> intersects <span class="math inline">\(L\)</span>, meaning <span class="math inline">\(p(v_0) = p(x_0)\)</span>. Hence <span class="math inline">\((v_0, x_0) \in F^{-1}(\Delta_{\mathbb{P}^t}) \setminus \Delta_V\)</span>. By connectedness, there exists an irreducible component <span class="math inline">\(T \subseteq F^{-1}(\Delta_{\mathbb{P}^t})\)</span> containing <span class="math inline">\((v_0, x_0)\)</span> such that: <span class="math display">\[
+T \cap \Delta_V \neq \varnothing.
+\]</span> Pick <span class="math inline">\((v^*, v^*) \in T \cap \Delta_V\)</span>, and choose a sequence <span class="math inline">\((v_k, x_k) \in T \setminus \Delta_V\)</span> converging to <span class="math inline">\((v^*, v^*)\)</span> with <span class="math inline">\(v_k \neq x_k\)</span> and <span class="math inline">\(p(v_k) = p(x_k)\)</span>. Then the secant lines <span class="math inline">\(\overline{v_k x_k}\)</span> meet <span class="math inline">\(L\)</span>. Since the incidence variety <span class="math inline">\(\mathcal{U}_L := \{ (x, y, l) \mid l \in \overline{xy} \cap L \}\)</span> is proper over <span class="math inline">\(V \times X\)</span>, taking the limit as <span class="math inline">\(k \to \infty\)</span> shows that the limiting line is tangent to <span class="math inline">\(X\)</span> at <span class="math inline">\(v^*\)</span> and intersects <span class="math inline">\(L\)</span>.</p>
+<p>Thus <span class="math inline">\(\mathbb{T}_{v^*} \cap L \neq \varnothing\)</span>, which contradicts <span class="math inline">\(L \cap \operatorname{Tan}_V(X) = \varnothing\)</span>.</p>
+</div>
+<hr>
+<div id="thm-zaks-tangencies" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Zak’s Theorem on Tangencies)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a smooth, non-degenerate irreducible subvariety of dimension <span class="math inline">\(n\)</span>. Let <span class="math inline">\(L \subseteq \mathbb{P}^r\)</span> be a linear subspace of dimension <span class="math inline">\(k\)</span> with <span class="math inline">\(n \le k \le r - 1\)</span>. Then the tangency locus: <span class="math display">\[
+\big\{ x \in X \;\big|\; \mathbb{T}_x \subseteq L \big\}
+\]</span> has dimension: <span class="math display">\[
+\dim\big\{ x \in X \;\big|\; \mathbb{T}_x \subseteq L \big\} \le k - n.
+\]</span> In particular, its dimension is at most <span class="math inline">\(\min\{k - n, \, n - 1\}\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Suppose for contradiction that there exists an irreducible component <span class="math inline">\(V \subseteq \{ x \in X \mid \mathbb{T}_x \subseteq L \}\)</span> of dimension: <span class="math display">\[
+v := \dim V \ge k + 1 - n.
+\]</span> Then by definition, for every <span class="math inline">\(x \in V\)</span>, the embedded tangent space <span class="math inline">\(\mathbb{T}_x \subseteq L\)</span>, which implies: <span class="math display">\[
+\operatorname{Tan}_V(X) = \bigcup_{x \in V} \mathbb{T}_x \subseteq L.
+\]</span> Thus <span class="math inline">\(\dim \operatorname{Tan}_V(X) \le \dim L = k \le v + n - 1\)</span>. By <a href="#prp-relative-sec-tan-dimension" class="quarto-xref">Proposition&nbsp;2</a>, we must have: <span class="math display">\[
+\operatorname{Tan}_V(X) = \operatorname{Sec}_V(X).
+\]</span> However, <span class="math inline">\(X \subseteq \operatorname{Sec}_V(X) = \operatorname{Tan}_V(X) \subseteq L\)</span>, which forces <span class="math inline">\(X \subseteq L\)</span>. This contradicts the assumption that <span class="math inline">\(X\)</span> is non-degenerate in <span class="math inline">\(\mathbb{P}^r\)</span>.</p>
+</div>
+<div id="cor-zaks-consequences" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 2 (Consequences of Zak’s Theorem)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a smooth, non-degenerate irreducible subvariety of dimension <span class="math inline">\(n\)</span>.</p>
+<ol type="1">
+<li><strong>Finiteness of the Gauss Map:</strong> The Gauss map <span class="math inline">\(\gamma: X \to \operatorname{Gr}(n, \mathbb{P}^r)\)</span>, <span class="math inline">\(x \mapsto \mathbb{T}_x\)</span> is a finite morphism.</li>
+<li><strong>Singularities of Hyperplane Sections:</strong> For any hyperplane <span class="math inline">\(H \subseteq \mathbb{P}^r\)</span>: <span class="math display">\[
+\dim \operatorname{Sing}(X \cap H) \le r - 1 - n.
+\]</span> Consequently:
+<ul>
+<li>If <span class="math inline">\(2n \ge r + 1\)</span>, then <span class="math inline">\(X \cap H\)</span> is reduced for general <span class="math inline">\(H\)</span>.</li>
+<li>If <span class="math inline">\(2n \ge r + 2\)</span>, then <span class="math inline">\(X \cap H\)</span> is normal for general <span class="math inline">\(H\)</span>.</li>
+</ul></li>
+<li><strong>Dimension of the Dual Variety:</strong> Let <span class="math inline">\(\mathcal{P} := \{ (x, H) \in X \times \check{\mathbb{P}}^r \mid \mathbb{T}_x \subseteq H \}\)</span>. Then <span class="math inline">\(\mathcal{P}\)</span> is a <span class="math inline">\(\mathbb{P}^{r - 1 - n}\)</span>-bundle over <span class="math inline">\(X\)</span> with <span class="math inline">\(\dim \mathcal{P} = r - 1\)</span>. The dual variety <span class="math inline">\(X^* := p_2(\mathcal{P}) \subseteq \check{\mathbb{P}}^r\)</span> satisfies: <span class="math display">\[
+\dim X^* \ge n.
+\]</span></li>
+</ol>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span></p>
+<ol type="1">
+<li><p>Setting <span class="math inline">\(k = n\)</span> in <a href="#thm-zaks-tangencies" class="quarto-xref">Theorem&nbsp;2</a>, for any <span class="math inline">\(n\)</span>-plane <span class="math inline">\(L\)</span>, <span class="math inline">\(\dim \{ x \in X \mid \mathbb{T}_x = L \} \le n - n = 0\)</span>. Hence every fiber of the Gauss map is zero-dimensional; being projective, <span class="math inline">\(\gamma\)</span> is finite.</p></li>
+<li><p>A point <span class="math inline">\(x \in X \cap H\)</span> is singular if and only if the differential <span class="math inline">\(d(s|_X)\)</span> vanishes at <span class="math inline">\(x\)</span>, which is equivalent to <span class="math inline">\(\mathbb{T}_x \subseteq H\)</span>. Thus: <span class="math display">\[
+\operatorname{Sing}(X \cap H) = \big\{ x \in X \;\big|\; \mathbb{T}_x \subseteq H \big\}.
+\]</span> Applying Zak’s Theorem with <span class="math inline">\(k = r - 1\)</span>, we obtain <span class="math inline">\(\dim \operatorname{Sing}(X \cap H) \le (r - 1) - n = r - 1 - n\)</span>.</p>
+<ul>
+<li>If <span class="math inline">\(2n \ge r + 1\)</span>, then <span class="math inline">\(\dim \operatorname{Sing}(X \cap H) \le n - 2 = \dim(X \cap H) - 1\)</span>, so <span class="math inline">\(X \cap H\)</span> is regular in codimension <span class="math inline">\(0\)</span> (<span class="math inline">\(R_0\)</span>). Since <span class="math inline">\(X\)</span> is smooth (hence Cohen–Macaulay), the hypersurface section <span class="math inline">\(X \cap H\)</span> is Cohen–Macaulay (<span class="math inline">\(S_1\)</span>). By Serre’s criterion, <span class="math inline">\(R_0 + S_1\)</span> implies that <span class="math inline">\(X \cap H\)</span> is reduced.</li>
+<li>If <span class="math inline">\(2n \ge r + 2\)</span>, then <span class="math inline">\(\dim \operatorname{Sing}(X \cap H) \le n - 3 = \dim(X \cap H) - 2\)</span>, so <span class="math inline">\(X \cap H\)</span> satisfies <span class="math inline">\(R_1\)</span>. Together with <span class="math inline">\(S_2\)</span>, Serre’s criterion implies that <span class="math inline">\(X \cap H\)</span> is normal.</li>
+</ul></li>
+<li><p>For any <span class="math inline">\(H \in X^*\)</span>, the fiber <span class="math inline">\(p_2^{-1}(H) \cong \{ x \in X \mid \mathbb{T}_x \subseteq H \}\)</span> has dimension at most <span class="math inline">\(r - 1 - n\)</span>. By fiber dimension: <span class="math display">\[
+\dim X^* \ge \dim \mathcal{P} - (r - 1 - n) = (r - 1) - (r - 1 - n) = n.
+\]</span></p></li>
+</ol>
+</div>
+<div id="rem-join-varieties" class="proof remark">
+<p><span class="proof-title"><em>Remark 1</em> (Join of Varieties). </span>Replacing <span class="math inline">\(\operatorname{Hilb}_2(X)\)</span> with the blow-up of <span class="math inline">\(X \times Y\)</span> along the diagonal, one defines the <strong>join</strong> <span class="math inline">\(X * Y\)</span> and the <strong>infinitesimal join</strong> <span class="math inline">\(\mathcal{L}\operatorname{Join}(X, Y)\)</span>. By identical arguments, either <span class="math inline">\(\dim(X * Y) = \dim X + \dim Y + 1\)</span> and <span class="math inline">\(\dim \mathcal{L}\operatorname{Join}(X, Y) = \dim X + \dim Y\)</span>, or <span class="math inline">\(\mathcal{L}\operatorname{Join}(X, Y) = X * Y\)</span>.</p>
+</div>
+<hr>
+<div id="thm-linear-normality-1" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Zak’s Theorem on Linear Normality (Form I))</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a smooth projective variety of dimension <span class="math inline">\(n\)</span>. If: <span class="math display">\[
+3n &gt; 2(r - 1),
+\]</span> then <span class="math inline">\(X\)</span> is <strong>linearly normal</strong>, meaning the restriction map: <span class="math display">\[
+H^0(\mathbb{P}^r, \mathcal{O}_{\mathbb{P}^r}(1)) \longrightarrow H^0(X, \mathcal{O}_X(1))
+\]</span> is surjective.</p>
+</div>
+<div id="prp-characterization-linear-normality" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3 (Geometric Characterization of Linear Normality)</strong></span> For a smooth projective variety <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span>, the following are equivalent: 1. <span class="math inline">\(X\)</span> is not linearly normal. 2. <span class="math inline">\(X\)</span> is the projection of a non-degenerate embedding in <span class="math inline">\(\mathbb{P}^{r+1}\)</span> from an external point <span class="math inline">\(P \notin X\)</span>. 3. There exists a non-degenerate embedding <span class="math inline">\(X \hookrightarrow \mathbb{P}^{r+1}\)</span> such that <span class="math inline">\(\operatorname{Sec}(X) \subsetneq \mathbb{P}^{r+1}\)</span>.</p>
+<p>Consequently, <a href="#thm-linear-normality-1" class="quarto-xref">Theorem&nbsp;3</a> is equivalent to:</p>
+<p><strong>Zak’s Theorem on Linear Normality (Form II):</strong> Let <span class="math inline">\(X \subseteq \mathbb{P}^m\)</span> be a smooth, non-degenerate projective variety of dimension <span class="math inline">\(n\)</span>. If: <span class="math display">\[
+3n &gt; 2(m - 2),
+\]</span> then: <span class="math display">\[
+\operatorname{Sec}(X) = \mathbb{P}^m.
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span></p>
+<ul>
+<li><strong>(1) <span class="math inline">\(\iff\)</span> (2):</strong> The map <span class="math inline">\(H^0(\mathbb{P}^r, \mathcal{O}(1)) \to H^0(X, \mathcal{O}_X(1))\)</span> fails to be surjective if and only if there exists a section <span class="math inline">\(f \in H^0(X, \mathcal{O}_X(1))\)</span> not in the image. Choosing a basis <span class="math inline">\(s_0, \dots, s_r\)</span> of <span class="math inline">\(H^0(\mathbb{P}^r, \mathcal{O}(1))\)</span> and setting <span class="math inline">\(s_{r+1} := f\)</span>, the linear system <span class="math inline">\(\langle s_0, \dots, s_{r+1} \rangle\)</span> defines an embedding <span class="math inline">\(X \hookrightarrow \mathbb{P}^{r+1}\)</span> whose projection from <span class="math inline">\([0: \dots : 0: 1]\)</span> recovers the original map to <span class="math inline">\(\mathbb{P}^r\)</span>.</li>
+<li><strong>(2) <span class="math inline">\(\iff\)</span> (3):</strong> The projection from <span class="math inline">\(P \in \mathbb{P}^{r+1}\)</span> restricts to an embedding on <span class="math inline">\(X\)</span> if and only if <span class="math inline">\(P\)</span> lies on no secant or tangent line of <span class="math inline">\(X\)</span>, which means <span class="math inline">\(P \notin \operatorname{Sec}(X)\)</span>. Such a point <span class="math inline">\(P\)</span> exists if and only if <span class="math inline">\(\operatorname{Sec}(X) \subsetneq \mathbb{P}^{r+1}\)</span>.</li>
+</ul>
+</div>
+<hr>
+<div id="def-trisecant-variety" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 4 (Trisecant and Higher Secant Varieties)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^m\)</span> be a smooth variety of dimension <span class="math inline">\(n\)</span>. A closed subscheme <span class="math inline">\(Z \subseteq X\)</span> of dimension <span class="math inline">\(0\)</span> and length <span class="math inline">\(3\)</span> has local rings <span class="math inline">\(\mathcal{O}_Z = \prod A_i\)</span> with <span class="math inline">\(\sum \operatorname{length}(A_i) = 3\)</span>: - Three distinct points: <span class="math inline">\(A_1 \times A_2 \times A_3\)</span>; - Two points (one tangent vector): <span class="math inline">\(A_1 \times A_2\)</span> with <span class="math inline">\(\operatorname{length}(A_2) = 2\)</span>; - One point (length <span class="math inline">\(3\)</span> local ring): <span class="math inline">\(\mathcal{O}_{X, x} / I\)</span> where: - If <span class="math inline">\(\mathfrak{m} / \mathfrak{m}^2\)</span> has image of dimension <span class="math inline">\(1\)</span>, <span class="math inline">\(I = (x_1^3, x_2, \dots, x_n)\)</span>, which defines an osculating plane <span class="math inline">\(\mathbb{P}^2 \subseteq T_x^{(2)} X\)</span>; - If <span class="math inline">\(\mathfrak{m} / \mathfrak{m}^2\)</span> has image of dimension <span class="math inline">\(2\)</span>, <span class="math inline">\(I = (x_1^2, x_1 x_2, x_2^2, x_3, \dots, x_n)\)</span>, whose spanned plane is already contained in <span class="math inline">\(\mathbb{T}_x X \subseteq \operatorname{Sec}(X)\)</span>.</p>
+<p>The <strong>trisecant variety</strong> is the variety: <span class="math display">\[
+\operatorname{Trisec}(X) := \operatorname{Sec}^3(X) = \bigcup_{Z \in \operatorname{Hilb}_3(X)} \operatorname{Span}(Z) = X * X * X \subseteq \mathbb{P}^m.
+\]</span> More generally, the <span class="math inline">\(k\)</span>-th secant variety is <span class="math inline">\(\operatorname{Sec}^k(X) := X * \dots * X\)</span> (<span class="math inline">\(k\)</span> times).</p>
+</div>
+<div id="rem-hilbert-schemes-smoothness" class="proof remark">
+<p><span class="proof-title"><em>Remark 2</em> (Smoothness and Irreducibility of Hilbert Schemes of Points). </span></p>
+<ul>
+<li>By Fogarty (1968), <span class="math inline">\(\operatorname{Hilb}_m(X)\)</span> is smooth if and only if <span class="math inline">\(\dim X \le 2\)</span> or <span class="math inline">\(m \le 3\)</span>.</li>
+<li><span class="math inline">\(\operatorname{Hilb}_m(X)\)</span> is irreducible if <span class="math inline">\(\dim X \le 2\)</span>.</li>
+<li><span class="math inline">\(\operatorname{Hilb}_m(\mathbb{P}^3)\)</span> is irreducible for <span class="math inline">\(m \le 7\)</span> (Mozgovoy 2008), has two irreducible components for <span class="math inline">\(m = 8\)</span> (Cartwright–Erman–Velasco–Viray 2008), while <span class="math inline">\(\operatorname{Hilb}_{11}(\mathbb{P}^3)\)</span> is irreducible (DJUNT 2017).</li>
+</ul>
+</div>
+<div id="lem-terracini" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 2 (Terracini’s Lemma)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^m\)</span> be a smooth, irreducible subvariety. 1. For distinct points <span class="math inline">\(x, y \in X\)</span> and <span class="math inline">\(p \in \overline{xy}\)</span>: <span class="math display">\[
+   \operatorname{Span}(\mathbb{T}_x, \, \mathbb{T}_y) \subseteq T_p \operatorname{Sec}(X),
+   \]</span> with equality holding for general <span class="math inline">\(x, y \in X\)</span> and general <span class="math inline">\(p \in \overline{xy}\)</span>. 2. For non-collinear points <span class="math inline">\(x, y, z \in X\)</span> and <span class="math inline">\(p \in \overline{xyz}\)</span>: <span class="math display">\[
+   \operatorname{Span}(\mathbb{T}_x, \, \mathbb{T}_y, \, \mathbb{T}_z) \subseteq T_p \operatorname{Trisec}(X),
+   \]</span> with equality holding for general points.</p>
+</div>
+<div id="cor-sec-equals-trisec" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 3 (Secant Equals Trisecant)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^m\)</span> be a smooth, non-degenerate projective variety. Then: <span class="math display">\[
+\operatorname{Sec}(X) = \mathbb{P}^m \iff \operatorname{Sec}(X) = \operatorname{Trisec}(X).
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>The implication <span class="math inline">\((\implies)\)</span> is immediate since <span class="math inline">\(\operatorname{Sec}(X) \subseteq \operatorname{Trisec}(X) \subseteq \mathbb{P}^m\)</span>.</p>
+<p>Conversely, suppose <span class="math inline">\(\operatorname{Sec}(X) \subsetneq \mathbb{P}^m\)</span>. For general <span class="math inline">\(x, y \in X\)</span> and general <span class="math inline">\(p \in \overline{xy}\)</span>, Terracini’s Lemma gives <span class="math inline">\(T_p \operatorname{Sec}(X) = \operatorname{Span}(\mathbb{T}_x, \mathbb{T}_y) =: \Lambda \subsetneq \mathbb{P}^m\)</span>. Because <span class="math inline">\(X\)</span> is non-degenerate, <span class="math inline">\(X \nsubseteq \Lambda\)</span>. Choosing <span class="math inline">\(z \in X \setminus \Lambda\)</span>, we have: <span class="math display">\[
+\operatorname{Span}(\mathbb{T}_x, \mathbb{T}_y, \mathbb{T}_z) \supsetneq \operatorname{Span}(\mathbb{T}_x, \mathbb{T}_y),
+\]</span> which implies <span class="math inline">\(\dim \operatorname{Trisec}(X) &gt; \dim \operatorname{Sec}(X)\)</span>, so <span class="math inline">\(\operatorname{Sec}(X) \neq \operatorname{Trisec}(X)\)</span>.</p>
+</div>
+<div id="prp-proof-linear-normality-2" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4 (Proof of Linear Normality (Form II))</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^m\)</span> be a smooth projective variety of dimension <span class="math inline">\(n\)</span>. If: <span class="math display">\[
+3n &gt; 2(m - 2),
+\]</span> then <span class="math inline">\(\operatorname{Sec}(X) = \operatorname{Trisec}(X)\)</span>, and consequently <span class="math inline">\(\operatorname{Sec}(X) = \mathbb{P}^m\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Suppose for contradiction that <span class="math inline">\(\operatorname{Sec}(X) \subsetneq \operatorname{Trisec}(X)\)</span>. Then there exist points <span class="math inline">\(x_0, y_0, z_0 \in X\)</span> spanning a plane <span class="math inline">\(\overline{x_0 y_0 z_0} \cong \mathbb{P}^2\)</span> not contained in <span class="math inline">\(\operatorname{Sec}(X)\)</span>. Thus: <span class="math display">\[
+\operatorname{Sec}(X) \cap \overline{x_0 y_0 z_0} \subsetneq \mathbb{P}^2
+\]</span> is a proper closed algebraic subset, hence has dimension <span class="math inline">\(\le 1\)</span>. In particular, <span class="math inline">\(X \cap \overline{x_0 y_0 z_0}\)</span> consists of only finitely many points (otherwise, any curve in the plane would force its secants to fill the entire <span class="math inline">\(\mathbb{P}^2\)</span>).</p>
+<p>Choose a general line <span class="math inline">\(L \subseteq \overline{x_0 y_0 z_0}\)</span>. Then <span class="math inline">\(L\)</span> meets <span class="math inline">\(\operatorname{Sec}(X)\)</span> transversely in finitely many points, and <span class="math inline">\(L \cap X = \varnothing\)</span>. Projection away from <span class="math inline">\(L\)</span> defines a finite morphism: <span class="math display">\[
+\pi: X \longrightarrow \mathbb{P}^{m-2}.
+\]</span> Consider the triple product map: <span class="math display">\[
+F := \pi \times \pi \times \pi: X \times X \times X \longrightarrow \mathbb{P}^{m-2} \times \mathbb{P}^{m-2} \times \mathbb{P}^{m-2}.
+\]</span> Because <span class="math inline">\(\dim(X \times X \times X) = 3n &gt; 2(m - 2)\)</span>, Fulton–Hansen Connectedness implies that: <span class="math display">\[
+F^{-1}(\Delta_{\mathbb{P}^{m-2}}) = \big\{ (x, y, z) \in X^3 \;\big|\; \pi(x) = \pi(y) = \pi(z) \big\}
+\]</span> is connected. Geometrically, <span class="math inline">\(\pi(x) = \pi(y) = \pi(z)\)</span> means that the secant lines <span class="math inline">\(\overline{xy}\)</span>, <span class="math inline">\(\overline{xz}\)</span>, and <span class="math inline">\(\overline{yz}\)</span> all meet the line <span class="math inline">\(L\)</span>.</p>
+<p>Define the continuous map: <span class="math display">\[
+\Phi: F^{-1}(\Delta_{\mathbb{P}^{m-2}}) \setminus D_X \longrightarrow L \times L \times L, \quad (x, y, z) \longmapsto (\overline{yz} \cap L, \; \overline{xz} \cap L, \; \overline{xy} \cap L),
+\]</span> where <span class="math inline">\(D_X := (\Delta_X \times X) \cup (X \times \Delta_X) \cup (\Delta_{1,3})\)</span>. Because <span class="math inline">\(L \cap \operatorname{Sec}(X)\)</span> is a finite set of points, the image of <span class="math inline">\(\Phi\)</span> is finite, so <span class="math inline">\(\Phi\)</span> is locally constant.</p>
+<p>By the connectedness of <span class="math inline">\(F^{-1}(\Delta_{\mathbb{P}^{m-2}})\)</span>, <span class="math inline">\(\Phi\)</span> must be constant on every component: <span class="math display">\[
+\Phi(x, y, z) = (a, b, c) \in L^3,
+\]</span> where <span class="math inline">\(a, b, c\)</span> are distinct points on <span class="math inline">\(L\)</span> (if, say, <span class="math inline">\(a = b\)</span>, then <span class="math inline">\(\overline{xy}\)</span> and <span class="math inline">\(\overline{xz}\)</span> meet <span class="math inline">\(L\)</span> at the same point, which forces <span class="math inline">\(x, y, z\)</span> to be collinear, contradicting <span class="math inline">\(L \cap X = \varnothing\)</span>).</p>
+<p>Now take a smooth curve <span class="math inline">\(T\)</span> in an irreducible component of <span class="math inline">\(F^{-1}(\Delta_{\mathbb{P}^{m-2}})\)</span> specializing a general point <span class="math inline">\((x_t, y_t, z_t)\)</span> to a point <span class="math inline">\((x^*, y^*, z^*) \in D_X\)</span> at <span class="math inline">\(t = t^*\)</span>: - If <span class="math inline">\(y^* = z^* \neq x^*\)</span>, then the two secant lines <span class="math inline">\(\overline{x_t y_t}\)</span> and <span class="math inline">\(\overline{x_t z_t}\)</span> both degenerate to the single line <span class="math inline">\(\overline{x^* y^*}\)</span>, forcing their intersection points <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> on <span class="math inline">\(L\)</span> to coincide, a contradiction. - If <span class="math inline">\(x^* = y^* = z^*\)</span>, then by the valuative criterion, the limits of <span class="math inline">\(\overline{x_t y_t}\)</span>, <span class="math inline">\(\overline{x_t z_t}\)</span>, and <span class="math inline">\(\overline{y_t z_t}\)</span> are three distinct tangent lines of <span class="math inline">\(X\)</span> at <span class="math inline">\(x^*\)</span> meeting <span class="math inline">\(L\)</span> at <span class="math inline">\(a, b, c\)</span>. This implies that <span class="math inline">\(L \subseteq \mathbb{T}_{x^*} X \subseteq \operatorname{Sec}(X)\)</span>, which contradicts the fact that <span class="math inline">\(L \cap \operatorname{Sec}(X)\)</span> is finite.</p>
+<p>This contradiction establishes that <span class="math inline">\(\operatorname{Sec}(X) = \operatorname{Trisec}(X)\)</span>, and thus <span class="math inline">\(\operatorname{Sec}(X) = \mathbb{P}^m\)</span>.</p>
+</div>
+<hr>
+<div id="thm-zariskis-problem" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4 (Branching over Nodal Curves (Zariski’s Problem))</strong></span> Let <span class="math inline">\(C \subseteq \mathbb{P}^2\)</span> be a (possibly reducible) plane curve having only nodal singularities (i.e., at every singular point <span class="math inline">\(p \in C\)</span>, the formal completion satisfies <span class="math inline">\(\widehat{\mathcal{O}}_{C, p} \cong k[[x, y]] / (xy)\)</span>).</p>
+<p>If <span class="math inline">\(f: X \to \mathbb{P}^2\)</span> is a finite covering branched only along <span class="math inline">\(C\)</span> (i.e., <span class="math inline">\(B(f) \subseteq C\)</span>), then: 1. <span class="math inline">\(f\)</span> is a Galois covering; 2. The Galois group <span class="math inline">\(\operatorname{Gal}(X / \mathbb{P}^2)\)</span> is abelian.</p>
+</div>
+
+
+
+</main> <!-- /main -->
+<style>
+/* --------------------------------------------------------------------------
+   1. 侧边栏常驻与容器保护
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  #quarto-margin-sidebar,
+  .margin-sidebar,
+  nav#TOC {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+body.quarto-reader-mode #quarto-margin-sidebar {
+  display: block !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. 副标题与排版微调
+   -------------------------------------------------------------------------- */
+.quarto-title .subtitle,
+header#title-block-header .subtitle,
+p.subtitle.lead {
+  font-size: 1.08rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  color: #64748b !important;
+  margin-top: 0.4rem !important;
+  margin-bottom: 1rem !important;
+}
+
+body.quarto-dark .quarto-title .subtitle,
+body.quarto-dark header#title-block-header .subtitle,
+body.quarto-dark p.subtitle.lead {
+  color: #94a3b8 !important;
+}
+
+.theorem-header,
+.callout-header,
+.callout-title {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. 紧凑左侧边栏留白与缩进
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  #quarto-sidebar,
+  .sidebar-navigation {
+    padding-left: 0.35rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  #quarto-sidebar .sidebar-menu-container,
+  #quarto-sidebar .sidebar-menu-container ul,
+  #quarto-sidebar .sidebar-item-container {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  #quarto-sidebar .sidebar-section .sidebar-item {
+    padding-left: 0.6rem !important;
+  }
+
+  #quarto-sidebar .sidebar-link {
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
+    white-space: nowrap !important;
+  }
+
+  #quarto-sidebar .menu-text {
+    white-space: nowrap !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. 紧凑型页脚
+   -------------------------------------------------------------------------- */
+footer.footer,
+.nav-footer {
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
+  min-height: unset !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.nav-footer p,
+.nav-footer-left,
+.nav-footer-right {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. 右侧目录标题 "ON THIS PAGE"
+   -------------------------------------------------------------------------- */
+#toc-title,
+h2#toc-title,
+nav#TOC h2,
+.sidebar .toc-title {
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  color: #64748b !important;
+  text-transform: uppercase !important;
+  margin-top: 0.3rem !important;
+  margin-bottom: 0.6rem !important;
+  padding-left: 0.2rem !important;
+}
+
+body.quarto-dark #toc-title,
+body.quarto-dark h2#toc-title,
+body.quarto-dark nav#TOC h2,
+body.quarto-dark .sidebar .toc-title {
+  color: #94a3b8 !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. 定理外观与折叠动画
+   -------------------------------------------------------------------------- */
+.theorem {
+  margin: 1.25rem 0 !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.09) !important;
+  border-left: 4.5px solid #2b6cb0 !important;
+  overflow: hidden !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+body.quarto-dark .theorem,
+body.quarto-dark .proof {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+.theorem-header {
+  user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.55rem 0.95rem !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.4 !important;
+  background: transparent !important;
+}
+
+.theorem-header.is-clickable {
+  cursor: pointer !important;
+}
+
+.theorem-header.is-clickable:hover {
+  opacity: 0.85;
+}
+
+.theorem-body {
+  padding: 0.35rem 0.95rem 0.75rem !important;
+  background: transparent !important;
+}
+
+.theorem.is-folded .theorem-body {
+  display: none !important;
+}
+
+.fold-chevron {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.75rem;
+  opacity: 0.7;
+  transition: transform 0.22s ease;
+  flex-shrink: 0;
+}
+
+.theorem-header:hover .fold-chevron,
+.proof-header:hover .fold-chevron {
+  opacity: 1;
+}
+
+.theorem.is-folded .fold-chevron,
+.proof.is-folded .fold-chevron {
+  transform: rotate(-90deg);
+}
+
+/* 学术色彩映射 (日间 & 夜间) */
+.theorem.kind-definition { border-left-color: #1e40af !important; }
+.theorem.kind-definition > .theorem-header { color: #1e40af !important; }
+body.quarto-dark .theorem.kind-definition { border-left-color: #3b82f6 !important; }
+body.quarto-dark .theorem.kind-definition > .theorem-header { color: #60a5fa !important; }
+
+.theorem.kind-lemma { border-left-color: #166534 !important; }
+.theorem.kind-lemma > .theorem-header { color: #166534 !important; }
+body.quarto-dark .theorem.kind-lemma { border-left-color: #22c55e !important; }
+body.quarto-dark .theorem.kind-lemma > .theorem-header { color: #4ade80 !important; }
+
+.theorem.kind-proposition { border-left-color: #6b21a8 !important; }
+.theorem.kind-proposition > .theorem-header { color: #6b21a8 !important; }
+body.quarto-dark .theorem.kind-proposition { border-left-color: #a855f7 !important; }
+body.quarto-dark .theorem.kind-proposition > .theorem-header { color: #c084fc !important; }
+
+.theorem.kind-theorem { border-left-color: #991b1b !important; }
+.theorem.kind-theorem > .theorem-header { color: #991b1b !important; }
+body.quarto-dark .theorem.kind-theorem { border-left-color: #ef4444 !important; }
+body.quarto-dark .theorem.kind-theorem > .theorem-header { color: #f87171 !important; }
+
+.theorem.kind-corollary { border-left-color: #c2410c !important; }
+.theorem.kind-corollary > .theorem-header { color: #c2410c !important; }
+body.quarto-dark .theorem.kind-corollary { border-left-color: #f97316 !important; }
+body.quarto-dark .theorem.kind-corollary > .theorem-header { color: #fb923c !important; }
+
+.theorem.kind-remark { border-left-color: #b45309 !important; }
+.theorem.kind-remark > .theorem-header { color: #b45309 !important; cursor: default !important; }
+body.quarto-dark .theorem.kind-remark { border-left-color: #f59e0b !important; }
+body.quarto-dark .theorem.kind-remark > .theorem-header { color: #fbbf24 !important; }
+
+.theorem.kind-example { border-left-color: #334155 !important; }
+.theorem.kind-example > .theorem-header { color: #334155 !important; }
+body.quarto-dark .theorem.kind-example { border-left-color: #64748b !important; }
+body.quarto-dark .theorem.kind-example > .theorem-header { color: #cbd5e1 !important; }
+
+/* 证明环境 */
+.proof {
+  margin: 0.9rem 0 1.35rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-left: 4px solid #64748b !important;
+  overflow: hidden !important;
+}
+
+body.quarto-dark .proof {
+  border-left-color: #94a3b8 !important;
+}
+
+.proof-header {
+  cursor: pointer !important;
+  user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.4rem 0.9rem !important;
+  font-weight: 600 !important;
+  color: #475569 !important;
+  font-size: 0.96rem !important;
+}
+
+body.quarto-dark .proof-header {
+  color: #94a3b8 !important;
+}
+
+.proof-body {
+  padding: 0.35rem 0.9rem 0.65rem !important;
+}
+
+.proof.is-folded .proof-body {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. 右侧边栏条目与贯通标尺
+   -------------------------------------------------------------------------- */
+nav#TOC > ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  border-left: 1.5px solid #d0dfec !important;
+}
+
+body.quarto-dark nav#TOC > ul {
+  border-left-color: #334454 !important;
+}
+
+nav#TOC li {
+  margin-bottom: 0.15rem !important;
+  list-style: none !important;
+}
+
+nav#TOC a.nav-link,
+.callout-toc-item a.nav-link {
+  display: block !important;
+  padding: 0.22rem 0.5rem 0.22rem 0.75rem !important;
+  margin-left: -1.5px !important;
+  border-left: 2.5px solid transparent !important;
+  font-size: 0.86rem !important;
+  color: #4a5568 !important;
+  text-decoration: none !important;
+  border-radius: 0 4px 4px 0 !important;
+  transition: all 0.15s ease !important;
+  cursor: pointer !important;
+}
+
+body.quarto-dark nav#TOC a.nav-link,
+body.quarto-dark .callout-toc-item a.nav-link {
+  color: #94a3b8 !important;
+}
+
+nav#TOC a.nav-link:hover,
+.callout-toc-item a.nav-link:hover {
+  color: #2b6cb0 !important;
+  background-color: rgba(43, 108, 176, 0.06) !important;
+}
+
+body.quarto-dark nav#TOC a.nav-link:hover,
+body.quarto-dark .callout-toc-item a.nav-link:hover {
+  color: #60a5fa !important;
+  background-color: rgba(96, 165, 250, 0.08) !important;
+}
+
+div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
+div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
+nav#TOC a.nav-link.active,
+nav#TOC a.nav-link.active-math-target,
+nav#TOC li.active > a.nav-link {
+  color: #2b6cb0 !important;
+  border-left: 2.5px solid #2b6cb0 !important;
+  font-weight: 700 !important;
+  background-color: rgba(43, 108, 176, 0.08) !important;
+  opacity: 1 !important;
+}
+
+body.quarto-dark div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
+body.quarto-dark div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
+body.quarto-dark nav#TOC a.nav-link.active,
+body.quarto-dark nav#TOC a.nav-link.active-math-target,
+body.quarto-dark nav#TOC li.active > a.nav-link {
+  color: #60a5fa !important;
+  border-left-color: #60a5fa !important;
+  background-color: rgba(96, 165, 250, 0.12) !important;
+}
+</style>
+
+<script>
+(function() {
+  const ENV_CONFIG = {
+    definition:  { full: 'Definition',  short: 'Def' },
+    lemma:       { full: 'Lemma',       short: 'Lem' },
+    proposition: { full: 'Proposition', short: 'Prop' },
+    theorem:     { full: 'Theorem',     short: 'Thm' },
+    corollary:   { full: 'Corollary',   short: 'Cor' },
+    remark:      { full: 'Remark',      short: 'Rem' },
+    example:     { full: 'Example',     short: 'Ex' }
+  };
+
+  const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+
+  function getSecPrefix() {
+    const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
+    if (sec) {
+      const clean = sec.replace(/["']/g, '');
+      return clean.endsWith('.') ? clean : clean + '.';
+    }
+
+    const titleEl = document.querySelector('h1.title, .quarto-title h1, header#title-block-header h1, #title-block-header .title');
+    const titleText = titleEl ? titleEl.textContent.trim() : document.title.trim();
+    const match = titleText.match(/^(\d+(?:\.\d+)*)\.?\s*/);
+    if (match) {
+      return match[1] + '.';
+    }
+    return "22.0.";
+  }
+
+  function ensureTocList() {
+    let list = document.querySelector('#TOC > ul') ||
+               document.querySelector('nav[role="doc-toc"] > ul') ||
+               document.querySelector('#quarto-toc-target > ul');
+    if (list) return list;
+
+    let marginSidebar = document.querySelector('#quarto-margin-sidebar, .margin-sidebar');
+    if (marginSidebar) {
+      marginSidebar.style.display = 'block';
+      let nav = marginSidebar.querySelector('#TOC');
+      if (!nav) {
+        nav = document.createElement('nav');
+        nav.id = 'TOC';
+        nav.setAttribute('role', 'doc-toc');
+        nav.className = 'toc-active';
+        nav.innerHTML = '<h2 id="toc-title">On this page</h2><ul></ul>';
+        marginSidebar.appendChild(nav);
+      }
+      return nav.querySelector('ul');
+    }
+    return null;
+  }
+
+  function detectKind(node, titleText) {
+    const id = (node.id || "").toLowerCase();
+    const cls = (node.className || "").toLowerCase();
+    const title = (titleText || "").toLowerCase();
+
+    if (id.startsWith('rem-') || cls.includes('remark') || /^remark\b/.test(title)) return 'remark';
+    if (id.startsWith('exm-') || cls.includes('example') || /^example\b/.test(title)) return 'example';
+    if (id.startsWith('def-') || cls.includes('definition') || /^definition\b/.test(title)) return 'definition';
+    if (id.startsWith('lem-') || cls.includes('lemma') || /^lemma\b/.test(title)) return 'lemma';
+    if (id.startsWith('prp-') || cls.includes('proposition') || /^proposition\b/.test(title)) return 'proposition';
+    if (id.startsWith('cor-') || cls.includes('corollary') || /^corollary\b/.test(title)) return 'corollary';
+    if (id.startsWith('thm-') || cls.includes('theorem') || /^theorem\b/.test(title)) return 'theorem';
+    return 'theorem';
+  }
+
+  function triggerMathTypeset(elements) {
+    if (window.MathJax && window.MathJax.typesetPromise) {
+      window.MathJax.typesetPromise(elements).catch(function(err) {});
+    } else if (window.MathJax && window.MathJax.Hub) {
+      window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, elements]);
+    }
+  }
+
+  // 核心：处理定理并绑定平滑跳转
+  function processTheorems() {
+    const secPrefix = getSecPrefix();
+    let counter = 0;
+
+    const tocList = ensureTocList();
+    if (!tocList) return;
+
+    // 清理旧自定义条目
+    tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
+
+    const pageNodes = document.querySelectorAll(
+      'main h2, main h3, #quarto-document-content h2, #quarto-document-content h3, .theorem, .remark, [id^="def-"], [id^="lem-"], [id^="prp-"], [id^="thm-"], [id^="cor-"], [id^="rem-"], [id^="exm-"]'
+    );
+
+    let lastTocAnchor = null;
+    const headersToTypeset = [];
+
+    pageNodes.forEach(node => {
+      if (node.tagName === 'H2' || node.tagName === 'H3') {
+        if (node.id) {
+          const a = tocList.querySelector(`a[href="#${CSS.escape(node.id)}"]`);
+          if (a) lastTocAnchor = a.closest('li');
+        }
+        return;
+      }
+
+      // 如果未做过 DOM 改写，执行改写；如果已经改写过，仅补充挂载到目录
+      if (node.dataset.mathProcessed !== "true") {
+        node.dataset.mathProcessed = "true";
+
+        const titleSpan = node.querySelector('.theorem-title');
+        let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
+        let subTitle = "";
+
+        const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
+        if (match) {
+          subTitle = ` (${match[1].trim()})`;
+        }
+        if (titleSpan) titleSpan.remove();
+
+        const firstP = node.querySelector(':scope > p:first-child');
+        if (firstP && firstP.textContent.trim() === '') firstP.remove();
+
+        const kind = detectKind(node, rawTitleHtml);
+        const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
+        const numStr = secPrefix + counter;
+        counter++;
+
+        const canFold = (kind !== 'remark');
+        node.classList.add('theorem', `kind-${kind}`);
+        node.dataset.kindShort = conf.short;
+        node.dataset.kindFull = conf.full;
+        node.dataset.numStr = numStr;
+        node.dataset.subTitle = subTitle;
+
+        const header = document.createElement('div');
+        header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
+        header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
+
+        const body = document.createElement('div');
+        body.className = 'theorem-body';
+        while (node.firstChild) {
+          body.appendChild(node.firstChild);
+        }
+
+        node.appendChild(header);
+        node.appendChild(body);
+        headersToTypeset.push(header);
+
+        if (canFold) {
+          header.addEventListener('click', () => {
+            node.classList.toggle('is-folded');
+          });
+        }
+
+        if (!node.id) {
+          node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
+        } else if (node.id.includes('.')) {
+          node.id = node.id.replace(/\./g, '-');
+        }
+      }
+
+      const targetId = node.id;
+      const shortLabel = node.dataset.kindShort || "Thm";
+      const numLabel = node.dataset.numStr || "";
+      const subLabel = node.dataset.subTitle || "";
+      const fullLabel = node.dataset.kindFull || "Theorem";
+
+      // 挂载到右侧 TOC 目录
+      const li = document.createElement('li');
+      li.setAttribute('data-callout-toc', 'true');
+      li.className = 'nav-item callout-toc-item';
+
+      const a = document.createElement('a');
+      a.className = 'nav-link';
+      a.href = `#${targetId}`;
+      a.textContent = `${shortLabel} ${numLabel}`;
+      if (subLabel) a.title = `${fullLabel} ${numLabel}${subLabel}`;
+
+      // ====== 终极修复：百分之百生效的精准跳转 ======
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        const target = document.getElementById(targetId);
+        if (target) {
+          // 1. 如果该定理处于折叠状态，点击立刻平滑展开
+          if (target.classList.contains('is-folded')) {
+            target.classList.remove('is-folded');
+          }
+
+          // 2. 计算绝对距离，避开吸顶导航栏与外层容器干扰
+          const navbar = document.querySelector('.navbar, header.fixed-top');
+          const navH = navbar ? navbar.getBoundingClientRect().height : 55;
+          const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 18;
+
+          // 3. 执行平滑滚动
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth'
+          });
+
+          // 4. 同步点亮目录项
+          tocList.querySelectorAll('a.nav-link').forEach(link => {
+            link.classList.remove('active', 'active-math-target');
+          });
+          a.classList.add('active', 'active-math-target');
+
+          // 5. 更新地址栏哈希
+          if (history.pushState) {
+            history.pushState(null, null, `#${targetId}`);
+          }
+        }
+      });
+
+      li.appendChild(a);
+
+      if (lastTocAnchor && lastTocAnchor.parentNode) {
+        lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
+        lastTocAnchor = li;
+      } else {
+        tocList.appendChild(li);
+        lastTocAnchor = li;
+      }
+    });
+
+    if (headersToTypeset.length > 0) {
+      triggerMathTypeset(headersToTypeset);
+    }
+  }
+
+  function processProofs() {
+    const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
+    proofs.forEach(proof => {
+      if (proof.dataset.mathProcessed === "true") return;
+      proof.dataset.mathProcessed = "true";
+
+      let proofLabel = "Proof.";
+      const firstP = proof.querySelector('p');
+      if (firstP) {
+        const titleSpan = firstP.querySelector('.proof-title');
+        if (titleSpan) {
+          proofLabel = titleSpan.textContent.trim();
+          titleSpan.remove();
+        } else {
+          const em = firstP.querySelector('em');
+          if (em && /proof/i.test(em.textContent)) {
+            proofLabel = em.textContent.trim();
+            em.remove();
+          }
+        }
+      }
+
+      const header = document.createElement('div');
+      header.className = 'proof-header';
+      header.innerHTML = `<span><em>${proofLabel}</em></span>${CHEVRON_SVG}`;
+
+      const body = document.createElement('div');
+      body.className = 'proof-body';
+      while (proof.firstChild) {
+        body.appendChild(proof.firstChild);
+      }
+
+      proof.appendChild(header);
+      proof.appendChild(body);
+
+      proof.classList.add('is-folded');
+
+      header.addEventListener('click', () => {
+        proof.classList.toggle('is-folded');
+      });
+    });
+  }
+
+  function initScrollSpy() {
+    const tocList = ensureTocList();
+    if (!tocList) return;
+
+    function onScroll() {
+      const targets = Array.from(document.querySelectorAll('main h2[id], main h3[id], #quarto-document-content h2[id], #quarto-document-content h3[id], .theorem[id]'));
+      if (!targets.length) return;
+
+      const threshold = 140;
+      let current = null;
+
+      for (const el of targets) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= threshold) {
+          current = el;
+        } else {
+          break;
+        }
+      }
+
+      if (!current && window.scrollY < 120) {
+        current = targets[0];
+      }
+
+      if (current) {
+        const allLinks = tocList.querySelectorAll('a.nav-link');
+        allLinks.forEach(a => {
+          a.classList.remove('active', 'active-math-target');
+        });
+
+        const activeA = tocList.querySelector(`a[href="#${CSS.escape(current.id)}"]`);
+        if (activeA) {
+          activeA.classList.add('active', 'active-math-target');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    setTimeout(onScroll, 150);
+  }
+
+  // 严格执行控制，彻底消除二次清空 Bug
+  let isExecuting = false;
+  function run() {
+    if (isExecuting) return;
+    isExecuting = true;
+    processTheorems();
+    processProofs();
+    initScrollSpy();
+    setTimeout(() => { isExecuting = false; }, 200);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+  window.addEventListener('load', run);
+
+  // 切换深浅模式时，重新对齐挂载
+  window.addEventListener('quarto-color-scheme-change', () => {
+    setTimeout(run, 150);
+  });
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/losergh\.github\.io\/note\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../22_positivity/22.1 Nef Divisors.html" class="pagination-link" aria-label="22.1 Nef-Divisors">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22.1 Nef-Divisors</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../22_positivity/22.2 Cones.html" class="pagination-link" aria-label="22.2 Cones">
+        <span class="nav-page-text">22.2 Cones</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
