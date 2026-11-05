@@ -1,63 +1,71 @@
 /* ==========================================================================
-   1. 字体库引入（Charter 学术衬线体 + STIX 数学字体）
+   Math Notes · 基础主题样式
+   加载顺序：styles.css（head）→ thm-toc.html（after-body，晚到的覆盖层）
+   因此本文件只负责「主题变量 + 排版基线」；定理折叠壳、目录挂载等
+   需要压过 Bootstrap/主题默认值的规则仍留在 thm-toc.html。
    ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. 字体：Charter 学术衬线体 + STIX 数学字体
+   -------------------------------------------------------------------------- */
 @import url('https://cdn.jsdelivr.net/npm/charter-webfont@1.0.2/charter.min.css');
 @import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
-/* ==========================================================================
-   2. 主题变量系统（完整支持亮色模式与 Quarto 暗色切换）
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   2. 主题变量（亮 / 暗）
+   -------------------------------------------------------------------------- */
 :root {
-  /* 页面基础 (日间) */
+  /* 页面基础（日间） */
   --note-bg: #ffffff;
   --note-text: #24292f;
   --note-heading: #111827;
   --note-muted: #5d6975;
-  --note-accent: #2b6cb0;          /* 雅致学术天青蓝 */
+  --note-accent: #2b6cb0;            /* 雅致学术天青蓝 */
   --note-paper: #fbfaf7;
-  --note-border: #d0dfec;          /* 泛浅蓝的温和边框 */
-  
-  /* 侧边栏与面包屑 (日间) */
+  --note-border: #d0dfec;            /* 泛浅蓝的温和边框 */
+
+  /* 侧边栏与面包屑（日间） */
   --sidebar-bg: #f8fafc;
   --secondary-nav-bg: #f1f5f9;
   --sidebar-text: #4a5568;
   --sidebar-hover: #111111;
-  
+
   --link-color: #1a1a1a;
   --link-underline: #a0aec0;
-  
-  /* 顶部导航专属 (日间) */
+
+  /* 顶部导航（日间） */
   --navbar-bg: #eaf2f8;
   --navbar-text: #1d3557;
   --navbar-hover: #dbeaf5;
 
-  /* 定理框专属 */
+  /* 定理框 */
   --callout-bg: #f8fafc;
   --callout-border: #cbd5e1;
+
+  /* 全站字体栈（避免逐处重复书写） */
+  --font-serif: "Charter", "Bitstream Charter", "STIX Two Text", "Cambria", serif;
 }
 
-/* 核心修复：点击夜间模式后，强制全局所有层级同步变黑 */
+/* 暗色有两套触发方式：Quarto 手动切换（body.quarto-dark / data-bs-theme）
+   与系统偏好。CSS 没有 mixin，两处取值需人工保持一致，故集中在此相邻维护。 */
 body.quarto-dark,
 html[data-bs-theme="dark"] body {
-  /* 页面基础 (夜间) */
   --note-bg: #181d24 !important;              /* 舒适护眼的暗夜蓝灰底色 */
   --note-text: #d3dce6 !important;            /* 高可读性冷浅灰 */
-  --note-heading: #f1f5f9 !important;         /* 标题明亮白 */
+  --note-heading: #f1f5f9 !important;
   --note-muted: #8c9ba8 !important;
   --note-accent: #60a5fa !important;          /* 深色模式下的明亮冰蓝 */
-  --note-paper: #202630 !important;           /* 卡片深色底色 */
-  --note-border: #323f4f !important;          /* 温和深色边框 */
-  
-  /* 侧边栏与面包屑 (夜间) */
+  --note-paper: #202630 !important;
+  --note-border: #323f4f !important;
+
   --sidebar-bg: #14181f !important;
   --secondary-nav-bg: #181d24 !important;
   --sidebar-text: #94a3b8 !important;
   --sidebar-hover: #f1f5f9 !important;
-  
+
   --link-color: #93c5fd !important;
   --link-underline: #475569 !important;
-  
-  /* 顶部导航专属 (夜间) */
+
   --navbar-bg: #13171e !important;
   --navbar-text: #e2e8f0 !important;
   --navbar-hover: #212e3e !important;
@@ -75,30 +83,34 @@ html[data-bs-theme="dark"] body {
     --note-accent: #60a5fa !important;
     --note-paper: #202630 !important;
     --note-border: #323f4f !important;
+
     --sidebar-bg: #14181f !important;
     --secondary-nav-bg: #181d24 !important;
     --sidebar-text: #94a3b8 !important;
     --sidebar-hover: #f1f5f9 !important;
+
     --link-color: #93c5fd !important;
     --link-underline: #475569 !important;
+
     --navbar-bg: #13171e !important;
     --navbar-text: #e2e8f0 !important;
     --navbar-hover: #212e3e !important;
+
     --callout-bg: #1e252f !important;
     --callout-border: #334454 !important;
   }
 }
 
-/* ==========================================================================
-   3. 全局排版、吸顶跳转与暗色彻底覆写
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   3. 全局排版、吸顶跳转
+   -------------------------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4.8rem; /* 防止跳转时被 pinned 置顶导航栏遮挡 */
+  scroll-padding-top: 4.8rem;   /* 跳转时不被 pinned 导航栏遮挡 */
 }
 
 body {
-  font-family: "Charter", "Bitstream Charter", "STIX Two Text", "Cambria", serif !important;
+  font-family: var(--font-serif) !important;
   font-size: 1.08rem;
   line-height: 1.55;
   word-spacing: 0.05em !important;
@@ -108,7 +120,7 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* 核心：消除正文容器残留的白底 */
+/* 正文容器一律透出 body 底色，避免暗色模式残留白块 */
 #quarto-content,
 #quarto-document-content,
 main,
@@ -119,14 +131,8 @@ main.content,
   color: inherit !important;
 }
 
-body.quarto-dark,
-body.quarto-dark #quarto-content,
-body.quarto-dark main {
-  background-color: #181d24 !important;
-  color: #d3dce6 !important;
-}
-
-.content p, main p {
+.content p,
+main p {
   text-align: justify;
   text-justify: inter-word;
   margin-top: 0 !important;
@@ -135,7 +141,7 @@ body.quarto-dark main {
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: "Charter", "STIX Two Text", "Cambria", serif !important;
+  font-family: var(--font-serif) !important;
   font-weight: 700 !important;
   color: var(--note-heading) !important;
   letter-spacing: -0.015em;
@@ -153,11 +159,6 @@ h2 {
   margin-bottom: 0.4rem !important;
 }
 
-h1.title {
-  font-weight: 650;
-  color: var(--note-heading) !important;
-}
-
 ul, ol {
   margin-top: 0.2rem !important;
   margin-bottom: 0.35rem !important;
@@ -169,18 +170,18 @@ li {
   line-height: 1.45 !important;
 }
 
-/* ==========================================================================
+/* --------------------------------------------------------------------------
    4. 定理提示框（Callout）
-   ========================================================================== */
+   -------------------------------------------------------------------------- */
 .callout {
   margin: 1.1rem 0 !important;
   border-radius: 0.45rem;
-  font-family: "Charter", "STIX Two Text", serif !important;
+  font-family: var(--font-serif) !important;
   background-color: var(--callout-bg) !important;
   border: 1px solid var(--callout-border) !important;
   border-left-width: 4.5px !important;
   border-left-color: var(--note-accent) !important;
-  scroll-margin-top: 4.8rem !important; /* 关键：锚点跳转时留出顶部安全距离 */
+  scroll-margin-top: 4.8rem !important;   /* 锚点跳转时留出顶部安全距离 */
 }
 
 div.callout,
@@ -193,13 +194,10 @@ div.callout-body > p {
   color: var(--note-text) !important;
 }
 
-/* 隐藏自带的提示图标，但保留右侧折叠手风琴箭头 */
+/* 隐藏自带的类型图标；右侧折叠手风琴箭头不在其中 */
 .callout-icon-container,
 .callout-icon {
   display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  visibility: hidden !important;
 }
 
 .callout-header {
@@ -209,26 +207,27 @@ div.callout-body > p {
 }
 
 .callout-title-container {
+  font-family: var(--font-serif) !important;
   font-weight: 700 !important;
-  font-family: "Charter", "STIX Two Text", serif !important;
   margin-left: 0 !important;
   padding-left: 0 !important;
   color: var(--note-heading) !important;
 }
 
-/* ==========================================================================
-   5. 左侧边栏与面包屑导航（消灭突兀黑块）
-   ========================================================================== */
-
-
-
-/* 3. 左侧边栏置顶：清除顶部空白 + 随页面滚动时牢牢吸附在屏幕左侧 */
+/* --------------------------------------------------------------------------
+   5. 左侧边栏、面包屑与标题块节奏
+   -------------------------------------------------------------------------- */
+/* 右侧栏：定位 + 底色 + 显示三处要求合一，避免同一选择器重复声明 */
 #quarto-margin-sidebar,
-  .margin-sidebar {
-    grid-column: body-end / screen-end !important;
-    margin-right: 0 !important;
-    padding-right: 0.4rem !important;
-  }
+.margin-sidebar {
+  grid-column: body-end / screen-end !important;
+  margin-right: 0 !important;
+  padding-right: 0.4rem !important;
+  background-color: transparent !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
 
 #quarto-sidebar,
 .sidebar {
@@ -273,21 +272,24 @@ header.quarto-secondary-nav {
   line-height: 1.4 !important;
 }
 
-/* ==========================================================================
-   消除 Darkly 夜间主题自带的面包屑过大间距，使日夜模式标题高度完全一致
-   ========================================================================== */
+/* 抹平 Darkly 主题自带的面包屑大间距，使日夜模式标题高度一致 */
 .breadcrumb,
 ol.breadcrumb,
 .quarto-page-breadcrumbs,
 .quarto-title-breadcrumbs {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  margin-top: 0.2rem !important;
-  margin-bottom: 0.3rem !important; /* 彻底压缩面包屑下方的空隙 */
+  margin-top: 0.5rem !important;
+  margin-bottom: 1rem !important;
   line-height: 1.3 !important;
 }
 
-
+/* Darkly 给 .breadcrumb 铺了深灰底，暗色下会显示成一块色块，统一去掉 */
+.breadcrumb,
+ol.breadcrumb {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+}
 
 main.content,
 #quarto-document-content {
@@ -295,54 +297,26 @@ main.content,
   margin-top: 0 !important;
 }
 
-.breadcrumb,
-.quarto-page-breadcrumbs,
-.quarto-title-breadcrumbs {
-  margin-top: 0.1rem !important;
-  margin-bottom: 0.5rem !important;
-}
-
-/* 统一标题块整体的顶部起始位置 */
 header#title-block-header,
 .quarto-title-block {
   margin-top: 0.1rem !important;
   padding-top: 0 !important;
 }
 
-/* 锁定大标题到副标题的间距 */
+/* 主标题：字号来自上面的 h1 规则，此处只管粗细与上下留白 */
 h1.title,
 .quarto-title h1 {
-  margin-top: 0.2rem !important;
-  margin-bottom: 0.35rem !important;
-}
-
-/* 1. 主标题下方留出自然间距 */
-h1.title,
-.quarto-title h1 {
-  margin-top: 0.4rem !important;
-  margin-bottom: 0.75rem !important; /* 原来是 0.35rem 太挤，改成 0.75rem 拉开距离 */
+  font-weight: 650;
   line-height: 1.25 !important;
+  margin-top: 0.4rem !important;
+  margin-bottom: 0.75rem !important;
 }
 
-/* 2. 副标题与大标题保持舒适距离，并与下方的 PUBLISHED 形成层次 */
-.quarto-title .subtitle,
-header#title-block-header .subtitle,
-p.subtitle.lead {
-  margin-top: 0.3rem !important;
-  margin-bottom: 1.4rem !important;  /* 与下方 PUBLISHED 日期拉开距离 */
-  line-height: 1.55 !important;
-  font-size: 1.1rem !important;
-}
+/* 副标题的最终外观由 thm-toc.html 的晚到规则决定（含颜色与 1.08rem 字号） */
 
-
-/* ==========================================================================
-   6. 右侧边栏与目录（TOC）样式重构（彻底解决双高亮与断裂 Bug）
-   ========================================================================== */
-.margin-sidebar,
-#quarto-margin-sidebar {
-  background-color: transparent !important;
-}
-
+/* --------------------------------------------------------------------------
+   6. 右侧目录（TOC）
+   -------------------------------------------------------------------------- */
 nav#TOC {
   text-align: left !important;
   word-spacing: normal !important;
@@ -361,12 +335,12 @@ nav#TOC #toc-title,
   margin-bottom: 0.75rem !important;
 }
 
-/* 目录主列表：建立整齐贯通的左侧标尺导线 */
+/* 主列表：贯通到底的左侧导轨 */
 nav#TOC ul {
   list-style: none !important;
   padding-left: 0 !important;
   margin-left: 0 !important;
-  border-left: 1.5px solid var(--note-border) !important; /* 唯一直贯到底的导轨 */
+  border-left: 1.5px solid var(--note-border) !important;
 }
 
 nav#TOC li {
@@ -374,12 +348,10 @@ nav#TOC li {
   list-style: none !important;
 }
 
-/* 目录链接项 */
-nav#TOC a,
-nav#TOC a.nav-link {
+nav#TOC a {
   display: block !important;
   padding: 0.25rem 0.55rem 0.25rem 0.75rem !important;
-  margin-left: -1.5px !important; /* 与统一标尺线重合 */
+  margin-left: -1.5px !important;         /* 与导轨重合 */
   border-left: 2px solid transparent !important;
   color: var(--sidebar-text) !important;
   text-decoration: none !important;
@@ -388,57 +360,54 @@ nav#TOC a.nav-link {
   cursor: pointer !important;
 }
 
-nav#TOC a:hover,
-nav#TOC a.nav-link:hover {
+nav#TOC a:hover {
   color: var(--note-accent) !important;
   background-color: color-mix(in srgb, var(--note-accent) 6%, transparent) !important;
   text-decoration: none !important;
 }
 
-/* 唯一激活高亮项（消灭原先青色和深蓝同时出现的 Bug） */
+/* 唯一激活项：覆盖 Quarto 主题硬编码的青色，避免双重高亮 */
 nav#TOC a.active,
-nav#TOC a.nav-link.active,
-nav#TOC li.active > a {
+nav#TOC li.active > a,
+div.quarto-toc nav[role=doc-toc] > ul > li > a.active,
+div.quarto-toc nav[role=doc-toc] > ul > li > ul > li > a.active {
   border-left: 2.5px solid var(--note-accent) !important;
   color: var(--note-accent) !important;
   font-weight: 700 !important;
   background-color: color-mix(in srgb, var(--note-accent) 10%, transparent) !important;
 }
 
-/* 覆盖 Quarto 默认 Cosmo/Darkly 主题对 TOC 激活项的青色硬编码 */
-div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
-div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active {
-  border-left-color: var(--note-accent) !important;
-  color: var(--note-accent) !important;
-}
-
-/* ==========================================================================
+/* --------------------------------------------------------------------------
    7. 超链接与文献引用配色
-   ========================================================================== */
-.content a, main a {
+   -------------------------------------------------------------------------- */
+.content a,
+main a {
   color: var(--link-color) !important;
   text-decoration: underline !important;
   text-decoration-color: var(--link-underline) !important;
   text-underline-offset: 2.5px;
 }
 
-.content a:hover, main a:hover {
+.content a:hover,
+main a:hover {
   color: var(--note-accent) !important;
   text-decoration-color: var(--note-accent) !important;
 }
 
-.citation, a[role="doc-biblioref"] {
+.citation,
+a[role="doc-biblioref"] {
   color: #c53030 !important;
   text-decoration: none !important;
 }
-body.quarto-dark .citation, 
+
+body.quarto-dark .citation,
 body.quarto-dark a[role="doc-biblioref"] {
   color: #f87171 !important;
 }
 
-/* ==========================================================================
-   8. 首页卡片样式（完整保留，无删减）
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   8. 首页卡片
+   -------------------------------------------------------------------------- */
 .hero-note {
   max-width: 52rem;
   margin: 1.5rem 0 2.5rem;
@@ -507,82 +476,180 @@ body.quarto-dark a[role="doc-biblioref"] {
   color: var(--note-muted);
 }
 
-/* ==========================================================================
-   9. 顶部导航栏与【高对比度极醒目暗色开关】（彻底解决选择器与隐形 Bug）
-   ========================================================================== */
+/* --------------------------------------------------------------------------
+   9. 顶部导航栏：统一控件高度、纵向居中、间距均匀
+   -------------------------------------------------------------------------- */
+:root {
+  --navbar-h: 2.875rem;     /* 整栏最小高度（紧凑版） */
+  --navbar-ctl: 1.75rem;    /* 品牌 / 菜单项 / 图标按钮 / 开关的统一高度 */
+  --navbar-gap: 0.3125rem;  /* 控件之间的均匀间距 */
+  --navbar-side: 2rem;      /* 窄屏左侧开关的边长 */
+}
+
 .navbar {
-  padding-top: 0.2rem !important;
-  padding-bottom: 0.2rem !important;
+  min-height: var(--navbar-h);
+  padding-top: 0.1875rem !important;
+  padding-bottom: 0.1875rem !important;
   background-color: var(--navbar-bg) !important;
   border-bottom: 1px solid var(--note-border) !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
   transition: background-color 0.2s ease;
 }
 
+body.quarto-dark .navbar {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* 容器：所有子元素统一纵向居中；列间距用 column-gap，不影响折叠菜单折行 */
+.navbar .navbar-container {
+  display: flex !important;
+  align-items: center !important;
+  column-gap: var(--navbar-gap);
+  min-height: calc(var(--navbar-h) - 0.375rem);
+}
+
+/* ---- 品牌 ---- */
+.navbar .navbar-brand-container {
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+}
+
 .navbar .navbar-brand {
-  font-family: "Charter", "STIX Two Text", serif !important;
-  font-size: 1.05rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  height: var(--navbar-ctl);
+  margin: 0 !important;
+  padding: 0 0.4rem !important;
+  line-height: 1 !important;
+  font-family: var(--font-serif) !important;
+  font-size: 1rem !important;
   font-weight: 700 !important;
   color: var(--navbar-text) !important;
-  padding-top: 0.1rem !important;
-  padding-bottom: 0.1rem !important;
-  margin-right: 1.2rem !important;
+  white-space: nowrap;
+}
+
+.navbar .navbar-title {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+/* ---- 菜单项 ---- */
+.navbar .navbar-nav {
+  display: flex;
+  align-items: center !important;
+  column-gap: var(--navbar-gap);
+  margin-top: 0 !important;      /* 清掉 Bootstrap 的上下外边距，消除 1px 级错位 */
+  margin-bottom: 0 !important;
+}
+
+.navbar .navbar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  margin: 0 !important;   /* 清掉主题给 .nav-item 的下外边距，避免整项上浮 1~2px */
 }
 
 .navbar .navbar-nav .nav-link {
-  font-size: 0.95rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: var(--navbar-ctl);
+  margin: 0 !important;
+  padding: 0 0.5rem !important;
+  border-radius: 6px;
+  line-height: 1 !important;
+  font-size: 0.9rem !important;
   color: var(--navbar-text) !important;
-  padding-top: 0.2rem !important;
-  padding-bottom: 0.2rem !important;
-  padding-left: 0.6rem !important;
-  padding-right: 0.6rem !important;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .navbar .navbar-nav .nav-link:hover {
   color: var(--navbar-text) !important;
   background-color: var(--navbar-hover) !important;
-  border-radius: 4px;
+}
+
+.navbar .navbar-nav .nav-link:focus-visible {
+  outline: 2px solid var(--note-accent);
+  outline-offset: 1px;
+}
+
+/* 菜单里的图标：与文字同一行盒，水平垂直都居中 */
+.navbar .navbar-nav .nav-link > i,
+.navbar .navbar-nav .nav-link > .bi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  font-size: 0.98rem;
+  line-height: 1;
+}
+
+/* ---- 右侧工具区 ---- */
+.navbar .quarto-navbar-tools {
+  display: flex !important;
+  align-items: center !important;
+  column-gap: var(--navbar-gap);
+  height: var(--navbar-ctl);
+  margin: 0 !important;
+}
+
+.navbar .quarto-navbar-tools > a,
+.navbar .quarto-navigation-tool {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: var(--navbar-ctl);
+  margin: 0 !important;
+  padding: 0 0.35rem !important;
 }
 
 .navbar .quarto-navbar-tools a,
 .navbar .quarto-navigation-tool,
-.navbar i,
+.navbar .navbar-nav i,
 .navbar svg {
   color: var(--navbar-text) !important;
   fill: var(--navbar-text) !important;
   stroke: var(--navbar-text) !important;
-  opacity: 0.88 !important;
+  opacity: 0.9 !important;
 }
 
-/* ====== 核心重写：直接作用于正确的 .quarto-color-scheme-toggle 节点 ====== */
+/* 开关本体：直接作用于 .quarto-color-scheme-toggle，高度与其它控件对齐 */
 .navbar .quarto-color-scheme-toggle {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 0.2rem 0.55rem !important;
-  margin: 0 0.35rem !important;
-  border-radius: 16px !important;
+  height: var(--navbar-ctl);
+  padding: 0 0.45rem !important;
+  margin: 0 !important;
+  border-radius: 999px !important;
   cursor: pointer !important;
-  transition: all 0.2s ease !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important;
 }
 
-/* 1. 日间状态（亮色底）：淡蓝实体药丸 + 醒目深蓝 toggle-off 图标 */
+/* 两种状态共用的图标盒；各自只看背景图区分 */
+.navbar .quarto-color-scheme-toggle .bi::before {
+  content: "" !important;
+  display: block !important;
+  width: 1.25rem !important;
+  height: 0.95rem !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+/* 日间：淡蓝药丸 + 深蓝 toggle-off */
 .navbar .quarto-color-scheme-toggle:not(.alternate) {
   background-color: #dbeafe !important;
   border: 1.5px solid #93c5fd !important;
 }
 
 .navbar .quarto-color-scheme-toggle:not(.alternate) .bi::before {
-  content: "" !important;
-  display: block !important;
-  width: 1.4rem !important;
-  height: 1.1rem !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='16' fill='%231e3a8a' class='bi bi-toggle-off' viewBox='0 0 16 16'%3E%3Cpath d='M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z'/%3E%3C/svg%3E") !important;
 }
 
-/* 2. 夜间状态（已点击）：深灰蓝药丸 + 璀璨金黄发光 toggle-on 图标 */
+/* 夜间：深灰蓝药丸 + 金黄发光 toggle-on */
 body.quarto-dark .navbar .quarto-color-scheme-toggle,
 .navbar .quarto-color-scheme-toggle.alternate {
   background-color: #1e293b !important;
@@ -592,42 +659,133 @@ body.quarto-dark .navbar .quarto-color-scheme-toggle,
 
 body.quarto-dark .navbar .quarto-color-scheme-toggle .bi::before,
 .navbar .quarto-color-scheme-toggle.alternate .bi::before {
-  content: "" !important;
-  display: block !important;
-  width: 1.4rem !important;
-  height: 1.1rem !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='16' fill='%23fbbf24' class='bi bi-toggle-on' viewBox='0 0 16 16'%3E%3Cpath d='M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z'/%3E%3C/svg%3E") !important;
 }
 
 .navbar .quarto-color-scheme-toggle:hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
-
-/* ==========================================================================
-   10. 右侧边栏与锚点跳转的绝对保障
-   ========================================================================== */
-/* 强制消除暗色主题可能对 margin-sidebar 设置的隐藏 */
-#quarto-margin-sidebar,
-.margin-sidebar {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+/* 桌面端：锁定菜单高度，使菜单项与品牌、开关完全同高同心 */
+@media (min-width: 992px) {
+  .navbar .navbar-nav {
+    height: var(--navbar-ctl);
+  }
 }
 
+/* ---- 窄屏（<992px）：汉堡按钮 / 品牌 / 工具区同一行、同一高度 ---- */
+@media (max-width: 991.98px) {
+  .navbar .navbar-container {
+    column-gap: 0.5rem;
+  }
 
+  .navbar .navbar-toggler {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    order: 0;
+    flex: 0 0 auto;
+    width: var(--navbar-side);
+    height: var(--navbar-side);
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid var(--note-border) !important;
+    border-radius: 8px !important;
+  }
 
+  .navbar .navbar-toggler-icon {
+    width: 0.95rem;
+    height: 0.95rem;
+    background-size: 0.95rem 0.95rem;
+  }
 
-/* 4. 面包屑导航与正文之间保持匀称节奏 */
-.breadcrumb,
-.quarto-page-breadcrumbs,
-.quarto-title-breadcrumbs {
-  margin-top: 0.5rem !important;
-  margin-bottom: 1.0rem !important;
+  /* 品牌靠左，与桌面端保持同一视觉起点 */
+  .navbar .navbar-brand-container {
+    order: 1;
+    margin-right: auto !important;
+  }
+
+  /* 工具区与左侧汉堡按钮等宽，保证品牌真正居中 */
+  .navbar .quarto-navbar-tools {
+    order: 2;
+    width: var(--navbar-side);
+    margin-left: 0 !important;
+    justify-content: center;
+  }
+
+  /* 窄屏下开关更紧凑，避免比同行的方块按钮更宽 */
+  .navbar .quarto-color-scheme-toggle {
+    padding: 0 0.35rem !important;
+  }
+
+  /* 展开的折叠菜单独占一行，落在控件行下方 */
+  .navbar .navbar-collapse {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .navbar .navbar-nav {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch !important;   /* 菜单项占满整行，图标与文字左对齐 */
+    margin: 0 !important;
+    padding: 0.35rem 0 0.15rem !important;
+    border-top: 1px solid var(--note-border);
+  }
+
+  /* 展开后的菜单项左对齐、占满整行，便于触屏点按 */
+  .navbar .navbar-nav .nav-link {
+    width: 100% !important;
+    height: auto !important;
+    justify-content: flex-start !important;
+    padding: 0.45rem 0.5rem !important;
+  }
 }
 
+/* ---- 次级导航（面包屑行）：与主导航同一高度节奏 ---- */
+.quarto-secondary-nav .container-fluid {
+  display: flex !important;
+  align-items: center !important;
+  column-gap: 0.5rem;
+  min-height: 2.5rem;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
 
+.quarto-btn-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto;
+  width: 1.875rem;
+  height: 1.875rem;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid var(--note-border) !important;
+  border-radius: 8px !important;
+  background-color: transparent !important;
+  color: var(--sidebar-text) !important;
+  line-height: 1 !important;
+}
 
+.quarto-btn-toggle:hover,
+.quarto-btn-toggle:focus-visible {
+  background-color: var(--secondary-nav-bg) !important;
+  color: var(--note-accent) !important;
+}
+
+.quarto-btn-toggle .bi {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* 面包屑在这一行里垂直居中，不再撑高整条次级导航 */
+.quarto-secondary-nav .quarto-page-breadcrumbs,
+.quarto-secondary-nav .breadcrumb {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+}

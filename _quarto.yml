@@ -3,6 +3,7 @@ project:
 
 filters:
   - etale.lua
+  - _filters/theorem-toc.lua
 
 website:
   # General Site Info (Generalized for future math topics)
@@ -84,7 +85,7 @@ format:
   html:
     grid:
       sidebar-width: 190px    # 左侧边栏宽度（默认 250px）
-      margin-width: 130px     # 右侧边栏宽度（默认 250px~300px）
+      margin-width: 168px     # 右侧边栏宽度：容纳「Thm 22.5.10」与中文小节标题不折行
       body-width: 1200px
       gutter-width: 1.2rem    # 侧边栏与正文的间隔（默认 1.5rem）
     theme:
@@ -95,6 +96,8 @@ format:
     toc-depth: 3
     code-copy: true
     link-external-newwindow: true
+    template-partials:
+      - _partials/toc.html
     include-after-body: thm-toc.html
 execute:
   freeze: auto
