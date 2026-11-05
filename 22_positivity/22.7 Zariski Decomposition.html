@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-26">
+<meta name="dcterms.date" content="2026-11-05">
 
 <title>22.7 Zariski Decomposition – Math Notes</title>
 <style>
@@ -41,18 +41,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-aea0307008146ee079b1533de64c4571.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-10aed12f2e75d254f234caddaa5283e4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-aea0307008146ee079b1533de64c4571.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8aa7dfeb8eb95bdcfa4dc6a7b561006e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-02146ddba7e175375472b78443451085.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8aa7dfeb8eb95bdcfa4dc6a7b561006e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -113,7 +114,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -136,6 +137,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -165,13 +167,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -265,6 +273,7 @@ window.Quarto = {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -279,14 +288,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Math Notes</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -299,17 +308,17 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.7 Zariski Decomposition.html">22.7 Zariski Decomposition</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.7 Zariski Decomposition.html">22.7 Zariski Decomposition</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -320,7 +329,7 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
         <div class="sidebar-tools-main">
     <div id="quarto-search" class="quarto-navigation-tool px-1" title="Search"></div>
 </div>
@@ -329,12 +338,12 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../22_positivity/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Positivity in AG</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Positivity in AG</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Positivity in AG">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../22_positivity/22.0 Preliminaries.html" class="sidebar-item-text sidebar-link">
@@ -408,14 +417,33 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+    <ul>
+    <li class="nav-item callout-toc-item"><a href="#thm-zariski-decomposition" id="toc-thm-zariski-decomposition" class="nav-link active" data-scroll-target="#thm-zariski-decomposition" title="Theorem 22.7.0 (Zariski Decomposition on Surfaces)">Thm 22.7.0</a></li>
+    <li class="nav-item callout-toc-item"><a href="#cor-fg-zariski-decomposition" id="toc-cor-fg-zariski-decomposition" class="nav-link" data-scroll-target="#cor-fg-zariski-decomposition" title="Corollary 22.7.1 (Finite Generation via the Positive Part)">Cor 22.7.1</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-extremal-ray" id="toc-def-extremal-ray" class="nav-link" data-scroll-target="#def-extremal-ray" title="Definition 22.7.2 (Extremal Ray)">Def 22.7.2</a></li>
+    <li class="nav-item callout-toc-item"><a href="#exm-curves-on-surface" id="toc-exm-curves-on-surface" class="nav-link" data-scroll-target="#exm-curves-on-surface" title="Example 22.7.3 (Curves on a Surface and Extremal Rays)">Ex 22.7.3</a></li>
+    <li class="nav-item callout-toc-item"><a href="#exm-kollar-non-bounded-very-ample" id="toc-exm-kollar-non-bounded-very-ample" class="nav-link" data-scroll-target="#exm-kollar-non-bounded-very-ample" title="Example 22.7.4 (Kollár’s Example: Unboundedness of Very Ample Multiples)">Ex 22.7.4</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-null-cone" id="toc-def-null-cone" class="nav-link" data-scroll-target="#def-null-cone" title="Definition 22.7.5 (The Null Cone)">Def 22.7.5</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-nef-boundary" id="toc-def-nef-boundary" class="nav-link" data-scroll-target="#def-nef-boundary" title="Definition 22.7.6 (The Nef Boundary)">Def 22.7.6</a></li>
+    <li class="nav-item callout-toc-item"><a href="#prp-boundary-in-null-cones" id="toc-prp-boundary-in-null-cones" class="nav-link" data-scroll-target="#prp-boundary-in-null-cones" title="Proposition 22.7.7 (Boundary Covered by Null Cones)">Prop 22.7.7</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-campana-peternell" id="toc-thm-campana-peternell" class="nav-link" data-scroll-target="#thm-campana-peternell" title="Theorem 22.7.8 (Campana-Peternell Theorem)">Thm 22.7.8</a></li>
+    <li class="nav-item callout-toc-item"><a href="#cor-cp-dual" id="toc-cor-cp-dual" class="nav-link" data-scroll-target="#cor-cp-dual" title="Corollary 22.7.9 (Dual Campana-Peternell Theorem)">Cor 22.7.9</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-cone-theorem" id="toc-thm-cone-theorem" class="nav-link" data-scroll-target="#thm-cone-theorem" title="Theorem 22.7.10 (Mori’s Cone Theorem)">Thm 22.7.10</a></li>
+    <li class="nav-item callout-toc-item"><a href="#cor-fano-polyhedral" id="toc-cor-fano-polyhedral" class="nav-link" data-scroll-target="#cor-fano-polyhedral" title="Corollary 22.7.11 (Cone of Fano Varieties)">Cor 22.7.11</a></li>
+    <li class="nav-item callout-toc-item"><a href="#cor-effective-ampleness-threshold" id="toc-cor-effective-ampleness-threshold" class="nav-link" data-scroll-target="#cor-effective-ampleness-threshold" title="Corollary 22.7.12 (Numerical Ampleness Bounds)">Cor 22.7.12</a></li>
+    <li class="nav-item callout-toc-item"><a href="#exm-blowups-p2" id="toc-exm-blowups-p2" class="nav-link" data-scroll-target="#exm-blowups-p2" title="Example 22.7.13 (Extremal Rays on Blowups of \mathbb{P}^2)">Ex 22.7.13</a></li>
+    <li class="nav-item callout-toc-item"><a href="#exm-variational-pathologies" id="toc-exm-variational-pathologies" class="nav-link" data-scroll-target="#exm-variational-pathologies" title="Example 22.7.14 (Variational Pathologies of the Iitaka Dimension)">Ex 22.7.14</a></li>
+    </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.7 Zariski Decomposition.html">22.7 Zariski Decomposition</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.7 Zariski Decomposition.html">22.7 Zariski Decomposition</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">22.7 Zariski Decomposition</h1>
 <p class="subtitle lead">Zariski Decomposition on Surfaces, Extremal Rays, and Mori’s Cone Theorem</p>
@@ -429,7 +457,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 26, 2026</p>
+      <p class="date">November 5, 2026</p>
     </div>
   </div>
   
@@ -441,8 +469,10 @@ window.Quarto = {
 </header>
 
 
-<div id="thm-zariski-decomposition" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Zariski Decomposition on Surfaces)</strong></span> Let <span class="math inline">\(X\)</span> be a smooth projective surface and let <span class="math inline">\(D\)</span> be a pseudoeffective integral Cartier divisor on <span class="math inline">\(X\)</span>. Then there exists a unique decomposition into <span class="math inline">\(\mathbb{Q}\)</span>-divisors: <span class="math display">\[
+<div id="thm-zariski-decomposition" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.7.0</strong> (Zariski Decomposition on Surfaces)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be a smooth projective surface and let <span class="math inline">\(D\)</span> be a pseudoeffective integral Cartier divisor on <span class="math inline">\(X\)</span>. Then there exists a unique decomposition into <span class="math inline">\(\mathbb{Q}\)</span>-divisors: <span class="math display">\[
 D = P + N
 \]</span> satisfying the following properties:</p>
 <ol type="1">
@@ -454,8 +484,11 @@ D = P + N
 H^0\big(X, \mathcal{O}_X(mD - \lceil m N \rceil)\big) \xrightarrow{\;\sim\;} H^0\big(X, \mathcal{O}_X(mD)\big) \quad \text{for all } m \ge 1.
 \]</span> In particular, <span class="math inline">\(\operatorname{vol}(D) = \operatorname{vol}(P) = (P^2)\)</span>.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>We prove the isomorphism on global sections. It suffices to show that for every effective divisor <span class="math inline">\(D' \sim m D\)</span>, we have <span class="math inline">\(D' \ge m N\)</span>. Clearing denominators, we may assume <span class="math inline">\(m = 1\)</span> and <span class="math inline">\(P, N\)</span> are integral.</p>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>We prove the isomorphism on global sections. It suffices to show that for every effective divisor <span class="math inline">\(D' \sim m D\)</span>, we have <span class="math inline">\(D' \ge m N\)</span>. Clearing denominators, we may assume <span class="math inline">\(m = 1\)</span> and <span class="math inline">\(P, N\)</span> are integral.</p>
 <p>Let <span class="math inline">\(D' \sim D\)</span> be an effective divisor. Write <span class="math inline">\(D' = N_1 + M_1\)</span>, where <span class="math inline">\(N_1 = \sum c_i E_i \in \bigoplus \mathbb{Z} E_i\)</span> and <span class="math inline">\(M_1\)</span> shares no components with <span class="math inline">\(N\)</span>. Because <span class="math inline">\(P \cdot E_i = 0\)</span>, we have: <span class="math display">\[
 (D' - N) \cdot E_i = (D' - D) \cdot E_i + (D - N) \cdot E_i = 0 + P \cdot E_i = 0.
 \]</span> Since <span class="math inline">\(D' = N_1 + M_1\)</span> and <span class="math inline">\(M_1 \cdot E_i \ge 0\)</span>, this implies: <span class="math display">\[
@@ -464,20 +497,32 @@ H^0\big(X, \mathcal{O}_X(mD - \lceil m N \rceil)\big) \xrightarrow{\;\sim\;} H^0
 (N_1 - N) \cdot N'' = N' \cdot N'' - (N''^2) &gt; 0,
 \]</span> since <span class="math inline">\(N' \cdot N'' \ge 0\)</span>. On the other hand, <span class="math inline">\((N_1 - N) \cdot E_i \le 0\)</span> for all <span class="math inline">\(i\)</span> implies that <span class="math inline">\((N_1 - N) \cdot N'' \le 0\)</span>, a contradiction. Thus <span class="math inline">\(N'' = 0\)</span>, which proves <span class="math inline">\(N_1 \ge N\)</span>.</p>
 </div>
-<div id="cor-fg-zariski-decomposition" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Finite Generation via the Positive Part)</strong></span> Let <span class="math inline">\(D\)</span> be a big divisor on a smooth projective surface <span class="math inline">\(X\)</span>, with Zariski decomposition <span class="math inline">\(D = P + N\)</span>. Then the section ring <span class="math inline">\(R(X, D)\)</span> is finitely generated if and only if <span class="math inline">\(P\)</span> is semiample.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By <a href="#thm-zariski-decomposition" class="quarto-xref">Theorem&nbsp;1</a>, <span class="math inline">\(R(X, D) \cong R(X, P)\)</span>. Since <span class="math inline">\(\operatorname{vol}(P) = \operatorname{vol}(D) &gt; 0\)</span> and <span class="math inline">\(P\)</span> is nef, <span class="math inline">\(P\)</span> is big and nef. The result follows immediately from <strong>?@thm-criterion-fg-nef-big</strong>.</p>
+<div id="cor-fg-zariski-decomposition" class="theorem kind-corollary">
+<div class="theorem-header is-clickable"><span><strong>Corollary 22.7.1</strong> (Finite Generation via the Positive Part)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(D\)</span> be a big divisor on a smooth projective surface <span class="math inline">\(X\)</span>, with Zariski decomposition <span class="math inline">\(D = P + N\)</span>. Then the section ring <span class="math inline">\(R(X, D)\)</span> is finitely generated if and only if <span class="math inline">\(P\)</span> is semiample.</p>
+</div>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>By <strong>?@thm-zariski-decomposition</strong>, <span class="math inline">\(R(X, D) \cong R(X, P)\)</span>. Since <span class="math inline">\(\operatorname{vol}(P) = \operatorname{vol}(D) &gt; 0\)</span> and <span class="math inline">\(P\)</span> is nef, <span class="math inline">\(P\)</span> is big and nef. The result follows immediately from <strong>?@thm-criterion-fg-nef-big</strong>.</p>
+</div>
 </div>
 <hr>
-<div id="def-extremal-ray" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Extremal Ray)</strong></span> Let <span class="math inline">\(V\)</span> be a finite-dimensional real vector space and <span class="math inline">\(K \subseteq V\)</span> a closed convex cone. A 1-dimensional subcone <span class="math inline">\(R = \mathbb{R}_{\ge 0} \cdot v \subseteq K\)</span> is called an <strong>extremal ray</strong> of <span class="math inline">\(K\)</span> if whenever <span class="math inline">\(x, y \in K\)</span> satisfy: <span class="math display">\[
+<div id="def-extremal-ray" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 22.7.2</strong> (Extremal Ray)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(V\)</span> be a finite-dimensional real vector space and <span class="math inline">\(K \subseteq V\)</span> a closed convex cone. A 1-dimensional subcone <span class="math inline">\(R = \mathbb{R}_{\ge 0} \cdot v \subseteq K\)</span> is called an <strong>extremal ray</strong> of <span class="math inline">\(K\)</span> if whenever <span class="math inline">\(x, y \in K\)</span> satisfy: <span class="math display">\[
 x + y \in R,
 \]</span> then both <span class="math inline">\(x, y \in R\)</span>.</p>
 </div>
-<div id="exm-curves-on-surface" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1 (Curves on a Surface and Extremal Rays)</strong></span> Let <span class="math inline">\(X\)</span> be a smooth projective surface. Poincaré duality identifies 1-cycles with divisors, so <span class="math inline">\(N^1(X)_{\mathbb{R}} \cong N_1(X)_{\mathbb{R}}\)</span>.</p>
+</div>
+<div id="exm-curves-on-surface" class="theorem kind-example">
+<div class="theorem-header is-clickable"><span><strong>Example 22.7.3</strong> (Curves on a Surface and Extremal Rays)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be a smooth projective surface. Poincaré duality identifies 1-cycles with divisors, so <span class="math inline">\(N^1(X)_{\mathbb{R}} \cong N_1(X)_{\mathbb{R}}\)</span>.</p>
 <ol type="1">
 <li><span class="math inline">\(\operatorname{Nef}(X) \subseteq \overline{\operatorname{NE}}(X)\)</span>. If <span class="math inline">\((C^2) \ge 0\)</span> for every irreducible curve <span class="math inline">\(C \subseteq X\)</span>, then <span class="math inline">\(\operatorname{Nef}(X) = \overline{\operatorname{NE}}(X)\)</span>.</li>
 <li>If <span class="math inline">\(C \subseteq X\)</span> is an irreducible curve with <span class="math inline">\((C^2) &lt; 0\)</span>, then: <span class="math display">\[
@@ -486,12 +531,18 @@ x + y \in R,
 <li>If <span class="math inline">\(C\)</span> is an irreducible curve with <span class="math inline">\((C^2) &lt; 0\)</span>, then <span class="math inline">\([C]\)</span> spans an extremal ray in <span class="math inline">\(\overline{\operatorname{NE}}(X)\)</span>.</li>
 </ol>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><em>Proof of (2) and (3):</em> For any irreducible curve <span class="math inline">\(C' \neq C\)</span>, <span class="math inline">\((C' \cdot C) \ge 0\)</span>, so <span class="math inline">\([C'] \in \overline{\operatorname{NE}}(X)_{C_{\ge 0}}\)</span>. Any effective 1-cycle decomposes as <span class="math inline">\(E = a C + E'\)</span> where <span class="math inline">\(C \not\subseteq \operatorname{Supp}(E')\)</span>, proving the sum formula.</p>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p><em>Proof of (2) and (3):</em> For any irreducible curve <span class="math inline">\(C' \neq C\)</span>, <span class="math inline">\((C' \cdot C) \ge 0\)</span>, so <span class="math inline">\([C'] \in \overline{\operatorname{NE}}(X)_{C_{\ge 0}}\)</span>. Any effective 1-cycle decomposes as <span class="math inline">\(E = a C + E'\)</span> where <span class="math inline">\(C \not\subseteq \operatorname{Supp}(E')\)</span>, proving the sum formula.</p>
 <p>Since <span class="math inline">\((C^2) &lt; 0\)</span>, <span class="math inline">\([C] \notin \overline{\operatorname{NE}}(X)_{C_{\ge 0}}\)</span>. Suppose <span class="math inline">\(v, w \in \overline{\operatorname{NE}}(X)\)</span> satisfy <span class="math inline">\(v + w = \lambda [C] \in \mathbb{R}_{\ge 0} [C]\)</span>. Decomposing <span class="math inline">\(v = v_1 + v_2\)</span> and <span class="math inline">\(w = w_1 + w_2\)</span> with <span class="math inline">\(v_1, w_1 \in \mathbb{R}_{\ge 0} [C]\)</span> and <span class="math inline">\(v_2, w_2 \in \overline{\operatorname{NE}}(X)_{C_{\ge 0}}\)</span>, we obtain <span class="math inline">\(v_2 + w_2 = 0\)</span>. Because <span class="math inline">\(\overline{\operatorname{NE}}(X)\)</span> contains no straight lines (as <span class="math inline">\((H \cdot \gamma) &gt; 0\)</span> for ample <span class="math inline">\(H\)</span>), this forces <span class="math inline">\(v_2 = w_2 = 0\)</span>, so <span class="math inline">\(v, w \in \mathbb{R}_{\ge 0} [C]\)</span>.</p>
 </div>
-<div id="exm-kollar-non-bounded-very-ample" class="theorem example">
-<p><span class="theorem-title"><strong>Example 2 (Kollár’s Example: Unboundedness of Very Ample Multiples)</strong></span> On a curve <span class="math inline">\(Y\)</span> of genus <span class="math inline">\(g\)</span>, every ample line bundle <span class="math inline">\(D\)</span> satisfies that <span class="math inline">\(m D\)</span> is very ample for <span class="math inline">\(m \ge 2g + 1\)</span>. Kollár showed that in dimension <span class="math inline">\(\ge 2\)</span>, <strong>there is no uniform bound</strong> <span class="math inline">\(m(Y)\)</span> such that <span class="math inline">\(m D\)</span> is very ample for all ample divisors <span class="math inline">\(D\)</span>.</p>
+</div>
+<div id="exm-kollar-non-bounded-very-ample" class="theorem kind-example">
+<div class="theorem-header is-clickable"><span><strong>Example 22.7.4</strong> (Kollár’s Example: Unboundedness of Very Ample Multiples)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>On a curve <span class="math inline">\(Y\)</span> of genus <span class="math inline">\(g\)</span>, every ample line bundle <span class="math inline">\(D\)</span> satisfies that <span class="math inline">\(m D\)</span> is very ample for <span class="math inline">\(m \ge 2g + 1\)</span>. Kollár showed that in dimension <span class="math inline">\(\ge 2\)</span>, <strong>there is no uniform bound</strong> <span class="math inline">\(m(Y)\)</span> such that <span class="math inline">\(m D\)</span> is very ample for all ample divisors <span class="math inline">\(D\)</span>.</p>
 <p><em>Construction:</em> Let <span class="math inline">\(X = E \times E\)</span> for an elliptic curve <span class="math inline">\(E\)</span>. For <span class="math inline">\(n \ge 2\)</span>, define the divisor: <span class="math display">\[
 A_n := n F_1 + (n^2 - n + 1) F_2 - (n-1)\Delta.
 \]</span> Computing intersection numbers yields <span class="math inline">\((A_n^2) = 2\)</span> and <span class="math inline">\(A_n \cdot (F_1 + F_2) = n^2 - 2n + 3 &gt; 0\)</span>, so <span class="math inline">\(A_n\)</span> is ample. Set <span class="math inline">\(R = F_1 + F_2\)</span>. Choose a smooth curve <span class="math inline">\(B \in |2 R|\)</span> and let <span class="math inline">\(\pi: Y \to X\)</span> be the double cover branched along <span class="math inline">\(B\)</span>.</p>
@@ -503,9 +554,12 @@ A_n := n F_1 + (n^2 - n + 1) F_2 - (n-1)\Delta.
 H^0(X, \mathcal{O}_X(n A_n)) \xrightarrow{\;\sim\;} H^0(Y, \mathcal{O}_Y(n D_n)).
 \]</span> Because the global sections of <span class="math inline">\(n D_n\)</span> all factor through <span class="math inline">\(X\)</span>, they cannot separate the two sheets of the double cover <span class="math inline">\(\pi: Y \to X\)</span>. Hence <span class="math inline">\(n D_n\)</span> is not very ample, which forces the very ample threshold <span class="math inline">\(m(D_n) &gt; n\)</span> to grow arbitrarily large.</p>
 </div>
+</div>
 <hr>
-<div id="def-null-cone" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (The Null Cone)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(V \subseteq X\)</span> be a subvariety of dimension <span class="math inline">\(d\)</span>.</p>
+<div id="def-null-cone" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 22.7.5</strong> (The Null Cone)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be an irreducible projective variety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(V \subseteq X\)</span> be a subvariety of dimension <span class="math inline">\(d\)</span>.</p>
 <ol type="1">
 <li>The polynomial map associated with <span class="math inline">\(V\)</span> is: <span class="math display">\[
 q_V: N^1(X)_{\mathbb{R}} \longrightarrow \mathbb{R}, \quad q_V(\xi) := (\xi^d \cdot V).
@@ -515,41 +569,62 @@ q_V: N^1(X)_{\mathbb{R}} \longrightarrow \mathbb{R}, \quad q_V(\xi) := (\xi^d \c
 \]</span></li>
 </ol>
 </div>
-<div id="def-nef-boundary" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (The Nef Boundary)</strong></span> The <strong>nef boundary</strong> of <span class="math inline">\(X\)</span> is the boundary of the nef cone: <span class="math display">\[
+</div>
+<div id="def-nef-boundary" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 22.7.6</strong> (The Nef Boundary)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>The <strong>nef boundary</strong> of <span class="math inline">\(X\)</span> is the boundary of the nef cone: <span class="math display">\[
 \mathcal{B}_X := \partial \operatorname{Nef}(X) \subseteq N^1(X)_{\mathbb{R}}.
 \]</span></p>
 </div>
-<div id="prp-boundary-in-null-cones" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 (Boundary Covered by Null Cones)</strong></span> For every <span class="math inline">\(\xi \in \mathcal{B}_X\)</span>, there exists an irreducible subvariety <span class="math inline">\(V \subseteq X\)</span> such that <span class="math inline">\(q_V(\xi) = 0\)</span>. That is: <span class="math display">\[
+</div>
+<div id="prp-boundary-in-null-cones" class="theorem kind-proposition">
+<div class="theorem-header is-clickable"><span><strong>Proposition 22.7.7</strong> (Boundary Covered by Null Cones)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>For every <span class="math inline">\(\xi \in \mathcal{B}_X\)</span>, there exists an irreducible subvariety <span class="math inline">\(V \subseteq X\)</span> such that <span class="math inline">\(q_V(\xi) = 0\)</span>. That is: <span class="math display">\[
 \mathcal{B}_X \subseteq \bigcup_{V \subseteq X} \mathcal{N}_V.
 \]</span></p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By definition of the nef cone, <span class="math inline">\(q_V(\xi) \ge 0\)</span> for all subvarieties <span class="math inline">\(V \subseteq X\)</span>. If <span class="math inline">\(q_V(\xi) &gt; 0\)</span> for all <span class="math inline">\(V\)</span>, the Nakai-Moishezon criterion (<strong>?@thm-nakai-r-divisors</strong>) implies that <span class="math inline">\(\xi\)</span> is ample, which means <span class="math inline">\(\xi \in \operatorname{int}(\operatorname{Nef}(X))\)</span>, contradicting <span class="math inline">\(\xi \in \mathcal{B}_X\)</span>.</p>
 </div>
-<div id="thm-campana-peternell" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (Campana-Peternell Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be an irreducible projective variety. There exists an open dense subset <span class="math inline">\(\mathcal{CP}(X) \subseteq \mathcal{B}_X\)</span> such that for every <span class="math inline">\(\xi \in \mathcal{CP}(X)\)</span>, there exists an open neighborhood <span class="math inline">\(U = U(\xi) \subseteq N^1(X)_{\mathbb{R}}\)</span> and an irreducible subvariety <span class="math inline">\(V \subseteq X\)</span> such that: <span class="math display">\[
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>By definition of the nef cone, <span class="math inline">\(q_V(\xi) \ge 0\)</span> for all subvarieties <span class="math inline">\(V \subseteq X\)</span>. If <span class="math inline">\(q_V(\xi) &gt; 0\)</span> for all <span class="math inline">\(V\)</span>, the Nakai-Moishezon criterion (<strong>?@thm-nakai-r-divisors</strong>) implies that <span class="math inline">\(\xi\)</span> is ample, which means <span class="math inline">\(\xi \in \operatorname{int}(\operatorname{Nef}(X))\)</span>, contradicting <span class="math inline">\(\xi \in \mathcal{B}_X\)</span>.</p>
+</div>
+</div>
+<div id="thm-campana-peternell" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.7.8</strong> (Campana-Peternell Theorem)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be an irreducible projective variety. There exists an open dense subset <span class="math inline">\(\mathcal{CP}(X) \subseteq \mathcal{B}_X\)</span> such that for every <span class="math inline">\(\xi \in \mathcal{CP}(X)\)</span>, there exists an open neighborhood <span class="math inline">\(U = U(\xi) \subseteq N^1(X)_{\mathbb{R}}\)</span> and an irreducible subvariety <span class="math inline">\(V \subseteq X\)</span> such that: <span class="math display">\[
 \mathcal{B}_X \cap U = \mathcal{N}_V \cap U.
 \]</span> In other words, the nef boundary is generically real-analytic, cut out locally by the polynomials <span class="math inline">\(q_V\)</span>.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>For each subvariety <span class="math inline">\(V \subseteq X\)</span>, define the open subset of the boundary: <span class="math display">\[
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>For each subvariety <span class="math inline">\(V \subseteq X\)</span>, define the open subset of the boundary: <span class="math display">\[
 \mathcal{O}_V := \big\{ \xi \in \mathcal{B}_X \;\big|\; \exists U(\xi) \text{ s.t. } U(\xi) \cap \mathcal{B}_X \subseteq \mathcal{N}_V \big\}, \qquad \mathcal{O} := \bigcup_{V \subseteq X} \mathcal{O}_V.
 \]</span></p>
 <p><em>Claim:</em> <span class="math inline">\(\mathcal{O}\)</span> is dense in <span class="math inline">\(\mathcal{B}_X\)</span>. Suppose it is not. Then there exists an open set <span class="math inline">\(U \subseteq N^1(X)_{\mathbb{R}}\)</span> intersecting <span class="math inline">\(\mathcal{B}_X\)</span> such that <span class="math inline">\(U \cap \mathcal{O} = \emptyset\)</span>, so <span class="math inline">\(U \cap \mathcal{O}_V = \emptyset\)</span> for all <span class="math inline">\(V\)</span>. Thus <span class="math inline">\(\overline{U} \setminus \mathcal{N}_V\)</span> is dense in <span class="math inline">\(\overline{U}\)</span> for each <span class="math inline">\(V\)</span>. Since the topological cycle class <span class="math inline">\([V] \in H_{2d}(X, \mathbb{Z})\)</span> belongs to a finitely generated abelian group, there are at most countably many distinct null cones <span class="math inline">\(\mathcal{N}_V\)</span>. By the Baire Category Theorem, the countable intersection: <span class="math display">\[
 \bigcap_V (\overline{U} \setminus \mathcal{N}_V) = \overline{U} \setminus \bigcup_V \mathcal{N}_V
-\]</span> is dense in <span class="math inline">\(\overline{U}\)</span>. But this contradicts <a href="#prp-boundary-in-null-cones" class="quarto-xref">Proposition&nbsp;1</a>, which states that <span class="math inline">\(\mathcal{B}_X \subseteq \bigcup_V \mathcal{N}_V\)</span>.</p>
+\]</span> is dense in <span class="math inline">\(\overline{U}\)</span>. But this contradicts <strong>?@prp-boundary-in-null-cones</strong>, which states that <span class="math inline">\(\mathcal{B}_X \subseteq \bigcup_V \mathcal{N}_V\)</span>.</p>
 <p>Now, let <span class="math inline">\(\mathcal{P} \subseteq \mathcal{B}_X\)</span> be the set of points satisfying the local equality of the theorem. Fix <span class="math inline">\(\xi_1 \in \mathcal{O}_V\)</span> with <span class="math inline">\(\dim V\)</span> minimal. Choose a general very ample divisor <span class="math inline">\(H\)</span> such that <span class="math inline">\(H \cap V\)</span> is proper. By the minimality of <span class="math inline">\(\dim V\)</span>, <span class="math inline">\(\xi_1 \notin \mathcal{O}_{H \cap V}\)</span>. Hence there exists a sequence <span class="math inline">\(\eta_n \to \xi_1\)</span> with <span class="math inline">\(q_{H \cap V}(\eta_n) &gt; 0\)</span>. The directional derivative satisfies: <span class="math display">\[
 \lim_{t \to 0} \frac{q_V(\eta_n + t [H]) - q_V(\eta_n)}{t} = \dim V \cdot (\eta_n^{\dim V - 1} \cdot H \cdot V) = \dim V \cdot q_{H \cap V}(\eta_n) &gt; 0.
 \]</span> Thus the differential <span class="math inline">\(D q_V(\eta_n) \neq 0\)</span>, so <span class="math inline">\(\mathcal{N}_V\)</span> is a smooth manifold near <span class="math inline">\(\eta_n\)</span>. Projecting locally onto the tangent space <span class="math inline">\(T_{\eta_n} \mathcal{N}_V\)</span>, topological invariance of domain implies that <span class="math inline">\(\mathcal{B}_X\)</span> and <span class="math inline">\(\mathcal{N}_V\)</span> must coincide in a small neighborhood of <span class="math inline">\(\eta_n\)</span>.</p>
 </div>
-<div id="cor-cp-dual" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 2 (Dual Campana-Peternell Theorem)</strong></span> By cone duality between <span class="math inline">\(N^1(X)_{\mathbb{R}}\)</span> and <span class="math inline">\(N_1(X)_{\mathbb{R}}\)</span>, there exists an open dense subset <span class="math inline">\(\mathcal{CP}(X)^* \subseteq \partial \overline{\operatorname{NE}}(X)\)</span> that is locally cut out by linear hyperplanes associated with subvarieties of <span class="math inline">\(X\)</span>.</p>
+</div>
+<div id="cor-cp-dual" class="theorem kind-corollary">
+<div class="theorem-header is-clickable"><span><strong>Corollary 22.7.9</strong> (Dual Campana-Peternell Theorem)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>By cone duality between <span class="math inline">\(N^1(X)_{\mathbb{R}}\)</span> and <span class="math inline">\(N_1(X)_{\mathbb{R}}\)</span>, there exists an open dense subset <span class="math inline">\(\mathcal{CP}(X)^* \subseteq \partial \overline{\operatorname{NE}}(X)\)</span> that is locally cut out by linear hyperplanes associated with subvarieties of <span class="math inline">\(X\)</span>.</p>
+</div>
 </div>
 <hr>
-<div id="thm-cone-theorem" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3 (Mori’s Cone Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be a smooth projective variety of dimension <span class="math inline">\(n\)</span>.</p>
+<div id="thm-cone-theorem" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.7.10</strong> (Mori’s Cone Theorem)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be a smooth projective variety of dimension <span class="math inline">\(n\)</span>.</p>
 <ol type="1">
 <li>There exists a countable family of rational curves <span class="math inline">\(\{C_i\}_{i \in I}\)</span> on <span class="math inline">\(X\)</span> satisfying <span class="math inline">\(0 &lt; -(K_X \cdot C_i) \le n + 1\)</span> such that: <span class="math display">\[
 \overline{\operatorname{NE}}(X) = \overline{\operatorname{NE}}(X)_{K_X \ge 0} + \sum_{i \in I} \mathbb{R}_{\ge 0} [C_i].
@@ -559,23 +634,35 @@ q_V: N^1(X)_{\mathbb{R}} \longrightarrow \mathbb{R}, \quad q_V(\xi) := (\xi^d \c
 \]</span></li>
 </ol>
 </div>
-<div id="cor-fano-polyhedral" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 3 (Cone of Fano Varieties)</strong></span> If <span class="math inline">\(X\)</span> is a Fano variety (that is, <span class="math inline">\(-K_X\)</span> is ample), then the cone of curves <span class="math inline">\(\overline{\operatorname{NE}}(X) = \operatorname{NE}(X)\)</span> is a rational polyhedral cone generated by finitely many classes of rational curves.</p>
 </div>
-<div id="cor-effective-ampleness-threshold" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 4 (Numerical Ampleness Bounds)</strong></span> Let <span class="math inline">\(X\)</span> be a smooth projective variety of dimension <span class="math inline">\(n\)</span>.</p>
+<div id="cor-fano-polyhedral" class="theorem kind-corollary">
+<div class="theorem-header is-clickable"><span><strong>Corollary 22.7.11</strong> (Cone of Fano Varieties)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>If <span class="math inline">\(X\)</span> is a Fano variety (that is, <span class="math inline">\(-K_X\)</span> is ample), then the cone of curves <span class="math inline">\(\overline{\operatorname{NE}}(X) = \operatorname{NE}(X)\)</span> is a rational polyhedral cone generated by finitely many classes of rational curves.</p>
+</div>
+</div>
+<div id="cor-effective-ampleness-threshold" class="theorem kind-corollary">
+<div class="theorem-header is-clickable"><span><strong>Corollary 22.7.12</strong> (Numerical Ampleness Bounds)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be a smooth projective variety of dimension <span class="math inline">\(n\)</span>.</p>
 <ol type="1">
 <li>If <span class="math inline">\(D\)</span> is an ample divisor such that <span class="math inline">\((D \cdot C) \ge n + 2\)</span> for all rational curves <span class="math inline">\(C \subseteq X\)</span>, then <span class="math inline">\(K_X + D\)</span> is ample.</li>
 <li>If <span class="math inline">\(D\)</span> is a nef divisor such that <span class="math inline">\((D \cdot C) \ge n + 1\)</span> for all rational curves <span class="math inline">\(C \subseteq X\)</span>, then <span class="math inline">\(K_X + D\)</span> is nef.</li>
 </ol>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By the Cone Theorem (<a href="#thm-cone-theorem" class="quarto-xref">Theorem&nbsp;3</a>), any class <span class="math inline">\(\gamma \in \overline{\operatorname{NE}}(X)\)</span> decomposes as <span class="math inline">\(\gamma = \gamma_0 + \sum a_i [C_i]\)</span> with <span class="math inline">\(K_X \cdot \gamma_0 \ge 0\)</span> and <span class="math inline">\(-(K_X \cdot C_i) \le n+1\)</span>. For (1): <span class="math display">\[
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>By the Cone Theorem (<strong>?@thm-cone-theorem</strong>), any class <span class="math inline">\(\gamma \in \overline{\operatorname{NE}}(X)\)</span> decomposes as <span class="math inline">\(\gamma = \gamma_0 + \sum a_i [C_i]\)</span> with <span class="math inline">\(K_X \cdot \gamma_0 \ge 0\)</span> and <span class="math inline">\(-(K_X \cdot C_i) \le n+1\)</span>. For (1): <span class="math display">\[
 (K_X + D) \cdot C_i = (K_X \cdot C_i) + (D \cdot C_i) \ge -(n+1) + (n+2) = 1 &gt; 0,
 \]</span> and <span class="math inline">\((K_X + D) \cdot \gamma_0 \ge D \cdot \gamma_0 &gt; 0\)</span>. By Kleiman’s criterion (<strong>?@thm-kleiman-cone-criterion</strong>), <span class="math inline">\(K_X + D\)</span> is ample. Statement (2) follows similarly.</p>
 </div>
-<div id="exm-blowups-p2" class="theorem example">
-<p><span class="theorem-title"><strong>Example 3 (Extremal Rays on Blowups of <span class="math inline">\(\mathbb{P}^2\)</span>)</strong></span> Let <span class="math inline">\(X = \operatorname{Bl}_{P_1, \dots, P_n}(\mathbb{P}^2)\)</span> be the blow-up of <span class="math inline">\(\mathbb{P}^2\)</span> at <span class="math inline">\(n\)</span> points in general position. Let <span class="math inline">\(\ell\)</span> be the pullback of the line class and <span class="math inline">\(e_1, \dots, e_n\)</span> the exceptional divisors, so <span class="math inline">\(-K_X = 3\ell - \sum_{i=1}^n e_i\)</span>.</p>
+</div>
+<div id="exm-blowups-p2" class="theorem kind-example">
+<div class="theorem-header is-clickable"><span><strong>Example 22.7.13</strong> (Extremal Rays on Blowups of <span class="math inline">ℙ<sup>2</sup></span>)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X = \operatorname{Bl}_{P_1, \dots, P_n}(\mathbb{P}^2)\)</span> be the blow-up of <span class="math inline">\(\mathbb{P}^2\)</span> at <span class="math inline">\(n\)</span> points in general position. Let <span class="math inline">\(\ell\)</span> be the pullback of the line class and <span class="math inline">\(e_1, \dots, e_n\)</span> the exceptional divisors, so <span class="math inline">\(-K_X = 3\ell - \sum_{i=1}^n e_i\)</span>.</p>
 <ul>
 <li>For <span class="math inline">\(1 \le n \le 8\)</span>, <span class="math inline">\(-K_X\)</span> is ample (so <span class="math inline">\(X\)</span> is a del Pezzo surface). By the adjunction formula: <span class="math display">\[
 (C^2) + (C \cdot K_X) = 2 g - 2.
@@ -585,29 +672,33 @@ q_V: N^1(X)_{\mathbb{R}} \longrightarrow \mathbb{R}, \quad q_V(\xi) := (\xi^d \c
 <li>For <span class="math inline">\(n \ge 10\)</span>, <span class="math inline">\(-K_X\)</span> is no longer nef. There exist infinitely many <span class="math inline">\((-1)\)</span>-curves with degrees <span class="math inline">\(d \to \infty\)</span>. Their normalized classes in the affine slice accumulate on the boundary of the cone of curves.</li>
 </ul>
 </div>
-<div id="exm-variational-pathologies" class="theorem example">
-<p><span class="theorem-title"><strong>Example 4 (Variational Pathologies of the Iitaka Dimension)</strong></span> Let <span class="math inline">\(T\)</span> be a smooth curve. There exists a family of smooth projective surfaces <span class="math inline">\(X \to T\)</span> and a line bundle <span class="math inline">\(L\)</span> on <span class="math inline">\(X\)</span> such that: <span class="math display">\[
+</div>
+<div id="exm-variational-pathologies" class="theorem kind-example">
+<div class="theorem-header is-clickable"><span><strong>Example 22.7.14</strong> (Variational Pathologies of the Iitaka Dimension)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(T\)</span> be a smooth curve. There exists a family of smooth projective surfaces <span class="math inline">\(X \to T\)</span> and a line bundle <span class="math inline">\(L\)</span> on <span class="math inline">\(X\)</span> such that: <span class="math display">\[
 \kappa(X_t, L_t) = -\infty \quad \text{for general } t \in T, \qquad \text{while} \qquad \kappa(X_0, L_0) = 2 \quad (\text{big})
 \]</span> at a special closed point <span class="math inline">\(0 \in T\)</span>.</p>
 <p><em>Construction:</em> Let <span class="math inline">\(S \subseteq \mathbb{P}^2\)</span> be a set of 9 distinct points, and consider <span class="math inline">\(X_S = \operatorname{Bl}_S(\mathbb{P}^2)\)</span> with divisor <span class="math inline">\(D_S = 2 H_S - E_S\)</span>. - If the 9 points lie on a smooth cubic <span class="math inline">\(B\)</span>, the strict transform <span class="math inline">\(C = 3H - E\)</span> satisfies <span class="math inline">\((D_S \cdot C) = -3 &lt; 0\)</span>. Slicing by multiples of <span class="math inline">\(C\)</span> reveals that <span class="math inline">\(H^0(X_S, \mathcal{O}_{X_S}(m D_S)) = 0\)</span> for all <span class="math inline">\(m \ge 1\)</span>. Hence <span class="math inline">\(\kappa(X_S, D_S) = -\infty\)</span> for general configurations <span class="math inline">\(S\)</span>. - If the 9 points become collinear, <span class="math inline">\(D_S - H_S\)</span> becomes effective, which implies <span class="math inline">\(D_S\)</span> is big, so <span class="math inline">\(\kappa = 2\)</span>.</p>
+</div>
 </div>
 
 
 
 </main> <!-- /main -->
 <style>
-/* --------------------------------------------------------------------------
-   1. 侧边栏常驻与容器保护
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Math Notes · 晚到覆盖层（include-after-body）
+   职责：定理/证明折叠壳外观、目录条目（含 JS 动态挂载项）样式、
+         侧边栏与页脚微调。基础主题变量仍由 styles.css 提供。
+   ========================================================================== */
 
-
+/* 1. 阅读模式下侧栏常驻 --------------------------------------------------- */
 body.quarto-reader-mode #quarto-margin-sidebar {
   display: block !important;
 }
 
-/* --------------------------------------------------------------------------
-   2. 副标题与排版微调
-   -------------------------------------------------------------------------- */
+/* 2. 副标题与定理标题字号 ------------------------------------------------- */
 .quarto-title .subtitle,
 header#title-block-header .subtitle,
 p.subtitle.lead {
@@ -633,9 +724,7 @@ body.quarto-dark p.subtitle.lead {
   letter-spacing: 0.01em !important;
 }
 
-/* --------------------------------------------------------------------------
-   3. 紧凑左侧边栏留白与缩进
-   -------------------------------------------------------------------------- */
+/* 3. 紧凑左侧边栏 --------------------------------------------------------- */
 @media (min-width: 992px) {
   #quarto-sidebar,
   .sidebar-navigation {
@@ -658,6 +747,8 @@ body.quarto-dark p.subtitle.lead {
     padding-left: 0.2rem !important;
     padding-right: 0.2rem !important;
     white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;   /* 过长的章节名用省略号收尾，不再被硬裁切 */
   }
 
   #quarto-sidebar .menu-text {
@@ -665,9 +756,7 @@ body.quarto-dark p.subtitle.lead {
   }
 }
 
-/* --------------------------------------------------------------------------
-   4. 紧凑型页脚
-   -------------------------------------------------------------------------- */
+/* 4. 紧凑型页脚 ----------------------------------------------------------- */
 footer.footer,
 .nav-footer {
   padding-top: 0.2rem !important;
@@ -685,11 +774,8 @@ footer.footer,
   line-height: 1 !important;
 }
 
-/* --------------------------------------------------------------------------
-   5. 右侧目录标题 "ON THIS PAGE"
-   -------------------------------------------------------------------------- */
+/* 5. 目录标题 “ON THIS PAGE” ---------------------------------------------- */
 #toc-title,
-h2#toc-title,
 nav#TOC h2,
 .sidebar .toc-title {
   font-size: 0.82rem !important;
@@ -703,30 +789,29 @@ nav#TOC h2,
 }
 
 body.quarto-dark #toc-title,
-body.quarto-dark h2#toc-title,
 body.quarto-dark nav#TOC h2,
 body.quarto-dark .sidebar .toc-title {
   color: #94a3b8 !important;
 }
 
-/* --------------------------------------------------------------------------
-   6. 定理外观与折叠动画
-   -------------------------------------------------------------------------- */
-.theorem {
-  margin: 1.25rem 0 !important;
+/* 6. 定理与证明 ----------------------------------------------------------- */
+/* 共享外框：圆角、无内边距、裁切子元素 */
+.theorem,
+.proof {
   padding: 0 !important;
-  background-color: transparent !important;
+  background: transparent !important;
   border-radius: 8px !important;
-  border: 1px solid rgba(0, 0, 0, 0.09) !important;
-  border-left: 4.5px solid #2b6cb0 !important;
   overflow: hidden !important;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-body.quarto-dark .theorem,
-body.quarto-dark .proof {
-  border-color: rgba(255, 255, 255, 0.12) !important;
-  background-color: rgba(255, 255, 255, 0.02) !important;
+/* 定理：左侧色条由 --theorem-accent 决定，具体取值见下方各 kind */
+.theorem {
+  --theorem-accent: #2b6cb0;
+  margin: 1.25rem 0 !important;
+  border: 1px solid rgba(0, 0, 0, 0.09) !important;
+  border-left-width: 4.5px !important;
+  border-left-color: var(--theorem-accent) !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .theorem-header {
@@ -735,8 +820,6 @@ body.quarto-dark .proof {
   align-items: center !important;
   justify-content: space-between !important;
   padding: 0.55rem 0.95rem !important;
-  font-weight: 700 !important;
-  font-size: 1.05rem !important;
   line-height: 1.4 !important;
   background: transparent !important;
 }
@@ -754,7 +837,8 @@ body.quarto-dark .proof {
   background: transparent !important;
 }
 
-.theorem.is-folded .theorem-body {
+.theorem.is-folded .theorem-body,
+.proof.is-folded .proof-body {
   display: none !important;
 }
 
@@ -777,55 +861,62 @@ body.quarto-dark .proof {
   transform: rotate(-90deg);
 }
 
-/* 学术色彩映射 (日间 & 夜间) */
-.theorem.kind-definition { border-left-color: #1e40af !important; }
-.theorem.kind-definition > .theorem-header { color: #1e40af !important; }
-body.quarto-dark .theorem.kind-definition { border-left-color: #3b82f6 !important; }
-body.quarto-dark .theorem.kind-definition > .theorem-header { color: #60a5fa !important; }
+/* 学术色彩映射：每类环境只声明 4 个自定义属性（日间主色/夜间主色、日间标题色/夜间标题色） */
+.theorem > .theorem-header {
+  color: var(--theorem-title, inherit) !important;
+}
 
-.theorem.kind-lemma { border-left-color: #166534 !important; }
-.theorem.kind-lemma > .theorem-header { color: #166534 !important; }
-body.quarto-dark .theorem.kind-lemma { border-left-color: #22c55e !important; }
-body.quarto-dark .theorem.kind-lemma > .theorem-header { color: #4ade80 !important; }
+.theorem.kind-definition {
+  --theorem-accent: #1e40af;  --theorem-accent-dark: #3b82f6;
+  --theorem-title: #1e40af;   --theorem-title-dark: #60a5fa;
+}
 
-.theorem.kind-proposition { border-left-color: #6b21a8 !important; }
-.theorem.kind-proposition > .theorem-header { color: #6b21a8 !important; }
-body.quarto-dark .theorem.kind-proposition { border-left-color: #a855f7 !important; }
-body.quarto-dark .theorem.kind-proposition > .theorem-header { color: #c084fc !important; }
+.theorem.kind-lemma {
+  --theorem-accent: #166534;  --theorem-accent-dark: #22c55e;
+  --theorem-title: #166534;   --theorem-title-dark: #4ade80;
+}
 
-.theorem.kind-theorem { border-left-color: #991b1b !important; }
-.theorem.kind-theorem > .theorem-header { color: #991b1b !important; }
-body.quarto-dark .theorem.kind-theorem { border-left-color: #ef4444 !important; }
-body.quarto-dark .theorem.kind-theorem > .theorem-header { color: #f87171 !important; }
+.theorem.kind-proposition {
+  --theorem-accent: #6b21a8;  --theorem-accent-dark: #a855f7;
+  --theorem-title: #6b21a8;   --theorem-title-dark: #c084fc;
+}
 
-.theorem.kind-corollary { border-left-color: #c2410c !important; }
-.theorem.kind-corollary > .theorem-header { color: #c2410c !important; }
-body.quarto-dark .theorem.kind-corollary { border-left-color: #f97316 !important; }
-body.quarto-dark .theorem.kind-corollary > .theorem-header { color: #fb923c !important; }
+.theorem.kind-theorem {
+  --theorem-accent: #991b1b;  --theorem-accent-dark: #ef4444;
+  --theorem-title: #991b1b;   --theorem-title-dark: #f87171;
+}
 
-.theorem.kind-remark { border-left-color: #b45309 !important; }
-.theorem.kind-remark > .theorem-header { color: #b45309 !important; cursor: default !important; }
-body.quarto-dark .theorem.kind-remark { border-left-color: #f59e0b !important; }
-body.quarto-dark .theorem.kind-remark > .theorem-header { color: #fbbf24 !important; }
+.theorem.kind-corollary {
+  --theorem-accent: #c2410c;  --theorem-accent-dark: #f97316;
+  --theorem-title: #c2410c;   --theorem-title-dark: #fb923c;
+}
 
-.theorem.kind-example { border-left-color: #334155 !important; }
-.theorem.kind-example > .theorem-header { color: #334155 !important; }
-body.quarto-dark .theorem.kind-example { border-left-color: #64748b !important; }
-body.quarto-dark .theorem.kind-example > .theorem-header { color: #cbd5e1 !important; }
+.theorem.kind-remark {
+  --theorem-accent: #b45309;  --theorem-accent-dark: #f59e0b;
+  --theorem-title: #b45309;   --theorem-title-dark: #fbbf24;
+}
+
+.theorem.kind-example {
+  --theorem-accent: #334155;  --theorem-accent-dark: #64748b;
+  --theorem-title: #334155;   --theorem-title-dark: #cbd5e1;
+}
+
+/* remark 同时带 .proof 类，会被 .proof 的灰色左条覆盖，故用双类提高优先级取回环境色 */
+.theorem[class*="kind-"] {
+  border-left-color: var(--theorem-accent) !important;
+}
+
+/* 注记不可折叠，标题区不显示手型光标 */
+.theorem.kind-remark > .theorem-header {
+  cursor: default !important;
+}
 
 /* 证明环境 */
 .proof {
   margin: 0.9rem 0 1.35rem !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border-radius: 8px !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  border-left: 4px solid #64748b !important;
-  overflow: hidden !important;
-}
-
-body.quarto-dark .proof {
-  border-left-color: #94a3b8 !important;
+  border-left-width: 4px !important;
+  border-left-color: #64748b !important;
 }
 
 .proof-header {
@@ -840,21 +931,38 @@ body.quarto-dark .proof {
   font-size: 0.96rem !important;
 }
 
-body.quarto-dark .proof-header {
-  color: #94a3b8 !important;
-}
-
 .proof-body {
   padding: 0.35rem 0.9rem 0.65rem !important;
 }
 
-.proof.is-folded .proof-body {
-  display: none !important;
+/* 夜间：底色/边框统一淡化，左侧色条换用亮色系（放在基础规则之后以覆盖其 border-left） */
+body.quarto-dark .theorem,
+body.quarto-dark .proof {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background-color: rgba(255, 255, 255, 0.02) !important;
 }
 
-/* --------------------------------------------------------------------------
-   7. 右侧边栏条目与贯通标尺
-   -------------------------------------------------------------------------- */
+body.quarto-dark .theorem {
+  border-left-color: var(--theorem-accent-dark, rgba(255, 255, 255, 0.12)) !important;
+}
+
+body.quarto-dark .theorem[class*="kind-"] {
+  border-left-color: var(--theorem-accent-dark, rgba(255, 255, 255, 0.12)) !important;
+}
+
+body.quarto-dark .theorem > .theorem-header {
+  color: var(--theorem-title-dark, inherit) !important;
+}
+
+body.quarto-dark .proof {
+  border-left-color: #94a3b8 !important;
+}
+
+body.quarto-dark .proof-header {
+  color: #94a3b8 !important;
+}
+
+/* 7. 右侧目录条目与贯通标尺 ----------------------------------------------- */
 nav#TOC > ul {
   list-style: none !important;
   padding-left: 0 !important;
@@ -902,8 +1010,7 @@ body.quarto-dark .callout-toc-item a.nav-link:hover {
   background-color: rgba(96, 165, 250, 0.08) !important;
 }
 
-div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
-div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
+/* 激活态：同时覆盖 Quarto 自带高亮与 JS 挂载的自定义条目 */
 nav#TOC a.nav-link.active,
 nav#TOC a.nav-link.active-math-target,
 nav#TOC li.active > a.nav-link {
@@ -914,8 +1021,6 @@ nav#TOC li.active > a.nav-link {
   opacity: 1 !important;
 }
 
-body.quarto-dark div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
-body.quarto-dark div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
 body.quarto-dark nav#TOC a.nav-link.active,
 body.quarto-dark nav#TOC a.nav-link.active-math-target,
 body.quarto-dark nav#TOC li.active > a.nav-link {
@@ -923,365 +1028,349 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
   border-left-color: #60a5fa !important;
   background-color: rgba(96, 165, 250, 0.12) !important;
 }
+
+/* 键盘聚焦：与选中态可区分，且不改变布局 */
+nav#TOC a.nav-link:focus-visible,
+.callout-toc-item a.nav-link:focus-visible {
+  outline: 2px solid #2b6cb0 !important;
+  outline-offset: -2px;
+}
+
+body.quarto-dark nav#TOC a.nav-link:focus-visible,
+body.quarto-dark .callout-toc-item a.nav-link:focus-visible {
+  outline-color: #60a5fa !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. 窄屏（<992px）：右侧栏被 Quarto 整体隐藏，目录改由正文流内的折叠块承载
+   -------------------------------------------------------------------------- */
+.note-mobile-toc {
+  display: none;
+}
+
+/* 无目录条目时用 hidden 关掉，避免只剩一个空壳标题 */
+.note-mobile-toc[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 991.98px) {
+  .note-mobile-toc {
+    display: block;
+    margin: 0.75rem 0 1rem;
+    border: 1px solid var(--note-border);
+    border-radius: 0.5rem;
+    background-color: var(--note-paper);
+  }
+
+  .note-mobile-toc > summary {
+    cursor: pointer;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--note-muted);
+  }
+
+  .note-mobile-toc[open] > summary {
+    border-bottom: 1px solid var(--note-border);
+  }
+
+  .note-mobile-toc .note-mobile-toc-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.5rem 0.6rem 0.75rem;
+  }
+
+  /* 主题在窄屏把整个目录设成 display:none，搬进正文后必须显式恢复 */
+  .note-mobile-toc nav[role="doc-toc"] {
+    display: block !important;
+  }
+
+  /* 折叠块自带 summary 标题，目录内的同名标题不再重复显示 */
+  .note-mobile-toc #toc-title {
+    display: none !important;
+  }
+
+  /* 触屏点击热区加高 */
+  .note-mobile-toc nav#TOC a.nav-link {
+    padding-top: 0.45rem !important;
+    padding-bottom: 0.45rem !important;
+  }
+}
+
+/* Quarto 自带的浮层副本（仅在右侧栏与 margin 内容重叠时出现）同样保证可滚动 */
+#quarto-toc-toggle .quarto-sidebar-toggle-contents {
+  max-height: 70vh !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}
+
+/* 直接用 #锚点 打开页面（分享链接、前进/后退）时，同样避开吸顶导航栏 */
+.theorem,
+.proof {
+  scroll-margin-top: 4.8rem !important;
+}
 </style>
 
 <script>
+(function () {
+  "use strict";
 
+  /* 目录条目、定理编号、折叠外壳都由 _filters/theorem-toc.lua 在构建时写好，
+     这里只负责交互：点击跳转、选中态、折叠开关、窄屏摆放。 */
 
+  const TOC_SCOPE = 'nav[role="doc-toc"]';
+  const TOC_LINK = 'a.nav-link';
+  const SCROLL_TARGETS = 'section[id], h2[id], h3[id], .theorem[id]';
+  const SCROLL_THRESHOLD = 140;   /* 判定“当前小节”的顶部偏移 */
+  const NAV_FALLBACK_HEIGHT = 55; /* 吸顶导航栏高度兜底值 */
+  const SCROLL_GAP = 18;          /* 锚点与导航栏之间的呼吸间距 */
+  const MOBILE_MEDIA = '(max-width: 991.98px)';
 
-(function() {
-  const ENV_CONFIG = {
-    definition:  { full: 'Definition',  short: 'Def' },
-    lemma:       { full: 'Lemma',       short: 'Lem' },
-    proposition: { full: 'Proposition', short: 'Prop' },
-    theorem:     { full: 'Theorem',     short: 'Thm' },
-    corollary:   { full: 'Corollary',   short: 'Cor' },
-    remark:      { full: 'Remark',      short: 'Rem' },
-    example:     { full: 'Example',     short: 'Ex' }
-  };
+  let tocTargets = [];
+  let spyBound = false;
+  let mobileHost = null;
+  let mobileMedia = null;
+  let tocHome = null;         /* nav#TOC 在桌面端的父容器（右侧栏） */
+  let tocNextSibling = null;  /* 以及它原来的下一个兄弟节点，便于原位放回 */
 
-  const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+  /* ------------------------------------------------------------ 目录跳转 */
 
-  function getSecPrefix() {
-    const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
-    if (sec) {
-      const clean = sec.replace(/["']/g, '');
-      return clean.endsWith('.') ? clean : clean + '.';
+  /* 链接 href 形如 "#thm-fujita-vanishing"，取出解码后的锚点 id */
+  function tocHrefId(link) {
+    const raw = link.getAttribute('href') || '';
+    const pos = raw.indexOf('#');
+    if (pos === -1) return '';
+    const hash = raw.slice(pos + 1);
+    try {
+      return decodeURIComponent(hash);
+    } catch (err) {
+      return hash;
     }
-
-    const titleEl = document.querySelector('h1.title, .quarto-title h1, header#title-block-header h1, #title-block-header .title');
-    const titleText = titleEl ? titleEl.textContent.trim() : document.title.trim();
-    const match = titleText.match(/^(\d+(?:\.\d+)*)\.?\s*/);
-    if (match) {
-      return match[1] + '.';
-    }
-    return "22.0.";
   }
 
-  function ensureTocList() {
-    let list = document.querySelector('#TOC > ul') ||
-               document.querySelector('nav[role="doc-toc"] > ul') ||
-               document.querySelector('#quarto-toc-target > ul');
-    if (list) return list;
+  /* 滚动留白：吸顶导航栏高度 + 固定呼吸间距（桌面 / 移动一致） */
+  function tocScrollOffset() {
+    const navbar = document.querySelector('.navbar, header.fixed-top');
+    const navHeight = navbar ? navbar.getBoundingClientRect().height : NAV_FALLBACK_HEIGHT;
+    return navHeight + SCROLL_GAP;
+  }
 
-    let marginSidebar = document.querySelector('#quarto-margin-sidebar, .margin-sidebar');
-    if (marginSidebar) {
-      marginSidebar.style.display = 'block';
-      let nav = marginSidebar.querySelector('#TOC');
-      if (!nav) {
-        nav = document.createElement('nav');
-        nav.id = 'TOC';
-        nav.setAttribute('role', 'doc-toc');
-        nav.className = 'toc-active';
-        nav.innerHTML = '<h2 id="toc-title">On this page</h2><ul></ul>';
-        marginSidebar.appendChild(nav);
+  function scrollToAnchor(target) {
+    // 目标若在折叠中的定理/证明里（或本身被折叠），逐层展开，否则跳过去看不到内容
+    let folded = target.closest('.is-folded');
+    while (folded) {
+      folded.classList.remove('is-folded');
+      folded = folded.parentElement ? folded.parentElement.closest('.is-folded') : null;
+    }
+
+    const top = target.getBoundingClientRect().top + window.scrollY - tocScrollOffset();
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+
+  /* 全站唯一选中态：桌面 nav 与窄屏副本里的同一锚点一起高亮 */
+  function setTocActive(id) {
+    document.querySelectorAll(TOC_SCOPE + ' ' + TOC_LINK).forEach(function (a) {
+      const on = id !== '' && tocHrefId(a) === id;
+      a.classList.toggle('active', on);
+      a.classList.toggle('active-math-target', on);
+    });
+  }
+
+  function tocNav() {
+    return document.querySelector('#quarto-margin-sidebar ' + TOC_SCOPE) || document.querySelector(TOC_SCOPE);
+  }
+
+  /* -------------------------------------------- 窄屏：目录挪进正文流折叠块 */
+
+  function ensureInlineToc() {
+    if (mobileHost && document.contains(mobileHost)) return mobileHost;
+
+    const content = document.querySelector('#quarto-document-content') || document.querySelector('main');
+    if (!content) return null;
+
+    mobileHost = document.createElement('details');
+    mobileHost.id = 'note-mobile-toc';
+    mobileHost.className = 'note-mobile-toc';
+    mobileHost.innerHTML = '<summary>On this page</summary><div class="note-mobile-toc-body"></div>';
+
+    // 放在标题块之后，正文之前
+    const titleBlock = content.querySelector('#title-block-header');
+    if (titleBlock && titleBlock.nextSibling) {
+      content.insertBefore(mobileHost, titleBlock.nextSibling);
+    } else {
+      content.insertBefore(mobileHost, content.firstChild);
+    }
+    return mobileHost;
+  }
+
+  function syncMobileToc() {
+    const nav = tocNav();
+    if (!nav) return;   // 页面没有右侧目录时不必建折叠块
+
+    const host = ensureInlineToc();
+    if (!host) return;
+
+    if (!tocHome && nav.parentElement !== host) {
+      tocHome = nav.parentElement;
+      tocNextSibling = nav.nextSibling;
+    }
+
+    const onMobile = mobileMedia ? mobileMedia.matches : window.innerWidth <= 991;
+    const useInline = onMobile && !!nav.querySelector(TOC_LINK);   // 有目录才值得放进正文
+    host.hidden = !useInline;
+
+    if (useInline) {
+      const body = host.querySelector('.note-mobile-toc-body');
+      if (nav.parentElement !== body) body.appendChild(nav);
+    } else if (tocHome && nav.parentElement !== tocHome) {
+      const anchor = tocNextSibling && tocNextSibling.parentNode === tocHome ? tocNextSibling : null;
+      tocHome.insertBefore(nav, anchor);   // 原位放回右侧栏
+    }
+  }
+
+  /* 跳转后收起浮层/折叠块，否则会挡住刚滚到的内容 */
+  function closeMobileToc() {
+    if (mobileHost) mobileHost.open = false;
+
+    const toggle = document.getElementById('quarto-toc-toggle');
+    if (!toggle || !toggle.classList.contains('expanded')) return;
+    const title = toggle.querySelector('.quarto-sidebar-toggle-title');
+    if (title) title.click();   // 交回 Quarto 自身的开关逻辑，保持其内部状态一致
+  }
+
+  /* ---------------------------------------------------------- 点击代理 */
+
+  function onDocumentClick(event) {
+    if (event.defaultPrevented || event.button !== 0) return;
+
+    const target = event.target;
+
+    // 1) 目录项：统一接管滚动、地址栏哈希与高亮
+    const link = target.closest ? target.closest('a') : null;
+    if (link && link.closest(TOC_SCOPE)) {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;  // 保留新标签页等默认行为
+      const id = tocHrefId(link);
+      const anchor = id ? document.getElementById(id) : null;
+      if (anchor) {
+        // 拦在 Quarto 自带的点击处理之前，避免重复滚动
+        event.preventDefault();
+        event.stopPropagation();
+        scrollToAnchor(anchor);
+        setTocActive(id);
+        closeMobileToc();
+        history.pushState(null, null, '#' + id);
       }
-      return nav.querySelector('ul');
+      return;
     }
-    return null;
-  }
 
-  function detectKind(node, titleText) {
-    const id = (node.id || "").toLowerCase();
-    const cls = (node.className || "").toLowerCase();
-    const title = (titleText || "").toLowerCase();
-
-    if (id.startsWith('rem-') || cls.includes('remark') || /^remark\b/.test(title)) return 'remark';
-    if (id.startsWith('exm-') || cls.includes('example') || /^example\b/.test(title)) return 'example';
-    if (id.startsWith('def-') || cls.includes('definition') || /^definition\b/.test(title)) return 'definition';
-    if (id.startsWith('lem-') || cls.includes('lemma') || /^lemma\b/.test(title)) return 'lemma';
-    if (id.startsWith('prp-') || cls.includes('proposition') || /^proposition\b/.test(title)) return 'proposition';
-    if (id.startsWith('cor-') || cls.includes('corollary') || /^corollary\b/.test(title)) return 'corollary';
-    if (id.startsWith('thm-') || cls.includes('theorem') || /^theorem\b/.test(title)) return 'theorem';
-    return 'theorem';
-  }
-
-  function triggerMathTypeset(elements) {
-    if (window.MathJax && window.MathJax.typesetPromise) {
-      window.MathJax.typesetPromise(elements).catch(function(err) {});
-    } else if (window.MathJax && window.MathJax.Hub) {
-      window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, elements]);
+    // 2) 折叠头：展开/收起定理或证明
+    const header = target.closest ? target.closest('.theorem-header.is-clickable, .proof-header') : null;
+    if (header && header.parentElement) {
+      header.parentElement.classList.toggle('is-folded');
     }
   }
 
-  // 核心：处理定理并绑定平滑跳转
-  function processTheorems() {
-    const secPrefix = getSecPrefix();
-    let counter = 0;
+  /* -------------------------------------------------------- 侧边栏排序 */
 
-    const tocList = ensureTocList();
-    if (!tocList) return;
+  function textOf(el) {
+    const label = el.querySelector('.sidebar-item-text, .menu-text, a');
+    return (label && label.textContent.trim()) || el.textContent.trim();
+  }
 
-    // 清理旧自定义条目
-    tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
+  function sortSidebarNumerically() {
+    document.querySelectorAll('#quarto-sidebar ul').forEach(function (ul) {
+      const items = Array.from(ul.children).filter(function (el) {
+        return el.classList.contains('sidebar-item');
+      });
+      if (items.length <= 1) return;
 
-    const pageNodes = document.querySelectorAll(
-      'main h2, main h3, #quarto-document-content h2, #quarto-document-content h3, .theorem, .remark, [id^="def-"], [id^="lem-"], [id^="prp-"], [id^="thm-"], [id^="cor-"], [id^="rem-"], [id^="exm-"]'
-    );
-
-    let lastTocAnchor = null;
-    const headersToTypeset = [];
-
-    pageNodes.forEach(node => {
-      if (node.tagName === 'H2' || node.tagName === 'H3') {
-        if (node.id) {
-          const a = tocList.querySelector(`a[href="#${CSS.escape(node.id)}"]`);
-          if (a) lastTocAnchor = a.closest('li');
-        }
-        return;
-      }
-
-      // 如果未做过 DOM 改写，执行改写；如果已经改写过，仅补充挂载到目录
-      if (node.dataset.mathProcessed !== "true") {
-        node.dataset.mathProcessed = "true";
-
-        const titleSpan = node.querySelector('.theorem-title');
-        let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
-        let subTitle = "";
-
-        const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
-        if (match) {
-          subTitle = ` (${match[1].trim()})`;
-        }
-        if (titleSpan) titleSpan.remove();
-
-        const firstP = node.querySelector(':scope > p:first-child');
-        if (firstP && firstP.textContent.trim() === '') firstP.remove();
-
-        const kind = detectKind(node, rawTitleHtml);
-        const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
-        const numStr = secPrefix + counter;
-        counter++;
-
-        const canFold = (kind !== 'remark');
-        node.classList.add('theorem', `kind-${kind}`);
-        node.dataset.kindShort = conf.short;
-        node.dataset.kindFull = conf.full;
-        node.dataset.numStr = numStr;
-        node.dataset.subTitle = subTitle;
-
-        const header = document.createElement('div');
-        header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
-        header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
-
-        const body = document.createElement('div');
-        body.className = 'theorem-body';
-        while (node.firstChild) {
-          body.appendChild(node.firstChild);
-        }
-
-        node.appendChild(header);
-        node.appendChild(body);
-        headersToTypeset.push(header);
-
-        if (canFold) {
-          header.addEventListener('click', () => {
-            node.classList.toggle('is-folded');
-          });
-        }
-
-        if (!node.id) {
-          node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
-        } else if (node.id.includes('.')) {
-          node.id = node.id.replace(/\./g, '-');
-        }
-      }
-
-      const targetId = node.id;
-      const shortLabel = node.dataset.kindShort || "Thm";
-      const numLabel = node.dataset.numStr || "";
-      const subLabel = node.dataset.subTitle || "";
-      const fullLabel = node.dataset.kindFull || "Theorem";
-
-      // 挂载到右侧 TOC 目录
-      const li = document.createElement('li');
-      li.setAttribute('data-callout-toc', 'true');
-      li.className = 'nav-item callout-toc-item';
-
-      const a = document.createElement('a');
-      a.className = 'nav-link';
-      a.href = `#${targetId}`;
-      a.textContent = `${shortLabel} ${numLabel}`;
-      if (subLabel) a.title = `${fullLabel} ${numLabel}${subLabel}`;
-
-      // ====== 终极修复：百分之百生效的精准跳转 ======
-      a.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-
-        const target = document.getElementById(targetId);
-        if (target) {
-          // 1. 如果该定理处于折叠状态，点击立刻平滑展开
-          if (target.classList.contains('is-folded')) {
-            target.classList.remove('is-folded');
-          }
-
-          // 2. 计算绝对距离，避开吸顶导航栏与外层容器干扰
-          const navbar = document.querySelector('.navbar, header.fixed-top');
-          const navH = navbar ? navbar.getBoundingClientRect().height : 55;
-          const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 18;
-
-          // 3. 执行平滑滚动
-          window.scrollTo({
-            top: targetY,
-            behavior: 'smooth'
-          });
-
-          // 4. 同步点亮目录项
-          tocList.querySelectorAll('a.nav-link').forEach(link => {
-            link.classList.remove('active', 'active-math-target');
-          });
-          a.classList.add('active', 'active-math-target');
-
-          // 5. 更新地址栏哈希
-          if (history.pushState) {
-            history.pushState(null, null, `#${targetId}`);
-          }
-        }
+      // numeric:true 让 "10" 排在 "2" 之后
+      items.sort(function (a, b) {
+        return textOf(a).localeCompare(textOf(b), undefined, { numeric: true, sensitivity: 'base' });
       });
 
-      li.appendChild(a);
+      items.forEach(function (item) { ul.appendChild(item); });
+    });
+  }
 
-      if (lastTocAnchor && lastTocAnchor.parentNode) {
-        lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
-        lastTocAnchor = li;
+  /* -------------------------------------------------------- 目录滚动高亮 */
+
+  function collectTargets() {
+    return Array.from(document.querySelectorAll(SCROLL_TARGETS)).filter(function (el) {
+      return !el.closest(TOC_SCOPE);   // 排除目录自身的标题
+    });
+  }
+
+  /* 选出「当前所在项」：最后一个顶部已越过阈值的小节/定理锚点 */
+  function updateActiveTocLink() {
+    if (!tocTargets.length) return;
+
+    let current = null;
+    for (const el of tocTargets) {
+      if (el.getBoundingClientRect().top <= SCROLL_THRESHOLD) {
+        current = el;
       } else {
-        tocList.appendChild(li);
-        lastTocAnchor = li;
+        break;
       }
-    });
-
-    if (headersToTypeset.length > 0) {
-      triggerMathTypeset(headersToTypeset);
     }
+    if (!current && window.scrollY < 120) current = tocTargets[0];
+    if (!current || !current.id) return;
+
+    setTocActive(current.id);
   }
 
-  // 自然数排序侧边栏
-function sortSidebarNumerically() {
-  const sidebarLists = document.querySelectorAll('#quarto-sidebar ul');
-  sidebarLists.forEach(ul => {
-    // 获取当前列表下的所有侧边栏条目
-    const items = Array.from(ul.children).filter(el => el.classList.contains('sidebar-item'));
-    if (items.length <= 1) return;
+  function init() {
+    sortSidebarNumerically();
+    syncMobileToc();
 
-    // 使用 numeric: true 开启自然数排序（自动识别 10 > 2）
-    items.sort((a, b) => {
-      const textA = a.querySelector('.sidebar-item-text, .menu-text, a')?.textContent.trim() || a.textContent.trim();
-      const textB = b.querySelector('.sidebar-item-text, .menu-text, a')?.textContent.trim() || b.textContent.trim();
-      return textA.localeCompare(textB, undefined, { numeric: true, sensitivity: 'base' });
-    });
+    // 监听只绑定一次；重复调用只刷新锚点缓存与高亮
+    if (!spyBound) {
+      spyBound = true;
 
-    // 将排序后的元素按新顺序重新插入 DOM
-    items.forEach(item => ul.appendChild(item));
-  });
-}
-  function processProofs() {
-    const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
-    proofs.forEach(proof => {
-      if (proof.dataset.mathProcessed === "true") return;
-      proof.dataset.mathProcessed = "true";
-
-      let proofLabel = "Proof.";
-      const firstP = proof.querySelector('p');
-      if (firstP) {
-        const titleSpan = firstP.querySelector('.proof-title');
-        if (titleSpan) {
-          proofLabel = titleSpan.textContent.trim();
-          titleSpan.remove();
-        } else {
-          const em = firstP.querySelector('em');
-          if (em && /proof/i.test(em.textContent)) {
-            proofLabel = em.textContent.trim();
-            em.remove();
-          }
-        }
-      }
-
-      const header = document.createElement('div');
-      header.className = 'proof-header';
-      header.innerHTML = `<span><em>${proofLabel}</em></span>${CHEVRON_SVG}`;
-
-      const body = document.createElement('div');
-      body.className = 'proof-body';
-      while (proof.firstChild) {
-        body.appendChild(proof.firstChild);
-      }
-
-      proof.appendChild(header);
-      proof.appendChild(body);
-
-      proof.classList.add('is-folded');
-
-      header.addEventListener('click', () => {
-        proof.classList.toggle('is-folded');
-      });
-    });
-  }
-
-  function initScrollSpy() {
-    const tocList = ensureTocList();
-    if (!tocList) return;
-
-    function onScroll() {
-      const targets = Array.from(document.querySelectorAll('main h2[id], main h3[id], #quarto-document-content h2[id], #quarto-document-content h3[id], .theorem[id]'));
-      if (!targets.length) return;
-
-      const threshold = 140;
-      let current = null;
-
-      for (const el of targets) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= threshold) {
-          current = el;
-        } else {
-          break;
-        }
-      }
-
-      if (!current && window.scrollY < 120) {
-        current = targets[0];
-      }
-
-      if (current) {
-        const allLinks = tocList.querySelectorAll('a.nav-link');
-        allLinks.forEach(a => {
-          a.classList.remove('active', 'active-math-target');
+      let ticking = false;
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          updateActiveTocLink();
         });
+      }, { passive: true });
 
-        const activeA = tocList.querySelector(`a[href="#${CSS.escape(current.id)}"]`);
-        if (activeA) {
-          activeA.classList.add('active', 'active-math-target');
-        }
+      document.addEventListener('click', onDocumentClick, true);
+
+      // Quarto 自带的 scrollspy 也会加 .active；等它更新后（rAF 晚一拍）再确认唯一高亮
+      window.addEventListener('quarto-sectionChanged', function () {
+        requestAnimationFrame(updateActiveTocLink);
+      });
+
+      // 跨过 992px 断点时，在「右侧栏」与「正文内折叠块」之间搬运目录
+      if (window.matchMedia) {
+        mobileMedia = window.matchMedia(MOBILE_MEDIA);
+        const handleBreakpoint = function () { syncMobileToc(); };
+        if (mobileMedia.addEventListener) mobileMedia.addEventListener('change', handleBreakpoint);
+        else if (mobileMedia.addListener) mobileMedia.addListener(handleBreakpoint);
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    setTimeout(onScroll, 150);
-  }
-
-  // 严格执行控制，彻底消除二次清空 Bug
-  let isExecuting = false;
-  function run() {
-    if (isExecuting) return;
-    isExecuting = true;
-    sortSidebarNumerically(); // <--- 在这里调用
-    processTheorems();
-    processProofs();
-    initScrollSpy();
-    setTimeout(() => { isExecuting = false; }, 200);
+    tocTargets = collectTargets();
+    setTimeout(updateActiveTocLink, 150);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run);
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    run();
+    init();
   }
-  window.addEventListener('load', run);
+  window.addEventListener('load', init, { once: true });
 
-  // 切换深浅模式时，重新对齐挂载
-  window.addEventListener('quarto-color-scheme-change', () => {
-    setTimeout(run, 150);
+  // 深浅色切换后重新对齐
+  window.addEventListener('quarto-color-scheme-change', function () {
+    setTimeout(init, 150);
   });
 })();
 </script>
@@ -1289,15 +1378,50 @@ function sortSidebarNumerically() {
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -1372,11 +1496,30 @@ function sortSidebarNumerically() {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/losergh\.github\.io\/note\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1390,8 +1533,70 @@ function sortSidebarNumerically() {
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1405,6 +1610,7 @@ function sortSidebarNumerically() {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1567,44 +1773,54 @@ function sortSidebarNumerically() {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1703,7 +1919,10 @@ function sortSidebarNumerically() {
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
       <a href="../22_positivity/22.6 Graded Linear Series.html" class="pagination-link" aria-label="22.6 Graded Linear Series">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22.6 Graded Linear Series</span>

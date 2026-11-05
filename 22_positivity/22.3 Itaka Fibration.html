@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-26">
+<meta name="dcterms.date" content="2026-11-05">
 
 <title>22.3 Iitaka Fibration – Math Notes</title>
 <style>
@@ -41,18 +41,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-aea0307008146ee079b1533de64c4571.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-10aed12f2e75d254f234caddaa5283e4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-aea0307008146ee079b1533de64c4571.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8aa7dfeb8eb95bdcfa4dc6a7b561006e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-02146ddba7e175375472b78443451085.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8aa7dfeb8eb95bdcfa4dc6a7b561006e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -113,7 +114,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -136,6 +137,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -165,13 +167,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -265,6 +273,7 @@ window.Quarto = {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -279,14 +288,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Math Notes</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -299,17 +308,17 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.3 Itaka Fibration.html">22.3 Iitaka Fibration</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.3 Itaka Fibration.html">22.3 Iitaka Fibration</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -320,7 +329,7 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
         <div class="sidebar-tools-main">
     <div id="quarto-search" class="quarto-navigation-tool px-1" title="Search"></div>
 </div>
@@ -329,12 +338,12 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../22_positivity/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Positivity in AG</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Positivity in AG</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Positivity in AG">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../22_positivity/22.0 Preliminaries.html" class="sidebar-item-text sidebar-link">
@@ -408,14 +417,31 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+    <ul>
+    <li class="nav-item callout-toc-item"><a href="#def-semigroup-line-bundle" id="toc-def-semigroup-line-bundle" class="nav-link active" data-scroll-target="#def-semigroup-line-bundle" title="Definition 22.3.0 (Semigroup of a Line Bundle and Exponent)">Def 22.3.0</a></li>
+    <li class="nav-item callout-toc-item"><a href="#prp-image-rational-map" id="toc-prp-image-rational-map" class="nav-link" data-scroll-target="#prp-image-rational-map" title="Proposition 22.3.1 (Scheme-Theoretic Image of a Rational Map)">Prop 22.3.1</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-iitaka-dimension" id="toc-def-iitaka-dimension" class="nav-link" data-scroll-target="#def-iitaka-dimension" title="Definition 22.3.2 (Iitaka Dimension)">Def 22.3.2</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-algebraic-fiber-space" id="toc-def-algebraic-fiber-space" class="nav-link" data-scroll-target="#def-algebraic-fiber-space" title="Definition 22.3.3 (Algebraic Fiber Space)">Def 22.3.3</a></li>
+    <li class="nav-item callout-toc-item"><a href="#prp-powers-achieving-kappa" id="toc-prp-powers-achieving-kappa" class="nav-link" data-scroll-target="#prp-powers-achieving-kappa" title="Proposition 22.3.4 (Powers Achieving the Iitaka Dimension)">Prop 22.3.4</a></li>
+    <li class="nav-item callout-toc-item"><a href="#prp-afs-function-fields" id="toc-prp-afs-function-fields" class="nav-link" data-scroll-target="#prp-afs-function-fields" title="Proposition 22.3.5 (Criterion for Algebraic Fiber Spaces)">Prop 22.3.5</a></li>
+    <li class="nav-item callout-toc-item"><a href="#lem-afs-cohomology-pic" id="toc-lem-afs-cohomology-pic" class="nav-link" data-scroll-target="#lem-afs-cohomology-pic" title="Lemma 22.3.6 (Invariance of Sections and Picard Group)">Lem 22.3.6</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-stable-base-locus" id="toc-def-stable-base-locus" class="nav-link" data-scroll-target="#def-stable-base-locus" title="Definition 22.3.7 (Stable Base Locus)">Def 22.3.7</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-semiample" id="toc-def-semiample" class="nav-link" data-scroll-target="#def-semiample" title="Definition 22.3.8 (Semiample Line Bundles)">Def 22.3.8</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-semiample-fibration" id="toc-thm-semiample-fibration" class="nav-link" data-scroll-target="#thm-semiample-fibration" title="Theorem 22.3.9 (Semiample Fibration)">Thm 22.3.9</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-bigness" id="toc-def-bigness" class="nav-link" data-scroll-target="#def-bigness" title="Definition 22.3.10 (Big Line Bundles and Divisors)">Def 22.3.10</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-iitaka-fibration" id="toc-thm-iitaka-fibration" class="nav-link" data-scroll-target="#thm-iitaka-fibration" title="Theorem 22.3.11 (The Iitaka Fibration Theorem)">Thm 22.3.11</a></li>
+    <li class="nav-item callout-toc-item"><a href="#cor-iitaka-fibers" id="toc-cor-iitaka-fibers" class="nav-link" data-scroll-target="#cor-iitaka-fibers" title="Corollary 22.3.12 (Iitaka Dimension of the Fibers)">Cor 22.3.12</a></li>
+    </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.3 Itaka Fibration.html">22.3 Iitaka Fibration</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.3 Itaka Fibration.html">22.3 Iitaka Fibration</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">22.3 Iitaka Fibration</h1>
 <p class="subtitle lead">Iitaka Dimension, Algebraic Fiber Spaces, and the Fundamental Theorem</p>
@@ -429,7 +455,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 26, 2026</p>
+      <p class="date">November 5, 2026</p>
     </div>
   </div>
   
@@ -441,8 +467,10 @@ window.Quarto = {
 </header>
 
 
-<div id="def-semigroup-line-bundle" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Semigroup of a Line Bundle and Exponent)</strong></span> Let <span class="math inline">\(X\)</span> be a variety and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span>.</p>
+<div id="def-semigroup-line-bundle" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 22.3.0</strong> (Semigroup of a Line Bundle and Exponent)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be a variety and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span>.</p>
 <ol type="1">
 <li>The set: <span class="math display">\[
 N(L) = N(X, L) := \big\{ m \ge 0 \;\big|\; H^0(X, L^{\otimes m}) \neq 0 \big\}
@@ -452,16 +480,25 @@ N(L) \subseteq e \mathbb{N} \quad \text{and} \quad e\mathbb{N} \setminus N(L) \t
 \]</span> The integer <span class="math inline">\(e(L)\)</span> is called the <strong>exponent</strong> of <span class="math inline">\(L\)</span>.</li>
 </ol>
 </div>
-<div id="prp-image-rational-map" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 (Scheme-Theoretic Image of a Rational Map)</strong></span> Let <span class="math inline">\(f: X \dashrightarrow Y\)</span> be a rational map between irreducible varieties. For any representative morphism <span class="math inline">\((U, f_U)\)</span> of <span class="math inline">\(f\)</span> defined on a dense open set <span class="math inline">\(U \subseteq X\)</span>, the closed subvariety: <span class="math display">\[
+</div>
+<div id="prp-image-rational-map" class="theorem kind-proposition">
+<div class="theorem-header is-clickable"><span><strong>Proposition 22.3.1</strong> (Scheme-Theoretic Image of a Rational Map)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(f: X \dashrightarrow Y\)</span> be a rational map between irreducible varieties. For any representative morphism <span class="math inline">\((U, f_U)\)</span> of <span class="math inline">\(f\)</span> defined on a dense open set <span class="math inline">\(U \subseteq X\)</span>, the closed subvariety: <span class="math display">\[
 \operatorname{Im}(f) := \overline{f_U(U)} \subseteq Y
 \]</span> is independent of the chosen representative and is called the <strong>image</strong> of <span class="math inline">\(f\)</span>.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>If <span class="math inline">\((V, f_V)\)</span> is another representative, then <span class="math inline">\(f_U|_{U \cap V} = f_V|_{U \cap V}\)</span>. Setting <span class="math inline">\(W = U \cap V\)</span>, the pullback <span class="math inline">\(\mathcal{O}_Y \to (f_U)_* \mathcal{O}_U \to (f_W)_* \mathcal{O}_W\)</span> has the same kernel because <span class="math inline">\(W\)</span> is dense in <span class="math inline">\(U\)</span> and <span class="math inline">\(X\)</span> is reduced. The kernel defines the vanishing ideal of the scheme-theoretic closure, so <span class="math inline">\(\overline{f_U(U)} = \overline{f_W(W)} = \overline{f_V(V)}\)</span>.</p>
 </div>
-<div id="def-iitaka-dimension" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 2 (Iitaka Dimension)</strong></span> Let <span class="math inline">\(X\)</span> be a normal variety and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span>.</p>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>If <span class="math inline">\((V, f_V)\)</span> is another representative, then <span class="math inline">\(f_U|_{U \cap V} = f_V|_{U \cap V}\)</span>. Setting <span class="math inline">\(W = U \cap V\)</span>, the pullback <span class="math inline">\(\mathcal{O}_Y \to (f_U)_* \mathcal{O}_U \to (f_W)_* \mathcal{O}_W\)</span> has the same kernel because <span class="math inline">\(W\)</span> is dense in <span class="math inline">\(U\)</span> and <span class="math inline">\(X\)</span> is reduced. The kernel defines the vanishing ideal of the scheme-theoretic closure, so <span class="math inline">\(\overline{f_U(U)} = \overline{f_W(W)} = \overline{f_V(V)}\)</span>.</p>
+</div>
+</div>
+<div id="def-iitaka-dimension" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 22.3.2</strong> (Iitaka Dimension)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be a normal variety and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span>.</p>
 <ol type="1">
 <li>For each <span class="math inline">\(m \in N(X, L)\)</span>, the complete linear system <span class="math inline">\(|L^{\otimes m}|\)</span> determines a rational map: <span class="math display">\[
 \phi_m := \phi_{|L^{\otimes m}|}: X \dashrightarrow \mathbb{P} H^0(X, L^{\otimes m}).
@@ -474,23 +511,32 @@ N(L) \subseteq e \mathbb{N} \quad \text{and} \quad e\mathbb{N} \setminus N(L) \t
 \]</span></li>
 </ol>
 </div>
-<div id="def-algebraic-fiber-space" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 3 (Algebraic Fiber Space)</strong></span> An <strong>algebraic fiber space</strong> (AFS) is a surjective projective morphism <span class="math inline">\(f: X \to Y\)</span> between irreducible varieties such that: <span class="math display">\[
+</div>
+<div id="def-algebraic-fiber-space" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 22.3.3</strong> (Algebraic Fiber Space)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>An <strong>algebraic fiber space</strong> (AFS) is a surjective projective morphism <span class="math inline">\(f: X \to Y\)</span> between irreducible varieties such that: <span class="math display">\[
 f_* \mathcal{O}_X = \mathcal{O}_Y.
 \]</span> By Zariski’s Connectedness Principle, every fiber of an algebraic fiber space is connected.</p>
+</div>
 </div>
 <hr>
 <blockquote class="blockquote">
 <p><strong>Convention:</strong> From now on, <span class="math inline">\(X\)</span> is assumed to be an irreducible normal projective variety over <span class="math inline">\(k\)</span>.</p>
 </blockquote>
 <hr>
-<div id="prp-powers-achieving-kappa" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2 (Powers Achieving the Iitaka Dimension)</strong></span> Let <span class="math inline">\(X\)</span> be a normal variety and <span class="math inline">\(\kappa = \kappa(X, L) \ge 0\)</span>. Then: <span class="math display">\[
+<div id="prp-powers-achieving-kappa" class="theorem kind-proposition">
+<div class="theorem-header is-clickable"><span><strong>Proposition 22.3.4</strong> (Powers Achieving the Iitaka Dimension)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be a normal variety and <span class="math inline">\(\kappa = \kappa(X, L) \ge 0\)</span>. Then: <span class="math display">\[
 \dim \operatorname{Im}(\phi_m) = \kappa \quad \text{for all } m \gg 0 \text{ with } m \in N(X, L).
 \]</span></p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Replacing <span class="math inline">\(L\)</span> by <span class="math inline">\(L^{\otimes e(L)}\)</span>, we may assume <span class="math inline">\(e(L) = 1\)</span>. Then there exists <span class="math inline">\(p_0\)</span> such that <span class="math inline">\(H^0(X, L^{\otimes p}) \neq 0\)</span> for all <span class="math inline">\(p \ge p_0\)</span>. Fix a non-zero section <span class="math inline">\(s \in H^0(X, L^{\otimes p})\)</span>.</p>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>Replacing <span class="math inline">\(L\)</span> by <span class="math inline">\(L^{\otimes e(L)}\)</span>, we may assume <span class="math inline">\(e(L) = 1\)</span>. Then there exists <span class="math inline">\(p_0\)</span> such that <span class="math inline">\(H^0(X, L^{\otimes p}) \neq 0\)</span> for all <span class="math inline">\(p \ge p_0\)</span>. Fix a non-zero section <span class="math inline">\(s \in H^0(X, L^{\otimes p})\)</span>.</p>
 <p>Choose <span class="math inline">\(m\)</span> such that <span class="math inline">\(\dim \operatorname{Im}(\phi_m) = \kappa\)</span>. Multiplication by <span class="math inline">\(s\)</span> induces an injection <span class="math inline">\(H^0(X, L^{\otimes m}) \hookrightarrow H^0(X, L^{\otimes(m+p)})\)</span>. This linear inclusion determines a rational projection of projective spaces: <span class="math display">\[
 \begin{CD}
 X @&gt;{\phi_{m+p}}&gt;&gt; Y_{m+p} \\
@@ -501,12 +547,18 @@ X @&gt;{\phi_m}&gt;&gt; Y_m
 \kappa = \dim Y_m \le \dim Y_{m+p} \le \kappa \implies \dim Y_{m+p} = \kappa.
 \]</span> Thus <span class="math inline">\(\dim \operatorname{Im}(\phi_n) = \kappa\)</span> for all <span class="math inline">\(n \ge m + p_0\)</span>.</p>
 </div>
-<div id="prp-afs-function-fields" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 3 (Criterion for Algebraic Fiber Spaces)</strong></span> Let <span class="math inline">\(f: X \to Y\)</span> be a surjective projective morphism between normal varieties, inducing an inclusion of function fields <span class="math inline">\(K(Y) \subseteq K(X)\)</span>. Then <span class="math inline">\(f\)</span> is an algebraic fiber space if and only if <span class="math inline">\(K(Y)\)</span> is algebraically closed in <span class="math inline">\(K(X)\)</span>.</p>
+</div>
+<div id="prp-afs-function-fields" class="theorem kind-proposition">
+<div class="theorem-header is-clickable"><span><strong>Proposition 22.3.5</strong> (Criterion for Algebraic Fiber Spaces)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(f: X \to Y\)</span> be a surjective projective morphism between normal varieties, inducing an inclusion of function fields <span class="math inline">\(K(Y) \subseteq K(X)\)</span>. Then <span class="math inline">\(f\)</span> is an algebraic fiber space if and only if <span class="math inline">\(K(Y)\)</span> is algebraically closed in <span class="math inline">\(K(X)\)</span>.</p>
 <p>In particular, every projective surjective birational morphism between normal varieties is an algebraic fiber space.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><strong><span class="math inline">\((\implies)\)</span>:</strong> Let <span class="math inline">\(K(Y) \subseteq \mathbb{L} \subseteq K(X)\)</span> be the algebraic closure of <span class="math inline">\(K(Y)\)</span> in <span class="math inline">\(K(X)\)</span>. Normalizing <span class="math inline">\(Y\)</span> in <span class="math inline">\(\mathbb{L}\)</span> produces a factorization: <span class="math display">\[
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p><strong><span class="math inline">\((\implies)\)</span>:</strong> Let <span class="math inline">\(K(Y) \subseteq \mathbb{L} \subseteq K(X)\)</span> be the algebraic closure of <span class="math inline">\(K(Y)\)</span> in <span class="math inline">\(K(X)\)</span>. Normalizing <span class="math inline">\(Y\)</span> in <span class="math inline">\(\mathbb{L}\)</span> produces a factorization: <span class="math display">\[
 X \xrightarrow{\quad h \quad} Z \xrightarrow{\quad g \quad} Y,
 \]</span> where <span class="math inline">\(g: Z \to Y\)</span> is finite and <span class="math inline">\(h\)</span> is proper. Since <span class="math inline">\(f\)</span> is surjective and projective, <span class="math inline">\(h(X) = Z\)</span>, so <span class="math inline">\(\dim Z = \dim Y\)</span>. The condition <span class="math inline">\(f_* \mathcal{O}_X = \mathcal{O}_Y\)</span> implies: <span class="math display">\[
 \mathcal{O}_Y \subseteq g_* \mathcal{O}_Z \subseteq g_* h_* \mathcal{O}_X = f_* \mathcal{O}_X = \mathcal{O}_Y \implies g_* \mathcal{O}_Z = \mathcal{O}_Y.
@@ -515,8 +567,11 @@ X \xrightarrow{\quad h \quad} Z \xrightarrow{\quad g \quad} Y,
 X \xrightarrow{\quad \phi \quad} Z \xrightarrow{\quad g \quad} Y,
 \]</span> where <span class="math inline">\(\phi_* \mathcal{O}_X = \mathcal{O}_Z\)</span> and <span class="math inline">\(g\)</span> is finite. Since <span class="math inline">\(X\)</span> is normal and <span class="math inline">\(\phi_* \mathcal{O}_X = \mathcal{O}_Z\)</span>, the scheme <span class="math inline">\(Z\)</span> is normal. Furthermore, <span class="math inline">\(K(Z) \subseteq K(X)\)</span> is a finite algebraic extension of <span class="math inline">\(K(Y)\)</span>. Since <span class="math inline">\(K(Y)\)</span> is algebraically closed in <span class="math inline">\(K(X)\)</span>, we must have <span class="math inline">\(K(Z) = K(Y)\)</span>. Because <span class="math inline">\(Y\)</span> is normal and <span class="math inline">\(g\)</span> is birational and finite, Zariski’s Main Theorem implies that <span class="math inline">\(g: Z \xrightarrow{\sim} Y\)</span> is an isomorphism. Thus <span class="math inline">\(f_* \mathcal{O}_X = \mathcal{O}_Y\)</span>.</p>
 </div>
-<div id="lem-afs-cohomology-pic" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 1 (Invariance of Sections and Picard Group)</strong></span> Let <span class="math inline">\(\phi: X \to Y\)</span> be an algebraic fiber space.</p>
+</div>
+<div id="lem-afs-cohomology-pic" class="theorem kind-lemma">
+<div class="theorem-header is-clickable"><span><strong>Lemma 22.3.6</strong> (Invariance of Sections and Picard Group)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(\phi: X \to Y\)</span> be an algebraic fiber space.</p>
 <ol type="1">
 <li>For every line bundle <span class="math inline">\(L\)</span> on <span class="math inline">\(Y\)</span>, the natural map is an isomorphism: <span class="math display">\[
 H^0(Y, L) \xrightarrow{\;\sim\;} H^0(X, \phi^* L).
@@ -524,15 +579,20 @@ H^0(Y, L) \xrightarrow{\;\sim\;} H^0(X, \phi^* L).
 <li>The pullback homomorphism <span class="math inline">\(\phi^*: \operatorname{Pic}(Y) \hookrightarrow \operatorname{Pic}(X)\)</span> is injective.</li>
 </ol>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span></p>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
 <ol type="1">
 <li>By the projection formula, <span class="math inline">\(\phi_* \phi^* L \cong L \otimes_{\mathcal{O}_Y} \phi_* \mathcal{O}_X \cong L\)</span>. Taking global sections yields <span class="math inline">\(H^0(X, \phi^* L) \cong H^0(Y, \phi_* \phi^* L) \cong H^0(Y, L)\)</span>.</li>
 <li>If <span class="math inline">\(\phi^* L \cong \mathcal{O}_X\)</span>, then by (1), <span class="math inline">\(H^0(Y, L) \cong H^0(X, \mathcal{O}_X) \cong k\)</span> and <span class="math inline">\(H^0(Y, L^\vee) \cong H^0(X, \mathcal{O}_X) \cong k\)</span>. Choose non-zero sections <span class="math inline">\(s \in H^0(Y, L)\)</span> and <span class="math inline">\(t \in H^0(Y, L^\vee)\)</span>. The product <span class="math inline">\(s \otimes t \in H^0(Y, \mathcal{O}_Y) \cong k\)</span> is non-zero, hence a non-zero constant <span class="math inline">\(c \in k^\times\)</span>. Thus <span class="math inline">\(s\)</span> vanishes nowhere, which implies <span class="math inline">\(L \cong \mathcal{O}_Y\)</span>.</li>
 </ol>
 </div>
-<div id="def-stable-base-locus" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 4 (Stable Base Locus)</strong></span> Let <span class="math inline">\(D\)</span> be a Cartier divisor on <span class="math inline">\(X\)</span>.</p>
+</div>
+<div id="def-stable-base-locus" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 22.3.7</strong> (Stable Base Locus)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(D\)</span> be a Cartier divisor on <span class="math inline">\(X\)</span>.</p>
 <ol type="1">
 <li>The <strong>stable base locus</strong> of <span class="math inline">\(D\)</span> is the closed set: <span class="math display">\[
 \mathbf{B}(D) := \bigcap_{m \ge 1} \operatorname{Bs}(|mD|).
@@ -542,8 +602,10 @@ H^0(Y, L) \xrightarrow{\;\sim\;} H^0(X, \phi^* L).
 \]</span></li>
 </ol>
 </div>
-<div id="def-semiample" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 5 (Semiample Line Bundles)</strong></span> &nbsp;</p>
+</div>
+<div id="def-semiample" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 22.3.8</strong> (Semiample Line Bundles)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
 <ol type="1">
 <li>Define the semigroup of free multiples: <span class="math display">\[
 M(X, L) := \big\{ m \in \mathbb{N} \;\big|\; L^{\otimes m} \text{ is base-point-free} \big\}.
@@ -551,8 +613,11 @@ M(X, L) := \big\{ m \in \mathbb{N} \;\big|\; L^{\otimes m} \text{ is base-point-
 <li>A line bundle <span class="math inline">\(L\)</span> on <span class="math inline">\(X\)</span> is <strong>semiample</strong> if <span class="math inline">\(M(X, L) \neq \{0\}\)</span>, that is, some positive power <span class="math inline">\(L^{\otimes m}\)</span> is generated by its global sections.</li>
 </ol>
 </div>
-<div id="thm-semiample-fibration" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Semiample Fibration)</strong></span> Let <span class="math inline">\(X\)</span> be a normal projective variety and <span class="math inline">\(L\)</span> a semiample line bundle on <span class="math inline">\(X\)</span>. Then there exists an algebraic fiber space <span class="math inline">\(\phi: X \to Y\)</span> and an ample line bundle <span class="math inline">\(A\)</span> on <span class="math inline">\(Y\)</span> such that:</p>
+</div>
+<div id="thm-semiample-fibration" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.3.9</strong> (Semiample Fibration)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be a normal projective variety and <span class="math inline">\(L\)</span> a semiample line bundle on <span class="math inline">\(X\)</span>. Then there exists an algebraic fiber space <span class="math inline">\(\phi: X \to Y\)</span> and an ample line bundle <span class="math inline">\(A\)</span> on <span class="math inline">\(Y\)</span> such that:</p>
 <ol type="1">
 <li>For all <span class="math inline">\(m \in M(X, L)\)</span> sufficiently large, the morphism <span class="math inline">\(\phi_m: X \to \mathbb{P} H^0(X, L^{\otimes m})\)</span> has image <span class="math inline">\(Y_m \cong Y\)</span>, and factors through <span class="math inline">\(\phi\)</span>.</li>
 <li><span class="math inline">\(\phi^* A \cong L^{\otimes f(L)}\)</span>, and for <span class="math inline">\(k \gg 0\)</span>, the very ample embeddings <span class="math inline">\(\iota_{A^{\otimes k}}: Y \hookrightarrow \mathbb{P} H^0(Y, A^{\otimes k})\)</span> make the following diagram commute: <span class="math display">\[
@@ -564,13 +629,19 @@ X @&gt;{\phi_{kf}}&gt;&gt; Y_{kf}
 \]</span> In particular, the target variety <span class="math inline">\(Y\)</span> is normal and projective.</li>
 </ol>
 </div>
-<div id="def-bigness" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 6 (Big Line Bundles and Divisors)</strong></span> A line bundle <span class="math inline">\(L\)</span> on an irreducible projective variety <span class="math inline">\(X\)</span> is <strong>big</strong> if: <span class="math display">\[
+</div>
+<div id="def-bigness" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 22.3.10</strong> (Big Line Bundles and Divisors)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>A line bundle <span class="math inline">\(L\)</span> on an irreducible projective variety <span class="math inline">\(X\)</span> is <strong>big</strong> if: <span class="math display">\[
 \kappa(X, L) = \dim X.
 \]</span> A Cartier divisor <span class="math inline">\(D\)</span> is big if <span class="math inline">\(\mathcal{O}_X(D)\)</span> is big.</p>
 </div>
-<div id="thm-iitaka-fibration" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (The Iitaka Fibration Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be a normal projective variety and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span> with <span class="math inline">\(\kappa(X, L) &gt; 0\)</span>. Then there exists an algebraic fiber space between normal varieties: <span class="math display">\[
+</div>
+<div id="thm-iitaka-fibration" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.3.11</strong> (The Iitaka Fibration Theorem)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be a normal projective variety and <span class="math inline">\(L\)</span> a line bundle on <span class="math inline">\(X\)</span> with <span class="math inline">\(\kappa(X, L) &gt; 0\)</span>. Then there exists an algebraic fiber space between normal varieties: <span class="math display">\[
 \phi_\infty: X_\infty \longrightarrow Y_\infty,
 \]</span> unique up to birational equivalence, and a birational morphism <span class="math inline">\(u_\infty: X_\infty \to X\)</span>, such that for all <span class="math inline">\(k \in N(X, L)\)</span> sufficiently large, there exists a birational map <span class="math inline">\(v_k: Y_\infty \dashrightarrow Y_k\)</span> making the following diagram commute: <span class="math display">\[
 \begin{CD}
@@ -580,15 +651,18 @@ Y_\infty @&gt;{v_k}&gt;{\approx}&gt; Y_k
 \end{CD}
 \]</span> where <span class="math inline">\(Y_k := \operatorname{Im}(\phi_k) \subseteq \mathbb{P} H^0(X, L^{\otimes k})\)</span>.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Replacing <span class="math inline">\(L\)</span> by <span class="math inline">\(L^{\otimes e(L)}\)</span>, we may assume without loss of generality that <span class="math inline">\(e(L) = 1\)</span>.</p>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>Replacing <span class="math inline">\(L\)</span> by <span class="math inline">\(L^{\otimes e(L)}\)</span>, we may assume without loss of generality that <span class="math inline">\(e(L) = 1\)</span>.</p>
 <p><em>Step 1: The stable fibration for a sub-semigroup <span class="math inline">\(m\mathbb{N}\)</span>.</em> Fix <span class="math inline">\(m \in N(X, L)\)</span> such that <span class="math inline">\(\dim Y_m = \kappa(X, L)\)</span>. Let <span class="math inline">\(\mathfrak{b} = \mathfrak{b}(|L^{\otimes m}|) \subseteq \mathcal{O}_X\)</span> be the base ideal. Blow up <span class="math inline">\(\mathfrak{b}\)</span> and normalize to obtain a projective birational morphism: <span class="math display">\[
 u_m: X_{(m)} := \operatorname{Bl}_{\mathfrak{b}}(X)^\nu \longrightarrow X.
 \]</span> Let <span class="math inline">\(E_m\)</span> be the exceptional divisor on the blow-up, and <span class="math inline">\(F_m\)</span> its pullback to <span class="math inline">\(X_{(m)}\)</span>. Define: <span class="math display">\[
 M_m := u_m^* L^{\otimes m} \otimes_{\mathcal{O}_{X_{(m)}}} \mathcal{O}_{X_{(m)}}(-F_m).
-\]</span> Because <span class="math inline">\(u_m: X_{(m)} \to X\)</span> is a birational morphism between normal varieties, <a href="#prp-afs-function-fields" class="quarto-xref">Proposition&nbsp;3</a> implies that <span class="math inline">\(u_m\)</span> is an algebraic fiber space. By <a href="#lem-afs-cohomology-pic" class="quarto-xref">Lemma&nbsp;1</a>, <span class="math inline">\(H^0(X, L^{\otimes m}) \cong H^0(X_{(m)}, u_m^* L^{\otimes m})\)</span>. Since all sections vanish along <span class="math inline">\(F_m\)</span> by construction of the blow-up, restriction to <span class="math inline">\(F_m\)</span> is zero, yielding an isomorphism: <span class="math display">\[
+\]</span> Because <span class="math inline">\(u_m: X_{(m)} \to X\)</span> is a birational morphism between normal varieties, <strong>?@prp-afs-function-fields</strong> implies that <span class="math inline">\(u_m\)</span> is an algebraic fiber space. By <strong>?@lem-afs-cohomology-pic</strong>, <span class="math inline">\(H^0(X, L^{\otimes m}) \cong H^0(X_{(m)}, u_m^* L^{\otimes m})\)</span>. Since all sections vanish along <span class="math inline">\(F_m\)</span> by construction of the blow-up, restriction to <span class="math inline">\(F_m\)</span> is zero, yielding an isomorphism: <span class="math display">\[
 H^0(X_{(m)}, M_m) \cong H^0(X, L^{\otimes m}).
-\]</span> Consequently, <span class="math inline">\(M_m\)</span> is generated by its global sections and defines a morphism <span class="math inline">\(\phi_{M_m}: X_{(m)} \to \mathbb{P} H^0(X_{(m)}, M_m)\)</span>. By <a href="#thm-semiample-fibration" class="quarto-xref">Theorem&nbsp;1</a>, the Stein factorization of <span class="math inline">\(\phi_{M_m^{\otimes k}}\)</span> stabilizes for <span class="math inline">\(k \gg 0\)</span> to an algebraic fiber space: <span class="math display">\[
+\]</span> Consequently, <span class="math inline">\(M_m\)</span> is generated by its global sections and defines a morphism <span class="math inline">\(\phi_{M_m}: X_{(m)} \to \mathbb{P} H^0(X_{(m)}, M_m)\)</span>. By <strong>?@thm-semiample-fibration</strong>, the Stein factorization of <span class="math inline">\(\phi_{M_m^{\otimes k}}\)</span> stabilizes for <span class="math inline">\(k \gg 0\)</span> to an algebraic fiber space: <span class="math display">\[
 \phi_{(m)}: X_{(m)} \longrightarrow Y_{(m)}.
 \]</span> For every <span class="math inline">\(k \ge 1\)</span>, we have <span class="math inline">\(H^0(X_{(m)}, M_m^{\otimes k}) \subseteq H^0(X_{(m)}, u_m^* L^{\otimes mk})\)</span>, inducing a dominant rational projection <span class="math inline">\(\mu_k: Y_{mk} \dashrightarrow Y_{(m)}\)</span>. Since <span class="math inline">\(X_{(m)} \to Y_{(m)}\)</span> is an AFS, <span class="math inline">\(K(Y_{(m)})\)</span> is algebraically closed in <span class="math inline">\(K(X_{(m)})\)</span>. The extension <span class="math inline">\(K(Y_{mk})/K(Y_{(m)})\)</span> is algebraic and contained in <span class="math inline">\(K(X_{(m)})\)</span>, forcing: <span class="math display">\[
 K(Y_{mk}) = K(Y_{(m)}).
@@ -605,20 +679,26 @@ X_\infty \longrightarrow Y_\infty \xrightarrow{\quad w \quad} Y_{(p)} \times Y_{
 H^0(X_\infty, M_{pq}) \hookrightarrow H^0(X_\infty, u_\infty^* L^{\otimes k}).
 \]</span> This gives an induced dominant rational map <span class="math inline">\(v_k: Y_\infty \dashrightarrow Y_k\)</span>. Since <span class="math inline">\(\dim Y_k = \kappa(X, L) = \dim Y_\infty\)</span> and <span class="math inline">\(K(Y_\infty)\)</span> is algebraically closed in <span class="math inline">\(K(X_\infty)\)</span>, <span class="math inline">\(v_k\)</span> is birational. Uniqueness follows because any two such targets are birational to <span class="math inline">\(Y_k\)</span>.</p>
 </div>
-<div id="cor-iitaka-fibers" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Iitaka Dimension of the Fibers)</strong></span> Let <span class="math inline">\(\phi_\infty: X_\infty \to Y_\infty\)</span> be the Iitaka fibration associated with <span class="math inline">\(L\)</span>, and let <span class="math inline">\(L_\infty := u_\infty^* L\)</span>. For a very general closed point <span class="math inline">\(y \in Y_\infty\)</span> (that is, <span class="math inline">\(y \in Y_\infty \setminus \bigcup_{i=1}^\infty F_i\)</span> for countable proper closed subsets <span class="math inline">\(F_i \subsetneq Y_\infty\)</span>), the fiber <span class="math inline">\(F := X_{\infty, y} = \phi_\infty^{-1}(y)\)</span> satisfies: <span class="math display">\[
+</div>
+<div id="cor-iitaka-fibers" class="theorem kind-corollary">
+<div class="theorem-header is-clickable"><span><strong>Corollary 22.3.12</strong> (Iitaka Dimension of the Fibers)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(\phi_\infty: X_\infty \to Y_\infty\)</span> be the Iitaka fibration associated with <span class="math inline">\(L\)</span>, and let <span class="math inline">\(L_\infty := u_\infty^* L\)</span>. For a very general closed point <span class="math inline">\(y \in Y_\infty\)</span> (that is, <span class="math inline">\(y \in Y_\infty \setminus \bigcup_{i=1}^\infty F_i\)</span> for countable proper closed subsets <span class="math inline">\(F_i \subsetneq Y_\infty\)</span>), the fiber <span class="math inline">\(F := X_{\infty, y} = \phi_\infty^{-1}(y)\)</span> satisfies: <span class="math display">\[
 \kappa(F, L_\infty|_F) = 0.
 \]</span></p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By generic smoothness, a very general fiber <span class="math inline">\(F = X_{\infty, y}\)</span> is smooth and connected (by Zariski’s Main Theorem), hence integral.</p>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>By generic smoothness, a very general fiber <span class="math inline">\(F = X_{\infty, y}\)</span> is smooth and connected (by Zariski’s Main Theorem), hence integral.</p>
 <p>For all <span class="math inline">\(k \gg 0\)</span>, the rational map <span class="math inline">\(\phi_k \circ u_\infty\)</span> is defined along <span class="math inline">\(F\)</span> and contracts <span class="math inline">\(F\)</span> to a single point <span class="math inline">\(\phi_k(u_\infty(F)) = \{p_k\} \subseteq Y_k\)</span>. Thus the image of the restriction map: <span class="math display">\[
 \rho_k: H^0(X_\infty, L_\infty^{\otimes k}) \longrightarrow H^0(F, L_\infty^{\otimes k}|_F)
 \]</span> has dimension <span class="math inline">\(\le 1\)</span> for all <span class="math inline">\(k \ge 1\)</span>.</p>
 <p><em>Claim:</em> Fix a very ample line bundle <span class="math inline">\(B\)</span> on <span class="math inline">\(Y_\infty\)</span>. 1. There exists <span class="math inline">\(m_0 &gt; 0\)</span> such that <span class="math inline">\(H^0(X_\infty, L_\infty^{\otimes m_0} \otimes \phi_\infty^* B^\vee) \neq 0\)</span>. 2. For any fixed <span class="math inline">\(k\)</span> and all <span class="math inline">\(r \gg 0\)</span>, the restriction: <span class="math display">\[
    \beta_{k, r}: H^0(X_\infty, L_\infty^{\otimes k} \otimes \phi_\infty^* B^{\otimes r}) \longrightarrow H^0(F, L_\infty^{\otimes k} \otimes \phi_\infty^* B^{\otimes r}|_F) \cong H^0(F, L_\infty^{\otimes k}|_F)
    \]</span> is surjective.</p>
-<p><em>Proof of Claim:</em> For (1), by the proof of <a href="#thm-iitaka-fibration" class="quarto-xref">Theorem&nbsp;2</a>, there exists an ample line bundle <span class="math inline">\(A\)</span> on <span class="math inline">\(Y_\infty\)</span> such that <span class="math inline">\(\phi_\infty^* A \subseteq L_\infty^{\otimes m_0}\)</span>. Because <span class="math inline">\(A\)</span> is ample, <span class="math inline">\(A^{\otimes m_0} \otimes B^\vee\)</span> has a non-zero section for <span class="math inline">\(m_0 \gg 0\)</span>, yielding a non-zero section <span class="math inline">\(s \in H^0(X_\infty, L_\infty^{\otimes m_0} \otimes \phi_\infty^* B^\vee)\)</span>. For a very general fiber <span class="math inline">\(F\)</span>, <span class="math inline">\(s|_F \neq 0\)</span>.</p>
+<p><em>Proof of Claim:</em> For (1), by the proof of <strong>?@thm-iitaka-fibration</strong>, there exists an ample line bundle <span class="math inline">\(A\)</span> on <span class="math inline">\(Y_\infty\)</span> such that <span class="math inline">\(\phi_\infty^* A \subseteq L_\infty^{\otimes m_0}\)</span>. Because <span class="math inline">\(A\)</span> is ample, <span class="math inline">\(A^{\otimes m_0} \otimes B^\vee\)</span> has a non-zero section for <span class="math inline">\(m_0 \gg 0\)</span>, yielding a non-zero section <span class="math inline">\(s \in H^0(X_\infty, L_\infty^{\otimes m_0} \otimes \phi_\infty^* B^\vee)\)</span>. For a very general fiber <span class="math inline">\(F\)</span>, <span class="math inline">\(s|_F \neq 0\)</span>.</p>
 <p>For (2), by generic flatness, <span class="math inline">\(X_\infty \to Y_\infty\)</span> is flat over a neighborhood of the generic point. By Grauert’s Semicontinuity Theorem, <span class="math inline">\((\phi_\infty)_* L_\infty^{\otimes k}\)</span> is locally free near <span class="math inline">\(y\)</span>, and the fiber cohomology satisfies: <span class="math display">\[
 H^0(F, L_\infty^{\otimes k}|_F) \cong (\phi_\infty)_* L_\infty^{\otimes k} \otimes k(y).
 \]</span> Since <span class="math inline">\(B\)</span> is very ample on <span class="math inline">\(Y_\infty\)</span>, the sheaf <span class="math inline">\((\phi_\infty)_* L_\infty^{\otimes k} \otimes B^{\otimes r}\)</span> is generated by its global sections for <span class="math inline">\(r \gg 0\)</span>. Hence the evaluation map <span class="math inline">\(\beta_{k, r}\)</span> is surjective.</p>
@@ -636,23 +716,24 @@ h^0(F, L_\infty^{\otimes k}|_F) \le 1 \quad \text{for all } k \ge 1.
 \kappa(F, L_\infty|_F) = 0.
 \]</span></p>
 </div>
+</div>
 
 
 
 </main> <!-- /main -->
 <style>
-/* --------------------------------------------------------------------------
-   1. 侧边栏常驻与容器保护
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Math Notes · 晚到覆盖层（include-after-body）
+   职责：定理/证明折叠壳外观、目录条目（含 JS 动态挂载项）样式、
+         侧边栏与页脚微调。基础主题变量仍由 styles.css 提供。
+   ========================================================================== */
 
-
+/* 1. 阅读模式下侧栏常驻 --------------------------------------------------- */
 body.quarto-reader-mode #quarto-margin-sidebar {
   display: block !important;
 }
 
-/* --------------------------------------------------------------------------
-   2. 副标题与排版微调
-   -------------------------------------------------------------------------- */
+/* 2. 副标题与定理标题字号 ------------------------------------------------- */
 .quarto-title .subtitle,
 header#title-block-header .subtitle,
 p.subtitle.lead {
@@ -678,9 +759,7 @@ body.quarto-dark p.subtitle.lead {
   letter-spacing: 0.01em !important;
 }
 
-/* --------------------------------------------------------------------------
-   3. 紧凑左侧边栏留白与缩进
-   -------------------------------------------------------------------------- */
+/* 3. 紧凑左侧边栏 --------------------------------------------------------- */
 @media (min-width: 992px) {
   #quarto-sidebar,
   .sidebar-navigation {
@@ -703,6 +782,8 @@ body.quarto-dark p.subtitle.lead {
     padding-left: 0.2rem !important;
     padding-right: 0.2rem !important;
     white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;   /* 过长的章节名用省略号收尾，不再被硬裁切 */
   }
 
   #quarto-sidebar .menu-text {
@@ -710,9 +791,7 @@ body.quarto-dark p.subtitle.lead {
   }
 }
 
-/* --------------------------------------------------------------------------
-   4. 紧凑型页脚
-   -------------------------------------------------------------------------- */
+/* 4. 紧凑型页脚 ----------------------------------------------------------- */
 footer.footer,
 .nav-footer {
   padding-top: 0.2rem !important;
@@ -730,11 +809,8 @@ footer.footer,
   line-height: 1 !important;
 }
 
-/* --------------------------------------------------------------------------
-   5. 右侧目录标题 "ON THIS PAGE"
-   -------------------------------------------------------------------------- */
+/* 5. 目录标题 “ON THIS PAGE” ---------------------------------------------- */
 #toc-title,
-h2#toc-title,
 nav#TOC h2,
 .sidebar .toc-title {
   font-size: 0.82rem !important;
@@ -748,30 +824,29 @@ nav#TOC h2,
 }
 
 body.quarto-dark #toc-title,
-body.quarto-dark h2#toc-title,
 body.quarto-dark nav#TOC h2,
 body.quarto-dark .sidebar .toc-title {
   color: #94a3b8 !important;
 }
 
-/* --------------------------------------------------------------------------
-   6. 定理外观与折叠动画
-   -------------------------------------------------------------------------- */
-.theorem {
-  margin: 1.25rem 0 !important;
+/* 6. 定理与证明 ----------------------------------------------------------- */
+/* 共享外框：圆角、无内边距、裁切子元素 */
+.theorem,
+.proof {
   padding: 0 !important;
-  background-color: transparent !important;
+  background: transparent !important;
   border-radius: 8px !important;
-  border: 1px solid rgba(0, 0, 0, 0.09) !important;
-  border-left: 4.5px solid #2b6cb0 !important;
   overflow: hidden !important;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-body.quarto-dark .theorem,
-body.quarto-dark .proof {
-  border-color: rgba(255, 255, 255, 0.12) !important;
-  background-color: rgba(255, 255, 255, 0.02) !important;
+/* 定理：左侧色条由 --theorem-accent 决定，具体取值见下方各 kind */
+.theorem {
+  --theorem-accent: #2b6cb0;
+  margin: 1.25rem 0 !important;
+  border: 1px solid rgba(0, 0, 0, 0.09) !important;
+  border-left-width: 4.5px !important;
+  border-left-color: var(--theorem-accent) !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .theorem-header {
@@ -780,8 +855,6 @@ body.quarto-dark .proof {
   align-items: center !important;
   justify-content: space-between !important;
   padding: 0.55rem 0.95rem !important;
-  font-weight: 700 !important;
-  font-size: 1.05rem !important;
   line-height: 1.4 !important;
   background: transparent !important;
 }
@@ -799,7 +872,8 @@ body.quarto-dark .proof {
   background: transparent !important;
 }
 
-.theorem.is-folded .theorem-body {
+.theorem.is-folded .theorem-body,
+.proof.is-folded .proof-body {
   display: none !important;
 }
 
@@ -822,55 +896,62 @@ body.quarto-dark .proof {
   transform: rotate(-90deg);
 }
 
-/* 学术色彩映射 (日间 & 夜间) */
-.theorem.kind-definition { border-left-color: #1e40af !important; }
-.theorem.kind-definition > .theorem-header { color: #1e40af !important; }
-body.quarto-dark .theorem.kind-definition { border-left-color: #3b82f6 !important; }
-body.quarto-dark .theorem.kind-definition > .theorem-header { color: #60a5fa !important; }
+/* 学术色彩映射：每类环境只声明 4 个自定义属性（日间主色/夜间主色、日间标题色/夜间标题色） */
+.theorem > .theorem-header {
+  color: var(--theorem-title, inherit) !important;
+}
 
-.theorem.kind-lemma { border-left-color: #166534 !important; }
-.theorem.kind-lemma > .theorem-header { color: #166534 !important; }
-body.quarto-dark .theorem.kind-lemma { border-left-color: #22c55e !important; }
-body.quarto-dark .theorem.kind-lemma > .theorem-header { color: #4ade80 !important; }
+.theorem.kind-definition {
+  --theorem-accent: #1e40af;  --theorem-accent-dark: #3b82f6;
+  --theorem-title: #1e40af;   --theorem-title-dark: #60a5fa;
+}
 
-.theorem.kind-proposition { border-left-color: #6b21a8 !important; }
-.theorem.kind-proposition > .theorem-header { color: #6b21a8 !important; }
-body.quarto-dark .theorem.kind-proposition { border-left-color: #a855f7 !important; }
-body.quarto-dark .theorem.kind-proposition > .theorem-header { color: #c084fc !important; }
+.theorem.kind-lemma {
+  --theorem-accent: #166534;  --theorem-accent-dark: #22c55e;
+  --theorem-title: #166534;   --theorem-title-dark: #4ade80;
+}
 
-.theorem.kind-theorem { border-left-color: #991b1b !important; }
-.theorem.kind-theorem > .theorem-header { color: #991b1b !important; }
-body.quarto-dark .theorem.kind-theorem { border-left-color: #ef4444 !important; }
-body.quarto-dark .theorem.kind-theorem > .theorem-header { color: #f87171 !important; }
+.theorem.kind-proposition {
+  --theorem-accent: #6b21a8;  --theorem-accent-dark: #a855f7;
+  --theorem-title: #6b21a8;   --theorem-title-dark: #c084fc;
+}
 
-.theorem.kind-corollary { border-left-color: #c2410c !important; }
-.theorem.kind-corollary > .theorem-header { color: #c2410c !important; }
-body.quarto-dark .theorem.kind-corollary { border-left-color: #f97316 !important; }
-body.quarto-dark .theorem.kind-corollary > .theorem-header { color: #fb923c !important; }
+.theorem.kind-theorem {
+  --theorem-accent: #991b1b;  --theorem-accent-dark: #ef4444;
+  --theorem-title: #991b1b;   --theorem-title-dark: #f87171;
+}
 
-.theorem.kind-remark { border-left-color: #b45309 !important; }
-.theorem.kind-remark > .theorem-header { color: #b45309 !important; cursor: default !important; }
-body.quarto-dark .theorem.kind-remark { border-left-color: #f59e0b !important; }
-body.quarto-dark .theorem.kind-remark > .theorem-header { color: #fbbf24 !important; }
+.theorem.kind-corollary {
+  --theorem-accent: #c2410c;  --theorem-accent-dark: #f97316;
+  --theorem-title: #c2410c;   --theorem-title-dark: #fb923c;
+}
 
-.theorem.kind-example { border-left-color: #334155 !important; }
-.theorem.kind-example > .theorem-header { color: #334155 !important; }
-body.quarto-dark .theorem.kind-example { border-left-color: #64748b !important; }
-body.quarto-dark .theorem.kind-example > .theorem-header { color: #cbd5e1 !important; }
+.theorem.kind-remark {
+  --theorem-accent: #b45309;  --theorem-accent-dark: #f59e0b;
+  --theorem-title: #b45309;   --theorem-title-dark: #fbbf24;
+}
+
+.theorem.kind-example {
+  --theorem-accent: #334155;  --theorem-accent-dark: #64748b;
+  --theorem-title: #334155;   --theorem-title-dark: #cbd5e1;
+}
+
+/* remark 同时带 .proof 类，会被 .proof 的灰色左条覆盖，故用双类提高优先级取回环境色 */
+.theorem[class*="kind-"] {
+  border-left-color: var(--theorem-accent) !important;
+}
+
+/* 注记不可折叠，标题区不显示手型光标 */
+.theorem.kind-remark > .theorem-header {
+  cursor: default !important;
+}
 
 /* 证明环境 */
 .proof {
   margin: 0.9rem 0 1.35rem !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border-radius: 8px !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  border-left: 4px solid #64748b !important;
-  overflow: hidden !important;
-}
-
-body.quarto-dark .proof {
-  border-left-color: #94a3b8 !important;
+  border-left-width: 4px !important;
+  border-left-color: #64748b !important;
 }
 
 .proof-header {
@@ -885,21 +966,38 @@ body.quarto-dark .proof {
   font-size: 0.96rem !important;
 }
 
-body.quarto-dark .proof-header {
-  color: #94a3b8 !important;
-}
-
 .proof-body {
   padding: 0.35rem 0.9rem 0.65rem !important;
 }
 
-.proof.is-folded .proof-body {
-  display: none !important;
+/* 夜间：底色/边框统一淡化，左侧色条换用亮色系（放在基础规则之后以覆盖其 border-left） */
+body.quarto-dark .theorem,
+body.quarto-dark .proof {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background-color: rgba(255, 255, 255, 0.02) !important;
 }
 
-/* --------------------------------------------------------------------------
-   7. 右侧边栏条目与贯通标尺
-   -------------------------------------------------------------------------- */
+body.quarto-dark .theorem {
+  border-left-color: var(--theorem-accent-dark, rgba(255, 255, 255, 0.12)) !important;
+}
+
+body.quarto-dark .theorem[class*="kind-"] {
+  border-left-color: var(--theorem-accent-dark, rgba(255, 255, 255, 0.12)) !important;
+}
+
+body.quarto-dark .theorem > .theorem-header {
+  color: var(--theorem-title-dark, inherit) !important;
+}
+
+body.quarto-dark .proof {
+  border-left-color: #94a3b8 !important;
+}
+
+body.quarto-dark .proof-header {
+  color: #94a3b8 !important;
+}
+
+/* 7. 右侧目录条目与贯通标尺 ----------------------------------------------- */
 nav#TOC > ul {
   list-style: none !important;
   padding-left: 0 !important;
@@ -947,8 +1045,7 @@ body.quarto-dark .callout-toc-item a.nav-link:hover {
   background-color: rgba(96, 165, 250, 0.08) !important;
 }
 
-div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
-div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
+/* 激活态：同时覆盖 Quarto 自带高亮与 JS 挂载的自定义条目 */
 nav#TOC a.nav-link.active,
 nav#TOC a.nav-link.active-math-target,
 nav#TOC li.active > a.nav-link {
@@ -959,8 +1056,6 @@ nav#TOC li.active > a.nav-link {
   opacity: 1 !important;
 }
 
-body.quarto-dark div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
-body.quarto-dark div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
 body.quarto-dark nav#TOC a.nav-link.active,
 body.quarto-dark nav#TOC a.nav-link.active-math-target,
 body.quarto-dark nav#TOC li.active > a.nav-link {
@@ -968,365 +1063,349 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
   border-left-color: #60a5fa !important;
   background-color: rgba(96, 165, 250, 0.12) !important;
 }
+
+/* 键盘聚焦：与选中态可区分，且不改变布局 */
+nav#TOC a.nav-link:focus-visible,
+.callout-toc-item a.nav-link:focus-visible {
+  outline: 2px solid #2b6cb0 !important;
+  outline-offset: -2px;
+}
+
+body.quarto-dark nav#TOC a.nav-link:focus-visible,
+body.quarto-dark .callout-toc-item a.nav-link:focus-visible {
+  outline-color: #60a5fa !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. 窄屏（<992px）：右侧栏被 Quarto 整体隐藏，目录改由正文流内的折叠块承载
+   -------------------------------------------------------------------------- */
+.note-mobile-toc {
+  display: none;
+}
+
+/* 无目录条目时用 hidden 关掉，避免只剩一个空壳标题 */
+.note-mobile-toc[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 991.98px) {
+  .note-mobile-toc {
+    display: block;
+    margin: 0.75rem 0 1rem;
+    border: 1px solid var(--note-border);
+    border-radius: 0.5rem;
+    background-color: var(--note-paper);
+  }
+
+  .note-mobile-toc > summary {
+    cursor: pointer;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--note-muted);
+  }
+
+  .note-mobile-toc[open] > summary {
+    border-bottom: 1px solid var(--note-border);
+  }
+
+  .note-mobile-toc .note-mobile-toc-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.5rem 0.6rem 0.75rem;
+  }
+
+  /* 主题在窄屏把整个目录设成 display:none，搬进正文后必须显式恢复 */
+  .note-mobile-toc nav[role="doc-toc"] {
+    display: block !important;
+  }
+
+  /* 折叠块自带 summary 标题，目录内的同名标题不再重复显示 */
+  .note-mobile-toc #toc-title {
+    display: none !important;
+  }
+
+  /* 触屏点击热区加高 */
+  .note-mobile-toc nav#TOC a.nav-link {
+    padding-top: 0.45rem !important;
+    padding-bottom: 0.45rem !important;
+  }
+}
+
+/* Quarto 自带的浮层副本（仅在右侧栏与 margin 内容重叠时出现）同样保证可滚动 */
+#quarto-toc-toggle .quarto-sidebar-toggle-contents {
+  max-height: 70vh !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}
+
+/* 直接用 #锚点 打开页面（分享链接、前进/后退）时，同样避开吸顶导航栏 */
+.theorem,
+.proof {
+  scroll-margin-top: 4.8rem !important;
+}
 </style>
 
 <script>
+(function () {
+  "use strict";
 
+  /* 目录条目、定理编号、折叠外壳都由 _filters/theorem-toc.lua 在构建时写好，
+     这里只负责交互：点击跳转、选中态、折叠开关、窄屏摆放。 */
 
+  const TOC_SCOPE = 'nav[role="doc-toc"]';
+  const TOC_LINK = 'a.nav-link';
+  const SCROLL_TARGETS = 'section[id], h2[id], h3[id], .theorem[id]';
+  const SCROLL_THRESHOLD = 140;   /* 判定“当前小节”的顶部偏移 */
+  const NAV_FALLBACK_HEIGHT = 55; /* 吸顶导航栏高度兜底值 */
+  const SCROLL_GAP = 18;          /* 锚点与导航栏之间的呼吸间距 */
+  const MOBILE_MEDIA = '(max-width: 991.98px)';
 
-(function() {
-  const ENV_CONFIG = {
-    definition:  { full: 'Definition',  short: 'Def' },
-    lemma:       { full: 'Lemma',       short: 'Lem' },
-    proposition: { full: 'Proposition', short: 'Prop' },
-    theorem:     { full: 'Theorem',     short: 'Thm' },
-    corollary:   { full: 'Corollary',   short: 'Cor' },
-    remark:      { full: 'Remark',      short: 'Rem' },
-    example:     { full: 'Example',     short: 'Ex' }
-  };
+  let tocTargets = [];
+  let spyBound = false;
+  let mobileHost = null;
+  let mobileMedia = null;
+  let tocHome = null;         /* nav#TOC 在桌面端的父容器（右侧栏） */
+  let tocNextSibling = null;  /* 以及它原来的下一个兄弟节点，便于原位放回 */
 
-  const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+  /* ------------------------------------------------------------ 目录跳转 */
 
-  function getSecPrefix() {
-    const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
-    if (sec) {
-      const clean = sec.replace(/["']/g, '');
-      return clean.endsWith('.') ? clean : clean + '.';
+  /* 链接 href 形如 "#thm-fujita-vanishing"，取出解码后的锚点 id */
+  function tocHrefId(link) {
+    const raw = link.getAttribute('href') || '';
+    const pos = raw.indexOf('#');
+    if (pos === -1) return '';
+    const hash = raw.slice(pos + 1);
+    try {
+      return decodeURIComponent(hash);
+    } catch (err) {
+      return hash;
     }
-
-    const titleEl = document.querySelector('h1.title, .quarto-title h1, header#title-block-header h1, #title-block-header .title');
-    const titleText = titleEl ? titleEl.textContent.trim() : document.title.trim();
-    const match = titleText.match(/^(\d+(?:\.\d+)*)\.?\s*/);
-    if (match) {
-      return match[1] + '.';
-    }
-    return "22.0.";
   }
 
-  function ensureTocList() {
-    let list = document.querySelector('#TOC > ul') ||
-               document.querySelector('nav[role="doc-toc"] > ul') ||
-               document.querySelector('#quarto-toc-target > ul');
-    if (list) return list;
+  /* 滚动留白：吸顶导航栏高度 + 固定呼吸间距（桌面 / 移动一致） */
+  function tocScrollOffset() {
+    const navbar = document.querySelector('.navbar, header.fixed-top');
+    const navHeight = navbar ? navbar.getBoundingClientRect().height : NAV_FALLBACK_HEIGHT;
+    return navHeight + SCROLL_GAP;
+  }
 
-    let marginSidebar = document.querySelector('#quarto-margin-sidebar, .margin-sidebar');
-    if (marginSidebar) {
-      marginSidebar.style.display = 'block';
-      let nav = marginSidebar.querySelector('#TOC');
-      if (!nav) {
-        nav = document.createElement('nav');
-        nav.id = 'TOC';
-        nav.setAttribute('role', 'doc-toc');
-        nav.className = 'toc-active';
-        nav.innerHTML = '<h2 id="toc-title">On this page</h2><ul></ul>';
-        marginSidebar.appendChild(nav);
+  function scrollToAnchor(target) {
+    // 目标若在折叠中的定理/证明里（或本身被折叠），逐层展开，否则跳过去看不到内容
+    let folded = target.closest('.is-folded');
+    while (folded) {
+      folded.classList.remove('is-folded');
+      folded = folded.parentElement ? folded.parentElement.closest('.is-folded') : null;
+    }
+
+    const top = target.getBoundingClientRect().top + window.scrollY - tocScrollOffset();
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+
+  /* 全站唯一选中态：桌面 nav 与窄屏副本里的同一锚点一起高亮 */
+  function setTocActive(id) {
+    document.querySelectorAll(TOC_SCOPE + ' ' + TOC_LINK).forEach(function (a) {
+      const on = id !== '' && tocHrefId(a) === id;
+      a.classList.toggle('active', on);
+      a.classList.toggle('active-math-target', on);
+    });
+  }
+
+  function tocNav() {
+    return document.querySelector('#quarto-margin-sidebar ' + TOC_SCOPE) || document.querySelector(TOC_SCOPE);
+  }
+
+  /* -------------------------------------------- 窄屏：目录挪进正文流折叠块 */
+
+  function ensureInlineToc() {
+    if (mobileHost && document.contains(mobileHost)) return mobileHost;
+
+    const content = document.querySelector('#quarto-document-content') || document.querySelector('main');
+    if (!content) return null;
+
+    mobileHost = document.createElement('details');
+    mobileHost.id = 'note-mobile-toc';
+    mobileHost.className = 'note-mobile-toc';
+    mobileHost.innerHTML = '<summary>On this page</summary><div class="note-mobile-toc-body"></div>';
+
+    // 放在标题块之后，正文之前
+    const titleBlock = content.querySelector('#title-block-header');
+    if (titleBlock && titleBlock.nextSibling) {
+      content.insertBefore(mobileHost, titleBlock.nextSibling);
+    } else {
+      content.insertBefore(mobileHost, content.firstChild);
+    }
+    return mobileHost;
+  }
+
+  function syncMobileToc() {
+    const nav = tocNav();
+    if (!nav) return;   // 页面没有右侧目录时不必建折叠块
+
+    const host = ensureInlineToc();
+    if (!host) return;
+
+    if (!tocHome && nav.parentElement !== host) {
+      tocHome = nav.parentElement;
+      tocNextSibling = nav.nextSibling;
+    }
+
+    const onMobile = mobileMedia ? mobileMedia.matches : window.innerWidth <= 991;
+    const useInline = onMobile && !!nav.querySelector(TOC_LINK);   // 有目录才值得放进正文
+    host.hidden = !useInline;
+
+    if (useInline) {
+      const body = host.querySelector('.note-mobile-toc-body');
+      if (nav.parentElement !== body) body.appendChild(nav);
+    } else if (tocHome && nav.parentElement !== tocHome) {
+      const anchor = tocNextSibling && tocNextSibling.parentNode === tocHome ? tocNextSibling : null;
+      tocHome.insertBefore(nav, anchor);   // 原位放回右侧栏
+    }
+  }
+
+  /* 跳转后收起浮层/折叠块，否则会挡住刚滚到的内容 */
+  function closeMobileToc() {
+    if (mobileHost) mobileHost.open = false;
+
+    const toggle = document.getElementById('quarto-toc-toggle');
+    if (!toggle || !toggle.classList.contains('expanded')) return;
+    const title = toggle.querySelector('.quarto-sidebar-toggle-title');
+    if (title) title.click();   // 交回 Quarto 自身的开关逻辑，保持其内部状态一致
+  }
+
+  /* ---------------------------------------------------------- 点击代理 */
+
+  function onDocumentClick(event) {
+    if (event.defaultPrevented || event.button !== 0) return;
+
+    const target = event.target;
+
+    // 1) 目录项：统一接管滚动、地址栏哈希与高亮
+    const link = target.closest ? target.closest('a') : null;
+    if (link && link.closest(TOC_SCOPE)) {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;  // 保留新标签页等默认行为
+      const id = tocHrefId(link);
+      const anchor = id ? document.getElementById(id) : null;
+      if (anchor) {
+        // 拦在 Quarto 自带的点击处理之前，避免重复滚动
+        event.preventDefault();
+        event.stopPropagation();
+        scrollToAnchor(anchor);
+        setTocActive(id);
+        closeMobileToc();
+        history.pushState(null, null, '#' + id);
       }
-      return nav.querySelector('ul');
+      return;
     }
-    return null;
-  }
 
-  function detectKind(node, titleText) {
-    const id = (node.id || "").toLowerCase();
-    const cls = (node.className || "").toLowerCase();
-    const title = (titleText || "").toLowerCase();
-
-    if (id.startsWith('rem-') || cls.includes('remark') || /^remark\b/.test(title)) return 'remark';
-    if (id.startsWith('exm-') || cls.includes('example') || /^example\b/.test(title)) return 'example';
-    if (id.startsWith('def-') || cls.includes('definition') || /^definition\b/.test(title)) return 'definition';
-    if (id.startsWith('lem-') || cls.includes('lemma') || /^lemma\b/.test(title)) return 'lemma';
-    if (id.startsWith('prp-') || cls.includes('proposition') || /^proposition\b/.test(title)) return 'proposition';
-    if (id.startsWith('cor-') || cls.includes('corollary') || /^corollary\b/.test(title)) return 'corollary';
-    if (id.startsWith('thm-') || cls.includes('theorem') || /^theorem\b/.test(title)) return 'theorem';
-    return 'theorem';
-  }
-
-  function triggerMathTypeset(elements) {
-    if (window.MathJax && window.MathJax.typesetPromise) {
-      window.MathJax.typesetPromise(elements).catch(function(err) {});
-    } else if (window.MathJax && window.MathJax.Hub) {
-      window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, elements]);
+    // 2) 折叠头：展开/收起定理或证明
+    const header = target.closest ? target.closest('.theorem-header.is-clickable, .proof-header') : null;
+    if (header && header.parentElement) {
+      header.parentElement.classList.toggle('is-folded');
     }
   }
 
-  // 核心：处理定理并绑定平滑跳转
-  function processTheorems() {
-    const secPrefix = getSecPrefix();
-    let counter = 0;
+  /* -------------------------------------------------------- 侧边栏排序 */
 
-    const tocList = ensureTocList();
-    if (!tocList) return;
+  function textOf(el) {
+    const label = el.querySelector('.sidebar-item-text, .menu-text, a');
+    return (label && label.textContent.trim()) || el.textContent.trim();
+  }
 
-    // 清理旧自定义条目
-    tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
+  function sortSidebarNumerically() {
+    document.querySelectorAll('#quarto-sidebar ul').forEach(function (ul) {
+      const items = Array.from(ul.children).filter(function (el) {
+        return el.classList.contains('sidebar-item');
+      });
+      if (items.length <= 1) return;
 
-    const pageNodes = document.querySelectorAll(
-      'main h2, main h3, #quarto-document-content h2, #quarto-document-content h3, .theorem, .remark, [id^="def-"], [id^="lem-"], [id^="prp-"], [id^="thm-"], [id^="cor-"], [id^="rem-"], [id^="exm-"]'
-    );
-
-    let lastTocAnchor = null;
-    const headersToTypeset = [];
-
-    pageNodes.forEach(node => {
-      if (node.tagName === 'H2' || node.tagName === 'H3') {
-        if (node.id) {
-          const a = tocList.querySelector(`a[href="#${CSS.escape(node.id)}"]`);
-          if (a) lastTocAnchor = a.closest('li');
-        }
-        return;
-      }
-
-      // 如果未做过 DOM 改写，执行改写；如果已经改写过，仅补充挂载到目录
-      if (node.dataset.mathProcessed !== "true") {
-        node.dataset.mathProcessed = "true";
-
-        const titleSpan = node.querySelector('.theorem-title');
-        let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
-        let subTitle = "";
-
-        const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
-        if (match) {
-          subTitle = ` (${match[1].trim()})`;
-        }
-        if (titleSpan) titleSpan.remove();
-
-        const firstP = node.querySelector(':scope > p:first-child');
-        if (firstP && firstP.textContent.trim() === '') firstP.remove();
-
-        const kind = detectKind(node, rawTitleHtml);
-        const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
-        const numStr = secPrefix + counter;
-        counter++;
-
-        const canFold = (kind !== 'remark');
-        node.classList.add('theorem', `kind-${kind}`);
-        node.dataset.kindShort = conf.short;
-        node.dataset.kindFull = conf.full;
-        node.dataset.numStr = numStr;
-        node.dataset.subTitle = subTitle;
-
-        const header = document.createElement('div');
-        header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
-        header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
-
-        const body = document.createElement('div');
-        body.className = 'theorem-body';
-        while (node.firstChild) {
-          body.appendChild(node.firstChild);
-        }
-
-        node.appendChild(header);
-        node.appendChild(body);
-        headersToTypeset.push(header);
-
-        if (canFold) {
-          header.addEventListener('click', () => {
-            node.classList.toggle('is-folded');
-          });
-        }
-
-        if (!node.id) {
-          node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
-        } else if (node.id.includes('.')) {
-          node.id = node.id.replace(/\./g, '-');
-        }
-      }
-
-      const targetId = node.id;
-      const shortLabel = node.dataset.kindShort || "Thm";
-      const numLabel = node.dataset.numStr || "";
-      const subLabel = node.dataset.subTitle || "";
-      const fullLabel = node.dataset.kindFull || "Theorem";
-
-      // 挂载到右侧 TOC 目录
-      const li = document.createElement('li');
-      li.setAttribute('data-callout-toc', 'true');
-      li.className = 'nav-item callout-toc-item';
-
-      const a = document.createElement('a');
-      a.className = 'nav-link';
-      a.href = `#${targetId}`;
-      a.textContent = `${shortLabel} ${numLabel}`;
-      if (subLabel) a.title = `${fullLabel} ${numLabel}${subLabel}`;
-
-      // ====== 终极修复：百分之百生效的精准跳转 ======
-      a.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-
-        const target = document.getElementById(targetId);
-        if (target) {
-          // 1. 如果该定理处于折叠状态，点击立刻平滑展开
-          if (target.classList.contains('is-folded')) {
-            target.classList.remove('is-folded');
-          }
-
-          // 2. 计算绝对距离，避开吸顶导航栏与外层容器干扰
-          const navbar = document.querySelector('.navbar, header.fixed-top');
-          const navH = navbar ? navbar.getBoundingClientRect().height : 55;
-          const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 18;
-
-          // 3. 执行平滑滚动
-          window.scrollTo({
-            top: targetY,
-            behavior: 'smooth'
-          });
-
-          // 4. 同步点亮目录项
-          tocList.querySelectorAll('a.nav-link').forEach(link => {
-            link.classList.remove('active', 'active-math-target');
-          });
-          a.classList.add('active', 'active-math-target');
-
-          // 5. 更新地址栏哈希
-          if (history.pushState) {
-            history.pushState(null, null, `#${targetId}`);
-          }
-        }
+      // numeric:true 让 "10" 排在 "2" 之后
+      items.sort(function (a, b) {
+        return textOf(a).localeCompare(textOf(b), undefined, { numeric: true, sensitivity: 'base' });
       });
 
-      li.appendChild(a);
+      items.forEach(function (item) { ul.appendChild(item); });
+    });
+  }
 
-      if (lastTocAnchor && lastTocAnchor.parentNode) {
-        lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
-        lastTocAnchor = li;
+  /* -------------------------------------------------------- 目录滚动高亮 */
+
+  function collectTargets() {
+    return Array.from(document.querySelectorAll(SCROLL_TARGETS)).filter(function (el) {
+      return !el.closest(TOC_SCOPE);   // 排除目录自身的标题
+    });
+  }
+
+  /* 选出「当前所在项」：最后一个顶部已越过阈值的小节/定理锚点 */
+  function updateActiveTocLink() {
+    if (!tocTargets.length) return;
+
+    let current = null;
+    for (const el of tocTargets) {
+      if (el.getBoundingClientRect().top <= SCROLL_THRESHOLD) {
+        current = el;
       } else {
-        tocList.appendChild(li);
-        lastTocAnchor = li;
+        break;
       }
-    });
-
-    if (headersToTypeset.length > 0) {
-      triggerMathTypeset(headersToTypeset);
     }
+    if (!current && window.scrollY < 120) current = tocTargets[0];
+    if (!current || !current.id) return;
+
+    setTocActive(current.id);
   }
 
-  // 自然数排序侧边栏
-function sortSidebarNumerically() {
-  const sidebarLists = document.querySelectorAll('#quarto-sidebar ul');
-  sidebarLists.forEach(ul => {
-    // 获取当前列表下的所有侧边栏条目
-    const items = Array.from(ul.children).filter(el => el.classList.contains('sidebar-item'));
-    if (items.length <= 1) return;
+  function init() {
+    sortSidebarNumerically();
+    syncMobileToc();
 
-    // 使用 numeric: true 开启自然数排序（自动识别 10 > 2）
-    items.sort((a, b) => {
-      const textA = a.querySelector('.sidebar-item-text, .menu-text, a')?.textContent.trim() || a.textContent.trim();
-      const textB = b.querySelector('.sidebar-item-text, .menu-text, a')?.textContent.trim() || b.textContent.trim();
-      return textA.localeCompare(textB, undefined, { numeric: true, sensitivity: 'base' });
-    });
+    // 监听只绑定一次；重复调用只刷新锚点缓存与高亮
+    if (!spyBound) {
+      spyBound = true;
 
-    // 将排序后的元素按新顺序重新插入 DOM
-    items.forEach(item => ul.appendChild(item));
-  });
-}
-  function processProofs() {
-    const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
-    proofs.forEach(proof => {
-      if (proof.dataset.mathProcessed === "true") return;
-      proof.dataset.mathProcessed = "true";
-
-      let proofLabel = "Proof.";
-      const firstP = proof.querySelector('p');
-      if (firstP) {
-        const titleSpan = firstP.querySelector('.proof-title');
-        if (titleSpan) {
-          proofLabel = titleSpan.textContent.trim();
-          titleSpan.remove();
-        } else {
-          const em = firstP.querySelector('em');
-          if (em && /proof/i.test(em.textContent)) {
-            proofLabel = em.textContent.trim();
-            em.remove();
-          }
-        }
-      }
-
-      const header = document.createElement('div');
-      header.className = 'proof-header';
-      header.innerHTML = `<span><em>${proofLabel}</em></span>${CHEVRON_SVG}`;
-
-      const body = document.createElement('div');
-      body.className = 'proof-body';
-      while (proof.firstChild) {
-        body.appendChild(proof.firstChild);
-      }
-
-      proof.appendChild(header);
-      proof.appendChild(body);
-
-      proof.classList.add('is-folded');
-
-      header.addEventListener('click', () => {
-        proof.classList.toggle('is-folded');
-      });
-    });
-  }
-
-  function initScrollSpy() {
-    const tocList = ensureTocList();
-    if (!tocList) return;
-
-    function onScroll() {
-      const targets = Array.from(document.querySelectorAll('main h2[id], main h3[id], #quarto-document-content h2[id], #quarto-document-content h3[id], .theorem[id]'));
-      if (!targets.length) return;
-
-      const threshold = 140;
-      let current = null;
-
-      for (const el of targets) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= threshold) {
-          current = el;
-        } else {
-          break;
-        }
-      }
-
-      if (!current && window.scrollY < 120) {
-        current = targets[0];
-      }
-
-      if (current) {
-        const allLinks = tocList.querySelectorAll('a.nav-link');
-        allLinks.forEach(a => {
-          a.classList.remove('active', 'active-math-target');
+      let ticking = false;
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          updateActiveTocLink();
         });
+      }, { passive: true });
 
-        const activeA = tocList.querySelector(`a[href="#${CSS.escape(current.id)}"]`);
-        if (activeA) {
-          activeA.classList.add('active', 'active-math-target');
-        }
+      document.addEventListener('click', onDocumentClick, true);
+
+      // Quarto 自带的 scrollspy 也会加 .active；等它更新后（rAF 晚一拍）再确认唯一高亮
+      window.addEventListener('quarto-sectionChanged', function () {
+        requestAnimationFrame(updateActiveTocLink);
+      });
+
+      // 跨过 992px 断点时，在「右侧栏」与「正文内折叠块」之间搬运目录
+      if (window.matchMedia) {
+        mobileMedia = window.matchMedia(MOBILE_MEDIA);
+        const handleBreakpoint = function () { syncMobileToc(); };
+        if (mobileMedia.addEventListener) mobileMedia.addEventListener('change', handleBreakpoint);
+        else if (mobileMedia.addListener) mobileMedia.addListener(handleBreakpoint);
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    setTimeout(onScroll, 150);
-  }
-
-  // 严格执行控制，彻底消除二次清空 Bug
-  let isExecuting = false;
-  function run() {
-    if (isExecuting) return;
-    isExecuting = true;
-    sortSidebarNumerically(); // <--- 在这里调用
-    processTheorems();
-    processProofs();
-    initScrollSpy();
-    setTimeout(() => { isExecuting = false; }, 200);
+    tocTargets = collectTargets();
+    setTimeout(updateActiveTocLink, 150);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run);
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    run();
+    init();
   }
-  window.addEventListener('load', run);
+  window.addEventListener('load', init, { once: true });
 
-  // 切换深浅模式时，重新对齐挂载
-  window.addEventListener('quarto-color-scheme-change', () => {
-    setTimeout(run, 150);
+  // 深浅色切换后重新对齐
+  window.addEventListener('quarto-color-scheme-change', function () {
+    setTimeout(init, 150);
   });
 })();
 </script>
@@ -1334,15 +1413,50 @@ function sortSidebarNumerically() {
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -1417,11 +1531,30 @@ function sortSidebarNumerically() {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/losergh\.github\.io\/note\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1435,8 +1568,70 @@ function sortSidebarNumerically() {
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1450,6 +1645,7 @@ function sortSidebarNumerically() {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1612,44 +1808,54 @@ function sortSidebarNumerically() {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1748,7 +1954,10 @@ function sortSidebarNumerically() {
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
       <a href="../22_positivity/22.2 Cones.html" class="pagination-link" aria-label="22.2 Cones">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22.2 Cones</span>

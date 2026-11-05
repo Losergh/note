@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-10-26">
+<meta name="dcterms.date" content="2026-11-05">
 
 <title>22.8 Analytic Topology – Math Notes</title>
 <style>
@@ -41,18 +41,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../image/1.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-aea0307008146ee079b1533de64c4571.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-10aed12f2e75d254f234caddaa5283e4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-aea0307008146ee079b1533de64c4571.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8aa7dfeb8eb95bdcfa4dc6a7b561006e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-02146ddba7e175375472b78443451085.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8aa7dfeb8eb95bdcfa4dc6a7b561006e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -113,7 +114,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -136,6 +137,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -165,13 +167,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -265,6 +273,7 @@ window.Quarto = {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -279,14 +288,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Math Notes</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -299,17 +308,17 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.8 Analytic Topology.html">22.8 Analytic Topology</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.8 Analytic Topology.html">22.8 Analytic Topology</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -320,7 +329,7 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
         <div class="sidebar-tools-main">
     <div id="quarto-search" class="quarto-navigation-tool px-1" title="Search"></div>
 </div>
@@ -329,12 +338,12 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../22_positivity/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Positivity in AG</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Positivity in AG</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Positivity in AG">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../22_positivity/22.0 Preliminaries.html" class="sidebar-item-text sidebar-link">
@@ -408,14 +417,31 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+    <ul>
+    <li class="nav-item callout-toc-item"><a href="#exm-stein-homotopy-type" id="toc-exm-stein-homotopy-type" class="nav-link active" data-scroll-target="#exm-stein-homotopy-type" title="Example 22.8.0 (Homotopy Type of Stein Manifolds)">Ex 22.8.0</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-morse-exhaustion" id="toc-def-morse-exhaustion" class="nav-link" data-scroll-target="#def-morse-exhaustion" title="Definition 22.8.1 (Morse Functions and Exhaustion Functions)">Def 22.8.1</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-existence-morse" id="toc-thm-existence-morse" class="nav-link" data-scroll-target="#thm-existence-morse" title="Theorem 22.8.2 (Existence of Distance Morse Functions)">Thm 22.8.2</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-morse-cw-complex" id="toc-thm-morse-cw-complex" class="nav-link" data-scroll-target="#thm-morse-cw-complex" title="Theorem 22.8.3 (CW Complex from an Exhaustion Morse Function)">Thm 22.8.3</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-andreotti-frankel" id="toc-thm-andreotti-frankel" class="nav-link" data-scroll-target="#thm-andreotti-frankel" title="Theorem 22.8.4 (Andreotti-Frankel Theorem)">Thm 22.8.4</a></li>
+    <li class="nav-item callout-toc-item"><a href="#cor-smooth-affine-cw" id="toc-cor-smooth-affine-cw" class="nav-link" data-scroll-target="#cor-smooth-affine-cw" title="Corollary 22.8.5 (Smooth Affine Varieties Have Finite Homotopy Type)">Cor 22.8.5</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-artin-grothendieck" id="toc-thm-artin-grothendieck" class="nav-link" data-scroll-target="#thm-artin-grothendieck" title="Theorem 22.8.6 (Artin-Grothendieck Vanishing Theorem)">Thm 22.8.6</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-lefschetz-hyperplane" id="toc-thm-lefschetz-hyperplane" class="nav-link" data-scroll-target="#thm-lefschetz-hyperplane" title="Theorem 22.8.7 (Lefschetz Hyperplane Theorem)">Thm 22.8.7</a></li>
+    <li class="nav-item callout-toc-item"><a href="#lem-lefschetz-duality" id="toc-lem-lefschetz-duality" class="nav-link" data-scroll-target="#lem-lefschetz-duality" title="Lemma 22.8.8 (Lefschetz Duality)">Lem 22.8.8</a></li>
+    <li class="nav-item callout-toc-item"><a href="#cor-connectedness-picard-ample" id="toc-cor-connectedness-picard-ample" class="nav-link" data-scroll-target="#cor-connectedness-picard-ample" title="Corollary 22.8.9 (Connectedness and Picard Group of Ample Divisors)">Cor 22.8.9</a></li>
+    <li class="nav-item callout-toc-item"><a href="#cor-hodge-restriction-ufd" id="toc-cor-hodge-restriction-ufd" class="nav-link" data-scroll-target="#cor-hodge-restriction-ufd" title="Corollary 22.8.10">Cor 22.8.10</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-barth" id="toc-thm-barth" class="nav-link" data-scroll-target="#thm-barth" title="Theorem 22.8.11 (Barth’s Theorem)">Thm 22.8.11</a></li>
+    <li class="nav-item callout-toc-item"><a href="#cor-barth-picard" id="toc-cor-barth-picard" class="nav-link" data-scroll-target="#cor-barth-picard" title="Corollary 22.8.12 (Picard Group of Subvarieties of Small Codimension)">Cor 22.8.12</a></li>
+    </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.8 Analytic Topology.html">22.8 Analytic Topology</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../22_positivity/index.html">Positivity in AG</a></li><li class="breadcrumb-item"><a href="../22_positivity/22.8 Analytic Topology.html">22.8 Analytic Topology</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">22.8 Analytic Topology</h1>
 <p class="subtitle lead">Morse Theory, Andreotti-Frankel Theorem, Lefschetz Hyperplane Theorem, and Barth’s Theorem</p>
@@ -429,7 +455,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 26, 2026</p>
+      <p class="date">November 5, 2026</p>
     </div>
   </div>
   
@@ -441,8 +467,10 @@ window.Quarto = {
 </header>
 
 
-<div id="exm-stein-homotopy-type" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1 (Homotopy Type of Stein Manifolds)</strong></span> Consider the closed complex submanifold of <span class="math inline">\(\mathbb{C}^2\)</span> defined by: <span class="math display">\[
+<div id="exm-stein-homotopy-type" class="theorem kind-example">
+<div class="theorem-header is-clickable"><span><strong>Example 22.8.0</strong> (Homotopy Type of Stein Manifolds)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Consider the closed complex submanifold of <span class="math inline">\(\mathbb{C}^2\)</span> defined by: <span class="math display">\[
 V = V\big(w \sin(\pi z) - 1\big) = \left\{ (z, w) \in \mathbb{C}^2 \;\middle|\; w \sin(\pi z) = 1 \right\} \subseteq \mathbb{C}^2.
 \]</span> Then <span class="math inline">\(V\)</span> is biholomorphic to the punctured complex plane <span class="math inline">\(\mathbb{C} \setminus \mathbb{Z}\)</span> via the biholomorphism: <span class="math display">\[
 V \xrightarrow{\;\sim\;} \mathbb{C} \setminus \mathbb{Z}, \quad (z, w) \longmapsto z, \qquad z \longmapsto \left(z, \frac{1}{\sin(\pi z)}\right).
@@ -452,11 +480,14 @@ V \simeq \mathbb{C} \setminus \mathbb{Z} \simeq \bigvee_{n \in \mathbb{Z}} S^1.
 H^1_{\mathrm{sing}}(V, \mathbb{Z}) \cong \bigoplus_{n \in \mathbb{Z}} \mathbb{Z}, \qquad H^i_{\mathrm{sing}}(V, \mathbb{Z}) = 0 \quad \text{for all } i \ge 2.
 \]</span></p>
 <p><strong>Question:</strong> Is every Stein manifold (in particular, any closed complex submanifold of <span class="math inline">\(\mathbb{C}^N\)</span>) of complex dimension <span class="math inline">\(n\)</span> homotopy equivalent to a CW complex of real dimension at most <span class="math inline">\(n\)</span>?</p>
-<p><strong>Answer:</strong> Yes! This is the celebrated <strong>Andreotti-Frankel Theorem</strong> (<a href="#thm-andreotti-frankel" class="quarto-xref">Theorem&nbsp;3</a>).</p>
+<p><strong>Answer:</strong> Yes! This is the celebrated <strong>Andreotti-Frankel Theorem</strong> (<strong>?@thm-andreotti-frankel</strong>).</p>
+</div>
 </div>
 <hr>
-<div id="def-morse-exhaustion" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (Morse Functions and Exhaustion Functions)</strong></span> Let <span class="math inline">\(M \subseteq \mathbb{R}^N\)</span> be a smooth real manifold of dimension <span class="math inline">\(m \ge 2\)</span>, and let <span class="math inline">\(f \in C^\infty(M, \mathbb{R})\)</span>.</p>
+<div id="def-morse-exhaustion" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 22.8.1</strong> (Morse Functions and Exhaustion Functions)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(M \subseteq \mathbb{R}^N\)</span> be a smooth real manifold of dimension <span class="math inline">\(m \ge 2\)</span>, and let <span class="math inline">\(f \in C^\infty(M, \mathbb{R})\)</span>.</p>
 <ol type="1">
 <li><span class="math inline">\(f\)</span> is called an <strong>exhaustion function</strong> if for every <span class="math inline">\(a \in \mathbb{R}\)</span>, the sublevel set <span class="math inline">\(f^{-1}((-\infty, a])\)</span> is compact in <span class="math inline">\(M\)</span>.</li>
 <li>A point <span class="math inline">\(p \in M\)</span> is a <strong>critical point</strong> of <span class="math inline">\(f\)</span> if <span class="math inline">\(df_p = 0\)</span>. The set of critical points is denoted by <span class="math inline">\(\operatorname{Crit}(f)\)</span>.</li>
@@ -469,29 +500,41 @@ H^1_{\mathrm{sing}}(V, \mathbb{Z}) \cong \bigoplus_{n \in \mathbb{Z}} \mathbb{Z}
 \]</span> counted with multiplicity.</li>
 </ol>
 </div>
-<div id="thm-existence-morse" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Existence of Distance Morse Functions)</strong></span> Let <span class="math inline">\(M \subseteq \mathbb{R}^N\)</span> be a smooth closed submanifold of dimension <span class="math inline">\(m \ge 2\)</span>. For any <span class="math inline">\(c \in \mathbb{R}^N\)</span>, consider the squared Euclidean distance function: <span class="math display">\[
+</div>
+<div id="thm-existence-morse" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.8.2</strong> (Existence of Distance Morse Functions)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(M \subseteq \mathbb{R}^N\)</span> be a smooth closed submanifold of dimension <span class="math inline">\(m \ge 2\)</span>. For any <span class="math inline">\(c \in \mathbb{R}^N\)</span>, consider the squared Euclidean distance function: <span class="math display">\[
 \phi_c: M \longrightarrow \mathbb{R}, \quad x \longmapsto \|x - c\|^2.
 \]</span> Then <span class="math inline">\(\phi_c\)</span> is an exhaustion function, and for almost all <span class="math inline">\(c \in \mathbb{R}^N\)</span> (outside a subset of Lebesgue measure zero), <span class="math inline">\(\phi_c\)</span> is a Morse function.</p>
 </div>
-<div id="thm-morse-cw-complex" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (CW Complex from an Exhaustion Morse Function)</strong></span> Let <span class="math inline">\(M\)</span> be a smooth manifold and let <span class="math inline">\(f: M \to \mathbb{R}\)</span> be an exhaustion Morse function. Then <span class="math inline">\(M\)</span> has the homotopy type of a CW complex <span class="math inline">\(K\)</span>: <span class="math display">\[
+</div>
+<div id="thm-morse-cw-complex" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.8.3</strong> (CW Complex from an Exhaustion Morse Function)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(M\)</span> be a smooth manifold and let <span class="math inline">\(f: M \to \mathbb{R}\)</span> be an exhaustion Morse function. Then <span class="math inline">\(M\)</span> has the homotopy type of a CW complex <span class="math inline">\(K\)</span>: <span class="math display">\[
 M \simeq K,
 \]</span> where the cells of <span class="math inline">\(K\)</span> are in one-to-one correspondence with the critical points of <span class="math inline">\(f\)</span>: <span class="math display">\[
 \{\text{cells of } K\} \stackrel{1:1}{\longleftrightarrow} \operatorname{Crit}(f), \quad e_p^m \longleftrightarrow p \in \operatorname{Crit}(f) \text{ with } m = \operatorname{Index}_p(f).
 \]</span></p>
 </div>
+</div>
 <hr>
-<div id="thm-andreotti-frankel" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3 (Andreotti-Frankel Theorem)</strong></span> Let <span class="math inline">\(V \subseteq \mathbb{C}^r\)</span> be a connected complex submanifold of complex dimension <span class="math inline">\(n\)</span>. Then <span class="math inline">\(V\)</span> has the homotopy type of a CW complex <span class="math inline">\(K\)</span> of real dimension at most <span class="math inline">\(n\)</span>: <span class="math display">\[
+<div id="thm-andreotti-frankel" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.8.4</strong> (Andreotti-Frankel Theorem)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(V \subseteq \mathbb{C}^r\)</span> be a connected complex submanifold of complex dimension <span class="math inline">\(n\)</span>. Then <span class="math inline">\(V\)</span> has the homotopy type of a CW complex <span class="math inline">\(K\)</span> of real dimension at most <span class="math inline">\(n\)</span>: <span class="math display">\[
 V \simeq K \quad \text{with} \quad \dim_{\mathbb{R}} K \le n.
 \]</span> In particular, the singular cohomology of <span class="math inline">\(V\)</span> vanishes above degree <span class="math inline">\(n\)</span>: <span class="math display">\[
 H^i_{\mathrm{sing}}(V, \mathbb{Z}) = 0 \quad \text{for all } i &gt; n.
 \]</span></p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By <a href="#thm-existence-morse" class="quarto-xref">Theorem&nbsp;1</a>, we can choose a point <span class="math inline">\(c \in \mathbb{R}^{2r} \cong \mathbb{C}^r\)</span> such that <span class="math inline">\(\phi_c: V \to \mathbb{R}\)</span>, <span class="math inline">\(x \mapsto \|x - c\|^2\)</span>, is an exhaustion Morse function on <span class="math inline">\(V\)</span>.</p>
-<p>By <a href="#thm-morse-cw-complex" class="quarto-xref">Theorem&nbsp;2</a>, to show that <span class="math inline">\(\dim_{\mathbb{R}} K \le n\)</span>, it suffices to show that: <span class="math display">\[
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>By <strong>?@thm-existence-morse</strong>, we can choose a point <span class="math inline">\(c \in \mathbb{R}^{2r} \cong \mathbb{C}^r\)</span> such that <span class="math inline">\(\phi_c: V \to \mathbb{R}\)</span>, <span class="math inline">\(x \mapsto \|x - c\|^2\)</span>, is an exhaustion Morse function on <span class="math inline">\(V\)</span>.</p>
+<p>By <strong>?@thm-morse-cw-complex</strong>, to show that <span class="math inline">\(\dim_{\mathbb{R}} K \le n\)</span>, it suffices to show that: <span class="math display">\[
 \operatorname{Index}_p(\phi_c) \le n \quad \text{for every critical point } p \in \operatorname{Crit}(\phi_c).
 \]</span></p>
 <p>Fix <span class="math inline">\(p \in \operatorname{Crit}(\phi_c)\)</span>. Because the question is purely local around <span class="math inline">\(p\)</span>, after a unitary transformation and translation on <span class="math inline">\(\mathbb{C}^r\)</span>, we may assume without loss of generality that: <span class="math display">\[
@@ -540,28 +583,40 @@ H \left( \begin{pmatrix} -v \\ u \end{pmatrix} \right) = H J \begin{pmatrix} u \
 \operatorname{Index}_0(\phi_c) = \#\{ 1 - 2\lambda &lt; 0 \} \le n.
 \]</span> This completes the proof.</p>
 </div>
-<hr>
-<div id="cor-smooth-affine-cw" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Smooth Affine Varieties Have Finite Homotopy Type)</strong></span> Let <span class="math inline">\(V \subseteq \mathbb{C}^r\)</span> be a smooth affine algebraic variety of dimension <span class="math inline">\(n\)</span>. Then in the analytic topology, <span class="math inline">\(V^{\mathrm{an}}\)</span> has the homotopy type of a <strong>finite</strong> CW complex of dimension at most <span class="math inline">\(n\)</span>.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(V = V(f_1, \dots, f_k) \subseteq \mathbb{C}^r\)</span>. By separating each polynomial and coordinate into real and imaginary parts, <span class="math inline">\(V\)</span> can be viewed as a real algebraic subvariety: <span class="math display">\[
+<hr>
+<div id="cor-smooth-affine-cw" class="theorem kind-corollary">
+<div class="theorem-header is-clickable"><span><strong>Corollary 22.8.5</strong> (Smooth Affine Varieties Have Finite Homotopy Type)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(V \subseteq \mathbb{C}^r\)</span> be a smooth affine algebraic variety of dimension <span class="math inline">\(n\)</span>. Then in the analytic topology, <span class="math inline">\(V^{\mathrm{an}}\)</span> has the homotopy type of a <strong>finite</strong> CW complex of dimension at most <span class="math inline">\(n\)</span>.</p>
+</div>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>Let <span class="math inline">\(V = V(f_1, \dots, f_k) \subseteq \mathbb{C}^r\)</span>. By separating each polynomial and coordinate into real and imaginary parts, <span class="math inline">\(V\)</span> can be viewed as a real algebraic subvariety: <span class="math display">\[
 V = V(g_1, \dots, g_p) \subseteq \mathbb{R}^{2r}.
 \]</span> For any <span class="math inline">\(x \in V\)</span>, the normal space is <span class="math inline">\(N_x V = \operatorname{Span}_{\mathbb{R}}\{\nabla g_1(x), \dots, \nabla g_p(x)\}\)</span>.</p>
 <p>Let <span class="math inline">\(\phi_c(x) = \|x - c\|^2\)</span> be a Morse exhaustion function on <span class="math inline">\(V\)</span>. A point <span class="math inline">\(q \in V\)</span> is a critical point of <span class="math inline">\(\phi_c|_V\)</span> if and only if <span class="math inline">\(c - q \in N_q V\)</span>, which is equivalent to: <span class="math display">\[
 \operatorname{rank}\big(\nabla g_1(q), \dots, \nabla g_p(q) \;\big|\; q - c\big) \le 2r - 2n.
 \]</span> This condition is algebraic: it is cut out by the vanishing of all <span class="math inline">\((2r - 2n + 1) \times (2r - 2n + 1)\)</span> minors of the augmented matrix. Hence <span class="math inline">\(\operatorname{Crit}(\phi_c)\)</span> is a real algebraic subvariety of <span class="math inline">\(V\)</span>.</p>
 <p>On the other hand, since <span class="math inline">\(\phi_c\)</span> is a Morse function, all its critical points are nondegenerate, meaning the differential <span class="math inline">\(D(\nabla \phi_c|_V) = \operatorname{Hess}(\phi_c)\)</span> is invertible at each critical point. By the inverse function theorem, <span class="math inline">\(\operatorname{Crit}(\phi_c)\)</span> consists of isolated points, so <span class="math inline">\(\dim_{\mathbb{R}} \operatorname{Crit}(\phi_c) = 0\)</span>.</p>
-<p>A <span class="math inline">\(0\)</span>-dimensional real algebraic variety in <span class="math inline">\(\mathbb{R}^{2r}\)</span> must be a <strong>finite set</strong>. Therefore, <span class="math inline">\(\operatorname{Crit}(\phi_c)\)</span> is finite, and by <a href="#thm-morse-cw-complex" class="quarto-xref">Theorem&nbsp;2</a>, <span class="math inline">\(V^{\mathrm{an}}\)</span> is homotopy equivalent to a finite CW complex of dimension <span class="math inline">\(\le n\)</span>.</p>
+<p>A <span class="math inline">\(0\)</span>-dimensional real algebraic variety in <span class="math inline">\(\mathbb{R}^{2r}\)</span> must be a <strong>finite set</strong>. Therefore, <span class="math inline">\(\operatorname{Crit}(\phi_c)\)</span> is finite, and by <strong>?@thm-morse-cw-complex</strong>, <span class="math inline">\(V^{\mathrm{an}}\)</span> is homotopy equivalent to a finite CW complex of dimension <span class="math inline">\(\le n\)</span>.</p>
 </div>
-<div id="thm-artin-grothendieck" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4 (Artin-Grothendieck Vanishing Theorem)</strong></span> Let <span class="math inline">\(V\)</span> be an affine variety over <span class="math inline">\(\mathbb{C}\)</span> of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(\mathcal{F}\)</span> be an algebraically constructible sheaf on <span class="math inline">\(V\)</span> (that is, <span class="math inline">\(\mathcal{F}\)</span> is analytically locally constant on each stratum of some Zariski stratification <span class="math inline">\(V = \bigsqcup X_i\)</span>). Then: <span class="math display">\[
+</div>
+<div id="thm-artin-grothendieck" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.8.6</strong> (Artin-Grothendieck Vanishing Theorem)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(V\)</span> be an affine variety over <span class="math inline">\(\mathbb{C}\)</span> of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(\mathcal{F}\)</span> be an algebraically constructible sheaf on <span class="math inline">\(V\)</span> (that is, <span class="math inline">\(\mathcal{F}\)</span> is analytically locally constant on each stratum of some Zariski stratification <span class="math inline">\(V = \bigsqcup X_i\)</span>). Then: <span class="math display">\[
 H^i(V, \mathcal{F}) = 0 \quad \text{for all } i &gt; n.
 \]</span></p>
 </div>
+</div>
 <hr>
-<div id="thm-lefschetz-hyperplane" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 5 (Lefschetz Hyperplane Theorem)</strong></span> Let <span class="math inline">\(X\)</span> be an <span class="math inline">\(n\)</span>-dimensional nonsingular irreducible complex projective variety, and let <span class="math inline">\(D \subseteq X\)</span> be an effective ample divisor. Then: <span class="math display">\[
+<div id="thm-lefschetz-hyperplane" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.8.7</strong> (Lefschetz Hyperplane Theorem)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be an <span class="math inline">\(n\)</span>-dimensional nonsingular irreducible complex projective variety, and let <span class="math inline">\(D \subseteq X\)</span> be an effective ample divisor. Then: <span class="math display">\[
 H^i(X, D; \mathbb{Z}) = 0 \quad \text{for all } i \le n - 1.
 \]</span> Consequently, the restriction homomorphism <span class="math inline">\(H^i(X, \mathbb{Z}) \to H^i(D, \mathbb{Z})\)</span> is:</p>
 <ol type="1">
@@ -569,10 +624,13 @@ H^i(X, D; \mathbb{Z}) = 0 \quad \text{for all } i \le n - 1.
 <li><strong>injective</strong> for <span class="math inline">\(i = n - 1\)</span>.</li>
 </ol>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Because <span class="math inline">\(\operatorname{Supp}(D) = \operatorname{Supp}(mD)\)</span>, we may replace <span class="math inline">\(D\)</span> by a large multiple <span class="math inline">\(m D\)</span> and assume without loss of generality that <span class="math inline">\(D\)</span> is very ample, cut out by a hyperplane section <span class="math inline">\(H\)</span>. The complement: <span class="math display">\[
+</div>
+<div id="lem-lefschetz-duality" class="theorem kind-lemma">
+<div class="theorem-header is-clickable"><span><strong>Lemma 22.8.8</strong> (Lefschetz Duality)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Because <span class="math inline">\(\operatorname{Supp}(D) = \operatorname{Supp}(mD)\)</span>, we may replace <span class="math inline">\(D\)</span> by a large multiple <span class="math inline">\(m D\)</span> and assume without loss of generality that <span class="math inline">\(D\)</span> is very ample, cut out by a hyperplane section <span class="math inline">\(H\)</span>. The complement: <span class="math display">\[
 X \setminus D = X \setminus (X \cap H)
-\]</span> is an affine variety of complex dimension <span class="math inline">\(n\)</span>. By the Andreotti-Frankel Theorem (<a href="#thm-andreotti-frankel" class="quarto-xref">Theorem&nbsp;3</a>) or Artin-Grothendieck vanishing (<a href="#thm-artin-grothendieck" class="quarto-xref">Theorem&nbsp;4</a>): <span class="math display">\[
+\]</span> is an affine variety of complex dimension <span class="math inline">\(n\)</span>. By the Andreotti-Frankel Theorem (<strong>?@thm-andreotti-frankel</strong>) or Artin-Grothendieck vanishing (<strong>?@thm-artin-grothendieck</strong>): <span class="math display">\[
 H_i(X \setminus D, \mathbb{Z}) = 0 \quad \text{for all } i &gt; n.
 \]</span></p>
 <div id="lem-lefschetz-duality" class="theorem lemma">
@@ -592,9 +650,12 @@ H^k(X, D; \mathbb{Z}) = 0 \quad \text{for all } 0 \le k \le n - 1.
 H^{i-1}(D, \mathbb{Z}) \longrightarrow H^i(X, D; \mathbb{Z}) \longrightarrow H^i(X, \mathbb{Z}) \longrightarrow H^i(D, \mathbb{Z}) \longrightarrow H^{i+1}(X, D; \mathbb{Z}).
 \]</span> - For <span class="math inline">\(i \le n - 2\)</span>, both <span class="math inline">\(H^i(X, D; \mathbb{Z}) = 0\)</span> and <span class="math inline">\(H^{i+1}(X, D; \mathbb{Z}) = 0\)</span>, so <span class="math inline">\(H^i(X, \mathbb{Z}) \xrightarrow{\sim} H^i(D, \mathbb{Z})\)</span> is an isomorphism. - For <span class="math inline">\(i = n - 1\)</span>, <span class="math inline">\(H^{n-1}(X, D; \mathbb{Z}) = 0\)</span>, so <span class="math inline">\(H^{n-1}(X, \mathbb{Z}) \hookrightarrow H^{n-1}(D, \mathbb{Z})\)</span> is injective.</p>
 </div>
+</div>
 <hr>
-<div id="cor-connectedness-picard-ample" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 2 (Connectedness and Picard Group of Ample Divisors)</strong></span> Let <span class="math inline">\(X\)</span> be a smooth projective variety over <span class="math inline">\(\mathbb{C}\)</span>.</p>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>Let <span class="math inline">\(X\)</span> be a smooth projective variety over <span class="math inline">\(\mathbb{C}\)</span>.</p>
 <ol type="1">
 <li>If <span class="math inline">\(\dim X \ge 2\)</span> and <span class="math inline">\(D \subseteq X\)</span> is an effective ample divisor, then <span class="math inline">\(D\)</span> is connected in both the classical (analytic) and Zariski topologies.</li>
 <li>If <span class="math inline">\(\dim X \ge 3\)</span> and <span class="math inline">\(D \subseteq X\)</span> is a reduced effective ample divisor, then the restriction map induces an isomorphism on Picard groups: <span class="math display">\[
@@ -602,8 +663,11 @@ H^{i-1}(D, \mathbb{Z}) \longrightarrow H^i(X, D; \mathbb{Z}) \longrightarrow H^i
 \]</span></li>
 </ol>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><em>Proof of (1):</em> Since <span class="math inline">\(n = \dim X \ge 2\)</span>, we have <span class="math inline">\(n - 2 \ge 0\)</span>. By <a href="#thm-lefschetz-hyperplane" class="quarto-xref">Theorem&nbsp;5</a>: <span class="math display">\[
+</div>
+<div id="cor-connectedness-picard-ample" class="theorem kind-corollary">
+<div class="theorem-header is-clickable"><span><strong>Corollary 22.8.9</strong> (Connectedness and Picard Group of Ample Divisors)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p><em>Proof of (1):</em> Since <span class="math inline">\(n = \dim X \ge 2\)</span>, we have <span class="math inline">\(n - 2 \ge 0\)</span>. By <strong>?@thm-lefschetz-hyperplane</strong>: <span class="math display">\[
 H^0(X, \mathbb{Z}) \xrightarrow{\;\sim\;} H^0(D, \mathbb{Z}) \cong \mathbb{Z}.
 \]</span> Therefore, <span class="math inline">\(D\)</span> is connected in the classical analytic topology. By Serre’s GAGA, <span class="math inline">\(H^0(D, \mathcal{O}_D) \cong H^0(D^{\mathrm{an}}, \mathcal{O}_{D^{\mathrm{an}}})\)</span> has no nontrivial idempotents, which proves <span class="math inline">\(D\)</span> is also connected in the Zariski topology.</p>
 <p><em>Proof of (2):</em> Since <span class="math inline">\(D\)</span> is reduced, we have the exponential sheaf sequence <span class="math inline">\(0 \to \mathbb{Z} \to \mathcal{O}_D \to \mathcal{O}_D^* \to 0\)</span> on <span class="math inline">\(D\)</span>, and similarly on <span class="math inline">\(X\)</span>. Consider the commutative diagram of long exact sequences: <span class="math display">\[
@@ -616,14 +680,16 @@ H^1(D, \mathbb{Z}) @&gt;&gt;&gt; H^1(D, \mathcal{O}_D) @&gt;&gt;&gt; H^1(D, \mat
 H^i(X, \mathcal{O}_X(-D)) \longrightarrow H^i(X, \mathcal{O}_X) \longrightarrow H^i(D, \mathcal{O}_D) \longrightarrow H^{i+1}(X, \mathcal{O}_X(-D)).
 \]</span> By Kodaira vanishing and Serre duality, <span class="math inline">\(H^j(X, \mathcal{O}_X(-D)) \cong H^{n-j}(X, K_X + D)^\vee = 0\)</span> for all <span class="math inline">\(j &lt; n\)</span>. Since <span class="math inline">\(n \ge 3\)</span>, this vanishing holds for <span class="math inline">\(j = 1, 2\)</span>, which implies: <span class="math display">\[
 H^i(X, \mathcal{O}_X) \xrightarrow{\;\sim\;} H^i(D, \mathcal{O}_D) \quad \text{for } i \le n - 2.
-\]</span> Since <span class="math inline">\(n \ge 3\)</span>, this is an isomorphism for <span class="math inline">\(i = 1\)</span> (and for <span class="math inline">\(i = 2\)</span> when <span class="math inline">\(n \ge 4\)</span>; when <span class="math inline">\(n = 3\)</span>, it is injective). Furthermore, by <a href="#thm-lefschetz-hyperplane" class="quarto-xref">Theorem&nbsp;5</a>: - <span class="math inline">\(H^1(X, \mathbb{Z}) \xrightarrow{\sim} H^1(D, \mathbb{Z})\)</span> is an isomorphism (as <span class="math inline">\(1 \le n - 2\)</span>); - <span class="math inline">\(H^2(X, \mathbb{Z}) \to H^2(D, \mathbb{Z})\)</span> is an isomorphism for <span class="math inline">\(n \ge 4\)</span>, and injective for <span class="math inline">\(n = 3\)</span>.</p>
+\]</span> Since <span class="math inline">\(n \ge 3\)</span>, this is an isomorphism for <span class="math inline">\(i = 1\)</span> (and for <span class="math inline">\(i = 2\)</span> when <span class="math inline">\(n \ge 4\)</span>; when <span class="math inline">\(n = 3\)</span>, it is injective). Furthermore, by <strong>?@thm-lefschetz-hyperplane</strong>: - <span class="math inline">\(H^1(X, \mathbb{Z}) \xrightarrow{\sim} H^1(D, \mathbb{Z})\)</span> is an isomorphism (as <span class="math inline">\(1 \le n - 2\)</span>); - <span class="math inline">\(H^2(X, \mathbb{Z}) \to H^2(D, \mathbb{Z})\)</span> is an isomorphism for <span class="math inline">\(n \ge 4\)</span>, and injective for <span class="math inline">\(n = 3\)</span>.</p>
 <p>By the Five Lemma, the restriction map on Picard groups: <span class="math display">\[
 \operatorname{Pic}(X) \cong H^1(X, \mathcal{O}_X^*) \xrightarrow{\;\sim\;} H^1(D, \mathcal{O}_D^*) \cong \operatorname{Pic}(D)
 \]</span> is an isomorphism.</p>
 </div>
+</div>
 <hr>
-<div id="cor-hodge-restriction-ufd" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 3</strong></span> &nbsp;</p>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
 <ol type="1">
 <li>Let <span class="math inline">\(X\)</span> be a smooth projective variety of dimension <span class="math inline">\(n\)</span>, and let <span class="math inline">\(D \subseteq X\)</span> be a nonsingular ample effective divisor. The restriction map on Hodge cohomology: <span class="math display">\[
 \operatorname{res}: H^p(X, \Omega_X^q) \longrightarrow H^p(D, \Omega_D^q)
@@ -633,8 +699,11 @@ R = \mathbb{C}[x_0, \dots, x_n] / (F)
 \]</span> is a Unique Factorization Domain (UFD).</li>
 </ol>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span><em>Proof of (2):</em> An integral domain <span class="math inline">\(R\)</span> is a UFD if and only if <span class="math inline">\(R\)</span> is normal and its divisor class group vanishes: <span class="math inline">\(\operatorname{Cl}(R) = 0\)</span>.</p>
+</div>
+<div id="cor-hodge-restriction-ufd" class="theorem kind-corollary">
+<div class="theorem-header is-clickable"><span><strong>Corollary 22.8.10</strong></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p><em>Proof of (2):</em> An integral domain <span class="math inline">\(R\)</span> is a UFD if and only if <span class="math inline">\(R\)</span> is normal and its divisor class group vanishes: <span class="math inline">\(\operatorname{Cl}(R) = 0\)</span>.</p>
 <ul>
 <li><strong>Normality:</strong> Because <span class="math inline">\(D = V(F)\)</span> is smooth in <span class="math inline">\(\mathbb{P}^n\)</span>, normal ci is projectively normal. Then the affine cone i.e.&nbsp;<span class="math inline">\(R\)</span> is normal.</li>
 <li><strong>Divisor Class Group:</strong> For the punctured affine cone <span class="math inline">\(\operatorname{Spec} R \setminus \{0\}\)</span>, the divisor class group satisfies: <span class="math display">\[
@@ -647,21 +716,27 @@ R = \mathbb{C}[x_0, \dots, x_n] / (F)
 \end{CD}
 \]</span> From the vector bundle homotopy invariance, <span class="math inline">\(\operatorname{Pic}(\mathcal{O}_D(-1)) \cong \operatorname{Pic}(D)\)</span>, and removing the zero section yields the exact sequence: <span class="math display">\[
 0 \longrightarrow \mathbb{Z} \cdot [\mathcal{O}_D(-1)] \longrightarrow \operatorname{Pic}(D) \longrightarrow \operatorname{Pic}(\operatorname{Spec} R \setminus \{0\}) \longrightarrow 0.
-\]</span> Since <span class="math inline">\(n \ge 4 \ge 3\)</span>, by <a href="#cor-connectedness-picard-ample" class="quarto-xref">Corollary&nbsp;2</a>: <span class="math display">\[
+\]</span> Since <span class="math inline">\(n \ge 4 \ge 3\)</span>, by <strong>?@cor-connectedness-picard-ample</strong>: <span class="math display">\[
 \operatorname{Pic}(D) \cong \operatorname{Pic}(\mathbb{P}^n) \cong \mathbb{Z} \cdot [\mathcal{O}_D(1)].
 \]</span> Because <span class="math inline">\([\mathcal{O}_D(-1)]\)</span> generates <span class="math inline">\(\operatorname{Pic}(D)\)</span>, the quotient is trivial: <span class="math display">\[
 \operatorname{Cl}(R) \cong \operatorname{Pic}(\operatorname{Spec} R \setminus \{0\}) = 0.
 \]</span> Hence <span class="math inline">\(R\)</span> is a UFD.</li>
 </ul>
 </div>
+</div>
 <hr>
-<div id="thm-barth" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 6 (Barth’s Theorem)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a nonsingular complex subvariety of dimension <span class="math inline">\(n\)</span> and codimension <span class="math inline">\(e = r - n\)</span>. Then the restriction homomorphism: <span class="math display">\[
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a nonsingular complex subvariety of dimension <span class="math inline">\(n\)</span> and codimension <span class="math inline">\(e = r - n\)</span>. Then the restriction homomorphism: <span class="math display">\[
 j^*: H^i(\mathbb{P}^r, \mathbb{C}) \longrightarrow H^i(X, \mathbb{C})
 \]</span> is an <strong>isomorphism</strong> for all <span class="math inline">\(i \le n - e = 2n - r\)</span>.</p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math inline">\(j: X \hookrightarrow \mathbb{P}^r\)</span> denote the inclusion. Let <span class="math inline">\(\zeta = c_1(\mathcal{O}_{\mathbb{P}^r}(1)) \in H^2(\mathbb{P}^r, \mathbb{C})\)</span> be the hyperplane class, so that: <span class="math display">\[
+</div>
+<div id="thm-barth" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 22.8.11</strong> (Barth’s Theorem)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(j: X \hookrightarrow \mathbb{P}^r\)</span> denote the inclusion. Let <span class="math inline">\(\zeta = c_1(\mathcal{O}_{\mathbb{P}^r}(1)) \in H^2(\mathbb{P}^r, \mathbb{C})\)</span> be the hyperplane class, so that: <span class="math display">\[
 H^*(\mathbb{P}^r, \mathbb{C}) \cong \mathbb{C}[\zeta] / (\zeta^{r+1}), \quad \deg \zeta = 2.
 \]</span> Let <span class="math inline">\(d = (X \cdot H^e)\)</span> be the degree of <span class="math inline">\(X\)</span>.</p>
 <p><strong>Step 1: Fundamental class and degree.</strong> The fundamental class <span class="math inline">\(\eta_X \in H^{2e}(\mathbb{P}^r, \mathbb{C})\)</span> is Poincaré dual to the cycle <span class="math inline">\([X] \in H_{2n}(\mathbb{P}^r, \mathbb{C})\)</span>. Since <span class="math inline">\(H^{2e}(\mathbb{P}^r, \mathbb{C}) = \mathbb{C} \cdot \zeta^e\)</span>, we can write <span class="math inline">\(\eta_X = a \zeta^e\)</span>. Evaluating on <span class="math inline">\(\zeta^n\)</span> gives: <span class="math display">\[
@@ -693,35 +768,42 @@ L^e: H^i(X, \mathbb{C}) \longrightarrow H^{i+2e}(X, \mathbb{C})
 j^*: H^i(\mathbb{P}^r, \mathbb{C}) \xrightarrow{\;\sim\;} H^i(X, \mathbb{C})
 \]</span> is an isomorphism for all <span class="math inline">\(i \le n - e\)</span>.</p>
 </div>
-<div id="cor-barth-picard" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 4 (Picard Group of Subvarieties of Small Codimension)</strong></span> Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a smooth subvariety of dimension <span class="math inline">\(n\)</span>. If <span class="math inline">\(2n - r \ge 2\)</span>, then the restriction map induces an isomorphism: <span class="math display">\[
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>Let <span class="math inline">\(X \subseteq \mathbb{P}^r\)</span> be a smooth subvariety of dimension <span class="math inline">\(n\)</span>. If <span class="math inline">\(2n - r \ge 2\)</span>, then the restriction map induces an isomorphism: <span class="math display">\[
 \operatorname{Pic}(\mathbb{P}^r) \xrightarrow{\;\sim\;} \operatorname{Pic}(X) \cong \mathbb{Z}.
 \]</span></p>
 </div>
-<div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>By Barth’s Theorem on <span class="math inline">\(\mathbb{Z}\)</span> (Deep Fact), <span class="math inline">\(2n - r = n - e \ge 2\)</span> implies that: <span class="math display">\[
+</div>
+<div id="cor-barth-picard" class="theorem kind-corollary">
+<div class="theorem-header is-clickable"><span><strong>Corollary 22.8.12</strong> (Picard Group of Subvarieties of Small Codimension)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>By Barth’s Theorem on <span class="math inline">\(\mathbb{Z}\)</span> (Deep Fact), <span class="math inline">\(2n - r = n - e \ge 2\)</span> implies that: <span class="math display">\[
 H^i(\mathbb{P}^r, \mathbb{Z}) \xrightarrow{\;\sim\;} H^i(X, \mathbb{Z}) \quad \text{for } i = 1, 2.
 \]</span> In particular, <span class="math inline">\(H^1(X, \mathbb{Z}) = 0\)</span> and <span class="math inline">\(H^2(X, \mathbb{Z}) \cong \mathbb{Z} \cdot c_1(\mathcal{O}_X(1))\)</span>. By Hodge decomposition, <span class="math inline">\(H^1(X, \mathcal{O}_X) = 0\)</span>. From the exponential sheaf sequence: <span class="math display">\[
 0 = H^1(X, \mathcal{O}_X) \longrightarrow \operatorname{Pic}(X) \xrightarrow{\;c_1\;} H^2(X, \mathbb{Z}) \cong \mathbb{Z},
 \]</span> the first Chern class <span class="math inline">\(c_1\)</span> gives an isomorphism <span class="math inline">\(\operatorname{Pic}(X) \cong \mathbb{Z} \cdot \mathcal{O}_X(1) \cong \operatorname{Pic}(\mathbb{P}^r)\)</span>.</p>
+</div>
 </div>
 
 
 
 </main> <!-- /main -->
 <style>
-/* --------------------------------------------------------------------------
-   1. 侧边栏常驻与容器保护
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   Math Notes · 晚到覆盖层（include-after-body）
+   职责：定理/证明折叠壳外观、目录条目（含 JS 动态挂载项）样式、
+         侧边栏与页脚微调。基础主题变量仍由 styles.css 提供。
+   ========================================================================== */
 
-
+/* 1. 阅读模式下侧栏常驻 --------------------------------------------------- */
 body.quarto-reader-mode #quarto-margin-sidebar {
   display: block !important;
 }
 
-/* --------------------------------------------------------------------------
-   2. 副标题与排版微调
-   -------------------------------------------------------------------------- */
+/* 2. 副标题与定理标题字号 ------------------------------------------------- */
 .quarto-title .subtitle,
 header#title-block-header .subtitle,
 p.subtitle.lead {
@@ -747,9 +829,7 @@ body.quarto-dark p.subtitle.lead {
   letter-spacing: 0.01em !important;
 }
 
-/* --------------------------------------------------------------------------
-   3. 紧凑左侧边栏留白与缩进
-   -------------------------------------------------------------------------- */
+/* 3. 紧凑左侧边栏 --------------------------------------------------------- */
 @media (min-width: 992px) {
   #quarto-sidebar,
   .sidebar-navigation {
@@ -772,6 +852,8 @@ body.quarto-dark p.subtitle.lead {
     padding-left: 0.2rem !important;
     padding-right: 0.2rem !important;
     white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;   /* 过长的章节名用省略号收尾，不再被硬裁切 */
   }
 
   #quarto-sidebar .menu-text {
@@ -779,9 +861,7 @@ body.quarto-dark p.subtitle.lead {
   }
 }
 
-/* --------------------------------------------------------------------------
-   4. 紧凑型页脚
-   -------------------------------------------------------------------------- */
+/* 4. 紧凑型页脚 ----------------------------------------------------------- */
 footer.footer,
 .nav-footer {
   padding-top: 0.2rem !important;
@@ -799,11 +879,8 @@ footer.footer,
   line-height: 1 !important;
 }
 
-/* --------------------------------------------------------------------------
-   5. 右侧目录标题 "ON THIS PAGE"
-   -------------------------------------------------------------------------- */
+/* 5. 目录标题 “ON THIS PAGE” ---------------------------------------------- */
 #toc-title,
-h2#toc-title,
 nav#TOC h2,
 .sidebar .toc-title {
   font-size: 0.82rem !important;
@@ -817,30 +894,29 @@ nav#TOC h2,
 }
 
 body.quarto-dark #toc-title,
-body.quarto-dark h2#toc-title,
 body.quarto-dark nav#TOC h2,
 body.quarto-dark .sidebar .toc-title {
   color: #94a3b8 !important;
 }
 
-/* --------------------------------------------------------------------------
-   6. 定理外观与折叠动画
-   -------------------------------------------------------------------------- */
-.theorem {
-  margin: 1.25rem 0 !important;
+/* 6. 定理与证明 ----------------------------------------------------------- */
+/* 共享外框：圆角、无内边距、裁切子元素 */
+.theorem,
+.proof {
   padding: 0 !important;
-  background-color: transparent !important;
+  background: transparent !important;
   border-radius: 8px !important;
-  border: 1px solid rgba(0, 0, 0, 0.09) !important;
-  border-left: 4.5px solid #2b6cb0 !important;
   overflow: hidden !important;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-body.quarto-dark .theorem,
-body.quarto-dark .proof {
-  border-color: rgba(255, 255, 255, 0.12) !important;
-  background-color: rgba(255, 255, 255, 0.02) !important;
+/* 定理：左侧色条由 --theorem-accent 决定，具体取值见下方各 kind */
+.theorem {
+  --theorem-accent: #2b6cb0;
+  margin: 1.25rem 0 !important;
+  border: 1px solid rgba(0, 0, 0, 0.09) !important;
+  border-left-width: 4.5px !important;
+  border-left-color: var(--theorem-accent) !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .theorem-header {
@@ -849,8 +925,6 @@ body.quarto-dark .proof {
   align-items: center !important;
   justify-content: space-between !important;
   padding: 0.55rem 0.95rem !important;
-  font-weight: 700 !important;
-  font-size: 1.05rem !important;
   line-height: 1.4 !important;
   background: transparent !important;
 }
@@ -868,7 +942,8 @@ body.quarto-dark .proof {
   background: transparent !important;
 }
 
-.theorem.is-folded .theorem-body {
+.theorem.is-folded .theorem-body,
+.proof.is-folded .proof-body {
   display: none !important;
 }
 
@@ -891,55 +966,62 @@ body.quarto-dark .proof {
   transform: rotate(-90deg);
 }
 
-/* 学术色彩映射 (日间 & 夜间) */
-.theorem.kind-definition { border-left-color: #1e40af !important; }
-.theorem.kind-definition > .theorem-header { color: #1e40af !important; }
-body.quarto-dark .theorem.kind-definition { border-left-color: #3b82f6 !important; }
-body.quarto-dark .theorem.kind-definition > .theorem-header { color: #60a5fa !important; }
+/* 学术色彩映射：每类环境只声明 4 个自定义属性（日间主色/夜间主色、日间标题色/夜间标题色） */
+.theorem > .theorem-header {
+  color: var(--theorem-title, inherit) !important;
+}
 
-.theorem.kind-lemma { border-left-color: #166534 !important; }
-.theorem.kind-lemma > .theorem-header { color: #166534 !important; }
-body.quarto-dark .theorem.kind-lemma { border-left-color: #22c55e !important; }
-body.quarto-dark .theorem.kind-lemma > .theorem-header { color: #4ade80 !important; }
+.theorem.kind-definition {
+  --theorem-accent: #1e40af;  --theorem-accent-dark: #3b82f6;
+  --theorem-title: #1e40af;   --theorem-title-dark: #60a5fa;
+}
 
-.theorem.kind-proposition { border-left-color: #6b21a8 !important; }
-.theorem.kind-proposition > .theorem-header { color: #6b21a8 !important; }
-body.quarto-dark .theorem.kind-proposition { border-left-color: #a855f7 !important; }
-body.quarto-dark .theorem.kind-proposition > .theorem-header { color: #c084fc !important; }
+.theorem.kind-lemma {
+  --theorem-accent: #166534;  --theorem-accent-dark: #22c55e;
+  --theorem-title: #166534;   --theorem-title-dark: #4ade80;
+}
 
-.theorem.kind-theorem { border-left-color: #991b1b !important; }
-.theorem.kind-theorem > .theorem-header { color: #991b1b !important; }
-body.quarto-dark .theorem.kind-theorem { border-left-color: #ef4444 !important; }
-body.quarto-dark .theorem.kind-theorem > .theorem-header { color: #f87171 !important; }
+.theorem.kind-proposition {
+  --theorem-accent: #6b21a8;  --theorem-accent-dark: #a855f7;
+  --theorem-title: #6b21a8;   --theorem-title-dark: #c084fc;
+}
 
-.theorem.kind-corollary { border-left-color: #c2410c !important; }
-.theorem.kind-corollary > .theorem-header { color: #c2410c !important; }
-body.quarto-dark .theorem.kind-corollary { border-left-color: #f97316 !important; }
-body.quarto-dark .theorem.kind-corollary > .theorem-header { color: #fb923c !important; }
+.theorem.kind-theorem {
+  --theorem-accent: #991b1b;  --theorem-accent-dark: #ef4444;
+  --theorem-title: #991b1b;   --theorem-title-dark: #f87171;
+}
 
-.theorem.kind-remark { border-left-color: #b45309 !important; }
-.theorem.kind-remark > .theorem-header { color: #b45309 !important; cursor: default !important; }
-body.quarto-dark .theorem.kind-remark { border-left-color: #f59e0b !important; }
-body.quarto-dark .theorem.kind-remark > .theorem-header { color: #fbbf24 !important; }
+.theorem.kind-corollary {
+  --theorem-accent: #c2410c;  --theorem-accent-dark: #f97316;
+  --theorem-title: #c2410c;   --theorem-title-dark: #fb923c;
+}
 
-.theorem.kind-example { border-left-color: #334155 !important; }
-.theorem.kind-example > .theorem-header { color: #334155 !important; }
-body.quarto-dark .theorem.kind-example { border-left-color: #64748b !important; }
-body.quarto-dark .theorem.kind-example > .theorem-header { color: #cbd5e1 !important; }
+.theorem.kind-remark {
+  --theorem-accent: #b45309;  --theorem-accent-dark: #f59e0b;
+  --theorem-title: #b45309;   --theorem-title-dark: #fbbf24;
+}
+
+.theorem.kind-example {
+  --theorem-accent: #334155;  --theorem-accent-dark: #64748b;
+  --theorem-title: #334155;   --theorem-title-dark: #cbd5e1;
+}
+
+/* remark 同时带 .proof 类，会被 .proof 的灰色左条覆盖，故用双类提高优先级取回环境色 */
+.theorem[class*="kind-"] {
+  border-left-color: var(--theorem-accent) !important;
+}
+
+/* 注记不可折叠，标题区不显示手型光标 */
+.theorem.kind-remark > .theorem-header {
+  cursor: default !important;
+}
 
 /* 证明环境 */
 .proof {
   margin: 0.9rem 0 1.35rem !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border-radius: 8px !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  border-left: 4px solid #64748b !important;
-  overflow: hidden !important;
-}
-
-body.quarto-dark .proof {
-  border-left-color: #94a3b8 !important;
+  border-left-width: 4px !important;
+  border-left-color: #64748b !important;
 }
 
 .proof-header {
@@ -954,21 +1036,38 @@ body.quarto-dark .proof {
   font-size: 0.96rem !important;
 }
 
-body.quarto-dark .proof-header {
-  color: #94a3b8 !important;
-}
-
 .proof-body {
   padding: 0.35rem 0.9rem 0.65rem !important;
 }
 
-.proof.is-folded .proof-body {
-  display: none !important;
+/* 夜间：底色/边框统一淡化，左侧色条换用亮色系（放在基础规则之后以覆盖其 border-left） */
+body.quarto-dark .theorem,
+body.quarto-dark .proof {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background-color: rgba(255, 255, 255, 0.02) !important;
 }
 
-/* --------------------------------------------------------------------------
-   7. 右侧边栏条目与贯通标尺
-   -------------------------------------------------------------------------- */
+body.quarto-dark .theorem {
+  border-left-color: var(--theorem-accent-dark, rgba(255, 255, 255, 0.12)) !important;
+}
+
+body.quarto-dark .theorem[class*="kind-"] {
+  border-left-color: var(--theorem-accent-dark, rgba(255, 255, 255, 0.12)) !important;
+}
+
+body.quarto-dark .theorem > .theorem-header {
+  color: var(--theorem-title-dark, inherit) !important;
+}
+
+body.quarto-dark .proof {
+  border-left-color: #94a3b8 !important;
+}
+
+body.quarto-dark .proof-header {
+  color: #94a3b8 !important;
+}
+
+/* 7. 右侧目录条目与贯通标尺 ----------------------------------------------- */
 nav#TOC > ul {
   list-style: none !important;
   padding-left: 0 !important;
@@ -1016,8 +1115,7 @@ body.quarto-dark .callout-toc-item a.nav-link:hover {
   background-color: rgba(96, 165, 250, 0.08) !important;
 }
 
-div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
-div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
+/* 激活态：同时覆盖 Quarto 自带高亮与 JS 挂载的自定义条目 */
 nav#TOC a.nav-link.active,
 nav#TOC a.nav-link.active-math-target,
 nav#TOC li.active > a.nav-link {
@@ -1028,8 +1126,6 @@ nav#TOC li.active > a.nav-link {
   opacity: 1 !important;
 }
 
-body.quarto-dark div.quarto-toc nav[role=doc-toc]>ul>li>a.active,
-body.quarto-dark div.quarto-toc nav[role=doc-toc]>ul>li>ul>li>a.active,
 body.quarto-dark nav#TOC a.nav-link.active,
 body.quarto-dark nav#TOC a.nav-link.active-math-target,
 body.quarto-dark nav#TOC li.active > a.nav-link {
@@ -1037,365 +1133,349 @@ body.quarto-dark nav#TOC li.active > a.nav-link {
   border-left-color: #60a5fa !important;
   background-color: rgba(96, 165, 250, 0.12) !important;
 }
+
+/* 键盘聚焦：与选中态可区分，且不改变布局 */
+nav#TOC a.nav-link:focus-visible,
+.callout-toc-item a.nav-link:focus-visible {
+  outline: 2px solid #2b6cb0 !important;
+  outline-offset: -2px;
+}
+
+body.quarto-dark nav#TOC a.nav-link:focus-visible,
+body.quarto-dark .callout-toc-item a.nav-link:focus-visible {
+  outline-color: #60a5fa !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. 窄屏（<992px）：右侧栏被 Quarto 整体隐藏，目录改由正文流内的折叠块承载
+   -------------------------------------------------------------------------- */
+.note-mobile-toc {
+  display: none;
+}
+
+/* 无目录条目时用 hidden 关掉，避免只剩一个空壳标题 */
+.note-mobile-toc[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 991.98px) {
+  .note-mobile-toc {
+    display: block;
+    margin: 0.75rem 0 1rem;
+    border: 1px solid var(--note-border);
+    border-radius: 0.5rem;
+    background-color: var(--note-paper);
+  }
+
+  .note-mobile-toc > summary {
+    cursor: pointer;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--note-muted);
+  }
+
+  .note-mobile-toc[open] > summary {
+    border-bottom: 1px solid var(--note-border);
+  }
+
+  .note-mobile-toc .note-mobile-toc-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.5rem 0.6rem 0.75rem;
+  }
+
+  /* 主题在窄屏把整个目录设成 display:none，搬进正文后必须显式恢复 */
+  .note-mobile-toc nav[role="doc-toc"] {
+    display: block !important;
+  }
+
+  /* 折叠块自带 summary 标题，目录内的同名标题不再重复显示 */
+  .note-mobile-toc #toc-title {
+    display: none !important;
+  }
+
+  /* 触屏点击热区加高 */
+  .note-mobile-toc nav#TOC a.nav-link {
+    padding-top: 0.45rem !important;
+    padding-bottom: 0.45rem !important;
+  }
+}
+
+/* Quarto 自带的浮层副本（仅在右侧栏与 margin 内容重叠时出现）同样保证可滚动 */
+#quarto-toc-toggle .quarto-sidebar-toggle-contents {
+  max-height: 70vh !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}
+
+/* 直接用 #锚点 打开页面（分享链接、前进/后退）时，同样避开吸顶导航栏 */
+.theorem,
+.proof {
+  scroll-margin-top: 4.8rem !important;
+}
 </style>
 
 <script>
+(function () {
+  "use strict";
 
+  /* 目录条目、定理编号、折叠外壳都由 _filters/theorem-toc.lua 在构建时写好，
+     这里只负责交互：点击跳转、选中态、折叠开关、窄屏摆放。 */
 
+  const TOC_SCOPE = 'nav[role="doc-toc"]';
+  const TOC_LINK = 'a.nav-link';
+  const SCROLL_TARGETS = 'section[id], h2[id], h3[id], .theorem[id]';
+  const SCROLL_THRESHOLD = 140;   /* 判定“当前小节”的顶部偏移 */
+  const NAV_FALLBACK_HEIGHT = 55; /* 吸顶导航栏高度兜底值 */
+  const SCROLL_GAP = 18;          /* 锚点与导航栏之间的呼吸间距 */
+  const MOBILE_MEDIA = '(max-width: 991.98px)';
 
-(function() {
-  const ENV_CONFIG = {
-    definition:  { full: 'Definition',  short: 'Def' },
-    lemma:       { full: 'Lemma',       short: 'Lem' },
-    proposition: { full: 'Proposition', short: 'Prop' },
-    theorem:     { full: 'Theorem',     short: 'Thm' },
-    corollary:   { full: 'Corollary',   short: 'Cor' },
-    remark:      { full: 'Remark',      short: 'Rem' },
-    example:     { full: 'Example',     short: 'Ex' }
-  };
+  let tocTargets = [];
+  let spyBound = false;
+  let mobileHost = null;
+  let mobileMedia = null;
+  let tocHome = null;         /* nav#TOC 在桌面端的父容器（右侧栏） */
+  let tocNextSibling = null;  /* 以及它原来的下一个兄弟节点，便于原位放回 */
 
-  const CHEVRON_SVG = `<svg class="fold-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+  /* ------------------------------------------------------------ 目录跳转 */
 
-  function getSecPrefix() {
-    const sec = getComputedStyle(document.documentElement).getPropertyValue('--sec').trim();
-    if (sec) {
-      const clean = sec.replace(/["']/g, '');
-      return clean.endsWith('.') ? clean : clean + '.';
+  /* 链接 href 形如 "#thm-fujita-vanishing"，取出解码后的锚点 id */
+  function tocHrefId(link) {
+    const raw = link.getAttribute('href') || '';
+    const pos = raw.indexOf('#');
+    if (pos === -1) return '';
+    const hash = raw.slice(pos + 1);
+    try {
+      return decodeURIComponent(hash);
+    } catch (err) {
+      return hash;
     }
-
-    const titleEl = document.querySelector('h1.title, .quarto-title h1, header#title-block-header h1, #title-block-header .title');
-    const titleText = titleEl ? titleEl.textContent.trim() : document.title.trim();
-    const match = titleText.match(/^(\d+(?:\.\d+)*)\.?\s*/);
-    if (match) {
-      return match[1] + '.';
-    }
-    return "22.0.";
   }
 
-  function ensureTocList() {
-    let list = document.querySelector('#TOC > ul') ||
-               document.querySelector('nav[role="doc-toc"] > ul') ||
-               document.querySelector('#quarto-toc-target > ul');
-    if (list) return list;
+  /* 滚动留白：吸顶导航栏高度 + 固定呼吸间距（桌面 / 移动一致） */
+  function tocScrollOffset() {
+    const navbar = document.querySelector('.navbar, header.fixed-top');
+    const navHeight = navbar ? navbar.getBoundingClientRect().height : NAV_FALLBACK_HEIGHT;
+    return navHeight + SCROLL_GAP;
+  }
 
-    let marginSidebar = document.querySelector('#quarto-margin-sidebar, .margin-sidebar');
-    if (marginSidebar) {
-      marginSidebar.style.display = 'block';
-      let nav = marginSidebar.querySelector('#TOC');
-      if (!nav) {
-        nav = document.createElement('nav');
-        nav.id = 'TOC';
-        nav.setAttribute('role', 'doc-toc');
-        nav.className = 'toc-active';
-        nav.innerHTML = '<h2 id="toc-title">On this page</h2><ul></ul>';
-        marginSidebar.appendChild(nav);
+  function scrollToAnchor(target) {
+    // 目标若在折叠中的定理/证明里（或本身被折叠），逐层展开，否则跳过去看不到内容
+    let folded = target.closest('.is-folded');
+    while (folded) {
+      folded.classList.remove('is-folded');
+      folded = folded.parentElement ? folded.parentElement.closest('.is-folded') : null;
+    }
+
+    const top = target.getBoundingClientRect().top + window.scrollY - tocScrollOffset();
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+
+  /* 全站唯一选中态：桌面 nav 与窄屏副本里的同一锚点一起高亮 */
+  function setTocActive(id) {
+    document.querySelectorAll(TOC_SCOPE + ' ' + TOC_LINK).forEach(function (a) {
+      const on = id !== '' && tocHrefId(a) === id;
+      a.classList.toggle('active', on);
+      a.classList.toggle('active-math-target', on);
+    });
+  }
+
+  function tocNav() {
+    return document.querySelector('#quarto-margin-sidebar ' + TOC_SCOPE) || document.querySelector(TOC_SCOPE);
+  }
+
+  /* -------------------------------------------- 窄屏：目录挪进正文流折叠块 */
+
+  function ensureInlineToc() {
+    if (mobileHost && document.contains(mobileHost)) return mobileHost;
+
+    const content = document.querySelector('#quarto-document-content') || document.querySelector('main');
+    if (!content) return null;
+
+    mobileHost = document.createElement('details');
+    mobileHost.id = 'note-mobile-toc';
+    mobileHost.className = 'note-mobile-toc';
+    mobileHost.innerHTML = '<summary>On this page</summary><div class="note-mobile-toc-body"></div>';
+
+    // 放在标题块之后，正文之前
+    const titleBlock = content.querySelector('#title-block-header');
+    if (titleBlock && titleBlock.nextSibling) {
+      content.insertBefore(mobileHost, titleBlock.nextSibling);
+    } else {
+      content.insertBefore(mobileHost, content.firstChild);
+    }
+    return mobileHost;
+  }
+
+  function syncMobileToc() {
+    const nav = tocNav();
+    if (!nav) return;   // 页面没有右侧目录时不必建折叠块
+
+    const host = ensureInlineToc();
+    if (!host) return;
+
+    if (!tocHome && nav.parentElement !== host) {
+      tocHome = nav.parentElement;
+      tocNextSibling = nav.nextSibling;
+    }
+
+    const onMobile = mobileMedia ? mobileMedia.matches : window.innerWidth <= 991;
+    const useInline = onMobile && !!nav.querySelector(TOC_LINK);   // 有目录才值得放进正文
+    host.hidden = !useInline;
+
+    if (useInline) {
+      const body = host.querySelector('.note-mobile-toc-body');
+      if (nav.parentElement !== body) body.appendChild(nav);
+    } else if (tocHome && nav.parentElement !== tocHome) {
+      const anchor = tocNextSibling && tocNextSibling.parentNode === tocHome ? tocNextSibling : null;
+      tocHome.insertBefore(nav, anchor);   // 原位放回右侧栏
+    }
+  }
+
+  /* 跳转后收起浮层/折叠块，否则会挡住刚滚到的内容 */
+  function closeMobileToc() {
+    if (mobileHost) mobileHost.open = false;
+
+    const toggle = document.getElementById('quarto-toc-toggle');
+    if (!toggle || !toggle.classList.contains('expanded')) return;
+    const title = toggle.querySelector('.quarto-sidebar-toggle-title');
+    if (title) title.click();   // 交回 Quarto 自身的开关逻辑，保持其内部状态一致
+  }
+
+  /* ---------------------------------------------------------- 点击代理 */
+
+  function onDocumentClick(event) {
+    if (event.defaultPrevented || event.button !== 0) return;
+
+    const target = event.target;
+
+    // 1) 目录项：统一接管滚动、地址栏哈希与高亮
+    const link = target.closest ? target.closest('a') : null;
+    if (link && link.closest(TOC_SCOPE)) {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;  // 保留新标签页等默认行为
+      const id = tocHrefId(link);
+      const anchor = id ? document.getElementById(id) : null;
+      if (anchor) {
+        // 拦在 Quarto 自带的点击处理之前，避免重复滚动
+        event.preventDefault();
+        event.stopPropagation();
+        scrollToAnchor(anchor);
+        setTocActive(id);
+        closeMobileToc();
+        history.pushState(null, null, '#' + id);
       }
-      return nav.querySelector('ul');
+      return;
     }
-    return null;
-  }
 
-  function detectKind(node, titleText) {
-    const id = (node.id || "").toLowerCase();
-    const cls = (node.className || "").toLowerCase();
-    const title = (titleText || "").toLowerCase();
-
-    if (id.startsWith('rem-') || cls.includes('remark') || /^remark\b/.test(title)) return 'remark';
-    if (id.startsWith('exm-') || cls.includes('example') || /^example\b/.test(title)) return 'example';
-    if (id.startsWith('def-') || cls.includes('definition') || /^definition\b/.test(title)) return 'definition';
-    if (id.startsWith('lem-') || cls.includes('lemma') || /^lemma\b/.test(title)) return 'lemma';
-    if (id.startsWith('prp-') || cls.includes('proposition') || /^proposition\b/.test(title)) return 'proposition';
-    if (id.startsWith('cor-') || cls.includes('corollary') || /^corollary\b/.test(title)) return 'corollary';
-    if (id.startsWith('thm-') || cls.includes('theorem') || /^theorem\b/.test(title)) return 'theorem';
-    return 'theorem';
-  }
-
-  function triggerMathTypeset(elements) {
-    if (window.MathJax && window.MathJax.typesetPromise) {
-      window.MathJax.typesetPromise(elements).catch(function(err) {});
-    } else if (window.MathJax && window.MathJax.Hub) {
-      window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, elements]);
+    // 2) 折叠头：展开/收起定理或证明
+    const header = target.closest ? target.closest('.theorem-header.is-clickable, .proof-header') : null;
+    if (header && header.parentElement) {
+      header.parentElement.classList.toggle('is-folded');
     }
   }
 
-  // 核心：处理定理并绑定平滑跳转
-  function processTheorems() {
-    const secPrefix = getSecPrefix();
-    let counter = 0;
+  /* -------------------------------------------------------- 侧边栏排序 */
 
-    const tocList = ensureTocList();
-    if (!tocList) return;
+  function textOf(el) {
+    const label = el.querySelector('.sidebar-item-text, .menu-text, a');
+    return (label && label.textContent.trim()) || el.textContent.trim();
+  }
 
-    // 清理旧自定义条目
-    tocList.querySelectorAll('li[data-callout-toc]').forEach(el => el.remove());
+  function sortSidebarNumerically() {
+    document.querySelectorAll('#quarto-sidebar ul').forEach(function (ul) {
+      const items = Array.from(ul.children).filter(function (el) {
+        return el.classList.contains('sidebar-item');
+      });
+      if (items.length <= 1) return;
 
-    const pageNodes = document.querySelectorAll(
-      'main h2, main h3, #quarto-document-content h2, #quarto-document-content h3, .theorem, .remark, [id^="def-"], [id^="lem-"], [id^="prp-"], [id^="thm-"], [id^="cor-"], [id^="rem-"], [id^="exm-"]'
-    );
-
-    let lastTocAnchor = null;
-    const headersToTypeset = [];
-
-    pageNodes.forEach(node => {
-      if (node.tagName === 'H2' || node.tagName === 'H3') {
-        if (node.id) {
-          const a = tocList.querySelector(`a[href="#${CSS.escape(node.id)}"]`);
-          if (a) lastTocAnchor = a.closest('li');
-        }
-        return;
-      }
-
-      // 如果未做过 DOM 改写，执行改写；如果已经改写过，仅补充挂载到目录
-      if (node.dataset.mathProcessed !== "true") {
-        node.dataset.mathProcessed = "true";
-
-        const titleSpan = node.querySelector('.theorem-title');
-        let rawTitleHtml = titleSpan ? titleSpan.innerHTML.trim() : "";
-        let subTitle = "";
-
-        const match = rawTitleHtml.match(/\(([\s\S]*)\)/);
-        if (match) {
-          subTitle = ` (${match[1].trim()})`;
-        }
-        if (titleSpan) titleSpan.remove();
-
-        const firstP = node.querySelector(':scope > p:first-child');
-        if (firstP && firstP.textContent.trim() === '') firstP.remove();
-
-        const kind = detectKind(node, rawTitleHtml);
-        const conf = ENV_CONFIG[kind] || { full: 'Theorem', short: 'Thm' };
-        const numStr = secPrefix + counter;
-        counter++;
-
-        const canFold = (kind !== 'remark');
-        node.classList.add('theorem', `kind-${kind}`);
-        node.dataset.kindShort = conf.short;
-        node.dataset.kindFull = conf.full;
-        node.dataset.numStr = numStr;
-        node.dataset.subTitle = subTitle;
-
-        const header = document.createElement('div');
-        header.className = `theorem-header ${canFold ? 'is-clickable' : ''}`;
-        header.innerHTML = `<span><strong>${conf.full} ${numStr}</strong>${subTitle}</span>${canFold ? CHEVRON_SVG : ''}`;
-
-        const body = document.createElement('div');
-        body.className = 'theorem-body';
-        while (node.firstChild) {
-          body.appendChild(node.firstChild);
-        }
-
-        node.appendChild(header);
-        node.appendChild(body);
-        headersToTypeset.push(header);
-
-        if (canFold) {
-          header.addEventListener('click', () => {
-            node.classList.toggle('is-folded');
-          });
-        }
-
-        if (!node.id) {
-          node.id = `thm-${conf.short.toLowerCase()}-${numStr.replace(/\./g, '-')}`;
-        } else if (node.id.includes('.')) {
-          node.id = node.id.replace(/\./g, '-');
-        }
-      }
-
-      const targetId = node.id;
-      const shortLabel = node.dataset.kindShort || "Thm";
-      const numLabel = node.dataset.numStr || "";
-      const subLabel = node.dataset.subTitle || "";
-      const fullLabel = node.dataset.kindFull || "Theorem";
-
-      // 挂载到右侧 TOC 目录
-      const li = document.createElement('li');
-      li.setAttribute('data-callout-toc', 'true');
-      li.className = 'nav-item callout-toc-item';
-
-      const a = document.createElement('a');
-      a.className = 'nav-link';
-      a.href = `#${targetId}`;
-      a.textContent = `${shortLabel} ${numLabel}`;
-      if (subLabel) a.title = `${fullLabel} ${numLabel}${subLabel}`;
-
-      // ====== 终极修复：百分之百生效的精准跳转 ======
-      a.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-
-        const target = document.getElementById(targetId);
-        if (target) {
-          // 1. 如果该定理处于折叠状态，点击立刻平滑展开
-          if (target.classList.contains('is-folded')) {
-            target.classList.remove('is-folded');
-          }
-
-          // 2. 计算绝对距离，避开吸顶导航栏与外层容器干扰
-          const navbar = document.querySelector('.navbar, header.fixed-top');
-          const navH = navbar ? navbar.getBoundingClientRect().height : 55;
-          const targetY = target.getBoundingClientRect().top + window.pageYOffset - navH - 18;
-
-          // 3. 执行平滑滚动
-          window.scrollTo({
-            top: targetY,
-            behavior: 'smooth'
-          });
-
-          // 4. 同步点亮目录项
-          tocList.querySelectorAll('a.nav-link').forEach(link => {
-            link.classList.remove('active', 'active-math-target');
-          });
-          a.classList.add('active', 'active-math-target');
-
-          // 5. 更新地址栏哈希
-          if (history.pushState) {
-            history.pushState(null, null, `#${targetId}`);
-          }
-        }
+      // numeric:true 让 "10" 排在 "2" 之后
+      items.sort(function (a, b) {
+        return textOf(a).localeCompare(textOf(b), undefined, { numeric: true, sensitivity: 'base' });
       });
 
-      li.appendChild(a);
+      items.forEach(function (item) { ul.appendChild(item); });
+    });
+  }
 
-      if (lastTocAnchor && lastTocAnchor.parentNode) {
-        lastTocAnchor.parentNode.insertBefore(li, lastTocAnchor.nextSibling);
-        lastTocAnchor = li;
+  /* -------------------------------------------------------- 目录滚动高亮 */
+
+  function collectTargets() {
+    return Array.from(document.querySelectorAll(SCROLL_TARGETS)).filter(function (el) {
+      return !el.closest(TOC_SCOPE);   // 排除目录自身的标题
+    });
+  }
+
+  /* 选出「当前所在项」：最后一个顶部已越过阈值的小节/定理锚点 */
+  function updateActiveTocLink() {
+    if (!tocTargets.length) return;
+
+    let current = null;
+    for (const el of tocTargets) {
+      if (el.getBoundingClientRect().top <= SCROLL_THRESHOLD) {
+        current = el;
       } else {
-        tocList.appendChild(li);
-        lastTocAnchor = li;
+        break;
       }
-    });
-
-    if (headersToTypeset.length > 0) {
-      triggerMathTypeset(headersToTypeset);
     }
+    if (!current && window.scrollY < 120) current = tocTargets[0];
+    if (!current || !current.id) return;
+
+    setTocActive(current.id);
   }
 
-  // 自然数排序侧边栏
-function sortSidebarNumerically() {
-  const sidebarLists = document.querySelectorAll('#quarto-sidebar ul');
-  sidebarLists.forEach(ul => {
-    // 获取当前列表下的所有侧边栏条目
-    const items = Array.from(ul.children).filter(el => el.classList.contains('sidebar-item'));
-    if (items.length <= 1) return;
+  function init() {
+    sortSidebarNumerically();
+    syncMobileToc();
 
-    // 使用 numeric: true 开启自然数排序（自动识别 10 > 2）
-    items.sort((a, b) => {
-      const textA = a.querySelector('.sidebar-item-text, .menu-text, a')?.textContent.trim() || a.textContent.trim();
-      const textB = b.querySelector('.sidebar-item-text, .menu-text, a')?.textContent.trim() || b.textContent.trim();
-      return textA.localeCompare(textB, undefined, { numeric: true, sensitivity: 'base' });
-    });
+    // 监听只绑定一次；重复调用只刷新锚点缓存与高亮
+    if (!spyBound) {
+      spyBound = true;
 
-    // 将排序后的元素按新顺序重新插入 DOM
-    items.forEach(item => ul.appendChild(item));
-  });
-}
-  function processProofs() {
-    const proofs = document.querySelectorAll('.proof:not(.remark):not([id^="rem-"])');
-    proofs.forEach(proof => {
-      if (proof.dataset.mathProcessed === "true") return;
-      proof.dataset.mathProcessed = "true";
-
-      let proofLabel = "Proof.";
-      const firstP = proof.querySelector('p');
-      if (firstP) {
-        const titleSpan = firstP.querySelector('.proof-title');
-        if (titleSpan) {
-          proofLabel = titleSpan.textContent.trim();
-          titleSpan.remove();
-        } else {
-          const em = firstP.querySelector('em');
-          if (em && /proof/i.test(em.textContent)) {
-            proofLabel = em.textContent.trim();
-            em.remove();
-          }
-        }
-      }
-
-      const header = document.createElement('div');
-      header.className = 'proof-header';
-      header.innerHTML = `<span><em>${proofLabel}</em></span>${CHEVRON_SVG}`;
-
-      const body = document.createElement('div');
-      body.className = 'proof-body';
-      while (proof.firstChild) {
-        body.appendChild(proof.firstChild);
-      }
-
-      proof.appendChild(header);
-      proof.appendChild(body);
-
-      proof.classList.add('is-folded');
-
-      header.addEventListener('click', () => {
-        proof.classList.toggle('is-folded');
-      });
-    });
-  }
-
-  function initScrollSpy() {
-    const tocList = ensureTocList();
-    if (!tocList) return;
-
-    function onScroll() {
-      const targets = Array.from(document.querySelectorAll('main h2[id], main h3[id], #quarto-document-content h2[id], #quarto-document-content h3[id], .theorem[id]'));
-      if (!targets.length) return;
-
-      const threshold = 140;
-      let current = null;
-
-      for (const el of targets) {
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= threshold) {
-          current = el;
-        } else {
-          break;
-        }
-      }
-
-      if (!current && window.scrollY < 120) {
-        current = targets[0];
-      }
-
-      if (current) {
-        const allLinks = tocList.querySelectorAll('a.nav-link');
-        allLinks.forEach(a => {
-          a.classList.remove('active', 'active-math-target');
+      let ticking = false;
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          updateActiveTocLink();
         });
+      }, { passive: true });
 
-        const activeA = tocList.querySelector(`a[href="#${CSS.escape(current.id)}"]`);
-        if (activeA) {
-          activeA.classList.add('active', 'active-math-target');
-        }
+      document.addEventListener('click', onDocumentClick, true);
+
+      // Quarto 自带的 scrollspy 也会加 .active；等它更新后（rAF 晚一拍）再确认唯一高亮
+      window.addEventListener('quarto-sectionChanged', function () {
+        requestAnimationFrame(updateActiveTocLink);
+      });
+
+      // 跨过 992px 断点时，在「右侧栏」与「正文内折叠块」之间搬运目录
+      if (window.matchMedia) {
+        mobileMedia = window.matchMedia(MOBILE_MEDIA);
+        const handleBreakpoint = function () { syncMobileToc(); };
+        if (mobileMedia.addEventListener) mobileMedia.addEventListener('change', handleBreakpoint);
+        else if (mobileMedia.addListener) mobileMedia.addListener(handleBreakpoint);
       }
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    setTimeout(onScroll, 150);
-  }
-
-  // 严格执行控制，彻底消除二次清空 Bug
-  let isExecuting = false;
-  function run() {
-    if (isExecuting) return;
-    isExecuting = true;
-    sortSidebarNumerically(); // <--- 在这里调用
-    processTheorems();
-    processProofs();
-    initScrollSpy();
-    setTimeout(() => { isExecuting = false; }, 200);
+    tocTargets = collectTargets();
+    setTimeout(updateActiveTocLink, 150);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run);
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    run();
+    init();
   }
-  window.addEventListener('load', run);
+  window.addEventListener('load', init, { once: true });
 
-  // 切换深浅模式时，重新对齐挂载
-  window.addEventListener('quarto-color-scheme-change', () => {
-    setTimeout(run, 150);
+  // 深浅色切换后重新对齐
+  window.addEventListener('quarto-color-scheme-change', function () {
+    setTimeout(init, 150);
   });
 })();
 </script>
@@ -1403,15 +1483,50 @@ function sortSidebarNumerically() {
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -1486,11 +1601,30 @@ function sortSidebarNumerically() {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/losergh\.github\.io\/note\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1504,8 +1638,70 @@ function sortSidebarNumerically() {
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1519,6 +1715,7 @@ function sortSidebarNumerically() {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1681,44 +1878,54 @@ function sortSidebarNumerically() {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1817,7 +2024,10 @@ function sortSidebarNumerically() {
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
       <a href="../22_positivity/22.7 Zariski Decomposition.html" class="pagination-link" aria-label="22.7 Zariski Decomposition">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22.7 Zariski Decomposition</span>
