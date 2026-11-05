@@ -480,10 +480,11 @@ body.quarto-dark a[role="doc-biblioref"] {
    9. 顶部导航栏：统一控件高度、纵向居中、间距均匀
    -------------------------------------------------------------------------- */
 :root {
-  --navbar-h: 2.875rem;     /* 整栏最小高度（紧凑版） */
-  --navbar-ctl: 1.75rem;    /* 品牌 / 菜单项 / 图标按钮 / 开关的统一高度 */
-  --navbar-gap: 0.3125rem;  /* 控件之间的均匀间距 */
-  --navbar-side: 2rem;      /* 窄屏左侧开关的边长 */
+  --navbar-h: 2.75rem;
+  --navbar-ctl: 1.625rem;
+  --navbar-gap: 0.25rem;
+  --navbar-side: 1.875rem;
+  /* 次级导航 min-height: 2.375rem */
 }
 
 .navbar {
