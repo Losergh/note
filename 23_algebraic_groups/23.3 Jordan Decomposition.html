@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-11-05">
+<meta name="dcterms.date" content="2026-11-06">
 
 <title>23.3 Jordan Decomposition – Math Notes</title>
 <style>
@@ -51,9 +51,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8aa7dfeb8eb95bdcfa4dc6a7b561006e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-02146ddba7e175375472b78443451085.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-8aa7dfeb8eb95bdcfa4dc6a7b561006e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-846072d1559ace59f0b8d9643937f3ed.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-ece319cf83569c875f03cf0888487a42.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-846072d1559ace59f0b8d9643937f3ed.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -425,7 +425,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 5, 2026</p>
+      <p class="date">November 6, 2026</p>
     </div>
   </div>
   
@@ -943,8 +943,8 @@ body.quarto-dark p.subtitle.lead {
 @media (min-width: 992px) {
   #quarto-sidebar,
   .sidebar-navigation {
-    padding-left: 0.35rem !important;
-    padding-right: 0.5rem !important;
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
   }
 
   #quarto-sidebar .sidebar-menu-container,
@@ -954,13 +954,19 @@ body.quarto-dark p.subtitle.lead {
     margin-left: 0 !important;
   }
 
+  /* Quarto 默认给菜单容器留了 1.08rem 的右内边距，会把文字可用宽度吃掉，
+     这里收窄到一条"呼吸缝"：文字/箭头不再贴着右边框 */
+  #quarto-sidebar .sidebar-menu-container {
+    padding-right: 0.35rem !important;
+  }
+
   #quarto-sidebar .sidebar-section .sidebar-item {
-    padding-left: 0.6rem !important;
+    padding-left: 0.45rem !important;   /* 二级缩进略收，给标题多留 2~3px */
   }
 
   #quarto-sidebar .sidebar-link {
     padding-left: 0.2rem !important;
-    padding-right: 0.2rem !important;
+    padding-right: 0 !important;   /* 右侧不再留白，宽度全部让给文字 */
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;   /* 过长的章节名用省略号收尾，不再被硬裁切 */
@@ -969,6 +975,7 @@ body.quarto-dark p.subtitle.lead {
   #quarto-sidebar .menu-text {
     white-space: nowrap !important;
   }
+
 }
 
 /* 4. 紧凑型页脚 ----------------------------------------------------------- */
@@ -1512,6 +1519,15 @@ body.quarto-dark .callout-toc-item a.nav-link:focus-visible {
     });
   }
 
+  /* 仍被省略号收尾的条目，补上悬停提示，方便看到完整章节名 */
+  function tagSidebarTitles() {
+    document.querySelectorAll('#quarto-sidebar .sidebar-link').forEach(function (link) {
+      const label = link.querySelector('.menu-text') || link;
+      const text = label.textContent.trim();
+      if (text && !link.title) link.title = text;
+    });
+  }
+
   /* -------------------------------------------------------- 目录滚动高亮 */
 
   function collectTargets() {
@@ -1540,6 +1556,7 @@ body.quarto-dark .callout-toc-item a.nav-link:focus-visible {
 
   function init() {
     sortSidebarNumerically();
+    tagSidebarTitles();
     syncMobileToc();
 
     // 监听只绑定一次；重复调用只刷新锚点缓存与高亮
@@ -1566,7 +1583,7 @@ body.quarto-dark .callout-toc-item a.nav-link:focus-visible {
       // 跨过 992px 断点时，在「右侧栏」与「正文内折叠块」之间搬运目录
       if (window.matchMedia) {
         mobileMedia = window.matchMedia(MOBILE_MEDIA);
-        const handleBreakpoint = function () { syncMobileToc(); };
+        const handleBreakpoint = function () { syncMobileToc(); tagSidebarTitles(); };
         if (mobileMedia.addEventListener) mobileMedia.addEventListener('change', handleBreakpoint);
         else if (mobileMedia.addListener) mobileMedia.addListener(handleBreakpoint);
       }
