@@ -84,8 +84,8 @@ website:
 format:
   html:
     grid:
-      sidebar-width: 190px    # 左侧边栏宽度（默认 250px）
-      margin-width: 168px     # 右侧边栏宽度：容纳「Thm 22.5.10」与中文小节标题不折行
+      sidebar-width: 195px    # 左侧边栏宽度（默认 250px）
+      margin-width: 130px     # 右侧边栏宽度：容纳「Thm 22.5.10」与中文小节标题不折行
       body-width: 1200px
       gutter-width: 1.2rem    # 侧边栏与正文的间隔（默认 1.5rem）
     theme:
