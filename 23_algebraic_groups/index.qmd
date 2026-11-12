@@ -21,8 +21,6 @@ The goal of this course is to systematically develop the theory of linear algebr
 
 ---
 
-### Syllabus & Lecture Schedule
-
 The notes are organized according to the 7 main modules of the course:
 
 ## [Weeks 1–2] Linear Algebraic Groups: Foundations & Jordan Decomposition

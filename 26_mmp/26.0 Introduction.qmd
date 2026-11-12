@@ -8,7 +8,7 @@ sec: "26.0."
 ---
 
 ::: {#note-course-setup}
-## Course Logistics & Fundamental Goal
+**Course logistics & fundamental goal.**
 - **Lecturer:** Chen Jiang (Fall 2026, Birational Geometry)
 - **Grading:** HW: 40%, Final Exam: 60%
 - **Base Field:** $\mathbb{C}$ (or an algebraically closed field $k = \bar{k}$ with $\operatorname{char} k = 0$).

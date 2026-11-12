@@ -7,8 +7,7 @@ sec: "26.3."
 ---
 
 ::: {#note-motivation-klt}
-## Motivation
-Consider the condition: $X$ smooth, $(X, B) \xrightarrow[\mathrm{proj}]{f} S$, $B \in [0, 1)$ with SNC support, and $D$ a nef & big $\mathbb{R}$-divisor such that $D + B \in Z^1(X)$. Then:
+**Motivation.** Consider the condition: $X$ smooth, $(X, B) \xrightarrow[\mathrm{proj}]{f} S$, $B \in [0, 1)$ with SNC support, and $D$ a nef & big $\mathbb{R}$-divisor such that $D + B \in Z^1(X)$. Then:
 $$
 R^i f_* \mathcal{O}_X(K_X + B + D) = 0 \quad \forall i > 0.
 $$
@@ -216,8 +215,7 @@ $$
 :::
 
 ::: {#note-induction-goal}
-## Goal: Downward Induction
-For $(S, C) \hookrightarrow (X, B)$ with $(K_X + B)|_S = K_S + C$, we want to show that if $(X, B)$ is DLT, then $(S, C)$ can still be DLT.
+**Goal (downward induction).** For $(S, C) \hookrightarrow (X, B)$ with $(K_X + B)|_S = K_S + C$, we want to show that if $(X, B)$ is DLT, then $(S, C)$ can still be DLT.
 :::
 
 ---

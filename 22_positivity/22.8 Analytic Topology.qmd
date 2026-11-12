@@ -238,7 +238,7 @@ H_i(X \setminus D, \mathbb{Z}) = 0 \quad \text{for all } i > n.
 $$
 
 ::: {#lem-lefschetz-duality}
-### Lefschetz Duality
+## Lefschetz Duality
 Consider the long exact sequence of compactly supported cohomology and relative cohomology:
 $$
 \begin{CD}

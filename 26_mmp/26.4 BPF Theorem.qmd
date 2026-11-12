@@ -32,7 +32,6 @@ H^0(X, \mathcal{O}_X(mD)) \otimes_k \mathcal{O}_X \twoheadrightarrow \mathcal{O}
 $$
 is surjective for all $m \gg 0$, i.e., $\operatorname{Bs}|mD| = \emptyset$.
 
-### Step 1: Reduction to $f$-ample and $\mathbb{Q}$-Weil boundary
 First, since $m_1 D + E - (K_X + B)$ is $f$-big, by Kodaira's lemma we can write:
 $$
 m_1 D + E - (K_X + B) \sim_{\mathbb{R}} A + B',
@@ -45,7 +44,6 @@ $$
 which is $f$-ample. Since $(X, B)$ is klt, for $\varepsilon \ll 1$, $(X, B + \varepsilon B')$ remains klt. We can then replace $B$ by $B + \varepsilon B'$.
 Thus, $m_1 D + E - (K_X + B) =: A$ is an $\mathbb{R}$-Cartier ample divisor. Since ampleness is an open condition in $N^1(X/S)_{\mathbb{R}}$, we may perturb the coefficients to assume without loss of generality that $B$ is a $\mathbb{Q}$-Weil divisor.
 
-### Step 2: Elimination of base points via strong log resolution
 Input the Nonvanishing Theorem (@thm-nonvanishing): then there exists $m \gg 0$ such that $f_* \mathcal{O}_X(mD) \ne 0$ (which is weaker; since $S$ is affine, this means $H^0(X, \mathcal{O}_X(mD)) \ne 0$).
 
 Assume that $|m_3' D|$ has a base point for some $m_3' \gg 0$ (otherwise, the theorem holds).
@@ -61,7 +59,6 @@ $$
 where $|M_1|$ is free and $M_2 \ne 0$ is the fixed part (an effective $\mathbb{Z}$-divisor).
 Notice that $\operatorname{Bs}|m_3' D| \subseteq \operatorname{Supp} M$, so $\operatorname{Bs}|\phi^* m_3' D| \subseteq \operatorname{Supp} \phi^* M$, which is of pure codimension $1$ and contained in $M_2$.
 
-### Step 3: Determining $t$, tie-breaking, and Kawamata vanishing
 **Idea:** Find a prime component $Z \preceq M_2$ (which corresponds to $E$) such that the restriction map:
 $$
 H^0\big(Y, \mathcal{O}_Y(m\phi^* D + \lceil -B_Y \rceil)\big) \twoheadrightarrow H^0\big(Z, \mathcal{O}_Z((m\phi^* D|_Z - \lfloor B_Y \rfloor|_Z))\big)
@@ -125,7 +122,6 @@ H^0(Y, \mathcal{O}_Y(m\phi^* D)) @>>> H^0(Z, \mathcal{O}_Z(m\phi^* D|_Z))
 $$
 where the isomorphism in the lower-left vertical column is induced by $H^0(X, \mathcal{O}_X(mD)) \cong H^0(X, \mathcal{O}_X(mD + E))$.
 
-### Step 4: Induction on dimension
 First, $\operatorname{Supp} M_2 \cup \operatorname{Supp} E \cup \operatorname{Supp} C$ is SNC, which implies that $Z$ is smooth.
 By the adjunction formula:
 $$
