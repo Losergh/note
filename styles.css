@@ -405,6 +405,15 @@ body.quarto-dark a[role="doc-biblioref"] {
   color: #f87171 !important;
 }
 
+/* Mermaid 图：标签字号略小于正文，保证在 Mermaid 计算出的节点框内完整显示 */
+.mermaid-js foreignObject div,
+.mermaid-js .nodeLabel {
+  font-size: 15px !important;
+  line-height: 1.35 !important;
+  word-spacing: normal !important;
+  letter-spacing: normal !important;
+}
+
 /* --------------------------------------------------------------------------
    8. 首页卡片
    -------------------------------------------------------------------------- */

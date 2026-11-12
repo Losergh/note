@@ -46,10 +46,11 @@ Let $S$ be a projective surface. By resolution of singularities, there exists a 
 ```{mermaid}
 %%| fig-align: center
 %%| fig-cap: "MMP Algorithm for Surfaces"
+%%{init: {'theme': 'default', 'flowchart': {'wrappingWidth': 320, 'nodeSpacing': 32, 'rankSpacing': 42, 'padding': 12}}}%%
 flowchart TD
-    A["Smooth projective surface S"] --> B{"Does S contain a (-1)-curve?"}
+    A["Smooth projective surface S"] --> B{"Does S contain<br/>a (-1)-curve?"}
     B -- No --> C["S is a Minimal Surface"]
-    B -- Yes --> D["Castelnuovo Contraction: S → S'"]
+    B -- Yes --> D["Castelnuovo Contraction:<br/>S → S'"]
     D --> E["Update: S := S'"]
     E --> B
 ```
@@ -76,11 +77,12 @@ flowchart TD
 ```{mermaid}
 %%| fig-align: center
 %%| fig-cap: "Higher-Dimensional MMP Flowchart"
+%%{init: {'theme': 'default', 'flowchart': {'wrappingWidth': 320, 'nodeSpacing': 32, 'rankSpacing': 42, 'padding': 12}}}%%
 flowchart TD
-    A["Projective variety X with mild singularities"] --> B{"Does X have a K_X-negative extremal ray?"}
-    B -- No --> C["X is a Minimal Model (or Mori Fiber Space)"]
+    A["Projective variety X<br/>with mild singularities"] --> B{"Does X have a<br/>K_X-negative extremal ray?"}
+    B -- No --> C["X is a Minimal Model<br/>(or Mori Fiber Space)"]
     B -- Yes --> D["Morphism: X → X'"]
-    D --> E["Perform Flip: X := Flip(X')"]
+    D --> E["Perform Flip:<br/>X := Flip(X')"]
     E --> B
 ```
 

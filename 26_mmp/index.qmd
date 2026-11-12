@@ -1,77 +1,64 @@
 ---
-title: "Algebraic Groups"
-subtitle: "Lecture Notes for MATH70008.01 26fall (Selected Topics in Representation Theory)"
+title: "MMP"
+subtitle: "Vanishing Theorems, Minimal Model Program and BCHM"
+author: "Chen Jiang (Fall 2026)"
 date: last-modified
+number-sections: true
+format:
+  html:
+    toc: true
+    toc-depth: 3
 ---
 
-::: {.callout-note appearance="simple"}
-## Course Information
-- **Course Code**: MATH70008.01
-- **Course Title**: Selected Topics in Representation Theory (Linear Algebraic Groups)
-- **Institution**: Shanghai Center for Mathematical Sciences (SCMS), Fudan University
-- **Instructor**: Prof. Miaofen Chen (陈苗芬)
-- **Credits**: 3.0 (54 Total Credit Hours)
-:::
+## Chapter Overview
 
-## Course Overview
+This chapter covers the foundations of modern higher-dimensional birational geometry and the Minimal Model Program (MMP). The central theme is the **classification of algebraic varieties up to birational equivalence**, developing the theory from classical surface classification to modern singularities of pairs and vanishing theorems.
 
-Linear algebraic groups are fundamental objects and tools in mathematics, with wide applications in number theory, representation theory, automorphic forms, and dynamical systems on homogeneous spaces. 
+The development is guided by two fundamental pillars:
 
-The goal of this course is to systematically develop the theory of linear algebraic groups, focusing on their structural properties, representations, and root-theoretic classifications, laying a solid foundation for research in arithmetic geometry, the Langlands program, and related areas.
-
----
-
-### Syllabus & Lecture Schedule
-
-The notes are organized according to the 7 main modules of the course:
-
-## [Weeks 1–2] Linear Algebraic Groups: Foundations & Jordan Decomposition
-- Affine varieties and the definition of linear algebraic groups
-- Subgroups, homomorphisms, and canonical examples ($\mathrm{GL}_n$, $\mathrm{SL}_n$, $\mathrm{Sp}_{2n}$, $\mathrm{SO}_n$)
-- Jordan-Chevalley decomposition (additive and multiplicative) in $\mathrm{GL}(V)$ and in abstract linear algebraic groups
-
-## [Weeks 3–4] Tannakian Formalism and Lie Algebras
-- Group actions on affine coordinate algebras $\mathcal{O}(G)$ and locally finite representations
-- Tannakian perspective: reconstructing an algebraic group from its representation category
-- The Lie algebra $\mathfrak{g} = \operatorname{Lie}(G)$ as invariant derivations
-- The adjoint representation $\mathrm{Ad}: G \to \mathrm{GL}(\mathfrak{g})$
-
-## [Week 5] Tori in Algebraic Groups
-- Diagonalizable groups and Cartier duality
-- Character lattice $X^*(T)$ and cocharacter lattice $X_*(T)$
-- Algebraic tori (split vs. non-split)
-- Rigidity of tori, centralizers, and normalizers
-
-## [Week 6] Quotients of Algebraic Groups
-- Actions on algebraic varieties, orbits, and stabilizers
-- Chevalley's Theorem on constructing subgroups as stabilizers of lines
-- Existence and geometric construction of homogeneous spaces and quotient varieties $G/H$
-
-## [Weeks 7–8] Reductive Groups
-- The radical $R(G)$ and the unipotent radical $R_u(G)$
-- Definitions and characterizations of semisimple and reductive groups
-- Action of maximal tori on $\operatorname{Lie}(G)$ and the root space decomposition
-- Basic properties of roots and root systems
-
-## [Weeks 10–11] Parabolic Subgroups of Reductive Groups
-- The Borel Fixed-Point Theorem for complete varieties
-- Maximal connected solvable subgroups (Borel subgroups $B$)
-- The flag variety $G/B$ and its projectivity/completeness
-- Parabolic subgroups: standard parabolic subgroups and their classification
-
-## [Weeks 12–13] Various Decompositions of Reductive Groups
-- The Bruhat decomposition: $G = \bigsqcup_{w \in W} B w B$
-- Relative root systems and decompositions over non-algebraically closed fields
-- Connections to the Iwasawa and Cartan decompositions in Lie groups and arithmetic groups
+1. **The Finite Generation Problem:**
+   Establishing the finite generation of the canonical ring for smooth projective varieties:
+   $$
+   R(X, K_X) := \bigoplus_{m=0}^\infty H^0(X, \mathcal{O}_X(m K_X)).
+   $$
+   To make induction on dimension work, one must generalize the setting to **log pairs** $(X, B)$ and study the relative section algebra $R(X/S, K_X + B)$.
+2. **Vanishing Theorems and Singularities of Pairs:**
+   Establishing the hierarchy of vanishing theorems (culminating in the **Kawamata-Viehweg Vanishing Theorem**), classifying mild singularities (**KLT, PLT, DLT, LC**), and applying **Shokurov's Connectedness Lemma** to deduce the **Subadjunction Formula**.
 
 ---
 
-## Primary References
+## Fundamental Theorems at a Glance
 
-- **J. S. Milne**, *Algebraic Groups: The Theory of Group Schemes of Finite Type over a Field*, Cambridge University Press, 2017.
+| Theorem | Section | Key Hypotheses | Main Conclusion |
+| :--- | :--- | :--- | :--- |
+| **Castelnuovo Contraction** | §26.0 | $C^2 = -1, \, C \cong \mathbb{P}^1$ on smooth surface $S$ | Smooth birational contraction $S \to S'$ contracting $C$ to a point |
+| **Elimination of Base Locus** | §26.1 | $\Lambda$ is a linear system of Cartier divisors | Birational morphism $f: Y \to X$ with $f^* \Lambda = \Lambda_1 + F$, $\Lambda_1$ free |
+| **Kodaira's Lemma** | §26.1 | $D$ is an $f$-big Cartier divisor, $S$ quasi-projective | $mD \sim A + E$ with $A$ relatively ample and $E \ge 0$ effective |
+| **Negativity Lemma** | §26.2 | $\operatorname{Supp} D \subseteq \operatorname{Exc}(f)$, $-D$ is $f$-nef | $D \ge 0$; if $D \ne 0$, $(D \cdot C) < 0$ for a contracted curve |
+| **Kawamata-Viehweg Vanishing** | §26.2 | $(X, B)/S$ SNC, $0 \le B < 1$, $D$ nef & big | $R^p f_* \mathcal{O}_X(K_X + B + D) = 0 \quad (\forall p > 0)$ |
+| **Connectedness Lemma** | §26.3 | $f^*(K_X + B) = K_Y + C$, $S = \lfloor C^+ \rfloor$ | $\mathcal{O}_X \twoheadrightarrow f_* \mathcal{O}_S$ is surjective; fibers are connected |
+| **Subadjunction Formula** | §26.3 | $(X, B)$ DLT, $Z \subseteq \lfloor B \rfloor$ prime component | $(K_X + B)|_Z = K_Z + B_Z$ is DLT (or KLT if PLT near $Z$) |
 
-## Supplementary Literature
+---
 
-- **Armand Borel**, *Linear Algebraic Groups*, Graduate Texts in Mathematics (GTM) 126, 2nd Edition, Springer, 1991.
-- **Armand Borel**, *Introduction to Arithmetic Groups*, American Mathematical Society (AMS), 2019.
-- **T. A. Springer**, *Linear Algebraic Groups*, 2nd Edition, Birkhäuser, 1998.
+## Notation & Conventions
+
+- **Varieties:** By default, a variety is an integral, separated scheme of finite type over $\mathbb{C}$, assumed to be **normal**.
+- **Divisor Groups:**
+  - $Z^1(X)$: Free abelian group generated by prime Weil divisors; $Z^1_{\mathbb{Q}}(X) := Z^1(X) \otimes \mathbb{Q}$; $Z^1_{\mathbb{R}}(X) := Z^1(X) \otimes \mathbb{R}$.
+  - $\operatorname{Div}(X)$: Group of Cartier divisors; $\operatorname{Pic}(X) = H^1(X, \mathcal{O}_X^*)$.
+  - $\operatorname{WCl}(X) := Z^1(X)/\operatorname{PDiv}(X)$: Weil divisor class group.
+  - Rounding operations for an $\mathbb{R}$-divisor $D = \sum d_i D_i$:
+    $$
+    \lfloor D \rfloor := \sum \lfloor d_i \rfloor D_i, \qquad \lceil D \rceil := \sum \lceil d_i \rceil D_i.
+    $$
+- **Pairs:**
+  - A pair $(X, B)$ consists of a normal variety $X$ and an effective $\mathbb{R}$-Weil divisor $B \ge 0$ such that $K_X + B$ is $\mathbb{R}$-Cartier.
+- **Equivalence Relations:**
+  - $\sim$: Linear equivalence of divisors.
+  - $\sim_{\mathbb{Q}}$ / $\sim_{\mathbb{R}}$: $\mathbb{Q}$-linear / $\mathbb{R}$-linear equivalence.
+  - $\equiv$ or $\equiv_S$: Relative numerical equivalence of line bundles or cycles over $S$.
+- **Numerical Vector Spaces and Cones:**
+  - $N^1(X/S)_{\mathbb{R}} := (\operatorname{Pic}(X)/\operatorname{Pic}^\tau(X/S)) \otimes_{\mathbb{Z}} \mathbb{R}$.
+  - $N_1(X/S)_{\mathbb{R}}$: Vector space of relative $1$-cycles modulo numerical equivalence.
+  - $\operatorname{Amp}(X/S)$, $\operatorname{Nef}(X/S)$, and $\overline{\operatorname{NE}}(X/S)$ denote the relative ample cone, nef cone, and closed cone of effective curves, respectively.
