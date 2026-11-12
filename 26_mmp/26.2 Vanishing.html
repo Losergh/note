@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-11-12">
+
+<title>26.2 Vanishing Theorems – Math Notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../26_mmp/26.3 KLT.html" rel="next">
+<link href="../26_mmp/26.1 Divisors.html" rel="prev">
+<link href="../image/1.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-846072d1559ace59f0b8d9643937f3ed.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-ece319cf83569c875f03cf0888487a42.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-846072d1559ace59f0b8d9643937f3ed.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+// MathJax 默认不加载 mathtools：\xleftrightarrow、\xLeftrightarrow、
+// \coloneqq 等命令需要它，这里显式加载（必须在 tex-chtml.js 之前执行）。
+window.MathJax = {
+  loader: { load: ['[tex]/mathtools'] },
+  tex: { packages: { '[+]': ['mathtools'] } }
+};
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Math Notes</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Losergh/note"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../26_mmp/26.2 Vanishing.html">26.2 Vanishing Theorems</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+        <div class="sidebar-tools-main">
+    <div id="quarto-search" class="quarto-navigation-tool px-1" title="Search"></div>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../26_mmp/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Algebraic Groups</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Algebraic Groups">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../26_mmp/26.0 Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">26.0 Introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../26_mmp/26.1 Divisors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">26.1 Divisors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../26_mmp/26.2 Vanishing.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">26.2 Vanishing Theorems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../26_mmp/26.3 KLT.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">26.3 KLT</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../26_mmp/26.4 BPF Theorem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">26.4 Base Point Free Theorem</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../26_mmp/26.5 Cone Theorem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">26.5 Cone Theorem</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+    <ul>
+    <li class="nav-item callout-toc-item"><a href="#thm-26-2-0" id="toc-thm-26-2-0" class="nav-link active" data-scroll-target="#thm-26-2-0" title="Theorem 26.2.0 (Hironaka Desingularization Theorem)">Thm 26.2.0</a></li>
+    <li class="nav-item callout-toc-item"><a href="#rem-26-2-1" id="toc-rem-26-2-1" class="nav-link" data-scroll-target="#rem-26-2-1" title="Remark 26.2.1">Rem 26.2.1</a></li>
+    <li class="nav-item callout-toc-item"><a href="#prp-26-2-2" id="toc-prp-26-2-2" class="nav-link" data-scroll-target="#prp-26-2-2" title="Proposition 26.2.2 (Negativity Lemma)">Prop 26.2.2</a></li>
+    <li class="nav-item callout-toc-item"><a href="#lem-26-2-3" id="toc-lem-26-2-3" class="nav-link" data-scroll-target="#lem-26-2-3" title="Lemma 26.2.3 (Strict Transform on N^1)">Lem 26.2.3</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-26-2-4" id="toc-def-26-2-4" class="nav-link" data-scroll-target="#def-26-2-4" title="Definition 26.2.4 (Permissible Center)">Def 26.2.4</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-26-2-5" id="toc-thm-26-2-5" class="nav-link" data-scroll-target="#thm-26-2-5" title="Theorem 26.2.5 (Permissible is Cofinal)">Thm 26.2.5</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-26-2-6" id="toc-thm-26-2-6" class="nav-link" data-scroll-target="#thm-26-2-6" title="Theorem 26.2.6 (Kodaira Vanishing I)">Thm 26.2.6</a></li>
+    <li class="nav-item callout-toc-item"><a href="#cor-26-2-7" id="toc-cor-26-2-7" class="nav-link" data-scroll-target="#cor-26-2-7" title="Corollary 26.2.7 (Kodaira Vanishing II)">Cor 26.2.7</a></li>
+    <li class="nav-item callout-toc-item"><a href="#lem-26-2-8" id="toc-lem-26-2-8" class="nav-link" data-scroll-target="#lem-26-2-8" title="Lemma 26.2.8 (Kawamata’s Covering Trick)">Lem 26.2.8</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-26-2-9" id="toc-thm-26-2-9" class="nav-link" data-scroll-target="#thm-26-2-9" title="Theorem 26.2.9 (Kodaira Vanishing III - Kawamata-Viehweg Vanishing)">Thm 26.2.9</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-26-2-10" id="toc-thm-26-2-10" class="nav-link" data-scroll-target="#thm-26-2-10" title="Theorem 26.2.10 (Relative Version of KV Vanishing)">Thm 26.2.10</a></li>
+    <li class="nav-item callout-toc-item"><a href="#rem-26-2-11" id="toc-rem-26-2-11" class="nav-link" data-scroll-target="#rem-26-2-11" title="Remark 26.2.11 (Vanishing &amp; Log Canonical)">Rem 26.2.11</a></li>
+    <li class="nav-item callout-toc-item"><a href="#lem-26-2-12" id="toc-lem-26-2-12" class="nav-link" data-scroll-target="#lem-26-2-12" title="Lemma 26.2.12">Lem 26.2.12</a></li>
+    <li class="nav-item callout-toc-item"><a href="#thm-26-2-13" id="toc-thm-26-2-13" class="nav-link" data-scroll-target="#thm-26-2-13" title="Theorem 26.2.13 (Kodaira Vanishing IV - Kawamata-Viehweg for Nef &amp; Big)">Thm 26.2.13</a></li>
+    <li class="nav-item callout-toc-item"><a href="#lem-26-2-14" id="toc-lem-26-2-14" class="nav-link" data-scroll-target="#lem-26-2-14" title="Lemma 26.2.14">Lem 26.2.14</a></li>
+    </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../26_mmp/26.2 Vanishing.html">26.2 Vanishing Theorems</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">26.2 Vanishing Theorems</h1>
+<p class="subtitle lead">Birational Geometry (Chen Jiang, Fall 2026)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 12, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="thm-26-2-0" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 26.2.0</strong> (Hironaka Desingularization Theorem)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<ol type="1">
+<li>For every variety <span class="math inline">\(X\)</span>, there exists a smooth variety <span class="math inline">\(Y\)</span> and a projective birational morphism <span class="math inline">\(f: Y \to X\)</span> such that <span class="math inline">\(f\)</span> is an isomorphism over <span class="math inline">\(\operatorname{Reg}(X)\)</span>.</li>
+<li><strong>(Log resolution)</strong> Let <span class="math inline">\((X, B)\)</span> be a pair with <span class="math inline">\(B\)</span> a proper closed subset of <span class="math inline">\(X\)</span>. There exists a smooth variety <span class="math inline">\(Y\)</span>, an SNC divisor <span class="math inline">\(C \subseteq Y\)</span>, and a projective birational morphism <span class="math inline">\(f: Y \to X\)</span> such that:
+<ul>
+<li><strong>(a)</strong> If <span class="math inline">\(B \ne \emptyset\)</span>, <span class="math inline">\(f^{-1}(B)\)</span> is a union of several irreducible components of <span class="math inline">\(C\)</span>;</li>
+<li><strong>(b)</strong> <span class="math inline">\(\operatorname{Exc}(f)\)</span> is a union of irreducible components of <span class="math inline">\(C\)</span>;</li>
+<li><strong>(c)</strong> <span class="math inline">\(f\)</span> is an isomorphism over <span class="math inline">\(\operatorname{Reg}(X, B)\)</span>. (The resolution is called <strong>proper / strong</strong> if (c) is satisfied).</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="rem-26-2-1" class="proof remark theorem kind-remark">
+<div class="theorem-header"><span><strong>Remark 26.2.1</strong></span></div>
+<div class="theorem-body">
+<ol type="1">
+<li>The <strong>weak log resolution</strong> is <span class="math inline">\(f: Y \to X\)</span> such that <span class="math inline">\(f^{-1}(B) \cup \operatorname{Exc}(f)\)</span> is SNC (we may have <span class="math inline">\(\operatorname{codim} \operatorname{Exc}(f) \ge 2\)</span>).</li>
+<li>The <strong>strong log resolution</strong> is a log resolution <span class="math inline">\(f: (Y, C) \to (X, B)\)</span> such that there exists an <span class="math inline">\(f\)</span>-ample divisor <span class="math inline">\(D \in \operatorname{Div}(Y)\)</span> with <span class="math inline">\(\operatorname{Supp} D \subseteq \operatorname{Exc}(f)\)</span>, in which case <span class="math inline">\(\operatorname{Supp} D = \operatorname{Exc}(f)\)</span> and <span class="math inline">\(-D \ge 0\)</span>.</li>
+<li><strong>Fact:</strong> Strong log resolutions always exist by blowing up.</li>
+</ol>
+</div>
+</div>
+<hr>
+<div id="prp-26-2-2" class="theorem kind-proposition">
+<div class="theorem-header is-clickable"><span><strong>Proposition 26.2.2</strong> (Negativity Lemma)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(f: X \to Y\)</span> be a projective birational morphism between normal algebraic varieties. Let <span class="math inline">\(D \in \operatorname{Div}_{\mathbb{R}}(X)\)</span> with <span class="math inline">\(\operatorname{Supp} D \subseteq \operatorname{Exc}(f)\)</span>. Then: 1. If <span class="math inline">\(D\)</span> is nonzero effective, there exists an irreducible component <span class="math inline">\(E \subseteq D\)</span> and a dense open subset <span class="math inline">\(U \subseteq E\)</span> such that for all <span class="math inline">\(x \in U\)</span>, there exists a curve <span class="math inline">\(C\)</span> contracted by <span class="math inline">\(f\)</span> through <span class="math inline">\(x\)</span> such that <span class="math inline">\(C \not\subseteq \operatorname{Supp}(D - E)\)</span> (i.e.&nbsp;<span class="math inline">\(x \in C \subseteq D\)</span>) and: <span class="math display">\[
+   (D \cdot C) &lt; 0.
+   \]</span> 2. If <span class="math inline">\(D\)</span> is <span class="math inline">\(f\)</span>-nef and <span class="math inline">\(D \ne 0\)</span>, then <span class="math inline">\(-D \ge 0\)</span>. Furthermore, <span class="math inline">\(\operatorname{Supp} D = f^{-1}(f(\operatorname{Supp} D))\)</span>. 3. If <span class="math inline">\(-D\)</span> is <span class="math inline">\(f\)</span>-ample, then <span class="math inline">\(\operatorname{Supp} D = \operatorname{Exc}(f)\)</span> (the case of strong resolution).</p>
+</div>
+</div>
+<hr>
+<div id="lem-26-2-3" class="theorem kind-lemma">
+<div class="theorem-header is-clickable"><span><strong>Lemma 26.2.3</strong> (Strict Transform on <span class="math inline"><em>N</em><sup>1</sup></span>)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(\alpha: X \dashrightarrow X'\)</span> be a birational map between normal <span class="math inline">\(\mathbb{Q}\)</span>-factorial varieties projective over <span class="math inline">\(S\)</span>: <span class="math display">\[
+\begin{CD}
+X @&gt;{\alpha}&gt;&gt; X' \\
+@V{f}VV @VV{f'}V \\
+S @= S
+\end{CD}
+\]</span> 1. <span class="math inline">\(\alpha\)</span> induces <span class="math inline">\(\alpha_*: N^1(X/S) \longrightarrow N^1(X'/S)\)</span>. 2. <span class="math inline">\(\alpha_*(\overline{\operatorname{Eff}}(X/S)) = \overline{\operatorname{Eff}}(X'/S)\)</span>. 3. If <span class="math inline">\(\alpha\)</span> is not an isomorphism, then: <span class="math display">\[
+   \alpha_*(\operatorname{Amp}(X/S)) \cap \operatorname{Amp}(X'/S) = \emptyset.
+   \]</span></p>
+</div>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p><strong>Proof of (1):</strong> First, <span class="math inline">\(\alpha\)</span> is an isomorphism in codimension <span class="math inline">\(1\)</span>, so <span class="math inline">\(Z^1(X) \xrightarrow{\sim} Z^1(X')\)</span>. Consider the graph <span class="math inline">\(\bar{\Gamma}_U \subseteq X \times X'\)</span> where <span class="math inline">\(\Gamma_U\)</span> is the graph over <span class="math inline">\(U = \operatorname{dom}(\alpha)\)</span>. By Theorem 26.2.0, there exists a smooth variety <span class="math inline">\(W\)</span> dominating <span class="math inline">\(\bar{\Gamma}\)</span>: <span class="math display">\[
+\begin{CD}
+@. W @. \\
+@V{\mathrm{bir}}VV @VV{\mathrm{bir}}V \\
+X @&lt;{\mathrm{bir}}&lt;&lt; \bar{\Gamma} @&gt;{\mathrm{bir}}&gt;&gt; X'
+\end{CD}
+\]</span> That is, there exist morphisms <span class="math inline">\(g: W \to X\)</span> and <span class="math inline">\(g': W \to X'\)</span>. For <span class="math inline">\(D \in Z^1(X)\)</span>, let <span class="math inline">\(D' := \alpha_* D\)</span>. Define the total transform pullback as a <span class="math inline">\(\mathbb{Q}\)</span>-Cartier divisor: <span class="math display">\[
+g^* D = g'^* D' + E, \qquad \text{where } g_* E = 0, \; g'_* E = 0.
+\]</span> Thus <span class="math inline">\(\operatorname{Supp}(E)\)</span> is exceptional with respect to both <span class="math inline">\(g\)</span> and <span class="math inline">\(g'\)</span> (using <span class="math inline">\(g \circ g^* = \mathrm{id}\)</span>). Assume <span class="math inline">\(D \equiv_S 0\)</span>; then <span class="math inline">\(g^* D \equiv_S 0\)</span>. We want to show <span class="math inline">\(D' \equiv_S 0\)</span>. Suppose <span class="math inline">\(E \ne 0\)</span>, or <span class="math inline">\(D' = g'_* g^* D = g'_* g'^* D' = D' \equiv_S 0\)</span>. Write <span class="math inline">\(E = E^+ - E^-\)</span>. If <span class="math inline">\(E^+ \ne 0\)</span>, by Prop 26.2.2 (Negativity Lemma), there exists <span class="math inline">\(C \in N_1(W/X)\)</span> such that <span class="math inline">\((E^+ \cdot C) &lt; 0\)</span> and <span class="math inline">\((E^- \cdot C) \ge 0\)</span> (they have no common components). But <span class="math inline">\((g^* D \cdot C) = (D \cdot g_* C) = 0 \implies (g'^* D' \cdot C) = 0\)</span> and <span class="math inline">\((g^* D \cdot C) = 0\)</span>. Thus <span class="math inline">\(((E^+ - E^-) \cdot C) &lt; 0 \implies\)</span> contradiction! Therefore <span class="math inline">\(E^+ = 0\)</span>, and similarly <span class="math inline">\(E^- = 0\)</span>. (Hence <span class="math inline">\(E\)</span> and <span class="math inline">\(-E\)</span> are <span class="math inline">\(g'\)</span>-nef, with <span class="math inline">\(E\)</span> being <span class="math inline">\(g'\)</span>-exceptional). Thus <span class="math inline">\(\alpha_*\)</span> induces a well-defined linear map <span class="math inline">\(N^1(X/S) \to N^1(X'/S)\)</span>.</p>
+<p><strong>Proof of (3):</strong> If <span class="math inline">\(\alpha_*(\operatorname{Amp}(X/S)) \cap \operatorname{Amp}(X'/S) \ne \emptyset\)</span>, there exists <span class="math inline">\(D \in Z^1(X)\)</span> relatively ample such that <span class="math inline">\(\alpha_* D\)</span> is relatively ample. Set <span class="math inline">\(D' := \alpha_* D\)</span>. Since <span class="math inline">\(\alpha\)</span> is an isomorphism in codimension <span class="math inline">\(1\)</span>, for all <span class="math inline">\(m \ge 0\)</span>: <span class="math display">\[
+\alpha_*: f_* \mathcal{O}_X(mD) \xrightarrow{\;\sim\;} f'_* \mathcal{O}_{X'}(mD'),
+\]</span> <span class="math display">\[
+(f_* \mathcal{O}_X(mD) = j_* f_* \mathcal{O}_U(mD|_U) \cong j_* f'_* \mathcal{O}_U(mD'|_U) = f'_* \mathcal{O}_{X'}(mD')).
+\]</span> Then: <span class="math display">\[
+X \cong \operatorname{Proj}_S \bigoplus_{m \ge 0} f_* \mathcal{O}_X(mD) \cong \operatorname{Proj}_S \bigoplus_{m \ge 0} f'_* \mathcal{O}_{X'}(mD') \cong X',
+\]</span> so <span class="math inline">\(\alpha\)</span> is an isomorphism.</p>
+</div>
+</div>
+<hr>
+<div id="def-26-2-4" class="theorem kind-definition">
+<div class="theorem-header is-clickable"><span><strong>Definition 26.2.4</strong> (Permissible Center)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<ol type="1">
+<li>Let <span class="math inline">\(X\)</span> be a smooth algebraic variety, and <span class="math inline">\(B\)</span> an SNC divisor. A smooth subvariety <span class="math inline">\(Z \subseteq X\)</span> is called a <strong>permissible center</strong> with respect to <span class="math inline">\((X, B)\)</span> if for all <span class="math inline">\(P \in X\)</span>, there exists a regular system of parameters <span class="math inline">\(z_1, \dots, z_n\)</span> of <span class="math inline">\(\mathcal{O}_{X, P}\)</span> and integers <span class="math inline">\(r, s, t\)</span> such that: <span class="math display">\[
+B = V(z_1 \cdots z_r), \qquad Z = V(z_s, \dots, z_t) \qquad (0 \le r \le n, \; 0 \le s \le t \le n).
+\]</span></li>
+<li>The blowup <span class="math inline">\(f: Y \to X\)</span> along a permissible center <span class="math inline">\(Z\)</span> with respect to <span class="math inline">\((X, B)\)</span> is called a <strong>permissible blowup</strong>.</li>
+</ol>
+</div>
+</div>
+<div id="thm-26-2-5" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 26.2.5</strong> (Permissible is Cofinal)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be smooth over <span class="math inline">\(k\)</span>, <span class="math inline">\(B\)</span> an SNC divisor, and <span class="math inline">\(f: Y \to X\)</span> a proper birational morphism with <span class="math inline">\(Y\)</span> smooth. Then there exists a sequence of blowups: <span class="math display">\[
+f_i: (X_i, B_i) \longrightarrow (X_{i-1}, B_{i-1}) \quad \text{and} \quad X_n \xrightarrow{\;\mathrm{bir}\;} Y,
+\]</span> such that <span class="math inline">\((X_0, B_0) = (X, B)\)</span>, <span class="math inline">\(f \circ g = f_1 \circ \dots \circ f_n\)</span>, and <span class="math inline">\(B_i = f_i^{-1} B_{i-1} + E_{f_i}\)</span> (total transforms cannot keep SNC).</p>
+</div>
+</div>
+<hr>
+<div id="thm-26-2-6" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 26.2.6</strong> (Kodaira Vanishing I)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be smooth projective and <span class="math inline">\(A \in \operatorname{Amp}(X)\)</span>. Then: <span class="math display">\[
+H^i(X, \mathcal{O}_X(K_X + A)) = 0 \quad \forall i &gt; 0.
+\]</span></p>
+</div>
+</div>
+<div id="cor-26-2-7" class="theorem kind-corollary">
+<div class="theorem-header is-clickable"><span><strong>Corollary 26.2.7</strong> (Kodaira Vanishing II)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\((X, B)\)</span> be a projective SNC pair, and <span class="math inline">\(A\)</span> ample. Then: <span class="math display">\[
+H^i(X, \mathcal{O}_X(K_X + B + A)) = 0 \quad \forall i &gt; 0.
+\]</span> (Here <span class="math inline">\(B\)</span> is regarded as a reduced Weil = Cartier divisor <span class="math inline">\(B = \sum_{j=1}^k B_j\)</span> where <span class="math inline">\(B = \bigcup_{j=1}^k B_j\)</span>).</p>
+</div>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>Induction on <span class="math inline">\(\dim X\)</span>: - If <span class="math inline">\(\dim X = 0\)</span>, trivial. - If <span class="math inline">\(\dim X = n\)</span>, proceed by induction on <span class="math inline">\(k\)</span>: - <span class="math inline">\(k = 0\)</span>: trivial by Theorem 26.2.6. - If <span class="math inline">\(k &gt; 0\)</span>: since <span class="math inline">\(B_k\)</span> is smooth, consider: <span class="math display">\[
+    0 \longrightarrow \mathcal{O}_X(K_X + B - B_k + A) \longrightarrow \mathcal{O}_X(K_X + B + A) \longrightarrow \mathcal{O}_{B_k}(K_{B_k} + A) \longrightarrow 0.
+    \]</span> Then the induction hypothesis on dimension <span class="math inline">\(n-1\)</span> and on <span class="math inline">\(k-1\)</span> gives: <span class="math display">\[
+    H^i(X, \mathcal{O}_X(K_X + B - B_k + A)) \longrightarrow H^i(X, \mathcal{O}_X(K_X + B + A)) \longrightarrow H^i(B_k, \mathcal{O}_{B_k}(K_{B_k} + A)).
+    \]</span> Since the two outer groups are <span class="math inline">\(0\)</span>, <span class="math inline">\(H^i(X, \mathcal{O}_X(K_X + B + A)) = 0\)</span>.</p>
+</div>
+</div>
+<div id="lem-26-2-8" class="theorem kind-lemma">
+<div class="theorem-header is-clickable"><span><strong>Lemma 26.2.8</strong> (Kawamata’s Covering Trick)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Given <span class="math inline">\((X, \sum B_i)\)</span> SNC and given <span class="math inline">\(n_i \in \mathbb{Z}_{&gt;0}\)</span>, there exists a finite Galois covering <span class="math inline">\(f: Y \to X\)</span> with <span class="math inline">\(Y\)</span> smooth such that: <span class="math display">\[
+f^* B_i = n_i C_i,
+\]</span> where <span class="math inline">\(C_i\)</span> are Weil divisors with coefficients <span class="math inline">\(1\)</span>, <span class="math inline">\(\operatorname{Supp} \sum C_i\)</span> is SNC in <span class="math inline">\(Y\)</span>, and <span class="math inline">\(\operatorname{Gal}(K(Y)/K(X))\)</span> is abelian. <em>(Recall that <span class="math inline">\((X, \sum B_i)\)</span> is SNC if <span class="math inline">\(X\)</span> is smooth and <span class="math inline">\(\bigcup B_i\)</span> is SNC).</em></p>
+</div>
+</div>
+<hr>
+<div id="thm-26-2-9" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 26.2.9</strong> (Kodaira Vanishing III - Kawamata-Viehweg Vanishing)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be smooth projective over <span class="math inline">\(\mathbb{C}\)</span>, <span class="math inline">\(D \in Z^1_{\mathbb{R}}(X)\)</span> ample, and <span class="math inline">\(\lceil D \rceil - D\)</span> have SNC support. Then: <span class="math display">\[
+H^i(X, \mathcal{O}_X(K_X + \lceil D \rceil)) = 0 \quad \forall i &gt; 0.
+\]</span> (Recall <span class="math inline">\(K_X \in Z^1(X)\)</span>).</p>
+</div>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>Take <span class="math inline">\(B := \lceil D \rceil - D\)</span> and <span class="math inline">\(D' := K_X + \lceil D \rceil\)</span>; then <span class="math inline">\(D' - K_X - B = D\)</span>. It suffices to show that for <span class="math inline">\(B \in Z^1_{\mathbb{R}}(X)\)</span> with SNC support, <span class="math inline">\(0 \le B &lt; \sum B_i\)</span>, and <span class="math inline">\(D \in Z^1(X)\)</span> such that <span class="math inline">\(D - K_X - B\)</span> is ample, we have <span class="math inline">\(H^i(X, \mathcal{O}_X(D)) = 0\)</span> for all <span class="math inline">\(i &gt; 0\)</span>.</p>
+<ul>
+<li><p><strong>Step 1:</strong> Without loss of generality, assume <span class="math inline">\(B \in \mathbb{Q}\)</span> since <span class="math inline">\(\operatorname{Amp}(X)\)</span> is an open cone. Write: <span class="math display">\[
+B = \sum \frac{m_i}{n_i} B_i \qquad (\exists N, \; NB \text{ is } \mathbb{Z}\text{-Weil}, \; NB = \sum n_i B_i).
+\]</span></p></li>
+<li><p><strong>Step 2:</strong> Take a finite covering <span class="math inline">\(f: Y \to X\)</span> such that <span class="math inline">\(f^* B_i = n_i C_i\)</span>. Then <span class="math inline">\(A := f^*(D - K_X - B) = f^* D - f^* K_X - \sum m_i C_i\)</span> is still ample. By Theorem 26.2.6 (Kodaira Vanishing I), <span class="math inline">\(H^i(Y, \mathcal{O}_Y(K_Y + A)) = 0\)</span> for all <span class="math inline">\(i &gt; 0\)</span>. Since <span class="math inline">\(f\)</span> is a finite morphism: <span class="math display">\[
+H^i(X, f_* \mathcal{O}_Y(K_Y + A)) = 0 \quad \forall i &gt; 0.
+\]</span> By miracle flatness, <span class="math inline">\(f\)</span> is flat <span class="math inline">\(\implies f_* \mathcal{O}_Y(K_Y + A)\)</span> is locally free.</p></li>
+<li><p><strong>Claim:</strong> <span class="math inline">\(\mathcal{O}_X(D)\)</span> is a direct summand of <span class="math inline">\(f_* \mathcal{O}_Y(K_Y + A)\)</span>. It suffices to show <span class="math inline">\(\mathcal{O}_X\)</span> is a direct summand of: <span class="math display">\[
+f_* \mathcal{O}_Y(K_Y + A - f^* D) = f_* \mathcal{O}_Y(K_Y - f^* K_X - \sum m_i C_i).
+\]</span> The Galois group <span class="math inline">\(G\)</span> acts on <span class="math inline">\(\mathcal{O}_Y(K_Y - f^*(K_X + B))\)</span> through <span class="math inline">\(G \circlearrowright \omega_Y\)</span>. Then <span class="math inline">\(G \circlearrowright f_* \mathcal{O}_Y(K_Y - f^*(K_X + B))\)</span>. Define <span class="math inline">\(\mathcal{L} := (f_* \mathcal{O}_Y(K_Y - f^*(K_X + B)))^G\)</span>. Since <span class="math inline">\(G\)</span> is abelian, <span class="math inline">\(f_* \mathcal{O}_Y\)</span> decomposes into a direct sum of line bundles corresponding to the characters of <span class="math inline">\(G\)</span>. For all <span class="math inline">\(f \in H^0(f^{-1}(U), \mathcal{O}_Y(f^*(K_X + B)))\)</span>, <span class="math inline">\(f\)</span> is fixed by <span class="math inline">\(G \iff f \in K(X)\)</span> and: <span class="math display">\[
+\operatorname{div}_Y f + f^*(K_X + B) \ge 0 \iff f^*(\operatorname{div}_X f) + f^*(K_X + B) \ge 0
+\]</span> <span class="math display">\[
+\iff \operatorname{div}_X f + K_X + \lfloor B \rfloor \ge 0 \iff f \in H^0(U, \mathcal{O}_X(K_X + \lfloor B \rfloor)) = H^0(U, \mathcal{O}_X(K_X)).
+\]</span> Then <span class="math inline">\(\mathcal{L} = (f_* \mathcal{O}_Y(K_Y))^G \otimes \mathcal{O}_X(-K_X - B) = (f_* \omega_Y)^G \otimes \omega_X^{-1}\)</span>. <strong>Fact:</strong> If <span class="math inline">\(Y/X\)</span> is Galois finite, then <span class="math inline">\((f_* \omega_Y)^G \cong \omega_X\)</span>. Thus <span class="math inline">\(\mathcal{O}_X \cong \mathcal{L}\)</span> is a direct summand of <span class="math inline">\(f_* \mathcal{O}_Y(K_Y + A - f^* D)\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<hr>
+<div id="thm-26-2-10" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 26.2.10</strong> (Relative Version of KV Vanishing)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(X\)</span> be a smooth variety, <span class="math inline">\(f: X \to S\)</span> projective, <span class="math inline">\(D\)</span> an <span class="math inline">\(f\)</span>-ample <span class="math inline">\(\mathbb{R}\)</span>-divisor, and <span class="math inline">\(\operatorname{Supp}(\lceil D \rceil - D)\)</span> SNC. Then: <span class="math display">\[
+R^i f_* \mathcal{O}_X(K_X + \lceil D \rceil) = 0 \quad \forall i &gt; 0.
+\]</span></p>
+</div>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<ol type="1">
+<li>Without loss of generality, assume <span class="math inline">\(S\)</span> is affine. Then <span class="math inline">\(X/S\)</span> is projective, and <span class="math inline">\(S \hookrightarrow \bar{S} \subseteq \mathbb{P}^N\)</span>. We have <span class="math inline">\(X \hookrightarrow \bar{X} \subseteq \mathbb{P}_{\bar{S}}^M\)</span> with: <span class="math display">\[
+\begin{CD}
+X @&gt;&gt;&gt; \bar{X} \\
+@VV{f}V @VV{\bar{f}}V \\
+S @&gt;&gt;&gt; \bar{S}
+\end{CD}
+\qquad \bar{f}^{-1}(S) = X.
+\]</span> <span class="math inline">\(\bar{S} \setminus S = H \cap \bar{S} \implies A := H|_{\bar{S}}\)</span> is ample on <span class="math inline">\(\bar{S}\)</span>. Then <span class="math inline">\(\bar{D} + m \bar{f}^* A\)</span> is ample for <span class="math inline">\(m \gg 0\)</span>. Set <span class="math inline">\(B := \lceil D \rceil - D\)</span>. Take a strong log resolution of <span class="math inline">\((\bar{X}, \bar{B} = \lceil \bar{D} \rceil - \bar{D})\)</span>: <span class="math display">\[
+\phi: Y \longrightarrow (\bar{X}, \bar{B})
+\]</span> such that <span class="math inline">\(\phi\)</span> is an isomorphism over <span class="math inline">\((X, B)\)</span>, and there exists <span class="math inline">\(E \in \operatorname{Div}(Y)\)</span> with <span class="math inline">\(\operatorname{Supp} E = \operatorname{Exc}(\phi)\)</span> ample over <span class="math inline">\(\bar{X}\)</span>. Then <span class="math inline">\(D_Y := \phi^*(\bar{D} + m \bar{f}^* A) + \varepsilon E\)</span> is ample with SNC support (<span class="math inline">\(0 &lt; \varepsilon \ll 1\)</span>). By Theorem 26.2.9, <span class="math inline">\(H^i(Y, \mathcal{O}_Y(K_Y + \lceil D_Y \rceil)) = 0\)</span> for all <span class="math inline">\(i &gt; 0\)</span>. Consider the Leray spectral sequence: <span class="math display">\[
+E_2^{p, q} = H^p(\bar{S}, R^q \bar{f}_* \phi_* \mathcal{O}_Y(K_Y + \lceil D_Y \rceil)) \Longrightarrow H^{p+q}(Y, \mathcal{O}_Y(K_Y + \lceil D_Y \rceil)),
+\]</span> where <span class="math inline">\(R^q \bar{f}_* \phi_* \mathcal{O}_Y(K_Y + \lceil \phi^* \bar{D} + \varepsilon E \rceil + m \phi^* \bar{f}^* A) \cong R^q \bar{f}_* \phi_* \mathcal{O}_Y(K_Y + \lceil \phi^* \bar{D} + \varepsilon E \rceil) \otimes \mathcal{O}_{\bar{S}}(mA)\)</span>. Then <span class="math inline">\(E_2^{p, q} = 0\)</span> for <span class="math inline">\(m \gg 0\)</span> and <span class="math inline">\(p \ge 1\)</span>. Fix <span class="math inline">\(m\)</span>: <span class="math inline">\(0 = H^0(Y, R^q \bar{f}_* \dots) = H^0(\bar{S}, \bar{f}_* \dots)\)</span> for <span class="math inline">\(q \ge 1\)</span>. By Serre vanishing <span class="math inline">\(\implies R^q \bar{f}_*(\mathcal{O}_Y(K_Y + \lceil D_Y \rceil))\)</span> is generated by global sections (take universal <span class="math inline">\(m\)</span>). Then <span class="math inline">\(R^q f_* \mathcal{O}_X(K_X + \lceil D \rceil) = 0\)</span>, since: <span class="math display">\[
+0 = R^q \bar{f}_* \phi_* \mathcal{O}_Y(K_Y + \lceil D_Y \rceil)|_S = R^q f_* \phi_* \big(\mathcal{O}_Y(K_Y + \lceil \phi^* D + \varepsilon E \rceil)|_X\big) = R^q f_* \mathcal{O}_X(K_X + \lceil D \rceil).
+\]</span></li>
+</ol>
+</div>
+</div>
+<hr>
+<div id="rem-26-2-11" class="proof remark theorem kind-remark">
+<div class="theorem-header"><span><strong>Remark 26.2.11</strong> (Vanishing &amp; Log Canonical)</span></div>
+<div class="theorem-body">
+<ol type="1">
+<li>For all <span class="math inline">\(B \in Z^1_{\mathbb{R}}(X)\)</span>, we say <span class="math inline">\(a \le B &lt; b\)</span> if <span class="math inline">\(B \in \bigoplus_{P \in Z^1(X) \text{ prime}} [a, b) P\)</span>.</li>
+<li>For all <span class="math inline">\(D \in Z^1_{\mathbb{R}}(X)\)</span>, <span class="math inline">\(\lceil D \rceil - D \in [0, 1)\)</span>, and <span class="math inline">\(B := \lceil D \rceil - D\)</span> is an effective <span class="math inline">\(\mathbb{R}\)</span>-divisor. We can rephrase Theorem 26.2.10 (relative version): Let <span class="math inline">\((X, B)\)</span> be an SNC pair, <span class="math inline">\(f: X \to S\)</span> projective, <span class="math inline">\(0 \le B &lt; 1\)</span>. For every <span class="math inline">\(f\)</span>-ample <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(D\)</span> such that <span class="math inline">\(D + B \in Z^1(X)\)</span> (in which case <span class="math inline">\(D + B = \lceil D \rceil\)</span>): <span class="math display">\[
+R^i f_* \mathcal{O}_X(K_X + B + D) = 0 \quad \forall i &gt; 0 \qquad (\text{log canonical sheaf}).
+\]</span> <span class="math inline">\(\triangle\)</span> The theorem is open on <span class="math inline">\(D\)</span>: for all <span class="math inline">\(F \ge 0\)</span> and <span class="math inline">\(0 &lt; \varepsilon \ll 1\)</span>, <span class="math display">\[
+0 \le B' = B + \varepsilon F &lt; 1 \quad \text{and} \quad D' = D - \varepsilon F \text{ is ample}.
+\]</span> Then still <span class="math inline">\(R^i f_* \mathcal{O}_X(K_X + B' + D') = 0\)</span>. Thus we want to extend <span class="math inline">\(D'\)</span> to <strong>nef &amp; big</strong> divisors: If <span class="math inline">\(D\)</span> is nef &amp; big, then <span class="math inline">\(D = A + E\)</span>, and <span class="math inline">\(D \le E = (1 - \varepsilon) D + \varepsilon A\)</span> is ample. Choose <span class="math inline">\(\varepsilon \ll 1\)</span> such that <span class="math inline">\(0 \le B + \varepsilon E &lt; 1\)</span>, and set <span class="math inline">\(B' := B + \varepsilon E\)</span>, <span class="math inline">\(D' := D - \varepsilon E\)</span>. Now if <span class="math inline">\(B'\)</span> is SNC, we are done; but if not, we need a log resolution.</li>
+</ol>
+</div>
+</div>
+<hr>
+<div id="lem-26-2-12" class="theorem kind-lemma">
+<div class="theorem-header is-clickable"><span><strong>Lemma 26.2.12</strong></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(Y \xrightarrow{g} X \xrightarrow{f} S\)</span> with <span class="math inline">\(h = f \circ g\)</span>. If <span class="math inline">\(D\)</span> on <span class="math inline">\(X\)</span> is <span class="math inline">\(f\)</span>-ample and <span class="math inline">\(E\)</span> on <span class="math inline">\(Y\)</span> is <span class="math inline">\(g\)</span>-ample, then <span class="math inline">\(E\)</span> is <span class="math inline">\(h\)</span>-ample.</p>
+</div>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>We only prove the integral case: There exists <span class="math inline">\(n_0\)</span> such that <span class="math inline">\(n_0 E = \mathcal{O}_Y(1)\)</span> where <span class="math inline">\(Y \hookrightarrow \mathbb{P}_X^N\)</span>, and there exists <span class="math inline">\(m_1 \gg 0\)</span> such that <span class="math inline">\(f^*(m_1 D)\)</span> is generated by global sections. Then <span class="math inline">\(n_0 E + m_1 g^* D = \mathcal{O}_Y(1)\)</span> where <span class="math inline">\(Y \hookrightarrow X \times \mathbb{P}^N \hookrightarrow \mathbb{P}_X^{N+1}\)</span>. For <span class="math inline">\(m_2 \gg 0 \implies Y \hookrightarrow X \times \mathbb{P}^N \hookrightarrow \mathbb{P}^M \times \mathbb{P}^N \hookrightarrow \mathbb{P}^{MN+M+N}\)</span>, <span class="math display">\[
+\mathcal{O}_Y(1) = n_0 E + (m_1 + m_2) g^* D.
+\]</span></p>
+</div>
+</div>
+<div id="thm-26-2-13" class="theorem kind-theorem">
+<div class="theorem-header is-clickable"><span><strong>Theorem 26.2.13</strong> (Kodaira Vanishing IV - Kawamata-Viehweg for Nef &amp; Big)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\((X, B)/S\)</span> be an SNC pair with <span class="math inline">\(0 \le B &lt; 1\)</span>, and let <span class="math inline">\(D\)</span> be an <span class="math inline">\(f\)</span>-nef and <span class="math inline">\(f\)</span>-big <span class="math inline">\(\mathbb{R}\)</span>-divisor such that <span class="math inline">\(D + B \in Z^1(X)\)</span>. Then: <span class="math display">\[
+R^p f_* \mathcal{O}_X(K_X + B + D) = 0 \quad \forall p &gt; 0.
+\]</span></p>
+</div>
+</div>
+<div class="proof is-folded">
+<div class="proof-header"><span><em>Proof.</em></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="proof-body">
+<p>First, without loss of generality, assume <span class="math inline">\(S\)</span> is affine. By Kodaira’s Lemma, <span class="math inline">\(D = A + E\)</span>. For <span class="math inline">\(0 &lt; \varepsilon \ll 1\)</span>, <span class="math inline">\(D - \varepsilon E\)</span> is ample. Set <span class="math inline">\(B' = B + \varepsilon E\)</span>. Take <span class="math inline">\(g: Y \to X\)</span> to be a strong log resolution of <span class="math inline">\((X, \operatorname{Supp} B')\)</span>, and let <span class="math inline">\(h: Y \to X \to S\)</span>. There exists a sufficiently small effective <span class="math inline">\(\mathbb{R}\)</span>-divisor <span class="math inline">\(A' \subseteq \operatorname{Exc}(g)\)</span> such that <span class="math inline">\(-A'\)</span> is <span class="math inline">\(g\)</span>-ample and <span class="math inline">\(D' := g^*(D - \varepsilon E) - A'\)</span> is <span class="math inline">\(h\)</span>-ample (<span class="math inline">\(A'\)</span> small). Now: <span class="math display">\[
+\lceil D' \rceil - D' = \lceil g^*(D - \varepsilon E) - A' \rceil - g^*(D - \varepsilon E) + A' = g^*(\lceil D \rceil - D) + \varepsilon g^* E + A' = g^* B + \varepsilon g^* E + A' \quad (\varepsilon \ll 1, \; A' \text{ small}).
+\]</span> <span class="math inline">\(\operatorname{Supp}(\lceil D' \rceil - D')\)</span> is a union of components of <span class="math inline">\(g^*(\operatorname{Supp} B') \cup \operatorname{Supp} A'\)</span> (where <span class="math inline">\(\operatorname{Supp} A' \subseteq \operatorname{Exc}(g) \subseteq g^*(\operatorname{Supp} B')\)</span>). By definition, there exists <span class="math inline">\(C_m\)</span> SNC such that <span class="math inline">\(g^*(\operatorname{Supp} B')\)</span> is a union of components of <span class="math inline">\(C_m\)</span>; i.e., <span class="math inline">\(\lceil D' \rceil - D'\)</span> is SNC. By Theorem 26.2.10 (relative version, since <span class="math inline">\(D'\)</span> is <span class="math inline">\(h\)</span>-ample <span class="math inline">\(\implies g\)</span>-ample): <span class="math display">\[
+R^p h_* \mathcal{O}_Y(K_Y + \lceil D' \rceil) = R^p g_* \mathcal{O}_Y(K_Y + \lceil D' \rceil) = 0.
+\]</span> By the Leray spectral sequence: <span class="math display">\[
+E_2^{p, q} = R^p f_*(R^q g_* \mathcal{O}_Y(K_Y + \lceil D' \rceil)) \Longrightarrow R^{p+q} h_* \mathcal{O}_Y(K_Y + \lceil D' \rceil).
+\]</span> Now <span class="math inline">\(E_2^{p, q} = 0\)</span> for <span class="math inline">\(q \ge 1\)</span>, so: <span class="math display">\[
+R^p f_*(g_* \mathcal{O}_Y(K_Y + \lceil D' \rceil)) = R^p h_* \mathcal{O}_Y(K_Y + \lceil D' \rceil) = 0 \quad \forall p \ge 1.
+\]</span> We want to show <span class="math inline">\(g_* \mathcal{O}_Y(K_Y + \lceil D' \rceil) = \mathcal{O}_X(K_X + \lceil D \rceil)\)</span>. Assume <span class="math inline">\(g^*(K_X + B) = K_Y + C\)</span> (so <span class="math inline">\(C = K_Y - g^*(K_X + B)\)</span>). By Lemma 26.2.14, <span class="math inline">\(C &lt; 1\)</span>. Then: <span class="math display">\[
+g^*(K_X + \lceil D \rceil) = g^*(K_X + B + D) = K_Y + C + g^* D \le K_Y + \lceil g^* D \rceil \quad (X \text{ smooth, integral}).
+\]</span> Hence <span class="math inline">\(g_* \mathcal{O}_Y(K_Y + \lceil g^* D \rceil) = \mathcal{O}_X(K_X + \lceil D \rceil)\)</span>. For all <span class="math inline">\(f \in K(Y) = K(X)\)</span>: <span class="math display">\[
+\operatorname{div}_Y(f) + K_Y + \lceil g^* D \rceil \ge 0 \implies g_* \operatorname{div}_Y(f) + g_*(K_Y + \lceil g^* D \rceil) \ge 0 \implies \operatorname{div}_X(f) + K_X + \lceil D \rceil \ge 0 \implies f \in H^0(X, \mathcal{O}_X(K_X + \lceil D \rceil)).
+\]</span> Conversely: <span class="math display">\[
+\operatorname{div}_X(f) + K_X + \lceil D \rceil \ge 0 \implies g^* \operatorname{div}_X(f) + g^*(K_X + \lceil D \rceil) \ge 0 \implies \operatorname{div}_Y(f) + K_Y + \lceil g^* D \rceil \ge 0.
+\]</span> Replacing <span class="math inline">\(X\)</span> by open subsets <span class="math inline">\(U \subseteq X\)</span>, we obtain <span class="math inline">\(g_* \mathcal{O}_Y(K_Y + \lceil D' \rceil) = \mathcal{O}_X(K_X + \lceil D \rceil)\)</span>.</p>
+</div>
+</div>
+<div id="lem-26-2-14" class="theorem kind-lemma">
+<div class="theorem-header is-clickable"><span><strong>Lemma 26.2.14</strong></span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+<div class="theorem-body">
+<p>Let <span class="math inline">\(Y \to X\)</span> be a projective birational morphism between algebraic varieties, and let <span class="math inline">\(B, C\)</span> be <span class="math inline">\(\mathbb{R}\)</span>-divisors on <span class="math inline">\(X, Y\)</span> with <span class="math inline">\(\operatorname{Supp} B, \operatorname{Supp} C\)</span> SNC, satisfying <span class="math inline">\(g^*(K_X + B) = K_Y + C\)</span>. Then: 1. <span class="math inline">\(B &lt; 1 \iff C &lt; 1\)</span>. 2. <span class="math inline">\(B \le 1 \iff C \le 1\)</span>, in which case if the components of <span class="math inline">\(B\)</span> with coefficient <span class="math inline">\(1\)</span> are disjoint, then <span class="math inline">\(C - g_*^{-1} B &lt; 1\)</span>.</p>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<style>
+/* ==========================================================================
+   Math Notes · 晚到覆盖层（include-after-body）
+   职责：定理/证明折叠壳外观、目录条目（含 JS 动态挂载项）样式、
+         侧边栏与页脚微调。基础主题变量仍由 styles.css 提供。
+   ========================================================================== */
+
+/* 1. 阅读模式下侧栏常驻 --------------------------------------------------- */
+body.quarto-reader-mode #quarto-margin-sidebar {
+  display: block !important;
+}
+
+/* 2. 副标题与定理标题字号 ------------------------------------------------- */
+.quarto-title .subtitle,
+header#title-block-header .subtitle,
+p.subtitle.lead {
+  font-size: 1.08rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  color: #64748b !important;
+  margin-top: 0.4rem !important;
+  margin-bottom: 1rem !important;
+}
+
+body.quarto-dark .quarto-title .subtitle,
+body.quarto-dark header#title-block-header .subtitle,
+body.quarto-dark p.subtitle.lead {
+  color: #94a3b8 !important;
+}
+
+.theorem-header,
+.callout-header,
+.callout-title {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* 3. 紧凑左侧边栏 --------------------------------------------------------- */
+@media (min-width: 992px) {
+  #quarto-sidebar,
+  .sidebar-navigation {
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
+  }
+
+  #quarto-sidebar .sidebar-menu-container,
+  #quarto-sidebar .sidebar-menu-container ul,
+  #quarto-sidebar .sidebar-item-container {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  /* Quarto 默认给菜单容器留了 1.08rem 的右内边距，会把文字可用宽度吃掉，
+     这里收窄到一条"呼吸缝"：文字/箭头不再贴着右边框 */
+  #quarto-sidebar .sidebar-menu-container {
+    padding-right: 0.35rem !important;
+  }
+
+  #quarto-sidebar .sidebar-section .sidebar-item {
+    padding-left: 0.45rem !important;   /* 二级缩进略收，给标题多留 2~3px */
+  }
+
+  #quarto-sidebar .sidebar-link {
+    padding-left: 0.2rem !important;
+    padding-right: 0 !important;   /* 右侧不再留白，宽度全部让给文字 */
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;   /* 过长的章节名用省略号收尾，不再被硬裁切 */
+  }
+
+  #quarto-sidebar .menu-text {
+    white-space: nowrap !important;
+  }
+
+}
+
+/* 4. 紧凑型页脚 ----------------------------------------------------------- */
+footer.footer,
+.nav-footer {
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
+  min-height: unset !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.nav-footer p,
+.nav-footer-left,
+.nav-footer-right {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+/* 5. 目录标题 “ON THIS PAGE” ---------------------------------------------- */
+#toc-title,
+nav#TOC h2,
+.sidebar .toc-title {
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  color: #64748b !important;
+  text-transform: uppercase !important;
+  margin-top: 0.3rem !important;
+  margin-bottom: 0.6rem !important;
+  padding-left: 0.2rem !important;
+}
+
+body.quarto-dark #toc-title,
+body.quarto-dark nav#TOC h2,
+body.quarto-dark .sidebar .toc-title {
+  color: #94a3b8 !important;
+}
+
+/* 6. 定理与证明 ----------------------------------------------------------- */
+/* 共享外框：圆角、无内边距、裁切子元素 */
+.theorem,
+.proof {
+  padding: 0 !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+/* 定理：左侧色条由 --theorem-accent 决定，具体取值见下方各 kind */
+.theorem {
+  --theorem-accent: #2b6cb0;
+  margin: 1.25rem 0 !important;
+  border: 1px solid rgba(0, 0, 0, 0.09) !important;
+  border-left-width: 4.5px !important;
+  border-left-color: var(--theorem-accent) !important;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.theorem-header {
+  user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.55rem 0.95rem !important;
+  line-height: 1.4 !important;
+  background: transparent !important;
+}
+
+.theorem-header.is-clickable {
+  cursor: pointer !important;
+}
+
+.theorem-header.is-clickable:hover {
+  opacity: 0.85;
+}
+
+.theorem-body {
+  padding: 0.35rem 0.95rem 0.75rem !important;
+  background: transparent !important;
+}
+
+.theorem.is-folded .theorem-body,
+.proof.is-folded .proof-body {
+  display: none !important;
+}
+
+.fold-chevron {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.75rem;
+  opacity: 0.7;
+  transition: transform 0.22s ease;
+  flex-shrink: 0;
+}
+
+.theorem-header:hover .fold-chevron,
+.proof-header:hover .fold-chevron {
+  opacity: 1;
+}
+
+.theorem.is-folded .fold-chevron,
+.proof.is-folded .fold-chevron {
+  transform: rotate(-90deg);
+}
+
+/* 学术色彩映射：每类环境只声明 4 个自定义属性（日间主色/夜间主色、日间标题色/夜间标题色） */
+.theorem > .theorem-header {
+  color: var(--theorem-title, inherit) !important;
+}
+
+.theorem.kind-definition {
+  --theorem-accent: #1e40af;  --theorem-accent-dark: #3b82f6;
+  --theorem-title: #1e40af;   --theorem-title-dark: #60a5fa;
+}
+
+.theorem.kind-lemma {
+  --theorem-accent: #166534;  --theorem-accent-dark: #22c55e;
+  --theorem-title: #166534;   --theorem-title-dark: #4ade80;
+}
+
+.theorem.kind-proposition {
+  --theorem-accent: #6b21a8;  --theorem-accent-dark: #a855f7;
+  --theorem-title: #6b21a8;   --theorem-title-dark: #c084fc;
+}
+
+.theorem.kind-theorem {
+  --theorem-accent: #991b1b;  --theorem-accent-dark: #ef4444;
+  --theorem-title: #991b1b;   --theorem-title-dark: #f87171;
+}
+
+.theorem.kind-corollary {
+  --theorem-accent: #c2410c;  --theorem-accent-dark: #f97316;
+  --theorem-title: #c2410c;   --theorem-title-dark: #fb923c;
+}
+
+.theorem.kind-remark {
+  --theorem-accent: #b45309;  --theorem-accent-dark: #f59e0b;
+  --theorem-title: #b45309;   --theorem-title-dark: #fbbf24;
+}
+
+.theorem.kind-example {
+  --theorem-accent: #334155;  --theorem-accent-dark: #64748b;
+  --theorem-title: #334155;   --theorem-title-dark: #cbd5e1;
+}
+
+/* remark 同时带 .proof 类，会被 .proof 的灰色左条覆盖，故用双类提高优先级取回环境色 */
+.theorem[class*="kind-"] {
+  border-left-color: var(--theorem-accent) !important;
+}
+
+/* 注记不可折叠，标题区不显示手型光标 */
+.theorem.kind-remark > .theorem-header {
+  cursor: default !important;
+}
+
+/* 证明环境 */
+.proof {
+  margin: 0.9rem 0 1.35rem !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-left-width: 4px !important;
+  border-left-color: #64748b !important;
+}
+
+.proof-header {
+  cursor: pointer !important;
+  user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.4rem 0.9rem !important;
+  font-weight: 600 !important;
+  color: #475569 !important;
+  font-size: 0.96rem !important;
+}
+
+.proof-body {
+  padding: 0.35rem 0.9rem 0.65rem !important;
+}
+
+/* 夜间：底色/边框统一淡化，左侧色条换用亮色系（放在基础规则之后以覆盖其 border-left） */
+body.quarto-dark .theorem,
+body.quarto-dark .proof {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+body.quarto-dark .theorem {
+  border-left-color: var(--theorem-accent-dark, rgba(255, 255, 255, 0.12)) !important;
+}
+
+body.quarto-dark .theorem[class*="kind-"] {
+  border-left-color: var(--theorem-accent-dark, rgba(255, 255, 255, 0.12)) !important;
+}
+
+body.quarto-dark .theorem > .theorem-header {
+  color: var(--theorem-title-dark, inherit) !important;
+}
+
+body.quarto-dark .proof {
+  border-left-color: #94a3b8 !important;
+}
+
+body.quarto-dark .proof-header {
+  color: #94a3b8 !important;
+}
+
+/* 7. 右侧目录条目与贯通标尺 ----------------------------------------------- */
+nav#TOC > ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  border-left: 1.5px solid #d0dfec !important;
+}
+
+body.quarto-dark nav#TOC > ul {
+  border-left-color: #334454 !important;
+}
+
+nav#TOC li {
+  margin-bottom: 0.15rem !important;
+  list-style: none !important;
+}
+
+nav#TOC a.nav-link,
+.callout-toc-item a.nav-link {
+  display: block !important;
+  padding: 0.22rem 0.5rem 0.22rem 0.75rem !important;
+  margin-left: -1.5px !important;
+  border-left: 2.5px solid transparent !important;
+  font-size: 0.86rem !important;
+  color: #4a5568 !important;
+  text-decoration: none !important;
+  border-radius: 0 4px 4px 0 !important;
+  transition: all 0.15s ease !important;
+  cursor: pointer !important;
+}
+
+body.quarto-dark nav#TOC a.nav-link,
+body.quarto-dark .callout-toc-item a.nav-link {
+  color: #94a3b8 !important;
+}
+
+nav#TOC a.nav-link:hover,
+.callout-toc-item a.nav-link:hover {
+  color: #2b6cb0 !important;
+  background-color: rgba(43, 108, 176, 0.06) !important;
+}
+
+body.quarto-dark nav#TOC a.nav-link:hover,
+body.quarto-dark .callout-toc-item a.nav-link:hover {
+  color: #60a5fa !important;
+  background-color: rgba(96, 165, 250, 0.08) !important;
+}
+
+/* 激活态：同时覆盖 Quarto 自带高亮与 JS 挂载的自定义条目 */
+nav#TOC a.nav-link.active,
+nav#TOC a.nav-link.active-math-target,
+nav#TOC li.active > a.nav-link {
+  color: #2b6cb0 !important;
+  border-left: 2.5px solid #2b6cb0 !important;
+  font-weight: 700 !important;
+  background-color: rgba(43, 108, 176, 0.08) !important;
+  opacity: 1 !important;
+}
+
+body.quarto-dark nav#TOC a.nav-link.active,
+body.quarto-dark nav#TOC a.nav-link.active-math-target,
+body.quarto-dark nav#TOC li.active > a.nav-link {
+  color: #60a5fa !important;
+  border-left-color: #60a5fa !important;
+  background-color: rgba(96, 165, 250, 0.12) !important;
+}
+
+/* 键盘聚焦：与选中态可区分，且不改变布局 */
+nav#TOC a.nav-link:focus-visible,
+.callout-toc-item a.nav-link:focus-visible {
+  outline: 2px solid #2b6cb0 !important;
+  outline-offset: -2px;
+}
+
+body.quarto-dark nav#TOC a.nav-link:focus-visible,
+body.quarto-dark .callout-toc-item a.nav-link:focus-visible {
+  outline-color: #60a5fa !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. 窄屏（<992px）：右侧栏被 Quarto 整体隐藏，目录改由正文流内的折叠块承载
+   -------------------------------------------------------------------------- */
+.note-mobile-toc {
+  display: none;
+}
+
+/* 无目录条目时用 hidden 关掉，避免只剩一个空壳标题 */
+.note-mobile-toc[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 991.98px) {
+  .note-mobile-toc {
+    display: block;
+    margin: 0.75rem 0 1rem;
+    border: 1px solid var(--note-border);
+    border-radius: 0.5rem;
+    background-color: var(--note-paper);
+  }
+
+  .note-mobile-toc > summary {
+    cursor: pointer;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--note-muted);
+  }
+
+  .note-mobile-toc[open] > summary {
+    border-bottom: 1px solid var(--note-border);
+  }
+
+  .note-mobile-toc .note-mobile-toc-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.5rem 0.6rem 0.75rem;
+  }
+
+  /* 主题在窄屏把整个目录设成 display:none，搬进正文后必须显式恢复 */
+  .note-mobile-toc nav[role="doc-toc"] {
+    display: block !important;
+  }
+
+  /* 折叠块自带 summary 标题，目录内的同名标题不再重复显示 */
+  .note-mobile-toc #toc-title {
+    display: none !important;
+  }
+
+  /* 触屏点击热区加高 */
+  .note-mobile-toc nav#TOC a.nav-link {
+    padding-top: 0.45rem !important;
+    padding-bottom: 0.45rem !important;
+  }
+}
+
+/* Quarto 自带的浮层副本（仅在右侧栏与 margin 内容重叠时出现）同样保证可滚动 */
+#quarto-toc-toggle .quarto-sidebar-toggle-contents {
+  max-height: 70vh !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}
+
+/* 直接用 #锚点 打开页面（分享链接、前进/后退）时，同样避开吸顶导航栏 */
+.theorem,
+.proof {
+  scroll-margin-top: 4.8rem !important;
+}
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  /* 目录条目、定理编号、折叠外壳都由 _filters/theorem-toc.lua 在构建时写好，
+     这里只负责交互：点击跳转、选中态、折叠开关、窄屏摆放。 */
+
+  const TOC_SCOPE = 'nav[role="doc-toc"]';
+  const TOC_LINK = 'a.nav-link';
+  const SCROLL_TARGETS = 'section[id], h2[id], h3[id], .theorem[id]';
+  const SCROLL_THRESHOLD = 140;   /* 判定“当前小节”的顶部偏移 */
+  const NAV_FALLBACK_HEIGHT = 55; /* 吸顶导航栏高度兜底值 */
+  const SCROLL_GAP = 18;          /* 锚点与导航栏之间的呼吸间距 */
+  const MOBILE_MEDIA = '(max-width: 991.98px)';
+
+  let tocTargets = [];
+  let spyBound = false;
+  let mobileHost = null;
+  let mobileMedia = null;
+  let tocHome = null;         /* nav#TOC 在桌面端的父容器（右侧栏） */
+  let tocNextSibling = null;  /* 以及它原来的下一个兄弟节点，便于原位放回 */
+
+  /* ------------------------------------------------------------ 目录跳转 */
+
+  /* 链接 href 形如 "#thm-fujita-vanishing"，取出解码后的锚点 id */
+  function tocHrefId(link) {
+    const raw = link.getAttribute('href') || '';
+    const pos = raw.indexOf('#');
+    if (pos === -1) return '';
+    const hash = raw.slice(pos + 1);
+    try {
+      return decodeURIComponent(hash);
+    } catch (err) {
+      return hash;
+    }
+  }
+
+  /* 滚动留白：吸顶导航栏高度 + 固定呼吸间距（桌面 / 移动一致） */
+  function tocScrollOffset() {
+    const navbar = document.querySelector('.navbar, header.fixed-top');
+    const navHeight = navbar ? navbar.getBoundingClientRect().height : NAV_FALLBACK_HEIGHT;
+    return navHeight + SCROLL_GAP;
+  }
+
+  function scrollToAnchor(target) {
+    // 目标若在折叠中的定理/证明里（或本身被折叠），逐层展开，否则跳过去看不到内容
+    let folded = target.closest('.is-folded');
+    while (folded) {
+      folded.classList.remove('is-folded');
+      folded = folded.parentElement ? folded.parentElement.closest('.is-folded') : null;
+    }
+
+    const top = target.getBoundingClientRect().top + window.scrollY - tocScrollOffset();
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+
+  /* 全站唯一选中态：桌面 nav 与窄屏副本里的同一锚点一起高亮 */
+  function setTocActive(id) {
+    document.querySelectorAll(TOC_SCOPE + ' ' + TOC_LINK).forEach(function (a) {
+      const on = id !== '' && tocHrefId(a) === id;
+      a.classList.toggle('active', on);
+      a.classList.toggle('active-math-target', on);
+    });
+  }
+
+  function tocNav() {
+    return document.querySelector('#quarto-margin-sidebar ' + TOC_SCOPE) || document.querySelector(TOC_SCOPE);
+  }
+
+  /* -------------------------------------------- 窄屏：目录挪进正文流折叠块 */
+
+  function ensureInlineToc() {
+    if (mobileHost && document.contains(mobileHost)) return mobileHost;
+
+    const content = document.querySelector('#quarto-document-content') || document.querySelector('main');
+    if (!content) return null;
+
+    mobileHost = document.createElement('details');
+    mobileHost.id = 'note-mobile-toc';
+    mobileHost.className = 'note-mobile-toc';
+    mobileHost.innerHTML = '<summary>On this page</summary><div class="note-mobile-toc-body"></div>';
+
+    // 放在标题块之后，正文之前
+    const titleBlock = content.querySelector('#title-block-header');
+    if (titleBlock && titleBlock.nextSibling) {
+      content.insertBefore(mobileHost, titleBlock.nextSibling);
+    } else {
+      content.insertBefore(mobileHost, content.firstChild);
+    }
+    return mobileHost;
+  }
+
+  function syncMobileToc() {
+    const nav = tocNav();
+    if (!nav) return;   // 页面没有右侧目录时不必建折叠块
+
+    const host = ensureInlineToc();
+    if (!host) return;
+
+    if (!tocHome && nav.parentElement !== host) {
+      tocHome = nav.parentElement;
+      tocNextSibling = nav.nextSibling;
+    }
+
+    const onMobile = mobileMedia ? mobileMedia.matches : window.innerWidth <= 991;
+    const useInline = onMobile && !!nav.querySelector(TOC_LINK);   // 有目录才值得放进正文
+    host.hidden = !useInline;
+
+    if (useInline) {
+      const body = host.querySelector('.note-mobile-toc-body');
+      if (nav.parentElement !== body) body.appendChild(nav);
+    } else if (tocHome && nav.parentElement !== tocHome) {
+      const anchor = tocNextSibling && tocNextSibling.parentNode === tocHome ? tocNextSibling : null;
+      tocHome.insertBefore(nav, anchor);   // 原位放回右侧栏
+    }
+  }
+
+  /* 跳转后收起浮层/折叠块，否则会挡住刚滚到的内容 */
+  function closeMobileToc() {
+    if (mobileHost) mobileHost.open = false;
+
+    const toggle = document.getElementById('quarto-toc-toggle');
+    if (!toggle || !toggle.classList.contains('expanded')) return;
+    const title = toggle.querySelector('.quarto-sidebar-toggle-title');
+    if (title) title.click();   // 交回 Quarto 自身的开关逻辑，保持其内部状态一致
+  }
+
+  /* ---------------------------------------------------------- 点击代理 */
+
+  function onDocumentClick(event) {
+    if (event.defaultPrevented || event.button !== 0) return;
+
+    const target = event.target;
+
+    // 1) 目录项：统一接管滚动、地址栏哈希与高亮
+    const link = target.closest ? target.closest('a') : null;
+    if (link && link.closest(TOC_SCOPE)) {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;  // 保留新标签页等默认行为
+      const id = tocHrefId(link);
+      const anchor = id ? document.getElementById(id) : null;
+      if (anchor) {
+        // 拦在 Quarto 自带的点击处理之前，避免重复滚动
+        event.preventDefault();
+        event.stopPropagation();
+        scrollToAnchor(anchor);
+        setTocActive(id);
+        closeMobileToc();
+        history.pushState(null, null, '#' + id);
+      }
+      return;
+    }
+
+    // 2) 折叠头：展开/收起定理或证明
+    const header = target.closest ? target.closest('.theorem-header.is-clickable, .proof-header') : null;
+    if (header && header.parentElement) {
+      header.parentElement.classList.toggle('is-folded');
+    }
+  }
+
+  /* -------------------------------------------------------- 侧边栏排序 */
+
+  function textOf(el) {
+    const label = el.querySelector('.sidebar-item-text, .menu-text, a');
+    return (label && label.textContent.trim()) || el.textContent.trim();
+  }
+
+  function sortSidebarNumerically() {
+    document.querySelectorAll('#quarto-sidebar ul').forEach(function (ul) {
+      const items = Array.from(ul.children).filter(function (el) {
+        return el.classList.contains('sidebar-item');
+      });
+      if (items.length <= 1) return;
+
+      // numeric:true 让 "10" 排在 "2" 之后
+      items.sort(function (a, b) {
+        return textOf(a).localeCompare(textOf(b), undefined, { numeric: true, sensitivity: 'base' });
+      });
+
+      items.forEach(function (item) { ul.appendChild(item); });
+    });
+  }
+
+  /* 仍被省略号收尾的条目，补上悬停提示，方便看到完整章节名 */
+  function tagSidebarTitles() {
+    document.querySelectorAll('#quarto-sidebar .sidebar-link').forEach(function (link) {
+      const label = link.querySelector('.menu-text') || link;
+      const text = label.textContent.trim();
+      if (text && !link.title) link.title = text;
+    });
+  }
+
+  /* -------------------------------------------------------- 目录滚动高亮 */
+
+  function collectTargets() {
+    return Array.from(document.querySelectorAll(SCROLL_TARGETS)).filter(function (el) {
+      return !el.closest(TOC_SCOPE);   // 排除目录自身的标题
+    });
+  }
+
+  /* 选出「当前所在项」：最后一个顶部已越过阈值的小节/定理锚点 */
+  function updateActiveTocLink() {
+    if (!tocTargets.length) return;
+
+    let current = null;
+    for (const el of tocTargets) {
+      if (el.getBoundingClientRect().top <= SCROLL_THRESHOLD) {
+        current = el;
+      } else {
+        break;
+      }
+    }
+    if (!current && window.scrollY < 120) current = tocTargets[0];
+    if (!current || !current.id) return;
+
+    setTocActive(current.id);
+  }
+
+  function init() {
+    sortSidebarNumerically();
+    tagSidebarTitles();
+    syncMobileToc();
+
+    // 监听只绑定一次；重复调用只刷新锚点缓存与高亮
+    if (!spyBound) {
+      spyBound = true;
+
+      let ticking = false;
+      window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          updateActiveTocLink();
+        });
+      }, { passive: true });
+
+      document.addEventListener('click', onDocumentClick, true);
+
+      // Quarto 自带的 scrollspy 也会加 .active；等它更新后（rAF 晚一拍）再确认唯一高亮
+      window.addEventListener('quarto-sectionChanged', function () {
+        requestAnimationFrame(updateActiveTocLink);
+      });
+
+      // 跨过 992px 断点时，在「右侧栏」与「正文内折叠块」之间搬运目录
+      if (window.matchMedia) {
+        mobileMedia = window.matchMedia(MOBILE_MEDIA);
+        const handleBreakpoint = function () { syncMobileToc(); tagSidebarTitles(); };
+        if (mobileMedia.addEventListener) mobileMedia.addEventListener('change', handleBreakpoint);
+        else if (mobileMedia.addListener) mobileMedia.addListener(handleBreakpoint);
+      }
+    }
+
+    tocTargets = collectTargets();
+    setTimeout(updateActiveTocLink, 150);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  window.addEventListener('load', init, { once: true });
+
+  // 深浅色切换后重新对齐
+  window.addEventListener('quarto-color-scheme-change', function () {
+    setTimeout(init, 150);
+  });
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/losergh\.github\.io\/note\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../26_mmp/26.1 Divisors.html" class="pagination-link" aria-label="26.1 Divisors">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">26.1 Divisors</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../26_mmp/26.3 KLT.html" class="pagination-link" aria-label="26.3 KLT">
+        <span class="nav-page-text">26.3 KLT</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

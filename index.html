@@ -104,6 +104,14 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
+<script>
+// MathJax 默认不加载 mathtools：\xleftrightarrow、\xLeftrightarrow、
+// \coloneqq 等命令需要它，这里显式加载（必须在 tex-chtml.js 之前执行）。
+window.MathJax = {
+  loader: { load: ['[tex]/mathtools'] },
+  tex: { packages: { '[+]': ['mathtools'] } }
+};
+</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -389,6 +397,12 @@ window.Quarto = {
  <span class="menu-text">Algebraic Groups</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./26_mmp/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Minimal Model Program</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
@@ -455,6 +469,11 @@ Positivity is a central organizing principle in modern algebraic geometry, bridg
 </section>
 <section id="algebraic-groups" class="level3 note-card">
 <h3 class="anchored" data-anchor-id="algebraic-groups"><a href="./23_algebraic_groups/index.html">Algebraic Groups</a></h3>
+Linear algebraic groups are fundamental objects and tools in mathematics, with wide applications in number theory, representation theory, automorphic forms, and dynamical…
+<p><a href="undefined">Start reading →</a></p>
+</section>
+<section id="algebraic-groups-1" class="level3 note-card">
+<h3 class="anchored" data-anchor-id="algebraic-groups-1"><a href="./26_mmp/index.html">Algebraic Groups</a></h3>
 Linear algebraic groups are fundamental objects and tools in mathematics, with wide applications in number theory, representation theory, automorphic forms, and dynamical…
 <p><a href="undefined">Start reading →</a></p>
 </section>

@@ -77,6 +77,14 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+// MathJax 默认不加载 mathtools：\xleftrightarrow、\xLeftrightarrow、
+// \coloneqq 等命令需要它，这里显式加载（必须在 tex-chtml.js 之前执行）。
+window.MathJax = {
+  loader: { load: ['[tex]/mathtools'] },
+  tex: { packages: { '[+]': ['mathtools'] } }
+};
+</script>
 
 
 <link rel="stylesheet" href="../styles.css">
