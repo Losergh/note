@@ -328,7 +328,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../26_mmp/26.0 Introduction.html">26.0 Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">MMP</a></li><li class="breadcrumb-item"><a href="../26_mmp/26.0 Introduction.html">26.0 Introduction</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -349,8 +349,8 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../26_mmp/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text" id="quarto-sidebar-section-1-label">Algebraic Groups</span></a>
-            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Algebraic Groups">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">MMP</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: MMP">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
             </button> 
       </div>
@@ -422,7 +422,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">Algebraic Groups</a></li><li class="breadcrumb-item"><a href="../26_mmp/26.0 Introduction.html">26.0 Introduction</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">MMP</a></li><li class="breadcrumb-item"><a href="../26_mmp/26.0 Introduction.html">26.0 Introduction</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">26.0 Introduction</h1>
 <p class="subtitle lead">Birational Geometry (Chen Jiang, Fall 2026)</p>
@@ -485,10 +485,11 @@ C &amp; \longrightarrow &amp; \{P\}
 <p></p><figure class="figure"><p></p>
 <div>
 
-<pre class="mermaid mermaid-js">flowchart TD
-    A["Smooth projective surface S"] --&gt; B{"Does S contain a (-1)-curve?"}
+<pre class="mermaid mermaid-js">%%{init: {'theme': 'default', 'flowchart': {'wrappingWidth': 320, 'nodeSpacing': 32, 'rankSpacing': 42, 'padding': 12}}}%%
+flowchart TD
+    A["Smooth projective surface S"] --&gt; B{"Does S contain&lt;br/&gt;a (-1)-curve?"}
     B -- No --&gt; C["S is a Minimal Surface"]
-    B -- Yes --&gt; D["Castelnuovo Contraction: S → S'"]
+    B -- Yes --&gt; D["Castelnuovo Contraction:&lt;br/&gt;S → S'"]
     D --&gt; E["Update: S := S'"]
     E --&gt; B
 </pre>
@@ -525,11 +526,12 @@ C &amp; \longrightarrow &amp; \{P\}
 <p></p><figure class="figure"><p></p>
 <div>
 
-<pre class="mermaid mermaid-js">flowchart TD
-    A["Projective variety X with mild singularities"] --&gt; B{"Does X have a K_X-negative extremal ray?"}
-    B -- No --&gt; C["X is a Minimal Model (or Mori Fiber Space)"]
+<pre class="mermaid mermaid-js">%%{init: {'theme': 'default', 'flowchart': {'wrappingWidth': 320, 'nodeSpacing': 32, 'rankSpacing': 42, 'padding': 12}}}%%
+flowchart TD
+    A["Projective variety X&lt;br/&gt;with mild singularities"] --&gt; B{"Does X have a&lt;br/&gt;K_X-negative extremal ray?"}
+    B -- No --&gt; C["X is a Minimal Model&lt;br/&gt;(or Mori Fiber Space)"]
     B -- Yes --&gt; D["Morphism: X → X'"]
-    D --&gt; E["Perform Flip: X := Flip(X')"]
+    D --&gt; E["Perform Flip:&lt;br/&gt;X := Flip(X')"]
     E --&gt; B
 </pre>
 </div>
@@ -1961,8 +1963,8 @@ body.quarto-dark .callout-toc-item a.nav-link:focus-visible {
   </script>
 <nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
-      <a href="../26_mmp/index.html" class="pagination-link" aria-label="Algebraic Groups">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Algebraic Groups</span>
+      <a href="../26_mmp/index.html" class="pagination-link" aria-label="MMP">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">MMP</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
