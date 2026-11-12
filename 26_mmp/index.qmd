@@ -1,5 +1,5 @@
 ---
-title: "MMP"
+title: "Minimal Model Program"
 subtitle: "Vanishing Theorems, Minimal Model Program and BCHM"
 author: "Chen Jiang (Fall 2026)"
 date: last-modified

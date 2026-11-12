@@ -265,7 +265,7 @@ $(\Leftarrow)$ PLT iff locally PLT. Assume without loss of generality that $\lfl
 For every log resolution $(Y, C)$, take $(Y_0, C_0)$ to be the resolution such that $C_0 - f_0^* B < 1$:
 $$
 \begin{CD}
-(Y, C) @<{g'}[\mathrm{proj, \, bir}]- (\widetilde{Y}, \widetilde{C}) @. \\
+(Y, C) @<{g'\;(\mathrm{proj,\,bir})}<< (\widetilde{Y}, \widetilde{C}) @. \\
 @V{g}[\text{log}]VV @VV{f}[\text{log}]V \\
 (X, B) @= (Y_0, C_0) \to (X, B)
 \end{CD}
