@@ -400,10 +400,6 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
     <ul>
     <li class="nav-item callout-toc-item"><a href="#thm-bpf" id="toc-thm-bpf" class="nav-link active" data-scroll-target="#thm-bpf" title="Theorem 26.4.0 (Base Point Free Theorem)">Thm 26.4.0</a></li>
-    <li class="nav-item"><a href="#step-1-reduction-to-f-ample-and-mathbbq-weil-boundary" id="toc-step-1-reduction-to-f-ample-and-mathbbq-weil-boundary" class="nav-link" data-scroll-target="#step-1-reduction-to-f-ample-and-mathbbq-weil-boundary">Step 1: Reduction to f-ample and \mathbb{Q}-Weil boundary</a></li>
-    <li class="nav-item"><a href="#step-2-elimination-of-base-points-via-strong-log-resolution" id="toc-step-2-elimination-of-base-points-via-strong-log-resolution" class="nav-link" data-scroll-target="#step-2-elimination-of-base-points-via-strong-log-resolution">Step 2: Elimination of base points via strong log resolution</a></li>
-    <li class="nav-item"><a href="#step-3-determining-t-tie-breaking-and-kawamata-vanishing" id="toc-step-3-determining-t-tie-breaking-and-kawamata-vanishing" class="nav-link" data-scroll-target="#step-3-determining-t-tie-breaking-and-kawamata-vanishing">Step 3: Determining t, tie-breaking, and Kawamata vanishing</a></li>
-    <li class="nav-item"><a href="#step-4-induction-on-dimension" id="toc-step-4-induction-on-dimension" class="nav-link" data-scroll-target="#step-4-induction-on-dimension">Step 4: Induction on dimension</a></li>
     <li class="nav-item callout-toc-item"><a href="#thm-nonvanishing" id="toc-thm-nonvanishing" class="nav-link" data-scroll-target="#thm-nonvanishing" title="Theorem 26.4.1 (Nonvanishing Theorem)">Thm 26.4.1</a></li>
     <li class="nav-item callout-toc-item"><a href="#rem-bpf-history" id="toc-rem-bpf-history" class="nav-link" data-scroll-target="#rem-bpf-history" title="Remark 26.4.2 (Historical Context)">Rem 26.4.2</a></li>
     <li class="nav-item callout-toc-item"><a href="#cor-semiample-fibration" id="toc-cor-semiample-fibration" class="nav-link" data-scroll-target="#cor-semiample-fibration" title="Corollary 26.4.3 (Semiample Fibration)">Cor 26.4.3</a></li>
@@ -466,25 +462,17 @@ f^* f_* \mathcal{O}_X(mD) \twoheadrightarrow \mathcal{O}_X(mD)
 <p>Since the statement is local on <span class="math inline">\(S\)</span>, we may assume without loss of generality that <span class="math inline">\(S\)</span> is affine. Then it suffices to show that the evaluation map on global sections <span class="math display">\[
 H^0(X, \mathcal{O}_X(mD)) \otimes_k \mathcal{O}_X \twoheadrightarrow \mathcal{O}_X(mD)
 \]</span> is surjective for all <span class="math inline">\(m \gg 0\)</span>, i.e., <span class="math inline">\(\operatorname{Bs}|mD| = \emptyset\)</span>.</p>
-<section id="step-1-reduction-to-f-ample-and-mathbbq-weil-boundary" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="step-1-reduction-to-f-ample-and-mathbbq-weil-boundary">Step 1: Reduction to <span class="math inline">\(f\)</span>-ample and <span class="math inline">\(\mathbb{Q}\)</span>-Weil boundary</h3>
 <p>First, since <span class="math inline">\(m_1 D + E - (K_X + B)\)</span> is <span class="math inline">\(f\)</span>-big, by Kodaira’s lemma we can write: <span class="math display">\[
 m_1 D + E - (K_X + B) \sim_{\mathbb{R}} A + B',
 \]</span> where <span class="math inline">\(A\)</span> is an <span class="math inline">\(f\)</span>-ample <span class="math inline">\(\mathbb{R}\)</span>-Cartier divisor and <span class="math inline">\(B'\)</span> is an effective <span class="math inline">\(\mathbb{R}\)</span>-Cartier divisor. For any <span class="math inline">\(0 &lt; \varepsilon \ll 1\)</span>, we have: <span class="math display">\[
 m_1 D + E - (K_X + B + \varepsilon B') = A + B' - \varepsilon B' = \underbrace{(1 - \varepsilon)(A + B')}_{\text{nef}} + \underbrace{\varepsilon A}_{\text{ample}},
 \]</span> which is <span class="math inline">\(f\)</span>-ample. Since <span class="math inline">\((X, B)\)</span> is klt, for <span class="math inline">\(\varepsilon \ll 1\)</span>, <span class="math inline">\((X, B + \varepsilon B')\)</span> remains klt. We can then replace <span class="math inline">\(B\)</span> by <span class="math inline">\(B + \varepsilon B'\)</span>. Thus, <span class="math inline">\(m_1 D + E - (K_X + B) =: A\)</span> is an <span class="math inline">\(\mathbb{R}\)</span>-Cartier ample divisor. Since ampleness is an open condition in <span class="math inline">\(N^1(X/S)_{\mathbb{R}}\)</span>, we may perturb the coefficients to assume without loss of generality that <span class="math inline">\(B\)</span> is a <span class="math inline">\(\mathbb{Q}\)</span>-Weil divisor.</p>
-</section>
-<section id="step-2-elimination-of-base-points-via-strong-log-resolution" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="step-2-elimination-of-base-points-via-strong-log-resolution">Step 2: Elimination of base points via strong log resolution</h3>
 <p>Input the Nonvanishing Theorem (<strong>?@thm-nonvanishing</strong>): then there exists <span class="math inline">\(m \gg 0\)</span> such that <span class="math inline">\(f_* \mathcal{O}_X(mD) \ne 0\)</span> (which is weaker; since <span class="math inline">\(S\)</span> is affine, this means <span class="math inline">\(H^0(X, \mathcal{O}_X(mD)) \ne 0\)</span>).</p>
 <p>Assume that <span class="math inline">\(|m_3' D|\)</span> has a base point for some <span class="math inline">\(m_3' \gg 0\)</span> (otherwise, the theorem holds). Take a general member <span class="math inline">\(M \in |m_3' D|\)</span> and a strong log resolution: <span class="math display">\[
 \phi: (Y, C) \longrightarrow (X, B + E + M),
 \]</span> and let <span class="math inline">\(h := f \circ \phi\)</span>. We may assume that the pullback linear system decomposes as: <span class="math display">\[
 \phi^* |m_3' D| = |M_1| + M_2,
 \]</span> where <span class="math inline">\(|M_1|\)</span> is free and <span class="math inline">\(M_2 \ne 0\)</span> is the fixed part (an effective <span class="math inline">\(\mathbb{Z}\)</span>-divisor). Notice that <span class="math inline">\(\operatorname{Bs}|m_3' D| \subseteq \operatorname{Supp} M\)</span>, so <span class="math inline">\(\operatorname{Bs}|\phi^* m_3' D| \subseteq \operatorname{Supp} \phi^* M\)</span>, which is of pure codimension <span class="math inline">\(1\)</span> and contained in <span class="math inline">\(M_2\)</span>.</p>
-</section>
-<section id="step-3-determining-t-tie-breaking-and-kawamata-vanishing" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="step-3-determining-t-tie-breaking-and-kawamata-vanishing">Step 3: Determining <span class="math inline">\(t\)</span>, tie-breaking, and Kawamata vanishing</h3>
 <p><strong>Idea:</strong> Find a prime component <span class="math inline">\(Z \preceq M_2\)</span> (which corresponds to <span class="math inline">\(E\)</span>) such that the restriction map: <span class="math display">\[
 H^0\big(Y, \mathcal{O}_Y(m\phi^* D + \lceil -B_Y \rceil)\big) \twoheadrightarrow H^0\big(Z, \mathcal{O}_Z((m\phi^* D|_Z - \lfloor B_Y \rfloor|_Z))\big)
 \]</span> is surjective. It suffices to have <span class="math inline">\(H^1(Y, \mathcal{O}_Y(m\phi^* D - \lfloor B_Y \rfloor - Z)) = 0\)</span>, for which we want <span class="math inline">\(m\phi^* D - B_Y - Z - K_Y\)</span> to be <span class="math inline">\(h\)</span>-ample (or <span class="math inline">\(h\)</span>-nef and big).</p>
@@ -517,9 +505,6 @@ H^0(Y, \mathcal{O}_Y(m\phi^* D + \phi^* E)) @&gt;&gt;&gt; H^0(Z, \mathcal{O}_Z(m
 H^0(Y, \mathcal{O}_Y(m\phi^* D)) @&gt;&gt;&gt; H^0(Z, \mathcal{O}_Z(m\phi^* D|_Z))
 \end{CD}
 \]</span> where the isomorphism in the lower-left vertical column is induced by <span class="math inline">\(H^0(X, \mathcal{O}_X(mD)) \cong H^0(X, \mathcal{O}_X(mD + E))\)</span>.</p>
-</section>
-<section id="step-4-induction-on-dimension" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="step-4-induction-on-dimension">Step 4: Induction on dimension</h3>
 <p>First, <span class="math inline">\(\operatorname{Supp} M_2 \cup \operatorname{Supp} E \cup \operatorname{Supp} C\)</span> is SNC, which implies that <span class="math inline">\(Z\)</span> is smooth. By the adjunction formula: <span class="math display">\[
 (K_Y + Z)|_Z = K_Z.
 \]</span> Then <span class="math inline">\((m\phi^* D|_Z - K_Z - F|_Z) = (m\phi^* D - K_Y - Z - F)|_Z\)</span> is ample. Set: <span class="math display">\[
@@ -532,7 +517,6 @@ H^0(Z, \mathcal{O}_Z(m\phi^* D|_Z)) \longhookrightarrow H^0(Z, \mathcal{O}_Z(m\p
 \]</span> By Noetherian induction on the base locus, there exists <span class="math inline">\(m \gg 0\)</span> such that: <span class="math display">\[
 \operatorname{Bs}|\phi^* m D| = \emptyset \implies \operatorname{Bs}|mD| = \phi(\operatorname{Bs}|\phi^* m D|) = \emptyset.
 \]</span> Therefore, <span class="math inline">\(D\)</span> is semiample, which implies <span class="math inline">\(\kappa(D) = \nu(D)\)</span>, and for all <span class="math inline">\(m \gg 0\)</span>, <span class="math inline">\(\operatorname{Bs}|mD| = \emptyset\)</span>.</p>
-</section>
 </div>
 </div>
 <hr>

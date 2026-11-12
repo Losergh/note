@@ -399,8 +399,7 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
     <ul>
-    <li class="nav-item"><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
-    <li class="nav-item callout-toc-item"><a href="#def-26-3-0" id="toc-def-26-3-0" class="nav-link" data-scroll-target="#def-26-3-0" title="Definition 26.3.0 (Pairs)">Def 26.3.0</a></li>
+    <li class="nav-item callout-toc-item"><a href="#def-26-3-0" id="toc-def-26-3-0" class="nav-link active" data-scroll-target="#def-26-3-0" title="Definition 26.3.0 (Pairs)">Def 26.3.0</a></li>
     <li class="nav-item callout-toc-item"><a href="#def-26-3-1" id="toc-def-26-3-1" class="nav-link" data-scroll-target="#def-26-3-1" title="Definition 26.3.1 (KLT - Kawamata Log Terminal)">Def 26.3.1</a></li>
     <li class="nav-item callout-toc-item"><a href="#prp-26-3-2" id="toc-prp-26-3-2" class="nav-link" data-scroll-target="#prp-26-3-2" title="Proposition 26.3.2 (Properties of KLT Pairs)">Prop 26.3.2</a></li>
     <li class="nav-item callout-toc-item"><a href="#prp-26-3-3" id="toc-prp-26-3-3" class="nav-link" data-scroll-target="#prp-26-3-3" title="Proposition 26.3.3">Prop 26.3.3</a></li>
@@ -409,7 +408,6 @@ window.Quarto = {
     <li class="nav-item callout-toc-item"><a href="#exm-26-3-6" id="toc-exm-26-3-6" class="nav-link" data-scroll-target="#exm-26-3-6" title="Example 26.3.6">Ex 26.3.6</a></li>
     <li class="nav-item callout-toc-item"><a href="#prp-26-3-7" id="toc-prp-26-3-7" class="nav-link" data-scroll-target="#prp-26-3-7" title="Proposition 26.3.7 (Finite Pullback)">Prop 26.3.7</a></li>
     <li class="nav-item callout-toc-item"><a href="#prp-26-3-8" id="toc-prp-26-3-8" class="nav-link" data-scroll-target="#prp-26-3-8" title="Proposition 26.3.8 (Very Log Resolution)">Prop 26.3.8</a></li>
-    <li class="nav-item"><a href="#goal-downward-induction" id="toc-goal-downward-induction" class="nav-link" data-scroll-target="#goal-downward-induction">Goal: Downward Induction</a></li>
     <li class="nav-item callout-toc-item"><a href="#lem-26-3-9" id="toc-lem-26-3-9" class="nav-link" data-scroll-target="#lem-26-3-9" title="Lemma 26.3.9 (Connectedness Lemma)">Lem 26.3.9</a></li>
     <li class="nav-item callout-toc-item"><a href="#cor-26-3-10" id="toc-cor-26-3-10" class="nav-link" data-scroll-target="#cor-26-3-10" title="Corollary 26.3.10 (Equivalent Definition of PLT)">Cor 26.3.10</a></li>
     <li class="nav-item callout-toc-item"><a href="#cor-26-3-11" id="toc-cor-26-3-11" class="nav-link" data-scroll-target="#cor-26-3-11" title="Corollary 26.3.11">Cor 26.3.11</a></li>
@@ -452,13 +450,10 @@ window.Quarto = {
 
 
 <div id="note-motivation-klt">
-<section id="motivation" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="motivation"><span class="header-section-number">1</span> Motivation</h2>
-<p>Consider the condition: <span class="math inline">\(X\)</span> smooth, <span class="math inline">\((X, B) \xrightarrow[\mathrm{proj}]{f} S\)</span>, <span class="math inline">\(B \in [0, 1)\)</span> with SNC support, and <span class="math inline">\(D\)</span> a nef &amp; big <span class="math inline">\(\mathbb{R}\)</span>-divisor such that <span class="math inline">\(D + B \in Z^1(X)\)</span>. Then: <span class="math display">\[
+<p><strong>Motivation.</strong> Consider the condition: <span class="math inline">\(X\)</span> smooth, <span class="math inline">\((X, B) \xrightarrow[\mathrm{proj}]{f} S\)</span>, <span class="math inline">\(B \in [0, 1)\)</span> with SNC support, and <span class="math inline">\(D\)</span> a nef &amp; big <span class="math inline">\(\mathbb{R}\)</span>-divisor such that <span class="math inline">\(D + B \in Z^1(X)\)</span>. Then: <span class="math display">\[
 R^i f_* \mathcal{O}_X(K_X + B + D) = 0 \quad \forall i &gt; 0.
 \]</span> The proof was done by adjusting <span class="math inline">\(D, B\)</span> by <span class="math inline">\(\varepsilon E\)</span> (<span class="math inline">\(E \ge 0\)</span> <span class="math inline">\(\mathbb{R}\)</span>-Cartier, <span class="math inline">\(0 &lt; \varepsilon \ll 1\)</span>), where <span class="math inline">\(E\)</span> is chosen such that <span class="math inline">\(D - \varepsilon E\)</span> is ample. This removed the SNC condition on <span class="math inline">\(B\)</span>.</p>
 <p><span class="math inline">\(\triangle\)</span> We hope to weaken the SNC condition on <span class="math inline">\((X, B)\)</span> so that the proof still works. In particular, we hope this condition is <strong>stable under perturbation of divisors</strong>.</p>
-</section>
 </div>
 <div id="def-26-3-0" class="theorem kind-definition">
 <div class="theorem-header is-clickable"><span><strong>Definition 26.3.0</strong> (Pairs)</span><svg class="fold-chevron" width="13" height="13" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
@@ -624,10 +619,7 @@ K_{\bar{Y}} + E' + (e - 1) \pi'^* E + O = K_{\bar{Y}} + E' + r(e - 1) E' + O.
 </div>
 </div>
 <div id="note-induction-goal">
-<section id="goal-downward-induction" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="goal-downward-induction"><span class="header-section-number">2</span> Goal: Downward Induction</h2>
-<p>For <span class="math inline">\((S, C) \hookrightarrow (X, B)\)</span> with <span class="math inline">\((K_X + B)|_S = K_S + C\)</span>, we want to show that if <span class="math inline">\((X, B)\)</span> is DLT, then <span class="math inline">\((S, C)\)</span> can still be DLT.</p>
-</section>
+<p><strong>Goal (downward induction).</strong> For <span class="math inline">\((S, C) \hookrightarrow (X, B)\)</span> with <span class="math inline">\((K_X + B)|_S = K_S + C\)</span>, we want to show that if <span class="math inline">\((X, B)\)</span> is DLT, then <span class="math inline">\((S, C)\)</span> can still be DLT.</p>
 </div>
 <hr>
 <div id="lem-26-3-9" class="theorem kind-lemma">
