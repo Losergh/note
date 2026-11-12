@@ -1,0 +1,348 @@
+---
+title: "26.2 Vanishing Theorems"
+subtitle: "Birational Geometry (Chen Jiang, Fall 2026)"
+date: last-modified
+number-sections: true
+sec: "26.2."
+---
+
+::: {#thm-26-2-0}
+## Hironaka Desingularization Theorem
+1. For every variety $X$, there exists a smooth variety $Y$ and a projective birational morphism $f: Y \to X$ such that $f$ is an isomorphism over $\operatorname{Reg}(X)$.
+2. **(Log resolution)** Let $(X, B)$ be a pair with $B$ a proper closed subset of $X$. There exists a smooth variety $Y$, an SNC divisor $C \subseteq Y$, and a projective birational morphism $f: Y \to X$ such that:
+   - **(a)** If $B \ne \emptyset$, $f^{-1}(B)$ is a union of several irreducible components of $C$;
+   - **(b)** $\operatorname{Exc}(f)$ is a union of irreducible components of $C$;
+   - **(c)** $f$ is an isomorphism over $\operatorname{Reg}(X, B)$. (The resolution is called **proper / strong** if (c) is satisfied).
+:::
+
+::: {#rem-26-2-1}
+1. The **weak log resolution** is $f: Y \to X$ such that $f^{-1}(B) \cup \operatorname{Exc}(f)$ is SNC (we may have $\operatorname{codim} \operatorname{Exc}(f) \ge 2$).
+2. The **strong log resolution** is a log resolution $f: (Y, C) \to (X, B)$ such that there exists an $f$-ample divisor $D \in \operatorname{Div}(Y)$ with $\operatorname{Supp} D \subseteq \operatorname{Exc}(f)$, in which case $\operatorname{Supp} D = \operatorname{Exc}(f)$ and $-D \ge 0$.
+3. **Fact:** Strong log resolutions always exist by blowing up.
+:::
+
+---
+
+::: {#prp-26-2-2}
+## Negativity Lemma
+Let $f: X \to Y$ be a projective birational morphism between normal algebraic varieties. Let $D \in \operatorname{Div}_{\mathbb{R}}(X)$ with $\operatorname{Supp} D \subseteq \operatorname{Exc}(f)$. Then:
+1. If $D$ is nonzero effective, there exists an irreducible component $E \subseteq D$ and a dense open subset $U \subseteq E$ such that for all $x \in U$, there exists a curve $C$ contracted by $f$ through $x$ such that $C \not\subseteq \operatorname{Supp}(D - E)$ (i.e. $x \in C \subseteq D$) and:
+   $$
+   (D \cdot C) < 0.
+   $$
+2. If $D$ is $f$-nef and $D \ne 0$, then $-D \ge 0$. Furthermore, $\operatorname{Supp} D = f^{-1}(f(\operatorname{Supp} D))$.
+3. If $-D$ is $f$-ample, then $\operatorname{Supp} D = \operatorname{Exc}(f)$ (the case of strong resolution).
+:::
+
+---
+
+::: {#lem-26-2-3}
+## Strict Transform on $N^1$
+Let $\alpha: X \dashrightarrow X'$ be a birational map between normal $\mathbb{Q}$-factorial varieties projective over $S$:
+$$
+\begin{CD}
+X @>{\alpha}>> X' \\
+@V{f}VV @VV{f'}V \\
+S @= S
+\end{CD}
+$$
+1. $\alpha$ induces $\alpha_*: N^1(X/S) \longrightarrow N^1(X'/S)$.
+2. $\alpha_*(\overline{\operatorname{Eff}}(X/S)) = \overline{\operatorname{Eff}}(X'/S)$.
+3. If $\alpha$ is not an isomorphism, then:
+   $$
+   \alpha_*(\operatorname{Amp}(X/S)) \cap \operatorname{Amp}(X'/S) = \emptyset.
+   $$
+:::
+
+::: {.proof}
+**Proof of (1):**
+First, $\alpha$ is an isomorphism in codimension $1$, so $Z^1(X) \xrightarrow{\sim} Z^1(X')$.
+Consider the graph $\bar{\Gamma}_U \subseteq X \times X'$ where $\Gamma_U$ is the graph over $U = \operatorname{dom}(\alpha)$.
+By Theorem 26.2.0, there exists a smooth variety $W$ dominating $\bar{\Gamma}$:
+$$
+\begin{CD}
+@. W @. \\
+@V{\mathrm{bir}}VV @VV{\mathrm{bir}}V \\
+X @<{\mathrm{bir}}<< \bar{\Gamma} @>{\mathrm{bir}}>> X'
+\end{CD}
+$$
+That is, there exist morphisms $g: W \to X$ and $g': W \to X'$.
+For $D \in Z^1(X)$, let $D' := \alpha_* D$. Define the total transform pullback as a $\mathbb{Q}$-Cartier divisor:
+$$
+g^* D = g'^* D' + E, \qquad \text{where } g_* E = 0, \; g'_* E = 0.
+$$
+Thus $\operatorname{Supp}(E)$ is exceptional with respect to both $g$ and $g'$ (using $g \circ g^* = \mathrm{id}$).
+Assume $D \equiv_S 0$; then $g^* D \equiv_S 0$. We want to show $D' \equiv_S 0$.
+Suppose $E \ne 0$, or $D' = g'_* g^* D = g'_* g'^* D' = D' \equiv_S 0$.
+Write $E = E^+ - E^-$. If $E^+ \ne 0$, by Prop 26.2.2 (Negativity Lemma), there exists $C \in N_1(W/X)$ such that $(E^+ \cdot C) < 0$ and $(E^- \cdot C) \ge 0$ (they have no common components).
+But $(g^* D \cdot C) = (D \cdot g_* C) = 0 \implies (g'^* D' \cdot C) = 0$ and $(g^* D \cdot C) = 0$.
+Thus $((E^+ - E^-) \cdot C) < 0 \implies$ contradiction!
+Therefore $E^+ = 0$, and similarly $E^- = 0$. (Hence $E$ and $-E$ are $g'$-nef, with $E$ being $g'$-exceptional).
+Thus $\alpha_*$ induces a well-defined linear map $N^1(X/S) \to N^1(X'/S)$.
+
+**Proof of (3):**
+If $\alpha_*(\operatorname{Amp}(X/S)) \cap \operatorname{Amp}(X'/S) \ne \emptyset$, there exists $D \in Z^1(X)$ relatively ample such that $\alpha_* D$ is relatively ample. Set $D' := \alpha_* D$.
+Since $\alpha$ is an isomorphism in codimension $1$, for all $m \ge 0$:
+$$
+\alpha_*: f_* \mathcal{O}_X(mD) \xrightarrow{\;\sim\;} f'_* \mathcal{O}_{X'}(mD'),
+$$
+$$
+(f_* \mathcal{O}_X(mD) = j_* f_* \mathcal{O}_U(mD|_U) \cong j_* f'_* \mathcal{O}_U(mD'|_U) = f'_* \mathcal{O}_{X'}(mD')).
+$$
+Then:
+$$
+X \cong \operatorname{Proj}_S \bigoplus_{m \ge 0} f_* \mathcal{O}_X(mD) \cong \operatorname{Proj}_S \bigoplus_{m \ge 0} f'_* \mathcal{O}_{X'}(mD') \cong X',
+$$
+so $\alpha$ is an isomorphism.
+:::
+
+---
+
+::: {#def-26-2-4}
+## Permissible Center
+1. Let $X$ be a smooth algebraic variety, and $B$ an SNC divisor. A smooth subvariety $Z \subseteq X$ is called a **permissible center** with respect to $(X, B)$ if for all $P \in X$, there exists a regular system of parameters $z_1, \dots, z_n$ of $\mathcal{O}_{X, P}$ and integers $r, s, t$ such that:
+   $$
+   B = V(z_1 \cdots z_r), \qquad Z = V(z_s, \dots, z_t) \qquad (0 \le r \le n, \; 0 \le s \le t \le n).
+   $$
+2. The blowup $f: Y \to X$ along a permissible center $Z$ with respect to $(X, B)$ is called a **permissible blowup**.
+:::
+
+::: {#thm-26-2-5}
+## Permissible is Cofinal
+Let $X$ be smooth over $k$, $B$ an SNC divisor, and $f: Y \to X$ a proper birational morphism with $Y$ smooth. Then there exists a sequence of blowups:
+$$
+f_i: (X_i, B_i) \longrightarrow (X_{i-1}, B_{i-1}) \quad \text{and} \quad X_n \xrightarrow{\;\mathrm{bir}\;} Y,
+$$
+such that $(X_0, B_0) = (X, B)$, $f \circ g = f_1 \circ \dots \circ f_n$, and $B_i = f_i^{-1} B_{i-1} + E_{f_i}$ (total transforms cannot keep SNC).
+:::
+
+---
+
+::: {#thm-26-2-6}
+## Kodaira Vanishing I
+Let $X$ be smooth projective and $A \in \operatorname{Amp}(X)$. Then:
+$$
+H^i(X, \mathcal{O}_X(K_X + A)) = 0 \quad \forall i > 0.
+$$
+:::
+
+::: {#cor-26-2-7}
+## Kodaira Vanishing II
+Let $(X, B)$ be a projective SNC pair, and $A$ ample. Then:
+$$
+H^i(X, \mathcal{O}_X(K_X + B + A)) = 0 \quad \forall i > 0.
+$$
+(Here $B$ is regarded as a reduced Weil = Cartier divisor $B = \sum_{j=1}^k B_j$ where $B = \bigcup_{j=1}^k B_j$).
+:::
+
+::: {.proof}
+Induction on $\dim X$:
+- If $\dim X = 0$, trivial.
+- If $\dim X = n$, proceed by induction on $k$:
+  - $k = 0$: trivial by Theorem 26.2.6.
+  - If $k > 0$: since $B_k$ is smooth, consider:
+    $$
+    0 \longrightarrow \mathcal{O}_X(K_X + B - B_k + A) \longrightarrow \mathcal{O}_X(K_X + B + A) \longrightarrow \mathcal{O}_{B_k}(K_{B_k} + A) \longrightarrow 0.
+    $$
+    Then the induction hypothesis on dimension $n-1$ and on $k-1$ gives:
+    $$
+    H^i(X, \mathcal{O}_X(K_X + B - B_k + A)) \longrightarrow H^i(X, \mathcal{O}_X(K_X + B + A)) \longrightarrow H^i(B_k, \mathcal{O}_{B_k}(K_{B_k} + A)).
+    $$
+    Since the two outer groups are $0$, $H^i(X, \mathcal{O}_X(K_X + B + A)) = 0$.
+:::
+
+::: {#lem-26-2-8}
+## Kawamata's Covering Trick
+Given $(X, \sum B_i)$ SNC and given $n_i \in \mathbb{Z}_{>0}$, there exists a finite Galois covering $f: Y \to X$ with $Y$ smooth such that:
+$$
+f^* B_i = n_i C_i,
+$$
+where $C_i$ are Weil divisors with coefficients $1$, $\operatorname{Supp} \sum C_i$ is SNC in $Y$, and $\operatorname{Gal}(K(Y)/K(X))$ is abelian.
+*(Recall that $(X, \sum B_i)$ is SNC if $X$ is smooth and $\bigcup B_i$ is SNC).*
+:::
+
+---
+
+::: {#thm-26-2-9}
+## Kodaira Vanishing III - Kawamata-Viehweg Vanishing
+Let $X$ be smooth projective over $\mathbb{C}$, $D \in Z^1_{\mathbb{R}}(X)$ ample, and $\lceil D \rceil - D$ have SNC support. Then:
+$$
+H^i(X, \mathcal{O}_X(K_X + \lceil D \rceil)) = 0 \quad \forall i > 0.
+$$
+(Recall $K_X \in Z^1(X)$).
+:::
+
+::: {.proof}
+Take $B := \lceil D \rceil - D$ and $D' := K_X + \lceil D \rceil$; then $D' - K_X - B = D$.
+It suffices to show that for $B \in Z^1_{\mathbb{R}}(X)$ with SNC support, $0 \le B < \sum B_i$, and $D \in Z^1(X)$ such that $D - K_X - B$ is ample, we have $H^i(X, \mathcal{O}_X(D)) = 0$ for all $i > 0$.
+
+- **Step 1:** Without loss of generality, assume $B \in \mathbb{Q}$ since $\operatorname{Amp}(X)$ is an open cone. Write:
+  $$
+  B = \sum \frac{m_i}{n_i} B_i \qquad (\exists N, \; NB \text{ is } \mathbb{Z}\text{-Weil}, \; NB = \sum n_i B_i).
+  $$
+- **Step 2:** Take a finite covering $f: Y \to X$ such that $f^* B_i = n_i C_i$.
+  Then $A := f^*(D - K_X - B) = f^* D - f^* K_X - \sum m_i C_i$ is still ample.
+  By Theorem 26.2.6 (Kodaira Vanishing I), $H^i(Y, \mathcal{O}_Y(K_Y + A)) = 0$ for all $i > 0$.
+  Since $f$ is a finite morphism:
+  $$
+  H^i(X, f_* \mathcal{O}_Y(K_Y + A)) = 0 \quad \forall i > 0.
+  $$
+  By miracle flatness, $f$ is flat $\implies f_* \mathcal{O}_Y(K_Y + A)$ is locally free.
+
+- **Claim:** $\mathcal{O}_X(D)$ is a direct summand of $f_* \mathcal{O}_Y(K_Y + A)$.
+  It suffices to show $\mathcal{O}_X$ is a direct summand of:
+  $$
+  f_* \mathcal{O}_Y(K_Y + A - f^* D) = f_* \mathcal{O}_Y(K_Y - f^* K_X - \sum m_i C_i).
+  $$
+  The Galois group $G$ acts on $\mathcal{O}_Y(K_Y - f^*(K_X + B))$ through $G \circlearrowright \omega_Y$.
+  Then $G \circlearrowright f_* \mathcal{O}_Y(K_Y - f^*(K_X + B))$.
+  Define $\mathcal{L} := (f_* \mathcal{O}_Y(K_Y - f^*(K_X + B)))^G$.
+  Since $G$ is abelian, $f_* \mathcal{O}_Y$ decomposes into a direct sum of line bundles corresponding to the characters of $G$.
+  For all $f \in H^0(f^{-1}(U), \mathcal{O}_Y(f^*(K_X + B)))$, $f$ is fixed by $G \iff f \in K(X)$ and:
+  $$
+  \operatorname{div}_Y f + f^*(K_X + B) \ge 0 \iff f^*(\operatorname{div}_X f) + f^*(K_X + B) \ge 0
+  $$
+  $$
+  \iff \operatorname{div}_X f + K_X + \lfloor B \rfloor \ge 0 \iff f \in H^0(U, \mathcal{O}_X(K_X + \lfloor B \rfloor)) = H^0(U, \mathcal{O}_X(K_X)).
+  $$
+  Then $\mathcal{L} = (f_* \mathcal{O}_Y(K_Y))^G \otimes \mathcal{O}_X(-K_X - B) = (f_* \omega_Y)^G \otimes \omega_X^{-1}$.
+  **Fact:** If $Y/X$ is Galois finite, then $(f_* \omega_Y)^G \cong \omega_X$.
+  Thus $\mathcal{O}_X \cong \mathcal{L}$ is a direct summand of $f_* \mathcal{O}_Y(K_Y + A - f^* D)$.
+:::
+
+---
+
+::: {#thm-26-2-10}
+## Relative Version of KV Vanishing
+Let $X$ be a smooth variety, $f: X \to S$ projective, $D$ an $f$-ample $\mathbb{R}$-divisor, and $\operatorname{Supp}(\lceil D \rceil - D)$ SNC. Then:
+$$
+R^i f_* \mathcal{O}_X(K_X + \lceil D \rceil) = 0 \quad \forall i > 0.
+$$
+:::
+
+::: {.proof}
+1. Without loss of generality, assume $S$ is affine. Then $X/S$ is projective, and $S \hookrightarrow \bar{S} \subseteq \mathbb{P}^N$.
+   We have $X \hookrightarrow \bar{X} \subseteq \mathbb{P}_{\bar{S}}^M$ with:
+   $$
+   \begin{CD}
+   X @>>> \bar{X} \\
+   @VV{f}V @VV{\bar{f}}V \\
+   S @>>> \bar{S}
+   \end{CD}
+   \qquad \bar{f}^{-1}(S) = X.
+   $$
+   $\bar{S} \setminus S = H \cap \bar{S} \implies A := H|_{\bar{S}}$ is ample on $\bar{S}$. Then $\bar{D} + m \bar{f}^* A$ is ample for $m \gg 0$.
+   Set $B := \lceil D \rceil - D$. Take a strong log resolution of $(\bar{X}, \bar{B} = \lceil \bar{D} \rceil - \bar{D})$:
+   $$
+   \phi: Y \longrightarrow (\bar{X}, \bar{B})
+   $$
+   such that $\phi$ is an isomorphism over $(X, B)$, and there exists $E \in \operatorname{Div}(Y)$ with $\operatorname{Supp} E = \operatorname{Exc}(\phi)$ ample over $\bar{X}$.
+   Then $D_Y := \phi^*(\bar{D} + m \bar{f}^* A) + \varepsilon E$ is ample with SNC support ($0 < \varepsilon \ll 1$).
+   By Theorem 26.2.9, $H^i(Y, \mathcal{O}_Y(K_Y + \lceil D_Y \rceil)) = 0$ for all $i > 0$.
+   Consider the Leray spectral sequence:
+   $$
+   E_2^{p, q} = H^p(\bar{S}, R^q \bar{f}_* \phi_* \mathcal{O}_Y(K_Y + \lceil D_Y \rceil)) \Longrightarrow H^{p+q}(Y, \mathcal{O}_Y(K_Y + \lceil D_Y \rceil)),
+   $$
+   where $R^q \bar{f}_* \phi_* \mathcal{O}_Y(K_Y + \lceil \phi^* \bar{D} + \varepsilon E \rceil + m \phi^* \bar{f}^* A) \cong R^q \bar{f}_* \phi_* \mathcal{O}_Y(K_Y + \lceil \phi^* \bar{D} + \varepsilon E \rceil) \otimes \mathcal{O}_{\bar{S}}(mA)$.
+   Then $E_2^{p, q} = 0$ for $m \gg 0$ and $p \ge 1$.
+   Fix $m$: $0 = H^0(Y, R^q \bar{f}_* \dots) = H^0(\bar{S}, \bar{f}_* \dots)$ for $q \ge 1$.
+   By Serre vanishing $\implies R^q \bar{f}_*(\mathcal{O}_Y(K_Y + \lceil D_Y \rceil))$ is generated by global sections (take universal $m$).
+   Then $R^q f_* \mathcal{O}_X(K_X + \lceil D \rceil) = 0$, since:
+   $$
+   0 = R^q \bar{f}_* \phi_* \mathcal{O}_Y(K_Y + \lceil D_Y \rceil)|_S = R^q f_* \phi_* \big(\mathcal{O}_Y(K_Y + \lceil \phi^* D + \varepsilon E \rceil)|_X\big) = R^q f_* \mathcal{O}_X(K_X + \lceil D \rceil).
+   $$
+:::
+
+---
+
+::: {#rem-26-2-11}
+## Vanishing & Log Canonical
+1. For all $B \in Z^1_{\mathbb{R}}(X)$, we say $a \le B < b$ if $B \in \bigoplus_{P \in Z^1(X) \text{ prime}} [a, b) P$.
+2. For all $D \in Z^1_{\mathbb{R}}(X)$, $\lceil D \rceil - D \in [0, 1)$, and $B := \lceil D \rceil - D$ is an effective $\mathbb{R}$-divisor.
+   We can rephrase Theorem 26.2.10 (relative version):
+   Let $(X, B)$ be an SNC pair, $f: X \to S$ projective, $0 \le B < 1$.
+   For every $f$-ample $\mathbb{R}$-divisor $D$ such that $D + B \in Z^1(X)$ (in which case $D + B = \lceil D \rceil$):
+   $$
+   R^i f_* \mathcal{O}_X(K_X + B + D) = 0 \quad \forall i > 0 \qquad (\text{log canonical sheaf}).
+   $$
+   $\triangle$ The theorem is open on $D$: for all $F \ge 0$ and $0 < \varepsilon \ll 1$,
+   $$
+   0 \le B' = B + \varepsilon F < 1 \quad \text{and} \quad D' = D - \varepsilon F \text{ is ample}.
+   $$
+   Then still $R^i f_* \mathcal{O}_X(K_X + B' + D') = 0$.
+   Thus we want to extend $D'$ to **nef & big** divisors:
+   If $D$ is nef & big, then $D = A + E$, and $D \le E = (1 - \varepsilon) D + \varepsilon A$ is ample.
+   Choose $\varepsilon \ll 1$ such that $0 \le B + \varepsilon E < 1$, and set $B' := B + \varepsilon E$, $D' := D - \varepsilon E$.
+   Now if $B'$ is SNC, we are done; but if not, we need a log resolution.
+:::
+
+---
+
+::: {#lem-26-2-12}
+Let $Y \xrightarrow{g} X \xrightarrow{f} S$ with $h = f \circ g$. If $D$ on $X$ is $f$-ample and $E$ on $Y$ is $g$-ample, then $E$ is $h$-ample.
+:::
+
+::: {.proof}
+We only prove the integral case:
+There exists $n_0$ such that $n_0 E = \mathcal{O}_Y(1)$ where $Y \hookrightarrow \mathbb{P}_X^N$, and there exists $m_1 \gg 0$ such that $f^*(m_1 D)$ is generated by global sections.
+Then $n_0 E + m_1 g^* D = \mathcal{O}_Y(1)$ where $Y \hookrightarrow X \times \mathbb{P}^N \hookrightarrow \mathbb{P}_X^{N+1}$.
+For $m_2 \gg 0 \implies Y \hookrightarrow X \times \mathbb{P}^N \hookrightarrow \mathbb{P}^M \times \mathbb{P}^N \hookrightarrow \mathbb{P}^{MN+M+N}$,
+$$
+\mathcal{O}_Y(1) = n_0 E + (m_1 + m_2) g^* D.
+$$
+:::
+
+::: {#thm-26-2-13}
+## Kodaira Vanishing IV - Kawamata-Viehweg for Nef & Big
+Let $(X, B)/S$ be an SNC pair with $0 \le B < 1$, and let $D$ be an $f$-nef and $f$-big $\mathbb{R}$-divisor such that $D + B \in Z^1(X)$. Then:
+$$
+R^p f_* \mathcal{O}_X(K_X + B + D) = 0 \quad \forall p > 0.
+$$
+:::
+
+::: {.proof}
+First, without loss of generality, assume $S$ is affine. By Kodaira's Lemma, $D = A + E$.
+For $0 < \varepsilon \ll 1$, $D - \varepsilon E$ is ample. Set $B' = B + \varepsilon E$.
+Take $g: Y \to X$ to be a strong log resolution of $(X, \operatorname{Supp} B')$, and let $h: Y \to X \to S$.
+There exists a sufficiently small effective $\mathbb{R}$-divisor $A' \subseteq \operatorname{Exc}(g)$ such that $-A'$ is $g$-ample and $D' := g^*(D - \varepsilon E) - A'$ is $h$-ample ($A'$ small).
+Now:
+$$
+\lceil D' \rceil - D' = \lceil g^*(D - \varepsilon E) - A' \rceil - g^*(D - \varepsilon E) + A' = g^*(\lceil D \rceil - D) + \varepsilon g^* E + A' = g^* B + \varepsilon g^* E + A' \quad (\varepsilon \ll 1, \; A' \text{ small}).
+$$
+$\operatorname{Supp}(\lceil D' \rceil - D')$ is a union of components of $g^*(\operatorname{Supp} B') \cup \operatorname{Supp} A'$ (where $\operatorname{Supp} A' \subseteq \operatorname{Exc}(g) \subseteq g^*(\operatorname{Supp} B')$).
+By definition, there exists $C_m$ SNC such that $g^*(\operatorname{Supp} B')$ is a union of components of $C_m$; i.e., $\lceil D' \rceil - D'$ is SNC.
+By Theorem 26.2.10 (relative version, since $D'$ is $h$-ample $\implies g$-ample):
+$$
+R^p h_* \mathcal{O}_Y(K_Y + \lceil D' \rceil) = R^p g_* \mathcal{O}_Y(K_Y + \lceil D' \rceil) = 0.
+$$
+By the Leray spectral sequence:
+$$
+E_2^{p, q} = R^p f_*(R^q g_* \mathcal{O}_Y(K_Y + \lceil D' \rceil)) \Longrightarrow R^{p+q} h_* \mathcal{O}_Y(K_Y + \lceil D' \rceil).
+$$
+Now $E_2^{p, q} = 0$ for $q \ge 1$, so:
+$$
+R^p f_*(g_* \mathcal{O}_Y(K_Y + \lceil D' \rceil)) = R^p h_* \mathcal{O}_Y(K_Y + \lceil D' \rceil) = 0 \quad \forall p \ge 1.
+$$
+We want to show $g_* \mathcal{O}_Y(K_Y + \lceil D' \rceil) = \mathcal{O}_X(K_X + \lceil D \rceil)$.
+Assume $g^*(K_X + B) = K_Y + C$ (so $C = K_Y - g^*(K_X + B)$).
+By Lemma 26.2.14, $C < 1$. Then:
+$$
+g^*(K_X + \lceil D \rceil) = g^*(K_X + B + D) = K_Y + C + g^* D \le K_Y + \lceil g^* D \rceil \quad (X \text{ smooth, integral}).
+$$
+Hence $g_* \mathcal{O}_Y(K_Y + \lceil g^* D \rceil) = \mathcal{O}_X(K_X + \lceil D \rceil)$.
+For all $f \in K(Y) = K(X)$:
+$$
+\operatorname{div}_Y(f) + K_Y + \lceil g^* D \rceil \ge 0 \implies g_* \operatorname{div}_Y(f) + g_*(K_Y + \lceil g^* D \rceil) \ge 0 \implies \operatorname{div}_X(f) + K_X + \lceil D \rceil \ge 0 \implies f \in H^0(X, \mathcal{O}_X(K_X + \lceil D \rceil)).
+$$
+Conversely:
+$$
+\operatorname{div}_X(f) + K_X + \lceil D \rceil \ge 0 \implies g^* \operatorname{div}_X(f) + g^*(K_X + \lceil D \rceil) \ge 0 \implies \operatorname{div}_Y(f) + K_Y + \lceil g^* D \rceil \ge 0.
+$$
+Replacing $X$ by open subsets $U \subseteq X$, we obtain $g_* \mathcal{O}_Y(K_Y + \lceil D' \rceil) = \mathcal{O}_X(K_X + \lceil D \rceil)$.
+:::
+
+::: {#lem-26-2-14}
+Let $Y \to X$ be a projective birational morphism between algebraic varieties, and let $B, C$ be $\mathbb{R}$-divisors on $X, Y$ with $\operatorname{Supp} B, \operatorname{Supp} C$ SNC, satisfying $g^*(K_X + B) = K_Y + C$. Then:
+1. $B < 1 \iff C < 1$.
+2. $B \le 1 \iff C \le 1$, in which case if the components of $B$ with coefficient $1$ are disjoint, then $C - g_*^{-1} B < 1$.
+:::

@@ -1,0 +1,299 @@
+
+---
+title: "26.0 Introduction"
+subtitle: "Birational Geometry (Chen Jiang, Fall 2026)"
+date: last-modified
+number-sections: true
+sec: "26.0."
+---
+
+::: {#note-course-setup}
+## Course Logistics & Fundamental Goal
+- **Lecturer:** Chen Jiang (Fall 2026, Birational Geometry)
+- **Grading:** HW: 40%, Final Exam: 60%
+- **Base Field:** $\mathbb{C}$ (or an algebraically closed field $k = \bar{k}$ with $\operatorname{char} k = 0$).
+- **Central Goal:** Classify all algebraic varieties up to birational equivalence.
+:::
+
+---
+
+::: {#exm-surfaces}
+## Classical Minimal Model Program for Surfaces
+Let $S$ be a projective surface. By resolution of singularities, there exists a smooth projective surface $\widetilde{S} \to S$, but $\widetilde{S}$ is **not unique**.
+
+1. **Relation $\le$ on Smooth Projective Surfaces:**
+   Let $X, Y$ be smooth projective surfaces. We define:
+   $$
+   X \le Y \iff \exists\, Y \xrightarrow[\mathrm{bir}]{\mathrm{proj}} X \implies \rho(X) \le \rho(Y) - 1,
+   $$
+   where $\rho(X) = \operatorname{rank} \operatorname{NS}(X)$ is the Picard number.
+   A smooth projective surface $S$ is called **minimal** if it is minimal with respect to the partial order $\le$.
+   Since $\rho(S) \ge 1$ for any projective surface, every smooth projective surface admits a minimal model $S_{\min} \in [S]$.
+
+2. **Castelnuovo's Contraction Theorem:**
+   Let $C \subseteq S$ be a $(-1)$-curve (i.e., $C \cong \mathbb{P}^1$ and $(C^2) = -1$). Then there exists a birational projective morphism to a smooth projective surface:
+   $$
+   \begin{array}{ccc}
+   S & \xrightarrow[\mathrm{bir}]{\mathrm{proj}} & S' \\
+   {\displaystyle \underset{\subseteq}{\big\downarrow}} & & {\displaystyle \underset{\subseteq}{\big\downarrow}} \\
+   C & \longrightarrow & \{P\}
+   \end{array}
+   \qquad \text{such that } S \setminus C \xrightarrow{\;\sim\;} S' \setminus \{P\}.
+   $$
+   Consequently, a smooth projective surface $S$ is minimal if and only if $S$ contains no $(-1)$-curves.
+:::
+
+```{mermaid}
+%%| fig-align: center
+%%| fig-cap: "MMP Algorithm for Surfaces"
+flowchart TD
+    A["Smooth projective surface S"] --> B{"Does S contain a (-1)-curve?"}
+    B -- No --> C["S is a Minimal Surface"]
+    B -- Yes --> D["Castelnuovo Contraction: S → S'"]
+    D --> E["Update: S := S'"]
+    E --> B
+```
+
+---
+
+::: {#rem-higher-dimensions}
+## Generalization to Higher Dimensions ($1970\sim$)
+1. **Generalize $(-1)$-curves:** $\leadsto$ **Extremal rays** in the cone of curves (using convex geometry and Kleiman's criterion).
+2. **Generalize Castelnuovo's Contraction Theorem:**
+   - Contraction Theorem
+   - Cone Theorem ($\sim 1980$)
+   - Base Point Free Theorem
+   - Existence of Flips ($3$-folds in 1988 by Mori; arbitrary dimensions in 2010 by $\text{BCHM}$).
+3. **Termination of Flips:**
+   - Dimension $3$: Proven by Mori, Shokurov ($1985\sim 1992$).
+   - General dimension $n$: Still largely open, known only in special cases.
+
+**Complications in Higher Dimensions:**
+- Contracting an extremal ray usually leads to **singularities** (terminal, canonical, klt).
+- Small contractions (contracting loci of codimension $\ge 2$) do not yield projective varieties directly; one must perform birational surgeries called **flips**.
+:::
+
+```{mermaid}
+%%| fig-align: center
+%%| fig-cap: "Higher-Dimensional MMP Flowchart"
+flowchart TD
+    A["Projective variety X with mild singularities"] --> B{"Does X have a K_X-negative extremal ray?"}
+    B -- No --> C["X is a Minimal Model (or Mori Fiber Space)"]
+    B -- Yes --> D["Morphism: X → X'"]
+    D --> E["Perform Flip: X := Flip(X')"]
+    E --> B
+```
+
+---
+
+::: {#thm-final-mmp-goal}
+## Canonical Ring and Enhanced Objects
+**Ultimate Goal:** For every smooth projective complex algebraic variety $X$, the canonical ring:
+$$
+R(X, K_X) := \bigoplus_{m=0}^\infty H^0(X, \mathcal{O}_X(m K_X))
+$$
+is a finitely generated $\mathbb{C}$-algebra.
+
+To establish this by induction on dimension, one must enlarge the category:
+1. **Log Version:** Consider **pairs** $(X, B)$, where $B = \sum b_i B_i \in Z^1_{\mathbb{R}}(X)$ is an effective $\mathbb{R}$-boundary divisor, and study $K_X + B$.
+2. **Relative Version:** Consider a projective morphism $f: (X, B) \to S$, and study the relative log canonical algebra:
+   $$
+   R(X/S, K_X + B) := \bigoplus_{m=0}^\infty f_* \mathcal{O}_X(\lfloor m(K_X + B) \rfloor).
+   $$
+
+**Fundamental Result (BCHM 2010):**
+If $f: (X, B) \to S$ is a Kawamata log terminal (klt) pair with $B \in Z^1_{\mathbb{Q}}(X)$, then $R(X/S, K_X + B)$ is a finitely generated graded $\mathcal{O}_S$-algebra.
+:::
+
+---
+
+::: {#def-variety-sheaf-divisor}
+## Divisors and Associated Sheaves
+**Convention:** A *variety* is an integral separated scheme of finite type over $\mathbb{C}$. Unless explicitly stated otherwise, every variety is assumed to be **normal**.
+
+Let $X$ be a normal variety.
+1. $Z^1(X)$ denotes the free abelian group generated by prime divisors (irreducible closed subvarieties of pure codimension $1$).
+2. For $D \in Z^1(X)$, the sheaf $\mathcal{O}_X(D) \subseteq \mathcal{K}$ is defined on open subsets $U \subseteq X$ by:
+   $$
+   \mathcal{O}_X(D)(U) := \big\{ f \in K(X)^* \;\big|\; (\operatorname{div} f)|_U + D|_U \ge 0 \big\} \cup \{0\}.
+   $$
+3. $\operatorname{PDiv}(X) := \{ \operatorname{div} f \mid f \in K(X)^* \}$ is the subgroup of principal divisors.
+:::
+
+::: {#prp-reflexive-sheaf-weil}
+## Reflexive Sheaves and Weil Divisor Classes
+1. For any $D \in Z^1(X)$, $\mathcal{O}_X(D)$ is a **coherent reflexive sheaf of rank $1$**, and:
+   $$
+   \mathcal{O}_X(D)^\vee := \mathcal{H}om_{\mathcal{O}_X}(\mathcal{O}_X(D), \mathcal{O}_X) \cong \mathcal{O}_X(-D).
+   $$
+2. There is a canonical group isomorphism:
+   $$
+   \big\{ \text{Reflexive sheaves of rank } 1 \text{ on } X \big\} \big/ {\cong} \;\xleftrightarrow{\quad 1:1 \quad}\; \operatorname{WCl}(X) := Z^1(X)/\operatorname{PDiv}(X).
+   $$
+3. The complete linear system $|D| := \{ D' \in Z^1(X) \mid D' \ge 0, \, D' \sim D \}$ is bijective to:
+   $$
+   (H^0(X, \mathcal{O}_X(D)) \setminus \{0\}) / k^* \xrightarrow{\;\sim\;} |D|, \quad s \longmapsto \operatorname{div}(s) := \operatorname{div}(f) + D.
+   $$
+4. $D$ is a Cartier divisor ($\iff D \in \operatorname{Div}(X) \subseteq Z^1(X)$) if and only if $\mathcal{O}_X(D)$ is an invertible sheaf ($\mathcal{O}_X(D) \in \operatorname{Pic}(X)$).
+:::
+
+::: {.proof}
+Let $U = \operatorname{Reg}(X)$ be the regular locus and $j: U \hookrightarrow X$ the natural embedding. Since $X$ is normal, $\operatorname{codim}_X(X \setminus U) \ge 2$.
+On $U$, all Weil divisors are Cartier, so $\mathcal{O}_U(D|_U)$ is locally free of rank $1$. By normality (Serre's condition $S_2$), for any open $V \subseteq X$:
+$$
+\Gamma(V, \mathcal{O}_X(D)) = \Gamma(V \cap U, \mathcal{O}_U(D|_U)) \implies \mathcal{O}_X(D) = j_* \big(\mathcal{O}_U(D|_U)\big).
+$$
+Taking duals commutes with pushforward along codim $\ge 2$ open immersions:
+$$
+\mathcal{O}_X(D)^\vee = \mathcal{H}om(j_* \mathcal{O}_U(D), j_* \mathcal{O}_U) \cong j_* \mathcal{H}om(\mathcal{O}_U(D), \mathcal{O}_U) \cong j_* \mathcal{O}_U(-D) = \mathcal{O}_X(-D).
+$$
+Hence $\mathcal{O}_X(D)^{\vee\vee} \cong \mathcal{O}_X(-(-D)) = \mathcal{O}_X(D)$, proving reflexivity.
+
+Conversely, every rank $1$ reflexive sheaf $\mathcal{L}$ is torsion-free, hence locally free of rank $1$ at the generic point and all codimension $1$ points. Thus there exists an open subset $V \subseteq X$ with $\operatorname{codim}_X(X \setminus V) \ge 2$ such that $\mathcal{L}|_V \cong \mathcal{O}_V(D_V)$ for a Cartier divisor $D_V \in \operatorname{Div}(V) = Z^1(V)$. Extending $D_V$ by closure yields $\bar{D} \in Z^1(X)$, and $\mathcal{L} \cong j_* \mathcal{L}|_V \cong \mathcal{O}_X(\bar{D})$.
+:::
+
+---
+
+::: {#def-q-r-divisors}
+## $\mathbb{Q}$-Weil, $\mathbb{R}$-Weil, and $\mathbb{Q}$-Factorial Varieties
+1. A **$\mathbb{Q}$-Weil divisor** (resp. **$\mathbb{R}$-Weil divisor**) is an element of:
+   $$
+   Z^1_{\mathbb{Q}}(X) := Z^1(X) \otimes_{\mathbb{Z}} \mathbb{Q}, \qquad Z^1_{\mathbb{R}}(X) := Z^1(X) \otimes_{\mathbb{Z}} \mathbb{R}.
+   $$
+   Similarly, $\operatorname{Div}_{\mathbb{Q}}(X) := \operatorname{Div}(X) \otimes_{\mathbb{Z}} \mathbb{Q}$ and $\operatorname{Div}_{\mathbb{R}}(X) := \operatorname{Div}(X) \otimes_{\mathbb{Z}} \mathbb{R}$.
+2. For an $\mathbb{R}$-divisor $D = \sum d_i D_i$, its round-down is defined as $\lfloor D \rfloor := \sum \lfloor d_i \rfloor D_i \in Z^1(X)$, and we set:
+   $$
+   \mathcal{O}_X(D) := \mathcal{O}_X(\lfloor D \rfloor).
+   $$
+3. A normal variety $X$ is called **$\mathbb{Q}$-factorial** if every Weil divisor has a nonzero integer multiple that is Cartier:
+   $$
+   \operatorname{Div}_{\mathbb{Q}}(X) \xrightarrow{\;\sim\;} Z^1_{\mathbb{Q}}(X) \quad \big(\implies \operatorname{Div}_{\mathbb{R}}(X) \xrightarrow{\;\sim\;} Z^1_{\mathbb{R}}(X)\big).
+   $$
+:::
+
+::: {#def-relative-linear-equiv}
+## Relative Linear Equivalence
+1. $D \sim D'$ ($D$ and $D'$ are linearly equivalent) if $D - D' \in \operatorname{PDiv}(X)$.
+2. For a morphism $f: X \to S$, $D \sim_f D'$ (or $D \sim_{X/S} D'$) if there exists an open covering $\{S_i\}$ of $S$ such that:
+   $$
+   D|_{f^{-1}(S_i)} \sim D'|_{f^{-1}(S_i)} \quad \forall i.
+   $$
+   Equivalently, there exists a Cartier divisor $B \in \operatorname{Div}(S)$ such that $D \sim D' + f^* B$, or equivalently $\mathcal{O}_X(D) \cong \mathcal{O}_X(D') \otimes f^* \mathcal{L}$ for some $\mathcal{L} \in \operatorname{Pic}(S)$.
+:::
+
+---
+
+::: {#def-snc-nc}
+## Simple Normal Crossing and Normal Crossing Divisors
+Let $X$ be a smooth variety and $B$ a reduced closed subscheme of pure codimension $1$.
+
+1. $B$ is a **simple normal crossing (SNC)** divisor if for every closed point $P \in X(\mathbb{C})$, there exists a regular system of parameters $(z_1, \dots, z_n)$ for the local ring $\mathcal{O}_{X, P}$ such that:
+   $$
+   \widehat{\mathcal{O}}_{B, P} \cong \widehat{\mathcal{O}}_{X, P} / (z_1 \cdots z_r) \quad (1 \le r \le n).
+   $$
+   In this case, writing $B = \sum B_i$ as a sum of irreducible components, each component $B_i$ is **smooth**.
+2. $B$ is **normal crossing (NC)** if the condition holds étale-locally or analytically-locally (the irreducible components of $B$ may have nodal self-intersections).
+3. The **regular locus of the pair** $(X, B)$ is defined as:
+   $$
+   \operatorname{Reg}(X, B) := \big\{ x \in X(\mathbb{C}) \;\big|\; X \text{ is smooth at } x \text{ and } B \text{ is SNC at } x \big\},
+   $$
+   which is a Zariski open subset of $X$. Its complement $\operatorname{Sing}(X, B) := X \setminus \operatorname{Reg}(X, B)$ is the **singular locus** of the pair.
+:::
+
+::: {.proof}
+To see that each irreducible component $B_i$ is smooth:
+Since $\mathcal{O}_{X, P}$ is a regular local ring, it is a UFD. The elements $z_1, \dots, z_r$ are coprime irreducible elements, giving the minimal prime decomposition $(z_1 \cdots z_r) = (z_1) \cap \dots \cap (z_r)$. Thus:
+$$
+\mathcal{O}_{B, P} \xhookrightarrow{\phantom{\to}} \prod_{i=1}^r \mathcal{O}_{X, P}/(z_i).
+$$
+For each component $B_i$, its local ring $\mathcal{O}_{B_i, P} \cong \mathcal{O}_{X, P}/(z_i)$ is again a regular local ring, which means that each $B_i$ is smooth.
+
+To see that $\operatorname{Reg}(X, B)$ is open:
+Lifting parameters $z_1, \dots, z_r$ to functions $f_1, \dots, f_r$ on a neighborhood $U$, the condition that $f_1, \dots, f_s$ form part of a regular system at $y \in B$ is equivalent to $df_1 \wedge \dots \wedge df_s \ne 0$, which is an algebraic open condition.
+:::
+
+::: {#rem-snc-vs-nc}
+## SNC is Strictly Stronger than NC
+Consider $X = \mathbb{A}^2$ and $B = V(y^2 - x^2(x+1)) \subseteq \mathbb{A}^2$ (the nodal cubic curve).
+- Analytically near $(0, 0)$, $B = V(u v)$ with respect to local analytic coordinates $u = y - x\sqrt{x+1}$ and $v = y + x\sqrt{x+1}$, so $B$ is **NC**.
+- However, $B$ is irreducible and has a singularity at the origin, so it is **not SNC**.
+:::
+
+---
+
+::: {#def-birational-transforms}
+## Exceptional Locus, Strict Transform, and Total Transform
+Let $f: Y \to X$ be a birational morphism of normal varieties.
+
+1. **Exceptional Locus:**
+   There exists a unique maximal open subset $U \subseteq X$ such that $f|_{f^{-1}(U)}: f^{-1}(U) \xrightarrow{\sim} U$ is an isomorphism. The **exceptional set** is defined by:
+   $$
+   \operatorname{Exc}(f) := Y \setminus f^{-1}(U).
+   $$
+   A divisor $E \in Z^1(Y)$ is called an **exceptional divisor** over $X$ if $\operatorname{Supp} E \subseteq \operatorname{Exc}(f)$.
+
+2. **Total Transform of Cartier Divisors:**
+   If $D \in \operatorname{Div}(X)$ is Cartier and given by local data $\{(U_i, s_i)\}$, its **total transform** is:
+   $$
+   f^* D := \big\{ (f^{-1}(U_i), \, f^* s_i) \big\} \in \operatorname{Div}(Y), \quad \text{with } \mathcal{O}_Y(f^* D) = f^* \mathcal{O}_X(D).
+   $$
+
+3. **Strict Transform of Weil Divisors:**
+   Let $g = f^{-1}: X \dashrightarrow Y$ be the birational inverse, with domain of definition $U \subseteq X$. Since $X$ is normal and $Y \to X$ is projective, $\operatorname{codim}_X(X \setminus U) \ge 2$.
+   For a prime divisor $D \subseteq X$, its **strict transform** is:
+   $$
+   f_*^{-1} D := \overline{g(D \cap U)} \subseteq Y.
+   $$
+   Extending linearly yields the linear map $f_*^{-1}: Z^1(X)_{\mathbb{R}} \to Z^1(Y)_{\mathbb{R}}$, which satisfies:
+   $$
+   f_* \circ f_*^{-1} = \mathrm{id}_{Z^1(X)}.
+   $$
+:::
+
+::: {#def-codim-1-isomorphism}
+## Codimension 1 Properties of Birational Maps
+A birational map $f: X \dashrightarrow Y$ is:
+
+- **surjective in codimension 1** if $f_*: Z^1(X) \to Z^1(Y)$ is surjective ($\iff f^{-1}$ has no exceptional divisors);
+
+- **injective in codimension 1** if $f_*: Z^1(X) \to Z^1(Y)$ is injective ($\iff f$ has no exceptional divisors);
+
+- **isomorphic in codimension 1** if $f_*$ is an isomorphism ($\iff$ neither $f$ nor $f^{-1}$ has exceptional divisors).
+:::
+
+---
+
+::: {#exm-cone-q-cartier}
+## Divisors on the Quadric Cone
+Let $X = V(xy - z^2) \subseteq \mathbb{A}^3$ (an $A_1$ singularity at the origin).
+
+1. **$\mathbb{Q}$-Cartier Weil Divisor:**
+   Consider the line $D = V(x, z) \subseteq X$.
+   - $T_0 X = \mathbb{C}^3$, but $T_0 D = \mathbb{C}$, so $D$ is not Cartier.
+   - The principal divisor of the function $x \in K(X)$ is:
+     $$
+     \operatorname{div}(x) = \operatorname{Spec} \frac{k[x,y,z]}{(xy-z^2, \, x)} = \operatorname{Spec} \frac{k[y,z]}{(z^2)} = 2D.
+     $$
+     Thus $2D$ is Cartier, which implies $D$ is **$\mathbb{Q}$-Cartier** of index $2$.
+
+2. **Pullback of a $\mathbb{Q}$-Cartier Divisor:**
+   Let $f: X' = \mathrm{Bl}_0 X \to X$ be the blowup at the origin.
+   The exceptional fiber is $C := \operatorname{Exc}(f) \cong \mathbb{P}^1$ with normal bundle $\mathcal{O}_{\mathbb{P}^1}(-2)$, so $(C^2) = -2$.
+   Writing:
+   $$
+   f^* D = f_*^{-1} D + \alpha C,
+   $$
+   by the projection formula $(f^* D \cdot C) = (D \cdot f_* C) = 0$.
+   Since the strict transform $f_*^{-1} D$ meets the exceptional curve $C$ transversely at one point, $(f_*^{-1} D \cdot C) = 1$. Therefore:
+   $$
+   0 = (f^* D \cdot C) = (f_*^{-1} D + \alpha C) \cdot C = 1 + \alpha (C^2) = 1 - 2\alpha \implies \alpha = \frac{1}{2}.
+   $$
+   Hence:
+   $$
+   f^* D = f_*^{-1} D + \frac{1}{2} C.
+   $$
+
+3. **Caution:**
+   The scheme-theoretic exceptional locus of a blowup $E = \operatorname{Proj} \bigoplus \mathcal{I}^n/\mathcal{I}^{n+1}$ does not always coincide with an exceptional *divisor* in birational geometry. For instance, blowing up a closed point on a smooth curve yields an exceptional fiber of dimension $0$, which contains no divisorial components.
+:::
+

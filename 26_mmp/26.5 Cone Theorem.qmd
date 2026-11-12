@@ -1,0 +1,457 @@
+---
+title: "26.5 Cone Theorem"
+subtitle: "Birational Geometry (Chen Jiang, Fall 2026)"
+date: last-modified
+number-sections: true
+sec: "26.5."
+---
+
+::: {.callout-note title="Idea: How to Use the BPF Theorem?"}
+Assume $K_X + B$ is **not** nef.
+Take $H$ ample over $S$, then $K_X + B + t H$ is ample for all $t \gg 0$.
+Define the threshold:
+$$
+t_0 := \inf \big\{ t \in \mathbb{R} \;\big|\; K_X + B + t H \text{ is ample over } S \big\}.
+$$
+Then $D := K_X + B + t_0 H$ is nef, and:
+$$
+D - (K_X + B) = t_0 H \quad \text{is } f\text{-ample}.
+$$
+**Main Issue:** Is $K_X + B + t_0 H$ a $\mathbb{Q}$-Cartier divisor or not?
+:::
+
+---
+
+::: {#thm-rationality}
+## Rationality Theorem
+1. Let $(X, B)/S$ be a KLT pair, $B$ a $\mathbb{Q}$-Cartier divisor, and $A$ a $\mathbb{Z}$-Cartier $f$-nef and $f$-big divisor.
+   Assume $K_X + B$ is not relatively nef, and define:
+   $$
+   r := \max \big\{ t \in \mathbb{R} \;\big|\; A + t(K_X + B) \text{ is } f\text{-nef} \big\}.
+   $$
+   Then $r \in \mathbb{Q}_{> 0}$.
+2. Let $a$ be the minimal positive integer such that $a(K_X + B)$ is Cartier, and let $b$ be the maximal dimension of the fibers of $f$.
+   If $\frac{r}{a} = \frac{p}{q}$ with $\gcd(p, q) = 1$ (writing $\left. A + r(K_X + B) = A + \frac{r}{a} \cdot a(K_X + B) \right)$, then:
+   $$
+   q \le a(b + 1).
+   $$
+:::
+
+::: {.proof}
+*(Idea of Proof)*
+Consider the divisor class $(x, y) \sim x A + y a(K_X + B)$ in the $(x, y)$-plane.
+The nef boundary line is given by $a y = r x$.
+
+1. There exist infinitely many points $(x, y) \in \mathbb{Z}^2$ in the strip between $a y = r x$ and $a y = r x + \delta$.
+2. There exist infinitely many $\mathbb{Z}^2$-points in this region satisfying the Nonvanishing Theorem.
+3. By the BPF argument, fix such a point $(x_0, y_0)$; then:
+   $$
+   \operatorname{Bs}|(x_0, y_0)| \supsetneq \operatorname{Bs}|(m x_0, m y_0)| \quad \text{for some } m \gg 0.
+   $$
+   Then there exists $(x_0', y_0') \in \{ (x, y) \mid a y = r x \} \cap \mathbb{Z}^2$ such that:
+   $$
+   (x_2, y_2) := (m x_0 + x_0', m y_0 + y_0')
+   $$
+   remains in the strip.
+   By the BPF theorem, we may assume $(x_0', y_0')$ is free (enlarging $m$), so:
+   $$
+   \operatorname{Bs}|(x_1, y_1)| \subsetneq \operatorname{Bs}|(x_0, y_0)|.
+   $$
+   Then for $n \gg 0$, $(x_n, y_n)$ is a $\mathbb{Z}$-Cartier free divisor, which implies it is nef, yielding a contradiction.
+:::
+
+---
+
+::: {#def-extremal-face-contraction}
+## Face, Extremal Ray, and Contraction
+Let $C \subseteq V$ be a closed convex cone in a finite-dimensional $\mathbb{R}$-vector space $V$.
+
+1. For any $u \in V^*$, define:
+   $$
+   C_{u \ge 0} := \{ v \in C \mid \langle u, v \rangle \ge 0 \}, \qquad C_{u = 0} := \{ v \in C \mid \langle u, v \rangle = 0 \}.
+   $$
+2. A subset $F \subseteq C$ is a **face** if there exists $u \in C^*$ such that $C \subseteq V_{u \ge 0}$ (i.e., $C = C_{u \ge 0}$) and $F = C_{u = 0}$. The element $u$ is called a **supporting function**.
+3. $R \subseteq C$ is an **extremal ray** if $R$ is a $1$-dimensional face.
+4. Let $F$ be a face of $\overline{\operatorname{NE}}(X/S)$. A morphism $h: X \to Y$ is a **contraction with respect to $F$** if and only if:
+   - $X, Y$ are normal and $h_* \mathcal{O}_X = \mathcal{O}_Y$ over $S$;
+   - For every relative curve $C \subseteq X/S$, $[C] \in F \iff h(C) = \text{pt}$;
+   - $F$ is the smallest closed convex cone containing $\{ [C] \mid h(C) = \text{pt} \}$.
+
+   In this case, $F = \overline{\operatorname{NE}}(X/Y) \subseteq \overline{\operatorname{NE}}(X/S)$.
+:::
+
+---
+
+::: {#thm-contraction}
+## Contraction Theorem
+Let $(X, B)$ be a KLT pair, $f: X \to S$ a projective morphism, and $F$ a face of $\overline{\operatorname{NE}}(X/S)$.
+Assume that there exists a rational supporting function $u \in N^1(X/S)_{\mathbb{Q}}$ of $F$, and for all nonzero $C \in F \setminus \{0\}$, $C \cdot (K_X + B) < 0$.
+Then:
+
+1. There exists a contraction morphism $h: X \to Y$ with respect to $F$;
+2. $F = \overline{\operatorname{NE}}(X/Y)$ via the inclusion $N_1(X/Y) \hookrightarrow N_1(X/S)$;
+3. $-(K_X + B)$ is $h$-ample;
+4. For every $\mathbb{Z}$-Cartier divisor $D$, if $D \equiv_{\mathrm{num}} 0$ in $N^1(X/Y)$ (i.e., $D \sim_Y 0$), then there exists $E \in \operatorname{Div}(Y)$ such that:
+   $$
+   D \sim_{\mathbb{Q}} h^* E \quad (\text{numerical triviality } \implies \mathbb{Q}\text{-linear equivalence});
+   $$
+5. $\rho(X/S) = \rho(Y/S) + \rho(X/Y)$.
+:::
+
+::: {.proof}
+- **(1) $\implies$ (2):** Holds by definition.
+- **(1) $\implies$ (3):** Since $(K_X + B) \cdot [C] < 0$ for all $[C] \in F \setminus \{0\} = \overline{\operatorname{NE}}(X/Y) \setminus \{0\}$, $-(K_X + B)$ is $h$-ample.
+- **(4) + (1) $\implies$ (5):** The sequence $0 \to N^1(Y/S) \xrightarrow{h^*} N^1(X/S) \to N^1(X/Y) \to 0$ where $E \mapsto h^* E$ is exact by (4).
+
+It therefore suffices to prove (1) and (4):
+
+Fix $L \in N^1(X)_{\mathbb{Q}}$ supporting $F$. Taking $m L$ for $m \gg 0$, we may assume $L \in N^1(X)_{\mathbb{Z}}$.
+Then $F = \overline{\operatorname{NE}}(X/S)_{L=0}$, and $L \ge 0$ on $\overline{\operatorname{NE}}(X/S) \implies L$ is nef.
+We want to apply the BPF theorem to $L$. It suffices to show that $m L - (K_X + B)$ is ample.
+Since $K_X + B < 0$ on $F \setminus \{0\}$, take the unit sphere $S_1 \subseteq N_1(X/S)$, and set $S' := S_1 \cap \overline{\operatorname{NE}}(X/S)$.
+Define:
+$$
+P := \{ x \in S' \mid (K_X + B) \cdot x \ge 0 \}.
+$$
+Then $P$ is closed and compact, and $P \cap F = \emptyset$.
+Thus $\delta := \min_P L > 0$. Take $m \gg 0$ such that $m \delta > \max_{S'} (K_X + B)$.
+For any $x \in S'$:
+- If $x \notin P$, $(m L - K_X - B) \cdot x \ge m L \cdot x \ge 0$;
+- If $x \in P$, $(m L - K_X - B) \cdot x \ge m \delta - \max_{S'} (K_X + B) > 0$.
+
+Hence $m L - K_X - B > 0$ on $\overline{\operatorname{NE}}(X/S) \setminus \{0\} \implies m L - K_X - B$ is ample.
+By the BPF Theorem (@thm-bpf), there exists a contraction $h: X \to Y$ over $S$ and an ample divisor $H$ on $Y/S$ such that $L = h^* H$.
+Consider the sequence:
+$$
+0 \longrightarrow N_1(X/Y) \longrightarrow N_1(X/S) \xrightarrow{h_*} N_1(Y/S) \longrightarrow 0.
+$$
+Then for any $\alpha \in \overline{\operatorname{NE}}(X/S)$,
+$$
+h_* \alpha = 0 \iff (h_* \alpha \cdot H) = 0 \iff (\alpha \cdot L) = 0 \iff \alpha \in \overline{\operatorname{NE}}(X/S)_{L=0} = F.
+$$
+Thus $\overline{\operatorname{NE}}(X/Y) \subseteq F$.
+
+Assume $\overline{\operatorname{NE}}(X/Y) =: F' \subsetneq F$. By separating convex sets, there exists a Cartier divisor $D$ such that:
+$$
+D > 0 \quad \text{on } F' \setminus \{0\}, \quad \text{and } \exists \alpha \in F \text{ such that } (D \cdot \alpha) < 0.
+$$
+Then $D$ is $h$-ample, which implies $D + m L$ is $f$-ample for all $m \gg 0$. But:
+$$
+(D + m L) \cdot \alpha = D \cdot \alpha < 0,
+$$
+a contradiction! Thus $F = \overline{\operatorname{NE}}(X/Y)$.
+
+Assume $D \equiv_{\mathrm{num}} 0$ in $N^1(X/Y)$. By the BPF theorem over $Y$, there exists $m > 0$ such that $|mD|$ is free over $Y$.
+This gives a contraction $h': X \to Y'$ over $Y$ and an ample divisor $H'/Y'$ over $Y$ such that $h'^* H' \sim D$:
+$$
+\begin{CD}
+X @>h'>> Y' \\
+@V h VV @VV \phi V \\
+Y @= Y
+\end{CD}
+$$
+For any curve $C$, $h(C) = \text{pt} \implies (D \cdot C) = 0 \implies h'(C) = \text{pt}$; conversely, $h'(C) = \text{pt} \implies h(C) = \text{pt}$.
+Hence $\phi: Y' \to Y$ is an isomorphism ($\phi_* \mathcal{O}_{Y'} = \mathcal{O}_Y$ and $\phi$ is a bijection, which implies isomorphism).
+Thus $D \sim_{\mathbb{Q}} h^* H'$, i.e., $D \sim_Y 0$.
+:::
+
+---
+
+::: {#thm-cone}
+## Cone Theorem
+1. Let $(X, B)$ be a KLT pair and $f: X \to S$ a projective morphism. Fix a relative ample divisor $A$ and $\varepsilon > 0$. Then there exist **finitely many** extremal rays $R_i$ of the closed cone of curves such that:
+   $$
+   \overline{\operatorname{NE}}(X/S) = \overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon A \ge 0} + \sum_{i=1}^k R_i.
+   $$
+   Consequently,
+   $$
+   \overline{\operatorname{NE}}(X/S) = \overline{\operatorname{NE}}(X/S)_{K_X + B \ge 0} + \sum_{\text{countable}} R_i.
+   $$
+2. For each $R_i \not\subseteq \overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon A \ge 0}$, $K_X + B$ is negative on $R_i \setminus \{0\}$, and there exists a contraction morphism associated to $R_i$.
+3. Each $R_i = \mathbb{R}_{\ge 0} [C_i]$ where $C_i$ is an effective rational curve such that:
+   $$
+   0 < -(K_X + B) \cdot C_i \le 2 \dim X \quad (\text{Fact: } \le \dim X + 1).
+   $$
+:::
+
+::: {.proof}
+Perturb $\varepsilon A$ so that $\overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon A \ge 0} \supsetneq \overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon' A' \ge 0}$ (considering $S_1 \cap \overline{\operatorname{NE}}(X/S)$).
+Then we may assume $A$ is $\mathbb{Z}$-Cartier, $\varepsilon \in \mathbb{Q}_{> 0}$, and $B$ is $\mathbb{Q}$-Cartier (hence $K_X + B$ is $\mathbb{Q}$-Cartier).
+We proceed by induction on $\rho(X/S)$. If $\rho(X/S) = 1$, the theorem is obvious.
+
+We may assume $\rho(X/S) \ge 2$ and $K_X + B$ is not nef over $S$.
+Take an $f$-ample $\mathbb{Z}$-Cartier divisor $H$ on $X$.
+By the Rationality Theorem (@thm-rationality),
+$$
+r_H := \max \big\{ t \in \mathbb{R} \;\big|\; H + t(K_X + B) \text{ is } f\text{-nef} \big\} \in \mathbb{Q}_{> 0}.
+$$
+The divisor $L_H := H + r_H(K_X + B)$ is $f$-nef and $\mathbb{Q}$-Cartier.
+Then by @thm-contraction, we have a contraction $h_H: X \to Y_H$ for $L_H$ with respect to the face $F_H = \overline{\operatorname{NE}}(X/Y_H)$.
+Note that $F_H = \overline{\operatorname{NE}}(X/S) \iff L_H \equiv 0 \iff Y_H = S$.
+
+**Goal:**
+$$
+\overline{\operatorname{NE}}(X/S) = \overline{\operatorname{NE}}(X/S)_{K_X + B \ge 0} + \sum_{H \text{ ample}, L_H \not\equiv 0} F_H \quad (\exists H \text{ such that } L_H \not\equiv 0 \text{ since } \rho \ge 2).
+$$
+If this Goal is true, by induction we can show:
+$$
+\overline{\operatorname{NE}}(X/S) = \overline{\operatorname{NE}}(X/S)_{K_X + B \ge 0} + \sum_{\dim F_H = 1} F_H.
+$$
+Indeed, on $X/Y_H$:
+$$
+\overline{\operatorname{NE}}(X/Y_H) = \overline{\operatorname{NE}}(X/Y_H)_{K_X + B \ge 0} + \sum_{H'} F_{H'},
+$$
+but:
+$$
+\overline{\operatorname{NE}}(X/Y_H) = \overline{\operatorname{NE}}(X/S)_{L_H = 0} = \overline{\operatorname{NE}}(X/S)_{H + r_H(K_X + B) = 0} \subseteq \overline{\operatorname{NE}}(X/S)_{K_X + B < 0}.
+$$
+Thus by induction:
+$$
+\overline{\operatorname{NE}}(X/Y_H) = \sum_{\substack{H' \text{ } h_H\text{-ample} \\ \dim F_{H'} = 1}} F_{H'}.
+$$
+Such $H'$ is $h_H$-ample; we now construct an $S$-ample divisor:
+Since $L_H = H + r_H(K_X + B)$, there exists $A_H$ ample on $Y/S$ such that $h_H^* A_H = L_H$.
+For any $H'$ that is $h_H$-ample, let $L_{H'} = H' + r'(K_X + B)$. Take $k \gg 0$, then:
+$$
+\widetilde{H} := H' + k L_H = H' + k h_H^* A_H \quad \text{is } S\text{-ample}.
+$$
+Then:
+$$
+\widetilde{H} + t(K_X + B) = H' + k L_H + t(K_X + B) = H' + t(K_X + B) + k L_H
+$$
+is nef but not ample. Thus:
+$$
+\widetilde{H} + r'(K_X + B) = L_{H'} + k L_H =: L_{\widetilde{H}}.
+$$
+Notice that:
+- $L_H = 0$ on $F_H$, and $L_H > 0$ on $\overline{\operatorname{NE}}(X/S) \setminus F_H$;
+- $L_{H'} = 0$ on $F_{H'} \subseteq F_H$, and $L_{H'} > 0$ on $F_H \setminus F_{H'}$;
+- $L_{\widetilde{H}} = 0$ on $F_{H'} \implies L_{\widetilde{H}}$ is not ample.
+
+Thus $h_H$ contracts more curves than $h_{H'}$.
+Let $A_k := A_{H'} + k g^* A_H$, then:
+$$
+L_{\widetilde{H}} = L_{H'} + k L_H = h_{H'}^* A_{H'} + k h_H^* A_H = h_{H'}^* A_k.
+$$
+Taking $k \gg 0$ such that $A_k$ is $S$-ample, we have that $L_{\widetilde{H}}$ is $S$-nef.
+Then $F_{\widetilde{H}} = F_{H'}$, so $F_H$ decomposes into smaller faces:
+$$
+\overline{\operatorname{NE}}(X/S) = \overline{\operatorname{NE}}(X/S)_{K_X + B \ge 0} + \sum F_H = \overline{\operatorname{NE}}(X/S)_{K_X + B \ge 0} + \sum_H \sum_{\substack{H' \\ \dim F = 1}} \text{rays}.
+$$
+
+Let $\mathcal{C} := \overline{\operatorname{NE}}(X/S)_{K_X + B \ge 0} + \sum_{L_H \not\equiv 0} F_H$.
+Suppose $\mathcal{C} \subsetneq \overline{\operatorname{NE}}(X/S)$. There exists $M \in \operatorname{Div}_{\mathbb{R}}(X)$ such that:
+$$
+M \cdot v > 0 \quad \forall v \in \mathcal{C} \setminus \{0\}, \quad \text{but } \exists v_0 \in \overline{\operatorname{NE}}(X/S) \setminus \mathcal{C} \text{ such that } M \cdot v_0 < 0.
+$$
+Since $M > 0$ on $\overline{\operatorname{NE}}(X/S)_{K_X + B \ge 0}$,
+$$
+M \in \big(\overline{\operatorname{NE}}(X/S)_{K_X + B \ge 0}\big)^\vee = \operatorname{Nef}(X/S) + (K_X + B)\mathbb{R}_{\ge 0}.
+$$
+Notice that $[M] \notin (K_X + B)\mathbb{R}_{\ge 0}$, because if $[M] = t(K_X + B)$, taking $H$ and $L_H = H + s(K_X + B)$ and $v \in F_H$, we would have:
+$$
+M \cdot v = t\big((K_X + B) \cdot v\big) = -\frac{t}{s}(H \cdot v) \le 0,
+$$
+contradicting $M \cdot v > 0$.
+Hence:
+$$
+M \in \operatorname{Int}\big(\operatorname{Nef}(X/S) + (K_X + B)\mathbb{R}_{\ge 0}\big) = \operatorname{Amp}(X/S) + (K_X + B)\mathbb{R}_{> 0}.
+$$
+Thus $M = H + t(K_X + B)$ for some ample divisor $H$ and $t > 0$.
+Since $M \cdot v_0 < 0$, let $L_H := H + s(K_X + B)$ with maximal $s \le t$.
+Since $M \notin (K_X + B)\mathbb{R}_{\ge 0}$, we have $L_H \not\equiv 0$, so $F_H \subseteq \mathcal{C}$.
+Then $M$ is positive on $F_H$. But $L_H = 0$ on $F_H \implies K_X + B$ is positive on $F_H$, which implies $L_H = H + s(K_X + B)$ is positive on $F_H$, a contradiction!
+
+Denote:
+$$
+\overline{\operatorname{NE}}(X/S) = \overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon A \ge 0} + \sum_{i \in I} R_i,
+$$
+where $R_i \not\subseteq \overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon A \ge 0}$.
+Let $h_i: X \to Y_i$ be the associated contraction morphism, so $R_i = \mathbb{R}_{\ge 0}[C_i]$ for a curve $C_i$.
+
+Let $a$ be the minimal positive integer such that $a(K_X + B)$ is Cartier, and let $b_i$ be the maximal dimension of the fibers of $h_i: (X, B) \to Y_i$.
+Since $-(K_X + B)$ is $h_i$-ample, there exists a unique $v_i \in R_i$ such that:
+$$
+a(K_X + B) \cdot v_i = -1.
+$$
+Take $f$-ample divisors $H_1, \dots, H_{\rho-1}$ such that $\{H_1, \dots, H_{\rho-1}, a(K_X + B)\}$ forms a basis of $N^1(X/S)$.
+Since $\dim N_1(X/Y_i) \ge 1$, there exists a unique $r_{ij}$ such that:
+$$
+H_j + r_{ij}(K_X + B) \equiv_{Y_i} 0.
+$$
+Here $r_{ij}$ is the maximal $t$ such that $H_j + t(K_X + B)$ is $Y_i$-nef.
+By the Rationality Theorem (@thm-rationality), writing $\frac{r_{ij}}{a} = \frac{p_{ij}}{q_{ij}}$, we have $q_{ij} \le a(b_i + 1)$.
+Since $q_{ij} \mid (a(b_i + 1))!$, we have:
+$$
+\big(a(b_i + 1)\big)! \, (H_j \cdot v_i) \in \mathbb{Z}.
+$$
+Now take $N \gg 0$ such that $N A - H_j$ is $f$-ample for all $j$.
+Then:
+$$
+(H_j \cdot v_i) \le (N A \cdot v_i) < -\frac{N}{\varepsilon} (K_X + B) \cdot v_i = \frac{N}{a \varepsilon},
+$$
+since $(K_X + B + \varepsilon A) \cdot v_i < 0$.
+Thus:
+$$
+\big(a(b_i + 1)\big)! \, (H_j \cdot v_i) \in \mathbb{Z} \cap \left[0, \frac{\big(a(b_i + 1)\big)! N}{a \varepsilon}\right).
+$$
+Now consider the map:
+$$
+\Phi: I \longhookrightarrow N_1(X)_{\mathbb{R}} \longrightarrow \mathbb{R}^\rho, \quad i \longmapsto v_i \longmapsto \big( (H_1 \cdot v_i), \dots, (H_{\rho-1} \cdot v_i), (K_X + B) \cdot v_i \big).
+$$
+Since $b_i \le \dim X =: n$, the image satisfies:
+$$
+\Phi(I) \subseteq \prod_{j=1}^{\rho-1} \left( \frac{1}{(a(n+1))!} \mathbb{Z} \cap \left[0, \frac{N}{a \varepsilon}\right) \right) \times \left\{ -\frac{1}{a} \right\},
+$$
+which is a **finite** set.
+Since $\Phi$ is injective on extremal rays, $I$ is finite, which completes the proof of (1) and (2).
+:::
+
+---
+
+::: {#cor-cone-big-boundary}
+## Finite Extremal Rays for Big Boundary
+Let $(X, B)$ be a KLT pair and $f: X \to S$ a projective morphism. Assume $S$ is quasi-projective and $B$ is an $f$-big $\mathbb{R}$-Cartier divisor.
+Then there are only **finitely many** extremal rays in $\overline{\operatorname{NE}}(X/S)_{K_X + B < 0}$.
+:::
+
+::: {.proof}
+Write $B = A + E$ with $A$ ample and $E$ effective. Take $\varepsilon \ll 1$ such that $(X, (1 - \varepsilon)B + \varepsilon E)$ is KLT.
+Then there are only finitely many extremal rays in:
+$$
+\overline{\operatorname{NE}}(X/S)_{K_X + (1-\varepsilon)B + \varepsilon E + \varepsilon A < 0} = \overline{\operatorname{NE}}(X/S)_{K_X + B < 0},
+$$
+by @thm-cone.
+:::
+
+---
+
+::: {#cor-cone-dlt}
+## DLT Case
+Let $(X, B)$ be a DLT pair, $f: X \to S$ a projective morphism, and assume $S$ is quasi-projective. Fix a relative ample divisor $A$ and $\varepsilon > 0$.
+Then there are only finitely many extremal rays $R_i$ such that:
+$$
+\overline{\operatorname{NE}}(X/S) = \overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon A \ge 0} + \sum R_i.
+$$
+For each $R_i \subseteq \overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon A < 0}$, there exists a contraction morphism with respect to $R_i$.
+:::
+
+::: {.proof}
+By Lemma 26.4.4, there exists an ample divisor $H/S$ and an effective $\mathbb{R}$-Weil divisor $B'/X$ such that:
+$$
+B' \sim_{\mathbb{R}} B + \frac{\varepsilon}{2}(f^* H + A) \quad \text{and } (X, B') \text{ is KLT}.
+$$
+Then $B' \equiv_S B + \frac{\varepsilon}{2} A$, and the corollary reduces directly to the KLT Cone Theorem (@thm-cone).
+:::
+
+---
+
+::: {#thm-cone-dual}
+## Dual Version of Cone Theorem
+Let $(X, B)$ be a KLT pair and $f: X \to S$ a projective morphism. Fix a relative ample divisor $A$ and $\varepsilon > 0$, and assume $K_X + B + \varepsilon A$ is not $f$-nef.
+There are finitely many extremal rays $R_i$ such that $\overline{\operatorname{NE}}(X/S) = \overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon A \ge 0} + \sum R_i$.
+For $R_i \subseteq \overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon A < 0}$, let $h_i: X \to Y_i$ be the contractions.
+Let $f_i \in N^1(X/S)^\vee \cong N_1(X/S)$ be defined by $v_i$, where $v_i \in R_i$ is a rational point.
+Then:
+
+1. $f_i \ge 0$ on $\operatorname{Nef}(X/S)$, and $f_i > 0$ on $\operatorname{Amp}(X/S)$.
+2. $G_i := \{ u \in \operatorname{Nef}(X/S) \mid f_i(u) = 0 \}$ is a face of codimension $1$ in $\operatorname{Nef}(X/S)$, which coincides with $h_i^* \operatorname{Nef}(Y_i/S)$.
+3. If $F = R_{i_1} + \dots + R_{i_r}$ is a face, let $h: X \to Y$ be its contraction. Then:
+   $$
+   G := \bigcap_{j=1}^r G_{i_j} = \{ u \in \operatorname{Nef}(X/S) \mid \forall v \in F, \, \langle u, v \rangle = 0 \} = h^* \operatorname{Nef}(Y/S).
+   $$
+4. For any $f$-ample divisor $H$, let $t := \max \{ s \in \mathbb{R} \mid s(K_X + B + \varepsilon A) + H \text{ is } f\text{-nef} \}$.
+   Then there exists a face $G = \bigcap G_{i_j}$ such that $[t(K_X + B + \varepsilon A) + H]$ is contained in:
+   $$
+   \operatorname{int}(G) = h^* \operatorname{Amp}(Y/S).
+   $$
+:::
+
+::: {.proof}
+- **Proof of (2):** If $D$ is $f$-nef and $D \cdot v_i = 0$, then:
+  $$
+  D \in \ker\big(N^1(X/S) \to N^1(X/Y_i)\big) = \operatorname{Im}\big(N^1(Y_i/S) \to N^1(X/S)\big).
+  $$
+  Then there exists $E$ on $Y_i$ such that $h_i^* E = D$.
+  Since $D$ is $f$-nef, $E \in \operatorname{Nef}(Y_i/S)$, so $G_i = h_i^* \operatorname{Nef}(Y_i/S)$.
+- **Proof of (3):** Take effective irreducible curves as a basis of $N_1(X/S)$ and $\mathbb{Z}$-Cartier ample divisors as a basis of $N^1(X/S)$.
+  Then $v_i$ is a rational point, which implies $G_{i_j}$ is defined by rational linear equations, and hence $G$ is defined by rational linear equations.
+  Since $F$ is a face, $G \setminus \{0\} \ne \emptyset$. Take a rational point $L \in \operatorname{rel.int}(G)$.
+  Then $L$ is a rational supporting function of $F$. The same proof as in (2) shows that $G = h^* \operatorname{Nef}(Y/S)$.
+- **Proof of (4):** The divisor $t(K_X + B + \varepsilon A) + H$ is the supporting function of a face $F$.
+  Since $F \cap \overline{\operatorname{NE}}(X/S)_{K_X + B + \varepsilon A \ge 0} = \emptyset$, we have $F = R_{i_1} + \dots + R_{i_r}$, and then $u \in \operatorname{int}(G) = h^* \operatorname{Amp}(Y/S)$.
+:::
+
+::: {.callout-note title="Geometric Intuition: The Satellite and the Planet"}
+Consider the nef cone $\operatorname{Nef}(X/S)$ as a celestial body (**"planet"**), and the canonical divisor $K_X + B \notin \operatorname{Nef}(X/S)$ as an observing **"satellite"**:
+
+- If $K_X + B \notin \operatorname{Nef}(X/S)$, an observer at $K_X + B$ can observe the front side $U$ of the boundary surface $\partial \operatorname{Nef}(X/S)$; the back side $\partial \operatorname{Nef}(X/S) \setminus U$ cannot be observed.
+- If we move a little bit closer (considering $K_X + B + \varepsilon A$), the visible boundary $U_\varepsilon$ looks like a **polyhedron with finitely many faces**.
+- As $\varepsilon \to 0$, there may be infinitely many faces converging towards the horizon defined by $(K_X + B) \cdot v = 0$.
+:::
+
+---
+
+::: {#cor-bpf-r-div}
+## BPF for $\mathbb{R}$-Divisors
+Let $(X, B)$ be a KLT pair and $f: X \to S$ a projective morphism. Let $D$ be an $\mathbb{R}$-Cartier divisor on $X$. Assume:
+
+1. $D$ is $f$-nef;
+2. $D - (K_X + B)$ is $f$-nef and $f$-big.
+
+Then there exists a projective morphism $g: Z \to S$ with $Z$ normal and a contraction $h: X \to Z$ such that:
+$$
+h_* \mathcal{O}_X = \mathcal{O}_Z, \quad f = g \circ h,
+$$
+and there exists a $g$-ample $\mathbb{R}$-divisor $H$ on $Z$ such that:
+$$
+h^* H \sim_{\mathbb{R}} D.
+$$
+:::
+
+::: {.proof}
+We may assume $S$ is affine (then glue to obtain $Z$). We may also assume $D$ is not ample (otherwise $Z = X$).
+Write $D - (K_X + B) = A + E$ with $A$ ample and $E$ effective.
+Then for $\varepsilon \ll 1$,
+$$
+L := D - (K_X + B) - \varepsilon E = (1 - \varepsilon)(A + E) + \varepsilon A.
+$$
+Then $L$ is $f$-ample, and for $\varepsilon \ll 1$ we may assume $(X, B + \varepsilon E)$ is KLT.
+Then $K_X + B + \varepsilon E = D - L$ is not $f$-nef since $D$ is not $f$-ample.
+Define:
+$$
+t_0 := \min \big\{ t \in \mathbb{R} \;\big|\; (K_X + B + \varepsilon E + \delta L) + t L \text{ is } f\text{-nef} \big\}.
+$$
+We compute:
+$$
+(K_X + B + \varepsilon E + \delta L) + t L = D - L + \delta L + t L = D + (t + \delta - 1) L.
+$$
+Since $D$ is nef but not ample, $t_0 = 1 - \delta$. The result then follows from @thm-cone-dual (4).
+:::
+
+---
+
+::: {#cor-canonical-model}
+## Canonical Model
+Let $(X, B)$ be a KLT pair and $f: X \to S$ a projective morphism. Assume $K_X + B$ is $f$-nef, and $B$ is an $f$-big $\mathbb{R}$-Cartier divisor.
+Then there exists a projective morphism $g: Z \to S$ from a normal variety $Z$ and a surjective morphism $h: X \to Z$ such that:
+$$
+h_* \mathcal{O}_X = \mathcal{O}_Z,
+$$
+and there exists a $g$-ample divisor $H$ on $Z$ such that:
+$$
+h^* H \sim_{\mathbb{R}} K_X + B.
+$$
+($Z$ is called the **canonical model** of $(X, B)$ over $S$).
+:::
+
+::: {.proof}
+Write $B = A + E$ with $A$ ample and $E$ effective.
+Then $B - \varepsilon E = (1 - \varepsilon)B + \varepsilon A$ is nef and big, and $(X, B + \varepsilon E)$ is KLT for $\varepsilon \ll 1$.
+Then:
+$$
+(K_X + B) - \big(K_X + (1 - \varepsilon)B + \varepsilon E\big) = \varepsilon A \quad \text{is nef and big (in fact, ample)},
+$$
+and $K_X + B$ is nef.
+The assertion then follows directly by applying @cor-bpf-r-div.
+:::

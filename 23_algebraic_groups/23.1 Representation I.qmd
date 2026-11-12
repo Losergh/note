@@ -188,7 +188,7 @@ $$
 0 \longrightarrow G(R) \longrightarrow G(R') \rightrightarrows G(R' \otimes_R R')
 $$
 $$
-\operatorname{Hom}(\mathcal{O}(G), R) \longhookrightarrow \operatorname{Hom}(\mathcal{O}(G), R') \rightrightarrows \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R')
+\operatorname{Hom}(\mathcal{O}(G), R) \xhookrightarrow{\phantom{\to}} \operatorname{Hom}(\mathcal{O}(G), R') \rightrightarrows \operatorname{Hom}(\mathcal{O}(G), R' \otimes_R R')
 $$
 Consider the commutative diagram:
 $$

@@ -412,7 +412,7 @@ is surjective. Hence the normalization map $\widetilde{X} \to X$ is unramified, 
 
 Now consider the composition:
 $$
-\widetilde{X} \xrightarrow{\;\nu\;} X \longhookrightarrow \mathbb{P}^r.
+\widetilde{X} \xrightarrow{\;\nu\;} X \xhookrightarrow{\phantom{\to}} \mathbb{P}^r.
 $$
 Then $\widetilde{X} \to \mathbb{P}^r$ is an unramified morphism from a complete variety of dimension $\dim \widetilde{X} = r - 1$. Since $r \ge 3$:
 $$
@@ -436,7 +436,7 @@ $$
 ::: {.proof}
 Suppose $p: Y \to X$ is a connected finite étale cover. Let $Y' \subseteq Y$ be an irreducible component of $Y$. The composite morphism:
 $$
-Y' \longhookrightarrow Y \xrightarrow{\;p\;} X \longhookrightarrow \mathbb{P}^r
+Y' \xhookrightarrow{\phantom{\to}} Y \xrightarrow{\;p\;} X \xhookrightarrow{\phantom{\to}} \mathbb{P}^r
 $$
 is unramified. Since $\dim Y' = n$ and $2n > r$, @thm-ramification-closed-embedding implies that $Y' \hookrightarrow \mathbb{P}^r$ is a closed embedding. 
 

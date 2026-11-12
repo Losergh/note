@@ -54,6 +54,13 @@ website:
       contents:
         auto: 23_algebraic_groups
 
+    - id: mmp-sidebar
+      title: "Minimal Model Program"
+      style: docked
+      collapse-level: 2
+      contents:
+        auto: 26_mmp 
+
     # Future topic sidebars can be added here, e.g.:
     # - id: cft-sidebar
     #   title: "Class Field Theory"
@@ -76,6 +83,8 @@ website:
               text: "Positivity"
             - href: 23_algebraic_groups/index.qmd
               text: "Algebraic Groups"
+            - href: 26_mmp/index.qmd
+              text: "Minimal Model Program"
         # 顺便把根目录下原作者留下的编辑指南也挂上（方便自己查公式排版）
         - href: editing.qmd
           text: "Typography"
@@ -98,6 +107,16 @@ format:
     link-external-newwindow: true
     template-partials:
       - _partials/toc.html
+    include-in-header:
+      text: |
+        <script>
+        // MathJax 默认不加载 mathtools：\xleftrightarrow、\xLeftrightarrow、
+        // \coloneqq 等命令需要它，这里显式加载（必须在 tex-chtml.js 之前执行）。
+        window.MathJax = {
+          loader: { load: ['[tex]/mathtools'] },
+          tex: { packages: { '[+]': ['mathtools'] } }
+        };
+        </script>
     include-after-body: thm-toc.html
 execute:
   freeze: auto

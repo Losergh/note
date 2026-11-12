@@ -1,0 +1,373 @@
+---
+title: "26.4 Base Point Free Theorem"
+subtitle: "Birational Geometry (Chen Jiang, Fall 2026)"
+date: last-modified
+number-sections: true
+sec: "26.4."
+---
+
+::: {#thm-bpf}
+## Base Point Free Theorem
+Let $(X, B)$ be a klt pair and let $f: X \to S$ be a projective morphism. Let $D$ and $E$ be $\mathbb{Z}$-Cartier divisors on $X$ ($E$ is an auxiliary divisor convenient for induction). Assume that:
+
+1. $D$ is $f$-nef;
+2. There exists an integer $m_1 > 0$ such that $m_1 D + E - (K_X + B)$ is $f$-nef and $f$-big;
+3. $E$ is effective, and there exists an integer $m_2 > 0$ such that for all $m \ge m_2$, the natural sheaf homomorphism
+   $$
+   f_* \mathcal{O}_X(mD) \xrightarrow{\sim} f_* \mathcal{O}_X(mD + E)
+   $$
+   is an isomorphism.
+
+Then there exists an integer $m_3 > 0$ such that for all $m \ge m_3$, $mD$ is $f$-generated (base-point free over $S$), i.e., the natural evaluation map
+$$
+f^* f_* \mathcal{O}_X(mD) \twoheadrightarrow \mathcal{O}_X(mD)
+$$
+is surjective. That is, $D$ is relatively semiample over $S$.
+:::
+
+::: {.proof}
+Since the statement is local on $S$, we may assume without loss of generality that $S$ is affine. Then it suffices to show that the evaluation map on global sections
+$$
+H^0(X, \mathcal{O}_X(mD)) \otimes_k \mathcal{O}_X \twoheadrightarrow \mathcal{O}_X(mD)
+$$
+is surjective for all $m \gg 0$, i.e., $\operatorname{Bs}|mD| = \emptyset$.
+
+### Step 1: Reduction to $f$-ample and $\mathbb{Q}$-Weil boundary
+First, since $m_1 D + E - (K_X + B)$ is $f$-big, by Kodaira's lemma we can write:
+$$
+m_1 D + E - (K_X + B) \sim_{\mathbb{R}} A + B',
+$$
+where $A$ is an $f$-ample $\mathbb{R}$-Cartier divisor and $B'$ is an effective $\mathbb{R}$-Cartier divisor.
+For any $0 < \varepsilon \ll 1$, we have:
+$$
+m_1 D + E - (K_X + B + \varepsilon B') = A + B' - \varepsilon B' = \underbrace{(1 - \varepsilon)(A + B')}_{\text{nef}} + \underbrace{\varepsilon A}_{\text{ample}},
+$$
+which is $f$-ample. Since $(X, B)$ is klt, for $\varepsilon \ll 1$, $(X, B + \varepsilon B')$ remains klt. We can then replace $B$ by $B + \varepsilon B'$.
+Thus, $m_1 D + E - (K_X + B) =: A$ is an $\mathbb{R}$-Cartier ample divisor. Since ampleness is an open condition in $N^1(X/S)_{\mathbb{R}}$, we may perturb the coefficients to assume without loss of generality that $B$ is a $\mathbb{Q}$-Weil divisor.
+
+### Step 2: Elimination of base points via strong log resolution
+Input the Nonvanishing Theorem (@thm-nonvanishing): then there exists $m \gg 0$ such that $f_* \mathcal{O}_X(mD) \ne 0$ (which is weaker; since $S$ is affine, this means $H^0(X, \mathcal{O}_X(mD)) \ne 0$).
+
+Assume that $|m_3' D|$ has a base point for some $m_3' \gg 0$ (otherwise, the theorem holds).
+Take a general member $M \in |m_3' D|$ and a strong log resolution:
+$$
+\phi: (Y, C) \longrightarrow (X, B + E + M),
+$$
+and let $h := f \circ \phi$.
+We may assume that the pullback linear system decomposes as:
+$$
+\phi^* |m_3' D| = |M_1| + M_2,
+$$
+where $|M_1|$ is free and $M_2 \ne 0$ is the fixed part (an effective $\mathbb{Z}$-divisor).
+Notice that $\operatorname{Bs}|m_3' D| \subseteq \operatorname{Supp} M$, so $\operatorname{Bs}|\phi^* m_3' D| \subseteq \operatorname{Supp} \phi^* M$, which is of pure codimension $1$ and contained in $M_2$.
+
+### Step 3: Determining $t$, tie-breaking, and Kawamata vanishing
+**Idea:** Find a prime component $Z \preceq M_2$ (which corresponds to $E$) such that the restriction map:
+$$
+H^0\big(Y, \mathcal{O}_Y(m\phi^* D + \lceil -B_Y \rceil)\big) \twoheadrightarrow H^0\big(Z, \mathcal{O}_Z((m\phi^* D|_Z - \lfloor B_Y \rfloor|_Z))\big)
+$$
+is surjective. It suffices to have $H^1(Y, \mathcal{O}_Y(m\phi^* D - \lfloor B_Y \rfloor - Z)) = 0$, for which we want $m\phi^* D - B_Y - Z - K_Y$ to be $h$-ample (or $h$-nef and big).
+
+First, there exists an effective $\mathbb{Z}$-divisor $C'$ such that $\operatorname{Supp} C' = \operatorname{Exc}(\phi)$ and $-C'$ is $\phi$-ample.
+For $0 < \varepsilon \ll 1$, we have that $\phi^*(m_1 D + E) - K_Y - C - \varepsilon C'$ is ample over $S$, where $0 \le B_Y < 1$.
+We want $m\phi^* D - Z = K_Y + B_Y + A_Y$ with $A_Y$ ample, i.e., $m\phi^* D - K_Y = Z + B_Y + A_Y$.
+We can expand the left-hand side as:
+$$
+\begin{aligned}
+\text{LHS} &= (m - t m_3')\phi^* D + t M_1 + t M_2 - K_Y \\
+&= \underbrace{(m - t m_3' - m_1)\phi^* D}_{\text{nef}} + \underbrace{t M_1}_{\text{free}} + \underbrace{t M_2 - \phi^* E + C + \varepsilon C'}_{Z + B_Y} + \underbrace{\phi^*(m_1 D + E) - K_Y - C - \varepsilon C'}_{\text{ample}}.
+\end{aligned}
+$$
+We require:
+1. There exists a unique component of $t M_2 - \phi^* E + C + \varepsilon C'$ with coefficient $1$ (which will be our prime divisor $Z$);
+2. $(m - t m_3' - m_1)\phi^* D + t M_1$ is free.
+
+Then we set:
+$$
+A_Y := (m - t m_3' - m_1)\phi^* D + t M_1 + \big(\phi^*(m_1 D + E) - K_Y - C - \varepsilon C'\big),
+$$
+and $Z + B_Y = t M_2 - \phi^* E + C + \varepsilon C'$, so that $m\phi^* D - B_Y - Z - K_Y = A_Y$ is ample.
+
+**Determining $t$:**
+First, we may assume $C + \varepsilon C' < 1$. Now define:
+$$
+t := \sup \big\{ s \in \mathbb{R}_{> 0} \;\big|\; \lfloor s M_2 - \phi^* E + C + \varepsilon C' \rfloor \le 0 \big\}.
+$$
+Then:
+$$
+t M_2 - \phi^* E + C + \varepsilon C' = Z + F,
+$$
+where $Z$ has coefficient $1$ (coming from $t M_2$) and $\lfloor F \rfloor \le 0$.
+**Goal:** $Z$ is a prime divisor. Since ampleness is an open condition, we perturb $C'$ so that the coefficient $1$ is attained at a unique prime component.
+Then by Kawamata–Viehweg vanishing:
+$$
+H^1(Y, \mathcal{O}_Y(m\phi^* D - Z - \lfloor F \rfloor)) = 0,
+$$
+which gives the surjection:
+$$
+H^0(Y, \mathcal{O}_Y(m\phi^* D - \lfloor F \rfloor)) \twoheadrightarrow H^0(Z, \mathcal{O}_Z((m\phi^* D|_Z - \lfloor F \rfloor|_Z))).
+$$
+Note that:
+$$
+0 \le F - \lfloor F \rfloor \le \lceil \phi^* E \rceil + \lceil -(t M_2 + C + \varepsilon C') \rceil - Z \le \phi^* E \quad \text{is effective}.
+$$
+
+**Diagram Chasing:**
+Consider the commutative diagram:
+$$
+\begin{CD}
+H^0(Y, \mathcal{O}_Y(m\phi^* D - \lfloor F \rfloor)) @>>> H^0(Z, \mathcal{O}_Z((m\phi^* D|_Z - \lfloor F \rfloor|_Z))) \\
+@VVV @VVV \\
+H^0(Y, \mathcal{O}_Y(m\phi^* D + \phi^* E)) @>>> H^0(Z, \mathcal{O}_Z(m\phi^* D|_Z)) \\
+@V \sim V \text{by (3)} V @. \\
+H^0(Y, \mathcal{O}_Y(m\phi^* D)) @>>> H^0(Z, \mathcal{O}_Z(m\phi^* D|_Z))
+\end{CD}
+$$
+where the isomorphism in the lower-left vertical column is induced by $H^0(X, \mathcal{O}_X(mD)) \cong H^0(X, \mathcal{O}_X(mD + E))$.
+
+### Step 4: Induction on dimension
+First, $\operatorname{Supp} M_2 \cup \operatorname{Supp} E \cup \operatorname{Supp} C$ is SNC, which implies that $Z$ is smooth.
+By the adjunction formula:
+$$
+(K_Y + Z)|_Z = K_Z.
+$$
+Then $(m\phi^* D|_Z - K_Z - F|_Z) = (m\phi^* D - K_Y - Z - F)|_Z$ is ample.
+Set:
+$$
+B_Z := (-\lfloor F \rfloor + F)|_Z,
+$$
+then $0 \le B_Z < 1$, $B_Z$ is SNC, and $(Z, B_Z)$ is a klt pair.
+Set $E_Z := \lceil -F \rceil|_Z \ge 0$. Note that:
+$$
+H^0(Z, \mathcal{O}_Z(m\phi^* D|_Z)) \longhookrightarrow H^0(Z, \mathcal{O}_Z(m\phi^* D|_Z + \lceil -F \rceil|_Z)).
+$$
+The triple $(\phi^* D|_Z, E_Z)$ on $(Z, B_Z)$ satisfies conditions (1), (2), and (3):
+1. $\phi^* D|_Z$ is nef;
+2. There exists $m_1 > 0$ such that $m_1 \phi^* D|_Z + E_Z - (K_Z + B_Z)$ is nef and big;
+3. $E_Z$ is effective, and for $m \ge m_2$, the sections stabilize.
+
+By induction on dimension, $\mathcal{O}_Z(\phi^* D|_Z)$ is semiample.
+For $m \gg 0$, there exists a section $s \in H^0(Z, \mathcal{O}_Z(m\phi^* D|_Z))$ such that $V(s) \subsetneq Z$.
+By the surjection from Step 3, lift $s$ to a section $\tilde{s} \in H^0(Y, \mathcal{O}_Y(m\phi^* D))$; then $Z \not\subseteq V(\tilde{s})$.
+Since $Z \subseteq M_2$, this implies $Z \not\subseteq \operatorname{Bs}|\phi^* m D|$.
+Thus, there exists $m \gg 0$ such that:
+$$
+\operatorname{Bs}|\phi^*(m m_3' D)| \subsetneq \operatorname{Bs}|\phi^* m_3' D| \quad (\dim \operatorname{Bs} \downarrow).
+$$
+By Noetherian induction on the base locus, there exists $m \gg 0$ such that:
+$$
+\operatorname{Bs}|\phi^* m D| = \emptyset \implies \operatorname{Bs}|mD| = \phi(\operatorname{Bs}|\phi^* m D|) = \emptyset.
+$$
+Therefore, $D$ is semiample, which implies $\kappa(D) = \nu(D)$, and for all $m \gg 0$, $\operatorname{Bs}|mD| = \emptyset$.
+:::
+
+---
+
+::: {#thm-nonvanishing}
+## Nonvanishing Theorem
+Let $(X, B)$ be a klt pair, $f: X \to S$ a projective morphism, and $D, E$ $\mathbb{Z}$-Cartier divisors on $X$. Assume:
+
+1. $D$ is $f$-nef;
+2. There exists $m_1 > 0$ such that $m_1 D + E - (K_X + B)$ is $f$-nef and $f$-big;
+3. $E$ is effective, and there exists $m_2 > 0$ such that for all $m \ge m_2$,
+   $$
+   f_* \mathcal{O}_X(mD) \xrightarrow{\sim} f_* \mathcal{O}_X(mD + E).
+   $$
+
+Then there exists $m_3 > 0$ such that for all $m \ge m_3$,
+$$
+f_* \mathcal{O}_X(mD) \ne 0.
+$$
+:::
+
+::: {.proof}
+We have:
+$$
+f_* \mathcal{O}_X(mD) \ne 0 \iff \big(f_* \mathcal{O}_X(mD)\big)_{k(s)} \ne 0 \iff H^0(X_{k(s)}, \mathcal{O}_{X_{k(s)}}(mD)) \ne 0.
+$$
+Thus, we may assume without loss of generality that $X/k$ where $k$ is a field of characteristic $0$ and $S = \operatorname{Spec} k$.
+Then $H^0(X, \mathcal{O}_X(mD)) \cong H^0(X, \mathcal{O}_X(mD + E))$.
+
+By Kawamata–Viehweg Vanishing, for all $p > 0$ and $m \ge m_1$, we have $H^p(X, \mathcal{O}_X(mD + E)) = 0$.
+Then:
+$$
+h^0(X, \mathcal{O}_X(mD + E)) = \chi(X, \mathcal{O}_X(mD + E)) =: P(m) \quad \text{is a polynomial in } m.
+$$
+
+- **Case 1: If $D \equiv_{\mathrm{num}} 0$.**
+  Then $E - (K_X + B) \equiv m_1 D + E - (K_X + B)$ is nef and big.
+  For all $p \ge 1$, $H^p(X, \mathcal{O}_X(E)) = 0$. But $E$ is effective, so $H^0(X, \mathcal{O}_X(E)) \ne 0$.
+  Then $\chi(X, \mathcal{O}_X(E)) \ne 0$, i.e., $P(0) \ne 0$.
+  Since $P(m)$ is not identically zero, $h^0(X, \mathcal{O}_X(mD)) = P(m) \ne 0$ for all $m \gg 0$.
+
+- **Case 2: In general.**
+  We may assume $m_1 D + E - (K_X + B) =: A$ is an ample $\mathbb{Q}$-Cartier divisor. Then there exists an integer $a \in \mathbb{Z}_{> 0}$ such that $a A$ is a $\mathbb{Z}$-Cartier very ample divisor.
+  Since $D \not\equiv_{\mathrm{num}} 0$ and $D$ is nef, there exists a curve $C$ such that $(D \cdot C) > 0$. We may assume $\mathcal{I}_C(aA)$ is generated by global sections.
+  Let $d := \dim X$. Take $d - 1$ general sections $s_1, \dots, s_{d-1}$ of $\mathcal{I}_C(aA)$:
+  $$
+  a^{d-1} A^{d-1} \sim \big(V(s_1) \cap \dots \cap V(s_{d-1})\big) = t C + C',
+  $$
+  where $C \in V(s)$ and $C'$ is effective and distinct from $C$ in $|aA|$.
+  Then $(D \cdot A^{d-1}) > 0$, and:
+  $$
+  (mD + aA)^d \ge m a^{d-1} (D \cdot A^{d-1}) \longrightarrow +\infty \quad (m \to +\infty).
+  $$
+  There exists $k_1$ such that for all $k \ge k_1$ and $p \ge 1$, $H^p(X, \mathcal{O}_X(k(mD + aA))) = 0$ by ampleness.
+  Then $h^0(X, \mathcal{O}_X(k(mD + aA))) = \chi(X, \mathcal{O}_X(k(mD + aA)))$ is a polynomial in $k$ of degree $d$, with leading coefficient $\frac{(mD + aA)^d}{d!}$.
+
+  Fix a smooth point $P \in X$ not contained in $\operatorname{Supp}(E + B)$, and let $\mathfrak{m}_P$ be its maximal ideal.
+  Then $\operatorname{length}(\mathcal{O}_P / \mathfrak{m}_P^{a(d+1)k})$ is a polynomial in $k$ of degree $d$, given by:
+  $$
+  \binom{d + a(d+1)k - 1}{d}, \quad \text{with leading coefficient } \frac{(a(d+1))^d}{d!}.
+  $$
+  Now choose $m \gg 0$ such that $(mD + aA)^d > a^d(d+1)^d$. Then for all $k \gg 0$:
+  $$
+  H^0\big(X, \mathcal{O}_X(k(mD + aA)) \otimes \mathfrak{m}_P^{a(d+1)k}\big) \ne 0.
+  $$
+  That is, there exists $M \in |k(mD + aA)|$ such that $\operatorname{mult}_P M \ge a(d+1)k$.
+
+  First blow up $P$, let $\pi: \mathrm{Bl}_P X \to X$, where $K_{\mathrm{Bl}_P X} = \pi^* K_X + (d-1)C_0$, and $C_0$ is the exceptional divisor.
+  Take a strong log resolution $\phi: Y \to X$ of $(\mathrm{Bl}_P X, B + E + M)$, and let $C_0$ denote the strict transform of the exceptional divisor.
+  Define:
+  $$
+  t := \sup \big\{ s \in \mathbb{R}_{> 0} \;\big|\; \lfloor s \phi^* M - \phi^* E + C + \varepsilon C' \rfloor \le 0 \big\}.
+  $$
+  Perturb $C'$ such that there exists a unique component $Z$ of coefficient $1$ in $t \phi^* M - \phi^* E + C + \varepsilon C'$.
+  Since $\operatorname{Supp} C_0 \not\subseteq \operatorname{Supp} E \cup \operatorname{Supp} \phi^* B$, we have:
+  $$
+  1 > \operatorname{coeff}_{C_0}(t \phi^* M - \phi^* E + C + \varepsilon C') \ge t a(d+1)k - (d - 1).
+  $$
+  Then $t \le \frac{d}{a(d+1)k}$.
+  Write $t \phi^* M - \phi^* E + C + \varepsilon C' = F + Z$ with $\lfloor F \rfloor \le 0$.
+  Then:
+  $$
+  \begin{aligned}
+  m' \phi^* D - F - Z - K_Y &= (m' - m_1 - t k m)\phi^* D - \phi^* M + \phi^* E - C - \varepsilon C' - K_Y + m_1 \phi^* D + t k m \phi^* D \\
+  &= (m' - m_1 - t k m)\phi^* D + (1 - t k a)\big(\phi^*(m_1 D + E) - K_Y - C\big) - \varepsilon C'.
+  \end{aligned}
+  $$
+  Since:
+  $$
+  1 - t k a \ge 1 - k a \cdot \frac{d}{a(d+1)k} = 1 - \frac{d}{d+1} = \frac{1}{d+1} > 0,
+  $$
+  the divisor $m' \phi^* D - F - Z - K_Y$ is ample.
+  Kawamata vanishing yields:
+  $$
+  H^0(Y, \mathcal{O}_Y(m'\phi^* D - \lfloor F \rfloor)) \twoheadrightarrow H^0(Z, \mathcal{O}_Z((m'\phi^* D|_Z - \lfloor F \rfloor|_Z))).
+  $$
+  By the same induction on dimension, $H^0(Z, \mathcal{O}_Z((m'\phi^* D|_Z - \lfloor F \rfloor|_Z))) \ne 0$ for all $m' \gg 0$, which completes the proof.
+:::
+
+---
+
+::: {#rem-bpf-history}
+## Historical Context
+- **Kawamata:** 3-dimensional Base Point Free Theorem, nonvanishing proven by Riemann–Roch (called the $\chi$-method).
+- **Shokurov:** Nonvanishing Theorem for all dimensions (Shokurov's Concentration Method).
+- **Kawamata:** Base Point Free Theorem for all dimensions.
+:::
+
+---
+
+::: {#cor-semiample-fibration}
+## Semiample Fibration
+Suppose $f: (X, B) \to S$ and $D, E$ satisfy conditions (1), (2), and (3) in @thm-bpf.
+Then there exists a unique normal variety $Z \to S$ projective over $S$ and a surjective projective morphism:
+$$
+h: X \longrightarrow Z \quad \text{with } h_* \mathcal{O}_X = \mathcal{O}_Z \text{ and } h^* H \sim_{\mathbb{Q}} D,
+$$
+where $H$ is an $S$-ample divisor on $Z$, and $Z \cong \operatorname{Proj}_S \bigoplus_{m \ge 0} f_* \mathcal{O}_X(mD)$.
+
+Moreover:
+1. **Theorem 26.4.0 $\iff$ Corollary 26.4.3.**
+2. In this case, for any relative curve $C \subseteq X/S$, $h(C) = \text{pt} \iff (C \cdot D) = 0$.
+3. $Z \cong X$ if and only if $D$ is $f$-ample.
+4. In particular, if $D$ is not $f$-ample, there exists an irreducible effective curve $C$ such that $(C \cdot D) = 0$ (which is not true for a general nef divisor).
+:::
+
+---
+
+::: {#lem-dlt-perturbation}
+## Perturbation of Boundary for DLT Pairs
+Let $(X, B)$ be a DLT pair, let $f: X \to S$ be projective, $H$ an $f$-ample divisor, and $\varepsilon > 0$.
+Assume $S$ is quasi-projective. Then there exists an ample divisor $A$ over $S$ and an effective $\mathbb{R}$-Weil divisor $B'$ on $X$ such that:
+$$
+B + \varepsilon(H + f^* A) \sim_{\mathbb{R}} B' \quad \text{and } (X, B') \text{ is a KLT pair}.
+$$
+:::
+
+::: {.proof}
+Choose an ample divisor $A$ on $S$ such that $H + f^* A$ is ample on $X$.
+Take a strong log resolution $g: (Y, C) \to (X, B)$, let $h := f \circ g$, and we may assume $C \le 1$.
+Take a small $\mathbb{Q}$-Cartier effective divisor $E$ such that $-E$ is $g$-ample, $\operatorname{Supp} E = \operatorname{Exc}(g)$, $\lfloor C + E \rfloor = \lfloor C \rfloor$, and $g^*(H + f^* A) - E$ is ample on $Y$.
+
+Assume $B = \sum b_i B_i$ and $g^{-1}_* B = \sum b_i B_i'$. For $m \gg 0$, $\mathcal{O}_Y(B_i' + m(g^*(H + f^* A) - E))$ is generated by global sections for all $i$.
+Take general effective divisors $D_i' \sim B_i' + m(g^*(H + f^* A) - E)$ and choose $0 \le \delta \ll 1$ such that:
+$$
+C' := C - \delta \sum b_i B_i' + \delta \sum b_i D_i' + m \delta \sum b_i E \sim_{\mathbb{R}} C + \delta m \sum b_i g^*(H + f^* A),
+$$
+such that $(\bigcup \operatorname{Supp} D_i') \cup g^*(\operatorname{Supp} B) \cup \operatorname{Exc}(g)$ is SNC.
+Then $C'$ is still SNC and $C' < 1$ for $\delta \ll 1$.
+Define $B' := g_* C' \sim_{\mathbb{R}} B + \delta m \sum b_i (H + f^* A)$.
+Then $K_X + B'$ is $\mathbb{R}$-Cartier and $g^*(K_X + B') = K_Y + C'$, which implies $(X, B')$ is a KLT pair.
+:::
+
+---
+
+::: {#thm-bpf-dlt}
+## BPF for DLT
+Let $(X, B)$ be a DLT pair, $f: X \to S$ a projective morphism, and $D, E$ Cartier divisors on $X$. Assume:
+
+1. $D$ is $f$-nef;
+2. There exists $m_1 > 0$ such that $m_1 D + E - (K_X + B)$ is $f$-ample;
+3. $E$ is effective, and there exists $m_2 > 0$ such that for all $m \ge m_2$,
+   $$
+   f_* \mathcal{O}_X(mD) \xrightarrow{\sim} f_* \mathcal{O}_X(mD + E).
+   $$
+
+Then $D$ is $f$-semiample.
+:::
+
+::: {.proof}
+We may assume $S$ is affine. Take $B' \sim_{\mathbb{R}} B + \varepsilon(H + f^* A)$ as in @lem-dlt-perturbation.
+If $\varepsilon$ is small, $m_1 D + E - (K_X + B')$ remains relatively ample. Then the result follows by @thm-bpf.
+:::
+
+---
+
+::: {#rem-effective-bpf}
+## Effective BPF Theorem
+Let $(X, B)/S$ be a KLT pair with $\dim X = n$, and let $D, E$ be $\mathbb{Z}$-Cartier divisors with $E$ effective.
+If:
+1. $D$ is $f$-nef;
+2. There exists $m_1 > 0$ such that $m_1 D + E - (K_X + B)$ is $f$-nef and $f$-big;
+3. $E$ is effective, and there exists $m_2 > 0$ such that for all $m \ge m_2$, $f_* \mathcal{O}_X(mD) \xrightarrow{\sim} f_* \mathcal{O}_X(mD + E)$;
+
+then for all integers:
+$$
+m \ge \max\{m_1, m_2\} \cdot 2(n + 2)^{n+2},
+$$
+the linear system $|mD|$ is free.
+:::
+
+---
+
+::: {#prp-abundance-big}
+## Special Case: Abundance for Big Divisors
+Let $(X, B)$ be a KLT pair and $f: X \to S$ a projective morphism. Assume $K_X + B$ is $f$-nef, and $B$ is an $f$-big $\mathbb{Q}$-Cartier divisor.
+Then there exists a normal variety $Z$ and a morphism $h: X \to Z$ with $h_* \mathcal{O}_X = \mathcal{O}_Z$, and an $S$-ample divisor $H$ such that:
+$$
+h^* H \sim_{\mathbb{Q}} K_X + B.
+$$
+:::
+
+::: {.proof}
+We may assume $S$ is affine. Since $B$ is $\mathbb{Q}$-Cartier and $K_X + B$ is $\mathbb{R}$-Cartier, $K_X$ is $\mathbb{Q}$-Cartier.
+There exists $m_1 \in \mathbb{Z}_{> 0}$ such that $m_1(K_X + B)$ is $\mathbb{Z}$-Cartier and $f$-nef; set $D := m_1(K_X + B)$.
+Since $B$ is big, there exists an ample $\mathbb{Q}$-Cartier divisor $A$ and an effective $\mathbb{Q}$-Cartier divisor $E$ such that $B = A + E$.
+Then $(X, (1 - \varepsilon)B + \varepsilon E)$ is KLT for $\varepsilon \ll 1$, and:
+$$
+D - (K_X + B') = D - \big(K_X + (1 - \varepsilon)B + \varepsilon E\big) = (m_1 - 1)(K_X + B) + \varepsilon A \quad \text{is } f\text{-ample}.
+$$
+The proposition then follows by @cor-semiample-fibration.
+:::

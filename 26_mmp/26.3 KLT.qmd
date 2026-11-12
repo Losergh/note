@@ -1,0 +1,467 @@
+---
+title: "26.3 KLT"
+subtitle: "Birational Geometry (Chen Jiang, Fall 2026)"
+date: last-modified
+number-sections: true
+sec: "26.3."
+---
+
+::: {#note-motivation-klt}
+## Motivation
+Consider the condition: $X$ smooth, $(X, B) \xrightarrow[\mathrm{proj}]{f} S$, $B \in [0, 1)$ with SNC support, and $D$ a nef & big $\mathbb{R}$-divisor such that $D + B \in Z^1(X)$. Then:
+$$
+R^i f_* \mathcal{O}_X(K_X + B + D) = 0 \quad \forall i > 0.
+$$
+The proof was done by adjusting $D, B$ by $\varepsilon E$ ($E \ge 0$ $\mathbb{R}$-Cartier, $0 < \varepsilon \ll 1$), where $E$ is chosen such that $D - \varepsilon E$ is ample. This removed the SNC condition on $B$.
+
+$\triangle$ We hope to weaken the SNC condition on $(X, B)$ so that the proof still works.
+In particular, we hope this condition is **stable under perturbation of divisors**.
+:::
+
+::: {#def-26-3-0}
+## Pairs
+A **pair** $(X, B)$ consists of a normal variety $X$ and an $\mathbb{R}$-Weil divisor $B = \sum b_i B_i$ with $b_i \in [0, 1]$ such that:
+$$
+K_X + B \quad \text{is } \mathbb{R}\text{-Cartier}.
+$$
+(This allows us to define the total transform).
+:::
+
+::: {#def-26-3-1}
+## KLT - Kawamata Log Terminal
+A pair $(X, B)$ is **KLT** if there exists a weak log resolution $f: Y \to (X, B)$ such that if we define $C$ by:
+$$
+f^*(K_X + B) = K_Y + C,
+$$
+then $C < 1$ as an $\mathbb{R}$-Weil divisor.
+In this case, $\operatorname{Supp} C \subseteq \operatorname{Exc}(f) \cup f^{-1}(\operatorname{Supp} B)$ is SNC.
+Write $C = \sum c_i C_i$; then $1 - c_i$ is called the **log discrepancy coefficient**.
+:::
+
+---
+
+::: {#prp-26-3-2}
+## Properties of KLT Pairs
+1. If $(X, B)$ is KLT, then for every weak log resolution $(Y, C) \to (X, B)$, we have $C < 1$.
+2. $(X, B)$ is KLT $\iff \exists\, X = \bigcup U_i$ such that $(U_i, B|_{U_i})$ is KLT.
+3. If $(X, B)$ is KLT, then:
+   $$
+   K_X + B = f_* f^*(K_X + B) = f_*(K_Y + C) = K_X + f_* C \implies B = f_* C < 1.
+   $$
+4. Let $(X, B)$ be a KLT pair, and let $B'$ be another effective $\mathbb{R}$-Weil divisor such that $B \ge B'$ and $B - B'$ is $\mathbb{R}$-Cartier. Then $(X, B')$ is again KLT.
+5. If $(X, B)$ is a KLT pair and $D \ge 0$ is an $\mathbb{R}$-Cartier divisor, then for all $0 < \varepsilon \ll 1$, $(X, B + \varepsilon D)$ is KLT. (We need $B + D \ge 0$, thus we assume $D \ge 0$).
+:::
+
+::: {#prp-26-3-3}
+Let $D \in Z^1_{\mathbb{Q}}(X)$. Then $D$ is $\mathbb{R}$-Cartier if and only if $D$ is $\mathbb{Q}$-Cartier.
+:::
+
+::: {.proof}
+*Idea:* Consider the diagram:
+$$
+\begin{CD}
+\operatorname{Div}_{\mathbb{Q}}(X) @>>> Z^1_{\mathbb{Q}}(X) \\
+@VVV @VVV \\
+\operatorname{Div}_{\mathbb{R}}(X) @>>> Z^1_{\mathbb{R}}(X)
+\end{CD}
+$$
+Take a basis of $\operatorname{Div}_{\mathbb{Q}}(X)$ and extend it to $Z^1_{\mathbb{Q}}(X)$.
+:::
+
+---
+
+::: {#thm-26-3-4}
+## Kawamata Vanishing
+Let $(X, B)/S$ be a KLT pair, and $D$ a relatively big and nef $\mathbb{R}$-Cartier divisor such that $D + K_X + B \in Z^1(X)$ ($\mathbb{R}$-Cartier). Then:
+$$
+R^p f_* \mathcal{O}_X(D + K_X + B) = 0 \quad \forall p \ge 1.
+$$
+:::
+
+::: {.proof}
+Take a strong log resolution $g: (Y, C) \to (X, B)$; then $g^*(K_X + B) = K_Y + C$ (needs $K_X + B$ to be $\mathbb{R}$-Cartier).
+Then $g^* D$ is $h$-nef and $h$-big ($h = f \circ g$):
+$$
+\begin{CD}
+Y @>{g}>> X \\
+@V{h}VV @VV{f}V \\
+S @= S
+\end{CD}
+$$
+Assume $C = C_{>0} + C_{\le 0}$; then:
+$$
+\lceil g^* D + K_Y \rceil = g^* D + K_Y + C - \lfloor C_{\le 0} \rfloor.
+$$
+Then $\lceil g^* D + K_Y \rceil - g^* D - K_Y = C - \lfloor C_{\le 0} \rfloor$ has support $\subseteq C \subseteq \operatorname{Exc}(g) \cup g^{-1}(B)$, which is SNC.
+By Theorem 26.2.13 (Kodaira Vanishing IV):
+$$
+R^p h_* \mathcal{O}_Y(\lceil g^* D + K_Y \rceil) = 0 \quad \forall p \ge 1.
+$$
+By the Leray spectral sequence:
+$$
+E_2^{p, q} = R^p f_*(R^q g_* \mathcal{O}_Y(\lceil g^* D + K_Y \rceil)) \Longrightarrow R^{p+q} h_* \mathcal{O}_Y(\lceil g^* D + K_Y \rceil).
+$$
+Since $R^q g_* \mathcal{O}_Y(\lceil g^* D + K_Y \rceil) = 0$, this implies $R^p f_*(g_* \mathcal{O}_Y(\lceil g^* D + K_Y \rceil)) = 0$ for all $p \ge 1$.
+
+We want to show $g_* \mathcal{O}_Y(\lceil g^* D + K_Y \rceil) = \mathcal{O}_X(D + K_X + B)$.
+Check: For all $v \in K(X) = K(Y)$,
+$$
+v \in H^0(Y, \mathcal{O}_Y(\lceil g^* D + K_Y \rceil)) \iff \operatorname{div}_Y v + \lceil g^* D + K_Y \rceil \ge 0
+$$
+$$
+\implies g_* \operatorname{div}_Y v + g_* \lceil g^* D + K_Y \rceil \ge 0 \implies \operatorname{div}_X v + D + K_X + B \ge 0 \implies v \in H^0(X, \mathcal{O}_X(D + K_X + B)),
+$$
+using $\lceil g^* g_* D + g_* K_Y \rceil = \lceil D + K_X \rceil = D + K_X + B$.
+Conversely, if $\operatorname{div}_X v + D + K_X + B \ge 0$, then:
+$$
+g^* \operatorname{div}_X v + g^*(D + K_X + B) \ge 0 \iff \operatorname{div}_Y v + g^* D + K_Y + C \ge 0.
+$$
+Since $C < 1$, $g^* D + K_Y + C \le \lceil g^* D + K_Y \rceil$, which implies $v \in H^0(Y, \mathcal{O}_Y(\lceil g^* D + K_Y \rceil))$.
+:::
+
+---
+
+::: {#def-26-3-5}
+## LC, DLT, PLT, KLT
+Let $(X, B)$ be a pair.
+1. **LC (log canonical):** if there exists a log resolution $f: Y \to (X, B)$ such that $C := f^*(K_X + B) - K_Y \le 1$.
+2. **DLT (divisorially log terminal):** if there exists a log resolution such that $C - f_*^{-1} B < 1 \iff$ there exists a strong log resolution such that $C - f_*^{-1} B < 1$ (and $f_*^{-1} B \le 1$).
+3. **PLT (purely log terminal):** if for every log resolution $(Y, C) \to (X, B)$, we have $C - f_*^{-1} B < 1$.
+4. **$\overline{\mathrm{KLT}}$:** if $(X, B)$ is LC and there exists an effective $\mathbb{R}$-divisor $B' \le B$ such that $(X, B')$ is KLT.
+   *(For the family $(X, B_\varepsilon)_{0 \le \varepsilon \le 1}$ where $B_\varepsilon := \varepsilon B' + (1-\varepsilon) B$, take $Y \to (X, B)$ a log resolution. Then:
+   $$
+   C_\varepsilon = f^*(K_X + B_\varepsilon) - K_Y = f^*(K_X + B_1) - K_Y - f^* B_1 + f^* B_\varepsilon = C_1 + f^*(B_\varepsilon - B_1) = C_1 + (1-\varepsilon) f^*(B - B') = C_1 + (1-\varepsilon)(C_0 - C_1).
+   $$
+   Then $C_\varepsilon < 1$ (KLT) if $\varepsilon > 0$, and $C_\varepsilon \le 1$ (LC) if $\varepsilon = 0$)*.
+:::
+
+::: {#exm-26-3-6}
+1. Inclusions and properties:
+   $$
+   \mathrm{KLT} \subseteq \mathrm{PLT} \subseteq \mathrm{DLT} \subseteq \mathrm{LC}, \qquad \mathrm{KLT} \subseteq \overline{\mathrm{KLT}} \subseteq \mathrm{LC}.
+   $$
+   - PLT is *good for induction*.
+   - KLT is an *open condition* and satisfies *vanishing theorems*.
+2. If $(X, B)$ is an SNC pair with $B = \sum a_i B_i$:
+   - $\mathrm{KLT} \iff \forall a_i < 1$;
+   - $\mathrm{DLT}, \, \mathrm{LC} \iff \forall a_i \le 1$;
+   - $\mathrm{PLT} \iff \forall a_i \le 1$, and if $a_i = a_j = 1$, then $B_i \cap B_j = \emptyset$.
+3. Weak log resolution is functorial, but log resolution is not.
+:::
+
+---
+
+::: {#prp-26-3-7}
+## Finite Pullback
+Let $\pi: (\bar{X}, \bar{B}) \to (X, B)$ be a finite morphism such that $K_{\bar{X}} + \bar{B} = \pi^*(K_X + B)$. Then:
+$$
+(\bar{X}, \bar{B}) \text{ is KLT (resp. LC)} \iff (X, B) \text{ is KLT (resp. LC)}.
+$$
+:::
+
+::: {.proof}
+Consider the resolution of indeterminacy:
+$$
+\begin{CD}
+(Y, C) @<{\pi' \text{ on } \mathrm{dom}}<< (\bar{Y}, \bar{C}) \\
+@V{\phi}VV \circlearrowleft @VV{\bar{\phi}}V \\
+(X, B) @<{\pi}<< (\bar{X}, \bar{B})
+\end{CD}
+$$
+where $\phi, \bar{\phi}$ are weak log resolutions.
+If $\bar{X}$ is KLT, it suffices to show $C < 1$.
+For every prime divisor $E \subseteq Y$, there exists a prime divisor $E' \subseteq \bar{Y}$ such that $E' \to E$.
+Write:
+$$
+\phi^*(K_X + B) = K_Y + eE + (C - eE), \qquad \bar{\phi}^*(K_{\bar{X}} + \bar{B}) = K_{\bar{Y}} + \bar{e} E' + O,
+$$
+where $O$ denotes the other components. Then:
+$$
+\pi'^*(K_Y + eE + O) = K_{\bar{Y}} + \bar{e} E' + O.
+$$
+Restrict $\pi'$ to a neighborhood of $\eta_E, \eta_{E'}$ (finite surjective). By the ramification formula:
+$$
+\pi'^*(K_Y + E) = K_{\bar{Y}} + E'.
+$$
+Locally:
+$$
+\pi'^* K_Y + e \pi'^* E + O = K_{\bar{Y}} + \bar{e} E' + O.
+$$
+Since $\pi'^* E = r E'$ with $r = r(E'/E)$, we have:
+$$
+K_{\bar{Y}} + E' + (e - 1) \pi'^* E + O = K_{\bar{Y}} + E' + r(e - 1) E' + O.
+$$
+Thus $\bar{e} = r e - r + 1$. Therefore:
+$$
+\bar{e} < 1 \iff e < 1 \qquad (\text{resp. } \bar{e} \le 1 \iff e \le 1).
+$$
+:::
+
+---
+
+::: {#prp-26-3-8}
+## Very Log Resolution
+If $(X, B)$ is KLT, there exists a log resolution $\phi: (Y, C) \to (X, B)$ such that $C = C^+ - C^-$ with $C^+, C^- \ge 0$ having no common components, and $\lfloor C^+ \rfloor$ is a **disjoint union of prime (smooth) divisors**.
+*(This is not true for PLT, DLT, LC)*.
+:::
+
+::: {.proof}
+*Idea:* If $C^+$ has intersections, blow up the intersection point.
+If $a < 1$ and $b < 1$, after blowing up the exceptional divisor $E$ has coefficient $a + b - 1 < 1$:
+$$
+\begin{array}{ccc}
+\begin{matrix} & \mid a < 1 \\ \hline b < 1 \mid & \end{matrix} & \longleftarrow & \begin{matrix} & \mid a & \mid E (a+b-1 < 1) & \mid b \\ \hline & & & \end{matrix}
+\end{array}
+$$
+:::
+
+::: {#note-induction-goal}
+## Goal: Downward Induction
+For $(S, C) \hookrightarrow (X, B)$ with $(K_X + B)|_S = K_S + C$, we want to show that if $(X, B)$ is DLT, then $(S, C)$ can still be DLT.
+:::
+
+---
+
+::: {#lem-26-3-9}
+## Connectedness Lemma
+Let $(X, B)$ be a pair of a normal variety and an $\mathbb{R}$-divisor such that $K_X + B$ is $\mathbb{R}$-Cartier.
+Let $f: (Y, C) \to (X, B)$ be a weak log resolution, and write $C = C^+ - C^-$ where $C^+, C^-$ are effective $\mathbb{R}$-divisors with no common irreducible components.
+Define $S := \lfloor C^+ \rfloor$ with reduced structure ($S = 0 \iff C < 1 \iff (X, B)$ is KLT), and $D := \lceil C^- \rceil$.
+Then:
+$$
+\mathcal{O}_X \twoheadrightarrow f_* \mathcal{O}_S \quad \text{is surjective}.
+$$
+As a consequence, $\mathcal{O}_{f(S)} = \mathcal{O}_X / \ker(\mathcal{O}_X \to f_* \mathcal{O}_S) = f_* \mathcal{O}_S$, and $S \to f(S)$ has **geometrically connected fibres**!
+:::
+
+::: {.proof}
+$-(K_Y + C) = -f^*(K_X + B)$ is $f$-nef and $f$-big (trivial on the generic fiber).
+We have $C - \lfloor C \rfloor \in [0, 1)$, and:
+$$
+-(K_Y + C) + C - \lfloor C \rfloor \in Z^1(Y) \quad \text{is } \mathbb{Q}\text{-Cartier}.
+$$
+By Theorem 26.3.4 (Kawamata Vanishing), $R^1 f_* \mathcal{O}_Y(-\lfloor C \rfloor) = 0$.
+Since $-\lfloor C \rfloor = -\lfloor C^+ \rfloor + \lceil C^- \rceil = -\lfloor C^+ \rfloor + D$, we have:
+$$
+0 \longrightarrow \mathcal{O}_Y(-\lfloor C^+ \rfloor + D) \longrightarrow \mathcal{O}_Y(D) \longrightarrow \mathcal{O}_S(D) \longrightarrow 0.
+$$
+Pushing forward gives $f_* \mathcal{O}_Y(D) \twoheadrightarrow f_* \mathcal{O}_S(D)$.
+Now $f_* \mathcal{O}_Y \hookrightarrow f_* \mathcal{O}_Y(D)$. Since for all $h \in \mathcal{O}_Y(D)(f^{-1}(U))$,
+$$
+\operatorname{div}_Y h + D \ge 0 \implies \operatorname{div}_X h \ge 0 \implies h \in \mathcal{O}_X(U) = \mathcal{O}_Y(f^{-1}(U)),
+$$
+this forces $f_* \mathcal{O}_Y \xrightarrow{\sim} f_* \mathcal{O}_Y(D)$.
+Since $X$ is normal, $f_* \mathcal{O}_Y = \mathcal{O}_X$.
+This forces $f_* \mathcal{O}_S \xrightarrow{\sim} f_* \mathcal{O}_S(D)$, and thus $\mathcal{O}_X \twoheadrightarrow f_* \mathcal{O}_S$.
+:::
+
+---
+
+::: {#cor-26-3-10}
+## Equivalent Definition of PLT
+A DLT pair $(X, B)$ is PLT if and only if the irreducible components of $\lfloor B \rfloor$ are disjoint from each other.
+:::
+
+::: {.proof}
+$(\Leftarrow)$ PLT iff locally PLT. Assume without loss of generality that $\lfloor B \rfloor$ is prime ($X = \bigcup_j (X \setminus \bigcup_{i \ne j} B_i)$).
+For every log resolution $(Y, C)$, take $(Y_0, C_0)$ to be the resolution such that $C_0 - f_0^* B < 1$:
+$$
+\begin{CD}
+(Y, C) @<{g'}[\mathrm{proj, \, bir}]- (\widetilde{Y}, \widetilde{C}) @. \\
+@V{g}[\text{log}]VV @VV{f}[\text{log}]V \\
+(X, B) @= (Y_0, C_0) \to (X, B)
+\end{CD}
+$$
+Assume without loss of generality that $\widetilde{Y}/Y_0$ is a sequence of permissible blowups.
+Then since there is a unique $i = 0$ with $f_0^{-1} B_0$ of coefficient $1$ in $C_0$, there is a unique prime divisor of coefficient $1$ in $\widetilde{C}$.
+Now $C = g'_* \widetilde{C} \implies$ there is at most one component of coefficient $1$ in $C$.
+Hence $C - f_*^{-1} B < 1$, so $(X, B)$ is PLT.
+
+$(\Rightarrow)$ If two components $B_1, B_2$ of $\lfloor B \rfloor$ intersect:
+Take a log resolution $f: (Y, C) \to (X, B)$. Then $f_* C = B$, so $f_*^{-1} B_1, f_*^{-1} B_2 \subseteq \lfloor C^+ \rfloor$, and $f(f_*^{-1}(B_1)) = B_1$, $f(f_*^{-1}(B_2)) = B_2$.
+Fix $x \in B_1 \cap B_2(k)$. Then $f^{-1}(x) \cap f_*^{-1} B_1 \ne \emptyset$ and $f^{-1}(x) \cap f_*^{-1} B_2 \ne \emptyset$.
+Take irreducible components containing $f^{-1}(x)$:
+$$
+\lfloor C^+ \rfloor = \sum_{B_j} f_*^{-1} B_j, \qquad f^{-1}(x) \cap \operatorname{Supp}\lfloor C^+ \rfloor = \bigcup_{i=1}^k (f_*^{-1} B_i \cap f^{-1}(x)) =: \bigcup K_i.
+$$
+Then there exists $P \in K_1 \cap K_2 \ne \emptyset$. Blow up $f_*^{-1} B_1 \cap f_*^{-1} B_2$; then for $(Y', C')$, $C' - f_*^{-1} B$ has a component of coefficient $1$, namely $E_{Y'}$, contradiction.
+:::
+
+::: {#cor-26-3-11}
+For a DLT pair $(X, B)$, every irreducible component of $\lfloor B \rfloor$ is normal.
+:::
+
+::: {.proof}
+Assume without loss of generality that $X$ is affine. Fix $B_1$ an irreducible component of $\lfloor B \rfloor$.
+For $N \gg 0$, let $s_1, \dots, s_N$ be general sections of $\mathcal{O}_X(\lfloor B \rfloor - B_1)$ with $\operatorname{div}(s_i) \sim \lfloor B \rfloor - B_1$.
+Define $B' = B - B_1 + \frac{1}{N} \sum \operatorname{div}(s_i) - \lfloor B \rfloor + B_1 = B - \lfloor B \rfloor + \frac{1}{N} \sum \operatorname{div}(s_i) \sim B - B_1$; then $\lfloor B' \rfloor \ge 0$.
+Take a log resolution $f: Y \to (X, B)$; then $Y$ is also a log resolution of $B + B'$ (using $H^0(X, \mathcal{O}_X(\lfloor B \rfloor - B_1)) = H^0(Y, f^* \mathcal{O}_X(\lfloor B \rfloor - B_1))$, with $s_1, \dots, s_N$ general so that $\operatorname{Exc}(f) \cup f^{-1}(B + B')$ is still SNC).
+Writing $K_Y + C = f^*(K_X + B + B')$, we have $\lfloor C^+ \rfloor = f_*^{-1} B_1$.
+Then $\lfloor C^+ \rfloor \to B_1$, which is an isomorphism at generic points.
+By Lemma 26.3.9 (Connectedness Lemma), $f_* \mathcal{O}_{\lfloor C^+ \rfloor} = \mathcal{O}_{B_1}$.
+Since $\lfloor C^+ \rfloor$ is smooth, $B_1$ is normal.
+:::
+
+---
+
+::: {#thm-26-3-12}
+## Subadjunction Formula
+Let $(X, B)$ be a DLT pair and $Z$ an irreducible component of $\lfloor B \rfloor$. Then there exists a natural effective $\mathbb{R}$-Weil divisor $B_Z$ on $Z$ such that:
+$$
+(K_X + B)|_Z = K_Z + B_Z,
+$$
+and $(Z, B_Z)$ is still **DLT**.
+Moreover, if $(X, B)$ is PLT near $Z$, then $(Z, B_Z)$ is **KLT**.
+*(Note: $(K_X + B)|_Z$ is usually only well-defined as a line bundle / $\mathbb{Q}$-Cartier class)*.
+:::
+
+::: {.proof}
+Take a log resolution $f: (Y, C) \to (X, B)$ such that $C - f_*^{-1} B < 1$, and set $W := f_*^{-1} Z$ (which has coefficient $1$).
+Consider adjunction on $Y$ ($W$ smooth):
+$$
+(K_Y + W)|_W = K_W, \qquad (K_Y + C)|_W = K_W + (C - W)|_W.
+$$
+$$
+\begin{CD}
+W @>>> Y \\
+@V{\mathrm{bir}}VV @VV{f}V \\
+Z @>>> X
+\end{CD}
+$$
+Then:
+$$
+(K_Y + C)|_W = f^*(K_X + B)|_W = f|_W^*((K_X + B)|_Z),
+$$
+$$
+(K_X + B)|_Z = f_{W*} f|_W^*((K_X + B)|_Z) = f|_W^*((K_Y + C)|_W) = f|_{W*}(K_W + (C - W)|_W) = K_Z + B_Z.
+$$
+Define $C_W := (C - W)|_W$ and $B_Z := (f|_W)_* C_W \le 1$.
+It suffices to show $(Z, B_Z)$ is a DLT pair:
+1. $B_Z \ge 0$: By locally cutting $X$ by hyperplanes, we may assume without loss of generality that $\dim X = 2$.
+   Then we may take the minimal resolution $(Y_0, C_0) \xrightarrow{f_0} X$.
+   **Fact:** $(Y, C)$ factors as $(Y, C) \to (Y_0, C_0) \to X$.
+   Then $(f|_W)_* C_W = (f_0|_W)_* C_{0W}$; but $C \ge 0$, thus $B_Z \ge 0$.
+2. $K_Z + B_Z = (K_X + B)|_Z$ is $\mathbb{Q}$-Cartier.
+   $f|_W$ is a log resolution of $(Z, B_Z)$, and $f|_W^*(K_Z + B_Z) = (K_Y + C)|_W = K_W + C_W$, i.e., $f|_W: (W, C_W) \to (Z, B_Z)$.
+   For every irreducible component of $C_W$ with coefficient $1$, $D$ is contained in $(f_*^{-1}\lfloor B \rfloor - W) \cap W$.
+   Then $D \subseteq \operatorname{Exc}(f)$ since $\operatorname{Exc}(f) \cup f_*^{-1} \lfloor B \rfloor$ is SNC, and $\operatorname{Exc}(f|_W) \subseteq \operatorname{Exc}(f) \cap W$.
+   Thus $D \subseteq \operatorname{Exc}(f|_W)$, and $D = f_W^{-1} f_W D \implies C_W - f_W^{-1} B_Z < 1$.
+3. If $(X, B)$ is PLT near $Z$, then $f_*^{-1} Z$ has no intersection with $\lfloor C^+ \rfloor$.
+   Since $(X, B)$ is DLT $\implies$ exceptional part of $C = 1$, then $C - W < 1$ near $W$.
+   Hence $C_W < 1$ and $f|_W^*(K_Z + B) = K_W + C_W \implies (Z, B_Z)$ is KLT.
+:::
+
+---
+
+::: {#def-26-3-13}
+## LC Center
+1. For a pair $(X, B)$, a subvariety $Z \subseteq X$ is called an **LC center** if there exists a log resolution $f: (Y, C) \to (X, B)$ such that $Z = f(C_i)$ for some component $C_i$ where $\lfloor C^+ \rfloor = \bigcup C_i$ is the irreducible decomposition.
+2. Fix a log resolution $f: (Y, C) \to (X, B)$ of an LC pair $(X, B)$. The LC centers are exactly the images of the components of intersections of components of $\lfloor C^+ \rfloor$. (LC centers form a partially ordered set).
+3. If $(X, B)$ is DLT, then the LC centers are the irreducible components of intersections of components of $\lfloor B \rfloor$.
+:::
+
+::: {#prp-26-3-14}
+## Equivalent Definitions of DLT
+Let $(X, B)$ be a pair. The following statements are equivalent:
+- **(B)** $(X, B)$ is DLT.
+- **(A)** There exists an open set $U \subseteq X$ such that $(U, B|_U)$ is SNC, and for all birational morphisms $(Y, C) \to (X, B)$ isomorphic on $U$, we have $C|_{\operatorname{Exc}(f)} < 1$ (i.e. $(X \setminus U, B|_{X \setminus U})$ is KLT).
+- **(C)** The generic points of all LC centers lie in $U$.
+- **(D)** For every proper log resolution $(Y, C)/(X, B)$, we have $C - f_*^{-1} B < 1$.
+
+Further, one can take $U = \operatorname{Reg}(X, B)$ to be the largest such open set.
+:::
+
+::: {.proof}
+- **(B) $\implies$ (C):**
+  Take $Y \xrightarrow{f} X$ such that $C - f_*^{-1} B < 1$. Let $U$ be the isomorphism locus.
+  Then by log resolution, $U = \operatorname{Reg}(X, B)$. Then $C - f_*^{-1} B < 1 \implies C|_{\operatorname{Exc}(f)} < 1$, so the generic points of LC centers of $(X, B)$ lie in $U$.
+
+- **(C) $\implies$ (A):**
+  For any $Y \xrightarrow{f} X$ birational and isomorphic on $U$:
+  First take $(Y_0, C_0) \xrightarrow{g} (X, B)$ a log resolution such that $C - f_0^* B < 1$.
+  Then there exists $(Y', C')$ isomorphic on $U$ dominating both:
+  $$
+  \begin{CD}
+  (Y, C) @<{\alpha}<< (Y', C') @>{h}>> (Y_0, C_0) \\
+  @. @VV{h}V @VV{g}V \\
+  @. (X, B) @= (X, B)
+  \end{CD}
+  $$
+  One can take $h$ to be a sequence of permissible blowups.
+  $C'|_{\operatorname{Exc}(h)} = C' - h_*^{-1} B = C' - f_0^* g_*^{-1} B \le f^*(C_0|_{\operatorname{Exc}(g)}) < 1$.
+  Then $C = \alpha_* C' \implies C|_{\operatorname{Exc}(f)} < 1$.
+
+- **(A) $\implies$ (B):**
+  Set $U = \operatorname{Reg}(X, B)$. Take a log resolution $(Y, C) \xrightarrow{f} (X, B)$.
+  Then $f$ is an isomorphism over $U$, so $C|_{\operatorname{Exc}(f)} < 1$; otherwise we would get an LC center outside $U$, which is a contradiction.
+
+- **(C) $\iff$ (D):**
+  Obvious.
+:::
+
+---
+
+::: {#thm-26-3-15}
+## Vanishing for DLT
+Let $(X, B)/S$ be a DLT pair, and let $D$ be a relatively ample $\mathbb{R}$-Cartier divisor such that $D + B \in Z^1(X)$ is an integral Weil divisor. Then:
+$$
+R^p f_* \mathcal{O}_X(D + K_X + B) = 0 \quad \forall p \ge 1.
+$$
+*(Warning: This is not true for $D$ nef & big)*.
+:::
+
+::: {.proof}
+Take a strong proper resolution $g: (Y, C) \to (X, B)$.
+$$
+\begin{CD}
+Y @>{g}>> X \\
+@V{h}VV @VV{f}V \\
+S @= S
+\end{CD}
+$$
+Take $-A$ to be $f$-ample such that $\operatorname{Supp} A \subseteq \operatorname{Exc}(g)$ and $\varepsilon A$ is an effective $\mathbb{R}$-divisor.
+Without loss of generality, assume $A < 1$ such that $\lfloor C + A \rfloor = \lfloor C \rfloor$ (since $C|_{\operatorname{Exc}(g)} < 1$).
+Then $A < 1 \implies g^* D - A$ is $h$-ample.
+Perturb: there exists $\varepsilon \ll 1$ such that $g^* D - A + \varepsilon C$ is $h$-ample.
+Then:
+$$
+D' := g^* D - A + \varepsilon C, \qquad D' = g^*(D + B + K_X) - C - K_Y - A + \varepsilon C \quad (C \le 1).
+$$
+$$
+(\lceil D' \rceil - D')|_{Y \setminus \operatorname{Exc}(g)} = \lceil C - A + \varepsilon C \rceil + C + A - \varepsilon C = -\lfloor C + A - \varepsilon C \rfloor + C + A - \varepsilon C.
+$$
+That is, $\lceil D' \rceil - D'$ has SNC support. Set $C' := \lceil D' \rceil - D'$; then $D'$ is $h$-ample and $C'$ is SNC.
+By Theorem 26.2.10, $R^p h_* \mathcal{O}_Y(D' + K_Y + C') = 0$.
+Now:
+$$
+g_*(D' + K_Y + C') = D + K_X + B - g_* \lfloor C + A - \varepsilon C \rfloor = D + K_X + B,
+$$
+$$
+D' + K_Y + C' = g^*(D + B + K_X) - \lfloor C + A - \varepsilon C \rfloor \ge \lfloor g^*(D + K_X + B) \rfloor.
+$$
+Then $g_* \mathcal{O}_Y(D' + K_Y + C') = \mathcal{O}_X(D + K_X + B)$, and $R^q g_* \mathcal{O}_Y(D' + K_Y + C') = 0$.
+By the Leray spectral sequence:
+$$
+R^p f_* g_* \mathcal{O}_Y(D' + K_Y + C') = R^p h_* \mathcal{O}_Y(D' + K_Y + C') = 0 \quad \forall p \ge 1.
+$$
+:::
+
+---
+
+::: {#rem-26-3-16}
+## Topological Properties of Singularities
+Fix prime Weil divisors $D_1, \dots, D_n$ on $X$.
+- **KLT is open:**
+  $$
+  \big\{ \vec{a} \;\big|\; (X, \, a_1 D_1 + \dots + a_n D_n) \text{ is KLT} \big\} \quad \text{is open in } \mathbb{R}^n.
+  $$
+- **LC is closed:**
+  $$
+  \big\{ \vec{b} \;\big|\; (X, \, b_1 D_1 + \dots + b_n D_n) \text{ is LC} \big\} \quad \text{is closed in } \mathbb{R}^n.
+  $$
+- **$\overline{\mathrm{KLT}}$ is closed:**
+  If $D$ is $\overline{\mathrm{KLT}}$ with $\operatorname{Supp} D \subseteq \bigcup D_i$, then:
+  $$
+  D \in \overline{\big\{ \vec{a} \;\big|\; a_1 D_1 + \dots + a_n D_n \text{ is KLT} \big\}}.
+  $$
+:::

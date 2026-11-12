@@ -100,7 +100,7 @@ Thus $\overline{\operatorname{NE}}(X) \setminus \{0\} \subseteq D_{> 0}$.
 ## Effective Curves are Not Enough
 The condition $(D \cdot C) > 0$ for every irreducible effective curve $C \subseteq X$ is **not** sufficient to guarantee that $D$ is ample:
 $$
-D \text{ ample} \centernot\iff \forall \text{ curve } C \subseteq X, \; (D \cdot C) > 0.
+D \text{ ample} \nLeftrightarrow \forall \text{ curve } C \subseteq X, \; (D \cdot C) > 0.
 $$
 One must test all classes in the closure $\overline{\operatorname{NE}}(X)$ (e.g., Mumford's famous construction of a non-ample divisor positive on all curves).
 :::
