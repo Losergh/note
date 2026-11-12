@@ -107,9 +107,16 @@ ul.task-list li input[type="checkbox"] {
 <script>
 // MathJax 默认不加载 mathtools：\xleftrightarrow、\xLeftrightarrow、
 // \coloneqq 等命令需要它，这里显式加载（必须在 tex-chtml.js 之前执行）。
+// 另外为 MathJax 缺失的 amssymb 长钩箭头补充定义（\hookrightarrow 有，长版本没有）。
 window.MathJax = {
   loader: { load: ['[tex]/mathtools'] },
-  tex: { packages: { '[+]': ['mathtools'] } }
+  tex: {
+    packages: { '[+]': ['mathtools'] },
+    macros: {
+      longhookrightarrow: "\\xhookrightarrow{\\phantom{\\to}}",
+      longhookleftarrow: "\\xhookleftarrow{\\phantom{\\to}}"
+    }
+  }
 };
 </script>
 
@@ -472,8 +479,8 @@ Positivity is a central organizing principle in modern algebraic geometry, bridg
 Linear algebraic groups are fundamental objects and tools in mathematics, with wide applications in number theory, representation theory, automorphic forms, and dynamical…
 <p><a href="undefined">Start reading →</a></p>
 </section>
-<section id="mmp" class="level3 note-card">
-<h3 class="anchored" data-anchor-id="mmp"><a href="./26_mmp/index.html">MMP</a></h3>
+<section id="minimal-model-program" class="level3 note-card">
+<h3 class="anchored" data-anchor-id="minimal-model-program"><a href="./26_mmp/index.html">Minimal Model Program</a></h3>
 This chapter covers the foundations of modern higher-dimensional birational geometry and the Minimal Model Program (MMP). The central theme is the <strong>classification of…</strong>
 <p><a href="undefined">Start reading →</a></p>
 </section>

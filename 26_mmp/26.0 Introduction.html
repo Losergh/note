@@ -86,9 +86,16 @@ ul.task-list li input[type="checkbox"] {
 <script>
 // MathJax 默认不加载 mathtools：\xleftrightarrow、\xLeftrightarrow、
 // \coloneqq 等命令需要它，这里显式加载（必须在 tex-chtml.js 之前执行）。
+// 另外为 MathJax 缺失的 amssymb 长钩箭头补充定义（\hookrightarrow 有，长版本没有）。
 window.MathJax = {
   loader: { load: ['[tex]/mathtools'] },
-  tex: { packages: { '[+]': ['mathtools'] } }
+  tex: {
+    packages: { '[+]': ['mathtools'] },
+    macros: {
+      longhookrightarrow: "\\xhookrightarrow{\\phantom{\\to}}",
+      longhookleftarrow: "\\xhookleftarrow{\\phantom{\\to}}"
+    }
+  }
 };
 </script>
 
@@ -328,7 +335,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">MMP</a></li><li class="breadcrumb-item"><a href="../26_mmp/26.0 Introduction.html">26.0 Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">Minimal Model Program</a></li><li class="breadcrumb-item"><a href="../26_mmp/26.0 Introduction.html">26.0 Introduction</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -349,8 +356,8 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../26_mmp/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text" id="quarto-sidebar-section-1-label">MMP</span></a>
-            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: MMP">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Minimal Model Program</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Minimal Model Program">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
             </button> 
       </div>
@@ -421,7 +428,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">MMP</a></li><li class="breadcrumb-item"><a href="../26_mmp/26.0 Introduction.html">26.0 Introduction</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">Minimal Model Program</a></li><li class="breadcrumb-item"><a href="../26_mmp/26.0 Introduction.html">26.0 Introduction</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">26.0 Introduction</h1>
 <p class="subtitle lead">Birational Geometry (Chen Jiang, Fall 2026)</p>
@@ -1954,8 +1961,8 @@ body.quarto-dark .callout-toc-item a.nav-link:focus-visible {
   </script>
 <nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
-      <a href="../26_mmp/index.html" class="pagination-link" aria-label="MMP">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">MMP</span>
+      <a href="../26_mmp/index.html" class="pagination-link" aria-label="Minimal Model Program">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Minimal Model Program</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

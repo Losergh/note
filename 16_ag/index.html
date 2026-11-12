@@ -80,9 +80,16 @@ ul.task-list li input[type="checkbox"] {
 <script>
 // MathJax 默认不加载 mathtools：\xleftrightarrow、\xLeftrightarrow、
 // \coloneqq 等命令需要它，这里显式加载（必须在 tex-chtml.js 之前执行）。
+// 另外为 MathJax 缺失的 amssymb 长钩箭头补充定义（\hookrightarrow 有，长版本没有）。
 window.MathJax = {
   loader: { load: ['[tex]/mathtools'] },
-  tex: { packages: { '[+]': ['mathtools'] } }
+  tex: {
+    packages: { '[+]': ['mathtools'] },
+    macros: {
+      longhookrightarrow: "\\xhookrightarrow{\\phantom{\\to}}",
+      longhookleftarrow: "\\xhookleftarrow{\\phantom{\\to}}"
+    }
+  }
 };
 </script>
 

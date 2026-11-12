@@ -9,7 +9,7 @@
 <meta name="author" content="Chen Jiang (Fall 2026)">
 <meta name="dcterms.date" content="2026-11-12">
 
-<title>MMP – Math Notes</title>
+<title>Minimal Model Program – Math Notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -83,9 +83,16 @@ ul.task-list li input[type="checkbox"] {
 <script>
 // MathJax 默认不加载 mathtools：\xleftrightarrow、\xLeftrightarrow、
 // \coloneqq 等命令需要它，这里显式加载（必须在 tex-chtml.js 之前执行）。
+// 另外为 MathJax 缺失的 amssymb 长钩箭头补充定义（\hookrightarrow 有，长版本没有）。
 window.MathJax = {
   loader: { load: ['[tex]/mathtools'] },
-  tex: { packages: { '[+]': ['mathtools'] } }
+  tex: {
+    packages: { '[+]': ['mathtools'] },
+    macros: {
+      longhookrightarrow: "\\xhookrightarrow{\\phantom{\\to}}",
+      longhookleftarrow: "\\xhookleftarrow{\\phantom{\\to}}"
+    }
+  }
 };
 </script>
 
@@ -325,7 +332,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">MMP</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../26_mmp/index.html">Minimal Model Program</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -346,8 +353,8 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../26_mmp/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text" id="quarto-sidebar-section-1-label">MMP</span></a>
-            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: MMP">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Minimal Model Program</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section: Minimal Model Program">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
             </button> 
       </div>
@@ -411,7 +418,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">MMP</h1>
+<h1 class="title">Minimal Model Program</h1>
 <p class="subtitle lead">Vanishing Theorems, Minimal Model Program and BCHM</p>
 </div>
 
